@@ -69,15 +69,33 @@ endif
 " [fvim]
 if exists('g:fvim_loaded')
   colorscheme molokai
+  " Good old 'set guifont' compatibility
   set guifont=SauceCodePro\ NF
+
+  " Ctrl-ScrollWheel for zooming in/out
+  nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
+  nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
+  nnoremap <silent> <C-=> :set guifont=+<CR>
+  nnoremap <silent> <C--> :set guifont=-<CR>
+  nnoremap <A-CR> :FVimToggleFullScreen<CR>
+
   " Cursor tweaks
   FVimCursorSmoothMove v:true
   FVimCursorSmoothBlink v:true
 
-  " Background composition, can be 'none', 'blur' or 'acrylic'
-  FVimBackgroundComposition 'none'
-  FVimBackgroundOpacity 1.0
-  FVimBackgroundAltOpacity 1.0
+  " Background composition
+  " 'none', 'transparent', 'blur' or 'acrylic'
+  FVimBackgroundComposition 'acrylic'   
+  FVimBackgroundOpacity 0.5
+  FVimBackgroundAltOpacity 0.85
+  " FVimBackgroundImage 'C:/foobar.png'
+  " vertial position, 'top', 'center' or 'bottom'
+  FVimBackgroundImageVAlign 'center'
+  " horizontal position, 'left', 'center' or 'right'
+  FVimBackgroundImageHAlign 'center'
+  " 'none', 'fill', 'uniform', 'uniformfill'
+  FVimBackgroundImageStretch 'fill'
+  " FVimBackgroundImageOpacity 0.85
 
   " Title bar tweaks (themed with colorscheme)
   FVimCustomTitleBar v:true
