@@ -382,19 +382,28 @@ if has('nvim')
 endif
 
 " [Appearance]
+" +-------------------------------------------------+
+" |text in the Vim window                           |
+" |~                                                |
+" |~                                                |
+" |-- VISUAL --                   2f     43,8   17% |
+" +-------------------------------------------------+
+"  ^^^^^^^^^^^                  ^^^^^^^^ ^^^^^^^^^^
+"   'showmode'                 'showcmd'  'ruler'
 set number
 set relativenumber
 set signcolumn=yes              " Whether or not to draw the signolumn
 set laststatus=2                " Show status line always
 " set showtabline=2               " Show tab line always
 set ruler                       " Show the line and column number of the cursor position
+" set title
 " -- CursorLine
 " set cursorcolumn
 set cursorline
 " --
 
 " [Text Display]
-set textwidth=100               " Maximum width of text that is being inserted
+" set textwidth=100               " Maximum width of text that is being inserted
 
 set wrap
 set linebreak                   " Wordwrapping doesn't break words in the middle
@@ -676,6 +685,7 @@ ab py py3
 
 " Plugins {{{
 
+" And justify, cfilter, shellmenu
 " runtime macros/matchit.vim
 
 " [CamelCaseMotion]
@@ -1068,8 +1078,8 @@ if exists('g:started_by_firenvim')
   nnoremap <C-z> :call firenvim#hide_frame()<CR>
 
   au BufEnter github.com_*.txt set filetype=markdown
-  au BufEnter leetcode-cn.com_*.txt set filetype=python
-  au BufEnter leetcode-cn.com_*comments*.txt set filetype=markdown
+  " au BufEnter leetcode-cn.com_*.txt set filetype=python
+  " au BufEnter leetcode-cn.com_*comments*.txt set filetype=markdown
 
   " Still NOT working
   " let l:bufname=expand('%:t')
@@ -1113,12 +1123,12 @@ if exists('g:started_by_firenvim')
             \ 'content': 'text',
             \ 'priority': 0,
             \ 'selector': 'textarea',
-            \ 'takeover': 'nonempty',
+            \ 'takeover': 'never',
         \ },
       \ }
     \ }
   let fc = g:firenvim_config['localSettings']
-  let fc['https?://[^/]+\.co\.uk/'] = { 'takeover': 'never', 'priority': 1 }
+  let fc['https?://[^/]+\.co\.uk/'] = { 'takeover': 'nonempty', 'priority': 1 }
   let fc['leetcode-cn.com'] = {  }
 else
   " set laststatus=2
