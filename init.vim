@@ -126,6 +126,7 @@ if all_plugins
 
     " [Change]
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-abolish'
     " == Comment
     Plug 'tpope/vim-commentary'
     " Plug 'preservim/nerdcommenter'
@@ -363,7 +364,7 @@ set viewoptions-=options
 
 " [Python]
 if has('nvim')
-  let g:python3_host_prog = 'C:\Users\younger\scoop\apps\miniconda3\current\python.exe'
+  " let g:python3_host_prog = 'C:\Users\younger\scoop\apps\miniconda3\current\python.exe'
 else
   set pythonthreedll=C:\Users\younger\scoop\apps\miniconda3\current\python37.dll
   " Not need to set pythonthreehome
@@ -494,6 +495,10 @@ endfunction
 
 command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 
+" Use this in a modified buffer to see the differences with the file it was loaded from
+command! DiffOrig vert new | set bt=nofile
+  \ | r ++edit # | 0d_ | diffthis
+  \ | wincmd p | diffthis
 
 """""""""""""""""""""
 "      Autocmd      "
@@ -502,7 +507,10 @@ command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 autocmd BufEnter * silent! lcd %:p:h
 
 " Return to last edit position when opening files (You want this!)
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$")
+  \ | exe "normal! g'\""
+  \ | endif
 
 " Delete trailing white space on save,
 fun! CleanExtraSpaces()
