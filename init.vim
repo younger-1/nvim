@@ -617,6 +617,12 @@ cnoremap <C-V> <C-R>+
 
 " }}}
 
+" Insert mappings
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-u> <ESC>I
+inoremap <C-d> <ESC>A
+
 " nnoremap <C-u> <C-u>zz
 " nnoremap <C-d> <C-d>zz
 
