@@ -140,9 +140,9 @@ if all_plugins
     " Plug 'brooth/far.vim'
     " == Auto pair
     " Plug 'cohama/lexima.vim'
-    Plug 'jiangmiao/auto-pairs'
-    " Plug 'tpope/vim-endwise'
-    " Plug 'rstacruz/vim-closer'
+    " Plug 'jiangmiao/auto-pairs'
+    Plug 'tpope/vim-endwise'
+    Plug 'rstacruz/vim-closer'
     " ==
     Plug 'sjl/gundo.vim'
 
@@ -192,6 +192,7 @@ if all_plugins
     " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     " ==
     " Plug 'Shougo/vimfiler.vim'
+    " Plug 'justinmk/vim-dirvish'
 
     " [Find]
     " -- fzf
@@ -213,6 +214,7 @@ if all_plugins
     " Plug 'ptzz/lf.vim'
     " ==
     Plug 'liuchengxu/vista.vim'
+    " Plug 'wfxr/minimap.vim'
 
     " [Git]
     " == fugitive
@@ -235,7 +237,8 @@ if all_plugins
 
     " [Snippet]
     Plug 'SirVer/ultisnips'
-    " Plug 'honza/vim-snippets'
+    Plug 'skywind3000/Leaderf-snippet'
+    Plug 'honza/vim-snippets'
 
     " [LaTeX]
     " Plug 'lervag/vimtex'
@@ -253,7 +256,7 @@ if all_plugins
     " Plug 'ludovicchabant/vim-gutentags'
     " Plug 'skywind3000/gutentags_plus'
     " ==
-    Plug 'codota/tabnine-vim'
+    " Plug 'codota/tabnine-vim'
     " Plug 'puremourning/vimspector'
 
     " [coc]
@@ -1081,6 +1084,18 @@ let g:far#enable_undo = 1
 
 " [lexima]
 let g:lexima_enable_basic_rules = 1
+
+" [Leaderf-snippet]
+inoremap <c-x><c-j> <c-\><c-o>:Leaderf snippet<cr>
+" Preview
+" let g:Lf_PreviewResult = get(g:, 'Lf_PreviewResult', {})
+" let g:Lf_PreviewResult.snippet = 1
+
+" [ultisnips]
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-l>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " }}}
 
