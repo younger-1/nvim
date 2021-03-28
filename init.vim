@@ -141,17 +141,24 @@ if all_plugins
     " == Auto pair
     " Plug 'cohama/lexima.vim'
     Plug 'jiangmiao/auto-pairs'
+    " Plug 'tpope/vim-endwise'
+    " Plug 'rstacruz/vim-closer'
     " ==
+    Plug 'sjl/gundo.vim'
 
     " [Vim | Debug]
     " Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-scriptease'
     " Plug 'junegunn/vader.vim',  { 'on': 'Vader', 'for': 'vader' }
     " Plug 'thinca/vim-themis'
+    if !has('nvim')
+      Plug 'yianwillis/vimcdoc'
+    endif
 
     " [Play]
     " Plug 'takac/vim-hardtime'
     " Plug 'skywind3000/vim-keysound'
+    Plug 'iqxd/vim-mine-sweeping'
 
     " [Appearance]
     " Plug 'vim-airline/vim-airline'
