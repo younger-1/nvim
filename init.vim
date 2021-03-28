@@ -145,6 +145,7 @@ if all_plugins
     Plug 'rstacruz/vim-closer'
     " ==
     Plug 'sjl/gundo.vim'
+    Plug 'mg979/vim-visual-multi'
 
     " [Vim | Debug]
     " Plug 'tpope/vim-sensible'
@@ -236,7 +237,7 @@ if all_plugins
     " --
 
     " [Snippet]
-    Plug 'SirVer/ultisnips'
+    " Plug 'SirVer/ultisnips'
     Plug 'skywind3000/Leaderf-snippet'
     Plug 'honza/vim-snippets'
 
@@ -260,7 +261,7 @@ if all_plugins
     " Plug 'puremourning/vimspector'
 
     " [coc]
-    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " [Lint Engine]
     " Plug 'w0rp/ale'
