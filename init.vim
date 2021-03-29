@@ -293,6 +293,25 @@ set t_Co=256
 set termguicolors
 
 
+" [lightline]
+
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+
+" " Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" let g:lightline.colorscheme = 'monokai_tasty'
+" let g:lightline.colorscheme = 'onehalfdark'
+
 " [falcon](https://github.com/fenetikm/falcon/wiki/Installation)
 " let g:falcon_lightline = 1
 " let g:lightline = { 'colorscheme' : 'falcon' }
@@ -301,9 +320,7 @@ set termguicolors
 " [onedark](https://github.com/joshdick/onedark.vim#options)
 let g:onedark_termcolors = 256
 let g:onedark_terminal_italics = 1
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ }
+let g:lightline.colorscheme = 'onedark'
 colorscheme onedark
 
 " [hybrid_material]
@@ -319,16 +336,11 @@ let g:hybrid_transparent_background = 1
 let g:vim_monokai_tasty_italic = 1
 " colorscheme vim-monokai-tasty
 
-
 " [Colorscheme]
 " colorscheme seoul256
 " colorscheme onehalfdark
 " colorscheme hybrid_material
 " colorscheme PaperColor
-
-" [lightline]
-" let g:lightline.colorscheme = 'monokai_tasty'
-" let g:lightline.colorscheme = 'onehalfdark'
 
 " [Personal tuning]
 " Change the colour of the search highlight:
@@ -467,9 +479,12 @@ endif
 " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 "   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 "   \,sm:block-blinkwait175-blinkoff150-blinkon175
-" set guifont=DejaVuSansMono\ NF
-" set guifont=Cascadia\ Mono\ Light:h14
-" set guifont=FuraMono\ NF
+
+" set guifont=DejaVuSansMono\ NF:h15
+" set guifont=Cascadia\ Mono\ Light:h15
+" set guifont=FuraMono\ NF:h15
+" set guifont=FiraCode\ NF:h15
+set guifont=JetBrainsMono\ NF:h15
 
 " }}}
 
