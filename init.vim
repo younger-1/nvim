@@ -642,9 +642,13 @@ vnoremap y y`]
 
 " Command line mappings {{{
 
-" Quickly search cmline history
-cnoremap <C-j> <Down>
-cnoremap <C-k> <Up>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+
+cnoremap <C-a> <HOME>
+
+cnoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<S-Left>"
+cnoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<S-Right>"
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
@@ -1013,8 +1017,7 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 
 " [vista.vim]
 " Toggle vista view window
-map <C-e> <Cmd>Vista!!<CR>
-imap <C-e> <Cmd>Vista!!<CR><Esc>
+noremap <C-e> <Cmd>Vista!!<CR>
 
 " More compact: ["▸ ", ""]
 " let g:vista_icon_indent = ["▸ ", ""]
@@ -1156,8 +1159,8 @@ else
 endif
 
 " Move within 'ins-completion-menu'
-imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
-imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
+imap <expr><C-j> pumvisible() ? "\<Down>" : "\<S-Left>"
+imap <expr><C-k> pumvisible() ? "\<Up>" : "\<S-Right>"
 
 " Scroll pages within 'ins-completion-menu'
 imap <expr><C-u> pumvisible() ? "\<PageUp>" : "\<ESC>I"
