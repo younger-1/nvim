@@ -66,7 +66,6 @@ if !all_plugins
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'michaeljsmith/vim-indent-object'
-    Plug 'justinmk/vim-sneak'
     Plug 'tpope/vim-repeat'
     Plug 'haya14busa/vim-asterisk'
     Plug 'bkad/CamelCaseMotion'
@@ -575,10 +574,10 @@ let g:maplocalleader = '\'
 " Normal: ~, +, -, _, j, k, gj, gk, gs, <Tab>, <BS>, <S-CR>, <S-Up...>, <C-N>, <C-P>, <C-M>, <C-j>, <C-k>
 
 " I must be crazy
-nnoremap ; :
-xnoremap ; :
-nnoremap : :<C-p>
-xnoremap v <C-V>
+" nnoremap ; :
+" xnoremap ; :
+" nnoremap : :<C-p>
+" xnoremap v <C-V>
 
 " CR is C-M {{{
 nnoremap <Leader><CR> o<ESC>cc<Esc>
@@ -641,6 +640,11 @@ vnoremap y y`]
 " }}}
 
 " Command line mappings {{{
+
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <Down> <C-n>
+cnoremap <Up> <C-p>
 
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
@@ -760,8 +764,8 @@ map g#  <Plug>(asterisk-g#)
 " map gz# <Plug>(asterisk-gz#)
 
 " [nerdtree]
-map <Leader>n <Cmd>NERDTreeToggle<CR>
-map <Leader>nn <Cmd>NERDTreeFind<CR>
+map <Leader>nn <Cmd>NERDTreeToggle<CR>
+map <Leader>nf <Cmd>NERDTreeFind<CR>
 
 " let g:NERDTreeDirArrowExpandable = '▸'
 " let g:NERDTreeDirArrowCollapsible = '▾'
