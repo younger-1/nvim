@@ -1136,6 +1136,7 @@ let g:asyncrun_open = 6
 """""""""""""""""""""
 
 " [coc.nvim] {{{
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugins
 " inoremap <silent><expr> <TAB>
@@ -1269,23 +1270,45 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ja  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>je  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>jc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>jo  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>js  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>jj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>jk  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>jp  :<C-u>CocListResume<CR>
 
 " }}}
+
+" coc-extensions {{{
+" leetcode,git,
+let g:coc_global_extensions = [
+      \  'coc-json',
+      \  'coc-lists',
+      \  'coc-explorer',
+      \  'coc-highlight',
+      \  'coc-marketplace',
+      \  'coc-ecdict',
+      \  'coc-tabnine',
+      \  'coc-translator',
+      \  'coc-fzf-preview',
+      \  'coc-go',
+      \  'coc-clangd',
+      \  'coc-pyright',
+      \  'coc-tsserver',
+      \  'coc-rust-analyzer',
+      \  ]
+
+" [coc-explorer[
+nnoremap <leader>jf :CocCommand explorer<CR>
 
 " [coc-translator]
 " NOTE: do NOT use `nore` mappings
@@ -1298,7 +1321,7 @@ vmap Ke <Plug>(coc-translator-ev)
 " Replace
 nmap Kr <Plug>(coc-translator-r)
 vmap Kr <Plug>(coc-translator-rv)
-
+" }}}
 
 """""""""""""""""""""
 "      Firenvim     "
