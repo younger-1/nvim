@@ -942,37 +942,33 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 nmap <Leader>h [fzf-p]
 xmap <Leader>h [fzf-p]
 
-nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
-nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActions<CR>
-nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
-nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
-nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
-nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
-nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
-xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
-nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
-nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
 " [nerdcommenter]
-" Create default mappings
-let g:NERDCreateDefaultMappings = 1
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
-" Use compact syntax for prettified multi-line comments
-" let g:NERDCompactSexyComs = 1
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 " Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
+" let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
-let g:NERDToggleCheckAllLines = 1
+" let g:NERDToggleCheckAllLines = 1
 
 " [LeaderF]
 " Use rg to index files
@@ -1129,7 +1125,17 @@ let g:UltiSnipsListSnippets="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-j>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" [coc.nvim]
+" [AsyncRun]
+let g:asyncrun_open = 6
+
+" }}}
+
+
+"""""""""""""""""""""
+"      coc.nvim     "
+"""""""""""""""""""""
+
+" [coc.nvim] {{{
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugins
 " inoremap <silent><expr> <TAB>
@@ -1182,17 +1188,18 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   elseif (coc#rpc#ready())
+"     call CocActionAsync('doHover')
+"   else
+"     execute '!' . &keywordprg . " " . expand('<cword>')
+"   endif
+" endfunction
+nnoremap <silent> Kk :call CocActionAsync('doHover')<CR>
+autocmd FileType markdown setl keywordprg=:help
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -1278,10 +1285,19 @@ nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 
-" [asyncrun]
-let g:asyncrun_open = 6
-
 " }}}
+
+" [coc-translator]
+" NOTE: do NOT use `nore` mappings
+" Popup
+nmap Kt <Plug>(coc-translator-p)
+vmap Kt <Plug>(coc-translator-pv)
+" Echo
+nmap Ke <Plug>(coc-translator-e)
+vmap Ke <Plug>(coc-translator-ev)
+" Replace
+nmap Kr <Plug>(coc-translator-r)
+vmap Kr <Plug>(coc-translator-rv)
 
 
 """""""""""""""""""""
