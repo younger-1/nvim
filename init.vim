@@ -120,7 +120,7 @@ if all_plugins
     " Plug 'terryma/vim-smooth-scroll'
     " Plug 'wellle/targets.vim'
     Plug 'unblevable/quick-scope'
-    " Plug 'andymass/vim-matchup'
+    Plug 'andymass/vim-matchup'
     " Plug 'tpope/vim-unimpaired'
     " Plug 'psliwka/vim-smoothie'
 
@@ -128,8 +128,8 @@ if all_plugins
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-abolish'
     " == Comment
-    Plug 'tpope/vim-commentary'
-    " Plug 'preservim/nerdcommenter'
+    " Plug 'tpope/vim-commentary'
+    Plug 'preservim/nerdcommenter'
     " Plug 'tyru/caw.vim'
     " ==
     Plug 'michaeljsmith/vim-indent-object'
@@ -272,6 +272,11 @@ if all_plugins
 
     " [go]
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+    " [Tasks]
+    Plug 'jpalardy/vim-slime'
+    Plug 'skywind3000/asynctasks.vim'
+    Plug 'skywind3000/asyncrun.vim'
   call plug#end()
 endif
 " }}}
@@ -955,9 +960,11 @@ let g:NERDSpaceDelims = 1
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 " Allow commenting and inverting empty lines (useful when commenting a region)
-" let g:NERDCommentEmptyLines = 1
+let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
 
 " [LeaderF]
 " Use rg to index files
@@ -1263,6 +1270,9 @@ nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+
+" [asyncrun]
+let g:asyncrun_open = 6
 
 " }}}
 
