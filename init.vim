@@ -1282,7 +1282,7 @@ nnoremap <silent><nowait> <leader>jh  :<C-u>CocList marketplace<cr>
 "     execute '!' . &keywordprg . " " . expand('<cword>')
 "   endif
 " endfunction
-nnoremap <silent> Kk :call CocActionAsync('doHover')<CR>
+nnoremap <silent> <leader>kk :call CocActionAsync('doHover')<CR>
 autocmd FileType markdown setl keywordprg=:help
 
 " Highlight the symbol and its references when holding the cursor.
@@ -1340,14 +1340,14 @@ nnoremap <leader>jf :CocCommand explorer<CR>
 " [coc-translator]
 " NOTE: do NOT use `nore` mappings
 " Popup
-nmap Kt <Plug>(coc-translator-p)
-vmap Kt <Plug>(coc-translator-pv)
+nmap <leader>kt <Plug>(coc-translator-p)
+vmap <leader>kt <Plug>(coc-translator-pv)
 " Echo
-nmap Ke <Plug>(coc-translator-e)
-vmap Ke <Plug>(coc-translator-ev)
+nmap <leader>ke <Plug>(coc-translator-e)
+vmap <leader>ke <Plug>(coc-translator-ev)
 " Replace
-nmap Kr <Plug>(coc-translator-r)
-vmap Kr <Plug>(coc-translator-rv)
+nmap <leader>kr <Plug>(coc-translator-r)
+vmap <leader>kr <Plug>(coc-translator-rv)
 
 " [coc-snippets]
 xmap <leader>ax  <Plug>(coc-convert-snippet)
