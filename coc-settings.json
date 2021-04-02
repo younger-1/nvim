@@ -1,4 +1,5 @@
 {
     "python.formatting.provider": "black",
-    "rust-analyzer.server.path": "~/scoop/apps/rust-analyzer/current/rust-analyzer.exe"
+    "rust-analyzer.server.path": "~/scoop/apps/rust-analyzer/current/rust-analyzer.exe",
+    "coc.preferences.formatOnType": true
 }
