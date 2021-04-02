@@ -385,15 +385,17 @@ set viewoptions-=options
 " [Win10]
 " set shell=C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe\ -ExecutionPolicy\ Bypass\ -NoLogo
 " set shell=C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe\ -ExecutionPolicy\ Bypass\ -NoLogo\ -NoProfile
-" set shellslash
+if exists('+shellslash')
+  set shellslash
+endif
 
 " [Python]
 if has('nvim')
-  " let g:python3_host_prog = 'C:\Users\younger\scoop\apps\miniconda3\current\python.exe'
+  let g:python3_host_prog = $scoop .. '/shims/python.exe'
 else
-  set pythonthreedll=C:\Users\younger\scoop\apps\miniconda3\current\python37.dll
+  set pythonthreedll=python39.dll
   " Not need to set pythonthreehome
-  let $PYTHONHOME = 'C:\Users\younger\scoop\apps\miniconda3\current'
+  let $pythonhome = $scoop .. '/apps/python/current'
   " let $PATH ..= ';' .. 'C:\Users\younger\scoop\apps\miniconda3\current'
 endif
 
@@ -558,6 +560,23 @@ endfun
 
 autocmd BufWritePre *.vim,*.txt,*.wiki :call CleanExtraSpaces()
 
+" https://vim.fandom.com/wiki/Change_between_backslash_and_forward_slash
+function! ToggleSlash(independent) range
+  let from = ''
+  for lnum in range(a:firstline, a:lastline)
+    let line = getline(lnum)
+    let first = matchstr(line, '[/\\]')
+    if !empty(first)
+      if a:independent || empty(from)
+        let from = first
+      endif
+      let opposite = (from == '/' ? '\' : '/')
+      call setline(lnum, substitute(line, from, opposite, 'g'))
+    endif
+  endfor
+endfunction
+
+command! -bang -range ToggleSlash <line1>,<line2>call ToggleSlash(<bang>1)
 
 " }}}
 
@@ -746,7 +765,6 @@ iab latex LaTeX
 
 " [CamelCaseMotion]
 let g:camelcasemotion_key = ','
-
 
 " [vim-sneak]
 " Jumps to target by label, just like easymotion
@@ -1293,9 +1311,12 @@ nnoremap <silent><nowait> <leader>jp  :<C-u>CocListResume<CR>
 let g:coc_global_extensions = [
       \  'coc-json',
       \  'coc-lists',
+      \  'coc-pairs',
       \  'coc-explorer',
+      \  'coc-snippets',
       \  'coc-highlight',
       \  'coc-marketplace',
+      \  'coc-tasks',
       \  'coc-ecdict',
       \  'coc-tabnine',
       \  'coc-translator',
