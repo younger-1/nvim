@@ -160,21 +160,6 @@ if all_plugins
     " Plug 'skywind3000/vim-keysound'
     Plug 'iqxd/vim-mine-sweeping'
 
-    " [Appearance]
-    " Plug 'vim-airline/vim-airline'
-    " == lightline
-    Plug 'itchyny/lightline.vim'
-    " Plug 'delphinus/lightline-delphinus'
-    " ==
-    " Plug 'liuchengxu/eleline.vim'
-    Plug 'ryanoasis/vim-devicons'
-    " == indentLine
-    Plug 'Yggdroot/indentLine'
-    " Plug 'nathanaelkane/vim-indent-guides'
-    " ==
-    " Plug 'delphinus/vim-auto-cursorline'
-    " Plug 'Yggdroot/vim-mark'
-
     " [Buffer | Window | Tab]
     Plug 'ap/vim-buftabline'
     " Plug 'zefei/vim-wintabs'
@@ -204,7 +189,6 @@ if all_plugins
     Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     " Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
     " Plug 'dyng/ctrlsf.vim'
-
 
     " [NewUI]
     Plug 'mhinz/vim-startify'
@@ -258,6 +242,8 @@ if all_plugins
     " ==
     " Plug 'codota/tabnine-vim'
     " Plug 'puremourning/vimspector'
+    " Plug 'vim-test/vim-test'
+    " Plug 'rcarriga/vim-ultest', { "do": ":UpdateRemotePlugins" }
 
     " [coc]
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -276,6 +262,22 @@ if all_plugins
     Plug 'jpalardy/vim-slime'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
+
+    " [Appearance]
+    " Plug 'vim-airline/vim-airline'
+    " == lightline
+    Plug 'itchyny/lightline.vim'
+    " Plug 'delphinus/lightline-delphinus'
+    " ==
+    " Plug 'liuchengxu/eleline.vim'
+    Plug 'ryanoasis/vim-devicons'
+    " == indentLine
+    Plug 'Yggdroot/indentLine'
+    " Plug 'nathanaelkane/vim-indent-guides'
+    " ==
+    " Plug 'delphinus/vim-auto-cursorline'
+    " Plug 'Yggdroot/vim-mark'
+
   call plug#end()
 endif
 " }}}
@@ -383,11 +385,18 @@ set viewoptions-=options
 
 
 " [Win10]
+
+" To use powershell (on Windows): >
+" set shell=powershell shellquote=( shellpipe=\| shellxquote=
+" set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+" set shellredir=\|\ Out-File\ -Encoding\ UTF8
+
 " set shell=C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe\ -ExecutionPolicy\ Bypass\ -NoLogo
 " set shell=C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe\ -ExecutionPolicy\ Bypass\ -NoLogo\ -NoProfile
-if exists('+shellslash')
-  set shellslash
-endif
+
+" if exists('+shellslash')
+"   set shellslash
+" endif
 
 " [Python]
 if has('nvim')
