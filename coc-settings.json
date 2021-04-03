@@ -1,5 +1,17 @@
 {
+    // coc setting
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.formatOnType": true,
+    // list
+    "list.source.files.args": [
+        // "--no-ignore",
+        "--hidden",
+        "--glob=!.git/*",
+        "--pretty",
+        "--files"
+    ],
+    // python
     "python.formatting.provider": "black",
-    "rust-analyzer.server.path": "~/scoop/apps/rust-analyzer/current/rust-analyzer.exe",
-    "coc.preferences.formatOnType": true
+    // rust
+    "rust-analyzer.server.path": "~/scoop/apps/rust-analyzer/current/rust-analyzer.exe"
 }
