@@ -85,7 +85,7 @@ if exists('g:fvim_loaded')
 
   " Background composition
   " 'none', 'transparent', 'blur' or 'acrylic'
-  FVimBackgroundComposition 'acrylic'   
+  FVimBackgroundComposition 'acrylic'
   FVimBackgroundOpacity 0.5
   FVimBackgroundAltOpacity 0.85
   " FVimBackgroundImage 'C:/foobar.png'

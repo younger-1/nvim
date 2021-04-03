@@ -567,7 +567,7 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-autocmd BufWritePre *.vim,*.txt,*.wiki :call CleanExtraSpaces()
+autocmd BufWritePre *.vim,*.md,*.wiki :call CleanExtraSpaces()
 
 " https://vim.fandom.com/wiki/Change_between_backslash_and_forward_slash
 function! ToggleSlash(independent) range
@@ -1417,6 +1417,8 @@ nmap <leader>kr <Plug>(coc-translator-r)
 vmap <leader>kr <Plug>(coc-translator-rv)
 
 " [coc-snippets]
+let g:coc_snippet_next = '<c-n>'
+let g:coc_snippet_prev = '<c-p>'
 xmap <leader>ax  <Plug>(coc-convert-snippet)
 
 " }}}
