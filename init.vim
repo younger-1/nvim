@@ -72,9 +72,8 @@ if !all_plugins
 
     Plug 'mhinz/vim-startify'
     Plug 'itchyny/lightline.vim'
-    " Plug 'Yggdroot/indentLine'
     Plug 'tomasr/molokai'
-    " Plug 'mhinz/vim-signify'
+    Plug 'mhinz/vim-signify'
   call plug#end()
 endif
 " }}}
@@ -312,7 +311,7 @@ let g:lightline = {
       \ },
       \ }
 
-" " Use autocmd to force lightline update.
+" Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " let g:lightline.colorscheme = 'monokai_tasty'
@@ -464,7 +463,7 @@ set showmatch                   " When a bracket is inserted, briefly jump to th
 
 " set list
 set listchars=eol:↲,space:·,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
-" set pumheight=10                " Completion window max size
+set pumheight=30                " Completion window max size
 set shortmess+=c                " Don't pass useless messages to |ins-completion-menu|.
 
 " [Complete]
@@ -477,11 +476,12 @@ set completeopt+=noinsert       " Do not insert any text for a match until the u
 " :echo undofile({name})
 " :swap
 if has('persistent_undo')
-  " set undofile	                " keep an undo file (undo changes after closing)
+  " set undofile                  " keep an undo file (undo changes after closing)
   " set undodir=
 endif
 " set noswapfile                  " Swapfile is not suitable for big files
 " set nobackup                    " Don't create annoying backup files
+" set nowritebackup
 
 " [GUI]
 " has('gui_running') for vim8
@@ -621,7 +621,7 @@ nnoremap <leader><tab> <C-^>
 " }}}
 
 
-" Localleader {{{
+" LocalLeader {{{
 " Source $MYVIMRC
 nnoremap <LocalLeader>s :source $MYVIMRC<CR>
 nnoremap <LocalLeader>e :e $MYVIMRC<CR>
@@ -724,11 +724,10 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 " More comfortable:
-" g is global
-nnoremap [g :cprevious<CR>
-nnoremap ]g :cnext<CR>
-nnoremap [G :cfirst<CR>
-nnoremap ]G :clast<CR>
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :cfirst<CR>
+nnoremap ]Q :clast<CR>
 " a is local
 nnoremap [a :lprevious<CR>
 nnoremap ]a :lnext<CR>
@@ -827,6 +826,18 @@ let g:indentLine_defaultGroup = 'SpecialKey'
 " Leading space: ˽˰··
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_leadingSpaceChar = '·'
+
+" [signify]
+
+" Make background color transparent for git changes
+" hi! SignifySignAdd guibg=NONE
+" hi! SignifySignDelete guibg=NONE
+" hi! SignifySignChange guibg=NONE
+" Highlight git change signs
+
+" hi! SignifySignAdd guifg=#99c794
+" hi! SignifySignDelete guifg=#ec5f67
+" hi! SignifySignChange guifg=#c594c5
 
 " [fzf]
 " command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
@@ -966,8 +977,8 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " [fzf-preview.vim]
-nmap <Leader>h [fzf-p]
-xmap <Leader>h [fzf-p]
+nmap <localleader>f [fzf-p]
+xmap <localleader>f [fzf-p]
 
 nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
@@ -1115,7 +1126,7 @@ nnoremap <silent> ] <Cmd>WhichKey ']'<CR>
 nnoremap <silent> [ <Cmd>WhichKey '['<CR>
 nnoremap <silent> , <Cmd>WhichKey ','<CR>
 nnoremap <silent> g <Cmd>WhichKey 'g'<CR>
-" nnoremap <silent> z <Cmd>WhichKey 'z'<CR>
+nnoremap <silent> z <Cmd>WhichKey 'z'<CR>
 " nnoremap <silent> <C-f> <Cmd>WhichKey '<C-f>'<CR>
 " nnoremap <silent> <C-w> <Cmd>WhichKey '<C-w>'<CR>
 
@@ -1164,7 +1175,7 @@ let g:asyncrun_open = 6
 "      coc.nvim     "
 """""""""""""""""""""
 
-" [coc.nvim] {{{
+" Coc.nvim {{{
 
 " Make <CR> notify coc.nvim to format on enter and make improvement of brackets
 inoremap <silent> <cr> <C-g>u<CR><c-r>=coc#on_enter()<CR>
@@ -1226,20 +1237,20 @@ xmap <silent> gl <Plug>(coc-range-select)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a<space> <Plug>(coc-codeaction-selected)
+nmap <leader>a<space> <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ac <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>aa  <Plug>(coc-fix-current)
+nmap <leader>aa <Plug>(coc-fix-current)
 
 " Symbol renaming.
 nmap <leader>ar <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>af  <Plug>(coc-format-selected)
-nmap <leader>af  <Plug>(coc-format-selected)
+" Formatting
+nmap <leader>af <Plug>(coc-format)
+xmap <leader>af <Plug>(coc-format-selected)
 
 " Navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -1258,27 +1269,53 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
+" Coc jump to mapings
+nnoremap <leader>jc  :<C-u>CocConfig<cr>
+nnoremap <silent> <leader>jj :CocCommand document.jumpToNextSymbol<CR>
+nnoremap <silent> <leader>jk :CocCommand document.jumpToPrevSymbol<CR>
 " Mappings for CocList
 " Do default action for next item.
-nnoremap <silent><nowait> <leader>jj  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>lj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <leader>jk  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>lk  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <leader>jr  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>lr  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>lR  :<C-u>CocList mru<cr>
 " Show all diagnostics.
-nnoremap <silent><nowait> <leader>jd  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <leader>je  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>le  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <leader>jc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>lc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>lC  :<C-u>CocList colors<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <leader>jo  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <leader>js  :<C-u>CocList -I symbols<cr>
-nnoremap <silent><nowait> <leader>jS  :<C-u>CocList sources<cr>
-nnoremap <silent><nowait> <leader>jm  :<C-u>CocList mru<cr>
-nnoremap <silent><nowait> <leader>jM  :<C-u>CocList marks<cr>
-nnoremap <silent><nowait> <leader>jh  :<C-u>CocList marketplace<cr>
+nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>lS  :<C-u>CocList sources<cr>
+"
+nnoremap <silent><nowait> <leader>lx  :<C-u>CocList marketplace<cr>
+nnoremap <silent><nowait> <leader>ll  :<C-u>CocList lists<cr>
+nnoremap <silent><nowait> <leader>lL  :<C-u>CocList location<cr>
+nnoremap <silent><nowait> <leader>lw  :<C-u>CocList words<cr>
+nnoremap <silent><nowait> <leader>lg  :<C-u>CocList grep<cr>
+nnoremap <silent><nowait> <leader>lf  :<C-u>CocList files<cr>
+nnoremap <silent><nowait> <leader>lF  :<C-u>CocList folders<cr>
+nnoremap <silent><nowait> <leader>lb  :<C-u>CocList buffers<cr>
+nnoremap <silent><nowait> <leader>lm  :<C-u>CocList maps<cr>
+nnoremap <silent><nowait> <leader>lM  :<C-u>CocList marks<cr>
+nnoremap <silent><nowait> <leader>lq  :<C-u>CocList quickfix<cr>
+nnoremap <silent><nowait> <leader>lv  :<C-u>CocList vimcommands<cr>
+nnoremap <silent><nowait> <leader>lh  :<C-u>CocList helptags<cr>
+nnoremap <silent><nowait> <leader>lt  :<C-u>CocList tags<cr>
+nnoremap <silent><nowait> <leader>lT  :<C-u>CocList translation<cr>
+"
+nnoremap <silent><nowait> <leader>l`  :<C-u>CocList filetypes<cr>
+nnoremap <silent><nowait> <leader>l1  :<C-u>CocList cmdhistory<cr>
+nnoremap <silent><nowait> <leader>l2  :<C-u>CocList searchhistory<cr>
+nnoremap <silent><nowait> <leader>l3  :<C-u>CocList tasks<cr>
+nnoremap <silent><nowait> <leader>l<Space>  :<C-u>CocList sessions<cr>
+nnoremap <silent><nowait> <leader>l<Tab>  :<C-u>CocList snippets<cr>
 
 " Use K to show documentation in preview window.
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -1305,6 +1342,11 @@ augroup cocUsing
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+" Temporarily disable your linter to avoid annoying syntax errors
+autocmd User EasyMotionPromptBegin CocDisable
+autocmd User EasyMotionPromptEnd   CocEnable
+
+
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -1321,7 +1363,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " }}}
 
-" coc-extensions {{{
+" Coc-extensions {{{
 " leetcode,git,
 let g:coc_global_extensions = [
       \  'coc-json',
@@ -1335,7 +1377,6 @@ let g:coc_global_extensions = [
       \  'coc-ecdict',
       \  'coc-tabnine',
       \  'coc-translator',
-      \  'coc-fzf-preview',
       \  'coc-go',
       \  'coc-clangd',
       \  'coc-pyright',
@@ -1343,8 +1384,25 @@ let g:coc_global_extensions = [
       \  'coc-rust-analyzer',
       \  ]
 
-" [coc-explorer[
+" [coc-lists]
+" Grep word under cursor
+" command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
+" function! s:GrepArgs(...)
+"   let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+"         \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+"   return join(list, "\n")
+" endfunction
+
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <Leader>lu :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+
+" [coc-explorer]
 nnoremap <leader>jf :CocCommand explorer<CR>
+
+" [coc-yank]
+nnoremap <silent> <leader>ly  :<C-u>CocList -A --normal yank<cr>
+" hi HighlightedyankRegion cterm=bold gui=bold guibg=#bada55
 
 " [coc-translator]
 " NOTE: do NOT use `nore` mappings
