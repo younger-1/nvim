@@ -5,6 +5,7 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "rust",
         "python",
+        "jsonc",
         "svg", // coc-svg support svg format
         "dart", // coc-flutter support dart format */
         "elixir", // diagnostic-languageserver support elixir format
@@ -19,8 +20,8 @@
         "--files"
     ],
     // [diagnostic]
-    "diagnostic.infoSign": "ღ",
-    "diagnostic.hintSign": "ஐ",
+    "diagnostic.infoSign": "🍳",
+    "diagnostic.hintSign": "🎅",
     "diagnostic.warningSign": "»",
     "diagnostic.errorSign": "×",
     "diagnostic.virtualText": true,
@@ -53,13 +54,19 @@
         "typeParameter": "\uf728",
         "default": "\uf29c"
     },
-    // [coc.source]
+    // [source]
     "coc.source.file.priority": 90,
     "coc.source.file.ignoreHidden": false,
     "coc.source.around.firstMatch": false,
     "coc.source.buffer.firstMatch": false,
-    // [pairs]
-    "pairs.enableBackspace": true,
+    // [coc-pairs]
+    "pairs.enableBackspace": false,
+    // [coc-explorer]
+    "explorer.git.showIgnored": true,
+    "explorer.icon.enableNerdfont": true,
+    // "explorer.icon.enableVimDevicons": true,
+    "explorer.filename.colored.enable": true,
+    "explorer.file.showHiddenFiles": true,
     // [vimlsp]
     "vimlsp.indexes.runtimepath": true,
     "vimlsp.indexes.gap": 10,

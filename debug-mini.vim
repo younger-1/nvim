@@ -1,283 +1,15 @@
-
-"""""""""""""""""""""""""""""
-"      Younger's vimrc      "
-"   `1 23 4 56 78 9 0- =    "
-"""""""""""""""""""""""""""""
-
-" Basic {{{
-" For debug reson, do NOT create $VIM\vimrc, as it will be sourced before "$HOME\_vimrc"
-" Get the defaults that most users want.
-" source $VIMRUNTIME/defaults.vim
-
-" Set the language of the messages and menu (gvim), but not the encodings of file
-" language en_US
-" language zh_TW
-" language zh_CN
-
-" Almost the same as 'language' above. Environment: powershell
-" Note: $env:LC_ALL work the same as $env:LC_MESSAGES
-" $env:LC_MESSAGES="utf-8"
-" $env:LC_MESSAGES="en_US.utf-8"
-" $env:LC_MESSAGES="zh_TW.utf-8"
-" $env:LC_MESSAGES="zh_CN.utf-8"
-
-" Set the language of the menu (gvim)
-" Must be set before loading menus, switching on filetype detection or syntax highlighting.
-" set langmenu=en_US.UTF-8
-" set langmenu=zh_TW.UTF-8
-" set langmenu=zh_CN.UTF-8
-
-" Must be set before filetype detection or syntax highlighting.
-" {for vim but not neovim}
 set encoding=utf-8
-" :scriptencoding must be placed after 'encoding' option
 scriptencoding utf-8
 
-" }}}
-
-
-""""""""""""""""""""""
-"      vim-plug      "
-""""""""""""""""""""""
-" Be care of:
-
-" --  call plug#end() automatically executes filetype plugin indent on and syntax enable. You can revert the settings after the call. e.g. filetype indent off, syntax off, etc.
-" --
-
-" Before plugins {{{
-
-" [vim-polyglot]
-" Language packs can be disabled:
-" let g:polyglot_disabled = ['markdown']
-" Polyglot includes vim-sensible plugin, I have it merged into my settings, so to disable it:
-let g:polyglot_disabled = ['sensible']
-
-" }}}
-
-
-" vim-plug {{{
 
 let all_plugins=1
 
-" Less plugins for speedup {{{
-if !all_plugins
-  call plug#begin('~/.cache/vim-plug')
-    Plug 'easymotion/vim-easymotion'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
-    Plug 'michaeljsmith/vim-indent-object'
-    Plug 'tpope/vim-repeat'
-    Plug 'haya14busa/vim-asterisk'
-    Plug 'bkad/CamelCaseMotion'
-
-    Plug 'mhinz/vim-startify'
-    Plug 'itchyny/lightline.vim'
-    Plug 'tomasr/molokai'
-    Plug 'mhinz/vim-signify'
-  call plug#end()
-endif
-" }}}
-
 if all_plugins
   call plug#begin('~/.cache/vim-plug')
-
-    if has('nvim')
-      Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    endif
-
-    " [Theme]
-    Plug 'junegunn/seoul256.vim'
-    Plug 'Lokaltog/vim-monotone'
-    Plug 'morhetz/gruvbox'
-    Plug 'tomasr/molokai'
-    Plug 'crusoexia/vim-monokai'
-    Plug 'patstockwell/vim-monokai-tasty'
-    Plug 'phanviet/vim-monokai-pro'
-    Plug 'sonph/onehalf', { 'rtp': 'vim' }
-    Plug 'dracula/vim', { 'as': 'dracula' }
-    Plug 'gosukiwi/vim-atom-dark'
-    Plug 'NLKNguyen/papercolor-theme'
-    Plug 'jacoborus/tender.vim'
-    Plug 'lifepillar/vim-solarized8'
-    Plug 'dylanaraps/wal.vim'
-    Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'kaicataldo/material.vim'
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'romgrk/doom-one.vim'
-    Plug 'fenetikm/falcon'
     Plug 'joshdick/onedark.vim'
-
-    " [Motion]
-    Plug 'easymotion/vim-easymotion'
-    " Plug 'justinmk/vim-sneak'
-    Plug 'haya14busa/vim-asterisk'
-    Plug 'bkad/CamelCaseMotion'
-    Plug 'vim-scripts/ReplaceWithRegister'
-    " Plug 'rhysd/clever-f.vim'
-    " Plug 'terryma/vim-expand-region'
-    " Plug 'terryma/vim-smooth-scroll'
-    " Plug 'wellle/targets.vim'
-    Plug 'unblevable/quick-scope'
-    Plug 'andymass/vim-matchup'
-    " Plug 'tpope/vim-unimpaired'
-    " Plug 'psliwka/vim-smoothie'
-
-    " [Change]
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-abolish'
-    " == Comment
-    " Plug 'tpope/vim-commentary'
-    Plug 'preservim/nerdcommenter'
-    " Plug 'tyru/caw.vim'
-    " ==
-    Plug 'michaeljsmith/vim-indent-object'
-    " Plug 'AndrewRadev/splitjoin.vim'
-    " Plug 'junegunn/vim-easy-align'
-    Plug 'tpope/vim-repeat'
-    Plug 'machakann/vim-highlightedyank'
-    " Plug 'brooth/far.vim'
-    " == Auto pair
-    " Plug 'cohama/lexima.vim'
-    " Plug 'jiangmiao/auto-pairs'
-    " Plug 'tpope/vim-endwise'
-    " Plug 'rstacruz/vim-closer'
-    " ==
-    Plug 'sjl/gundo.vim'
-    Plug 'mg979/vim-visual-multi'
-
-    " [Vim | Debug]
-    " Plug 'tpope/vim-sensible'
-    Plug 'tpope/vim-scriptease'
-    " Plug 'junegunn/vader.vim',  { 'on': 'Vader', 'for': 'vader' }
-    " Plug 'thinca/vim-themis'
-    if !has('nvim')
-      Plug 'yianwillis/vimcdoc'
-    endif
-
-    " [Play]
-    " Plug 'takac/vim-hardtime'
-    " Plug 'skywind3000/vim-keysound'
-    Plug 'iqxd/vim-mine-sweeping'
-
-    " [Buffer | Window | Tab]
-    Plug 'ap/vim-buftabline'
-    " Plug 'zefei/vim-wintabs'
-    " Plug 'bagrat/vim-buffet'
-    " Plug 'tpope/vim-flagship'
-    " Plug 'yatli/vmux.vim'
-    " == terminal
-    " Plug 'kassio/neoterm'
-    " ==
-
-    " [File]
-    " == nerdtree
-    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-    " Plug 'Xuyuanp/nerdtree-git-plugin'
-    " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    " ==
-    " Plug 'Shougo/vimfiler.vim'
-    " Plug 'justinmk/vim-dirvish'
-
-    " [Find]
-    " -- fzf
-    Plug 'junegunn/fzf'
-    Plug 'junegunn/fzf.vim'
-    " Plug 'pbogut/fzf-mru.vim'
-    " Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
-    " --
-    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-    " Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
-    " Plug 'dyng/ctrlsf.vim'
-
-    " [NewUI]
     Plug 'mhinz/vim-startify'
-    Plug 'liuchengxu/vim-which-key'
-    " == floaterm
-    " Plug 'voldikss/vim-floaterm'
-    " Plug 'ptzz/lf.vim'
-    " ==
-    Plug 'liuchengxu/vista.vim'
-    " Plug 'wfxr/minimap.vim'
-    " Plug 'mbbill/undotree'
-
-    " [Git]
-    " == fugitive
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb'
-    " ==
-    Plug 'mhinz/vim-signify'
-    " Plug 'airblade/vim-gitgutter'
-    " Plug 'junegunn/gv.vim'
-    " Plug 'rhysd/git-messenger.vim'
-    " Plug 'rhysd/committia.vim'
-    " Plug 'rhysd/github-complete.vim'
-
-    " [Write]
-    " Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-    " -- Distraction-free writing in Vim
-    " Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-    " Plug 'junegunn/limelight.vim'
-    " --
-
-    " [Snippet]
-    " Plug 'SirVer/ultisnips'
-    Plug 'skywind3000/Leaderf-snippet'
-    Plug 'honza/vim-snippets'
-
-    " [LaTeX]
-    " Plug 'lervag/vimtex'
-
-    " [Markdown]
-    " Plug 'plasticboy/vim-markdown'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-    " Plug 'gabrielelana/vim-markdown', { 'as': 'vim-markdown_' }
-    " Plug 'ferrine/md-img-paste.vim'
-
-
-    " [Languages]
-    Plug 'sheerun/vim-polyglot'
-    " == ctags
-    " Plug 'ludovicchabant/vim-gutentags'
-    " Plug 'skywind3000/gutentags_plus'
-    " ==
-    " Plug 'codota/tabnine-vim'
-    " Plug 'puremourning/vimspector'
-    " Plug 'vim-test/vim-test'
-    " Plug 'rcarriga/vim-ultest', { "do": ":UpdateRemotePlugins" }
-
-    " [coc]
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    " [Lint Engine]
-    " Plug 'w0rp/ale'
-    " Plug 'maximbaz/lightline-ale'
-
-    " [Format]
-    " Plug 'sbdchd/neoformat'
-
-    " [go]
-    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-    " [Tasks]
-    Plug 'jpalardy/vim-slime'
-    Plug 'skywind3000/asynctasks.vim'
-    Plug 'skywind3000/asyncrun.vim'
-
-    " [Appearance]
-    " Plug 'vim-airline/vim-airline'
-    " == lightline
     Plug 'itchyny/lightline.vim'
-    " Plug 'delphinus/lightline-delphinus'
-    " ==
-    " Plug 'liuchengxu/eleline.vim'
-    Plug 'ryanoasis/vim-devicons'
-    " == indentLine
-    Plug 'Yggdroot/indentLine'
-    " Plug 'nathanaelkane/vim-indent-guides'
-    " ==
-    " Plug 'delphinus/vim-auto-cursorline'
-    " Plug 'Yggdroot/vim-mark'
-
   call plug#end()
 endif
 " }}}
@@ -287,80 +19,8 @@ endif
 filetype plugin indent on
 syntax on
 
-""""""""""""""""""""""
-"      Colorscheme   "
-""""""""""""""""""""""
-
-" Theme {{{
-
-" [Term Color]
-" Terminal's 256 color
-set t_Co=256
-if has('nvim') || has('termguicolors')
-    set termguicolors
-endif
-
-
-" [lightline]
-
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
-
-" Use autocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-" let g:lightline.colorscheme = 'monokai_tasty'
-" let g:lightline.colorscheme = 'onehalfdark'
-
-" [falcon](https://github.com/fenetikm/falcon/wiki/Installation)
-let g:falcon_lightline = 1
-" let g:lightline.colorscheme = 'falcon'
-" colorscheme falcon
-
-" [onedark](https://github.com/joshdick/onedark.vim#options)
-let g:onedark_terminal_italics = 0
-let g:lightline.colorscheme = 'onedark'
 colorscheme onedark
 
-" [hybrid_material]
-" Some of the code to be bolded, like functions and language controls:
-let g:enable_bold_font = 1
-" If you want comments to be in italic:
-let g:enable_italic_font = 1
-" To use transparent background, add this option:
-let g:hybrid_transparent_background = 1
-
-" [vim-monokai-tasty]
-" Allow italics, set this before the colorscheme
-let g:vim_monokai_tasty_italic = 1
-" colorscheme vim-monokai-tasty
-
-" [Colorscheme]
-" colorscheme seoul256
-" colorscheme onehalfdark
-" colorscheme hybrid_material
-" colorscheme PaperColor
-
-" [Personal tuning]
-" Change the colour of the search highlight:
-" highlight Search guifg=#bada55 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
-" highlight CursorLine guibg=lightblue ctermbg=lightgray
-
-" }}}
-
-
-""""""""""""""""""""""
-"      Settings      "
-""""""""""""""""""""""
-
-" Settings {{{
 set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 set wildmenu                    " Enhanced tab completion
 set fileformats=unix,dos,mac    " Use unix's LF in new buffer
@@ -382,22 +42,6 @@ set nrformats-=octal            " For CTRL-A and CTRL-X work better
 set sessionoptions-=options
 set viewoptions-=options
 
-
-
-" [Win10]
-
-" To use powershell (on Windows): >
-" set shell=powershell shellquote=( shellpipe=\| shellxquote=
-" set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
-" set shellredir=\|\ Out-File\ -Encoding\ UTF8
-
-" set shell=C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe\ -ExecutionPolicy\ Bypass\ -NoLogo
-" set shell=C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe\ -ExecutionPolicy\ Bypass\ -NoLogo\ -NoProfile
-
-" if exists('+shellslash')
-"   set shellslash
-" endif
-
 " [Python]
 if has('nvim')
   let g:python3_host_prog = $scoop .. '/shims/python.exe'
@@ -418,31 +62,8 @@ if has('nvim')
   set inccommand=split
 endif
 
-" [Appearance]
-" +-------------------------------------------------+
-" |text in the Vim window                           |
-" |~                                                |
-" |~                                                |
-" |-- VISUAL --                   2f     43,8   17% |
-" +-------------------------------------------------+
-"  ^^^^^^^^^^^                  ^^^^^^^^ ^^^^^^^^^^
-"   'showmode'                 'showcmd'  'ruler'
 set number
-set relativenumber
 set signcolumn=yes              " Whether or not to draw the signolumn
-set laststatus=2                " Show status line always
-" set showtabline=2               " Show tab line always
-set ruler                       " Show the line and column number of the cursor position
-" set title
-" -- CursorLine
-" set cursorcolumn
-set cursorline
-" --
-set cmdheight=2                 " Give more space for displaying messages.
-
-" [Text Display]
-" set textwidth=100               " Maximum width of text that is being inserted
-
 set wrap
 set linebreak                   " Wordwrapping doesn't break words in the middle
 set scrolloff=2
@@ -457,8 +78,6 @@ set softtabstop=4               " Number of spaces that a <Tab> counts for
 set shiftwidth=4                " Number of spaces of (auto)indent
 set smarttab                    " <Tab> in front of a line inserts blanks according to 'shiftwidth'
 
-" 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
-" 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
 set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
 set showmatch                   " When a bracket is inserted, briefly jump to the matching one
 
@@ -473,33 +92,6 @@ set completeopt+=menuone        " Always show menu, even for one item
 set completeopt+=noselect       " Do not select a match in the menu.
 set completeopt+=noinsert       " Do not insert any text for a match until the user selects from menu.
 
-" [Vim files]
-" :echo undofile({name})
-" :swap
-if has('persistent_undo')
-  " set undofile                  " keep an undo file (undo changes after closing)
-  " set undodir=
-endif
-" set noswapfile                  " Swapfile is not suitable for big files
-" set nobackup                    " Don't create annoying backup files
-" set nowritebackup
-
-" [GUI]
-" has('gui_running') for vim8
-if has('gui_running')
-  " set guioptions-=T  " no toolbar
-  " colorscheme elflord
-endif
-
-" set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-"   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-"   \,sm:block-blinkwait175-blinkoff150-blinkon175
-
-" set guifont=DejaVuSansMono\ NF:h15
-" set guifont=Cascadia\ Mono\ Light:h15
-" set guifont=FuraMono\ NF:h15
-" set guifont=FiraCode\ NF:h15
 set guifont=JetBrainsMono\ NF:h15
 
 " }}}
@@ -767,10 +359,6 @@ iab latex LaTeX
 "      Plugins      "
 """""""""""""""""""""
 
-" Plugins {{{
-
-" And justify, cfilter, shellmenu
-" runtime macros/matchit.vim
 
 " [CamelCaseMotion]
 let g:camelcasemotion_key = ','
@@ -1066,94 +654,6 @@ if has('gui_running')
   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 endif
 
-" [vim-which-key]
-let g:which_key_fallback_to_native_key=1
-let g:which_key_run_map_on_popup = 1
-let g:which_key_use_floating_win = 1
-let g:which_key_display_names = { ' ': 'SPC', '<C-H>': 'BS', '<CR>': '↵', '<S-CR>': "↑-↵", '<TAB>': '⇆' }
-
-function s:which_key_format(mapping) abort
-  let l:ret = a:mapping
-  let l:ret = substitute(l:ret, '\c<cr>$', '', '')
-  let l:ret = substitute(l:ret, '^:', '', '')
-  let l:ret = substitute(l:ret, '^\c<cmd>', '', '')
-  let l:ret = substitute(l:ret, '^\c<c-u>', '', '')
-  " let l:ret = substitute(l:ret, '^<Plug>', '', '')
-  return l:ret
-endfunction
-let g:WhichKeyFormatFunc = function('s:which_key_format')
-
-let g:space_prefix_dict =  {}
-let g:space_prefix_dict['f'] = {
-  \ 'name' : '+LeaderF',
-  \ 'f' : 'file',
-  \ 'l' : 'line',
-  \ 't' : 'tags in buffer',
-  \ 'b' : 'jump-to-buffer',
-  \ 'c' : 'command-history',
-  \ 'C' : 'colorscheme',
-  \ 'm' : 'most-recent-use',
-  \ 'd' : 'gtags: definition',
-  \ 'n' : 'gtags: next',
-  \ 'o' : 'gtags: recall',
-  \ 'p' : 'gtags: previous',
-  \ 'r' : 'gtags: reference',
-  \ }
-let g:space_prefix_dict['w'] = {
-  \ 'name' : '+windows' ,
-  \ 'h' : ['<C-W>5<'    , 'shrink-width']    ,
-  \ 'j' : ['<C-W>5-'    , 'shrink-height']   ,
-  \ 'k' : ['<C-W>5+'    , 'expand-height']      ,
-  \ 'l' : ['<C-W>5>'    , 'expand-width']   ,
-  \ 's' : ['<C-W>s'     , 'split-window']    ,
-  \ 'v' : ['<C-W>v'     , '[v]split-window'] ,
-  \ 'c' : ['<C-W>c'     , 'close-window']         ,
-  \ 't' : ['<C-W>T'     , 'move-to-tab']    ,
-  \ '=' : ['<C-W>='     , 'balance-window']        ,
-  \ '?' : ['Windows'    , 'fzf-window']            ,
-  \ }
-
-
-" 注册键位与对应的 dict
-call which_key#register('<Space>', "g:space_prefix_dict")
-" To register the descriptions when using the on-demand load feature,
-" use the autocmd hook to call which_key#register(), e.g., register for the Space key:
-" autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
-
-" Originally, `:<C-u>WhichKey`
-nnoremap <silent> <leader> <Cmd>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> <Cmd>WhichKey '\'<CR>
-nnoremap <silent> ] <Cmd>WhichKey ']'<CR>
-nnoremap <silent> [ <Cmd>WhichKey '['<CR>
-nnoremap <silent> , <Cmd>WhichKey ','<CR>
-nnoremap <silent> g <Cmd>WhichKey 'g'<CR>
-" nnoremap <silent> z <Cmd>WhichKey 'z'<CR>
-" nnoremap <silent> <C-f> <Cmd>WhichKey '<C-f>'<CR>
-" nnoremap <silent> <C-w> <Cmd>WhichKey '<C-w>'<CR>
-
-" Originally, `:<C-u>WhichKeyVisual`
-vnoremap <silent> <leader> <Cmd>WhichKeyVisual '<Space>'<CR>
-" vnoremap <silent> <localleader> <Cmd>WhichKeyVisual '\'<CR>
-" vnoremap <silent> ] <Cmd>WhichKeyVisual ']'<CR>
-" vnoremap <silent> [ <Cmd>WhichKeyVisual '['<CR>
-" vnoremap <silent> , <Cmd>WhichKeyVisual ','<CR>
-" vnoremap <silent> <C-f> <Cmd>WhichKey '<C-f>'<CR>
-" vnoremap <silent> g <Cmd>WhichKeyVisual 'g'<CR>
-" vnoremap <silent> z <Cmd>WhichKeyVisual 'z'<CR>
-" vnoremap <silent> <C-w> <Cmd>WhichKey '<C-w>'<CR>
-
-" highlight default link WhichKey          Function
-" highlight default link WhichKeySeperator DiffAdded
-" highlight default link WhichKeyGroup     Keyword
-" highlight default link WhichKeyDesc      Identifier
-" highlight default link WhichKeyFloating Pmenu
-
-" [far.vim]
-let g:far#enable_undo = 1
-
-" [lexima]
-let g:lexima_enable_basic_rules = 1
-
 " [Leaderf-snippet]
 inoremap <c-x><c-j> <c-\><c-o>:Leaderf snippet<cr>
 " Preview
@@ -1424,110 +924,3 @@ xmap <leader>ax  <Plug>(coc-convert-snippet)
 
 " }}}
 
-"""""""""""""""""""""
-"      Firenvim     "
-"""""""""""""""""""""
-
-" {{{
-if exists('g:started_by_firenvim')
-  set laststatus=0
-  au BufEnter * set showtabline=0
-  set guifont=FuraMono\ NF:h14
-  " Return to webpage
-  nnoremap <Esc><Esc> :call firenvim#focus_page()<CR>
-  nnoremap <C-z> :call firenvim#hide_frame()<CR>
-
-  au BufEnter github.com_*.txt set filetype=markdown
-  " au BufEnter leetcode-cn.com_*.txt set filetype=python
-  " au BufEnter leetcode-cn.com_*comments*.txt set filetype=markdown
-
-  " Still NOT working
-  " let l:bufname=expand('%:t')
-  " if l:bufname =~? 'github.com' || l:bufname =~? 'gitee.com'
-  "     set ft=markdown
-  " elseif l:bufname =~? 'leetcode-cn.com'
-  "     set ft=python
-  " " elseif l:bufname =~? 'localhost'
-  " "     " Jupyter notebooks don't have any more specific buffer information.
-  " "     " If you use some other locally hosted app you want editing function in, set it here.
-  " "     set ft=python
-  " endif
-
-  " Still slow
-  " Automatically synchronize changes with delay
-  " let g:dont_write = v:false
-  " function! My_Write(timer) abort
-  "   let g:dont_write = v:false
-  "   write
-  " endfunction
-  " function! Delay_My_Write() abort
-  "   if g:dont_write
-  "     return
-  "   end
-  "   let g:dont_write = v:true
-  "   call timer_start(10000, 'My_Write')
-  " endfunction
-  " au TextChanged * ++nested call Delay_My_Write()
-  " au TextChangedI * ++nested call Delay_My_Write()
-
-  let g:firenvim_config = {
-    \ 'globalSettings': {
-        \ 'alt': 'all',
-        \ 'ignoreKeys': {
-            \ 'all': ['<C-->', '<C-+>'],
-            \ }
-    \  },
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'cmdline': 'neovim',
-            \ 'content': 'text',
-            \ 'priority': 0,
-            \ 'selector': 'textarea',
-            \ 'takeover': 'never',
-        \ },
-      \ }
-    \ }
-  let fc = g:firenvim_config['localSettings']
-  let fc['https?://[^/]+\.co\.uk/'] = { 'takeover': 'nonempty', 'priority': 1 }
-  let fc['leetcode-cn.com'] = {  }
-else
-  " set laststatus=2
-endif
-
-" }}}
-
-
-"""""""""""""""""""""
-"      Neovide      "
-"""""""""""""""""""""
-
-" {{{
-" !!! Dynamically at runtime ！！！
-" 光标泡泡特效
-let g:neovide_cursor_vfx_mode = "railgun"
-" 水雷
-" let g:neovide_cursor_vfx_mode = "torpedo"
-" 精灵
-" let g:neovide_cursor_vfx_mode = "pixiedust"
-" 音速轰
-" let g:neovide_cursor_vfx_mode = "sonicboom"
-" 涟漪
-" let g:neovide_cursor_vfx_mode = "ripple"
-" 线框
-" let g:neovide_cursor_vfx_mode = "wireframe"
-" 光标特效可见度
-" let g:neovide_cursor_vfx_opacity=250.0
-" let g:neovide_cursor_vfx_particle_lifetime=2
-" let g:neovide_cursor_vfx_particle_density=7.0
-" let g:neovide_cursor_vfx_particle_speed=10.0
-
-
-" Not effect yet
-let g:neovide_transparency=0.8
-let g:neovide_fullscreen=v:true
-let g:neovide_cursor_trail_length=0.8
-"
-let g:neovide_cursor_animation_length=0.18
-" }}}
-
-" vim: textwidth=100 shiftwidth=2 foldmethod=marker foldmarker=\ {{{,\ }}}
