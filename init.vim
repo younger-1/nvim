@@ -297,6 +297,7 @@ syntax on
 " Terminal's 256 color
 set t_Co=256
 if has('nvim') || has('termguicolors')
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     set termguicolors
 endif
 
@@ -326,33 +327,41 @@ let g:falcon_lightline = 1
 
 " [onedark](https://github.com/joshdick/onedark.vim#options)
 let g:onedark_terminal_italics = 0
-let g:lightline.colorscheme = 'onedark'
-colorscheme onedark
+" let g:lightline.colorscheme = 'onedark'
+" colorscheme onedark
 
-" [hybrid_material]
-" Some of the code to be bolded, like functions and language controls:
+" [material.vim](https://github.com/kaicataldo/material.vim)
+" Styles: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+" 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
+let g:material_theme_style = 'palenight'
+let g:material_terminal_italics = 0
+" let g:lightline.colorscheme = 'material_vim'
+" colorscheme material
+
+" [hybrid_material](https://github.com/kristijanhusak/vim-hybrid-material)
+" Note: can set bg=light
 let g:enable_bold_font = 1
-" If you want comments to be in italic:
-let g:enable_italic_font = 1
-" To use transparent background, add this option:
-let g:hybrid_transparent_background = 1
+let g:enable_italic_font = 0
+let g:hybrid_transparent_background = 0
+" colorscheme hybrid_material
+" colorscheme hybrid_reverse
 
 " [vim-monokai-tasty]
-" Allow italics, set this before the colorscheme
-let g:vim_monokai_tasty_italic = 1
-" colorscheme vim-monokai-tasty
+let g:vim_monokai_tasty_italic = 0
+let g:lightline.colorscheme = 'monokai_tasty'
+colorscheme vim-monokai-tasty
 
 " [Colorscheme]
 " colorscheme seoul256
 " colorscheme onehalfdark
-" colorscheme hybrid_material
 " colorscheme PaperColor
 
 " [Personal tuning]
 " Change the colour of the search highlight:
 " highlight Search guifg=#bada55 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
 " highlight CursorLine guibg=lightblue ctermbg=lightgray
-
+" Change the colour of the search hightlight:
+" highlight Search guifg=#bada55 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
 " }}}
 
 
@@ -438,7 +447,6 @@ set ruler                       " Show the line and column number of the cursor 
 " set cursorcolumn
 set cursorline
 " --
-set cmdheight=2                 " Give more space for displaying messages.
 
 " [Text Display]
 " set textwidth=100               " Maximum width of text that is being inserted
@@ -588,6 +596,8 @@ endfunction
 
 command! -bang -range ToggleSlash <line1>,<line2>call ToggleSlash(<bang>1)
 
+" Like zS: print out the syntax group that the cursor is currently above.
+command! What echo synIDattr(synID(line('.'), col('.'), -1), 'name')
 " }}}
 
 
@@ -621,7 +631,6 @@ nnoremap <Leader><S-CR> O<ESC>cc<Esc>
 nnoremap <leader><tab> <C-^>
 " }}}
 
-
 " LocalLeader {{{
 " Source $MYVIMRC
 nnoremap <LocalLeader>s :source $MYVIMRC<CR>
@@ -634,91 +643,14 @@ noremap <LocalLeader>d :lchdir %:p:h<CR>:pwd<CR>
 
 " }}}
 
+" Leader {{{
 
-" Comfortable {{{
-
-" On MS-Windows, this is mapped to cut Visual text, I want it to subtract number
-silent! vunmap <C-X>
-
-" Normal, Visual, Select, Operator-pending {{{
-noremap j gj
-noremap k gk
-noremap j gj
-noremap k gk
-
-noremap <leader><leader>p "+p
+map <leader>tl :<C-u>set list!<CR>
+map <leader>tL :<C-u>exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
 
 " }}}
 
-" Operator-pending mappings {{{
-onoremap H ^
-onoremap L $
-" }}}
-
-" Visual mappings {{{
-" Continuous indent
-vnoremap > >gv
-vnoremap < <gv
-
-" Move to the end of yanked text after yank
-vnoremap y y`]
-" I don't want to be so crazy:
-" nnoremap p p`]
-" vnoremap p p`]
-
-" }}}
-
-" Command line mappings {{{
-
-cnoremap <C-n> <Down>
-cnoremap <C-p> <Up>
-cnoremap <Down> <C-n>
-cnoremap <Up> <C-p>
-
-cnoremap <C-f> <Right>
-cnoremap <C-b> <Left>
-
-cnoremap <C-a> <HOME>
-
-cnoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<S-Left>"
-cnoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<S-Right>"
-
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" Paste more quickly in cmdline
-cnoremap <C-V> <C-R>+
-
-" }}}
-
-" Insert mappings {{{
-" inoremap <C-u> <ESC>I
-" inoremap <C-d> <ESC>A
-" }}}
-
-" nnoremap <C-u> <C-u>zz
-" nnoremap <C-d> <C-d>zz
-
-" Act like D and C
-nnoremap Y y$
-" Copy to system clipboard in Visual and Select mode
-vnoremap Y "+y
-
-" Stop highlighting when clearing screen
-" nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-nnoremap <silent> <C-L> :nohlsearch<C-R>='<Bar>diffupdate'<CR><CR><C-L>
-
-" Using <C-G>u: when delete, break undo sequence, start new change
-if empty(mapcheck('<C-U>', 'i'))
-  inoremap <C-U> <C-G>u<C-U>
-endif
-if empty(mapcheck('<C-W>', 'i'))
-  inoremap <C-W> <C-G>u<C-W>
-endif
-
-
-" }}}
-
-" Efficient {{{
+" ][ {{{
 
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -740,13 +672,109 @@ nnoremap ]t :tnext<CR>
 nnoremap [T :tfirst<CR>
 nnoremap ]T :tlast<CR>
 
+" }}}
+
+" Comfortable {{{
+
+noremap j gj
+noremap k gk
+noremap j gj
+noremap k gk
+
+noremap <leader><leader>p "+p
+
+vnoremap <C-x> "*d
+
+vnoremap <C-a> <C-a>gv
+vnoremap <C-q> <C-x>gv
+
+" Paste more quickly
+cnoremap <C-V> <C-R>+
+inoremap <C-V> <C-R><C-O>+
+" This is wrong: inoremap <C-V> <ESC>"+pa
+" This is wrong: inoremap <C-V> <C-O>"+P
+" This is good:  inoremap <C-V> <C-\><C-O>"+P<Esc>`]a
+" inoremap <C-V> <Cmd>call <SID>paste_from_clip()<CR><right>
+" function s:paste_from_clip() abort
+"   set noautoindent
+"   exec "normal i\<C-R>+"
+"   set autoindent
+" endfunction
+
+" <C-z> in nvim is dead, so i mapped it.
+noremap <C-z> <Cmd>SSave<CR>
+
+" Act like D and C
+nnoremap Y y$
+" Copy to system clipboard in Visual and Select mode
+vnoremap Y "+y
+
 " Save with formatting: Ctrl-S
 noremap <C-S> :<C-U>update<CR>
 inoremap <C-S> <C-O>:update<CR>
 " Save without formatting: Todo:
 nnoremap <Leader>s :w<CR>
 
+" nnoremap <C-u> <C-u>zz
+" nnoremap <C-d> <C-d>zz
 
+" Stop highlighting when clearing screen
+" nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+nnoremap <silent> <C-L> :nohlsearch<C-R>='<Bar>diffupdate'<CR><CR><C-L>
+
+" This breaks undo at each line break
+inoremap <CR> <C-G>u<CR>
+
+" Using <C-G>u: when delete, break undo sequence, start new change
+if empty(mapcheck('<C-U>', 'i'))
+  inoremap <C-U> <C-G>u<C-U>
+endif
+if empty(mapcheck('<C-W>', 'i'))
+  inoremap <C-W> <C-G>u<C-W>
+endif
+
+" }}}
+
+" Operator-pending mappings {{{
+onoremap H ^
+onoremap L $
+" }}}
+
+" Visual mappings {{{
+" Continuous indent
+vnoremap > >gv
+vnoremap < <gv
+
+" Move to the end of yanked text after yank
+vnoremap y y`]
+nnoremap p p`]
+vnoremap p p`]
+
+" }}}
+
+" Command line mappings {{{
+
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <Down> <C-n>
+cnoremap <Up> <C-p>
+
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+
+cnoremap <C-a> <HOME>
+
+cnoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<S-Left>"
+cnoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<S-Right>"
+
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+
+" }}}
+
+" Insert mappings {{{
+" inoremap <C-u> <ESC>I
+" inoremap <C-d> <ESC>A
 " }}}
 
 """"""""""""""""""""""
@@ -953,8 +981,8 @@ nnoremap ,v <Cmd>StartifyWin<CR>
 " let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 0
 let g:mkdp_command_for_global = 1
-" autocmd Filetype markdown nmap <buffer> <LocalLeader>t <Plug>MarkdownPreviewToggle
-nmap <LocalLeader>t <Plug>MarkdownPreviewToggle
+" autocmd Filetype markdown map <buffer> <Leader>tm <Plug>MarkdownPreviewToggle
+map <Leader>tm <Plug>MarkdownPreviewToggle
 
 " [easymotion]
 " Disable default mappings
