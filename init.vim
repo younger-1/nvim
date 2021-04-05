@@ -5,7 +5,7 @@
 """""""""""""""""""""""""""""
 
 " Basic {{{
-" For debug reson, do NOT create $VIM\vimrc, as it will be sourced before "$HOME\_vimrc"
+" For debug reason, do NOT create $VIM\vimrc, as it will be sourced before "$HOME\_vimrc"
 " Get the defaults that most users want.
 " source $VIMRUNTIME/defaults.vim
 
@@ -39,12 +39,13 @@ scriptencoding utf-8
 """"""""""""""""""""""
 "      vim-plug      "
 """"""""""""""""""""""
-" Be care of:
 
+" Before plugins {{{
+
+" Be care of:
 " --  call plug#end() automatically executes filetype plugin indent on and syntax enable. You can revert the settings after the call. e.g. filetype indent off, syntax off, etc.
 " --
 
-" Before plugins {{{
 
 " [vim-polyglot]
 " Language packs can be disabled:
@@ -53,7 +54,6 @@ scriptencoding utf-8
 let g:polyglot_disabled = ['sensible']
 
 " }}}
-
 
 " vim-plug {{{
 
@@ -258,10 +258,11 @@ if all_plugins
     " [go]
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-    " [Tasks]
+    " [Tools]
     Plug 'jpalardy/vim-slime'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
+    Plug 'wakatime/vim-wakatime'
 
     " [Appearance]
     " Plug 'vim-airline/vim-airline'
@@ -280,29 +281,19 @@ if all_plugins
 
   call plug#end()
 endif
-" }}}
-
 
 " filetype plugin on
 filetype plugin indent on
 syntax on
 
+" }}}
+
+
 """"""""""""""""""""""
 "      Colorscheme   "
 """"""""""""""""""""""
 
-" Theme {{{
-
-" [Term Color]
-" Terminal's 256 color
-set t_Co=256
-if has('nvim') || has('termguicolors')
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-    set termguicolors
-endif
-
-
-" [lightline]
+" [lightline] {{{
 
 let g:lightline = {
       \ 'active': {
@@ -317,8 +308,17 @@ let g:lightline = {
 " Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
-" let g:lightline.colorscheme = 'monokai_tasty'
-" let g:lightline.colorscheme = 'onehalfdark'
+" }}}
+
+" Theme {{{
+
+" [Term Color]
+" Terminal's 256 color
+set t_Co=256
+if has('nvim') || has('termguicolors')
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    set termguicolors
+endif
 
 " [falcon](https://github.com/fenetikm/falcon/wiki/Installation)
 let g:falcon_lightline = 1
@@ -346,17 +346,56 @@ let g:hybrid_transparent_background = 0
 " colorscheme hybrid_material
 " colorscheme hybrid_reverse
 
-" [vim-monokai-tasty]
+" [vim-monokai-tasty](https://github.com/patstockwell/vim-monokai-tasty)
 let g:vim_monokai_tasty_italic = 0
 let g:lightline.colorscheme = 'monokai_tasty'
 colorscheme vim-monokai-tasty
 
-" [Colorscheme]
+" [nord](https://www.nordtheme.com/docs/ports/vim)
+" let g:lightline.colorscheme = 'nord'
+" colorscheme nord
+
+" [seoul256](https://github.com/junegunn/seoul256.vim)
+let g:seoul256_background = 235
+let g:seoul256_light_background = 253
 " colorscheme seoul256
-" colorscheme onehalfdark
+
+" [papercolor](https://github.com/NLKNguyen/papercolor-theme)
+" Note: can set bg=light
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 0,
+  \       'allow_italic': 0,
+  \     }
+  \   },
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+" let g:lightline.colorscheme = 'PaperColor'
 " colorscheme PaperColor
 
-" [Personal tuning]
+" [onehalf](https://github.com/sonph/onehalf/tree/master/vim)
+" let g:lightline.colorscheme = 'onehalfdark'
+" colorscheme onehalflight
+" colorscheme onehalfdark
+
+" [monotone](https://github.com/Lokaltog/vim-monotone)
+" let g:monotone_emphasize_comments = 1
+" colorscheme monotone
+
+" }}}
+
+" [Personal tuning] {{{
 " Change the colour of the search highlight:
 " highlight Search guifg=#bada55 guibg=#000000 gui=bold ctermfg=green ctermbg=black cterm=bold
 " highlight CursorLine guibg=lightblue ctermbg=lightgray
@@ -390,7 +429,7 @@ set nrformats-=octal            " For CTRL-A and CTRL-X work better
 
 set sessionoptions-=options
 set viewoptions-=options
-
+set synmaxcol=180               " For performance tweaks
 
 
 " [Win10]
@@ -488,9 +527,13 @@ if has('persistent_undo')
   " set undofile                  " keep an undo file (undo changes after closing)
   " set undodir=
 endif
-" set noswapfile                  " Swapfile is not suitable for big files
+" set noswapfile                  " Swap file is not suitable for big files
 " set nobackup                    " Don't create annoying backup files
 " set nowritebackup
+
+" Spell: enable spell only if file type is normal text
+let spellable = ['vim', 'markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
+autocmd BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell | endif
 
 " [GUI]
 " has('gui_running') for vim8
@@ -606,6 +649,8 @@ command! What echo synIDattr(synID(line('.'), col('.'), -1), 'name')
 """"""""""""""""""""""
 
 " Mappings {{{
+
+" Keys {{{
 let g:mapleader = ' '
 let g:maplocalleader = '\'
 
@@ -617,6 +662,7 @@ let g:maplocalleader = '\'
 " xnoremap ; :
 " nnoremap : :<C-p>
 " xnoremap v <C-V>
+" }}}
 
 " CR is C-M {{{
 nnoremap <Leader><CR> o<ESC>cc<Esc>
@@ -656,7 +702,7 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
-" More comfortable:
+" quickfix
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q :cfirst<CR>
@@ -681,6 +727,12 @@ noremap k gk
 noremap j gj
 noremap k gk
 
+" Move selected line / block of text in visual mode
+" shift + k to move up
+xnoremap K :move '<-2<CR>gv
+" shift + j to move down
+xnoremap J :move '>+1<CR>gv
+
 noremap <leader><leader>p "+p
 
 vnoremap <C-x> "*d
@@ -690,7 +742,7 @@ vnoremap <C-q> <C-x>gv
 
 " Paste more quickly
 cnoremap <C-V> <C-R>+
-inoremap <C-V> <C-R><C-O>+
+inoremap <C-V> <C-G>u<C-R><C-O>+
 " This is wrong: inoremap <C-V> <ESC>"+pa
 " This is wrong: inoremap <C-V> <C-O>"+P
 " This is good:  inoremap <C-V> <C-\><C-O>"+P<Esc>`]a
@@ -742,6 +794,8 @@ onoremap L $
 
 " Visual mappings {{{
 " Continuous indent
+nmap < <<
+nmap > >>
 vnoremap > >gv
 vnoremap < <gv
 
@@ -1451,6 +1505,7 @@ let g:coc_snippet_prev = '<c-p>'
 xmap <leader>ax  <Plug>(coc-convert-snippet)
 
 " }}}
+
 
 """""""""""""""""""""
 "      Firenvim     "
