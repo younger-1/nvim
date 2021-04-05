@@ -25,7 +25,9 @@
     "diagnostic.warningSign": "»",
     "diagnostic.errorSign": "×",
     "diagnostic.virtualText": true,
+    "diagnostic.virtualTextPrefix": "☵ ",
     // "diagnostic.virtualTextCurrentLineOnly": false,
+    // "diagnostic.displayByAle": true,
     // [suggest]
     "suggest.completionItemKindLabels": {
         "keyword": "\uf1de",
