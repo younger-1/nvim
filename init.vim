@@ -125,39 +125,35 @@ if all_plugins
     " [Change]
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-abolish'
-    " == Comment
+    " -- Comment
     " Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdcommenter'
     " Plug 'tyru/caw.vim'
-    " ==
+    " --
     Plug 'michaeljsmith/vim-indent-object'
     " Plug 'AndrewRadev/splitjoin.vim'
     " Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-repeat'
     Plug 'machakann/vim-highlightedyank'
     " Plug 'brooth/far.vim'
-    " == Auto pair
+    " -- Auto pair
     " Plug 'cohama/lexima.vim'
     " Plug 'jiangmiao/auto-pairs'
     " Plug 'tpope/vim-endwise'
     " Plug 'rstacruz/vim-closer'
-    " ==
+    " --
     Plug 'sjl/gundo.vim'
     Plug 'mg979/vim-visual-multi'
 
-    " [Vim | Debug]
+    " [Vim]
     " Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-scriptease'
+    " -- vimscript test
     " Plug 'junegunn/vader.vim',  { 'on': 'Vader', 'for': 'vader' }
     " Plug 'thinca/vim-themis'
     if !has('nvim')
       Plug 'yianwillis/vimcdoc'
     endif
-
-    " [Play]
-    " Plug 'takac/vim-hardtime'
-    " Plug 'skywind3000/vim-keysound'
-    Plug 'iqxd/vim-mine-sweeping'
 
     " [Buffer | Window | Tab]
     Plug 'ap/vim-buftabline'
@@ -165,16 +161,16 @@ if all_plugins
     " Plug 'bagrat/vim-buffet'
     " Plug 'tpope/vim-flagship'
     " Plug 'yatli/vmux.vim'
-    " == terminal
+    " -- terminal
     " Plug 'kassio/neoterm'
-    " ==
+    " --
 
     " [File]
-    " == nerdtree
+    " -- nerdtree
     Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
     " Plug 'Xuyuanp/nerdtree-git-plugin'
     " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    " ==
+    " --
     " Plug 'Shougo/vimfiler.vim'
     " Plug 'justinmk/vim-dirvish'
 
@@ -192,19 +188,19 @@ if all_plugins
     " [NewUI]
     Plug 'mhinz/vim-startify'
     Plug 'liuchengxu/vim-which-key'
-    " == floaterm
+    " -- floaterm
     " Plug 'voldikss/vim-floaterm'
     " Plug 'ptzz/lf.vim'
-    " ==
+    " --
     Plug 'liuchengxu/vista.vim'
     " Plug 'wfxr/minimap.vim'
     " Plug 'mbbill/undotree'
 
     " [Git]
-    " == fugitive
+    " -- fugitive
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
-    " ==
+    " --
     Plug 'mhinz/vim-signify'
     " Plug 'airblade/vim-gitgutter'
     " Plug 'junegunn/gv.vim'
@@ -219,64 +215,71 @@ if all_plugins
     " Plug 'junegunn/limelight.vim'
     " --
 
-    " [Snippet]
-    " Plug 'SirVer/ultisnips'
-    Plug 'skywind3000/Leaderf-snippet'
-    Plug 'honza/vim-snippets'
-
-    " [LaTeX]
-    " Plug 'lervag/vimtex'
-
     " [Markdown]
     " Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     " Plug 'gabrielelana/vim-markdown', { 'as': 'vim-markdown_' }
     " Plug 'ferrine/md-img-paste.vim'
+    " -- LaTeX
+    " Plug 'lervag/vimtex'
+    " --
 
-
-    " [Languages]
+    " [Code tools]
     Plug 'sheerun/vim-polyglot'
-    " == ctags
+    " -- ctags
     " Plug 'ludovicchabant/vim-gutentags'
     " Plug 'skywind3000/gutentags_plus'
-    " ==
+    " -- snippet
+    " Plug 'SirVer/ultisnips'
+    Plug 'skywind3000/Leaderf-snippet'
+    Plug 'honza/vim-snippets'
+    " -- complete
     " Plug 'codota/tabnine-vim'
-    " Plug 'puremourning/vimspector'
-    " Plug 'vim-test/vim-test'
-    " Plug 'rcarriga/vim-ultest', { "do": ":UpdateRemotePlugins" }
-
-    " [coc]
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    " [Lint Engine]
+    " -- lint engine
     " Plug 'w0rp/ale'
     " Plug 'maximbaz/lightline-ale'
-
-    " [Format]
+    " -- format
     " Plug 'sbdchd/neoformat'
+    " -- test
+    " Plug 'vim-test/vim-test'
+    " Plug 'rcarriga/vim-ultest', { "do": ":UpdateRemotePlugins" }
+    " -- debug
+    " Plug 'puremourning/vimspector'
+    " -- repl
+    Plug 'jpalardy/vim-slime'
+    " --
 
-    " [go]
+    " [LSP]
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " [Languages]
+    " -- go
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " --
 
     " [Tools]
-    Plug 'jpalardy/vim-slime'
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'wakatime/vim-wakatime'
 
+    " [Play]
+    " Plug 'takac/vim-hardtime'
+    " Plug 'skywind3000/vim-keysound'
+    Plug 'iqxd/vim-mine-sweeping'
+
     " [Appearance]
     " Plug 'vim-airline/vim-airline'
-    " == lightline
+    " -- lightline
     Plug 'itchyny/lightline.vim'
     " Plug 'delphinus/lightline-delphinus'
-    " ==
+    " --
     " Plug 'liuchengxu/eleline.vim'
     " Plug 'ojroques/vim-scrollstatus'
     Plug 'ryanoasis/vim-devicons'
-    " == indentLine
+    " -- indentLine
     Plug 'Yggdroot/indentLine'
     " Plug 'nathanaelkane/vim-indent-guides'
-    " ==
+    " --
     " Plug 'delphinus/vim-auto-cursorline'
     " Plug 'Yggdroot/vim-mark'
 
@@ -1182,7 +1185,7 @@ xnoremap <leader>fy :<C-U><C-R>=printf("Leaderf! rg --stayOpen -F -e %s ", leade
 
 noremap <leader>fr :<C-U>Leaderf! rg --recall<CR>
 
-" == gtags
+" -- gtags
 " If 0, must exe `:Leaderf gtags --update` first
 " let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_Gtagsconf = expand('~/.globalrc')
@@ -1194,7 +1197,7 @@ noremap <leader>fgg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expan
 noremap <leader>fgr :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fj :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fk :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
-" ==
+" --
 
 " [vista.vim]
 " Toggle vista view window
