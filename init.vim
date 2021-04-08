@@ -1484,7 +1484,7 @@ autocmd FileType markdown setl keywordprg=:help
 highlight CocCursorRange guibg=#b16286 guifg=#ebdbb2
 highlight link CocHighlightText  CocErrorSign
 
-
+" Multiple Cursor in coc:
 nmap <silent> <leader><C-c> <Plug>(coc-cursors-position)
 nmap <silent> <leader><C-d> <Plug>(coc-cursors-word)
 xmap <silent> <leader><C-d> <Plug>(coc-cursors-range)
@@ -1495,7 +1495,10 @@ nmap <expr> <silent> <leader><C-n> <SID>select_current_word()
 function! s:select_current_word()
   return "\<Plug>(coc-cursors-word)*:nohlsearch\<CR>"
 endfunc
+
 xmap <silent> <leader><C-n> <Plug>(coc-cursors-range)gvy/\V<C-r>=escape(@",'/\')<CR><CR>:nohlsearch<CR>gn
+xnoremap n gn<Esc>gn
+xnoremap N gN<Esc>gN
 
 augroup cocUsing
   autocmd!
