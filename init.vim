@@ -106,6 +106,7 @@ if all_plugins
     Plug 'romgrk/doom-one.vim'
     Plug 'fenetikm/falcon'
     Plug 'joshdick/onedark.vim'
+    Plug 'romgrk/doom-one.vim'
 
     " [Motion]
     Plug 'easymotion/vim-easymotion'
@@ -352,8 +353,8 @@ let g:hybrid_transparent_background = 0
 
 " [vim-monokai-tasty](https://github.com/patstockwell/vim-monokai-tasty)
 let g:vim_monokai_tasty_italic = 0
-let g:lightline.colorscheme = 'monokai_tasty'
-colorscheme vim-monokai-tasty
+" let g:lightline.colorscheme = 'monokai_tasty'
+" colorscheme vim-monokai-tasty
 
 " [nord](https://www.nordtheme.com/docs/ports/vim)
 " let g:lightline.colorscheme = 'nord'
@@ -406,6 +407,8 @@ let g:gruvbox_italic = 0
 " let g:lightline.colorscheme = 'gruvbox'
 " colorscheme gruvbox
 
+" [doom-one](https://github.com/romgrk/doom-one.vim)
+colorscheme doom-one
 
 " }}}
 
@@ -1482,7 +1485,7 @@ autocmd FileType markdown setl keywordprg=:help
 " endif
 
 highlight CocCursorRange guibg=#b16286 guifg=#ebdbb2
-highlight link CocHighlightText  CocErrorSign
+highlight link CocHighlightText DiffText
 
 " Multiple Cursor in coc:
 nmap <silent> <leader><C-c> <Plug>(coc-cursors-position)
