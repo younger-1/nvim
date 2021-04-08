@@ -1415,7 +1415,26 @@ nnoremap <silent> <leader>kk :call CocActionAsync('doHover')<CR>
 autocmd FileType markdown setl keywordprg=:help
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * if exists('*CocActionAsync') | call CocActionAsync('highlight') | endif
+" if exists('*CocActionAsync')
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+" endif
+
+highlight CocCursorRange guibg=#b16286 guifg=#ebdbb2
+highlight link CocHighlightText  CocErrorSign
+
+
+nmap <silent> <leader><C-c> <Plug>(coc-cursors-position)
+nmap <silent> <leader><C-d> <Plug>(coc-cursors-word)
+xmap <silent> <leader><C-d> <Plug>(coc-cursors-range)
+nmap <leader>ax  <Plug>(coc-cursors-operator)
+
+" Add current to selection and go to next:
+nmap <expr> <silent> <leader><C-n> <SID>select_current_word()
+function! s:select_current_word()
+  return "\<Plug>(coc-cursors-word)*:nohlsearch\<CR>"
+endfunc
+xmap <silent> <leader><C-n> <Plug>(coc-cursors-range)gvy/\V<C-r>=escape(@",'/\')<CR><CR>:nohlsearch<CR>gn
 
 augroup cocUsing
   autocmd!
