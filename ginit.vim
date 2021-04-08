@@ -20,7 +20,6 @@ function NvimGuiName()
   return get(info.client, 'name', '')
 endfunction
 
-
 function! s:get_last_ui_chan()
   let uis = nvim_list_uis()
   if len(uis) == 0
