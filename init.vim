@@ -119,7 +119,7 @@ if all_plugins
     " Plug 'wellle/targets.vim'
     Plug 'unblevable/quick-scope'
     Plug 'andymass/vim-matchup'
-    " Plug 'tpope/vim-unimpaired'
+    Plug 'tpope/vim-unimpaired'
     " Plug 'psliwka/vim-smoothie'
 
     " [Change]
@@ -271,6 +271,7 @@ if all_plugins
     " Plug 'delphinus/lightline-delphinus'
     " ==
     " Plug 'liuchengxu/eleline.vim'
+    " Plug 'ojroques/vim-scrollstatus'
     Plug 'ryanoasis/vim-devicons'
     " == indentLine
     Plug 'Yggdroot/indentLine'
@@ -393,6 +394,16 @@ let g:PaperColor_Theme_Options = {
 " let g:monotone_emphasize_comments = 1
 " colorscheme monotone
 
+" [gruvbox](https://github.com/morhetz/gruvbox/wiki/Configuration)
+" Note: can set bg=light
+" soft, medium and hard
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_light= 'soft'
+let g:gruvbox_italic = 0
+" let g:lightline.colorscheme = 'gruvbox'
+" colorscheme gruvbox
+
+
 " }}}
 
 " [Personal tuning] {{{
@@ -430,6 +441,7 @@ set nrformats-=octal            " For CTRL-A and CTRL-X work better
 set sessionoptions-=options
 set viewoptions-=options
 set synmaxcol=180               " For performance tweaks
+set whichwrap=b,s,<,>
 
 
 " [Win10]
@@ -531,8 +543,13 @@ endif
 " set nobackup                    " Don't create annoying backup files
 " set nowritebackup
 
+" If you like to keep a lot of backups, you could use a BufWritePre
+" autocommand to change 'backupext' just before writing the file to
+" include a timestamp.
+" :au BufWritePre * let &bex = '-' . strftime("%Y%b%d%X") . '~'
+
 " Spell: enable spell only if file type is normal text
-let spellable = ['vim', 'markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
+let spellable = ['markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
 autocmd BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell | endif
 
 " [GUI]
@@ -610,7 +627,9 @@ autocmd BufReadPost *
   \ | exe "normal! g'\""
   \ | endif
 
-" Delete trailing white space on save,
+
+" Delete trailing white space on save
+autocmd BufWritePre *.vim,*.md,*.wiki :call CleanExtraSpaces()
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
@@ -619,9 +638,8 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
-autocmd BufWritePre *.vim,*.md,*.wiki :call CleanExtraSpaces()
-
 " https://vim.fandom.com/wiki/Change_between_backslash_and_forward_slash
+command! -bang -range ToggleSlash <line1>,<line2>call ToggleSlash(<bang>1)
 function! ToggleSlash(independent) range
   let from = ''
   for lnum in range(a:firstline, a:lastline)
@@ -637,10 +655,47 @@ function! ToggleSlash(independent) range
   endfor
 endfunction
 
-command! -bang -range ToggleSlash <line1>,<line2>call ToggleSlash(<bang>1)
-
 " Like zS: print out the syntax group that the cursor is currently above.
 command! What echo synIDattr(synID(line('.'), col('.'), -1), 'name')
+
+" Highlight the found tag in preview window, avoid the ":ptag" when there is no word under the cursor
+" au! CursorHold *.[ch] ++nested call PreviewWord()
+" func PreviewWord()
+"   if &previewwindow                  " don't do this in the preview window
+"     return
+"   endif
+"   let w = expand("<cword>")          " get the word under cursor
+"   if w =~ '\a'                       " if the word contains a letter
+"     " Delete any existing highlight before showing another tag
+"     silent! wincmd P                 " jump to preview window
+"     if &previewwindow                " if we really get there...
+"       match none                     " delete existing highlight
+"       wincmd p                       " back to old window
+"     endif
+
+"     " Try displaying a matching tag for the word under the cursor
+"     try
+"        exe "ptag " . w
+"     catch
+"       return
+"     endtry
+
+"     silent! wincmd P                 " jump to preview window
+"     if &previewwindow                " if we really get there...
+"       if has("folding")
+"         silent! .foldopen            " don't want a closed fold
+"       endif
+"       call search("$", "b")          " to end of previous line
+"       let w = substitute(w, '\\', '\\\\', "")
+"       call search('\<\V' . w . '\>') " position cursor on match
+"       " Add a match highlight to the word at this position
+"       hi previewWord term=bold ctermbg=green guibg=green
+"       exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
+"       wincmd p                       " back to old window
+"     endif
+"   endif
+" endfun
+
 " }}}
 
 
@@ -806,7 +861,7 @@ vnoremap p p`]
 
 " }}}
 
-" Command line mappings {{{
+" Cmdline mappings {{{
 
 cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
@@ -820,6 +875,9 @@ cnoremap <C-a> <HOME>
 
 cnoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<S-Left>"
 cnoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<S-Right>"
+
+" cnoremap <expr><C-d> pumvisible() ? "\<PageDown>" : "\<C-d>"
+" cnoremap <expr><C-u> pumvisible() ? "\<PageUp>" : "\<C-u>"
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
@@ -1466,9 +1524,10 @@ command! -nargs=0 Import :call CocAction('runCommand', 'editor.action.organizeIm
 " }}}
 
 " Coc-extensions {{{
-" leetcode,git,
+" leetcode,git,ecdict,zi,rainbow-fart,fzf-preview,rls
 let g:coc_global_extensions = [
       \  'coc-json',
+      \  'coc-yank',
       \  'coc-lists',
       \  'coc-pairs',
       \  'coc-explorer',
@@ -1476,15 +1535,25 @@ let g:coc_global_extensions = [
       \  'coc-highlight',
       \  'coc-marketplace',
       \  'coc-tasks',
-      \  'coc-ecdict',
       \  'coc-tabnine',
       \  'coc-translator',
       \  'coc-go',
+      \  'coc-css',
+      \  'coc-html',
       \  'coc-clangd',
+      \  'coc-vimlsp',
       \  'coc-pyright',
       \  'coc-tsserver',
       \  'coc-rust-analyzer',
       \  ]
+
+" let g:test_array = [
+"         "\ first entry comment
+"         \ 'first',
+"         "\ second entry comment
+"         \ 'second',
+"         \ ]
+
 
 " [coc-lists]
 " Grep word under cursor
@@ -1632,4 +1701,5 @@ let g:neovide_cursor_trail_length=0.8
 let g:neovide_cursor_animation_length=0.18
 " }}}
 
-" vim: textwidth=100 shiftwidth=2 foldmethod=marker foldmarker=\ {{{,\ }}}
+" vim: textwidth=100 shiftwidth=2
+" vim: foldmethod=marker foldmarker=\ {{{,\ }}}
