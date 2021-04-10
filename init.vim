@@ -482,13 +482,19 @@ set whichwrap=b,s,<,>
 " endif
 
 " [Python]
-if has('nvim')
-  let g:python3_host_prog = $scoop .. '/shims/python.exe'
+if has('win32')
+  if has('nvim')
+    let g:python3_host_prog = $scoop .. '/shims/python.exe'
+  else
+    set pythonthreedll=python39.dll
+    " Not need to set pythonthreehome
+    let $pythonhome = $scoop .. '/apps/python/current'
+    " let $PATH ..= ';' .. 'C:\Users\younger\scoop\apps\miniconda3\current'
+  endif
 else
-  set pythonthreedll=python39.dll
-  " Not need to set pythonthreehome
-  let $pythonhome = $scoop .. '/apps/python/current'
-  " let $PATH ..= ';' .. 'C:\Users\younger\scoop\apps\miniconda3\current'
+  if has('nvim')
+    let g:python3_host_prog = '/usr/sbin/python'
+  endif
 endif
 
 " [Search]
@@ -1723,6 +1729,22 @@ let g:neovide_cursor_trail_length=0.8
 "
 let g:neovide_cursor_animation_length=0.18
 " }}}
+
+
+"""""""""""""""""""""
+"        WSL        "
+"""""""""""""""""""""
+" WSL yank support
+let g:windows_clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(g:windows_clip)
+  " 1. Copy to win-clip with Y
+  vnoremap Y y<Cmd>call system(g:windows_clip, @0)<CR>
+  " 2. Copy to win-clip after every yank.
+  " augroup WSLYank
+  "   autocmd!
+  "   autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+  " augroup END
+endif
 
 " vim: textwidth=100 shiftwidth=2
 " vim: foldmethod=marker foldmarker=\ {{{,\ }}}
