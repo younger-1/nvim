@@ -22,8 +22,10 @@
     // [diagnostic]
     "diagnostic.infoSign": "🍳",
     "diagnostic.hintSign": "🎅",
-    "diagnostic.warningSign": "»",
-    "diagnostic.errorSign": "×",
+    // "diagnostic.warningSign": "»",
+    // "diagnostic.errorSign": "×",
+    "diagnostic.warningSign": "🚸",
+    "diagnostic.errorSign": "⛔",
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextPrefix": "☵ ",
     // "diagnostic.virtualTextCurrentLineOnly": false,
