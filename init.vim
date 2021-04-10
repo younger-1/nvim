@@ -1496,10 +1496,7 @@ nnoremap <silent> <leader>kk :call CocActionAsync('doHover')<CR>
 autocmd FileType markdown setl keywordprg=:help
 
 " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * if exists('*CocActionAsync') | call CocActionAsync('highlight') | endif
-" if exists('*CocActionAsync')
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-" endif
+autocmd CursorHold * if exists('*CocActionAsync') | call CocActionAsync('highlight') | endif
 
 highlight CocCursorRange guibg=#b16286 guifg=#ebdbb2
 highlight link CocHighlightText DiffText
