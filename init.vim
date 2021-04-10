@@ -78,6 +78,13 @@ if !all_plugins
 endif
 " }}}
 
+" Auto install Plug https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : has('win32') ? '~/vimfiles' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 if all_plugins
   call plug#begin('~/.cache/vim-plug')
 
@@ -107,6 +114,7 @@ if all_plugins
     Plug 'fenetikm/falcon'
     Plug 'joshdick/onedark.vim'
     Plug 'romgrk/doom-one.vim'
+    Plug 'ayu-theme/ayu-vim'
 
     " [Motion]
     Plug 'easymotion/vim-easymotion'
@@ -410,6 +418,15 @@ let g:gruvbox_italic = 0
 " [doom-one](https://github.com/romgrk/doom-one.vim)
 colorscheme doom-one
 
+" [ayu](https://github.com/ayu-theme/ayu-vim)
+" Or: dark, light, mirage
+let ayucolor="dark"
+" let g:lightline.colorscheme = 'ayu'
+" colorscheme ayu
+
+" dracula(https://draculatheme.com/vim)
+colorscheme dracula
+
 " }}}
 
 " [Personal tuning] {{{
@@ -635,7 +652,7 @@ autocmd BufReadPost *
 
 
 " Delete trailing white space on save
-autocmd BufWritePre *.vim,*.md,*.wiki :call CleanExtraSpaces()
+autocmd BufWritePre *.vim,*.md,*.wiki,*.log,*.txt,*.ini :call CleanExtraSpaces()
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
