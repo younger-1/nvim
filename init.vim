@@ -425,7 +425,7 @@ let ayucolor="dark"
 " colorscheme ayu
 
 " dracula(https://draculatheme.com/vim)
-colorscheme dracula
+" colorscheme dracula
 
 " }}}
 
@@ -1730,21 +1730,6 @@ let g:neovide_cursor_trail_length=0.8
 let g:neovide_cursor_animation_length=0.18
 " }}}
 
-
-"""""""""""""""""""""
-"        WSL        "
-"""""""""""""""""""""
-" WSL yank support
-let g:windows_clip = '/mnt/c/Windows/System32/clip.exe'
-if executable(g:windows_clip)
-  " 1. Copy to win-clip with Y
-  vnoremap Y y<Cmd>call system(g:windows_clip, @0)<CR>
-  " 2. Copy to win-clip after every yank.
-  " augroup WSLYank
-  "   autocmd!
-  "   autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-  " augroup END
-endif
 
 " vim: textwidth=100 shiftwidth=2
 " vim: foldmethod=marker foldmarker=\ {{{,\ }}}
