@@ -3,6 +3,7 @@
     "coc.preferences.extensionUpdateCheck": "daily",
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnSaveFiletypes": [
+        "go",
         "rust",
         "python",
         "jsonc",
@@ -10,6 +11,7 @@
         "dart", // coc-flutter support dart format */
         "elixir", // diagnostic-languageserver support elixir format
         "eelixir", // diagnostic-languageserver support elixir format
+        "css",
         "html"
     ],
     // [list]
@@ -80,5 +82,5 @@
     // [python]
     "python.formatting.provider": "black",
     // [rust]
-    "rust-analyzer.server.path": "~/scoop/apps/rust-analyzer/current/rust-analyzer.exe"
+    "rust-analyzer.server.path": "rust-analyzer.exe"
 }
