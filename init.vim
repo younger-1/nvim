@@ -290,7 +290,7 @@ if all_plugins
     " Plug 'nathanaelkane/vim-indent-guides'
     " --
     " Plug 'delphinus/vim-auto-cursorline'
-    " Plug 'Yggdroot/vim-mark'
+    Plug 'rrethy/vim-hexokinase', { 'do': 'cd hexokinase && go build' }
 
   call plug#end()
 endif
@@ -892,11 +892,13 @@ vnoremap p p`]
 
 " Cmdline mappings {{{
 
-cnoremap <C-n> <Down>
-cnoremap <C-p> <Up>
+cnoremap <M-n> <Down>
+cnoremap <M-p> <Up>
 cnoremap <Down> <C-n>
 cnoremap <Up> <C-p>
 
+cnoremap <M-f> <S-Right>
+cnoremap <M-b> <S-Left>
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 
@@ -914,8 +916,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " }}}
 
 " Insert mappings {{{
-" inoremap <C-u> <ESC>I
-" inoremap <C-d> <ESC>A
+inoremap <M-f> <S-Right>
+inoremap <M-b> <S-Left>
 " }}}
 
 """"""""""""""""""""""
@@ -1400,8 +1402,8 @@ else
 endif
 
 " Move within 'ins-completion-menu'
-imap <expr><C-j> pumvisible() ? "\<Down>" : "\<S-Left>"
-imap <expr><C-k> pumvisible() ? "\<Up>" : "\<S-Right>"
+imap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
+imap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 
 " Scroll pages within 'ins-completion-menu'
 imap <expr><C-u> pumvisible() ? "\<PageUp>" : "\<ESC>I"
@@ -1638,8 +1640,8 @@ nmap <leader>kr <Plug>(coc-translator-r)
 vmap <leader>kr <Plug>(coc-translator-rv)
 
 " [coc-snippets]
-let g:coc_snippet_next = '<c-n>'
-let g:coc_snippet_prev = '<c-p>'
+" let g:coc_snippet_next = '<C-n>'
+" let g:coc_snippet_prev = '<C-p>'
 xmap <leader>ax  <Plug>(coc-convert-snippet)
 
 " }}}
