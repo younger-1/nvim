@@ -134,14 +134,16 @@ if all_plugins
     " [Change]
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-abolish'
+    Plug 'kana/vim-textobj-user'
+    Plug 'kana/vim-textobj-entire'
     " -- Comment
     " Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdcommenter'
-    " Plug 'tyru/caw.vim'
+    Plug 'tyru/caw.vim'
     " --
     Plug 'michaeljsmith/vim-indent-object'
     " Plug 'AndrewRadev/splitjoin.vim'
-    " Plug 'junegunn/vim-easy-align'
+    Plug 'junegunn/vim-easy-align'
     Plug 'tpope/vim-repeat'
     Plug 'machakann/vim-highlightedyank'
     " Plug 'brooth/far.vim'
@@ -837,8 +839,10 @@ inoremap <C-V> <C-G>u<C-R><C-O>+
 "   set autoindent
 " endfunction
 
-" <C-z> in nvim is dead, so i mapped it.
-noremap <C-z> <Cmd>SSave<CR>
+" <C-z> in win10's nvim is dead, so i mapped it.
+if has('win32')
+  noremap <C-z> <Cmd>SSave<CR>
+endif
 
 " Act like D and C
 nnoremap Y y$
@@ -960,6 +964,15 @@ map g#  <Plug>(asterisk-g#)
 " map gz* <Plug>(asterisk-gz*)
 " map z#  <Plug>(asterisk-z#)
 " map gz# <Plug>(asterisk-gz#)
+
+" [vim-easy-align]
+" For build-in ASCII
+nnoremap gA ga
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(LiveEasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(LiveEasyAlign)
+
 
 " [nerdtree]
 map <Leader>nn <Cmd>NERDTreeToggle<CR>
