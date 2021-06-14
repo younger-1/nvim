@@ -115,6 +115,7 @@ if all_plugins
     Plug 'joshdick/onedark.vim'
     Plug 'romgrk/doom-one.vim'
     Plug 'ayu-theme/ayu-vim'
+    Plug 'sainnhe/sonokai'
 
     " [Motion]
     Plug 'easymotion/vim-easymotion'
@@ -204,7 +205,7 @@ if all_plugins
     " Plug 'ptzz/lf.vim'
     " --
     Plug 'liuchengxu/vista.vim'
-    " Plug 'wfxr/minimap.vim'
+    Plug 'wfxr/minimap.vim'
     " Plug 'mbbill/undotree'
 
     " [Git]
@@ -493,6 +494,10 @@ if has('win32')
     let $pythonhome = $scoop .. '/apps/python/current'
     " let $PATH ..= ';' .. 'C:\Users\younger\scoop\apps\miniconda3\current'
   endif
+elseif has('mac')
+  if has('nvim')
+    let g:python3_host_prog = '/usr/local/bin/python3'
+  endif
 else
   if has('nvim')
     let g:python3_host_prog = '/usr/sbin/python'
@@ -599,7 +604,11 @@ endif
 " set guifont=Cascadia\ Mono\ Light:h15
 " set guifont=FuraMono\ NF:h15
 " set guifont=FiraCode\ NF:h15
-set guifont=JetBrainsMono\ NF:h15
+" set guifont=JetBrainsMono\ NF:h15
+
+if has('unix') && !has('nvim')
+  set guifont=JetBrainsMono_Nerd_Font:h14
+endif
 
 " }}}
 
