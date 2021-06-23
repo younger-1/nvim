@@ -116,6 +116,8 @@ if all_plugins
     Plug 'romgrk/doom-one.vim'
     Plug 'ayu-theme/ayu-vim'
     Plug 'sainnhe/sonokai'
+    Plug 'cocopon/iceberg.vim'
+    Plug 'rakr/vim-one'
 
     " [Motion]
     Plug 'easymotion/vim-easymotion'
@@ -343,8 +345,8 @@ let g:falcon_lightline = 1
 
 " [onedark](https://github.com/joshdick/onedark.vim#options)
 let g:onedark_terminal_italics = 0
-" let g:lightline.colorscheme = 'onedark'
-" colorscheme onedark
+let g:lightline.colorscheme = 'onedark'
+colorscheme onedark
 
 " [material.vim](https://github.com/kaicataldo/material.vim)
 " Styles: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
@@ -419,7 +421,7 @@ let g:gruvbox_italic = 0
 " colorscheme gruvbox
 
 " [doom-one](https://github.com/romgrk/doom-one.vim)
-colorscheme doom-one
+" colorscheme doom-one
 
 " [ayu](https://github.com/ayu-theme/ayu-vim)
 " Or: dark, light, mirage
@@ -427,8 +429,18 @@ let ayucolor="dark"
 " let g:lightline.colorscheme = 'ayu'
 " colorscheme ayu
 
-" dracula(https://draculatheme.com/vim)
+" [dracula](https://draculatheme.com/vim)
 " colorscheme dracula
+
+" [iceberg](https://github.com/cocopon/iceberg.vim)
+" let g:lightline.colorscheme = 'iceberg'
+" colorscheme iceberg
+
+" [vim-one](https://github.com/rakr/vim-one)
+let g:one_allow_italics = 0
+" let g:airline_theme='one'
+" colorscheme one
+" set background=dark
 
 " }}}
 
@@ -1226,12 +1238,19 @@ noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 noremap <leader>fc :<C-U><C-R>=printf("Leaderf cmdHistory %s", "")<CR><CR>
 noremap <leader>fC :<C-U><C-R>=printf("Leaderf colorscheme %s", "")<CR><CR>
 
+" Search what you want
+nnoremap <leader>fs :<C-U><C-R>=printf("Leaderf! rg -e ")<CR>
+nnoremap <leader>fS :<C-U><C-R>=printf("Leaderf! rg --stayOpen -e ")<CR>
 " More: https://zhuanlan.zhihu.com/p/54865001
-nnoremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-nnoremap <leader>fy :<C-U><C-R>=printf("Leaderf! rg --stayOpen -e %s ", expand("<cword>"))<CR>
+nnoremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR>
+nnoremap <leader>fW :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer --stayOpen -e %s ", expand("<cword>"))<CR>
+nnoremap <leader>fy :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", expand("<cword>"))<CR>
+nnoremap <leader>fY :<C-U><C-R>=printf("Leaderf! rg -F --stayOpen -e %s ", expand("<cword>"))<CR>
 " Search visually selected text literally
-xnoremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -F -e %s ", leaderf#Rg#visual())<CR>
-xnoremap <leader>fy :<C-U><C-R>=printf("Leaderf! rg --stayOpen -F -e %s ", leaderf#Rg#visual())<CR>
+xnoremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", leaderf#Rg#visual())<CR>
+xnoremap <leader>fw :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer --stayOpen -e %s ", leaderf#Rg#visual())<CR>
+xnoremap <leader>fy :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+xnoremap <leader>fY :<C-U><C-R>=printf("Leaderf! rg -F --stayOpen -e %s ", leaderf#Rg#visual())<CR>
 
 noremap <leader>fr :<C-U>Leaderf! rg --recall<CR>
 
