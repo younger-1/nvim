@@ -282,6 +282,7 @@ if all_plugins
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'wakatime/vim-wakatime'
+    Plug 'wellle/context.vim'
 
     " [Play]
     " Plug 'takac/vim-hardtime'
