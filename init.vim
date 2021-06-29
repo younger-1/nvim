@@ -116,6 +116,9 @@ if all_plugins
     Plug 'romgrk/doom-one.vim'
     Plug 'ayu-theme/ayu-vim'
     Plug 'sainnhe/sonokai'
+    Plug 'sainnhe/edge'
+    Plug 'sainnhe/everforest'
+    Plug 'sainnhe/gruvbox-material'
     Plug 'cocopon/iceberg.vim'
     Plug 'rakr/vim-one'
 
@@ -139,6 +142,7 @@ if all_plugins
     Plug 'tpope/vim-abolish'
     Plug 'kana/vim-textobj-user'
     Plug 'kana/vim-textobj-entire'
+    Plug 'tommcdo/vim-exchange'
     " -- Comment
     " Plug 'tpope/vim-commentary'
     Plug 'preservim/nerdcommenter'
@@ -175,6 +179,9 @@ if all_plugins
     " Plug 'bagrat/vim-buffet'
     " Plug 'tpope/vim-flagship'
     " Plug 'yatli/vmux.vim'
+    " -- lens
+    " Plug 'camspiers/animate.vim'
+    " Plug 'camspiers/lens.vim'
     " -- terminal
     " Plug 'kassio/neoterm'
     " --
@@ -282,13 +289,16 @@ if all_plugins
     Plug 'iqxd/vim-mine-sweeping'
 
     " [Appearance]
+    " -- airline
     " Plug 'vim-airline/vim-airline'
     " -- lightline
     Plug 'itchyny/lightline.vim'
     " Plug 'delphinus/lightline-delphinus'
-    " --
+    " -- eleline
     " Plug 'liuchengxu/eleline.vim'
-    " Plug 'ojroques/vim-scrollstatus'
+    " -- spaceline
+    " Plug 'glepnir/spaceline.vim'
+    " -- icons
     Plug 'ryanoasis/vim-devicons'
     " -- indentLine
     Plug 'Yggdroot/indentLine'
@@ -296,6 +306,7 @@ if all_plugins
     " --
     " Plug 'delphinus/vim-auto-cursorline'
     Plug 'rrethy/vim-hexokinase', { 'do': 'cd hexokinase && go build' }
+    " Plug 'ojroques/vim-scrollstatus'
 
   call plug#end()
 endif
@@ -313,6 +324,11 @@ syntax on
 
 " [lightline] {{{
 
+" To apply colorscheme without reloading:
+"     :let g:lightline.colorscheme = 'edge'
+"     :call lightline#init()
+"     :call lightline#colorscheme()
+
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -326,6 +342,12 @@ let g:lightline = {
 " Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
+" }}}
+
+" [spaceline] {{{
+let g:spaceline_seperate_style = 'curve'
+" builtin colorscheme space, one, nord, dracula
+let g:spaceline_colorscheme = 'one'
 " }}}
 
 " Theme {{{
@@ -345,8 +367,8 @@ let g:falcon_lightline = 1
 
 " [onedark](https://github.com/joshdick/onedark.vim#options)
 let g:onedark_terminal_italics = 0
-let g:lightline.colorscheme = 'onedark'
-colorscheme onedark
+" let g:lightline.colorscheme = 'onedark'
+" colorscheme onedark
 
 " [material.vim](https://github.com/kaicataldo/material.vim)
 " Styles: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
@@ -437,11 +459,45 @@ let ayucolor="dark"
 " colorscheme iceberg
 
 " [vim-one](https://github.com/rakr/vim-one)
+" Note: can set bg=light
 let g:one_allow_italics = 0
-" let g:airline_theme='one'
 " colorscheme one
-" set background=dark
 
+" [sonokai](https://github.com/sainnhe/sonokai)
+" Styles: Available values: `'default'`, `'atlantis'`, `'andromeda'`, `'shusia'`, `'maia'`, `'espresso'`
+let g:sonokai_style = 'default'
+" Available values: `'grey background'`, `'bold'`, `'underline'`, `'italic'`
+let g:sonokai_current_word = 'underline'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 0
+let g:sonokai_transparent_background = 0
+let g:sonokai_lightline_disable_bold = 1
+let g:sonokai_better_performance = 0
+let g:lightline.colorscheme = 'sonokai'
+colorscheme sonokai
+
+" [edge](https://github.com/sainnhe/edge)
+" Styles: Available values: `'default'`, `'aura'`, `'neon'`
+let g:edge_style = 'default'
+let g:edge_enable_italic = 1
+let g:edge_disable_italic_comment = 0
+let g:edge_transparent_background = 0
+let g:edge_lightline_disable_bold = 1
+let g:edge_better_performance = 0
+" let g:lightline.colorscheme = 'edge'
+" colorscheme edge
+
+" [everforest](https://github.com/sainnhe/everforest)
+" Note: can set bg=light
+" Styles: Available values: `'hard'`, `'medium'`, `'soft'`
+let g:everforest_style = 'default'
+let g:everforest_enable_italic = 1
+let g:everforest_disable_italic_comment = 0
+let g:everforest_transparent_background = 0
+let g:everforest_lightline_disable_bold = 1
+let g:everforest_better_performance = 0
+" let g:lightline.colorscheme = 'everforest'
+" colorscheme everforest
 " }}}
 
 " [Personal tuning] {{{
@@ -1401,6 +1457,10 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
+
+" [lens.vim]
+" let g:lens#disabled = 1
+let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'coc-explorer']
 
 " }}}
 
