@@ -1532,13 +1532,16 @@ xmap <silent> gl <Plug>(coc-range-select)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a<space> <Plug>(coc-codeaction-selected)
-nmap <leader>a<space> <Plug>(coc-codeaction-selected)
+xmap <leader>aa <Plug>(coc-codeaction-selected)
+nmap <leader>aa <Plug>(coc-codeaction-selected)
+
+nmap <leader>ac <Plug>(coc-codeaction-cursor)
+nmap <leader>al <Plug>(coc-codeaction-line)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac <Plug>(coc-codeaction)
+nmap <leader>a<space> <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>aa <Plug>(coc-fix-current)
+nmap <leader>aq <Plug>(coc-fix-current)
 
 " Symbol renaming.
 nmap <leader>ar <Plug>(coc-rename)
