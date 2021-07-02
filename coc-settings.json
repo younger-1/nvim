@@ -81,6 +81,10 @@
     // "vimlsp.suggest.fromRuntimepath": true,
     // [python]
     "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
     // [rust]
     "rust-analyzer.server.path": "rust-analyzer.exe"
 }
