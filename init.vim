@@ -693,7 +693,7 @@ command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':'
 " Open in VSCode from Vim and preserve the working directory
 command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
 " Rename file
-command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
+command! -nargs=1 -complete=file Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
 " Format json
 command! FormatJSON %!python3 -m json.tool
 
