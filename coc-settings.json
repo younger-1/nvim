@@ -85,6 +85,8 @@
         "--line-length",
         "100"
     ],
+    // [java]
+    // "java.jdt.ls.home": ,
     // [rust]
-    "rust-analyzer.server.path": "rust-analyzer.exe"
+    "rust-analyzer.server.path": "rust-analyzer"
 }
