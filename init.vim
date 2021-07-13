@@ -169,9 +169,11 @@ if all_plugins
     " -- vimscript test
     " Plug 'junegunn/vader.vim',  { 'on': 'Vader', 'for': 'vader' }
     " Plug 'thinca/vim-themis'
+    " --
     if !has('nvim')
       Plug 'yianwillis/vimcdoc'
     endif
+    Plug 'junegunn/vim-peekaboo'
 
     " [Buffer | Window | Tab]
     Plug 'ap/vim-buftabline'
@@ -192,8 +194,10 @@ if all_plugins
     " Plug 'Xuyuanp/nerdtree-git-plugin'
     " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     " --
-    " Plug 'Shougo/vimfiler.vim'
     " Plug 'justinmk/vim-dirvish'
+    " if has('nvim')
+    "   Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+    " endif
 
     " [Find]
     " -- fzf
@@ -733,7 +737,7 @@ autocmd BufEnter * silent! lcd %:p:h
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
   \ if line("'\"") >= 1 && line("'\"") <= line("$")
-  \ | exe "normal! g'\""
+  \ | exe "normal! g`\""
   \ | endif
 
 
@@ -1089,6 +1093,10 @@ let g:indentLine_defaultGroup = 'SpecialKey'
 " Leading space: ˽˰··
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_leadingSpaceChar = '·'
+
+" [chadtree]
+nnoremap <leader>v <cmd>CHADopen<cr>
+
 
 " [signify]
 
