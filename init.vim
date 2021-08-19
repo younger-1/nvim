@@ -674,15 +674,11 @@ endif
 "   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 "   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
+set guifont=JetBrainsMono\ NF:h15
+" set guifont=CaskaydiaCove\ NF:h15
 " set guifont=DejaVuSansMono\ NF:h15
 " set guifont=Cascadia\ Mono\ Light:h15
-" set guifont=FuraMono\ NF:h15
 " set guifont=FiraCode\ NF:h15
-" set guifont=JetBrainsMono\ NF:h15
-
-if has('unix') && !has('nvim')
-  set guifont=JetBrainsMono_Nerd_Font:h14
-endif
 
 " }}}
 
@@ -1767,7 +1763,7 @@ xmap <leader>ax  <Plug>(coc-convert-snippet)
 if exists('g:started_by_firenvim')
   set laststatus=0
   au BufEnter * set showtabline=0
-  set guifont=FuraMono\ NF:h14
+  " set guifont=JetBrainsMono\ NF:h15
   " Return to webpage
   nnoremap <Esc><Esc> :call firenvim#focus_page()<CR>
   nnoremap <C-z> :call firenvim#hide_frame()<CR>
