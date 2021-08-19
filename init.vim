@@ -90,6 +90,7 @@ if all_plugins
 
     if has('nvim')
       Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+      Plug 'subnut/nvim-ghost.nvim', {'do': ':call nvim_ghost#installer#install()'}
     endif
 
     " [Theme]
@@ -218,7 +219,7 @@ if all_plugins
     " Plug 'ptzz/lf.vim'
     " --
     Plug 'liuchengxu/vista.vim'
-    Plug 'wfxr/minimap.vim'
+    " Plug 'wfxr/minimap.vim'
     " Plug 'mbbill/undotree'
 
     " [Git]
@@ -964,8 +965,6 @@ onoremap L $
 
 " Visual mappings {{{
 " Continuous indent
-nmap < <<
-nmap > >>
 vnoremap > >gv
 vnoremap < <gv
 
