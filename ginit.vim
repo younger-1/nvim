@@ -33,16 +33,13 @@ endfunction
 
 " [nvim-qt]
 if exists('g:GuiLoaded')
-  " GuiFont CaskaydiaCove NF:h12
+  GuiFont! JetBrainsMono NF:h12
+  " GuiFont! CaskaydiaCove NF:h12
+  " GuiFont Hack NF
   " GuiFont Delugia Nerd Font:h12
   " Guifont DejaVuSansMono NF:h12
-  " GuiFont FuraMono NF:h12
-  " GuiFont JetBrainsMono NF:h12
-  " GuiFont Hack NF
-  " [Valid font]
   " GuiFont FiraMono NF:h13
-  " GuiFont Consolas:h13
-  GuiFont SauceCodePro NF:h13
+  " GuiFont SauceCodePro NF:h13
   " GuiFont Sarasa Term SC ExtraLight:h13
   " GuiFont Sarasa Term SC Light:h13
   " GuiFont Sarasa Term SC:h13
@@ -69,7 +66,9 @@ endif
 if exists('g:fvim_loaded')
   colorscheme molokai
   " Good old 'set guifont' compatibility
-  set guifont=SauceCodePro\ NF
+  " set guifont=JetBrainsMono\ NF:h15
+  " set guifont=CaskaydiaCove\ NF
+  " set guifont=SauceCodePro\ NF
 
   " Ctrl-ScrollWheel for zooming in/out
   nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
