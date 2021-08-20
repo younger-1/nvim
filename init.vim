@@ -287,7 +287,6 @@ if all_plugins
     Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'wakatime/vim-wakatime'
-    Plug 'wellle/context.vim'
 
     " [Play]
     " Plug 'takac/vim-hardtime'
@@ -1861,6 +1860,10 @@ let g:neovide_cursor_trail_length=0.8
 let g:neovide_cursor_animation_length=0.18
 " }}}
 
+
+lua << EOF
+require 'young'
+EOF
 
 " vim: textwidth=100 shiftwidth=2
 " vim: foldmethod=marker foldmarker=\ {{{,\ }}}
