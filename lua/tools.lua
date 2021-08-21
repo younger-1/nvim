@@ -4,6 +4,7 @@
 -- https://github.com/luvit/luv/blob/master/docs.md
 
 local M = {}
+local handle, handle_1
 
 function M.makeScratch()
   vim.api.nvim_command('enew') -- equivalent to :enew
@@ -16,7 +17,6 @@ function M.convertFile()
   local shortname = vim.fn.expand('%:t:r')
   local fullname = vim.api.nvim_buf_get_name(0)
   -- loop logic goes here
-  -- handle should be global, as it will be used in callback
   handle = vim.loop.spawn('pandoc', {
       args = {fullname, '--to=html5', '-o', string.format('%s.html', shortname), '-s', '--highlight-style', 'tango', '-c', '--css=pandoc.css'}
     },
@@ -53,7 +53,7 @@ end
 function M.asyncGrep(term)
   local stdout = vim.loop.new_pipe(false) -- create file descriptor for stdout
   local stderr = vim.loop.new_pipe(false) -- create file descriptor for stderr
-  handle = vim.loop.spawn('rg', {
+  handle_1 = vim.loop.spawn('rg', {
       args = {term, '--vimgrep', '--smart-case', '--block-buffered'},
       stdio = {nil,stdout,stderr}
     },
@@ -62,7 +62,7 @@ function M.asyncGrep(term)
         stderr:read_stop()
         stdout:close()
         stderr:close()
-        handle:close()
+        handle_1:close()
         setQF()
       end
     )
