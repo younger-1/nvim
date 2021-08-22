@@ -17,13 +17,17 @@ iabbrev wnat want
 iabbrev synchronisation
 	\ synchronization
 
+" Count the number of corrections
 let s:count = 4
 
+" Default mapping
 if !hasmapto('<Plug>TypecorrAdd;')
-  map <unique> <Leader>tt  <Plug>TypecorrAdd;
+  map <unique> <Leader><Leader>tt  <Plug>TypecorrAdd;
 endif
+" Inside script mapping
 noremap <unique> <script> <Plug>TypecorrAdd;  <SID>Add
 
+" The "Plugin" menu is recommended for adding menu items for plugins.
 noremenu <script> Plugin.Add\ Correction      <SID>Add
 
 noremap <SID>Add  :call <SID>Add(expand("<cword>"), 1)<CR>
