@@ -57,7 +57,7 @@ let g:polyglot_disabled = ['sensible']
 
 " vim-plug {{{
 
-let all_plugins=1
+let g:all_plugins=1
 
 " Less plugins for speedup {{{
 if !all_plugins
@@ -79,7 +79,7 @@ endif
 " }}}
 
 " Auto install Plug https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-let data_dir = has('nvim') ? stdpath('data') .. '/site' : $HOME .. (has('win32') ? '/vimfiles' : '/.vim')
+let g:data_dir = has('nvim') ? stdpath('data') .. '/site' : $HOME .. (has('win32') ? '/vimfiles' : '/.vim')
 if empty(glob(data_dir .. '/autoload/plug.vim'))
   silent execute '!curl -fLo ' .. data_dir .. '/autoload/plug.vim --create-dirs  https://raw.fastgit.org/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -220,7 +220,7 @@ if all_plugins
     " --
     Plug 'liuchengxu/vista.vim'
     " Plug 'wfxr/minimap.vim'
-    " Plug 'mbbill/undotree'
+    Plug 'mbbill/undotree'
 
     " [Git]
     " -- fugitive
@@ -649,7 +649,6 @@ if has('persistent_undo')
   " set undodir=
 endif
 " set noswapfile                  " Swap file is not suitable for big files
-" set nobackup                    " Don't create annoying backup files
 " set nowritebackup
 
 " If you like to keep a lot of backups, you could use a BufWritePre
@@ -694,6 +693,8 @@ command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':'
 command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
 " Rename file
 command! -nargs=1 -complete=file Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
+" Rename the current buffer
+command! -nargs=1 -bang -complete=file Renamebuffer f <args>|w<bang>
 " Format json
 command! FormatJSON %!python3 -m json.tool
 
