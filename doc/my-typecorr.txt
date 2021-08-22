@@ -1,0 +1,18 @@
+*my-typecorr.txt*	Plugin for correcting typing mistakes
+
+If you make typing mistakes, this plugin will have them corrected
+automatically.
+
+There are currently only a few corrections.  Add your own if you like.
+
+Mappings:
+<Leader>tt   or   <Plug>TypecorrAdd;
+	Add a correction for the word under the cursor.
+
+Commands:
+:Correct {word}
+	Add a correction for {word}.
+
+						*my-typecorr-settings*
+This plugin doesn't have any settings.
+

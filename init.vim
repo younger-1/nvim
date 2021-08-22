@@ -693,8 +693,6 @@ command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':'
 command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
 " Rename file
 command! -nargs=1 -complete=file Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
-" Rename the current buffer
-command! -nargs=1 -bang -complete=file Renamebuffer f <args>|w<bang>
 " Format json
 command! FormatJSON %!python3 -m json.tool
 
