@@ -51,7 +51,7 @@ scriptencoding utf-8
 " Language packs can be disabled:
 " let g:polyglot_disabled = ['markdown']
 " Polyglot includes vim-sensible plugin, I have it merged into my settings, so to disable it:
-let g:polyglot_disabled = ['sensible']
+" let g:polyglot_disabled = ['sensible']
 
 " }}}
 
@@ -90,7 +90,7 @@ if all_plugins
 
     if has('nvim')
       Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-      Plug 'subnut/nvim-ghost.nvim', {'do': ':call nvim_ghost#installer#install()'}
+      " Plug 'subnut/nvim-ghost.nvim', {'do': ':call nvim_ghost#installer#install()'}
     endif
 
     " [Theme]

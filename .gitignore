@@ -2,3 +2,5 @@
 .netrwhist
 tags
 sessions/
+
+plugin/packer_compiled.lua
