@@ -896,7 +896,7 @@ xnoremap K :move '<-2<CR>gv
 " shift + j to move down
 xnoremap J :move '>+1<CR>gv
 
-noremap <leader><leader>p "+p
+noremap ,p "+p
 
 vnoremap <C-x> "*d
 
@@ -1030,15 +1030,11 @@ let g:camelcasemotion_key = ','
 " let g:sneak#label = 1
 
 " [vim-asterisk]
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-" But z is conflick with vim-sneak
-" map z*  <Plug>(asterisk-z*)
-" map gz* <Plug>(asterisk-gz*)
-" map z#  <Plug>(asterisk-z#)
-" map gz# <Plug>(asterisk-gz#)
+let g:asterisk#keeppos = 1
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
 
 " [vim-easy-align]
 " For build-in ASCII
