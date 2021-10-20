@@ -34,12 +34,12 @@ return require("packer").startup(function(use)
     use({ "folke/trouble.nvim", config = require("plug-config.lsp-trouble"), event = "BufWinEnter" })
 
     -- Colorscheme & Colors
-    use("/home/morde/repos/nvim-papadark") -- Colorscheme
     use({ "nvim-treesitter/nvim-treesitter", config = require("plug-config.treesitter"), run = ":TSUpdate" })
     use("nvim-treesitter/playground")
     use("norcalli/nvim-colorizer.lua")
     use("rktjmp/lush.nvim") -- Scheme creator
     use({ "RRethy/vim-illuminate", config = require("plug-config.illuminate"), event = "BufWinEnter" })
+    use "joshdick/onedark.vim"
 
     -- Telescope
     use({
@@ -118,5 +118,5 @@ return require("packer").startup(function(use)
     use({ "edluffy/specs.nvim" })
 
     -- Self plugin
-    use({ "/home/morde/repos/nvim-lspmanager", config = require("plug-config.lspmanager") })
+    use({ "MordechaiHadad/nvim-lspmanager", config = require("plug-config.lspmanager") })
 end)

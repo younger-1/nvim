@@ -30,5 +30,8 @@ vim.o.showtabline = 2
 vim.cmd("set shortmess+=c")
 
 if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.g.sqlite_clib_path = "C:/Program Files/Sqlite/sqlite3.dll"
+    vim.g.sqlite_clib_path = join_paths(os.getenv('SCOOP'), "apps", "sqlite3dll", "current","sqlite3.dll")
 end
+
+vim.o.ignorecase = true
+vim.o.smartcase = true

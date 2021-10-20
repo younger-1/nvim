@@ -1,3 +1,5 @@
+require("young.global")
+
 require("plugins")
 require("settings")
 require("colorscheme")

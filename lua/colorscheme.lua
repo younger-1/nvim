@@ -1,2 +1,2 @@
 vim.cmd("syntax on")
-vim.cmd("colorscheme papadark")
+vim.cmd("colorscheme onedark")
