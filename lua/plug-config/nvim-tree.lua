@@ -1,5 +1,5 @@
 return function()
-	require("nvim-tree").setup({
-		auto_close = 0,
-	})
+  require('nvim-tree').setup {
+    auto_close = 0,
+  }
 end

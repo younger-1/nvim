@@ -1,10 +1,10 @@
-require("young.global")
+require 'young.global'
 
-require("plugins")
-require("settings")
-require("colorscheme")
-require("keymappings")
-require("lsp")
+require 'plugins'
+require 'settings'
+require 'colorscheme'
+require 'keymappings'
+require 'lsp'
 
 -- Plugins Config
-require("plug-config/colorizer")
+require 'plug-config/colorizer'

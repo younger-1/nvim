@@ -1,3 +1,3 @@
 return function()
-	require("gitsigns").setup()
+  require('gitsigns').setup()
 end
