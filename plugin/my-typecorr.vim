@@ -28,14 +28,17 @@ endif
 noremap <unique> <script> <Plug>TypecorrAdd;  <SID>Add
 
 " The "Plugin" menu is recommended for adding menu items for plugins.
+" Note: ":map <script>" and ":noremap <script>" do the same thing.
 noremenu <script> Plugin.Add\ Correction      <SID>Add
 
+" The basic rule is that you use <SID>Add() in mappings and s:Add() in other places (the script itself, autocommands, user commands).
 noremap <SID>Add  :call <SID>Add(expand("<cword>"), 1)<CR>
 
 if !exists(":Correct")
   command -nargs=1  Correct  :call s:Add(<q-args>, 0)
 endif
 
+" We define the function local to the script by prepending it with "s:".
 function s:Add(from, correct)
   let to = input("type the correction for " .. a:from .. ": ")
   exe ":iabbrev " .. a:from .. " " .. to

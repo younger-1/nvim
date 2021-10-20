@@ -49,9 +49,9 @@ scriptencoding utf-8
 
 " [vim-polyglot]
 " Language packs can be disabled:
-" let g:polyglot_disabled = ['markdown']
+let g:polyglot_disabled = ['markdown']
 " Polyglot includes vim-sensible plugin, I have it merged into my settings, so to disable it:
-" let g:polyglot_disabled = ['sensible']
+let g:polyglot_disabled = ['sensible']
 
 " }}}
 
@@ -61,6 +61,7 @@ let g:all_plugins=1
 
 " Less plugins for speedup {{{
 if !all_plugins
+  " call plug#begin(stdpath('data') . '/vim-plug')
   call plug#begin('~/.cache/vim-plug')
     Plug 'easymotion/vim-easymotion'
     Plug 'tpope/vim-surround'
@@ -672,7 +673,8 @@ endif
 "   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 "   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-set guifont=JetBrainsMono\ NF:h15
+set guifont=hack\ nf:h15
+" set guifont=JetBrainsMono\ NF:h15
 " set guifont=CaskaydiaCove\ NF:h15
 " set guifont=DejaVuSansMono\ NF:h15
 " set guifont=Cascadia\ Mono\ Light:h15
@@ -930,7 +932,7 @@ vnoremap Y "+y
 noremap <C-S> :<C-U>update<CR>
 inoremap <C-S> <C-O>:update<CR>
 " Save without formatting: Todo:
-nnoremap <Leader>s :w<CR>
+nnoremap <Leader>w :w<CR>
 
 " nnoremap <C-u> <C-u>zz
 " nnoremap <C-d> <C-d>zz
@@ -1848,7 +1850,7 @@ let g:neovide_cursor_vfx_mode = "railgun"
 
 
 " Not effect yet
-let g:neovide_transparency=0.8
+let g:neovide_transparency=0.93
 let g:neovide_fullscreen=v:true
 let g:neovide_cursor_trail_length=0.8
 "
