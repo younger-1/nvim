@@ -1,27 +1,33 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-local install_path = fn.stdpath 'data' .. '/site/pack/packer/opt/packer.nvim'
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
-if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-  execute 'packadd packer.nvim'
-end -- Bootstrap packer so it auto installs everywhere
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  vim.fn.system { "git", "clone", "--depth", "5", "https://github.com/wbthomason/packer.nvim", install_path }
+end
 
-vim.cmd [[packadd packer.nvim]]
+vim.cmd [[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua PackerCompile
+  augroup end
+]]
 
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
 local packer = require 'packer'
-
 packer.init {
-  max_jobs = 4,
   profile = {
     enable = true,
   },
+  display = {
+    open_fn = function()
+      -- return require("packer.util").float { border = "rounded" }
+      return require("packer.util").float { border = "double" }
+    end,
+  },
 }
 
-return require('packer').startup(function(use)
-  -- Packer can manage itself as an optional plugin
-  use { 'wbthomason/packer.nvim', opt = true }
+local use = require('packer').use
+return packer.startup(function(use)
+  use { 'wbthomason/packer.nvim' }
 
   -- UI
   use { 'romgrk/barbar.nvim', config = require 'plug-config.barbar' }
@@ -60,6 +66,7 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/nvim-cmp', config = require 'plug-config.cmp' }
   use { 'hrsh7th/cmp-buffer' }
   use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
+  use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
   use { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' }
   use { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' }
@@ -119,4 +126,12 @@ return require('packer').startup(function(use)
 
   -- Self plugin
   use { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' }
+
+  use {
+    "ZSaberLv0/ZFVimDirDiff",
+    keys = { "ZFDirDiff", "ZFDirDiffMark" },
+    setup = function()
+      vim.g.ZFDirDiffUI_dirExpandable = "+"
+    end,
+  },
 end)
