@@ -129,9 +129,9 @@ return packer.startup(function(use)
 
   use {
     "ZSaberLv0/ZFVimDirDiff",
-    keys = { "ZFDirDiff", "ZFDirDiffMark" },
+    cmd = { "ZFDirDiff", "ZFDirDiffMark" },
     setup = function()
       vim.g.ZFDirDiffUI_dirExpandable = "+"
     end,
-  },
+  }
 end)
