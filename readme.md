@@ -13,3 +13,5 @@ Great thanks to:
 <https://github.com/whatsthatsmell/dots/tree/master/public%20dots/vim-nvim>
 
 <https://github.com/max397574/NeovimConfig>
+
+<https://github.com/dtr2300/nvim>
