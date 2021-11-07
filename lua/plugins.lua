@@ -1,8 +1,9 @@
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local runtime_dir = vim.fn.stdpath 'data'
+local install_path = join_paths(runtime_dir, 'site', 'pack', 'packer', 'start', 'packer.nvim')
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-  vim.fn.system { 'git', 'clone', '--depth', '5', 'https://github.com/wbthomason/packer.nvim', install_path }
+  vim.fn.system { 'git', 'clone', '--depth', '3', 'https://github.com/wbthomason/packer.nvim', install_path }
 end
 
 vim.cmd [[
@@ -42,7 +43,7 @@ return packer.startup(function(use)
   -- Colorscheme & Colors
   use { 'nvim-treesitter/nvim-treesitter', config = require 'plug-config.treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
-  use 'norcalli/nvim-colorizer.lua'
+  use { 'norcalli/nvim-colorizer.lua', config = require 'plug-config/colorizer' }
   use 'rktjmp/lush.nvim'
   use { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' }
   use 'joshdick/onedark.vim'

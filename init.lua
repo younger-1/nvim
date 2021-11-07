@@ -1,10 +1,13 @@
-require 'young.tools.functions'
+require 'young.utils.global'
+
+require 'settings'
+
+vim.g.mapleader = ' '
 
 require 'plugins'
-require 'settings'
-require 'colorscheme'
-require 'keymappings'
-require 'lsp'
 
--- Plugins Config
-require 'plug-config/colorizer'
+vim.cmd 'syntax on'
+vim.cmd 'colorscheme onedark'
+
+require 'keymappings'.setup()
+require 'lsp'
