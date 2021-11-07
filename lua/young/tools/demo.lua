@@ -39,7 +39,7 @@ local results = {}
 -- Implement onread callback
 local function onread(err, data)
   if err then
-    -- print('ERROR: ', err)
+    print('ERROR: ', err)
     -- TODO handle err
   end
   if data then

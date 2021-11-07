@@ -1,4 +1,4 @@
-require 'young.global'
+require 'young.tools.functions'
 
 require 'plugins'
 require 'settings'

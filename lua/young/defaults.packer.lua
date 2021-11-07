@@ -1,17 +1,3 @@
--- 1
-vim = vim
--- vim.opt.termguicolors = true
-
--- 2
-vim.cmd [[command! Scratch lua require'tools'.makeScratch()]]
-vim.cmd [[command! Md2HTML lua require'tools'.convertFile()]]
-vim.cmd [[command! -nargs=+ -complete=dir -bar Grepp lua require'tools'.asyncGrep(<q-args>)]]
-
--- vim.api.nvim_command [[autocmd CursorHold   * lua require'utils'.blameVirtText()]]
--- vim.api.nvim_command [[autocmd CursorMoved  * lua require'utils'.clearBlameVirtText()]]
--- vim.api.nvim_command [[autocmd CursorMovedI * lua require'utils'.clearBlameVirtText()]]
--- vim.api.nvim_command [[hi! link GitLens Comment]]
-
 local packer_install_dir = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local packer_repo = 'https://github.com/wbthomason/packer.nvim'
 local install_cmd = string.format('10split |term git clone --depth=1 %s %s', packer_repo, packer_install_dir)
