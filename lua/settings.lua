@@ -1,20 +1,20 @@
 local default_options = {
   backup = false,
-  clipboard = "unnamedplus", -- allows neovim to access the system clipboard
+  clipboard = 'unnamedplus', -- allows neovim to access the system clipboard
   cmdheight = 1,
-  colorcolumn = "99999", -- fixes indentline for now
-  completeopt = { "menuone", "noselect" },
+  colorcolumn = '99999', -- fixes indentline for now
+  completeopt = { 'menuone', 'noselect' },
   conceallevel = 0, -- so that `` is visible in markdown files
-  fileencoding = "utf-8", -- the encoding written to a file
+  fileencoding = 'utf-8', -- the encoding written to a file
   -- fileformat = 'unix',
-  foldmethod = "manual", -- folding, set to "expr" for treesitter based folding
-  foldexpr = "", -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
-  guifont = "SauceCodePro NF", -- the font used in graphical neovim applications
+  foldmethod = 'manual', -- folding, set to "expr" for treesitter based folding
+  foldexpr = '', -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
+  guifont = 'SauceCodePro NF', -- the font used in graphical neovim applications
   hidden = true, -- required to keep multiple buffers and open multiple buffers
-  inccommand = "split",
+  inccommand = 'split',
   hlsearch = true, -- highlight all matches on previous search pattern
   ignorecase = true, -- ignore case in search patterns
-  mouse = "a", -- allow the mouse to be used in neovim
+  mouse = 'a', -- allow the mouse to be used in neovim
   pumheight = 10, -- pop up menu height
   showmode = false, -- we don't need to see things like -- INSERT -- anymore
   showtabline = 2, -- always show tabs
@@ -37,22 +37,22 @@ local default_options = {
   number = true, -- set numbered lines
   relativenumber = false, -- set relative numbered lines
   numberwidth = 4, -- set number column width to 2 {default 4}
-  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+  signcolumn = 'yes', -- always show the sign column, otherwise it would shift the text each time
   wrap = false, -- display lines as one long line
   spell = false,
-  spelllang = "en",
+  spelllang = 'en',
   scrolloff = 4, -- is one of my fav
   sidescrolloff = 8,
 }
 
 -- Completion
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append 'c'
 
 for k, v in pairs(default_options) do
   vim.opt[k] = v
 end
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd 'set whichwrap+=<,>,[,],h,l'
 
 local disable_distribution = function()
   vim.g.loaded_2html_plugin = 1
@@ -103,7 +103,7 @@ end
 local neovide_config = function()
   vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font:h12]]
   vim.g.neovide_refresh_rate = 60
-  vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_cursor_vfx_mode = 'railgun'
   vim.g.neovide_no_idle = true
   vim.g.neovide_cursor_animation_length = 0.03
   vim.g.neovide_cursor_trail_length = 0.05
@@ -120,4 +120,3 @@ disable_distribution()
 if vim.loop.os_uname().sysname == 'Windows_NT' then
   vim.g.sqlite_clib_path = join_paths(os.getenv 'SCOOP', 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
 end
-

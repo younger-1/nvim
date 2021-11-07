@@ -29,16 +29,16 @@ keymap('n', ' go', ':Telescope git_status<CR>', opts)
 ToggleMouse = function()
   if vim.o.mouse == 'nvi' then
     -- vim.cmd[[IndentBlanklineDisable]]
-    vim.wo.signcolumn='no'
+    vim.wo.signcolumn = 'no'
     vim.o.mouse = ''
     vim.wo.number = false
-    print("Mouse disabled")
+    print 'Mouse disabled'
   else
     -- vim.cmd[[IndentBlanklineEnable]]
-    vim.wo.signcolumn='yes'
+    vim.wo.signcolumn = 'yes'
     vim.o.mouse = 'nvi'
     vim.wo.number = true
-    print("Mouse enabled")
+    print 'Mouse enabled'
   end
 end
 
