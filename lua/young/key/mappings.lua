@@ -27,15 +27,148 @@ local mode_adapters = {
   insert_command_mode = '!',
 }
 
+M.keys = {
+  insert_command_mode = {
+    ['<C-a>'] = '<Home>',
+    ['<C-e>'] = '<End>',
+    --
+    ['<A-f>'] = '<S-Right>',
+    ['<A-b>'] = '<S-Left>',
+    -- ["<C-b>"] = "<Left>",
+    -- ["<C-f>"] = "<Right>",
+  },
+  ---@usage change or add keymappings for command mode
+  command_mode = {
+    -- navigate tab completion with <c-j> and <c-k>
+    -- runs conditionally
+    ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
+    ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
+    --
+    ['<C-V>'] = '<C-R>+',
+  },
+
+  -- ---@usage change or add keymappings for insert mode
+  insert_mode = {
+    -- 'jk' for quitting insert mode
+    ['jk'] = '<ESC>',
+    -- 'kj' for quitting insert mode
+    ['kj'] = '<ESC>',
+    -- 'jj' for quitting insert mode
+    ['jj'] = '<ESC>',
+    -- Move current line / block with Alt-j/k ala vscode.
+    ['<A-j>'] = '<Esc>:m .+1<CR>==gi',
+    -- Move current line / block with Alt-j/k ala vscode.
+    ['<A-k>'] = '<Esc>:m .-2<CR>==gi',
+    -- navigation
+    ['<A-Up>'] = '<C-\\><C-N><C-w>k',
+    ['<A-Down>'] = '<C-\\><C-N><C-w>j',
+    ['<A-Left>'] = '<C-\\><C-N><C-w>h',
+    ['<A-Right>'] = '<C-\\><C-N><C-w>l',
+    -- break undo sequence, start new change
+    ['<C-U>'] = '<C-G>u<C-U>',
+    ['<C-W>'] = '<C-G>u<C-W>',
+    ['<C-v>'] = '<C-G>u<C-R><C-O>+',
+
+    -- Move line in insert mode
+    ['<C-Up>'] = '<C-o>:m .-2<CR>',
+    ['<C-Down>'] = '<C-o>:m .+1<CR>',
+  },
+
+  ---@usage change or add keymappings for normal mode
+  normal_mode = {
+    -- Better window movement
+    ['<C-h>'] = '<C-w>h',
+    ['<C-j>'] = '<C-w>j',
+    ['<C-k>'] = '<C-w>k',
+    ['<C-l>'] = '<C-w>l',
+
+    -- Resize with arrows
+    ['<C-Up>'] = ':resize -2<CR>',
+    ['<C-Down>'] = ':resize +2<CR>',
+    ['<C-Left>'] = ':vertical resize -2<CR>',
+    ['<C-Right>'] = ':vertical resize +2<CR>',
+
+    -- Move current line / block with Alt-j/k a la vscode.
+    ['<A-j>'] = ':m .+1<CR>==',
+    ['<A-k>'] = ':m .-2<CR>==',
+
+    -- QuickFix
+    [']q'] = ':cnext<CR>',
+    ['[q'] = ':cprev<CR>',
+    ['<C-q>'] = ':call QuickFixToggle()<CR>',
+
+    [']e'] = ':lnext<CR>',
+    ['[e'] = ':lprev<CR>',
+    ['<C-e>'] = ':call LocListToggle()<CR>',
+
+    -- Remap for dealing with word wrap
+    k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
+    j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
+
+    --
+    Y = 'y$',
+    ZA = ':wqa<CR>',
+    ['g<C-l>'] = '<cmd>nohlsearch<cr><C-l>',
+    ['+'] = ':SymbolsOutline<cr>',
+  },
+
+  ---@usage change or add keymappings for terminal mode
+  term_mode = {
+    -- Terminal window navigation
+    ['<C-h>'] = '<C-\\><C-N><C-w>h',
+    ['<C-j>'] = '<C-\\><C-N><C-w>j',
+    ['<C-k>'] = '<C-\\><C-N><C-w>k',
+    ['<C-l>'] = '<C-\\><C-N><C-w>l',
+
+    -- quitting insert mode
+    JJ = '<C-\\><C-N>',
+    JK = '<C-\\><C-N>',
+  },
+
+  ---@usage change or add keymappings for visual mode
+  visual_mode = {
+    -- Better indenting
+    ['<'] = '<gv',
+    ['>'] = '>gv',
+
+    Y = [["+y]],
+    d = [["_d]],
+    X = [["+x]],
+
+    -- Select to start and end quickly
+    H = '^',
+    L = '$',
+  },
+
+  ---@usage change or add keymappings for visual block mode
+  visual_block_mode = {
+    -- Move selected line / block of text in visual mode
+    ['K'] = ":move '<-2<CR>gv-gv",
+    ['J'] = ":move '>+1<CR>gv-gv",
+
+    -- Move current line / block with Alt-j/k ala vscode.
+    ['<A-j>'] = ":m '>+1<CR>gv-gv",
+    ['<A-k>'] = ":m '<-2<CR>gv-gv",
+  },
+
+  operator_mode = {
+    -- Operate to start and end quickly
+    H = '^',
+    L = '$',
+  },
+
+  map_mode = {},
+}
+
 -- Append key mappings to lunarvim's defaults for a given mode
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
--- function M.append_to_defaults(keymaps)
---   for mode, mappings in pairs(keymaps) do
---     for k, v in pairs(mappings) do
---       lvim.keys[mode][k] = v
---     end
---   end
--- end
+function M.append_to_defaults(keymaps)
+  for mode, mappings in pairs(keymaps) do
+    for k, v in pairs(mappings) do
+      M.keys[mode][k] = v
+    end
+  end
+end
 
 -- Set key mappings individually
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
@@ -63,146 +196,14 @@ end
 -- Load key mappings for all provided modes
 -- @param keymaps A list of key mappings for each mode
 function M.load(keymaps)
-  keymaps = keymaps or {}
+  keymaps = keymaps or M.keys
   for mode, mapping in pairs(keymaps) do
     load_mode(mode, mapping)
   end
 end
 
 function M.config()
-  local keys = {
-    insert_command_mode = {
-      ['<C-a>'] = '<Home>',
-      ['<C-e>'] = '<End>',
-      --
-      ['<A-f>'] = '<S-Right>',
-      ['<A-b>'] = '<S-Left>',
-      -- ["<C-b>"] = "<Left>",
-      -- ["<C-f>"] = "<Right>",
-    },
-    ---@usage change or add keymappings for command mode
-    command_mode = {
-      -- navigate tab completion with <c-j> and <c-k>
-      -- runs conditionally
-      ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
-      ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
-      --
-      ['<C-V>'] = '<C-R>+',
-    },
-
-    -- ---@usage change or add keymappings for insert mode
-    insert_mode = {
-      -- 'jk' for quitting insert mode
-      ['jk'] = '<ESC>',
-      -- 'kj' for quitting insert mode
-      ['kj'] = '<ESC>',
-      -- 'jj' for quitting insert mode
-      ['jj'] = '<ESC>',
-      -- Move current line / block with Alt-j/k ala vscode.
-      ['<A-j>'] = '<Esc>:m .+1<CR>==gi',
-      -- Move current line / block with Alt-j/k ala vscode.
-      ['<A-k>'] = '<Esc>:m .-2<CR>==gi',
-      -- navigation
-      ['<A-Up>'] = '<C-\\><C-N><C-w>k',
-      ['<A-Down>'] = '<C-\\><C-N><C-w>j',
-      ['<A-Left>'] = '<C-\\><C-N><C-w>h',
-      ['<A-Right>'] = '<C-\\><C-N><C-w>l',
-      -- break undo sequence, start new change
-      ['<C-U>'] = '<C-G>u<C-U>',
-      ['<C-W>'] = '<C-G>u<C-W>',
-      ['<C-v>'] = '<C-G>u<C-R><C-O>+',
-
-      -- Move line in insert mode
-      ['<C-Up>'] = '<C-o>:m .-2<CR>',
-      ['<C-Down>'] = '<C-o>:m .+1<CR>',
-    },
-
-    ---@usage change or add keymappings for normal mode
-    normal_mode = {
-      -- Better window movement
-      ['<C-h>'] = '<C-w>h',
-      ['<C-j>'] = '<C-w>j',
-      ['<C-k>'] = '<C-w>k',
-      ['<C-l>'] = '<C-w>l',
-
-      -- Resize with arrows
-      ['<C-Up>'] = ':resize -2<CR>',
-      ['<C-Down>'] = ':resize +2<CR>',
-      ['<C-Left>'] = ':vertical resize -2<CR>',
-      ['<C-Right>'] = ':vertical resize +2<CR>',
-
-      -- Move current line / block with Alt-j/k a la vscode.
-      ['<A-j>'] = ':m .+1<CR>==',
-      ['<A-k>'] = ':m .-2<CR>==',
-
-      -- QuickFix
-      [']q'] = ':cnext<CR>',
-      ['[q'] = ':cprev<CR>',
-      ['<C-q>'] = ':call QuickFixToggle()<CR>',
-
-      [']e'] = ':lnext<CR>',
-      ['[e'] = ':lprev<CR>',
-      ['<C-e>'] = ':call LocListToggle()<CR>',
-
-      -- Remap for dealing with word wrap
-      k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
-      j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
-
-      --
-      Y = 'y$',
-      ZA = ':wqa<CR>',
-      ['g<C-l>'] = '<cmd>nohlsearch<cr><C-l>',
-      ['+'] = ':SymbolsOutline<cr>',
-    },
-
-    ---@usage change or add keymappings for terminal mode
-    term_mode = {
-      -- Terminal window navigation
-      ['<C-h>'] = '<C-\\><C-N><C-w>h',
-      ['<C-j>'] = '<C-\\><C-N><C-w>j',
-      ['<C-k>'] = '<C-\\><C-N><C-w>k',
-      ['<C-l>'] = '<C-\\><C-N><C-w>l',
-
-      -- quitting insert mode
-      JJ = '<C-\\><C-N>',
-      JK = '<C-\\><C-N>',
-    },
-
-    ---@usage change or add keymappings for visual mode
-    visual_mode = {
-      -- Better indenting
-      ['<'] = '<gv',
-      ['>'] = '>gv',
-
-      Y = [["+y]],
-      d = [["_d]],
-      X = [["+x]],
-
-      -- Select to start and end quickly
-      H = '^',
-      L = '$',
-    },
-
-    ---@usage change or add keymappings for visual block mode
-    visual_block_mode = {
-      -- Move selected line / block of text in visual mode
-      ['K'] = ":move '<-2<CR>gv-gv",
-      ['J'] = ":move '>+1<CR>gv-gv",
-
-      -- Move current line / block with Alt-j/k ala vscode.
-      ['<A-j>'] = ":m '>+1<CR>gv-gv",
-      ['<A-k>'] = ":m '<-2<CR>gv-gv",
-    },
-
-    operator_mode = {
-      -- Operate to start and end quickly
-      H = '^',
-      L = '$',
-    },
-
-    map_mode = {},
-  }
-
+  local keys = M.keys
   if vim.fn.has 'mac' == 1 then
     keys.normal_mode['<A-Up>'] = keys.normal_mode['<C-Up>']
     keys.normal_mode['<A-Down>'] = keys.normal_mode['<C-Down>']
@@ -210,8 +211,6 @@ function M.config()
     keys.normal_mode['<A-Right>'] = keys.normal_mode['<C-Right>']
     -- Log:debug 'Activated mac keymappings'
   end
-
-  M.keys = keys
 end
 
 function M.print(mode)
@@ -224,7 +223,6 @@ function M.print(mode)
 end
 
 function M.setup()
-  M.config()
   M.load(M.keys)
 end
 

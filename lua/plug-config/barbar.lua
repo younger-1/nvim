@@ -4,7 +4,7 @@
 local M = {}
 
 M.setup = function()
-  require('young.key.mappings').load {
+  require('young.key.mappings').append_to_defaults {
     normal_mode = {
       ['<S-l>'] = ':BufferNext<CR>',
       ['<S-h>'] = ':BufferPrevious<CR>',

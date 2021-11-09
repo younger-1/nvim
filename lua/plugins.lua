@@ -62,8 +62,9 @@ return packer.startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
-    cmd = 'Telescope',
-    config = require 'plug-config.telescope',
+    config = function()
+      require 'young.mod.telescope'.setup()
+    end,
   }
   use {
     'nvim-telescope/telescope-frecency.nvim',

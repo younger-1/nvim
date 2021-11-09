@@ -2,6 +2,12 @@
 
 > My love, you're the unsolved wave, I'm the naked island.
 
+## TODO
+
+- [ ] `young.telescope`, `M.tele/M.cfg`, `local cfg`
+
+## Acknowledge
+
 Great thanks to:
 
 <https://github.com//dotfiles/tree/master/nvim>
