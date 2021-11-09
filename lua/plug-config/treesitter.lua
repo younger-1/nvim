@@ -33,7 +33,7 @@ return function()
       -- 'fish'
       'go',
       'gomod',
-      'graphgl',
+      'graphql',
       -- 'hcl',
       'html',
       'java',

@@ -31,19 +31,29 @@ return packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   -- UI
-  use { 'romgrk/barbar.nvim', config = require 'plug-config.barbar' }
+  use {
+    'romgrk/barbar.nvim',
+    config = function()
+      require 'plug-config.barbar'.setup()
+    end,
+  }
   use { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' }
   -- use({ "NTBBloodbath/galaxyline.nvim", config = require("plug-config.galaxyline")})
   use { 'kyazdani42/nvim-tree.lua', config = require 'plug-config.nvim-tree', event = 'BufWinEnter' }
-  use { 'kyazdani42/nvim-web-devicons', module = 'nvim-web-devicons' }
+  use { 'kyazdani42/nvim-web-devicons' }
   use { 'goolord/alpha-nvim', config = require 'plug-config.alpha' }
   use { 'akinsho/toggleterm.nvim', config = require 'plug-config.toggleterm' }
   use { 'folke/trouble.nvim', config = require 'plug-config.lsp-trouble', event = 'BufWinEnter' }
 
   -- Colorscheme & Colors
   use { 'nvim-treesitter/nvim-treesitter', config = require 'plug-config.treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/playground'
-  use { 'norcalli/nvim-colorizer.lua', config = require 'plug-config/colorizer' }
+  use { 'nvim-treesitter/playground' }
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require 'plug-config.colorizer'
+    end,
+  }
   use 'rktjmp/lush.nvim'
   use { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' }
   use 'joshdick/onedark.vim'
@@ -86,7 +96,6 @@ return packer.startup(function(use)
   }
 
   -- Editing Enhancments
-  use { 'b3nj5m1n/kommentary', event = 'BufWinEnter' }
   use { 'windwp/nvim-autopairs', event = 'InsertEnter', config = require 'plug-config.autopairs' }
   use {
     'folke/todo-comments.nvim',
@@ -97,7 +106,13 @@ return packer.startup(function(use)
 
   -- General Plugins
   use { 'ahmedkhalf/project.nvim', config = require 'plug-config.project', event = 'BufWinEnter' }
-  use { 'folke/which-key.nvim', config = require 'plug-config.which-key', event = 'BufWinEnter' }
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require('young.key.which-key').setup()
+    end,
+    event = 'BufWinEnter',
+  }
   use {
     'folke/persistence.nvim',
     event = 'BufReadPre',

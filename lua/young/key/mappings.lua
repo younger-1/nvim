@@ -111,6 +111,10 @@ function M.config()
       ['<C-U>'] = '<C-G>u<C-U>',
       ['<C-W>'] = '<C-G>u<C-W>',
       ['<C-v>'] = '<C-G>u<C-R><C-O>+',
+
+      -- Move line in insert mode
+      ['<C-Up>'] = '<C-o>:m .-2<CR>',
+      ['<C-Down>'] = '<C-o>:m .+1<CR>',
     },
 
     ---@usage change or add keymappings for normal mode

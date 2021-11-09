@@ -9,5 +9,5 @@ require 'plugins'
 vim.cmd 'syntax on'
 vim.cmd 'colorscheme onedark'
 
-require 'keymappings'.setup()
+require 'young.key.mappings'.setup()
 require 'lsp'
