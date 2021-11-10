@@ -33,8 +33,9 @@ return packer.startup(function(use)
   -- UI
   use {
     'romgrk/barbar.nvim',
+    event = 'BufWinEnter',
     config = function()
-      require 'plug-config.barbar'.setup()
+      require('young.mod.barbar').setup()
     end,
   }
   use { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' }
@@ -42,7 +43,13 @@ return packer.startup(function(use)
   use { 'kyazdani42/nvim-tree.lua', config = require 'plug-config.nvim-tree', event = 'BufWinEnter' }
   use { 'kyazdani42/nvim-web-devicons' }
   use { 'goolord/alpha-nvim', config = require 'plug-config.alpha' }
-  use { 'akinsho/toggleterm.nvim', config = require 'plug-config.toggleterm' }
+  use {
+    'akinsho/toggleterm.nvim',
+    event = 'BufWinEnter',
+    config = function()
+      require 'young.mod.toggleterm'.setup()
+    end
+  }
   use { 'folke/trouble.nvim', config = require 'plug-config.lsp-trouble', event = 'BufWinEnter' }
 
   -- Colorscheme & Colors
@@ -63,7 +70,7 @@ return packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
     config = function()
-      require 'young.mod.telescope'.setup()
+      require('young.mod.telescope').setup()
     end,
   }
   use {

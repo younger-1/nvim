@@ -1,6 +1,6 @@
 local mappings = {
   ['/'] = { "<cmd>lua require('Comment').toggle()<CR>", 'Comment' },
-  [';'] = { '<cmd>Dashboard<CR>', 'Dashboard' },
+  [';'] = { '<cmd>Alpha<CR>', 'Dashboard' },
   ['?'] = {
     [' '] = { ':h api<CR>', 'Api' },
     ['?'] = { ':h reference_toc<CR>', '❓' },
