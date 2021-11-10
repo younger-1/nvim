@@ -5,7 +5,7 @@
 ## TODO
 
 - [ ] `young.telescope`, `M.tele/M.cfg`, `local cfg`
-- [ ] init ice hot done 
+- [ ] ice hot done 
 
 ## Acknowledge
 

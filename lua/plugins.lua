@@ -50,7 +50,13 @@ return packer.startup(function(use)
       require 'young.mod.toggleterm'.done()
     end
   }
-  use { 'folke/trouble.nvim', config = require 'plug-config.lsp-trouble', event = 'BufWinEnter' }
+  use { 
+    'folke/trouble.nvim', 
+    event = 'BufWinEnter',
+    config = function()
+      require 'young.mod.trouble'.done()
+    end
+  }
 
   -- Colorscheme & Colors
   use { 'nvim-treesitter/nvim-treesitter', config = require 'plug-config.treesitter', run = ':TSUpdate' }
