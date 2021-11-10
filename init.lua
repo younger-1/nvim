@@ -4,6 +4,7 @@ require 'young.cfg.settings'
 
 require 'young.key.mappings'
 
+require 'young.key.which-key'.ice()
 vim.g.mapleader = ' '
 require 'plugins'
 

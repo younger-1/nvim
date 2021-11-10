@@ -1,6 +1,6 @@
 local M = {}
 
-local cfg = {
+M.cfg = {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -68,24 +68,20 @@ local my_opts = {
   update = false,
 }
 
-M.setup = function()
+M.ice = function()
+  M.leader = {}
+  M.leader.n = require "young.key.leader-normal"
+  M.leader.v = require "young.key.leader-visual"
+  M.n = require "young.key.normal"
+end
+
+M.done = function()
   local wk = require 'which-key'
 
-  wk.setup(cfg)
-
-  local mappings = require "young.key.leader-normal"
-  local vmappings = require "young.key.leader-visual"
-
-  wk.register(mappings, opts)
-  wk.register(vmappings, vopts)
-
-  -- if lvim.builtin.which_key.on_config_done then
-  --   lvim.builtin.which_key.on_config_done(which_key)
-  -- end
-
-  mappings = require "young.key.normal"
-
-  wk.register(mappings, my_opts)
+  wk.setup(M.cfg)
+  wk.register(M.leader.n, opts)
+  wk.register(M.leader.v, vopts)
+  wk.register(M.n, my_opts)
 end
 
 return M

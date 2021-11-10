@@ -35,7 +35,7 @@ return packer.startup(function(use)
     'romgrk/barbar.nvim',
     event = 'BufWinEnter',
     config = function()
-      require('young.mod.barbar').setup()
+      require('young.mod.barbar').hot()
     end,
   }
   use { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' }
@@ -47,7 +47,7 @@ return packer.startup(function(use)
     'akinsho/toggleterm.nvim',
     event = 'BufWinEnter',
     config = function()
-      require 'young.mod.toggleterm'.setup()
+      require 'young.mod.toggleterm'.done()
     end
   }
   use { 'folke/trouble.nvim', config = require 'plug-config.lsp-trouble', event = 'BufWinEnter' }
@@ -70,7 +70,7 @@ return packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
     config = function()
-      require('young.mod.telescope').setup()
+      require('young.mod.telescope').done()
     end,
   }
   use {
@@ -117,7 +117,7 @@ return packer.startup(function(use)
   use {
     'folke/which-key.nvim',
     config = function()
-      require('young.key.which-key').setup()
+      require('young.key.which-key').done()
     end,
     event = 'BufWinEnter',
   }

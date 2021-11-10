@@ -202,7 +202,7 @@ function M.load(keymaps)
   end
 end
 
-function M.config()
+function M.ice()
   local keys = M.keys
   if vim.fn.has 'mac' == 1 then
     keys.normal_mode['<A-Up>'] = keys.normal_mode['<C-Up>']
@@ -222,11 +222,11 @@ function M.print(mode)
   end
 end
 
-function M.setup()
+function M.hot()
   M.load(M.keys)
 end
 
-M.config()
-M.setup()
+M.ice()
+M.hot()
 
 return M

@@ -191,7 +191,6 @@ local mappings = {
     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", 'Undo Stage Hunk' },
     y = 'Link',
   },
-  gg = 'LazyGit',
   h = { ':nohlsearch<CR>', 'which_key_ignore' },
   j = {
     name = '+justify',

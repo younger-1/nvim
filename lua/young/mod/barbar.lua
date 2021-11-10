@@ -80,7 +80,7 @@ vim.g.bufferline = {
   tabpages = true,
 }
 
-M.setup = function()
+M.hot = function()
   require('young.key.mappings').load {
     normal_mode = {
       ['<S-l>'] = ':BufferNext<CR>',
