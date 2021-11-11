@@ -1,6 +1,6 @@
 local plugin_loader = {}
 
--- local utils = require "lvim.utils"
+local utils = require 'young.utils'
 -- local Log = require "lvim.core.log"
 
 local runtime_dir = vim.fn.stdpath 'data'
@@ -16,7 +16,7 @@ function plugin_loader.init()
     vim.fn.system { 'git', 'clone', '--depth', '3', 'https://github.com/wbthomason/packer.nvim', install_path }
   end
 
-  packer.init {
+  require('packer').init {
     compile_path = compile_path,
     log = { level = 'warn' },
     profile = { enable = true },
@@ -49,9 +49,9 @@ end
 function plugin_loader.recompile()
   plugin_loader.cache_clear()
   pcall_packer_command 'compile'
-  -- if utils.is_file(compile_path) then
-  --   Log:debug "generated packer_compiled.lua"
-  -- end
+  if utils.is_file(compile_path) then
+    -- Log:debug "generated packer_compiled.lua"
+  end
 end
 
 function plugin_loader.load()
@@ -65,10 +65,21 @@ function plugin_loader.load()
     end)
   end, debug.traceback)
   if not status_ok then
-    vim.notify('[young.plugin-loader] load()', vim.log.levels.WARN)
+    vim.notify('[young.plugin-loader]: loading plugins', vim.log.levels.WARN)
     -- Log:warn "problems detected while loading plugins' configurations"
     -- Log:trace(debug.traceback())
+    return
   end
+
+  -- @young
+  if not utils.is_file(compile_path) then
+    packer.compile()
+    vim.notify('[young.plugin-loader]: not find packer_compiled.lua', vim.log.levels.WARN)
+    -- I return because `packer.compile()` is async.
+    return
+  end
+  require 'young.packer_compiled'
+  -- @young
 end
 
 function plugin_loader.get_core_plugins()

@@ -9,8 +9,6 @@ vim.g.mapleader = ' '
 require 'young.plugin-loader'.init()
 require 'young.plugin-loader'.load()
 
-require 'young.packer_compiled'
-
 vim.cmd 'syntax on'
 vim.cmd 'colorscheme onedark'
 
