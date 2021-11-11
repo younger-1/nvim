@@ -5,12 +5,12 @@ utils.join_paths = _G.join_paths
 
 function utils.toggle_autoformat()
   if lvim.format_on_save then
-    require("lvim.core.autocmds").define_augroups {
+    require('lvim.core.autocmds').define_augroups {
       autoformat = {
         {
-          "BufWritePre",
-          "*",
-          ":silent lua vim.lsp.buf.formatting_sync()",
+          'BufWritePre',
+          '*',
+          ':silent lua vim.lsp.buf.formatting_sync()',
         },
       },
     }
@@ -33,12 +33,12 @@ function utils.unrequire(m)
 end
 
 function utils.gsub_args(args)
-  if args == nil or type(args) ~= "table" then
+  if args == nil or type(args) ~= 'table' then
     return args
   end
   local buffer_filepath = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
   for i = 1, #args do
-    args[i] = string.gsub(args[i], "${FILEPATH}", buffer_filepath)
+    args[i] = string.gsub(args[i], '${FILEPATH}', buffer_filepath)
   end
   return args
 end
@@ -48,7 +48,7 @@ end
 --@returns (bool)
 function utils.is_file(path)
   local stat = uv.fs_stat(path)
-  return stat and stat.type == "file" or false
+  return stat and stat.type == 'file' or false
 end
 
 --- Checks whether a given path exists and is a directory
@@ -56,7 +56,7 @@ end
 --@returns (bool)
 function utils.is_directory(path)
   local stat = uv.fs_stat(path)
-  return stat and stat.type == "directory" or false
+  return stat and stat.type == 'directory' or false
 end
 
 --- Returns a table with the default values that are missing.
@@ -66,8 +66,8 @@ end
 function utils.apply_defaults(config, default_config)
   config = config or {}
   default_config = default_config or {}
-  local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
-  new_config = vim.tbl_deep_extend("keep", new_config, default_config)
+  local new_config = vim.tbl_deep_extend('keep', vim.empty_dict(), config)
+  new_config = vim.tbl_deep_extend('keep', new_config, default_config)
   return new_config
 end
 
@@ -79,6 +79,5 @@ function utils.add_to_set(set1, set2)
     end
   end
 end
-
 
 return utils
