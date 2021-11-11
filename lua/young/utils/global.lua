@@ -1,9 +1,13 @@
+local uv = vim.loop
+local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
+
 function _G.join_paths(...)
-  local path_sep = vim.loop.os_uname().version:match 'Windows' and '\\' or '/'
+  -- local result = table.concat({ ... }, path_sep)
   local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. '+', path_sep)
   return result
 end
 
+-- [](https://github.com/glepnir/nvim-lua-guide-zh#tips)
 function _G.pp(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(table.concat(objects, '\n'))
@@ -21,18 +25,18 @@ function _G.ppp(...)
 end
 
 -- Toggle to disable mouse mode and indentlines for easier paste
-ToggleMouse = function()
-  if vim.o.mouse == 'nvi' then
-    -- vim.cmd[[IndentBlanklineDisable]]
-    vim.wo.signcolumn = 'no'
-    vim.o.mouse = ''
-    vim.wo.number = false
-    print 'Mouse disabled'
-  else
+function ToggleMouse()
+  if vim.o.mouse == '' then
     -- vim.cmd[[IndentBlanklineEnable]]
-    vim.wo.signcolumn = 'yes'
     vim.o.mouse = 'nvi'
-    vim.wo.number = true
     print 'Mouse enabled'
+    vim.wo.signcolumn = 'yes'
+    vim.wo.number = true
+  else
+    -- vim.cmd[[IndentBlanklineDisable]]
+    vim.o.mouse = ''
+    print 'Mouse disabled'
+    vim.wo.signcolumn = 'no'
+    vim.wo.number = false
   end
 end
