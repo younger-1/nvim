@@ -2,7 +2,7 @@
 "" Author: Maxim Kim <habamax@gmail.com>
 "" https://github.com/habamax/.vim/blob/master/plugin/foldtext.vim
 
-func! fold#Text()
+func! yo#fold#Text()
     let foldchar = get(b:, 'foldchar', '•')
     let strip_comments = get(b:, 'foldtext_strip_comments', v:false)
     let strip_add_regex = get(b:, 'foldtext_strip_add_regex', '')

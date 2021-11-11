@@ -1,5 +1,5 @@
 local uv = vim.loop
-local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
+local path_sep = uv.os_uname().version:match 'Windows' and '\\' or '/'
 
 function _G.join_paths(...)
   -- local result = table.concat({ ... }, path_sep)
@@ -15,28 +15,11 @@ end
 
 function _G.ppp(...)
   local objects = {}
-  for i = 1, select("#", ...) do
+  for i = 1, select('#', ...) do
     local v = select(i, ...)
     table.insert(objects, vim.inspect(v))
   end
 
-  print(table.concat(objects, "\n"))
+  print(table.concat(objects, '\n'))
   return ...
-end
-
--- Toggle to disable mouse mode and indentlines for easier paste
-function ToggleMouse()
-  if vim.o.mouse == '' then
-    -- vim.cmd[[IndentBlanklineEnable]]
-    vim.o.mouse = 'nvi'
-    print 'Mouse enabled'
-    vim.wo.signcolumn = 'yes'
-    vim.wo.number = true
-  else
-    -- vim.cmd[[IndentBlanklineDisable]]
-    vim.o.mouse = ''
-    print 'Mouse disabled'
-    vim.wo.signcolumn = 'no'
-    vim.wo.number = false
-  end
 end

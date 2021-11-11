@@ -336,7 +336,7 @@ local mappings = {
   },
   t = {
     b = 'Biscuits',
-    l = { ":lua require('user.tools').tabline_toggle()<cr>", 'Tabline' },
+    l = { ":lua require('user.tools').toggle_tabline()<cr>", 'Tabline' },
     m = { '<cmd>MinimapToggle<cr>', 'Minimap' },
     name = '+tog',
     t = { '<cmd>TodoQuickFix<cr>', 'Todo' },
