@@ -260,7 +260,7 @@ local mappings = {
       "<cmd>lua require('telescope').extensions.packer.plugins { layout_config = { preview_width = 0.5} }<cr>",
       'Telescope Packer',
     },
-    r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", 'Re-compile' },
+    r = { "<cmd>lua require('young.plugin-loader').recompile()<cr>", 'Re-compile' },
     s = { '<cmd>PackerStatus<cr>', 'Status' },
     u = { '<cmd>PackerUpdate<cr>', 'Update' },
   },

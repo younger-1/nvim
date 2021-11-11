@@ -6,9 +6,12 @@ require 'young.key.mappings'
 
 require 'young.key.which-key'.ice()
 vim.g.mapleader = ' '
-require 'plugins'
+require 'young.plugin-loader'.init()
+require 'young.plugin-loader'.load()
+
+require 'young.packer_compiled'
 
 vim.cmd 'syntax on'
 vim.cmd 'colorscheme onedark'
 
-require 'lsp'
+require 'young.lsp'

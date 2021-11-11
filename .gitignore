@@ -5,4 +5,4 @@ sessions/
 
 spell/en.utf-8.add.spl
 
-plugin/packer_compiled.lua
+packer_compiled.lua
