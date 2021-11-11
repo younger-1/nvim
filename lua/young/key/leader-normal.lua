@@ -272,7 +272,7 @@ local mappings = {
     w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", 'Replace Word' },
   },
   s = {
-    [' '] = { '<cmd>Telescope resume<CR>', '♻️' },
+    [' '] = { '<cmd>Telescope resume<CR>', '' },
     ['"'] = { '<cmd>Telescope registers<CR>', 'Registers' },
     ["'"] = { '<cmd>Telescope marks<CR>', 'Marks' },
     ['.'] = { '<cmd>Telescope file_browser hidden=v:true<CR>', 'Browser' },
@@ -280,7 +280,7 @@ local mappings = {
     [':'] = { '<cmd>Telescope command_history<CR>', 'Command History' },
     ['<C-e>'] = { '<cmd>Telescope loclist<CR>', 'LocList Bug' },
     ['<C-q>'] = { '<cmd>Telescope quickfix<CR>', 'QuickList' },
-    ['<tab>'] = { '<cmd>Telescope<CR>', '🧙' },
+    ['<tab>'] = { '<cmd>Telescope<CR>', '' },
     ['?'] = { '<cmd>Telescope help_tags<CR>', 'Help' },
     C = { '<cmd>Telescope commands<cr>', 'Commands' },
     G = { '<cmd>Telescope live_grep grep_open_files=v:true<cr>', 'Grep in opened buffer' },
