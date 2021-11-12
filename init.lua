@@ -1,6 +1,7 @@
 require 'young.utils.global'
 
-require 'young.cfg.settings'
+require 'young.cfg.global'
+require 'young.cfg.option'
 
 require 'young.key.mappings'
 
@@ -14,4 +15,4 @@ vim.cmd 'colorscheme onedark'
 
 require 'young.lsp'
 
-require 'young.gui'.setup()
+require('young.gui').setup()
