@@ -1,5 +1,8 @@
 local uv = vim.loop
-local path_sep = uv.os_uname().version:match 'Windows' and '\\' or '/'
+
+_G.is_windows = uv.os_uname().version:match 'Windows'
+_G.is_unix = not is_windows
+_G.path_sep = is_windows and '\\' or '/'
 
 function _G.join_paths(...)
   -- local result = table.concat({ ... }, path_sep)

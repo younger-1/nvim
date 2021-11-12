@@ -138,7 +138,7 @@ local function set_mappings()
   }
 
   for k, v in pairs(mappings) do
-    api.nvim_buf_set_keymap(buf, 'n', k, ':lua require"pack.whid".' .. v .. '<cr>', {
+    api.nvim_buf_set_keymap(buf, 'n', k, ':lua require"zoom.whid".' .. v .. '<cr>', {
       nowait = true,
       noremap = true,
       silent = true,

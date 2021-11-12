@@ -5,7 +5,7 @@
 ## TODO
 
 - [ ] `young.telescope`, `M.tele/M.cfg`, `local cfg`
-- [ ] ice hot done 
+- [ ] once ice hot done
 
 ## Acknowledge
 
@@ -22,3 +22,5 @@ Great thanks to:
 <https://github.com/max397574/NeovimConfig>
 
 <https://github.com/dtr2300/nvim>
+
+<https://github.com/EdenEast/nyx/tree/main/config/.config/nvim>

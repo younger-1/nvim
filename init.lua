@@ -13,3 +13,5 @@ vim.cmd 'syntax on'
 vim.cmd 'colorscheme onedark'
 
 require 'young.lsp'
+
+require 'young.gui'.setup()
