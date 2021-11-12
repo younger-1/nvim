@@ -135,4 +135,13 @@ return {
       vim.g.ZFDirDiffUI_dirExpandable = '+'
     end,
   },
+
+  {
+    'nathom/filetype.nvim',
+    -- opt = true,
+    setup = function() end,
+    config = function()
+      require('young.mod.filetype').done()
+    end,
+  },
 }
