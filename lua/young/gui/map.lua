@@ -1,5 +1,6 @@
 local nmap = require('young.key').nmap
 local font = require 'young.gui.font'
+local gui = require 'young.gui'
 
 local M = {}
 
@@ -11,6 +12,7 @@ M.adjust_fontsize = function(num)
   fontsize = math.max(math.min(fontsize, 24), 10)
   font.set(nil, fontsize)
   vim.opt.guifont = fontface .. ':h' .. fontsize
+  gui.post_font()
 end
 
 M.toggle_fullscreen = function() end

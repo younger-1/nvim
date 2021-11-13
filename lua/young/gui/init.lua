@@ -32,7 +32,7 @@ function M.setup()
   end
 
   if gui_running then
-    require('young.gui.map').done()
+    M.post_config()
   end
 end
 
@@ -65,8 +65,33 @@ function M.ginit()
   end
 
   if gui_running then
-    require('young.gui.map').done()
+    M.post_config()
   end
+end
+
+M.post_config = function()
+  local gmap = require 'young.gui.map'
+  require('young.gui.map').done()
+  local prepare = function()
+    gmap.adjust_fontsize(0)
+  end
+  vim.defer_fn(prepare, 100)
+end
+
+M.post_font = function()
+  local font = require 'young.gui.font'
+  local fontface, fontsize = font.get()
+  local msg = "[" .. fontface .. ' ' .. fontsize .. "]"
+  local info = function()
+    vim.notify(msg)
+  end
+  vim.defer_fn(info, 100)
+end
+
+M.post_transparency = function()
+end
+
+M.post_effect = function()
 end
 
 return M

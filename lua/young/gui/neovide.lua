@@ -2,6 +2,7 @@ local M = {}
 
 local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
+local gui = require 'young.gui'
 
 local isfullscreen = false
 local transparency = 0.9
@@ -26,6 +27,7 @@ function M.adjust_transparency(num)
   transparency = math.max(math.min(transparency, 1), 0.1)
   -- vim.g doesn't work
   vim.cmd('let g:neovide_transparency = ' .. transparency)
+  gui.post_transparency()
 end
 
 function M.switch_effect() 
@@ -33,6 +35,7 @@ function M.switch_effect()
   cur_idx = cur_idx + 1
   -- vim.g doesn't work
   vim.cmd('let g:neovide_cursor_vfx_mode = "' .. cursor_modes[cur_idx] .. '"')
+  gui.post_effect()
 end
 
 -- FIX: <https://github.com/neovide/neovide/issues/1037>
@@ -74,7 +77,6 @@ M.config = function()
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.adjust_transparency = M.adjust_transparency
   gmap.switch_effect = M.switch_effect
-  gmap.adjust_fontsize(0)
 end
 
 return M
