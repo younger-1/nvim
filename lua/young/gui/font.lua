@@ -1,6 +1,6 @@
 local M = {}
 
--- Fuck: neovide require it
+-- Fuck: neovide makes neovim didn't recognize global var which defined in other files
 local is_windows = vim.loop.os_uname().version:match 'Windows' and true or false
 
 M.fonts = {

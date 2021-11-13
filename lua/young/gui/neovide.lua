@@ -4,25 +4,33 @@ local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
 
 local isfullscreen = false
+local transparency = 0.9
 
 function M.toggle_fullscreen()
   isfullscreen = not isfullscreen
   -- vim.g doesn't work
-  vim.cmd('let g:neovide_fullscreen=v:' .. tostring(isfullscreen))
+  vim.cmd('let g:neovide_fullscreen = v:' .. tostring(isfullscreen))
+end
+
+function M.adjust_transparency(num)
+  transparency = transparency + num * 0.05
+  transparency = math.max(math.min(transparency, 1), 0.1)
+  -- vim.g doesn't work
+  vim.cmd('let g:neovide_transparency = ' .. transparency)
 end
 
 M.once = function()
-  vim.g.neovide_refresh_rate = 60
+  vim.cmd 'let g:neovide_cursor_animation_length = 0.2' -- vim.g doesn't work
   vim.g.neovide_cursor_vfx_mode = 'railgun'
-  vim.g.neovide_no_idle = true
-  -- vim.cmd 'let g:neovide_cursor_animation_length = 0' -- vim.g doesn't work
-  vim.g.neovide_cursor_animation_length = 0.03
+  vim.g.neovide_transparency = transparency
   vim.g.neovide_cursor_trail_length = 0.05
   vim.g.neovide_cursor_antialiasing = true
   vim.g.neovide_cursor_vfx_opacity = 200.0
   vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
   vim.g.neovide_cursor_vfx_particle_speed = 20.0
   vim.g.neovide_cursor_vfx_particle_density = 5.0
+  vim.g.neovide_no_idle = true
+  vim.g.neovide_refresh_rate = 60
 end
 
 -- M.hot = function()
@@ -45,6 +53,7 @@ M.config = function()
   -- M.hot()
   font.once('jetbrain', 16)
   gmap.toggle_fullscreen = M.toggle_fullscreen
+  gmap.adjust_transparency = M.adjust_transparency
   gmap.adjust_fontsize(0)
 end
 
