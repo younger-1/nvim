@@ -1,3 +1,5 @@
+-- <https://github.com/neovide/neovide/wiki/Configuration>
+
 local M = {}
 
 local gmap = require 'young.gui.map'
@@ -45,12 +47,13 @@ M.once = function()
   vim.cmd 'let g:neovide_cursor_animation_length = 0.2' -- vim.g doesn't work
   vim.g.neovide_cursor_vfx_mode = cursor_modes[cur_idx]
   vim.g.neovide_transparency = transparency
-  vim.g.neovide_cursor_trail_length = 0.05
+  vim.g.neovide_cursor_animation_length = 0.3 -- the time it takes for the cursor to complete it's animation in seconds.
+  vim.g.neovide_cursor_trail_length = 0.1 -- how much the trail of the cursor lags behind the front edge.
   vim.g.neovide_cursor_antialiasing = true
-  vim.g.neovide_cursor_vfx_opacity = 200.0
-  vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
-  vim.g.neovide_cursor_vfx_particle_speed = 20.0
-  vim.g.neovide_cursor_vfx_particle_density = 5.0
+  vim.g.neovide_cursor_vfx_opacity = 200.0 -- the transparency of the generated particles.
+  vim.g.neovide_cursor_vfx_particle_lifetime = 1.2 -- the amount of time the generated particles should survive.
+  vim.g.neovide_cursor_vfx_particle_density = 10.0 -- the number of generated particles.
+  vim.g.neovide_cursor_vfx_particle_speed = 10.0 -- the speed of particle movement.
   vim.g.neovide_no_idle = true
   vim.g.neovide_refresh_rate = 60
 end
