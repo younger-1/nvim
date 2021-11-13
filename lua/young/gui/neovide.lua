@@ -5,6 +5,15 @@ local font = require 'young.gui.font'
 
 local isfullscreen = false
 local transparency = 0.9
+local cur_idx = 1
+local cursor_modes = {
+  "railgun", -- 泡泡
+  "torpedo", -- 水雷
+  "pixiedust", -- 精灵
+  "sonicboom", -- 音速轰
+  "ripple", -- 涟漪
+  "wireframe", -- 线框
+}
 
 function M.toggle_fullscreen()
   isfullscreen = not isfullscreen
@@ -19,9 +28,19 @@ function M.adjust_transparency(num)
   vim.cmd('let g:neovide_transparency = ' .. transparency)
 end
 
+function M.switch_effect() 
+  cur_idx = cur_idx % #cursor_modes
+  cur_idx = cur_idx + 1
+  -- vim.g doesn't work
+  vim.cmd('let g:neovide_cursor_vfx_mode = "' .. cursor_modes[cur_idx] .. '"')
+end
+
+-- FIX: <https://github.com/neovide/neovide/issues/1037>
+function M.toggle_ligature() end
+
 M.once = function()
   vim.cmd 'let g:neovide_cursor_animation_length = 0.2' -- vim.g doesn't work
-  vim.g.neovide_cursor_vfx_mode = 'railgun'
+  vim.g.neovide_cursor_vfx_mode = cursor_modes[cur_idx]
   vim.g.neovide_transparency = transparency
   vim.g.neovide_cursor_trail_length = 0.05
   vim.g.neovide_cursor_antialiasing = true
@@ -54,6 +73,7 @@ M.config = function()
   font.once('jetbrain', 16)
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.adjust_transparency = M.adjust_transparency
+  gmap.switch_effect = M.switch_effect
   gmap.adjust_fontsize(0)
 end
 

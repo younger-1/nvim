@@ -36,7 +36,7 @@ M.set = function(name, size)
 end
 
 M.next = function()
-  idx = idx % 3
+  idx = idx % #fonts_key
   idx = idx + 1
   M.current.name = fonts_key[idx]
 end
