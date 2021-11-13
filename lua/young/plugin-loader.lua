@@ -79,8 +79,11 @@ function plugin_loader.load()
     return
   end
 
-  -- TODO: use vim.defer_fn({fn}, {timeout})
-  require 'young.packer_compiled'
+  -- TODO: use vim.defer_fn({fn}, {timeout}) or plenary's async
+  local do_compiled = function()
+    require 'young.packer_compiled'
+  end
+  do_compiled()
   -- @young
 end
 

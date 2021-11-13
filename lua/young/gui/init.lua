@@ -81,17 +81,15 @@ end
 M.post_font = function()
   local font = require 'young.gui.font'
   local fontface, fontsize = font.get()
-  local msg = "[" .. fontface .. ' ' .. fontsize .. "]"
+  local msg = "[Font]: " .. fontface .. ' ' .. fontsize
   local info = function()
     vim.notify(msg)
   end
   vim.defer_fn(info, 100)
 end
 
-M.post_transparency = function()
-end
+M.post_transparency = function() end
 
-M.post_effect = function()
-end
+M.post_effect = function() end
 
 return M

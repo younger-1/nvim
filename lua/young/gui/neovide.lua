@@ -77,6 +77,14 @@ M.config = function()
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.adjust_transparency = M.adjust_transparency
   gmap.switch_effect = M.switch_effect
+  gui.post_transparency = function()
+    local msg = '[Transparency]: ' .. transparency
+    vim.notify(msg)
+  end
+  gui.post_effect = function()
+    local msg = '[Effect]: ' .. cursor_modes[cur_idx]
+    vim.notify(msg)
+  end
 end
 
 return M
