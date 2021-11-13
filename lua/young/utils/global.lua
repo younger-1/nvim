@@ -1,6 +1,6 @@
 local uv = vim.loop
 
-_G.is_windows = uv.os_uname().version:match 'Windows'
+_G.is_windows = uv.os_uname().version:match 'Windows' and true or false
 _G.is_unix = not is_windows
 _G.path_sep = is_windows and '\\' or '/'
 

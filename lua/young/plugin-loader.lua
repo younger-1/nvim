@@ -78,6 +78,8 @@ function plugin_loader.load()
     -- I return because `packer.compile()` is async.
     return
   end
+
+  -- TODO: use vim.defer_fn({fn}, {timeout})
   require 'young.packer_compiled'
   -- @young
 end

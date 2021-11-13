@@ -29,15 +29,15 @@ end
 --   local nmap = require('young.key').nmap
 
 --   -- mouse wheel doesn't work
---   -- nmap('n', '<C-ScrollWheelUp>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(1)<CR>")
---   -- nmap('n', '<C-ScrollWheelDown>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(-1)<CR>")
---   -- nmap('i', '<C-ScrollWheelUp>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(1)<CR>")
---   -- nmap('i', '<C-ScrollWheelDown>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(-1)<CR>")
+--   -- nmap('<C-ScrollWheelUp>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(1)<CR>")
+--   -- nmap('<C-ScrollWheelDown>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(-1)<CR>")
+--   -- nmap('<C-ScrollWheelUp>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(1)<CR>")
+--   -- nmap('<C-ScrollWheelDown>', "<Cmd>silent! lua require'young.gui.neovide'.adjust_fontsize(-1)<CR>")
 
---   nmap('n', '<F8>', "<Cmd>lua require'young.gui.neovide'.adjust_fontsize(-1)<CR>")
---   nmap('n', '<F9>', "<Cmd>lua require'young.gui.neovide'.adjust_fontsize(+1)<CR>")
---   nmap('n', '<F10>', "<Cmd>lua require'young.gui.neovide'.switch_font()<CR>")
---   nmap('n', '<F11>', "<Cmd>lua require'young.gui.neovide'.toggle_fullscreen()<CR>")
+--   nmap('<F8>', "<Cmd>lua require'young.gui.neovide'.adjust_fontsize(-1)<CR>")
+--   nmap('<F9>', "<Cmd>lua require'young.gui.neovide'.adjust_fontsize(+1)<CR>")
+--   nmap('<F10>', "<Cmd>lua require'young.gui.neovide'.switch_font()<CR>")
+--   nmap('<F11>', "<Cmd>lua require'young.gui.neovide'.toggle_fullscreen()<CR>")
 -- end
 
 M.config = function()
@@ -45,7 +45,7 @@ M.config = function()
   -- M.hot()
   font.once('jetbrain', 16)
   gmap.toggle_fullscreen = M.toggle_fullscreen
-  M.adjust_fontsize(0)
+  gmap.adjust_fontsize(0)
 end
 
 return M
