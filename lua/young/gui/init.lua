@@ -70,7 +70,7 @@ function M.ginit()
 end
 
 M.post_config = function()
-  -- vim.opt.mouse = 'a'
+  vim.opt.mouse = 'a'
   local gmap = require 'young.gui.map'
   require('young.gui.map').done()
   local prepare = function()

@@ -39,8 +39,9 @@ M.once = function()
   vim.cmd "GuiTabline 0"
   vim.cmd "GuiPopupmenu 1"
   vim.cmd "GuiScrollBar 0"
-  vim.cmd "GuiLinespace 2"
+  vim.cmd "GuiLinespace 0"
   vim.fn.GuiWindowMaximized(1)
+  vim.fn.GuiMousehide(0)
   -- vim.cmd("GuiWindowOpacity " .. transparency)
   vim.cmd [[
     " Right Click Context Menu (Copy-Cut-Paste)
@@ -48,6 +49,8 @@ M.once = function()
     inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
     xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
     snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
+
+    nnoremap <leader>E <Cmd>GuiTreeviewToggle<CR>
   ]]
 end
 
