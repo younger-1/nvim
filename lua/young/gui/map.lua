@@ -31,11 +31,11 @@ end
 M.switch_effect = function() end
 
 M.done = function()
-  nmap('<S-F9>', "<Cmd>lua require'young.gui.map'.adjust_transparency(-1)<CR>")
-  nmap('<F9>', "<Cmd>lua require'young.gui.map'.adjust_transparency(1)<CR>")
+  nmap('<C-9>', "<Cmd>lua require'young.gui.map'.adjust_transparency(-1)<CR>")
+  nmap('<C-0>', "<Cmd>lua require'young.gui.map'.adjust_transparency(1)<CR>")
 
-  nmap('<S-F10>', "<Cmd>lua require'young.gui.map'.adjust_fontsize(-1)<CR>")
-  nmap('<F10>', "<Cmd>lua require'young.gui.map'.adjust_fontsize(1)<CR>")
+  nmap('<C-->', "<Cmd>lua require'young.gui.map'.adjust_fontsize(-1)<CR>")
+  nmap('<C-=>', "<Cmd>lua require'young.gui.map'.adjust_fontsize(1)<CR>")
 
   nmap('<S-F11>', "<Cmd>lua require'young.gui.map'.toggle_ligature()<CR>")
   nmap('<F11>', "<Cmd>lua require'young.gui.map'.toggle_fullscreen()<CR>")

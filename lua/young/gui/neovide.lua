@@ -6,7 +6,6 @@ local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
 local gui = require 'young.gui'
 
-local isfullscreen = false
 local transparency = 0.9
 local cur_idx = 1
 local cursor_modes = {
@@ -19,9 +18,8 @@ local cursor_modes = {
 }
 
 function M.toggle_fullscreen()
-  isfullscreen = not isfullscreen
   -- vim.g doesn't work
-  vim.cmd('let g:neovide_fullscreen = v:' .. tostring(isfullscreen))
+  vim.cmd('let g:neovide_fullscreen = !g:neovide_fullscreen')
 end
 
 function M.adjust_transparency(num)
@@ -76,7 +74,7 @@ end
 M.config = function()
   M.once()
   -- M.hot()
-  font.once('jetbrain', 16)
+  font.once('delu_l', 16)
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.adjust_transparency = M.adjust_transparency
   gmap.switch_effect = M.switch_effect

@@ -4,12 +4,19 @@ local M = {}
 local is_windows = vim.loop.os_uname().version:match 'Windows' and true or false
 
 M.fonts = {
-  jetbrain = is_windows and 'JetBrainsMono NF' or 'JetBrainsMono Nerd Font',
+  jet = is_windows and 'JetBrainsMono NF' or 'JetBrainsMono Nerd Font',
   sauce = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
   hack = is_windows and 'Hack NF' or 'Hack Nerd Font',
+  iose = is_windows and 'Iosevka NF' or 'Iosevka Nerd Font',
+  fira = is_windows and 'FiraCode NF' or 'FiraCode Nerd Font',
+  firamono = is_windows and 'FiraMono NF' or 'FiraMono Nerd Font',
+  deja = is_windows and 'DejaVuSansMono NF' or 'DejaVuSansMono Nerd Font',
+  delu = 'Delugia',
+  delu_l = 'Delugia Light',
+  sara = 'Sarasa Term SC',
 }
 
-M.default = { name = 'jetbrain', size = 13 }
+M.default = { name = 'sauce', size = 12 }
 
 local idx = 0
 local fonts_key = vim.tbl_keys(M.fonts)

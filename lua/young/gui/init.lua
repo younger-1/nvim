@@ -53,7 +53,7 @@ function M.ginit()
     require 'young.gui.fvim'
   elseif vim.g.GuiLoaded then
     -- https://github.com/equalsraf/neovim-qt
-    require 'young.gui.nvimqt'
+    require('young.gui.nvim-qt').config()
   elseif vim.g.GtkGuiLoaded then
     -- https://github.com/daa84/neovim-gtk
     require 'young.gui.nvim-gtk'
@@ -70,6 +70,7 @@ function M.ginit()
 end
 
 M.post_config = function()
+  -- vim.opt.mouse = 'a'
   local gmap = require 'young.gui.map'
   require('young.gui.map').done()
   local prepare = function()
