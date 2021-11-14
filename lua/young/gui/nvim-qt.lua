@@ -36,13 +36,6 @@ end
 function M.toggle_ligature() end
 
 M.once = function()
-  vim.cmd "GuiTabline 0"
-  vim.cmd "GuiPopupmenu 1"
-  vim.cmd "GuiScrollBar 0"
-  vim.cmd "GuiLinespace 0"
-  vim.fn.GuiWindowMaximized(1)
-  vim.fn.GuiMousehide(0)
-  -- vim.cmd("GuiWindowOpacity " .. transparency)
   vim.cmd [[
     " Right Click Context Menu (Copy-Cut-Paste)
     nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
@@ -52,6 +45,15 @@ M.once = function()
 
     nnoremap <leader>E <Cmd>GuiTreeviewToggle<CR>
   ]]
+  vim.cmd [[
+    GuiTabline 0
+    GuiPopupmenu 1
+    GuiScrollBar 0
+    GuiLinespace 0
+  ]]
+  -- vim.cmd("GuiWindowOpacity " .. transparency)
+  vim.fn.GuiWindowMaximized(1)
+  vim.fn.GuiMousehide(0)
 end
 
 M.config = function()
