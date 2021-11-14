@@ -22,7 +22,8 @@ M.cfg = {
   -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
   direction = 'float',
   close_on_exit = true, -- close the terminal window when the process exits
-  shell = 'pwsh',-- vim.o.shell,
+  shell = vim.o.shell,
+  -- shell = is_windows and 'pwsh' or vim.o.shell,-- vim.o.shell,
   -- This field is only relevant if direction is set to 'float'
   float_opts = {
     -- The border key is *almost* the same as 'nvim_win_open'
