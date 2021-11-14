@@ -15,8 +15,8 @@ local fullscreen = false
 local transparency = 0.9
 
 function M.adjust_fontsize(num)
-  -- vim.opt.guifont = fontface .. ':h' .. fontsize
   font.adjust_size(num)
+  -- vim.opt.guifont = fontface .. ':h' .. fontsize
   vim.cmd("GuiFont! " .. font.get_guifont())
   gui.post_font()
 end

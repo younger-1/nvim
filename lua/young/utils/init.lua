@@ -80,4 +80,15 @@ function utils.add_to_set(set1, set2)
   end
 end
 
+--@param para: table or single value
+function utils.defer(fn, para, time)
+  -- wrap it!
+  para = type(para) == 'table' and para or { para }
+  local fn_box = function()
+    fn(unpack(para))
+  end
+  time = time or 100
+  vim.defer_fn(fn_box, time)
+end
+
 return utils

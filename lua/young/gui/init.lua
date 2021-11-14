@@ -1,4 +1,7 @@
+local defer = require('young.utils').defer
+
 local M = {}
+
 local gui_running
 
 -- https://github.com/vhakulinen/gnvim
@@ -50,7 +53,7 @@ function M.ginit()
     require('young.gui.neovide').config()
   elseif vim.g.fvim_loaded then
     -- https://github.com/yatli/fvim
-    require 'young.gui.fvim'
+    require('young.gui.fvim').config()
   elseif vim.g.GuiLoaded then
     -- https://github.com/equalsraf/neovim-qt
     require('young.gui.nvim-qt').config()
@@ -73,20 +76,14 @@ M.post_config = function()
   vim.opt.mouse = 'a'
   local gmap = require 'young.gui.map'
   require('young.gui.map').done()
-  local prepare = function()
-    gmap.adjust_fontsize(0)
-  end
-  vim.defer_fn(prepare, 100)
+  defer(gmap.adjust_fontsize, 0)
 end
 
 M.post_font = function()
   local font = require 'young.gui.font'
   local fontface, fontsize = font.get()
   local msg = "[Font]: " .. fontface .. ' ' .. fontsize
-  local info = function()
-    vim.notify(msg)
-  end
-  vim.defer_fn(info, 100)
+  defer(vim.notify, msg)
 end
 
 M.post_transparency = function() end
