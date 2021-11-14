@@ -73,17 +73,19 @@ function M.ginit()
 end
 
 M.post_config = function()
-  vim.opt.mouse = 'a'
-  local gmap = require 'young.gui.map'
-  require('young.gui.map').done()
-  defer(gmap.adjust_fontsize, 0)
+  defer(function()
+    vim.opt.mouse = 'a'
+    local gmap = require 'young.gui.map'
+    require('young.gui.map').done()
+    gmap.adjust_fontsize(0)
+  end)
 end
 
 M.post_font = function()
   local font = require 'young.gui.font'
   local fontface, fontsize = font.get()
   local msg = "[Font]: " .. fontface .. ' ' .. fontsize
-  defer(vim.notify, msg)
+  defer(vim.notify, msg, 120)
 end
 
 M.post_transparency = function() end

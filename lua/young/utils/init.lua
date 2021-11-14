@@ -87,7 +87,7 @@ function utils.defer(fn, para, time)
   local fn_box = function()
     fn(unpack(para))
   end
-  time = time or 100
+  time = time or 20
   vim.defer_fn(fn_box, time)
 end
 
