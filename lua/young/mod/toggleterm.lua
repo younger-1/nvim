@@ -45,6 +45,7 @@ M.cfg = {
   -- lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gdb", "tg", "GNU Debugger"}
   execs = {
     { 'lazygit', 'gg', 'LazyGit' },
+    { 'broot -w', 'b.', 'Broot' },
   },
 }
 

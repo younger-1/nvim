@@ -1,6 +1,10 @@
 return {
   { 'wbthomason/packer.nvim' },
 
+  -- Change
+  { 'tpope/vim-surround' },
+  { 'tpope/vim-repeat' },
+
   -- UI
   {
     'romgrk/barbar.nvim',
@@ -10,7 +14,7 @@ return {
     end,
   },
   { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
-  -- use({ "NTBBloodbath/galaxyline.nvim", config = require("plug-config.galaxyline")})
+  -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
   { 'kyazdani42/nvim-tree.lua', config = require 'plug-config.nvim-tree', event = 'BufWinEnter' },
   { 'kyazdani42/nvim-web-devicons' },
   { 'goolord/alpha-nvim', config = require 'plug-config.alpha' },
@@ -59,14 +63,33 @@ return {
   { 'windwp/nvim-ts-autotag', ft = { 'html', 'svelte' } },
 
   -- Autocomplete
-  { 'hrsh7th/nvim-cmp', config = require 'plug-config.cmp' },
+  { 
+    'hrsh7th/nvim-cmp', 
+    config = function()
+      require('young.mod.cmp').done()
+    end,
+    requires = {
+      -- [luasnip]
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      -- [vsnip]
+      -- 'hrsh7th/cmp-vsnip',
+      -- 'hrsh7th/vim-vsnip',
+      -- [ultisnips]
+      -- 'SirVer/ultisnips'
+      -- 'quangnguyen30192/cmp-nvim-ultisnips'
+      -- [source]
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-calc',
+    },
+  },
   { 'hrsh7th/cmp-buffer' },
   { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
   { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-  { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-  { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
-  { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-  { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
 
   -- LSP
   { 'neovim/nvim-lspconfig' },

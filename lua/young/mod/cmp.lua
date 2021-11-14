@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.done = function()
   local cmp = require 'cmp'
 
   local icons = {
@@ -82,3 +84,5 @@ return function()
     },
   }
 end
+
+return M
