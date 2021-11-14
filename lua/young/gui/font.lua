@@ -3,6 +3,7 @@ local M = {}
 -- Fuck: neovide makes neovim didn't recognize global var which defined in other files
 local is_windows = vim.loop.os_uname().version:match 'Windows' and true or false
 
+-- { fontname => fontface }
 M.fonts = {
   jet = is_windows and 'JetBrainsMono NF' or 'JetBrainsMono Nerd Font',
   sauce = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
@@ -46,6 +47,18 @@ M.next = function()
   idx = idx % #fonts_key
   idx = idx + 1
   M.current.name = fonts_key[idx]
+end
+
+M.adjust_size = function(num)
+  local _, fontsize = M.get()
+  fontsize = fontsize + num
+  fontsize = math.max(math.min(fontsize, 24), 10)
+  M.current.size = fontsize
+end
+
+M.get_guifont = function()
+  local fontface, fontsize = M.get()
+  return fontface .. ':h' .. fontsize
 end
 
 return M
