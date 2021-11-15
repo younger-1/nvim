@@ -18,7 +18,6 @@ function M.adjust_fontsize(num)
   font.adjust_size(num)
   -- vim.opt.guifont = fontface .. ':h' .. fontsize
   vim.cmd("GuiFont! " .. font.get_guifont())
-  gui.post_font()
 end
 
 function M.adjust_transparency(num)
@@ -57,7 +56,7 @@ M.config = function()
   M.once()
   font.once("sauce", 12)
   gmap.adjust_fontsize = M.adjust_fontsize
-  gmap.adjust_transparency = M.adjust_transparency
+  -- gmap.adjust_transparency = M.adjust_transparency
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.toggle_ligature = M.toggle_ligature
 end

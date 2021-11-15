@@ -1,4 +1,4 @@
-local defer = require('young.utils').defer
+
 
 local M = {}
 
@@ -73,7 +73,7 @@ function M.ginit()
 end
 
 M.post_config = function()
-  defer(function()
+  require('young.utils').defer(function()
     vim.opt.mouse = 'a'
     local gmap = require 'young.gui.map'
     require('young.gui.map').done()
@@ -82,14 +82,19 @@ M.post_config = function()
   end)
 end
 
-M.post_font = function()
+M.post_font = function(show_default, show_fallback)
   local font = require 'young.gui.font'
-  local fontface, fontsize = font.get()
-  local msg = "[Font]: " .. fontface .. ' ' .. fontsize
-  if #vim.opt.guifont:get() > 1 then
-    msg = msg .. ' (' .. vim.opt.guifont:get()[2] .. ')'
+  -- current
+  local msg = "[Font]: " .. font.get_guifont()
+  -- default
+  if show_default then
+    msg = msg .. ', [default]: ' .. font.get_guifont(font.default)
   end
-  defer(vim.notify, msg, 120)
+  -- fallback
+  if show_fallback and #vim.opt.guifont:get() > 1 then
+    msg = msg .. ', [fallback]: ' .. font.get_guifont(font.fallback)
+  end
+  require('young.utils').defer(vim.notify, msg, 120)
 end
 
 M.post_effect = function() end

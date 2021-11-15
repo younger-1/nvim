@@ -14,7 +14,6 @@ local fullscreen = false
 --   local fontface, fontsize = font.get()
 --   vim.cmd("NvuiCmdFontFamily " .. fontface)
 --   vim.cmd("NvuiCmdFontSize " .. fontsize)
---   gui.post_font()
 -- end
 
 function M.adjust_transparency(num)

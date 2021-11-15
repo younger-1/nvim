@@ -10,7 +10,7 @@ M.adjust_fontsize = function(num)
   font.adjust_size(num)
   -- vim.opt.guifont = font.get_guifont()
   vim.opt.guifont = { font.get_guifont(), font.get_guifont(font.fallback) }
-  gui.post_font()
+  gui.post_font(true, true)
 end
 
 M.toggle_fullscreen = function() end
