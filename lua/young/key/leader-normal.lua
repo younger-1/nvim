@@ -207,6 +207,7 @@ local mappings = {
     },
     ['<C-e>'] = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Diagnostics LocList' },
     A = { '<cmd>Telescope lsp_range_code_actions<cr>', 'Range Action' },
+    C = { "<cmd>CmpStatus<cr>", "Code Action" },
     F = {
       function()
         vim.lsp.buf.formatting_sync()
