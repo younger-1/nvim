@@ -4,9 +4,9 @@ local M = {}
 
 local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
+local tran = require 'young.gui.transparency'
 local gui = require 'young.gui'
 
-local transparency = 0.9
 local cur_idx = 1
 local cursor_modes = {
   "railgun", -- 泡泡
@@ -23,11 +23,9 @@ function M.toggle_fullscreen()
 end
 
 function M.adjust_transparency(num)
-  transparency = transparency + num * 0.05
-  transparency = math.max(math.min(transparency, 1), 0.1)
+  tran.adjust(num)
   -- vim.g doesn't work
-  vim.cmd('let g:neovide_transparency = ' .. transparency)
-  gui.post_transparency()
+  vim.cmd('let g:neovide_transparency = ' .. tran.val)
 end
 
 function M.switch_effect() 
@@ -44,7 +42,6 @@ function M.toggle_ligature() end
 M.once = function()
   vim.cmd 'let g:neovide_cursor_animation_length = 0.2' -- vim.g doesn't work
   vim.g.neovide_cursor_vfx_mode = cursor_modes[cur_idx]
-  vim.g.neovide_transparency = transparency
   vim.g.neovide_cursor_animation_length = 0.3 -- the time it takes for the cursor to complete it's animation in seconds.
   vim.g.neovide_cursor_trail_length = 0.1 -- how much the trail of the cursor lags behind the front edge.
   vim.g.neovide_cursor_antialiasing = true
@@ -78,10 +75,6 @@ M.config = function()
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.adjust_transparency = M.adjust_transparency
   gmap.switch_effect = M.switch_effect
-  gui.post_transparency = function()
-    local msg = '[Transparency]: ' .. transparency
-    vim.notify(msg)
-  end
   gui.post_effect = function()
     local msg = '[Effect]: ' .. cursor_modes[cur_idx]
     vim.notify(msg)

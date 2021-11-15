@@ -2,10 +2,10 @@ local M = {}
 
 local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
+local tran = require 'young.gui.transparency'
 local gui = require 'young.gui'
 
 local ligature = true
-local transparency = 0.85
 local bg_idx = 3
 local bg_compositions = {
   'none',
@@ -17,10 +17,8 @@ local bg_compositions = {
 local image = vim.fn.resolve '~/Beauty/Wallpaper/live.jpg'
 
 function M.adjust_transparency(num)
-  transparency = transparency + num * 0.05
-  transparency = math.max(math.min(transparency, 1), 0.1)
-  vim.cmd('FVimBackgroundOpacity ' .. transparency)
-  gui.post_transparency()
+  tran.adjust(num)
+  vim.cmd('FVimBackgroundOpacity ' .. tran.val)
 end
 
 function M.toggle_fullscreen()
@@ -53,7 +51,6 @@ M.once = function()
   ]]
   -- Background composition
   vim.cmd('FVimBackgroundComposition "' .. bg_compositions[bg_idx] .. '"')
-  vim.cmd('FVimBackgroundOpacity ' .. transparency) -- default bg opacity
   vim.cmd('FVimBackgroundAltOpacity 0.5') -- non-default bg opacity
   -- Image
   -- vim.cmd('FVimBackgroundImage "' .. image .. '"')
@@ -99,10 +96,6 @@ M.config = function()
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.toggle_ligature = M.toggle_ligature
   gmap.switch_effect = M.switch_effect
-  gui.post_transparency = function()
-    local msg = '[Transparency]: ' .. transparency
-    vim.notify(msg)
-  end
   gui.post_effect = function()
     local msg = '[Effect]: ' .. bg_compositions[bg_idx]
     vim.notify(msg)

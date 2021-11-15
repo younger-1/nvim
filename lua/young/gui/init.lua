@@ -77,6 +77,7 @@ M.post_config = function()
     vim.opt.mouse = 'a'
     local gmap = require 'young.gui.map'
     require('young.gui.map').done()
+    gmap.adjust_transparency(0)
     gmap.adjust_fontsize(0)
   end)
 end
@@ -90,8 +91,6 @@ M.post_font = function()
   end
   defer(vim.notify, msg, 120)
 end
-
-M.post_transparency = function() end
 
 M.post_effect = function() end
 

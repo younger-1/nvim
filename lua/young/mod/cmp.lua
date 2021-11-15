@@ -1,3 +1,5 @@
+local luasnip = require('luasnip')
+
 local M = {}
 
 M.has_words_before = function()
@@ -115,7 +117,7 @@ M.done = function()
     },
     snippet = {
       expand = function(args)
-        require('luasnip').lsp_expand(args.body)
+        luasnip.lsp_expand(args.body)
       end,
     },
     sources = {

@@ -4,10 +4,10 @@ local M = {}
 
 local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
+local tran = require 'young.gui.transparency'
 local gui = require 'young.gui'
 
 local fullscreen = false
-local transparency = 0.9
 
 -- function M.adjust_fontsize(num)
 --   font.adjust_size(num)
@@ -18,10 +18,8 @@ local transparency = 0.9
 -- end
 
 function M.adjust_transparency(num)
-  transparency = transparency + num * 0.05
-  transparency = math.max(math.min(transparency, 1), 0.1)
-  vim.cmd('NvuiOpacity ' .. transparency)
-  gui.post_transparency()
+  tran.adjust(num)
+  vim.cmd('NvuiOpacity ' .. tran.val)
 end
 
 function M.toggle_fullscreen()
@@ -32,6 +30,8 @@ end
 M.once = function()
   vim.cmd [[
     NvuiScrollAnimationDuration 0.5
+
+    NvuiCursorHideWhileTyping 0
   ]]
 end
 
@@ -41,10 +41,6 @@ M.config = function()
   -- gmap.adjust_fontsize = M.adjust_fontsize
   gmap.adjust_transparency = M.adjust_transparency
   gmap.toggle_fullscreen = M.toggle_fullscreen
-  gui.post_transparency = function()
-    local msg = '[Transparency]: ' .. transparency
-    vim.notify(msg)
-  end
 end
 
 return M
