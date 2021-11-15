@@ -14,7 +14,7 @@ local bg_compositions = {
   'acrylic',
 }
 -- NOTE: don't use `vim.fn.expand`
-local image = '~/Beauty/Wallpaper/live.jpg'
+local image = vim.fn.resolve '~/Beauty/Wallpaper/live.jpg'
 
 function M.adjust_transparency(num)
   transparency = transparency + num * 0.05

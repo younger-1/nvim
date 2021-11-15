@@ -2,6 +2,7 @@ require 'young.utils.global'
 
 require 'young.cfg.global'
 require 'young.cfg.option'
+require 'young.cfg.autocmds'
 
 require 'young.key.mappings'
 
