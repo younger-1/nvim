@@ -5,8 +5,8 @@ _G.is_unix = not is_windows
 _G.path_sep = is_windows and '\\' or '/'
 
 function _G.join_paths(...)
-  -- local result = table.concat({ ... }, path_sep)
-  local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. '+', path_sep)
+  local result = table.concat({ ... }, path_sep)
+  -- local result = table.concat(vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. '+', path_sep)
   return result
 end
 
@@ -25,4 +25,8 @@ function _G.ppp(...)
 
   print(table.concat(objects, '\n'))
   return ...
+end
+
+function _G.to_home(path)
+  return vim.fn.fnamemodify(path, ':~')
 end

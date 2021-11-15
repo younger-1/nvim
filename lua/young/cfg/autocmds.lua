@@ -6,7 +6,8 @@ local config_dir = vim.fn.stdpath 'config'
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
   -- local user_config_file = vim.fn.resolve(require("lvim.config"):get_user_config_path())
-  local user_config_file = join_paths(config_dir, "lua", "young", "plugins.lua")
+  -- FIXME:
+  local user_config_file = "plugins.lua"
 
   return {
     _general_settings = {
@@ -22,7 +23,7 @@ function M.load_augroups()
         "setlocal cursorline signcolumn=yes cursorcolumn number",
       },
       -- { "BufWritePost", user_config_file, "lua require('lvim.config'):reload()" },
-      { "BufWritePost", user_config_file, ":echo '[reload young]'" },
+      { "BufWritePost", user_config_file, ":echomsg '[reload young]'" },
       { "FileType", "qf", "set nobuflisted" },
       -- { "VimLeavePre", "*", "set title set titleold=" },
     },
