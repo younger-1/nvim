@@ -17,6 +17,8 @@ M.fonts = {
   sara = 'Sarasa Term SC',
 }
 
+M.fallback = { name = 'sauce', size = 12 }
+
 M.default = { name = 'sauce', size = 12 }
 
 M.current = vim.deepcopy(M.default)
@@ -26,6 +28,7 @@ local fonts_key = vim.tbl_keys(M.fonts)
 
 M.once = function(name, size)
   M.current = { name = name or M.current.name, size = size or M.current.size }
+  M.default = { name = name or M.current.name, size = size or M.current.size }
   for i, v in ipairs(fonts_key) do
     if M.current.name == v then
       idx = i

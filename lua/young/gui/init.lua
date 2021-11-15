@@ -86,7 +86,7 @@ M.post_font = function()
   local fontface, fontsize = font.get()
   local msg = "[Font]: " .. fontface .. ' ' .. fontsize
   if #vim.opt.guifont:get() > 1 then
-    msg = msg .. ' ' .. vim.opt.guifont:get()[2]
+    msg = msg .. ' (' .. vim.opt.guifont:get()[2] .. ')'
   end
   defer(vim.notify, msg, 120)
 end

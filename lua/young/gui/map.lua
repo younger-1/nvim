@@ -9,7 +9,7 @@ M.adjust_transparency = function() end
 M.adjust_fontsize = function(num)
   font.adjust_size(num)
   -- vim.opt.guifont = font.get_guifont()
-  vim.opt.guifont = { font.get_guifont(), font.get_guifont(font.default) }
+  vim.opt.guifont = { font.get_guifont(), font.get_guifont(font.fallback) }
   gui.post_font()
 end
 
