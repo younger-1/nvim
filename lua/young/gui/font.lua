@@ -54,17 +54,32 @@ M.next = function()
   M.current.name = fonts_key[idx]
 end
 
+M.get_guifont = function(opt)
+  opt = opt or {}
+  local fontface, fontsize = M.get(opt.name, opt.size)
+  return fontface .. ':h' .. fontsize
+end
+
 M.adjust_size = function(num)
   local _, fontsize = M.get()
   fontsize = fontsize + num
   fontsize = math.max(math.min(fontsize, 24), 10)
   M.current.size = fontsize
+  M.post_font(true, true)
 end
 
-M.get_guifont = function(opt)
-  opt = opt or {}
-  local fontface, fontsize = M.get(opt.name, opt.size)
-  return fontface .. ':h' .. fontsize
+M.post_font = function(show_default, show_fallback)
+  -- current
+  local msg = "[Font]: " .. M.get_guifont()
+  -- default
+  if show_default then
+    msg = msg .. ', [default]: ' .. M.get_guifont(M.default)
+  end
+  -- fallback
+  if show_fallback and #vim.opt.guifont:get() > 1 then
+    msg = msg .. ', [fallback]: ' .. M.get_guifont(M.fallback)
+  end
+  require('young.utils').defer(vim.notify, msg, 120)
 end
 
 M.once()

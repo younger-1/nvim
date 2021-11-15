@@ -3,7 +3,6 @@ local M = {}
 local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
 local tran = require 'young.gui.transparency'
-local gui = require 'young.gui'
 
 local ligature = true
 local bg_idx = 3
@@ -34,7 +33,12 @@ function M.switch_effect()
   bg_idx = bg_idx % #bg_compositions
   bg_idx = bg_idx + 1
   vim.cmd('FVimBackgroundComposition "' .. bg_compositions[bg_idx] .. '"')
-  gui.post_effect()
+  M.post_effect()
+end
+
+function M.post_effect()
+  local msg = '[Effect]: ' .. bg_compositions[bg_idx]
+  vim.notify(msg)
 end
 
 M.once = function()
@@ -96,10 +100,6 @@ M.config = function()
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.toggle_ligature = M.toggle_ligature
   gmap.switch_effect = M.switch_effect
-  gui.post_effect = function()
-    local msg = '[Effect]: ' .. bg_compositions[bg_idx]
-    vim.notify(msg)
-  end
 end
 
 return M

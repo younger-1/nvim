@@ -82,21 +82,4 @@ M.post_config = function()
   end)
 end
 
-M.post_font = function(show_default, show_fallback)
-  local font = require 'young.gui.font'
-  -- current
-  local msg = "[Font]: " .. font.get_guifont()
-  -- default
-  if show_default then
-    msg = msg .. ', [default]: ' .. font.get_guifont(font.default)
-  end
-  -- fallback
-  if show_fallback and #vim.opt.guifont:get() > 1 then
-    msg = msg .. ', [fallback]: ' .. font.get_guifont(font.fallback)
-  end
-  require('young.utils').defer(vim.notify, msg, 120)
-end
-
-M.post_effect = function() end
-
 return M
