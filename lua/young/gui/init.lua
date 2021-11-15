@@ -17,7 +17,7 @@ function M.setup()
 
   if vim.g.nvui then
     -- https://github.com/rohit-px2/nvui
-    require 'young.gui.nvui'
+    require 'young.gui.nvui'.config()
   elseif vim.g.goneovim then
     -- https://github.com/akiyosi/goneovim
     require 'young.gui.goneovim'
@@ -85,6 +85,9 @@ M.post_font = function()
   local font = require 'young.gui.font'
   local fontface, fontsize = font.get()
   local msg = "[Font]: " .. fontface .. ' ' .. fontsize
+  if #vim.opt.guifont:get() > 1 then
+    msg = msg .. ' ' .. vim.opt.guifont:get()[2]
+  end
   defer(vim.notify, msg, 120)
 end
 

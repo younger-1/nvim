@@ -11,11 +11,14 @@ function _G.join_paths(...)
 end
 
 -- [](https://github.com/glepnir/nvim-lua-guide-zh#tips)
+-- 1. fancy print 2. return parameters
 function _G.pp(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(table.concat(objects, '\n'))
+  return ...
 end
 
+-- 1. return fancy string
 function _G.ppp(...)
   local objects = {}
   for i = 1, select('#', ...) do
@@ -23,8 +26,7 @@ function _G.ppp(...)
     table.insert(objects, vim.inspect(v))
   end
 
-  print(table.concat(objects, '\n'))
-  return ...
+  return table.concat(objects, '\n')
 end
 
 function _G.to_home(path)

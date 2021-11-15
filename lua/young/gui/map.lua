@@ -8,7 +8,8 @@ M.adjust_transparency = function() end
 
 M.adjust_fontsize = function(num)
   font.adjust_size(num)
-  vim.opt.guifont = font.get_guifont()
+  -- vim.opt.guifont = font.get_guifont()
+  vim.opt.guifont = { font.get_guifont(), font.get_guifont(font.default) }
   gui.post_font()
 end
 
@@ -25,6 +26,11 @@ M.switch_font = function(name)
   M.adjust_fontsize(0)
 end
 
+M.default_font = function()
+  font.set(font.default.name, font.default.size)
+  M.adjust_fontsize(0)
+end
+
 M.switch_effect = function() end
 
 M.done = function()
@@ -38,7 +44,10 @@ M.done = function()
   nmap('<A-CR>', "<Cmd>lua require'young.gui.map'.toggle_fullscreen()<CR>")
 
   nmap('<A-\\>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>")
-  nmap('<A-BS>', "<Cmd>lua require'young.gui.map'.switch_font()<CR>")
+  nmap('<C-BS>', "<Cmd>lua require'young.gui.map'.switch_font()<CR>")
+
+  -- TODO: default
+  nmap('<C-0>', "<Cmd>lua require'young.gui.map'.default_font()<CR>")
 end
 
 return M

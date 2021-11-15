@@ -19,11 +19,13 @@ M.fonts = {
 
 M.default = { name = 'sauce', size = 12 }
 
+M.current = vim.deepcopy(M.default)
+
 local idx = 0
 local fonts_key = vim.tbl_keys(M.fonts)
 
-M.once = function(fontname, fontsize)
-  M.current = { name = fontname or M.default.name, size = fontsize or M.default.size }
+M.once = function(name, size)
+  M.current = { name = name or M.current.name, size = size or M.current.size }
   for i, v in ipairs(fonts_key) do
     if M.current.name == v then
       idx = i
@@ -56,9 +58,12 @@ M.adjust_size = function(num)
   M.current.size = fontsize
 end
 
-M.get_guifont = function()
-  local fontface, fontsize = M.get()
+M.get_guifont = function(opt)
+  opt = opt or {}
+  local fontface, fontsize = M.get(opt.name, opt.size)
   return fontface .. ':h' .. fontsize
 end
+
+M.once()
 
 return M
