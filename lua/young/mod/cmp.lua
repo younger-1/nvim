@@ -43,8 +43,6 @@ M.done = function()
     Variable = '',
   }
   cmp.setup {
-    -- formatting = {
-    -- },
     formatting = {
       -- format = function(entry, vim_item)
       --   vim_item.kind = icons[vim_item.kind]
@@ -84,10 +82,7 @@ M.done = function()
       --   i = cmp.mapping.abort(),
       --   c = cmp.mapping.close(),
       -- }),
-      ['<CR>'] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-      },
+      ['<CR>'] = cmp.mapping.confirm(),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()

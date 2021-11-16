@@ -103,7 +103,13 @@ return {
   },
 
   -- Editing Enhancments
-  { 'windwp/nvim-autopairs', event = 'InsertEnter', config = require 'plug-config.autopairs' },
+  { 
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = function()
+      require 'young.mod.autopairs'
+    end
+  },
   {
     'folke/todo-comments.nvim',
     event = 'InsertEnter',
