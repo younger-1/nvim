@@ -1,9 +1,9 @@
 local M = {}
 
-M.val = 0.85
+M.val = 0.9
 
 M.adjust = function(num)
-  M.val = M.val + num * 0.05
+  M.val = M.val + num * 0.025
   M.val = math.max(math.min(M.val, 1), 0.1)
   M.post_transparency()
 end

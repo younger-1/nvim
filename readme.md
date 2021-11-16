@@ -6,6 +6,27 @@
 
 - [ ] `young.telescope`, `M.tele/M.cfg`, `local cfg`
 - [ ] once ice hot done
+- [ ] hl cursorline
+
+## Features
+
+### GUI support
+
+`init.lua`
+
+- [x]  [nvui](https://github.com/rohit-px2/nvui)
+- [ ]  [goneovim](https://github.com/akiyosi/goneovim)
+- [ ]  [uivonim](https://github.com/smolck/uivonim)
+- [ ]  [nvy](https://github.com/RMichelsen/Nvy)
+- [ ]  [firenvim](https://github.com/glacambre/firenvim)
+
+`ginit.vim`
+
+- [x]  [neovide](https://github.com/neovide/neovide)
+- [x]  [fvim](https://github.com/yatli/fvim)
+- [x]  [neovim-qt](https://github.com/equalsraf/neovim-qt)
+- [ ]  [neovim-gtk](https://github.com/daa84/neovim-gtk)
+- [ ]  [vimr](https://github.com/qvacua/vimr)
 
 ## Acknowledge
 

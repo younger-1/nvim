@@ -34,8 +34,8 @@ end
 M.once = function()
   vim.cmd [[
     NvuiScrollAnimationDuration 0.5
-
     NvuiCursorHideWhileTyping 0
+    NvuiFrameless 1
   ]]
 end
 

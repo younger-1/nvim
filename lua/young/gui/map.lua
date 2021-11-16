@@ -42,7 +42,8 @@ M.done = function()
   nmap('<A-DEL>', "<Cmd>lua require'young.gui.map'.toggle_ligature()<CR>")
   nmap('<A-CR>', "<Cmd>lua require'young.gui.map'.toggle_fullscreen()<CR>")
 
-  nmap('<A-\\>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>")
+  -- nmap('<A-\\>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>")
+  nmap('<A-BS>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>")
   nmap('<C-BS>', "<Cmd>lua require'young.gui.map'.switch_font()<CR>")
 
   nmap('<C-0>', "<Cmd>lua require'young.gui.map'.default_font()<CR>")
