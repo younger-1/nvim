@@ -10,7 +10,7 @@ local compile_path = join_paths(config_dir, 'lua', 'young', 'packer_compiled.lua
 
 local _, packer = pcall(require, 'packer')
 
-function plugin_loader.init()
+plugin_loader.once = function()
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
     vim.fn.system { 'git', 'clone', '--depth', '3', 'https://github.com/wbthomason/packer.nvim', install_path }
@@ -29,32 +29,21 @@ function plugin_loader.init()
   }
 end
 
--- packer expects a space separated list
-local function pcall_packer_command(cmd, kwargs)
-  local status_ok, msg = pcall(function()
-    require('packer')[cmd](unpack(kwargs or {}))
-  end)
-  if not status_ok then
-    -- Log:warn(cmd .. " failed with: " .. vim.inspect(msg))
-    -- Log:trace(vim.inspect(vim.fn.eval "v:errmsg"))
-  end
-end
-
-function plugin_loader.cache_clear()
+plugin_loader.cache_clear = function()
   if vim.fn.delete(compile_path) == 0 then
     -- Log:debug "deleted packer_compiled.lua"
   end
 end
 
-function plugin_loader.recompile()
+plugin_loader.recompile = function()
   plugin_loader.cache_clear()
-  pcall_packer_command 'compile'
+  packer.compile()
   if utils.is_file(compile_path) then
     -- Log:debug "generated packer_compiled.lua"
   end
 end
 
-function plugin_loader.load()
+plugin_loader.load = function()
   local plugins = require 'young.plugins'
   -- Log:debug "loading plugins configuration"
   local status_ok, _ = xpcall(function()
@@ -70,8 +59,10 @@ function plugin_loader.load()
     -- Log:trace(debug.traceback())
     return
   end
+end
 
-  -- @young
+-- @young
+plugin_loader.source_compiled = function()
   if not utils.is_file(compile_path) then
     packer.compile()
     vim.notify('[young.plugin-loader]: not find packer_compiled.lua', vim.log.levels.WARN)
@@ -84,22 +75,12 @@ function plugin_loader.load()
     require 'young.packer_compiled'
   end
   do_compiled()
-  -- @young
 end
 
-function plugin_loader.get_core_plugins()
-  local list = {}
-  local plugins = require 'lvim.plugins'
-  for _, item in pairs(plugins) do
-    table.insert(list, item[1]:match '/(%S*)')
-  end
-  return list
-end
-
-function plugin_loader.sync_core_plugins()
-  local core_plugins = plugin_loader.get_core_plugins()
-  -- Log:trace(string.format("Syncing core plugins: [%q]", table.concat(core_plugins, ", ")))
-  pcall_packer_command('sync', core_plugins)
+plugin_loader.done = function()
+  plugin_loader.once()
+  plugin_loader.load()
+  plugin_loader.source_compiled()
 end
 
 return plugin_loader
