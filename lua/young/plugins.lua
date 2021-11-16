@@ -58,6 +58,52 @@ return {
     'nvim-telescope/telescope-frecency.nvim',
     requires = { 'tami5/sql.nvim' },
   },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "fzf"
+    end,
+  },
+  { "nvim-telescope/telescope-symbols.nvim" },
+  {
+    "nvim-telescope/telescope-packer.nvim",
+    after = "telescope.nvim",
+  },
+  {
+    "jvgrootveld/telescope-zoxide",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "zoxide"
+      require("telescope._extensions.zoxide.config").setup {
+        prompt_title = "[ Z⏫ ]",
+      }
+    end,
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "neoclip"
+      require("neoclip").setup {
+        filter = nil,
+        preview = true,
+        default_register = '"',
+        content_spec_column = false,
+        on_paste = {
+          set_reg = false,
+        },
+        keys = {
+          i = {
+            select = "<cr>",
+            paste = "<c-l>",
+            paste_behind = "<c-h>",
+          },
+        },
+      }
+    end,
+  },
 
   -- Web Dev
   { 'windwp/nvim-ts-autotag', ft = { 'html', 'svelte' } },
@@ -123,7 +169,6 @@ return {
     config = function()
       require 'young.mod.project'
     end,
-    event = 'BufWinEnter'
   },
   {
     'folke/which-key.nvim',
