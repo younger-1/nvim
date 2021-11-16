@@ -174,4 +174,13 @@ return {
       require 'young.mod.comment'
     end,
   },
+
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    setup = function()
+      vim.g.startuptime_use_blocks = 0
+    end,
+  },
+
 }
