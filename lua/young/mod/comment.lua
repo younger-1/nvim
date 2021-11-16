@@ -1,4 +1,10 @@
 -- <https://github.com/numToStr/Comment.nvim>
+
+local _ts_comment = function()
+  local ok, ts_internal = pcall(require, 'ts_context_commentstring.internal')
+  return ok and ts_internal.calculate_commentstring() or nil
+end
+
 require('Comment').setup {
   ignore = "^$",
   ---LHS of toggle mappings in NORMAL + VISUAL mode
@@ -29,4 +35,21 @@ require('Comment').setup {
     ---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
     extended = false,
   },
+  pre_hook = _ts_comment 
 }
+
+--[[
+# Linewise
+
+`gcw` - Toggle from the current cursor position to the next word
+`gc$` - Toggle from the current cursor position to the end of line
+`gc}` - Toggle until the next blank line
+`gcip` - Toggle inside of paragraph
+`gca}` - Toggle around curly brackets
+
+# Blockwise
+
+`gC2}` - Toggle until the 2 next blank line
+`gCaf` - Toggle comment around a function (w/ LSP/treesitter support)
+`gCac` - Toggle comment around a class (w/ LSP/treesitter support) 
+--]]
