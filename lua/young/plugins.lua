@@ -118,7 +118,13 @@ return {
   },
 
   -- General Plugins
-  { 'ahmedkhalf/project.nvim', config = require 'plug-config.project', event = 'BufWinEnter' },
+  { 
+    'ahmedkhalf/project.nvim',
+    config = function()
+      require 'young.mod.project'
+    end,
+    event = 'BufWinEnter'
+  },
   {
     'folke/which-key.nvim',
     config = function()
