@@ -139,6 +139,8 @@ return {
   -- LSP
   { 'neovim/nvim-lspconfig' },
   { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
+  -- { "jose-elias-alvarez/null-ls.nvim" },
+  -- { "williamboman/nvim-lsp-installer" },
 
   -- Git
   {
@@ -240,4 +242,5 @@ return {
     end,
   },
 
+  { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 }
