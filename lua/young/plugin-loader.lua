@@ -40,6 +40,8 @@ plugin_loader.recompile = function()
   packer.compile()
   if utils.is_file(compile_path) then
     -- Log:debug "generated packer_compiled.lua"
+  vim.wait(5000, compiled_ok)
+  require 'young.packer_compiled'
   end
 end
 
@@ -65,17 +67,15 @@ end
 plugin_loader.source_compiled = function()
   if not utils.is_file(compile_path) then
     packer.compile()
-    vim.notify('[young.plugin-loader]: not find packer_compiled.lua', vim.log.levels.WARN)
-    -- I return because `packer.compile()` is async.
+    -- vim.notify('[young.plugin-loader]: not find packer_compiled.lua', vim.log.levels.WARN)
     -- return
   end
 
   -- TODO: use vim.defer_fn(), plenary's async, timer_start(), wait()
-  -- vim.defer_fn(function()
-  --   vim.fn.wait(-1, vim.fn.filereadable(compile_path))
-  --   require 'young.packer_compiled'
-  -- end, 0)
-
+  local compiled_ok = function()
+    return utils.is_file(compile_path)
+  end
+  vim.wait(5000, compiled_ok)
   require 'young.packer_compiled'
 end
 
