@@ -15,7 +15,13 @@ return {
   },
   { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
   -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
-  { 'kyazdani42/nvim-tree.lua', config = require 'plug-config.nvim-tree', event = 'BufWinEnter' },
+  {
+    'kyazdani42/nvim-tree.lua',
+    event = 'BufWinEnter',
+    config = function()
+      require('young.mod.nvim-tree').done()
+    end,
+  },
   { 'kyazdani42/nvim-web-devicons' },
   { 'goolord/alpha-nvim', config = require 'plug-config.alpha' },
   {
@@ -59,34 +65,34 @@ return {
     requires = { 'tami5/sql.nvim' },
   },
   {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    run = "make",
-    after = "telescope.nvim",
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
+    after = 'telescope.nvim',
     config = function()
-      require("telescope").load_extension "fzf"
+      require('telescope').load_extension 'fzf'
     end,
   },
-  { "nvim-telescope/telescope-symbols.nvim" },
+  { 'nvim-telescope/telescope-symbols.nvim' },
   {
-    "nvim-telescope/telescope-packer.nvim",
-    after = "telescope.nvim",
+    'nvim-telescope/telescope-packer.nvim',
+    after = 'telescope.nvim',
   },
   {
-    "jvgrootveld/telescope-zoxide",
-    after = "telescope.nvim",
+    'jvgrootveld/telescope-zoxide',
+    after = 'telescope.nvim',
     config = function()
-      require("telescope").load_extension "zoxide"
-      require("telescope._extensions.zoxide.config").setup {
-        prompt_title = "[ Z⏫ ]",
+      require('telescope').load_extension 'zoxide'
+      require('telescope._extensions.zoxide.config').setup {
+        prompt_title = '[ Z⏫ ]',
       }
     end,
   },
   {
-    "AckslD/nvim-neoclip.lua",
-    after = "telescope.nvim",
+    'AckslD/nvim-neoclip.lua',
+    after = 'telescope.nvim',
     config = function()
-      require("telescope").load_extension "neoclip"
-      require("neoclip").setup {
+      require('telescope').load_extension 'neoclip'
+      require('neoclip').setup {
         filter = nil,
         preview = true,
         default_register = '"',
@@ -96,9 +102,9 @@ return {
         },
         keys = {
           i = {
-            select = "<cr>",
-            paste = "<c-l>",
-            paste_behind = "<c-h>",
+            select = '<cr>',
+            paste = '<c-l>',
+            paste_behind = '<c-h>',
           },
         },
       }
@@ -109,8 +115,8 @@ return {
   { 'windwp/nvim-ts-autotag', ft = { 'html', 'svelte' } },
 
   -- Autocomplete
-  { 
-    'hrsh7th/nvim-cmp', 
+  {
+    'hrsh7th/nvim-cmp',
     config = function()
       require('young.mod.cmp').done()
     end,
@@ -151,12 +157,12 @@ return {
   },
 
   -- Editing Enhancments
-  { 
+  {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = function()
       require 'young.mod.autopairs'
-    end
+    end,
   },
   {
     'folke/todo-comments.nvim',
@@ -166,7 +172,7 @@ return {
   },
 
   -- General Plugins
-  { 
+  {
     'ahmedkhalf/project.nvim',
     config = function()
       require 'young.mod.project'
@@ -227,20 +233,20 @@ return {
   },
 
   {
-    "numToStr/Comment.nvim",
-    event = "BufRead",
+    'numToStr/Comment.nvim',
+    event = 'BufRead',
     config = function()
       require 'young.mod.comment'
     end,
   },
 
   {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
     setup = function()
       vim.g.startuptime_use_blocks = 0
     end,
   },
 
-  { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 }
