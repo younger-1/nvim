@@ -1,4 +1,4 @@
-require 'young.cfg'.once()
+require('young.cfg').once()
 require('young.plugin-loader').done()
 
 vim.cmd 'syntax on'

@@ -1,7 +1,30 @@
 local uv = vim.loop
 
-_G.is_windows = uv.os_uname().version:match 'Windows' and true or false
+local uname = uv.os_uname()
+--[[
+[has("wsl") always reports 0](https://github.com/neovim/neovim/issues/12642)
+[fix(eval): fix has('wsl')](https://github.com/mjlbach/neovim/commit/26a5ab11b4d6a4f1db7fef0020c5a3b8bd260ebb)
+
+Windows:
+  machine = "x86_64",
+  release = "10.0.19043",
+  sysname = "Windows_NT",
+  version = "Windows 10 Home China"
+WSL-arch:
+  machine = "x86_64",
+  release = "5.10.60.1-microsoft-standard-WSL2",
+  sysname = "Linux",
+  version = "#1 SMP Wed Aug 25 23:20:18 UTC 2021"
+WSL-ubuntu:
+  machine = "x86_64",
+  release = "4.4.0-19041-Microsoft",
+  sysname = "Linux",
+  version = "#1237-Microsoft Sat Sep 11 14:32:00 PST 2021"
+]]
+
+_G.is_windows = uname.version:match 'Windows' and true or false
 _G.is_unix = not is_windows
+_G.is_wsl = uname.release:match 'WSL' and true or false
 _G.path_sep = is_windows and '\\' or '/'
 
 function _G.join_paths(...)
