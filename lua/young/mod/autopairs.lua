@@ -29,32 +29,6 @@ if cmp_status_ok then
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = map_char })
 end
 
-
-npairs.add_rule(Rule("<",">", { "markdown", "txt" }))
-
--- TODO: **, __
-npairs.add_rules {
-  Rule("*", "*", "markdown")
-    -- don't add a pair if the next character is %
-    :with_pair(cond.not_after_regex_check("%%"))
-    -- don't add a pair if the previous character is xxx
-    :with_pair(cond.not_before_regex_check("xxx", 3))
-    -- don't move right when repeat character
-    :with_move(cond.none())
-    -- don't delete if the next character is xx
-    :with_del(cond.not_after_regex_check("xx"))
-    -- disable add newline when press <cr>
-    :with_cr(cond.none()),
-  Rule("_", "_", "markdown")
-    :with_pair(function(opts)
-        print(vim.inspect(opts))
-        -- don't add pair on that line
-        if opts.line == "nvim nb" then
-          return false
-        end
-    end),
-}
-
 npairs.add_rules {
   Rule("(",")")
     :use_key("<c-h>")
@@ -87,4 +61,29 @@ npairs.add_rules {
       end)
       :use_key(']')
 }
+
+npairs.add_rule(Rule("<",">", { "markdown", "txt" }))
+
+-- TODO: **, __
+-- npairs.add_rules {
+--   Rule("*", "*", "markdown")
+--     -- don't add a pair if the next character is %
+--     :with_pair(cond.not_after_regex_check("%%"))
+--     -- don't add a pair if the previous character is xxx
+--     :with_pair(cond.not_before_regex_check("xxx", 3))
+--     -- don't move right when repeat character
+--     :with_move(cond.none())
+--     -- don't delete if the next character is xx
+--     :with_del(cond.not_after_regex_check("xx"))
+--     -- disable add newline when press <cr>
+--     :with_cr(cond.none()),
+--   Rule("_", "_", "markdown")
+--     :with_pair(function(opts)
+--         print(vim.inspect(opts))
+--         -- don't add pair on that line
+--         if opts.line == "nvim nb" then
+--           return false
+--         end
+--     end),
+-- }
 
