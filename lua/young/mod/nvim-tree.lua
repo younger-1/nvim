@@ -1,16 +1,42 @@
+local tree_cb = require('nvim-tree.config').nvim_tree_callback
+
 local M = {}
+
+M.opts = {
+  gitignore = 0,
+  highlight_opened_files = 2,
+  icons = {
+    git = {
+      unstaged = '',
+      staged = '',
+      deleted = '',
+      untracked = '',
+      unmerged = '',
+      renamed = '',
+      ignored = '',
+    },
+  },
+  respect_buf_cwd = 1,
+  create_in_closed_folder = 0,
+  -- root_folder_modifier = ':t',
+  -- TODO: not impl
+  -- ignore = { '.git', 'node_modules', '.cache' }, 
+  -- hide_dotfiles = 1,
+}
 
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 M.cfg = {
   disable_netrw       = true,
   hijack_netrw        = true,
-  open_on_setup       = false,
-  ignore_ft_on_setup  = {},
+  open_on_setup       = true,
+  ignore_ft_on_setup  = {
+    -- "alpha"
+  },
   auto_close          = true,
   open_on_tab         = false,
   hijack_cursor       = false,
-  update_cwd          = true,
+  update_cwd          = true, -- true good
   update_to_buf_dir   = {
     enable = true,
     auto_open = true,
@@ -44,41 +70,16 @@ M.cfg = {
     auto_resize = false, -- false good
     mappings = {
       custom_only = false,
-      list = {}
+      list = {
+        { key = "l", cb = tree_cb "edit" },
+        { key = "h", cb = tree_cb "close_node" },
+        { key = "u", cb = tree_cb "parent_node" },
+        { key = { "<CR>" }, cb = tree_cb "cd" },
+        { key = "?", cb = tree_cb "toggle_help" },
+        { key = ".", cb = tree_cb "toggle_dotfiles" },
+      },
     }
   }
-}
-
-M.opts = {
-  gitignore = 1,
-  highlight_opened_files = 2
-  -- ignore = { '.git', 'node_modules', '.cache' },
-  -- quit_on_open = 0,
-  -- hide_dotfiles = 1,
-  -- git_hl = 1,
-  -- root_folder_modifier = ':t',
-  -- allow_resize = 1,
-  -- auto_ignore_ft = { 'startify', 'dashboard' },
-  -- icons = {
-  --   default = '',
-  --   symlink = '',
-  --   git = {
-  --     unstaged = '',
-  --     staged = 'S',
-  --     unmerged = '',
-  --     renamed = '➜',
-  --     deleted = '',
-  --     untracked = 'U',
-  --     ignored = '◌',
-  --   },
-  --   folder = {
-  --     default = '',
-  --     open = '',
-  --     empty = '',
-  --     empty_open = '',
-  --     symlink = '',
-  --   },
-  -- },
 }
 
 M.done = function()
@@ -87,14 +88,7 @@ M.done = function()
     vim.g['nvim_tree_' .. opt] = val
   end
 
-  -- Implicitly update nvim-tree when project module is active
-  -- lvim.builtin.nvimtree.respect_buf_cwd = 1
-  -- lvim.builtin.nvimtree.setup.update_cwd = true
-  -- lvim.builtin.nvimtree.setup.disable_netrw = false
-  -- lvim.builtin.nvimtree.setup.hijack_netrw = false
-  -- vim.g.netrw_banner = false
-
-  -- vim.cmd "au WinClosed * lua require('lvim.core.nvimtree').on_close()"
+  require('young.key').leader.n.e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' },
 
   require('nvim-tree').setup(M.cfg)
 end

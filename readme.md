@@ -4,7 +4,7 @@
 
 ## TODO
 
-- [ ] `young.telescope`, `M.tele/M.cfg`, `local cfg`
+- [ ] `yj.telescope`, `M.tele/M.cfg`, `local cfg`
 - [ ] once ice hot done
 - [ ] hl cursorline
 

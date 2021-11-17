@@ -73,6 +73,10 @@ M.ice = function()
   M.leader.n = require "young.key.leader-normal"
   M.leader.v = require "young.key.leader-visual"
   M.n = require "young.key.normal"
+
+  local key = require('young.key')
+  key.leader = M.leader
+  key.n = M.n
 end
 
 M.done = function()

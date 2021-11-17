@@ -130,7 +130,6 @@ local mappings = {
     t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", 'Toggle Breakpoint' },
     u = { "<cmd>lua require'dap'.step_out()<cr>", 'Step Out' },
   },
-  e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' },
   f = { "<cmd>lua require('lir.float').toggle()<cr>", 'Files' },
   g = {
     [' '] = {
