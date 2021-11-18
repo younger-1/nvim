@@ -22,7 +22,7 @@
 " $env:LC_MESSAGES="zh_CN.utf-8"
 
 " Set the language of the menu (gvim)
-" Must be set before loading menus, switching on filetype detection or syntax highlighting.
+" Must be set bafore loadong menus, switching on filetype detection or syntax highlighting.
 " set langmenu=en_US.UTF-8
 " set langmenu=zh_TW.UTF-8
 " set langmenu=zh_CN.UTF-8

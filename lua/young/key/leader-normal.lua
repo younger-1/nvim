@@ -146,7 +146,8 @@ local mappings = {
       p = { '<cmd>Gist -b -p<cr>', 'Create Private' },
     },
     ['"'] = { '<cmd>Gitsigns toggle_current_line_blame<cr>', 'Blames' },
-    ["'"] = { '<cmd>Gitsigns toggle_linehl<cr>', 'Highlight' },
+    ["'"] = { '<cmd>Gitsigns toggle_linehl<cr>', 'Line Highlight' },
+    ['`'] = { '<cmd>Gitsigns toggle_numhl<cr>', 'Number Highlight' },
     ['<C-e>'] = {
       name = '+loclist',
       a = { "<cmd>lua require 'gitsigns'.setloclist('all')<cr>", 'All Git' },
@@ -178,7 +179,7 @@ local mappings = {
     },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
-    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", 'Blame' },
+    l = { "<cmd>lua require 'gitsigns'.blame_line { full=true }<cr>", 'Blame' },
     n = {
       name = '+neogit',
       c = { "<cmd>lua require('neogit').open({ 'commit' })<cr>", 'Commit' },
@@ -191,6 +192,7 @@ local mappings = {
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", 'Reset Hunk' },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", 'Stage Hunk' },
     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", 'Undo Stage Hunk' },
+    w = { '<cmd>Gitsigns toggle_word_diff<cr>', 'Word diff' },
     y = 'Link',
   },
   h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },

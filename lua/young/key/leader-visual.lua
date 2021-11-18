@@ -3,6 +3,8 @@ local vmappings = {
   g = {
     name = 'git',
     y = 'Link',
+    s = { '<cmd>lua require "gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Stage Hunk'},
+    r = { '<cmd>lua require "gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Reset Hunk'},
   },
   l = {
     name = 'lsp',

@@ -152,8 +152,10 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
-    config = require 'plug-config.gitsigns',
-    event = 'BufWinEnter',
+    event = "BufRead",
+    config = function()
+      require('young.mod.gitsigns').done()
+    end
   },
 
   -- Editing Enhancments
