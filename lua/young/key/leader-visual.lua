@@ -1,12 +1,12 @@
 local vmappings = {
-  -- ['/'] = { '<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<CR>', 'Comment' },
+  -- ['/'] = { '<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<cr>', 'Comment' },
   g = {
     name = 'git',
     y = 'Link',
   },
   l = {
     name = 'lsp',
-    f = { '<cmd>vim.lsp.buf.range_formatting()<CR>', 'Format' },
+    f = { '<cmd>vim.lsp.buf.range_formatting()<cr>', 'Format' },
   },
   p = {
     name = 'pack',
@@ -14,9 +14,9 @@ local vmappings = {
   },
   s = {
     name = 'search',
-    f = { 'y<cmd>Telescope fd<CR><C-r>"', 'Find files' },
-    g = { 'y<cmd>Telescope live_grep<CR><C-r>"', 'Grep' },
-    y = { 'dh<cmd>Telescope neoclip<CR>', 'Clipboard' },
+    f = { 'y<cmd>Telescope fd<cr><C-r>"', 'Find files' },
+    g = { 'y<cmd>Telescope live_grep<cr><C-r>"', 'Grep' },
+    y = { 'dh<cmd>Telescope neoclip<cr>', 'Clipboard' },
   },
 }
 

@@ -4,7 +4,7 @@ local previewers = require 'telescope.previewers'
 local sorters = require 'telescope.sorters'
 local actions = require 'telescope.actions'
 
-local _tele = require 'young.mod.telescope.utils'
+local view = require 'young.mod.telescope.view'
 
 -- M.config = function()
 --   local actions = require 'telescope.actions'
@@ -136,24 +136,24 @@ M.cfg = {
   pickers = {
     -- get_cursor(), get_dropdown(), get_ivy()
     -- find_files = require("telescope.themes").get_ivy(),
-    autocommands = _tele.v1,
+    autocommands = view.v1,
     buffers = { theme = 'ivy' },
-    colorscheme = _tele.h4,
+    colorscheme = view.h4,
     commands = { theme = 'ivy' },
-    current_buffer_fuzzy_find = _tele.v2,
-    file_browser = _tele.h2,
-    find_files = _tele.v1,
-    git_bcommits = _tele.h3,
-    git_commits = _tele.h3,
-    git_files = _tele.h3,
-    git_status = _tele.h3,
+    current_buffer_fuzzy_find = view.v2,
+    file_browser = view.h2,
+    find_files = view.v1,
+    git_bcommits = view.h3,
+    git_commits = view.h3,
+    git_files = view.h3,
+    git_status = view.h3,
     grep_string = { theme = 'ivy' },
-    live_grep = _tele.h1,
+    live_grep = view.h1,
     lsp_code_actions = { theme = 'cursor' },
     lsp_range_code_actions = { theme = 'cursor' },
-    man_pages = _tele.h1,
-    marks = _tele.h1,
-    oldfiles = _tele.v4,
+    man_pages = view.h1,
+    marks = view.h1,
+    oldfiles = view.v4,
     git_branches = {
       mappings = {
         i = {
