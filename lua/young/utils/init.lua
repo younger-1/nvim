@@ -91,4 +91,18 @@ function utils.defer(fn, para, time)
   vim.defer_fn(fn_box, time)
 end
 
+function utils.shallow_force(a, b)
+  for k, v in pairs(b) do
+    a[k] = v
+  end
+end
+
+function utils.shallow_keep(a, b)
+  for k, v in pairs(b) do
+    if not a[k] then
+      a[k] = v
+    end
+  end
+end
+
 return utils

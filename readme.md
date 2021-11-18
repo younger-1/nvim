@@ -103,7 +103,7 @@ Great thanks to:
 <https://github.com/max397574/NeovimConfig>
 
 ```
- .
+ max397574
 ├──  ftplugin
 │  ├──  norg.lua
 │  └──  tex.vim

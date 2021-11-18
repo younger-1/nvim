@@ -345,6 +345,7 @@ local mappings = {
     l = { "<cmd>lua require('user.tools').toggle_tabline()<cr>", 'Tabline' },
     m = { '<cmd>MinimapToggle<cr>', 'Minimap' },
     t = { '<cmd>TodoQuickFix<cr>', 'Todo' },
+    i = { '<cmd>lua require("young.mod.indent-blankline").hot()<cr>', 'Indent Style' },
   },
   w = { '<cmd>w!<cr>', 'Save' },
   x = {
