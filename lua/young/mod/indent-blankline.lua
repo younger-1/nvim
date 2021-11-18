@@ -10,8 +10,8 @@ M.cfg = {
 
   -- Static keys
   use_treesitter = true,
-  show_end_of_line = true,
-  -- show_current_context = true,
+  show_end_of_line = true, -- use vim.o.listchars
+  show_current_context = true,
   -- show_first_indent_level = false,
   -- show_trailing_blankline_indent = false,
   -- space_char_blankline = ".", -- not useful
@@ -50,14 +50,14 @@ M.cfg = {
   },
 }
 
-local idx = 0
+local idx = 1
 local styles = {
-  {
+  [1] = {
     char = '▏',
     char_highlight_list = {},
     space_char_highlight_list = {},
   },
-  {
+  [2] = {
     char = '▏',
     char_highlight_list = {
       'IBL_colo_1',
@@ -76,12 +76,9 @@ local styles = {
       vim.cmd [[highlight IBL_colo_6 guifg=#61AFEF blend=nocombine]]
     end
   },
-  {
+  [3] = {
     char = '',
-    char_highlight_list = {
-      "IBL_mono_1",
-      "IBL_mono_2",
-    },
+    char_highlight_list = {},
     space_char_highlight_list = {
       "IBL_mono_1",
       "IBL_mono_2",
@@ -90,21 +87,30 @@ local styles = {
       vim.cmd [[highlight IBL_mono_1 guibg=#1f1f1f blend=nocombine]]
       vim.cmd [[highlight IBL_mono_2 guibg=#1a1a1a blend=nocombine]]
     end
+  },
+  [4] = {
+    char = '',
+    char_highlight_list = {},
+    space_char_highlight_list = {
+      "Normal",
+      "CursorLine",
+    },
   }
 }
 
-local function next_style()
-  idx = idx % #styles
-  idx = idx + 1
+local function apply_style()
   local style = styles[idx]
   if style.hl_cmd then
     style.hl_cmd()
   end
   require('young.utils').shallow_force(M.cfg, style)
+
+  idx = idx % #styles
+  idx = idx + 1
 end
 
 M.hot = function()
-  next_style()
+  apply_style()
   ibl.setup(M.cfg)
   ibl.refresh()
 end
@@ -120,6 +126,8 @@ M.done = function()
   -- }
   -- Or: vim.opt.listchars:append("eol:↲,space:·")
 
+  -- highlight of current indent char, default is Label
+  vim.cmd [[highlight! link IndentBlanklineContextChar Normal]]
   M.hot()
 end
 
