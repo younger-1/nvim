@@ -4,6 +4,13 @@ return {
   -- Change
   { 'tpope/vim-surround' },
   { 'tpope/vim-repeat' },
+  {
+    "chaoren/vim-wordmotion",
+    event = "CursorMoved",
+    setup = function()
+      vim.g.wordmotion_prefix = ";"
+    end,
+  },
 
   -- UI
   {
@@ -52,7 +59,7 @@ return {
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
-      require 'plug-config.colorizer'
+      require 'young.mod.colorizer'
     end,
   },
   -- { 'rktjmp/lush.nvim' },

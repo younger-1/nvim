@@ -1,4 +1,5 @@
 require('colorizer').setup({ '*' }, {
+  names = true,
   RGB = true, -- #RGB hex codes
   RRGGBB = true, -- #RRGGBB hex codes
   RRGGBBAA = true, -- #RRGGBBAA hex codes
