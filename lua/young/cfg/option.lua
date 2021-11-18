@@ -2,7 +2,6 @@ local default_options = {
   backup = false,
   clipboard = '',
   cmdheight = 1,
-  colorcolumn = '99999', -- fixes indentline for now
   completeopt = { 'menuone', 'noselect' },
   conceallevel = 0, -- so that `` is visible in markdown files
   fileencoding = 'utf-8', -- the encoding written to a file

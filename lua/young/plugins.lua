@@ -33,9 +33,16 @@ return {
   },
   {
     'folke/trouble.nvim',
-    event = 'BufWinEnter',
+    event = 'BufRead',
     config = function()
       require('young.mod.trouble').done()
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
+    config = function()
+      require('young.mod.indent-blankline').done()
     end,
   },
 
@@ -182,10 +189,10 @@ return {
   },
   {
     'folke/which-key.nvim',
+    event = 'BufWinEnter',
     config = function()
       require('young.key.which-key').done()
     end,
-    event = 'BufWinEnter',
   },
   {
     'folke/persistence.nvim',
