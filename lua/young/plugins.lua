@@ -11,6 +11,13 @@ return {
     end,
   },
   {
+    "andymass/vim-matchup",
+    event = "CursorMoved",
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  },
+  {
     "chaoren/vim-wordmotion",
     event = "CursorMoved",
     setup = function()
