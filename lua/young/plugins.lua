@@ -5,6 +5,12 @@ return {
   { 'tpope/vim-surround' },
   { 'tpope/vim-repeat' },
   {
+    "haya14busa/vim-asterisk",
+    config = function()
+      require "young.mod.asterisk"
+    end,
+  },
+  {
     "chaoren/vim-wordmotion",
     event = "CursorMoved",
     setup = function()

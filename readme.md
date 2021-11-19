@@ -8,6 +8,13 @@
 - [ ] once ice hot done
 - [ ] hl cursorline
 
+## Problem
+
+`project.nvim` 
+
+- echo twice even in the same cwd when open new buffer
+- echo once in the same cwd when switch buffers
+
 ## Features
 
 ### GUI support

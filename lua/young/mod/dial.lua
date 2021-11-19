@@ -52,7 +52,7 @@ M.done = function()
     vmap g<C-x> <Plug>(dial-decrement-additional)
   ]]
 
-  -- add_true_false()
+  add_true_false()
 
   -- dial.config.searchlist.normal = settings
 
