@@ -80,6 +80,12 @@ function utils.add_to_set(set1, set2)
   end
 end
 
+function utils.append_to_list(a, b)
+  for _, v in ipairs(b) do
+    table.insert(a, v)
+  end
+end
+
 --@param para: table or single value
 function utils.defer(fn, para, time)
   -- wrap it!
@@ -91,6 +97,7 @@ function utils.defer(fn, para, time)
   vim.defer_fn(fn_box, time)
 end
 
+--@note: pairs also iter over number index
 function utils.shallow_force(a, b)
   for k, v in pairs(b) do
     a[k] = v

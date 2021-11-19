@@ -11,6 +11,13 @@ return {
       vim.g.wordmotion_prefix = ";"
     end,
   },
+  {
+    "monaqa/dial.nvim",
+    event = "BufRead",
+    config = function()
+      require('young.mod.dial').done()
+    end,
+  },
 
   -- UI
   {
