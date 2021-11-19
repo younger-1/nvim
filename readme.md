@@ -15,6 +15,16 @@
 - echo twice even in the same cwd when open new buffer
 - echo once in the same cwd when switch buffers
 
+`fzf.lua`
+
+- Windows support
+
+`surround`
+
+- Normal: ys
+- Visual: S 
+- Operator: ds, cs, 
+
 ## Features
 
 ### GUI support

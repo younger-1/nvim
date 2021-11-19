@@ -285,4 +285,15 @@ return {
   },
 
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+
+  {
+    "ibhagwan/fzf-lua",
+    requires = "vijaymarupudi/nvim-fzf",
+    module = 'fzf-lua',
+    config = function()
+      require 'young.mod.fzf'
+    end,
+    disable = is_windows
+  },
+
 }

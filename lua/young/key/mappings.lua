@@ -109,7 +109,6 @@ M.keys = {
     Y = 'y$',
     ZA = ':wqa<CR>',
     ['g<C-l>'] = '<cmd>nohlsearch<cr><C-l>',
-    ['+'] = ':SymbolsOutline<cr>',
   },
 
   ---@usage change or add keymappings for terminal mode
