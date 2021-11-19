@@ -217,6 +217,8 @@ Great thanks to:
 
 <https://github.com/EdenEast/nyx/tree/main/config/.config/nvim>
 
+<https://github.com/RishabhRD/rdconfig/tree/master/.config/nvim>
+
 <https://github.com/tamton-aquib/nvim>
 
 ```

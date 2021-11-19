@@ -31,6 +31,13 @@ return {
       require('young.mod.dial').done()
     end,
   },
+  {
+    "ggandor/lightspeed.nvim",
+    event = "BufRead",
+    config = function()
+      require "young.mod.lightspeed"
+    end,
+  },
 
   -- UI
   {
