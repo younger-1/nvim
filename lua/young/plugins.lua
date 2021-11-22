@@ -61,7 +61,8 @@ return {
     'goolord/alpha-nvim', 
     -- config = require 'plug-config.alpha'
     config = function()
-      require('alpha').setup(require('young.mod.alpha').opts)
+      -- require('alpha').setup(require('young.mod.alpha.screen').opts)
+      require('young.mod.alpha').done()
     end
   },
   {

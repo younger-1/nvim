@@ -1,5 +1,5 @@
 return function()
-  require('nvim-treesitter.install').compilers = { 'clang' }
+  -- require('nvim-treesitter.install').compilers = { 'clang' }
 
   local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 

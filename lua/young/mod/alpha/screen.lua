@@ -1,3 +1,5 @@
+-- <https://github.com/BeyondMagic/config/blob/main/_config/nvim/lua/screen.lua>
+
 math.randomseed(os.time()) -- For random header.
 
 -- To split our quote, artist and source.
