@@ -57,7 +57,13 @@ return {
     end,
   },
   { 'kyazdani42/nvim-web-devicons' },
-  { 'goolord/alpha-nvim', config = require 'plug-config.alpha' },
+  { 
+    'goolord/alpha-nvim', 
+    -- config = require 'plug-config.alpha'
+    config = function()
+      require('alpha').setup(require('young.mod.alpha').opts)
+    end
+  },
   {
     'akinsho/toggleterm.nvim',
     event = 'BufWinEnter',
