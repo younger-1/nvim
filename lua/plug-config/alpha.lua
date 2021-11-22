@@ -31,6 +31,8 @@ return function()
     ]]
 end
 
+-- <https://github.com/BeyondMagic/config/blob/main/_config/nvim/lua/screen.lua>
+
 -- <https://github.com/rafamadriz/NeoCode/blob/main/lua/modules/plugins/alpha.lua>
 -- local M = {}
 -- 

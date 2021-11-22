@@ -25,6 +25,11 @@
 - Visual: S 
 - Operator: ds, cs, 
 
+`lightspeed`
+
+- Operator-pending mode is invoked with z/Z
+- defaults, mapping to the following keys: `s, S` (Normal and Visual mode), `z, Z, x, X` (Operator-pending mode), and `f, F, t, T` (all modes).
+
 ## Features
 
 ### GUI support
