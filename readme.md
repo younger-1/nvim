@@ -30,6 +30,12 @@
 - Operator-pending mode is invoked with z/Z
 - defaults, mapping to the following keys: `s, S` (Normal and Visual mode), `z, Z, x, X` (Operator-pending mode), and `f, F, t, T` (all modes).
 
+`alpha`
+
+- <https://wiki.archlinux.org/title/ASCII_art>
+- <https://www.asciiart.eu/> 
+- <https://github.com/pi314/ascii-arts>
+
 ## Features
 
 ### GUI support
