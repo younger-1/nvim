@@ -33,7 +33,7 @@ return {
   },
   {
     "ggandor/lightspeed.nvim",
-    event = "BufRead",
+    event = "BufWinEnter",
     config = function()
       require "young.mod.lightspeed"
     end,
