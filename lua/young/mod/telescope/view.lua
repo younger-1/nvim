@@ -1,6 +1,9 @@
--- [Falling back to find_files if git_files can't find a .git directory](https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory)
 local M = {}
 
+local builtin = require "telescope.builtin"
+local themes = require "telescope.themes"
+
+-- [Falling back to find_files if git_files can't find a .git directory](https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory)
 M.project_files = function()
   local opts = {}
   local ok = pcall(require('telescope.builtin').git_files, opts)
@@ -62,5 +65,24 @@ M.v4 = {
   layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.6, prompt_position = 'top', mirror = true },
   sorting_strategy = 'ascending',
 }
+
+local function get_theme(opts)
+  local theme = themes.get_ivy(opts or {})
+  theme.layout_config = {
+    width = function(_, max_cols, _)
+      return math.min(max_cols, 110)
+    end,
+    height = function(_, _, max_rows)
+      return math.min(max_rows, 20)
+    end,
+  }
+  return theme
+end
+
+function M.ivy(opts)
+  opts = opts or {}
+  opts = get_theme(opts)
+  builtin.find_files(opts)
+end
 
 return M
