@@ -205,6 +205,13 @@ return {
       require('young.mod.gitsigns').done()
     end
   },
+  -- {
+  --   'tanvirtin/vgit.nvim',
+  --   event = 'BufWinEnter',
+  --   config = function()
+  --       require('vgit').setup()
+  --   end,
+  -- },
 
   -- Editing Enhancments
   {
