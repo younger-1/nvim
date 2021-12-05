@@ -42,4 +42,8 @@ function M.reload()
   -- Log:info "Reloaded configuration"
 end
 
+function M.get_reload_path()
+  return join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
+end
+
 return M

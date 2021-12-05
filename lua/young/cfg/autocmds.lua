@@ -6,8 +6,13 @@ local config_dir = vim.fn.stdpath 'config'
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
   -- FIXME:
-  local plugins_path = "plugins.lua"
-  -- local plugins_path = vim.fn.resolve(require("young.cfg").reload_path())
+  -- local plugins_path = "plugins.lua"
+  local plugins_path = vim.fn.resolve(require("young.cfg").get_reload_path())
+  if is_windows then
+    -- autocmds require forward slashes even on windows
+    plugins_path = plugins_path:gsub("\\", "/")
+  end
+
 
   return {
     _general_settings = {

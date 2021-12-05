@@ -211,6 +211,7 @@ return {
   --   config = function()
   --       require('vgit').setup()
   --   end,
+  --   disable = is_windows,
   -- },
 
   -- Editing Enhancments
