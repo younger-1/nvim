@@ -456,8 +456,14 @@ M.write = {
   markdown = {
     {
       'iamcco/markdown-preview.nvim',
-      run = 'cd app && npm install',
+      run = 'cd app && yarn install',
       ft = 'markdown',
+      config = function()
+        vim.g.mkdp_auto_start = 0
+        vim.g.mkdp_auto_close = 0
+        vim.g.mkdp_command_for_global = 1
+        vim.g.mkdp_open_to_the_world = 0
+      end
     },
   },
 }
