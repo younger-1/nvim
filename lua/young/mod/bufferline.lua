@@ -1,6 +1,7 @@
-vim.api.nvim_set_keymap('n', '<TAB>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+local nmap = require('young.key').nmap
 
-vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+nmap('<TAB>', ':BufferLineCycleNext<CR>')
+nmap('<S-TAB>', ':BufferLineCyclePrev<CR>')
 
 local colors = {
   foreground = '#E5E9F0',
