@@ -46,7 +46,7 @@ plugin_loader.recompile = function()
 end
 
 plugin_loader.load = function()
-  local plugins = require 'young.plugins'
+  local plugins = require('young.plugins').done()
   -- Log:debug "loading plugins configuration"
   local status_ok, _ = xpcall(function()
     packer.startup(function(use)

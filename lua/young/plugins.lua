@@ -1,12 +1,10 @@
--- local mod = require('young.mod').make_module
+local utils = require('young.utils')
 local M = {}
 
 setmetatable(M, {
   __index = function(t, k)
     error(k .. ' is not a valid module section!')
-    -- print(k .. " is not a valid classic event!")
   end,
-  __call = function(t) end,
 })
 
 M.basic = {
@@ -315,42 +313,44 @@ M.telescope = {
     },
     { 'nvim-telescope/telescope-symbols.nvim' },
   },
-  {
-    'nvim-telescope/telescope-packer.nvim',
-    after = 'telescope.nvim',
-  },
-  {
-    'jvgrootveld/telescope-zoxide',
-    after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension 'zoxide'
-      require('telescope._extensions.zoxide.config').setup {
-        prompt_title = '[ Z⏫ ]',
-      }
-    end,
-  },
-  {
-    'AckslD/nvim-neoclip.lua',
-    after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension 'neoclip'
-      require('neoclip').setup {
-        filter = nil,
-        preview = true,
-        default_register = '"',
-        content_spec_column = false,
-        on_paste = {
-          set_reg = false,
-        },
-        keys = {
-          i = {
-            select = '<cr>',
-            paste = '<c-l>',
-            paste_behind = '<c-h>',
+  other = {
+    {
+      'nvim-telescope/telescope-packer.nvim',
+      after = 'telescope.nvim',
+    },
+    {
+      'jvgrootveld/telescope-zoxide',
+      after = 'telescope.nvim',
+      config = function()
+        require('telescope').load_extension 'zoxide'
+        require('telescope._extensions.zoxide.config').setup {
+          prompt_title = '[ Z⏫ ]',
+        }
+      end,
+    },
+    {
+      'AckslD/nvim-neoclip.lua',
+      after = 'telescope.nvim',
+      config = function()
+        require('telescope').load_extension 'neoclip'
+        require('neoclip').setup {
+          filter = nil,
+          preview = true,
+          default_register = '"',
+          content_spec_column = false,
+          on_paste = {
+            set_reg = false,
           },
-        },
-      }
-    end,
+          keys = {
+            i = {
+              select = '<cr>',
+              paste = '<c-l>',
+              paste_behind = '<c-h>',
+            },
+          },
+        }
+      end,
+    },
   },
 }
 
@@ -462,20 +462,40 @@ M.write = {
   },
 }
 
-return {
-  M.basic,
-  M.theme,
-  M.appearance,
-  M.motion,
-  M.change,
-  M.BWT,
-  M.files,
-  M.UI,
-  M.treesitter,
-  M.telescope,
-  M.code,
-  M.LSP,
-  M.git,
-  M.neovim,
-  M.write,
-}
+for _, module in pairs(M) do
+  setmetatable(module, {
+    __call = function(t)
+      local plugs = {}
+      for key, item in pairs(module) do
+        if type(key) == "number" then
+          plugs[#plugs + 1] = item
+        else
+          utils.append_to_list(plugs, item)
+        end
+      end
+      return unpack(plugs)
+    end
+  })
+end
+
+M.done = function()
+  return {
+    M.theme(),
+    M.basic(),
+    M.appearance(),
+    M.motion(),
+    M.change(),
+    M.BWT(),
+    M.files(),
+    M.UI(),
+    M.treesitter(),
+    M.telescope(),
+    M.code(),
+    M.LSP(),
+    M.git(),
+    M.neovim(),
+    M.write(),
+  }
+end
+
+return M
