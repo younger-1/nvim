@@ -364,6 +364,14 @@ M.code = {
       },
     },
     { 'onsails/lspkind-nvim' },
+    -- {
+    --   "github/copilot.vim",
+    --   setup = function()
+    --     vim.g.copilot_filetypes = {
+    --       ["TelescopePrompt"] = false,
+    --     }
+    --   end,
+    -- },
   },
   -- { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
 }
@@ -397,6 +405,9 @@ M.git = {
       require('neogit').setup {}
     end,
   },
+  -- {
+  --   'tpope/vim-fugitive',
+  -- }
   -- {
   --   'tanvirtin/vgit.nvim',
   --   event = 'BufWinEnter',
