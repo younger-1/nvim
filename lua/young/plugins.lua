@@ -1,9 +1,117 @@
-return {
-  { 'wbthomason/packer.nvim' },
+local M = { "lo", i = 3, j = "kl" }
 
-  -- Change
-  { 'tpope/vim-surround' },
-  { 'tpope/vim-repeat' },
+setmetatable(M, { __index = function(t, k) 
+  error(k .. " is not a valid module section!")
+  -- print(k .. " is not a valid classic event!") 
+end })
+
+M.core = {
+  { 'wbthomason/packer.nvim' },
+  {
+    'folke/which-key.nvim',
+    event = 'BufWinEnter',
+    config = function()
+      require('young.key.which-key').done()
+    end,
+  },
+  { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  {
+    'nathom/filetype.nvim',
+    -- opt = true,
+    setup = function() end,
+    config = function()
+      require('young.mod.filetype').done()
+    end,
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = function()
+      require 'young.mod.autopairs'
+    end,
+  },
+  {
+    'numToStr/Comment.nvim',
+    event = 'BufRead',
+    config = function()
+      require 'young.mod.comment'
+    end,
+  },
+  {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
+    setup = function()
+      vim.g.startuptime_use_blocks = 0
+    end,
+  },
+}
+
+M.theme = {
+  -- { 'rktjmp/lush.nvim' },
+
+  -- [vim theme]
+  'joshdick/onedark.vim',
+  "sainnhe/sonokai",
+  "sainnhe/edge",
+  "sainnhe/everforest",
+  "sainnhe/gruvbox-material",
+
+  -- [lua theme]
+  {
+    "shaunsingh/nord.nvim",
+    setup = function()
+      vim.g.nord_borders = true
+    end,
+  },
+  "tanvirtin/monokai.nvim",
+}
+
+M.appearance = {
+  { 'kyazdani42/nvim-web-devicons' },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
+    config = function()
+      require('young.mod.indent-blankline').done()
+    end,
+  },
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require 'young.mod.colorizer'
+    end,
+  },
+
+  -- [line]
+  { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' },
+  { 
+    'edluffy/specs.nvim',
+    config = function()
+      require('specs').setup{
+          -- show_jumps  = true,
+          -- min_jump = 30,
+          -- popup = {
+          --     delay_ms = 0, -- delay before popup displays
+          --     inc_ms = 10, -- time increments used for fade/resize effects
+          --     blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+          --     width = 10,
+          --     winhl = "PMenu",
+          --     fader = require('specs').linear_fader,
+          --     resizer = require('specs').shrink_resizer
+          -- },
+          -- ignore_filetypes = {},
+          -- ignore_buftypes = {
+          --     nofile = true,
+          -- },
+      }
+      vim.api.nvim_set_keymap('n', 'z ', ':lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', 'n', 'n:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', 'N', 'N:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
+    end
+  },
+}
+
+M.motion = {
   {
     "haya14busa/vim-asterisk",
     config = function()
@@ -25,21 +133,34 @@ return {
     end,
   },
   {
-    "monaqa/dial.nvim",
-    event = "BufRead",
-    config = function()
-      require('young.mod.dial').done()
-    end,
-  },
-  {
     "ggandor/lightspeed.nvim",
     event = "BufWinEnter",
     config = function()
       require "young.mod.lightspeed"
     end,
   },
+  -- {
+  --   'abecodes/tabout.nvim',
+  --   config = function()
+  --     require('tabout').setup()
+  --   end,
+  -- },
+}
 
-  -- UI
+M.change= {
+  { 'tpope/vim-surround' },
+  { 'tpope/vim-repeat' },
+  {
+    "monaqa/dial.nvim",
+    event = "BufRead",
+    config = function()
+      require('young.mod.dial').done()
+    end,
+  },
+}
+
+M.BWT = {
+  -- [bufferline]
   {
     'romgrk/barbar.nvim',
     event = 'BufWinEnter',
@@ -47,8 +168,16 @@ return {
       require('young.mod.barbar').hot()
     end,
   },
-  { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
-  -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
+  -- [window]
+  {
+    'luukvbaal/stabilize.nvim',
+    config = function()
+      require('stabilize').setup()
+    end,
+  },
+}
+
+M.files = {
   {
     'kyazdani42/nvim-tree.lua',
     event = 'BufWinEnter',
@@ -56,7 +185,63 @@ return {
       require('young.mod.nvim-tree').done()
     end,
   },
-  { 'kyazdani42/nvim-web-devicons' },
+  -- [project]
+  {
+    'ahmedkhalf/project.nvim',
+    config = function()
+      require 'young.mod.project'
+    end,
+  },
+  {
+    'folke/persistence.nvim',
+    event = 'BufReadPre',
+    module = 'persistence',
+    config = require 'plug-config.persistence',
+  },
+  {
+    'ZSaberLv0/ZFVimDirDiff',
+    cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
+    setup = function()
+      vim.g.ZFDirDiffUI_dirExpandable = '+'
+    end,
+  },
+}
+
+M.find = {
+  {
+    "windwp/nvim-spectre",
+    event = "BufRead",
+    config = function()
+      -- require("user.spectre").config()
+    end,
+  },
+
+  {
+    "ibhagwan/fzf-lua",
+    requires = "vijaymarupudi/nvim-fzf",
+    module = 'fzf-lua',
+    config = function()
+      require 'young.mod.fzf'
+    end,
+    disable = is_windows
+  },
+}
+
+M.UI = {
+  -- [statusline]
+  -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
+  { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
+
+  -- [terminal]
+  {
+    'akinsho/toggleterm.nvim',
+    event = 'BufWinEnter',
+    config = function()
+      require('young.mod.toggleterm').done()
+    end,
+  },
+
+  -- [startscreen]
   { 
     'goolord/alpha-nvim', 
     -- config = require 'plug-config.alpha'
@@ -66,41 +251,21 @@ return {
     end
   },
   {
-    'akinsho/toggleterm.nvim',
-    event = 'BufWinEnter',
-    config = function()
-      require('young.mod.toggleterm').done()
-    end,
-  },
-  {
     'folke/trouble.nvim',
     event = 'BufRead',
     config = function()
       require('young.mod.trouble').done()
     end,
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    config = function()
-      require('young.mod.indent-blankline').done()
-    end,
-  },
+}
 
-  -- Colorscheme & Colors
+
+M.treesitter = {
   { 'nvim-treesitter/nvim-treesitter', config = require 'plug-config.treesitter', run = ':TSUpdate' },
   { 'nvim-treesitter/playground' },
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require 'young.mod.colorizer'
-    end,
-  },
-  -- { 'rktjmp/lush.nvim' },
-  { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' },
-  { 'joshdick/onedark.vim' },
+}
 
-  -- Telescope
+M.telescope = {
   {
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
@@ -158,11 +323,10 @@ return {
       }
     end,
   },
+}
 
-  -- Web Dev
-  { 'windwp/nvim-ts-autotag', ft = { 'html', 'svelte' } },
-
-  -- Autocomplete
+M.code = {
+  -- [completion]
   {
     'hrsh7th/nvim-cmp',
     config = function()
@@ -190,13 +354,19 @@ return {
   },
   { 'onsails/lspkind-nvim' },
 
-  -- LSP
+  -- [repl]
+  -- { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
+}
+
+M.lsp = {
   { 'neovim/nvim-lspconfig' },
   { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
   -- { "jose-elias-alvarez/null-ls.nvim" },
-  -- { "williamboman/nvim-lsp-installer" },
+  { "williamboman/nvim-lsp-installer" },
+  -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
+}
 
-  -- Git
+M.git = {
   {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
@@ -213,109 +383,45 @@ return {
   --   end,
   --   disable = is_windows,
   -- },
-
-  -- Editing Enhancments
   {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
+    "TimUntersberger/neogit",
+    cmd = "Neogit",
+    module = "neogit",
     config = function()
-      require 'young.mod.autopairs'
+      require("neogit").setup {}
     end,
   },
+}
+
+M.lua = {
+  { 'folke/lua-dev.nvim' },
+  { 'nanotee/luv-vimdocs' },
+}
+
+M.write= {
   {
     'folke/todo-comments.nvim',
     event = 'InsertEnter',
     requires = 'nvim-lua/plenary.nvim',
     config = require 'plug-config.todo-comments',
   },
-
-  -- General Plugins
-  {
-    'ahmedkhalf/project.nvim',
-    config = function()
-      require 'young.mod.project'
-    end,
-  },
-  {
-    'folke/which-key.nvim',
-    event = 'BufWinEnter',
-    config = function()
-      require('young.key.which-key').done()
-    end,
-  },
-  {
-    'folke/persistence.nvim',
-    event = 'BufReadPre',
-    module = 'persistence',
-    config = require 'plug-config.persistence',
-  },
   { 'nvim-neorg/neorg', branch = 'unstable', config = require 'plug-config.neorg', ft = 'norg' },
-  -- {
-  --   'abecodes/tabout.nvim',
-  --   config = function()
-  --     require('tabout').setup()
-  --   end,
-  -- },
-  { 'folke/lua-dev.nvim' },
-  { 'nanotee/luv-vimdocs' },
-  { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
+}
 
-  {
-    'luukvbaal/stabilize.nvim',
-    config = function()
-      require('stabilize').setup()
-    end,
-  },
-
-  -- Tests
-  { 'edluffy/specs.nvim' },
-
-  -- Self plugin
-  -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
-
-  {
-    'ZSaberLv0/ZFVimDirDiff',
-    cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
-    setup = function()
-      vim.g.ZFDirDiffUI_dirExpandable = '+'
-    end,
-  },
-
-  {
-    'nathom/filetype.nvim',
-    -- opt = true,
-    setup = function() end,
-    config = function()
-      require('young.mod.filetype').done()
-    end,
-  },
-
-  {
-    'numToStr/Comment.nvim',
-    event = 'BufRead',
-    config = function()
-      require 'young.mod.comment'
-    end,
-  },
-
-  {
-    'dstein64/vim-startuptime',
-    cmd = 'StartupTime',
-    setup = function()
-      vim.g.startuptime_use_blocks = 0
-    end,
-  },
-
-  { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-
-  {
-    "ibhagwan/fzf-lua",
-    requires = "vijaymarupudi/nvim-fzf",
-    module = 'fzf-lua',
-    config = function()
-      require 'young.mod.fzf'
-    end,
-    disable = is_windows
-  },
-
+return {
+  M.core,
+  M.theme,
+  M.appearance,
+  M.motion,
+  M.change,
+  M.BWT,
+  M.files,
+  M.UI,
+  M.treesitter,
+  M.telescope,
+  M.code,
+  M.lsp,
+  M.git,
+  M.lua,
+  M.write,
 }
