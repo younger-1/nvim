@@ -263,3 +263,5 @@ Great thanks to:
       ├──  web_devicons.lua
       └──  staline.lua
 ```
+
+<https://github.com/nanozuki/CrowsEnv/tree/master/dots/nvim>

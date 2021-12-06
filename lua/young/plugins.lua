@@ -1,19 +1,17 @@
-local M = { "lo", i = 3, j = "kl" }
+-- local mod = require('young.mod').make_module
+local M = {}
 
-setmetatable(M, { __index = function(t, k) 
-  error(k .. " is not a valid module section!")
-  -- print(k .. " is not a valid classic event!") 
-end })
+setmetatable(M, {
+  __index = function(t, k)
+    error(k .. ' is not a valid module section!')
+    -- print(k .. " is not a valid classic event!")
+  end,
+  __call = function(t)
+  end,
+})
 
-M.core = {
+M.basic = {
   { 'wbthomason/packer.nvim' },
-  {
-    'folke/which-key.nvim',
-    event = 'BufWinEnter',
-    config = function()
-      require('young.key.which-key').done()
-    end,
-  },
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     'nathom/filetype.nvim',
@@ -37,13 +35,6 @@ M.core = {
       require 'young.mod.comment'
     end,
   },
-  {
-    'dstein64/vim-startuptime',
-    cmd = 'StartupTime',
-    setup = function()
-      vim.g.startuptime_use_blocks = 0
-    end,
-  },
 }
 
 M.theme = {
@@ -51,26 +42,26 @@ M.theme = {
 
   -- [vim theme]
   'joshdick/onedark.vim',
-  "sainnhe/sonokai",
-  "sainnhe/edge",
-  "sainnhe/everforest",
-  "sainnhe/gruvbox-material",
+  'sainnhe/sonokai',
+  'sainnhe/edge',
+  'sainnhe/everforest',
+  'sainnhe/gruvbox-material',
 
   -- [lua theme]
   {
-    "shaunsingh/nord.nvim",
+    'shaunsingh/nord.nvim',
     setup = function()
       vim.g.nord_borders = true
     end,
   },
-  "tanvirtin/monokai.nvim",
+  'tanvirtin/monokai.nvim',
 }
 
 M.appearance = {
   { 'kyazdani42/nvim-web-devicons' },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
     config = function()
       require('young.mod.indent-blankline').done()
     end,
@@ -84,59 +75,59 @@ M.appearance = {
 
   -- [line]
   { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' },
-  { 
+  {
     'edluffy/specs.nvim',
     config = function()
-      require('specs').setup{
-          -- show_jumps  = true,
-          -- min_jump = 30,
-          -- popup = {
-          --     delay_ms = 0, -- delay before popup displays
-          --     inc_ms = 10, -- time increments used for fade/resize effects
-          --     blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-          --     width = 10,
-          --     winhl = "PMenu",
-          --     fader = require('specs').linear_fader,
-          --     resizer = require('specs').shrink_resizer
-          -- },
-          -- ignore_filetypes = {},
-          -- ignore_buftypes = {
-          --     nofile = true,
-          -- },
+      require('specs').setup {
+        -- show_jumps  = true,
+        -- min_jump = 30,
+        -- popup = {
+        --     delay_ms = 0, -- delay before popup displays
+        --     inc_ms = 10, -- time increments used for fade/resize effects
+        --     blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        --     width = 10,
+        --     winhl = "PMenu",
+        --     fader = require('specs').linear_fader,
+        --     resizer = require('specs').shrink_resizer
+        -- },
+        -- ignore_filetypes = {},
+        -- ignore_buftypes = {
+        --     nofile = true,
+        -- },
       }
       vim.api.nvim_set_keymap('n', 'z ', ':lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', 'n', 'n:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', 'N', 'N:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
-    end
+    end,
   },
 }
 
 M.motion = {
   {
-    "haya14busa/vim-asterisk",
+    'haya14busa/vim-asterisk',
     config = function()
-      require "young.mod.asterisk"
+      require 'young.mod.asterisk'
     end,
   },
   {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
+    'andymass/vim-matchup',
+    event = 'CursorMoved',
     config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      vim.g.matchup_matchparen_offscreen = { method = 'popup' }
     end,
   },
   {
-    "chaoren/vim-wordmotion",
-    event = "CursorMoved",
+    'chaoren/vim-wordmotion',
+    event = 'CursorMoved',
     setup = function()
-      vim.g.wordmotion_prefix = ";"
+      vim.g.wordmotion_prefix = ';'
     end,
   },
   {
-    "ggandor/lightspeed.nvim",
-    event = "BufWinEnter",
+    'ggandor/lightspeed.nvim',
+    event = 'BufWinEnter',
     config = function()
-      require "young.mod.lightspeed"
+      require 'young.mod.lightspeed'
     end,
   },
   -- {
@@ -147,12 +138,12 @@ M.motion = {
   -- },
 }
 
-M.change= {
+M.change = {
   { 'tpope/vim-surround' },
   { 'tpope/vim-repeat' },
   {
-    "monaqa/dial.nvim",
-    event = "BufRead",
+    'monaqa/dial.nvim',
+    event = 'BufRead',
     config = function()
       require('young.mod.dial').done()
     end,
@@ -209,25 +200,33 @@ M.files = {
 
 M.find = {
   {
-    "windwp/nvim-spectre",
-    event = "BufRead",
+    'windwp/nvim-spectre',
+    event = 'BufRead',
     config = function()
       -- require("user.spectre").config()
     end,
   },
 
   {
-    "ibhagwan/fzf-lua",
-    requires = "vijaymarupudi/nvim-fzf",
+    'ibhagwan/fzf-lua',
+    requires = 'vijaymarupudi/nvim-fzf',
     module = 'fzf-lua',
     config = function()
       require 'young.mod.fzf'
     end,
-    disable = is_windows
+    disable = is_windows,
   },
 }
 
 M.UI = {
+  {
+    'folke/which-key.nvim',
+    event = 'BufWinEnter',
+    config = function()
+      require('young.key.which-key').done()
+    end,
+  },
+
   -- [statusline]
   -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
   { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
@@ -242,13 +241,13 @@ M.UI = {
   },
 
   -- [startscreen]
-  { 
-    'goolord/alpha-nvim', 
+  {
+    'goolord/alpha-nvim',
     -- config = require 'plug-config.alpha'
     config = function()
       -- require('alpha').setup(require('young.mod.alpha.screen').opts)
       require('young.mod.alpha').done()
-    end
+    end,
   },
   {
     'folke/trouble.nvim',
@@ -258,7 +257,6 @@ M.UI = {
     end,
   },
 }
-
 
 M.treesitter = {
   { 'nvim-treesitter/nvim-treesitter', config = require 'plug-config.treesitter', run = ':TSUpdate' },
@@ -358,11 +356,11 @@ M.code = {
   -- { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
 }
 
-M.lsp = {
+M.LSP = {
   { 'neovim/nvim-lspconfig' },
   { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
   -- { "jose-elias-alvarez/null-ls.nvim" },
-  { "williamboman/nvim-lsp-installer" },
+  { 'williamboman/nvim-lsp-installer' },
   -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
 }
 
@@ -370,10 +368,10 @@ M.git = {
   {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
-    event = "BufRead",
+    event = 'BufRead',
     config = function()
       require('young.mod.gitsigns').done()
-    end
+    end,
   },
   -- {
   --   'tanvirtin/vgit.nvim',
@@ -384,21 +382,28 @@ M.git = {
   --   disable = is_windows,
   -- },
   {
-    "TimUntersberger/neogit",
-    cmd = "Neogit",
-    module = "neogit",
+    'TimUntersberger/neogit',
+    cmd = 'Neogit',
+    module = 'neogit',
     config = function()
-      require("neogit").setup {}
+      require('neogit').setup {}
     end,
   },
 }
 
-M.lua = {
+M.neovim = {
   { 'folke/lua-dev.nvim' },
   { 'nanotee/luv-vimdocs' },
+  {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
+    setup = function()
+      vim.g.startuptime_use_blocks = 0
+    end,
+  },
 }
 
-M.write= {
+M.write = {
   {
     'folke/todo-comments.nvim',
     event = 'InsertEnter',
@@ -406,10 +411,17 @@ M.write= {
     config = require 'plug-config.todo-comments',
   },
   { 'nvim-neorg/neorg', branch = 'unstable', config = require 'plug-config.neorg', ft = 'norg' },
+  markdown = {
+    {
+      'iamcco/markdown-preview.nvim',
+      run = 'cd app && npm install',
+      ft = 'markdown',
+    },
+  },
 }
 
 return {
-  M.core,
+  M.basic,
   M.theme,
   M.appearance,
   M.motion,
@@ -420,8 +432,8 @@ return {
   M.treesitter,
   M.telescope,
   M.code,
-  M.lsp,
+  M.LSP,
   M.git,
-  M.lua,
+  M.neovim,
   M.write,
 }
