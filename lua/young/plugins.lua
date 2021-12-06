@@ -473,7 +473,7 @@ for _, module in pairs(M) do
           utils.append_to_list(plugs, item)
         end
       end
-      return unpack(plugs)
+      return plugs
     end
   })
 end
