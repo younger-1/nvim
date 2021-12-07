@@ -215,6 +215,7 @@ local mappings = {
     ['<C-e>'] = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Diagnostics LocList' },
     A = { '<cmd>Telescope lsp_range_code_actions<cr>', 'Range Action' },
     C = { "<cmd>CmpStatus<cr>", "Code Action" },
+    D = { '<cmd>Telescope lsp_workspace_diagnostics<cr>', 'Workspace Diagnostics' },
     F = {
       function()
         vim.lsp.buf.formatting_sync()
@@ -224,7 +225,6 @@ local mappings = {
     },
     I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
     S = { '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', 'Workspace Symbols' },
-    W = { '<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>', 'Workspace folders' },
     ['['] = { '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Incoming Calls' },
     [']'] = { '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Outgoing Calls' },
     a = { '<cmd>Telescope lsp_code_actions<cr>', 'Code Action' },
@@ -253,7 +253,11 @@ local mappings = {
     r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document Symbols' },
     v = { '<cmd>Vista!!<cr>', 'Vista' },
-    w = { '<cmd>Telescope lsp_workspace_diagnostics<cr>', 'Workspace Diagnostics' },
+    w = {
+      w = { '<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>', 'Workspace folders' },
+      a = { '<cmd>lua pp(vim.lsp.buf.add_workspace_folder())<cr>', 'Add folder' },
+      r = { '<cmd>lua pp(vim.lsp.buf.remove_workspace_folder())<cr>', 'Remove folder' },
+    },
   },
   p = {
     name = '+packer',

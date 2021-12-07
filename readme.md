@@ -265,3 +265,63 @@ Great thanks to:
 ```
 
 <https://github.com/nanozuki/CrowsEnv/tree/master/dots/nvim>
+
+<https://github.com/williamboman/nvim-config>
+
+```
+ ./
+├──  after/
+│  └──  plugin/
+│     └──  sleuth.vim
+├──  ftdetect/
+│  └──  mine.vim
+├──  ftplugin/
+│  ├──  gitcommit.vim
+│  ├──  gitmessengerpopup.vim
+│  ├──  help.vim
+│  └──  lsp-installer.vim
+├──  lua/
+│  └──  wb/
+│     ├──  coq_3p/
+│     │  └──  uuid.lua
+│     ├──  coq_nvim/
+│     │  └──  init.lua
+│     ├──  formatter/
+│     │  └──  init.lua
+│     ├──  gitsigns/
+│     │  └──  init.lua
+│     ├──  lsp/
+│     │  ├──  capabilities.lua
+│     │  ├──  custom-server.lua
+│     │  ├──  diagnostics.lua
+│     │  ├──  handlers.lua
+│     │  ├──  init.lua
+│     │  └──  keymaps.lua
+│     ├──  lualine/
+│     │  └──  init.lua
+│     ├──  nvim-autopairs/
+│     │  └──  init.lua
+│     ├──  nvim-colorizer/
+│     │  └──  init.lua
+│     ├──  nvim-tree/
+│     │  └──  init.lua
+│     ├──  nvim-treesitter/
+│     │  └──  init.lua
+│     ├──  telescope/
+│     │  ├──  find_files.lua
+│     │  ├──  git.lua
+│     │  ├──  init.lua
+│     │  └──  lsp.lua
+│     ├──  vim-test/
+│     │  └──  init.lua
+│     ├──  plugins.lua
+│     └──  settings.lua
+├──  plugin/
+│  ├──  buffers.vim
+│  ├──  colors.vim
+│  ├──  keymaps.vim
+│  ├──  python.vim
+│  ├──  tabline.vim
+│  └──  vimspector.vim
+└──  init.lua
+```

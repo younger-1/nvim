@@ -382,6 +382,7 @@ M.LSP = {
     { 'williamboman/nvim-lsp-installer' },
     -- { "jose-elias-alvarez/null-ls.nvim" },
     -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
+    { 'b0o/SchemaStore.nvim' },
   },
   ui = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
