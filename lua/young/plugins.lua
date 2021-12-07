@@ -268,7 +268,12 @@ M.UI = {
 }
 
 M.treesitter = {
-  { 'nvim-treesitter/nvim-treesitter', config = require 'plug-config.treesitter', run = ':TSUpdate' },
+  { 
+    'nvim-treesitter/nvim-treesitter', 
+    branch = vim.fn.has "nvim-0.6" == 1 and "master" or "0.5-compat",
+    run = ':TSUpdate',
+    config = require 'plug-config.treesitter',
+  },
   { 'nvim-treesitter/playground' },
 }
 
@@ -384,6 +389,10 @@ M.LSP = {
     -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
     { 'b0o/SchemaStore.nvim' },
   },
+  lua = {
+    { 'folke/lua-dev.nvim' },
+    { 'nanotee/luv-vimdocs' },
+  },
   ui = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
   },
@@ -420,10 +429,6 @@ M.git = {
 }
 
 M.neovim = {
-  lua = {
-    { 'folke/lua-dev.nvim' },
-    { 'nanotee/luv-vimdocs' },
-  },
   profile = {
     {
       'dstein64/vim-startuptime',
@@ -472,6 +477,9 @@ for _, module in pairs(M) do
         else
           utils.append_to_list(plugs, item)
         end
+      end
+      if #plugs == 1 then
+        return unpack(plugs)
       end
       return plugs
     end
