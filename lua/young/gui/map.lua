@@ -1,10 +1,9 @@
 local nmap = require('young.key').nmap
 local font = require 'young.gui.font'
-local gui = require 'young.gui'
 
 local M = {}
 
-M.adjust_transparency = function() end
+M.adjust_transparency = function(_) end
 
 M.adjust_fontsize = function(num)
   font.adjust_size(num)

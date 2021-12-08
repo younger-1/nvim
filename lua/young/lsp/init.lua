@@ -57,18 +57,18 @@ lsp_installer.on_server_ready(function(server)
   }
 
   local server_opts = {
-    ["sumneko_lua"] = function()
-      return require("lua-dev").setup {
-        lspconfig = default_opts,
-        library = {
-          vimruntime = true, -- runtime path
-          types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-          -- plugins = true, -- installed opt or start plugins in packpath
-          -- you can also specify the list of plugins to make available as a workspace library
-          plugins = { "nvim-treesitter", "telescope.nvim" },
-        },
-      }
-    end,
+    -- ["sumneko_lua"] = function()
+    --   return require("lua-dev").setup {
+    --     lspconfig = default_opts,
+    --     library = {
+    --       vimruntime = true, -- runtime path
+    --       types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+    --       -- plugins = true, -- installed opt or start plugins in packpath
+    --       -- you can also specify the list of plugins to make available as a workspace library
+    --       plugins = { "nvim-treesitter", "telescope.nvim" },
+    --     },
+    --   }
+    -- end,
     ["yamlls"] = function()
       return vim.tbl_deep_extend("force", default_opts, {
         settings = {

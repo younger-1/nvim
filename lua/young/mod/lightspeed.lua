@@ -11,7 +11,6 @@ require'lightspeed'.setup {
   -- Leaving the appropriate list empty effectively disables
   -- "smart" mode, and forces auto-jump to be on or off.
   -- safe_labels = { ... },
-  x_mode_prefix_key = '<c-x>',
 
   -- By default, the values of these will be decided at runtime,
   -- based on `jump_to_first_match`.

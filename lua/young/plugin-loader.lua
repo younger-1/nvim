@@ -40,8 +40,7 @@ plugin_loader.recompile = function()
   packer.compile()
   if utils.is_file(compile_path) then
     -- Log:debug "generated packer_compiled.lua"
-  vim.wait(5000, compiled_ok)
-  require 'young.packer_compiled'
+    require 'young.packer_compiled'
   end
 end
 

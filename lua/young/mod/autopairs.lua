@@ -25,7 +25,7 @@ if cmp_status_ok then
   local map_char = {
       all = "(",
       tex = "{",
-  },
+  }
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = map_char })
 end
 

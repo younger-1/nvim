@@ -7,6 +7,7 @@
 - [ ] `yj.telescope`, `M.tele/M.cfg`, `local cfg`
 - [ ] once ice hot done
 - [ ] hl cursorline
+- [ ] `yo` <==> require('young')
 
 ## Problem
 
@@ -37,6 +38,10 @@
 - <https://github.com/pi314/ascii-arts>
 
 ## Features
+
+### Lua IDE
+
+<https://github.com/sumneko/lua-language-server/wiki/Setting>
 
 ### GUI support
 

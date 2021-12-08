@@ -2,6 +2,8 @@
 
 local M = {}
 
+local text
+
 function M.blameVirtText()
   local ft = vim.fn.expand '%:h:t'
   if ft == '' then -- if we are in a scratch buffer or unknown filetype

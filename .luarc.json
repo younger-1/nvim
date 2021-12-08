@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.fastgit.org/sumneko/vscode-lua/master/setting/schema-zh-cn.json",
+    "runtime": {
+        "version": "LuaJIT",
+        "path": [
+            "lua/?.lua",
+            "lua/?/init.lua"
+        ],
+        "pathStrict": false
+    },
+    "diagnostics": {
+        "globals": [
+            "vim",
+            "lvim"
+        ]
+    }
+}
