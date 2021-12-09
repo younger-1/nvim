@@ -1,4 +1,3 @@
-local nvim_lsp = require 'lspconfig'
 local lsp_installer = require("nvim-lsp-installer")
 
 local M = {}
@@ -48,10 +47,17 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Register a handler that will be called for all installed servers.
 lsp_installer.on_server_ready(function(server)
   local default_opts = {
+    before_init = function (params, config)
+      -- pp("[[ params ]]: ", params)
+      -- pp("[[ config ]]: ", config)
+      -- pp(vim.tbl_keys(params)) -- { "rootPath", "rootUri", "processId", "clientInfo", "capabilities", "trace", "initializationOptions", "workspaceFolders" }
+      -- pp(vim.tbl_keys(config)) -- { "before_init", "flags", "get_language_id", "single_file_support", "init_options", "cmd_cwd", "cmd", "workspace_folders", "handlers", "name", "root_dir", "filetypes", "on_exit", "on_attach", "on_new_config", "_on_attach", "capabilities", "message_level", "autostart", "log_level", "on_init", "settings" }
+    end,
     on_attach = on_attach,
     capabilities = capabilities,
   }
@@ -63,9 +69,8 @@ lsp_installer.on_server_ready(function(server)
     --     library = {
     --       vimruntime = true, -- runtime path
     --       types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-    --       -- plugins = true, -- installed opt or start plugins in packpath
-    --       -- you can also specify the list of plugins to make available as a workspace library
-    --       plugins = { "nvim-treesitter", "telescope.nvim" },
+    --       -- plugins = { "nvim-treesitter", "telescope.nvim" },
+    --       plugins = false,
     --     },
     --   }
     -- end,
