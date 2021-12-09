@@ -1,3 +1,6 @@
+-- <https://github.com/maxxnino/lvim/blob/main/lua/user/neovim.lua>
+-- <https://github.com/n3wborn/nvim/blob/main/init.lua>
+
 local default_options = {
   backup = false,
   clipboard = '',
@@ -45,6 +48,8 @@ local default_options = {
   spelllang = 'en',
   scrolloff = 4, -- is one of my fav
   sidescrolloff = 8,
+  confirm = true,
+  showbreak = '↪',
 }
 
 for k, v in pairs(default_options) do

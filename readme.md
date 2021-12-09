@@ -330,3 +330,35 @@ Great thanks to:
 │  └──  vimspector.vim
 └──  init.lua
 ```
+
+<https://github.com/n3wborn/nvim>
+
+```
+ ./
+├──  lua/
+│  ├──  modules/
+│  │  ├──  core/
+│  │  │  ├──  autocommands.lua
+│  │  │  ├──  colorscheme.lua
+│  │  │  ├──  init.lua
+│  │  │  ├──  mappings.lua
+│  │  │  └──  statusline.lua
+│  │  ├──  lsp/
+│  │  │  ├──  init.lua
+│  │  │  ├──  null-ls.lua
+│  │  │  └──  tsserver.lua
+│  │  └──  plugins/
+│  │     ├──  blankline.lua
+│  │     ├──  cmp.lua
+│  │     ├──  colorizer.lua
+│  │     ├──  formatter.lua
+│  │     ├──  gitsigns.lua
+│  │     ├──  init.lua
+│  │     ├──  nvimtree.lua
+│  │     ├──  packer.lua
+│  │     ├──  telescope.lua
+│  │     ├──  treesitter.lua
+│  │     └──  trouble.lua
+│  └──  utils.lua
+└──  init.lua
+```

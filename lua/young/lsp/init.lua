@@ -2,6 +2,10 @@ local lsp_installer = require("nvim-lsp-installer")
 
 local M = {}
 
+-- vim.lsp.set_log_level("debug")
+-- if vim.fn.has 'nvim-0.5.1' == 1 then
+--   require('vim.lsp.log').set_format_func(vim.inspect)
+-- end
 vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
 
 lsp_installer.settings {
@@ -16,6 +20,9 @@ lsp_installer.settings {
 }
 
 local on_attach = function(_, bufnr)
+  -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = true, silent = true }
@@ -28,7 +35,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
@@ -60,6 +67,9 @@ lsp_installer.on_server_ready(function(server)
     end,
     on_attach = on_attach,
     capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 800,
+    }
   }
 
   local server_opts = {
