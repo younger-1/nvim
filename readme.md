@@ -43,6 +43,22 @@
 
 <https://github.com/sumneko/lua-language-server/wiki/Setting>
 
+### Keymappings
+
+Currently used:
+
+1. vanilla vim style
+2. LunarVim style
+3. lua api and its thin wrapper
+4. [which-key](https://github.com/folke/which-key.nvim/)
+
+May be useful:
+
+- <https://github.com/tjdevries/astronauta.nvim>
+- <https://github.com/b0o/mapx.nvim>
+- <https://github.com/svermeulen/vimpeccable>
+- <https://github.com/LionC/nest.nvim>
+
 ### GUI support
 
 `init.lua`

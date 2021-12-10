@@ -80,7 +80,8 @@ M.rr = function(...)
     print("    " .. pack .. " is updated")
   end
 
-  require("utils").reload_lv_config()
+  -- TODO: may be to reload
+  -- require("utils").reload_lv_config()
 end
 
 -- Completion for not yet loaded plugins
@@ -163,5 +164,52 @@ M.toggle_mouse = function()
     vim.wo.number = false
   end
 end
+
+M.get_ls = function(servername)
+  for _, client in pairs(vim.lsp.buf_get_clients()) do
+    if not servername and client.name ~= 'null-ls' then
+      return client
+    end
+    if servername and client.name == servername then
+      return client
+    end
+  end
+end
+
+M.print_ls = function(is_nls, ...)
+  local keys = { ... }
+  local ls = M.get_ls(is_nls and 'null-ls')
+  if not ls then
+    print("[Failed]: Not such server")
+    return
+  end
+
+  -- Print entire client
+  if #keys == 0 then
+    pp(ls)
+    return
+  end
+
+  local info = {}
+  for _, k in ipairs(keys) do
+    info[k] = ls[k]
+  end
+  pp(info)
+end
+
+M.print_ls_complete = function (lead, _, _)
+  local completion_list = {}
+  for name, _ in pairs(M.get_ls()) do
+    if vim.startswith(name, lead) then
+      table.insert(completion_list, name)
+    end
+  end
+  table.sort(completion_list)
+  return completion_list
+end
+
+-- TODO: pick certain LS
+-- M.pick_ls
+-- commands Pls <servername> <key>
 
 return M

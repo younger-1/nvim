@@ -162,6 +162,7 @@ M.BWT = {
   window = {
     {
       'luukvbaal/stabilize.nvim',
+      disable = true,
       config = function()
         require('stabilize').setup()
       end,

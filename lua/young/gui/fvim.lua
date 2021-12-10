@@ -29,7 +29,7 @@ function M.toggle_ligature()
   vim.cmd("FVimFontLigature v:" .. tostring(ligature))
 end
 
-function M.switch_effect() 
+function M.switch_effect()
   bg_idx = bg_idx % #bg_compositions
   bg_idx = bg_idx + 1
   vim.cmd('FVimBackgroundComposition "' .. bg_compositions[bg_idx] .. '"')

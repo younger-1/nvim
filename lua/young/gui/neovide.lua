@@ -27,7 +27,7 @@ function M.adjust_transparency(num)
   vim.cmd('let g:neovide_transparency = ' .. tran.val)
 end
 
-function M.switch_effect() 
+function M.switch_effect()
   cur_idx = cur_idx % #cursor_modes
   cur_idx = cur_idx + 1
   -- vim.g doesn't work

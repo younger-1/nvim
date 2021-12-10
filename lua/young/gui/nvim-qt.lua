@@ -10,7 +10,6 @@ local M = {}
 local gmap = require 'young.gui.map'
 local font = require 'young.gui.font'
 local tran = require 'young.gui.transparency'
-local gui = require 'young.gui'
 
 local fullscreen = false
 
