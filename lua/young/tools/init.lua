@@ -176,9 +176,9 @@ M.get_ls = function(servername)
   end
 end
 
-M.print_ls = function(is_nls, ...)
+M.print_ls = function(...)
   local keys = { ... }
-  local ls = M.get_ls(is_nls and 'null-ls')
+  local ls = M.get_ls()
   if not ls then
     print("[Failed]: Not such server")
     return
