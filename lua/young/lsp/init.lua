@@ -73,6 +73,22 @@ lsp_installer.on_server_ready(function(server)
   }
 
   local server_opts = {
+    ["sumneko_lua"] = function()
+      return vim.tbl_deep_extend("force", default_opts, {
+        settings = {
+          Lua = {
+            runtime = { },
+            workspace = {
+              library = {
+                [vim.fn.expand '~/.luarocks/share/lua/5.3'] = true,
+                ['/usr/share/lua/5.3'] = true
+              }
+            }
+          }
+        }
+      })
+    end,
+
     -- ["sumneko_lua"] = function()
     --   return require("lua-dev").setup {
     --     lspconfig = default_opts,
@@ -84,6 +100,7 @@ lsp_installer.on_server_ready(function(server)
     --     },
     --   }
     -- end,
+
     ["yamlls"] = function()
       return vim.tbl_deep_extend("force", default_opts, {
         settings = {
@@ -96,6 +113,7 @@ lsp_installer.on_server_ready(function(server)
         },
       })
     end,
+
     ["jsonls"] = function()
       return vim.tbl_deep_extend("force", default_opts, {
         settings = {

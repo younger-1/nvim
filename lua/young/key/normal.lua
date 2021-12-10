@@ -53,7 +53,7 @@ local mymappings = {
       w = { '<cmd>setlocal wrap!<cr>', 'wrap' },
       h = { '<cmd>set hls!<cr>', 'hightlight' },
       b = { [[:set background=<C-R>=&background == "dark" ? "light" : "dark"<cr><cr>]], 'background' },
-      m = { [[:set mouse=<C-R>=&mouse == "a" ? "" : "a"<cr><cr>]], 'mouse' },
+      m = { [[:set mouse=<C-R>=&mouse == "" ? "a" : ""<cr><cr>]], 'mouse' },
       M = { '<cmd>lua require("young.tools").toggle_mouse()<cr>', 'mouse++' },
       f = { ':call FoldTextToggle()<cr>', 'hightlight' },
     },

@@ -197,7 +197,7 @@ M.print_ls = function(is_nls, ...)
   pp(info)
 end
 
-M.print_ls_complete = function (lead, _, _)
+M.print_ls_complete = function(lead, _, _)
   local completion_list = {}
   for name, _ in pairs(M.get_ls()) do
     if vim.startswith(name, lead) then
