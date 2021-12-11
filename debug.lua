@@ -18,3 +18,5 @@ it:for_each(function(k, v)
   print(v .. ":" .. k)
 end)
 
+-- Should not be required, not in lua runtime.path
+require("plenary.filetypes.base")

@@ -87,7 +87,8 @@ lsp_installer.on_server_ready(function(server)
             workspace = {
               library = {
                 [vim.fn.expand "$VIMRUNTIME"] = true,
-                [_G.packer_plugins['lua-dev.nvim'].path .. '/types'] = true,
+                [_G.packer_plugins['lua-dev.nvim'].path] = true,
+                [_G.packer_plugins['plenary.nvim'].path] = true,
               },
               maxPreload = 2000,
               preloadFileSize = 200,

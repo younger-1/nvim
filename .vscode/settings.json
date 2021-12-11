@@ -6,7 +6,8 @@
     ],
     "Lua.workspace.library": [
         "$SCOOP/apps/neovim/current/share/nvim/runtime",
-        "~/.local/share/nvim-data/site/pack/packer/start/lua-dev.nvim/types",
+        "~/.local/share/nvim-data/site/pack/packer/start/lua-dev.nvim",
+        "~/.local/share/nvim-data/site/pack/packer/start/plenary.nvim",
     ],
     "Lua.diagnostics.globals": [
         "vim"
