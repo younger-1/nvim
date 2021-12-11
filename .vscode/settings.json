@@ -1,0 +1,11 @@
+{
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.runtime.path": [
+        "lua/?.lua",
+        "lua/?/init.lua"
+    ],
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
+    "Lua.completion.callSnippet": "Replace",
+}
