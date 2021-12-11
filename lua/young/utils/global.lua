@@ -56,6 +56,6 @@ function _G.to_home(path)
   return vim.fn.fnamemodify(path, ':~')
 end
 
-function _G.r(...)
+function _G.rr(...)
   return require(...)
 end

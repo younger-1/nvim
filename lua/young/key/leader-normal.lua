@@ -269,7 +269,7 @@ local mappings = {
     c = { '<cmd>PackerCompile<cr>', 'Compile' },
     i = { '<cmd>PackerInstall<cr>', 'Install' },
     p = {
-      "<cmd>lua require('telescope').extensions.packer.plugins { layout_config = { preview_width = 0.5} }<cr>",
+      "<cmd>lua require('telescope').extensions.packer.packer { layout_config = { preview_width = 0.5} }<cr>",
       'Telescope Packer',
     },
     r = { "<cmd>lua require('young.plugin-loader').recompile()<cr>", 'Re-compile' },

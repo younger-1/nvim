@@ -5,7 +5,6 @@ require'lightspeed'.setup {
   -- turn it on only if your machine can always cope with it.
   highlight_unique_chars = true,
   match_only_the_start_of_same_char_seqs = true,
-  jump_to_first_match = true,
   jump_on_partial_input_safety_timeout = 400,
   substitute_chars = { ['\r'] = '¬' },
   -- Leaving the appropriate list empty effectively disables

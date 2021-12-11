@@ -189,6 +189,12 @@ M.cfg = {
         ['wiki'] = vim.fn.expand '~/wiki',
       },
     },
+    packer = {
+      theme = 'ivy',
+      layout_config = {
+        height = .75
+      }
+    },
   },
 }
 

@@ -6,6 +6,7 @@
     ],
     "Lua.workspace.library": [
         "$SCOOP/apps/neovim/current/share/nvim/runtime",
+        // NOTE: Windows user should set $env:XDG_DATA_HOME to `~/.local/share`
         "~/.local/share/nvim-data/site/pack/packer/start/lua-dev.nvim",
         "~/.local/share/nvim-data/site/pack/packer/start/plenary.nvim",
     ],
