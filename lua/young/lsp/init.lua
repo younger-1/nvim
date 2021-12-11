@@ -86,7 +86,7 @@ lsp_installer.on_server_ready(function(server)
             },
             workspace = {
               library = {
-                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                [vim.fn.expand "$VIMRUNTIME"] = true,
               },
               maxPreload = 2000,
               preloadFileSize = 200,
