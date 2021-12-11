@@ -4,6 +4,10 @@
         "lua/?.lua",
         "lua/?/init.lua"
     ],
+    "Lua.workspace.library": [
+        "$SCOOP/apps/neovim/current/share/nvim/runtime",
+        "~/.local/share/nvim-data/site/pack/packer/start/lua-dev.nvim/types",
+    ],
     "Lua.diagnostics.globals": [
         "vim"
     ],

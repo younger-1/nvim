@@ -1,12 +1,12 @@
--- Import to lua LSP
-vim = require("vim.shared")
-vim = require("vim.uri")
-vim = require("vim.inspect")
+--@Important to lua LSP, from `lua-dev`
+-- vim = require("vim.shared")
+-- vim = require("vim.uri")
+-- vim = require("vim.inspect")
 
-vim.lsp = require("vim.lsp")
-vim.diagnostic = require("vim.diagnostic")
-vim.treesitter = require("vim.treesitter")
-vim.highlight = require("vim.highlight")
+-- vim.lsp = require("vim.lsp")
+-- vim.diagnostic = require("vim.diagnostic")
+-- vim.treesitter = require("vim.treesitter")
+-- vim.highlight = require("vim.highlight")
 
 vim.lsp.buf_get_clients()
 vim.lsp.buf.hover()
