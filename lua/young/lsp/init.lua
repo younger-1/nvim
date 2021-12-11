@@ -77,11 +77,23 @@ lsp_installer.on_server_ready(function(server)
       return vim.tbl_deep_extend("force", default_opts, {
         settings = {
           Lua = {
-            runtime = { },
+            runtime = {
+              version = "LuaJIT",
+              path = {
+                "lua/?.lua",
+                "lua/?/init.lua"
+              },
+            },
             workspace = {
               library = {
-                [vim.fn.expand '~/.luarocks/share/lua/5.3'] = true,
-                ['/usr/share/lua/5.3'] = true
+                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+              },
+              maxPreload = 2000,
+              preloadFileSize = 200,
+            },
+            diagnostics = {
+              globals = {
+                "vim",
               }
             }
           }

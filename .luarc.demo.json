@@ -1,0 +1,41 @@
+{
+    "$schema": "https://raw.fastgit.org/sumneko/vscode-lua/master/setting/schema-zh-cn.json",
+    "runtime": {
+        "version": "LuaJIT",
+        "path": [
+            "lua/?.lua",
+            "lua/?/init.lua"
+        ],
+        "pathStrict": true
+    },
+    "diagnostics": {
+        "globals": [
+            "vim"
+        ],
+        "libraryFiles": "Disable"
+    },
+    "workspace": {
+        "checkThirdParty": true,
+        "library": [],
+        "ignoreDir": [
+            ".vscode"
+        ],
+        "ignoreSubmodules": true,
+        "maxPreload": 1000,
+        "preloadFileSize": 100,
+        "useGitIgnore": true,
+        "userThirdParty": []
+    },
+    "completion": {
+        "autoRequire": true,
+        "callSnippet": "Replace",
+        "displayContext": 3
+    },
+    "color": {
+        "mode": "Semantic"
+    },
+    "window": {
+        "progressBar": true,
+        "statusBar": true
+    }
+}

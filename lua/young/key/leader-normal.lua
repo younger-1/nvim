@@ -112,6 +112,7 @@ local mappings = {
     h = { '<cmd>BufferCloseBuffersLeft<cr>', 'Close all to the left' },
     j = { '<cmd>BufferPick<cr>', 'Jump' },
     l = { '<cmd>BufferLast<cr>', 'Last' },
+    o = { '<cmd>BufferCloseAllButCurrent<cr>', 'Close all but current' },
     p = { '<cmd>BufferPin<cr>', 'Pin' },
     r = { ':TablineTabRename ', 'Tabline Rename' },
     t = { ':TablineTabNew ', 'Tabline New' },
