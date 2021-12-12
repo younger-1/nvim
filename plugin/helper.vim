@@ -47,6 +47,10 @@ endfunction
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR lua require'young.tools'.rr(<f-args>)
 
+function! s:PrintLSCompletion(...) abort
+    return join(sort(luaeval("vim.tbl_keys(require'young.tools'.get_ls())")), "\n")
+endfunction
+" command! -nargs=* -complete=custom,s:PrintLSCompletion Gls lua require'young.tools'.print_ls(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.print_ls_complete Gls lua require'young.tools'.print_ls(<f-args>)
 
 " Replace a range with the contents of a file

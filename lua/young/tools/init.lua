@@ -165,20 +165,33 @@ M.toggle_mouse = function()
   end
 end
 
+local ls
+
 M.get_ls = function(servername)
+  if ls then
+    for bufnr, _ in pairs(ls.attached_buffers) do
+      if bufnr == vim.fn.bufnr() then
+        print("[Cat!]")
+        return ls
+      end
+    end
+  end
+
   for _, client in pairs(vim.lsp.buf_get_clients()) do
     if not servername and client.name ~= 'null-ls' then
-      return client
+      ls = client
+      return ls
     end
     if servername and client.name == servername then
-      return client
+      ls = client
+      return ls
     end
   end
 end
 
 M.print_ls = function(...)
   local keys = { ... }
-  local ls = M.get_ls()
+  M.get_ls()
   if not ls then
     print("[Failed]: Not such server")
     return
