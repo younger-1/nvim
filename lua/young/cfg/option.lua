@@ -50,6 +50,7 @@ local default_options = {
   sidescrolloff = 8,
   confirm = true,
   showbreak = '↪',
+  qftf = '{info -> v:lua.require("young.cfg.quickfix").quickfixtextfunc(info)}',
   -- TODO:
   fillchars = 'vert:┃',
 }

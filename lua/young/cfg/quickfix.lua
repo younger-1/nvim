@@ -1,7 +1,8 @@
 local fn = vim.fn
 local M = {}
 
-function M.qftf(info)
+-- <https://github.com/kevinhwang91/nvim-bqf/issues/43#issuecomment-962531219>
+function M.quickfixtextfunc(info)
   local items
   local ret = {}
   if info.quickfix == 1 then
