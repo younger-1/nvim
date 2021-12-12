@@ -32,9 +32,11 @@ M.done = function()
       preview = "p", -- preview the diagnostic location
       close_folds = { "zM", "zm" }, -- close all folds
       open_folds = { "zR", "zr" }, -- open all folds
-      toggle_fold = { "zA", "za" }, -- toggle fold of current file
+      toggle_fold = { "zA", "za", 'i' }, -- toggle fold of current file
       previous = "k", -- preview item
       next = "j", -- next item
+      -- TODO: window is not big enough
+      help = '?',
     },
     indent_lines = true, -- add an indent guide below the fold icons
     auto_open = true, -- automatically open the list when you have diagnostics

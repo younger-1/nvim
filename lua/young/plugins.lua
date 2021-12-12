@@ -169,6 +169,17 @@ M.BWT = {
     },
   },
   -- tab = {},
+  quickfix = {
+    {
+      "kevinhwang91/nvim-bqf",
+      -- event = "BufRead",
+      ft = 'qf',
+      -- lua pp((require('bqf.config'))
+      config = function()
+        require('young.mod.bqf').done()
+      end,
+    },
+  }
 }
 
 M.files = {
@@ -217,6 +228,7 @@ M.find = {
       end,
       disable = is_windows,
     },
+    { 'junegunn/fzf' }
   },
 }
 

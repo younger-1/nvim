@@ -3,7 +3,6 @@ local tree_cb = require('nvim-tree.config').nvim_tree_callback
 local M = {}
 
 M.opts = {
-  gitignore = 0,
   highlight_opened_files = 2,
   icons = {
     git = {
@@ -34,8 +33,6 @@ M.cfg = {
     -- "alpha"
   },
   auto_close          = true,
-  open_on_tab         = false,
-  hijack_cursor       = false,
   update_cwd          = true, -- true good
   update_to_buf_dir   = {
     enable = true,
@@ -59,14 +56,18 @@ M.cfg = {
     cmd  = nil,
     args = {}
   },
+  git = {
+    enable = true,
+    ignore = true,
+  },
   filters = {
     dotfiles = false,
     custom = {}
   },
   view = {
     width = 30,
-    hide_root_folder = false,
     side = 'left',
+    hide_root_folder = false,
     auto_resize = false, -- false good
     mappings = {
       custom_only = false,
@@ -74,7 +75,7 @@ M.cfg = {
         { key = "l", cb = tree_cb "edit" },
         { key = "h", cb = tree_cb "close_node" },
         { key = "u", cb = tree_cb "parent_node" },
-        { key = { "<CR>" }, cb = tree_cb "cd" },
+        { key = "i", cb = tree_cb "cd" },
         { key = "?", cb = tree_cb "toggle_help" },
         { key = ".", cb = tree_cb "toggle_dotfiles" },
       },

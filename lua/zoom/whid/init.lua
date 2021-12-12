@@ -50,7 +50,7 @@ local function open_window()
   -- We will fill border with "box-drawing" characters.
   local border_lines = { '╔' .. string.rep('═', win_width) .. '╗' }
   local middle_line = '║' .. string.rep(' ', win_width) .. '║'
-  for i = 1, win_height do
+  for _ = 1, win_height do
     table.insert(border_lines, middle_line)
   end
   table.insert(border_lines, '╚' .. string.rep('═', win_width) .. '╝')
