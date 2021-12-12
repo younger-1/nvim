@@ -15,7 +15,7 @@ function M.setup()
 
   if vim.g.nvui then
     -- https://github.com/rohit-px2/nvui
-    require 'young.gui.nvui'.config()
+    require('young.gui.nvui').config()
   elseif vim.g.goneovim then
     -- https://github.com/akiyosi/goneovim
     require 'young.gui.goneovim'

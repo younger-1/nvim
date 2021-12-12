@@ -21,12 +21,12 @@ function M.adjust_transparency(num)
 end
 
 function M.toggle_fullscreen()
-  vim.cmd "FVimToggleFullScreen"
+  vim.cmd 'FVimToggleFullScreen'
 end
 
 function M.toggle_ligature()
   ligature = not ligature
-  vim.cmd("FVimFontLigature v:" .. tostring(ligature))
+  vim.cmd('FVimFontLigature v:' .. tostring(ligature))
 end
 
 function M.switch_effect()
@@ -47,7 +47,7 @@ M.once = function()
     nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
   ]]
   -- Titlebar
-  vim.cmd "FVimCustomTitleBar v:true"
+  vim.cmd 'FVimCustomTitleBar v:true'
   -- Cursor
   vim.cmd [[
     FVimCursorSmoothMove v:true
@@ -55,7 +55,7 @@ M.once = function()
   ]]
   -- Background composition
   vim.cmd('FVimBackgroundComposition "' .. bg_compositions[bg_idx] .. '"')
-  vim.cmd('FVimBackgroundAltOpacity 0.5') -- non-default bg opacity
+  vim.cmd 'FVimBackgroundAltOpacity 0.5'
   -- Image
   -- vim.cmd('FVimBackgroundImage "' .. image .. '"')
   vim.cmd [[
@@ -65,17 +65,17 @@ M.once = function()
     " FVimBackgroundImageOpacity 0.85
   ]]
   -- Font
-  vim.cmd("FVimFontLigature v:" .. tostring(ligature))
+  vim.cmd('FVimFontLigature v:' .. tostring(ligature))
   -- Weight tuning, possible valuaes are 100..900
   vim.cmd [[
     FVimFontNormalWeight 400
     FVimFontBoldWeight 700
   ]]
-  vim.cmd "FVimFontAntialias v:true"
-  vim.cmd "FVimFontAutohint v:true"
-  vim.cmd "FVimFontAutoSnap v:true"
+  vim.cmd 'FVimFontAntialias v:true'
+  vim.cmd 'FVimFontAutohint v:true'
+  vim.cmd 'FVimFontAutoSnap v:true'
   vim.cmd "FVimFontHintLevel 'full'"
-  vim.cmd "FVimFontSubpixel v:true"
+  vim.cmd 'FVimFontSubpixel v:true'
   vim.cmd [[
     " FVimFontLineHeight '+1.0'
     " FVimFontNoBuiltInSymbols v:true
@@ -95,7 +95,7 @@ end
 
 M.config = function()
   M.once()
-  font.once("sauce", 14)
+  font.once('sauce', 14)
   gmap.adjust_transparency = M.adjust_transparency
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.toggle_ligature = M.toggle_ligature

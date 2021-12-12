@@ -11,17 +11,17 @@ local unload_module = function(found, module_name, starts_with_only)
     end
   else
     matcher = function(pack)
-      return string.find(pack, "^" .. module_name)
+      return string.find(pack, '^' .. module_name)
     end
   end
 
   -- Handle impatient.nvim automatically.
   local luacache = (_G.__luacache or {}).cache
 
-  print "Start unload:"
+  print 'Start unload:'
   for pack, _ in pairs(package.loaded) do
     if matcher(pack) then
-      print("    " .. pack .. " is found")
+      print('    ' .. pack .. ' is found')
       package.loaded[pack] = nil
       table.insert(found, pack)
 
@@ -48,22 +48,22 @@ M.rr = function(...)
   if #mods == 0 then
     local bufpath = vim.api.nvim_buf_get_name(0)
     -- local bufpath = "/home/.local/lua/start/packer.nvim/lua/packer/clean.lua"
-    bufpath = vim.split(bufpath, "/") -- { "", "home", ".local", "lua", "start", "packer.nvim", "lua", "packer", "clean.lua" }
-    local pack = { vim.split(bufpath[#bufpath], ".", true)[1] } -- "clean"
+    bufpath = vim.split(bufpath, '/') -- { "", "home", ".local", "lua", "start", "packer.nvim", "lua", "packer", "clean.lua" }
+    local pack = { vim.split(bufpath[#bufpath], '.', true)[1] } -- "clean"
     for i = #bufpath - 1, 1, -1 do
-      if i == 1 and bufpath[i] ~= "lua" then
-        print("Invalid pack path: " .. vim.api.nvim_buf_get_name(0))
+      if i == 1 and bufpath[i] ~= 'lua' then
+        print('Invalid pack path: ' .. vim.api.nvim_buf_get_name(0))
         return
       end
-      if bufpath[i] == "lua" then
+      if bufpath[i] == 'lua' then
         break
       end
       table.insert(pack, 1, bufpath[i])
     end
-    pack = table.concat(pack, ".")
+    pack = table.concat(pack, '.')
     M.reload_file(pack)
-    print("Reload: " .. pack)
-    require("utils").reload_lv_config()
+    print('Reload: ' .. pack)
+    require('utils').reload_lv_config()
     return
   end
 
@@ -74,10 +74,10 @@ M.rr = function(...)
     unload_module(found, mod, true)
   end
 
-  print "Reload:"
+  print 'Reload:'
   for _, pack in ipairs(found) do
     require(pack)
-    print("    " .. pack .. " is updated")
+    print('    ' .. pack .. ' is updated')
   end
 
   -- TODO: may be to reload
@@ -128,20 +128,20 @@ end
 local bar_flag = true
 M.toggle_tabline = function()
   if bar_flag then
-    vim.cmd "BarbarDisable"
-    require("young.mod.tabline").config()
-    require("young.key.mappings").load {
+    vim.cmd 'BarbarDisable'
+    require('young.mod.tabline').config()
+    require('young.key.mappings').load {
       normal_mode = {
-        ["<S-l>"] = ":TablineBufferNext<CR>",
-        ["<S-h>"] = ":TablineBufferPrevious<CR>",
+        ['<S-l>'] = ':TablineBufferNext<CR>',
+        ['<S-h>'] = ':TablineBufferPrevious<CR>',
       },
     }
   else
-    vim.cmd "BarbarEnable"
-    require("young.key.mappings").load {
+    vim.cmd 'BarbarEnable'
+    require('young.key.mappings').load {
       normal_mode = {
-        ["<S-l>"] = ":BufferNext<CR>",
-        ["<S-h>"] = ":BufferPrevious<CR>",
+        ['<S-l>'] = ':BufferNext<CR>',
+        ['<S-h>'] = ':BufferPrevious<CR>',
       },
     }
   end
@@ -171,7 +171,7 @@ M.get_ls = function(servername)
   if ls then
     for bufnr, _ in pairs(ls.attached_buffers) do
       if bufnr == vim.fn.bufnr() then
-        print("[Cat!]")
+        print '[Cat!]'
         return ls
       end
     end
@@ -193,7 +193,7 @@ M.print_ls = function(...)
   local keys = { ... }
   M.get_ls()
   if not ls then
-    print("[Failed]: Not such server")
+    print '[Failed]: Not such server'
     return
   end
 

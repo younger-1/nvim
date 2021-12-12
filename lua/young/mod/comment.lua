@@ -6,7 +6,7 @@ local _ts_comment = function()
 end
 
 require('Comment').setup {
-  ignore = "^$",
+  ignore = '^$',
   ---LHS of toggle mappings in NORMAL + VISUAL mode
   ---@type table
   toggler = {
@@ -35,7 +35,7 @@ require('Comment').setup {
     ---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
     extended = false,
   },
-  pre_hook = _ts_comment 
+  pre_hook = _ts_comment,
 }
 
 --[[

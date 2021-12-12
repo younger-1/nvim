@@ -192,8 +192,8 @@ M.cfg = {
     packer = {
       theme = 'ivy',
       layout_config = {
-        height = .75
-      }
+        height = 0.75,
+      },
     },
   },
 }
@@ -220,8 +220,7 @@ function M.code_actions()
   builtin.lsp_code_actions(themes.get_dropdown(opts))
 end
 
-M.ice = function()
-end
+M.ice = function() end
 
 M.done = function()
   -- M.cfg = vim.tbl_deep_extend('force', M.cfg, {})

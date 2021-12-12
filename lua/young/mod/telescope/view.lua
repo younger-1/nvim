@@ -1,7 +1,7 @@
 local M = {}
 
-local builtin = require "telescope.builtin"
-local themes = require "telescope.themes"
+local builtin = require 'telescope.builtin'
+local themes = require 'telescope.themes'
 
 -- [Falling back to find_files if git_files can't find a .git directory](https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory)
 M.project_files = function()

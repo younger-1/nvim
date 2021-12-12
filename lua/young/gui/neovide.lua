@@ -8,17 +8,17 @@ local tran = require 'young.gui.transparency'
 
 local cur_idx = 1
 local cursor_modes = {
-  "railgun", -- 泡泡
-  "torpedo", -- 水雷
-  "pixiedust", -- 精灵
-  "sonicboom", -- 音速轰
-  "ripple", -- 涟漪
-  "wireframe", -- 线框
+  'railgun', -- 泡泡
+  'torpedo', -- 水雷
+  'pixiedust', -- 精灵
+  'sonicboom', -- 音速轰
+  'ripple', -- 涟漪
+  'wireframe', -- 线框
 }
 
 function M.toggle_fullscreen()
   -- vim.g doesn't work
-  vim.cmd('let g:neovide_fullscreen = !g:neovide_fullscreen')
+  vim.cmd 'let g:neovide_fullscreen = !g:neovide_fullscreen'
 end
 
 function M.adjust_transparency(num)

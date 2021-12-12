@@ -29,7 +29,7 @@ local mymappings = {
   ['<C-s>'] = {},
   -- Must
   ['<C-z>'] = {
-    ['<C-z>'] = {"<C-z>", "Suspend"}
+    ['<C-z>'] = { '<C-z>', 'Suspend' },
   },
   -- ["<C-a>"] = {},
   -- ["<C-x>"] = {},

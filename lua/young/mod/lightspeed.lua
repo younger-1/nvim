@@ -1,4 +1,4 @@
-require'lightspeed'.setup {
+require('lightspeed').setup {
   -- s/x
   grey_out_search_area = true,
   -- This can get _really_ slow if the window has a lot of content,

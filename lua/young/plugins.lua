@@ -1,4 +1,4 @@
-local utils = require('young.utils')
+local utils = require 'young.utils'
 local M = {}
 
 setmetatable(M, {
@@ -162,16 +162,18 @@ M.BWT = {
   window = {
     {
       'luukvbaal/stabilize.nvim',
-      disable = true,
+      -- disable = true,
       config = function()
-        require('stabilize').setup()
+        require('stabilize').setup {
+          nested = 'QuickFixCmdPost,DiagnosticChanged *',
+        }
       end,
     },
   },
   -- tab = {},
   quickfix = {
     {
-      "kevinhwang91/nvim-bqf",
+      'kevinhwang91/nvim-bqf',
       -- event = "BufRead",
       ft = 'qf',
       -- lua pp((require('bqf.config'))
@@ -179,7 +181,7 @@ M.BWT = {
         require('young.mod.bqf').done()
       end,
     },
-  }
+  },
 }
 
 M.files = {
@@ -228,7 +230,7 @@ M.find = {
       end,
       disable = is_windows,
     },
-    { 'junegunn/fzf' }
+    { 'junegunn/fzf' },
   },
 }
 
@@ -283,7 +285,7 @@ M.UI = {
 M.treesitter = {
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = vim.fn.has "nvim-0.6" == 1 and "master" or "0.5-compat",
+    branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
     run = ':TSUpdate',
     config = require 'plug-config.treesitter',
   },
@@ -478,7 +480,7 @@ M.write = {
         vim.g.mkdp_auto_close = 0
         vim.g.mkdp_command_for_global = 1
         vim.g.mkdp_open_to_the_world = 0
-      end
+      end,
     },
   },
 }
@@ -488,7 +490,7 @@ for _, module in pairs(M) do
     __call = function(t)
       local plugs = {}
       for key, item in pairs(module) do
-        if type(key) == "number" then
+        if type(key) == 'number' then
           plugs[#plugs + 1] = item
         else
           utils.append_to_list(plugs, item)
@@ -498,7 +500,7 @@ for _, module in pairs(M) do
         return unpack(plugs)
       end
       return plugs
-    end
+    end,
   })
 end
 

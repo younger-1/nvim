@@ -1,6 +1,6 @@
-local npairs = require('nvim-autopairs')
-local Rule = require('nvim-autopairs.rule')
-local cond = require('nvim-autopairs.conds')
+local npairs = require 'nvim-autopairs'
+local Rule = require 'nvim-autopairs.rule'
+local cond = require 'nvim-autopairs.conds'
 -- pp(cond)
 
 -- [Default]
@@ -13,56 +13,61 @@ local cond = require('nvim-autopairs.conds')
 -- local check_ts = false -- tree-sitter
 -- local map_bs = true  -- map the <BS> key
 -- local map_c_w = false -- map <c-w> to delete an pair if possible
-npairs.setup { 
+npairs.setup {
   fast_wrap = {},
 }
 
 -- If you want insert `(` after select function, but not for `tex`
-local cmp_status_ok, cmp = pcall(require, "cmp")
+local cmp_status_ok, cmp = pcall(require, 'cmp')
 if cmp_status_ok then
-  local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+  local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
   -- local map_char = { tex = '' }
   local map_char = {
-      all = "(",
-      tex = "{",
+    all = '(',
+    tex = '{',
   }
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = map_char })
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = map_char })
 end
 
 npairs.add_rules {
-  Rule("(",")")
-    :use_key("<c-h>")
-    :replace_endpair(function() return "<bs><del>" end, true)
+  Rule('(', ')'):use_key('<c-h>'):replace_endpair(function()
+    return '<bs><del>'
+  end, true),
 }
 
 -- Add spaces between parentheses
 npairs.add_rules {
-  Rule(' ', ' ')
-    :with_pair(function(opts)
-      local pair = opts.line:sub(opts.col - 1, opts.col)
-      return vim.tbl_contains({ '()', '[]', '{}' }, pair)
-    end),
+  Rule(' ', ' '):with_pair(function(opts)
+    local pair = opts.line:sub(opts.col - 1, opts.col)
+    return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+  end),
   Rule('( ', ' )')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%)') ~= nil
-      end)
-      :use_key(')'),
+    :with_pair(function()
+      return false
+    end)
+    :with_move(function(opts)
+      return opts.prev_char:match '.%)' ~= nil
+    end)
+    :use_key ')',
   Rule('{ ', ' }')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%}') ~= nil
-      end)
-      :use_key('}'),
+    :with_pair(function()
+      return false
+    end)
+    :with_move(function(opts)
+      return opts.prev_char:match '.%}' ~= nil
+    end)
+    :use_key '}',
   Rule('[ ', ' ]')
-      :with_pair(function() return false end)
-      :with_move(function(opts)
-          return opts.prev_char:match('.%]') ~= nil
-      end)
-      :use_key(']')
+    :with_pair(function()
+      return false
+    end)
+    :with_move(function(opts)
+      return opts.prev_char:match '.%]' ~= nil
+    end)
+    :use_key ']',
 }
 
-npairs.add_rule(Rule("<",">", { "markdown", "txt" }))
+npairs.add_rule(Rule('<', '>', { 'markdown', 'txt' }))
 
 -- TODO: **, __
 -- npairs.add_rules {
@@ -86,4 +91,3 @@ npairs.add_rule(Rule("<",">", { "markdown", "txt" }))
 --         end
 --     end),
 -- }
-

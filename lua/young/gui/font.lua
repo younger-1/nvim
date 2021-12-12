@@ -74,7 +74,7 @@ end
 
 M.post_font = function(show_default, show_fallback)
   -- current
-  local msg = "[Font]: " .. M.get_guifont()
+  local msg = '[Font]: ' .. M.get_guifont()
   -- default
   if show_default then
     msg = msg .. ', [default]: ' .. M.get_guifont(M.default)

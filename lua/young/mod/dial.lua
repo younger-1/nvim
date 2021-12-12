@@ -1,7 +1,7 @@
 local M = {}
 
-local dial = require "dial"
-local utils = require("young.utils")
+local dial = require 'dial'
+local utils = require 'young.utils'
 
 --[[
 
@@ -19,26 +19,26 @@ pp(require 'dial'.augends)
 
 -- Add a few of augends into default searchlist
 local settings = {
-  "number#decimal#fixed#zero",
-  "markup#markdown#header",
+  'number#decimal#fixed#zero',
+  'markup#markdown#header',
 }
 
 local function add_true_false()
   -- Toggle true / false
-  dial.augends["custom#boolean"] = dial.common.enum_cyclic {
-    name = "boolean",
-    strlist = { "true", "false" },
+  dial.augends['custom#boolean'] = dial.common.enum_cyclic {
+    name = 'boolean',
+    strlist = { 'true', 'false' },
   }
 
   -- For Languages which prefer True/False, e.g. python.
-  dial.augends["custom#Boolean"] = dial.common.enum_cyclic {
-    name = "Boolean",
-    strlist = { "True", "False" },
+  dial.augends['custom#Boolean'] = dial.common.enum_cyclic {
+    name = 'Boolean',
+    strlist = { 'True', 'False' },
   }
 
   utils.append_to_list(settings, {
-    "custom#Boolean",
-    "custom#boolean",
+    'custom#Boolean',
+    'custom#boolean',
   })
 end
 

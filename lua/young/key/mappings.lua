@@ -157,10 +157,10 @@ M.keys = {
     k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
     j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
 
-    ['<Up>'] = "<C-E>",
-    ['<Down>'] = "<C-Y>",
-    ['<Left>'] = "2zl",
-    ['<Right>'] = "2zh",
+    ['<Up>'] = '<C-E>',
+    ['<Down>'] = '<C-Y>',
+    ['<Left>'] = '2zl',
+    ['<Right>'] = '2zh',
   },
 }
 

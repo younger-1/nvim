@@ -70,11 +70,11 @@ local my_opts = {
 
 M.ice = function()
   M.leader = {}
-  M.leader.n = require "young.key.leader-normal"
-  M.leader.v = require "young.key.leader-visual"
-  M.n = require "young.key.normal"
+  M.leader.n = require 'young.key.leader-normal'
+  M.leader.v = require 'young.key.leader-visual'
+  M.n = require 'young.key.normal'
 
-  local key = require('young.key')
+  local key = require 'young.key'
   key.leader = M.leader
   key.n = M.n
 end

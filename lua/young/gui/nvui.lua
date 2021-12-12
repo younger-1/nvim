@@ -27,7 +27,7 @@ end
 
 function M.toggle_fullscreen()
   fullscreen = not fullscreen
-  vim.cmd("NvuiFullscreen v:" .. tostring(fullscreen))
+  vim.cmd('NvuiFullscreen v:' .. tostring(fullscreen))
 end
 
 M.once = function()
@@ -40,7 +40,7 @@ end
 
 M.config = function()
   M.once()
-  font.once("fira", 12)
+  font.once('fira', 12)
   gmap.adjust_fontsize = M.adjust_fontsize
   gmap.adjust_transparency = M.adjust_transparency
   gmap.toggle_fullscreen = M.toggle_fullscreen

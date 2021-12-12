@@ -1,10 +1,10 @@
-local luasnip = require('luasnip')
+local luasnip = require 'luasnip'
 
 local M = {}
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
 end
 
 M.done = function()
@@ -63,17 +63,20 @@ M.done = function()
       -- end,
 
       -- format = require('lspkind').cmp_format(),
-      format = require("lspkind").cmp_format{with_text = true, menu = {
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
-        nvim_lua = "[Lua]",
-        latex_symbols = "[Latex]",
-      }},
+      format = require('lspkind').cmp_format {
+        with_text = true,
+        menu = {
+          buffer = '[Buffer]',
+          nvim_lsp = '[LSP]',
+          luasnip = '[LuaSnip]',
+          nvim_lua = '[Lua]',
+          latex_symbols = '[Latex]',
+        },
+      },
     },
     mapping = {
-      ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+      ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+      ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -116,36 +119,36 @@ M.done = function()
       end,
     },
     sources = {
-      { name = "nvim_lsp" },
-      { name = "path" },
-      { name = "luasnip" },
-      { name = "cmp_tabnine" },
-      { name = "nvim_lua" },
-      { name = "buffer" },
-      { name = "calc" },
-      { name = "emoji" },
-      { name = "treesitter" },
-      { name = "crates" },
+      { name = 'nvim_lsp' },
+      { name = 'path' },
+      { name = 'luasnip' },
+      { name = 'cmp_tabnine' },
+      { name = 'nvim_lua' },
+      { name = 'buffer' },
+      { name = 'calc' },
+      { name = 'emoji' },
+      { name = 'treesitter' },
+      { name = 'crates' },
     },
   }
 
   -- Use buffer source for `/`
-  cmp.setup.cmdline("/", {
+  cmp.setup.cmdline('/', {
     sources = {
-      { name = "buffer" },
+      { name = 'buffer' },
     },
   })
 
-  cmp.setup.cmdline("?", {
+  cmp.setup.cmdline('?', {
     sources = {
-      { name = "buffer" },
+      { name = 'buffer' },
     },
   })
   -- Use cmdline & path source for ':'
-  cmp.setup.cmdline(":", {
+  cmp.setup.cmdline(':', {
     sources = {
-      { name = "path" },
-      { name = "cmdline" },
+      { name = 'path' },
+      { name = 'cmdline' },
     },
   })
 end

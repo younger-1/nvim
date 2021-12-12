@@ -1,5 +1,5 @@
 local mappings = {
-  ['/'] = { "<cmd>Telescope find_files layout_strategy=horizontal<cr>", 'Files' },
+  ['/'] = { '<cmd>Telescope find_files layout_strategy=horizontal<cr>', 'Files' },
   [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
   ['?'] = {
     name = '+help',
@@ -79,7 +79,7 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
       'LunarVim Git Branch',
     },
-    c = { ':edit ' .. join_paths(vim.fn.stdpath('config'), 'init.lua') .. '<cr>', 'Edit init.lua' },
+    c = { ':edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua') .. '<cr>', 'Edit init.lua' },
     f = { "<cmd>lua require('young.mod.telescope.finder').find_vim_config()<cr>", 'Find Config files' },
     g = { "<cmd>lua require('young.mod.telescope.finder').grep_vim_config()<cr>", 'Grep Config files' },
     i = { "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>", 'Toggle LunarVim Info' },
@@ -215,7 +215,7 @@ local mappings = {
     },
     ['<C-e>'] = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Diagnostics LocList' },
     A = { '<cmd>Telescope lsp_range_code_actions<cr>', 'Range Action' },
-    C = { "<cmd>CmpStatus<cr>", "Code Action" },
+    C = { '<cmd>CmpStatus<cr>', 'Code Action' },
     D = { '<cmd>Telescope lsp_workspace_diagnostics<cr>', 'Workspace Diagnostics' },
     F = {
       function()

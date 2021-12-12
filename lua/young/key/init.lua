@@ -15,7 +15,9 @@ M.map = function(keymap)
   local opts = vim.tbl_extend('force', defaults, {})
   -- get the extra options
   for i, v in pairs(keymap) do
-    if type(i) == 'string' then opts[i] = v end
+    if type(i) == 'string' then
+      opts[i] = v
+    end
   end
 
   -- basic support for buffer-scoped keybindings

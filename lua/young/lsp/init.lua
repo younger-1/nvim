@@ -1,4 +1,4 @@
-local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer = require 'nvim-lsp-installer'
 
 local M = {}
 
@@ -12,9 +12,9 @@ lsp_installer.settings {
   log_level = vim.log.levels.DEBUG,
   ui = {
     icons = {
-      server_installed = "",
-      server_pending = "",
-      server_uninstalled = "",
+      server_installed = '',
+      server_pending = '',
+      server_uninstalled = '',
     },
   },
 }
@@ -59,7 +59,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- Register a handler that will be called for all installed servers.
 lsp_installer.on_server_ready(function(server)
   local default_opts = {
-    before_init = function (params, config)
+    before_init = function(params, config)
       -- pp("[[ params ]]: ", params)
       -- pp("[[ config ]]: ", config)
       -- pp(vim.tbl_keys(params)) -- { "rootPath", "rootUri", "processId", "clientInfo", "capabilities", "trace", "initializationOptions", "workspaceFolders" }
@@ -69,24 +69,24 @@ lsp_installer.on_server_ready(function(server)
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 800,
-    }
+    },
   }
 
   local server_opts = {
-    ["sumneko_lua"] = function()
-      return vim.tbl_deep_extend("force", default_opts, {
+    ['sumneko_lua'] = function()
+      return vim.tbl_deep_extend('force', default_opts, {
         settings = {
           Lua = {
             runtime = {
-              version = "LuaJIT",
+              version = 'LuaJIT',
               path = {
-                "lua/?.lua",
-                "lua/?/init.lua"
+                'lua/?.lua',
+                'lua/?/init.lua',
               },
             },
             workspace = {
               library = {
-                [vim.fn.expand "$VIMRUNTIME"] = true,
+                [vim.fn.expand '$VIMRUNTIME'] = true,
                 [_G.packer_plugins['lua-dev.nvim'].path] = true,
                 [_G.packer_plugins['plenary.nvim'].path] = true,
               },
@@ -95,11 +95,11 @@ lsp_installer.on_server_ready(function(server)
             },
             diagnostics = {
               globals = {
-                "vim",
-              }
-            }
-          }
-        }
+                'vim',
+              },
+            },
+          },
+        },
       })
     end,
 
@@ -115,24 +115,24 @@ lsp_installer.on_server_ready(function(server)
     --   }
     -- end,
 
-    ["yamlls"] = function()
-      return vim.tbl_deep_extend("force", default_opts, {
+    ['yamlls'] = function()
+      return vim.tbl_deep_extend('force', default_opts, {
         settings = {
           yaml = {
             hover = true,
             completion = true,
             validate = true,
-            schemas = require("schemastore").json.schemas(),
+            schemas = require('schemastore').json.schemas(),
           },
         },
       })
     end,
 
-    ["jsonls"] = function()
-      return vim.tbl_deep_extend("force", default_opts, {
+    ['jsonls'] = function()
+      return vim.tbl_deep_extend('force', default_opts, {
         settings = {
           json = {
-            schemas = require("schemastore").json.schemas(),
+            schemas = require('schemastore').json.schemas(),
           },
         },
       })

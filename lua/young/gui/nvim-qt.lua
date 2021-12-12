@@ -16,7 +16,7 @@ local fullscreen = false
 function M.adjust_fontsize(num)
   font.adjust_size(num)
   -- vim.opt.guifont = fontface .. ':h' .. fontsize
-  vim.cmd("GuiFont! " .. font.get_guifont())
+  vim.cmd('GuiFont! ' .. font.get_guifont())
 end
 
 function M.adjust_transparency(num)
@@ -53,7 +53,7 @@ end
 
 M.config = function()
   M.once()
-  font.once("sauce", 12)
+  font.once('sauce', 12)
   gmap.adjust_fontsize = M.adjust_fontsize
   -- gmap.adjust_transparency = M.adjust_transparency
   gmap.toggle_fullscreen = M.toggle_fullscreen

@@ -2,9 +2,9 @@ local M = {}
 
 local alpha = require 'alpha'
 local dashboard = require 'alpha.themes.dashboard'
-local startify = require "alpha.themes.startify"
+local startify = require 'alpha.themes.startify'
 
-M.done =function()
+M.done = function()
   -- Set header
   dashboard.section.header.val = {
     -- "                                                     ",
@@ -109,7 +109,7 @@ M.done =function()
 end
 
 -- <https://github.com/rafamadriz/NeoCode/blob/main/lua/modules/plugins/alpha.lua>
--- 
+--
 -- M.config = function()
 --     startify.section.header.val = vim.g.code_startify_header_ascii
 --     startify.section.top_buttons.val = {

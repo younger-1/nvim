@@ -13,7 +13,7 @@ local default_options = {
   foldmethod = 'expr', -- folding, set to "expr" for treesitter based folding
   foldexpr = 'nvim_treesitter#foldexpr()', -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
   -- guifont = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
-  guifontwide = {'Sarasa Term SC'},
+  guifontwide = { 'Sarasa Term SC' },
   hidden = true, -- required to keep multiple buffers and open multiple buffers
   inccommand = 'split',
   hlsearch = true, -- highlight all matches on previous search pattern
@@ -50,6 +50,8 @@ local default_options = {
   sidescrolloff = 8,
   confirm = true,
   showbreak = '↪',
+  -- TODO:
+  fillchars = 'vert:┃',
 }
 
 for k, v in pairs(default_options) do

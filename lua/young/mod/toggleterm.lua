@@ -65,7 +65,7 @@ M.add_exec = function(exec, keymap, name)
     "<cmd>lua require('young.mod.toggleterm')._exec_toggle('" .. exec .. "')<CR>",
     { noremap = true, silent = true }
   )
-  require'young.key.which-key'.leader.n[keymap] = name
+  require('young.key.which-key').leader.n[keymap] = name
   -- lvim.builtin.which_key.mappings[keymap] = name
 end
 
@@ -84,7 +84,10 @@ M._exec_toggle = function(exec)
   local binary = M._split(exec)[1]
   if vim.fn.executable(binary) ~= 1 then
     -- Log:error('Unable to run executable ' .. binary .. '. Please make sure it is installed properly.')
-    vim.notify('Unable to run executable ' .. binary .. '. Please make sure it is installed properly.', vim.log.levels.ERROR)
+    vim.notify(
+      'Unable to run executable ' .. binary .. '. Please make sure it is installed properly.',
+      vim.log.levels.ERROR
+    )
     return
   end
   local Terminal = require('toggleterm.terminal').Terminal
