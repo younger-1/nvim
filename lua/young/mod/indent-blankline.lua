@@ -50,7 +50,6 @@ M.cfg = {
   },
 }
 
-local idx = 1
 local styles = {
   [1] = {
     char = '▏',
@@ -98,6 +97,7 @@ local styles = {
   },
 }
 
+local idx
 local function apply_style()
   local style = styles[idx]
   if style.hl_cmd then
@@ -115,6 +115,11 @@ M.hot = function()
   ibl.refresh()
 end
 
+M.reset = function()
+  idx = 1
+  M.hot()
+end
+
 M.done = function()
   -- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
   vim.wo.colorcolumn = '99999'
@@ -128,7 +133,7 @@ M.done = function()
 
   -- highlight of current indent char, default is Label
   vim.cmd [[highlight! link IndentBlanklineContextChar Normal]]
-  M.hot()
+  M.reset()
 end
 
 return M
