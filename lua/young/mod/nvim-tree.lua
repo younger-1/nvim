@@ -88,8 +88,8 @@ M.done = function()
     vim.g['nvim_tree_' .. opt] = val
   end
 
-  require('young.key').leader.n.e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' }, 
-require('nvim-tree').setup(M.cfg)
+  require('young.key').leader.n.e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' }
+  require('nvim-tree').setup(M.cfg)
 end
 
 return M

@@ -211,13 +211,17 @@ M.files = {
 }
 
 M.find = {
-  replace = {
+  core = {
     {
       'windwp/nvim-spectre',
       event = 'BufRead',
       config = function()
         -- require("user.spectre").config()
       end,
+    },
+    {
+      'mhinz/vim-grepper',
+      cmd = { 'Grepper', '<plug>(GrepperOperator)' },
     },
   },
   fzf = {
@@ -230,7 +234,6 @@ M.find = {
       end,
       disable = is_windows,
     },
-    { 'junegunn/fzf' },
   },
 }
 
@@ -433,9 +436,9 @@ M.git = {
       require('neogit').setup {}
     end,
   },
-  -- {
-  --   'tpope/vim-fugitive',
-  -- }
+  {
+    'tpope/vim-fugitive',
+  }
   -- {
   --   'tanvirtin/vgit.nvim',
   --   event = 'BufWinEnter',
@@ -506,20 +509,21 @@ end
 
 M.done = function()
   return {
-    M.theme(),
-    M.basic(),
-    M.appearance(),
-    M.motion(),
-    M.change(),
     M.BWT(),
-    M.files(),
-    M.UI(),
-    M.treesitter(),
-    M.telescope(),
-    M.code(),
     M.LSP(),
+    M.UI(),
+    M.appearance(),
+    M.basic(),
+    M.change(),
+    M.code(),
+    M.files(),
+    M.find(),
     M.git(),
+    M.motion(),
     M.neovim(),
+    M.telescope(),
+    M.theme(),
+    M.treesitter(),
     M.write(),
   }
 end
