@@ -381,3 +381,6 @@ Great thanks to:
 │  └──  utils.lua
 └──  init.lua
 ```
+
+<https://github.com/LunarVim/Neovim-from-scratch>
+

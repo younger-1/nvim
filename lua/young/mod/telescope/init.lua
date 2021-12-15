@@ -27,25 +27,29 @@ local view = require 'young.mod.telescope.view'
 --   end
 -- end
 
--- i -> <C-C>   -> close                           i -> <CR>    -> select_default
--- i -> <C-L>   -> complete_tag                    i -> <C-X>   -> select_horizontal
--- i -> <Down>  -> move_selection_next             i -> <C-T>   -> select_tab
--- i -> <C-N>   -> move_selection_next             i -> <C-V>   -> select_vertical
--- i -> <Up>    -> move_selection_previous         i -> <M-q>   -> send_selected_to_qflist + ope…
--- i -> <C-P>   -> move_selection_previous         i -> <C-Q>   -> send_to_qflist + open_qflist
--- i -> <C-D>   -> preview_scrolling_down          i -> <S-Tab> -> toggle_selection + move_selec…
--- i -> <C-U>   -> preview_scrolling_up            i -> <Tab>   -> toggle_selection + move_selec…
+--[[ Tips:
+  <C-e> to put command to commandline, creates new file in current directory
 
--- n -> <Esc>   -> close                           n -> <C-D>   -> preview_scrolling_down
--- n -> j       -> move_selection_next             n -> <C-U>   -> preview_scrolling_up
--- n -> <Down>  -> move_selection_next             n -> <CR>    -> select_default
--- n -> k       -> move_selection_previous         n -> <C-X>   -> select_horizontal
--- n -> <Up>    -> move_selection_previous         n -> <C-T>   -> select_tab
--- n -> L       -> move_to_bottom                  n -> <C-V>   -> select_vertical
--- n -> G       -> move_to_bottom                  n -> <M-q>   -> send_selected_to_qflist + ope…
--- n -> M       -> move_to_middle                  n -> <C-Q>   -> send_to_qflist + open_qflist
--- n -> H       -> move_to_top                     n -> <S-Tab> -> toggle_selection + move_selec…
--- n -> gg      -> move_to_top                     n -> <Tab>   -> toggle_selection + move_selec…
+  i -> <C-C>   -> close                           i -> <CR>    -> select_default
+  i -> <C-L>   -> complete_tag                    i -> <C-X>   -> select_horizontal
+  i -> <Down>  -> move_selection_next             i -> <C-T>   -> select_tab
+  i -> <C-N>   -> move_selection_next             i -> <C-V>   -> select_vertical
+  i -> <Up>    -> move_selection_previous         i -> <M-q>   -> send_selected_to_qflist + ope…
+  i -> <C-P>   -> move_selection_previous         i -> <C-Q>   -> send_to_qflist + open_qflist
+  i -> <C-D>   -> preview_scrolling_down          i -> <S-Tab> -> toggle_selection + move_selec…
+  i -> <C-U>   -> preview_scrolling_up            i -> <Tab>   -> toggle_selection + move_selec…
+
+  n -> <Esc>   -> close                           n -> <C-D>   -> preview_scrolling_down
+  n -> j       -> move_selection_next             n -> <C-U>   -> preview_scrolling_up
+  n -> <Down>  -> move_selection_next             n -> <CR>    -> select_default
+  n -> k       -> move_selection_previous         n -> <C-X>   -> select_horizontal
+  n -> <Up>    -> move_selection_previous         n -> <C-T>   -> select_tab
+  n -> L       -> move_to_bottom                  n -> <C-V>   -> select_vertical
+  n -> G       -> move_to_bottom                  n -> <M-q>   -> send_selected_to_qflist + ope…
+  n -> M       -> move_to_middle                  n -> <C-Q>   -> send_to_qflist + open_qflist
+  n -> H       -> move_to_top                     n -> <S-Tab> -> toggle_selection + move_selec…
+  n -> gg      -> move_to_top                     n -> <Tab>   -> toggle_selection + move_selec…
+]]
 
 M.cfg = {
   defaults = {
@@ -111,25 +115,47 @@ M.cfg = {
       i = {
         -- ['<C-c>'] = actions.close,
         -- ['<CR>'] = actions.select_default + actions.center,
-        ['<C-j>'] = actions.move_selection_next,
-        ['<C-k>'] = actions.move_selection_previous,
-        ['<C-n>'] = actions.cycle_history_next,
-        ['<C-p>'] = actions.cycle_history_prev,
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-r>'] = actions.smart_send_to_loclist + actions.open_loclist,
+
+        -- ['<C-_>'] = actions.which_key, -- Keys to produce <C-/>
         -- ["<C-_>"] = require("telescope.actions.generate").which_key {
         --   name_width = 20, -- typically leads to smaller floats
         --   max_height = 0.2, -- increase potential maximum height
         --   seperator = " ⇐ ", -- change sep between mode, keybind, and name
         --   close_with_action = false, -- do not close float on action
         -- },
+        ['<C-j>'] = actions.move_selection_next,
+        ['<C-k>'] = actions.move_selection_previous,
+
+        ['<C-n>'] = actions.cycle_history_next,
+        ['<C-p>'] = actions.cycle_history_prev,
+
+        ['<C-b>'] = actions.results_scrolling_up,
+        ['<C-f>'] = actions.results_scrolling_down,
+
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
+
+        ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+        ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
       },
       n = {
         ['<C-n>'] = actions.cycle_history_next,
         ['<C-p>'] = actions.cycle_history_prev,
+
+        ['<C-b>'] = actions.results_scrolling_up,
+        ['<C-f>'] = actions.results_scrolling_down,
+
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-r>'] = actions.smart_send_to_loclist + actions.open_loclist,
-        ['<C-_>'] = actions.which_key, -- Keys to produce <C-/>
+        ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
+
+        ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+        ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
+
+        t = actions.toggle_selection,
+        T = actions.select_all,
+        U = actions.drop_all,
+        J = actions.cycle_previewers_next,
+        K = actions.cycle_previewers_prev,
       },
     },
   },
@@ -137,7 +163,14 @@ M.cfg = {
     -- get_cursor(), get_dropdown(), get_ivy()
     -- find_files = require("telescope.themes").get_ivy(),
     autocommands = view.v1,
-    buffers = { theme = 'ivy' },
+    buffers = {
+      theme = 'ivy',
+      mappings = {
+        n = {
+          d = actions.delete_buffer,
+        },
+      },
+    },
     colorscheme = view.h4,
     commands = { theme = 'ivy' },
     current_buffer_fuzzy_find = view.v2,
@@ -157,9 +190,11 @@ M.cfg = {
     git_branches = {
       mappings = {
         i = {
+          ['<C-b>'] = actions.preview_scrolling_up,
           ['<C-f>'] = actions.preview_scrolling_down,
         },
         n = {
+          ['<C-b>'] = actions.preview_scrolling_up,
           ['<C-f>'] = actions.preview_scrolling_down,
         },
       },

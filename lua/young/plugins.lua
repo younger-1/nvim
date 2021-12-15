@@ -219,10 +219,6 @@ M.find = {
         -- require("user.spectre").config()
       end,
     },
-    {
-      'mhinz/vim-grepper',
-      cmd = { 'Grepper', '<plug>(GrepperOperator)' },
-    },
   },
   fzf = {
     {
