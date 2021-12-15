@@ -87,8 +87,8 @@ end
 -- For lua lsp
 plugin_loader.test_path = function()
   for name, infos in pairs(_G.packer_plugins) do
-    if not vim.tbl_contains(vim.tbl_keys(infos), "path") then
-      print(name .. " do not have `path` attributes")
+    if not vim.tbl_contains(vim.tbl_keys(infos), 'path') then
+      print(name .. ' do not have `path` attributes')
     end
   end
 end

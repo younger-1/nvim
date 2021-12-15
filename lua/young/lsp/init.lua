@@ -8,13 +8,13 @@ local M = {}
 -- end
 vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
 
-local lsp_cfg = require('young.lsp.config')
+local lsp_cfg = require 'young.lsp.config'
 for _, sign in ipairs(lsp_cfg.diagnostics.signs) do
   vim.fn.sign_define(sign.name, {
     -- icon = require('young.tools').get_icon(sign.name),
     text = sign.text,
     texthl = sign.name,
-    numhl = sign.name
+    numhl = sign.name,
   })
 end
 

@@ -30,9 +30,9 @@ M.cfg = {
   hijack_netrw = true,
   open_on_setup = true,
   ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
-    "alpha",
+    'startify',
+    'dashboard',
+    'alpha',
   },
   auto_close = true,
   update_cwd = true, -- true good

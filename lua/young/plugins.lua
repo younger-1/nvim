@@ -18,12 +18,12 @@ M.basic = {
       require('young.mod.filetype').done()
     end,
   },
-  { 
+  {
     'rcarriga/nvim-notify',
     config = function()
       require('young.mod.notify').done()
-    end
-  }
+    end,
+  },
 }
 
 M.theme = {
@@ -314,7 +314,7 @@ M.telescope = {
     },
     {
       'nvim-telescope/telescope-frecency.nvim',
-      requires = { { "tami5/sqlite.lua", module = "sqlite" } },
+      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
     },
     { 'nvim-telescope/telescope-symbols.nvim' },
   },
@@ -435,7 +435,7 @@ M.git = {
   },
   {
     'tpope/vim-fugitive',
-  }
+  },
   -- {
   --   'tanvirtin/vgit.nvim',
   --   event = 'BufWinEnter',

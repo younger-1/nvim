@@ -354,6 +354,8 @@ local mappings = {
     M = { '<cmd>MinimapToggle<cr>', 'Minimap' },
     t = { '<cmd>TodoQuickFix<cr>', 'Todo' },
     i = { '<cmd>lua require("young.mod.indent-blankline").hot()<cr>', 'Indent Style' },
+    n = { '<cmd>lua require("young.mod.notify").hot()<cr>', 'Nofity Style' },
+    N = { '<cmd>lua require("young.mod.notify").toggle()<cr>', 'Toggle Nofity' },
   },
   w = { '<cmd>w!<cr>', 'Save' },
   x = {
