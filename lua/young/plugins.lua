@@ -301,30 +301,27 @@ M.telescope = {
       end,
     },
     {
-      'nvim-telescope/telescope-frecency.nvim',
-      requires = { 'tami5/sql.nvim' },
-    },
-    {
       'nvim-telescope/telescope-fzf-native.nvim',
       run = 'make',
-      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'fzf'
       end,
+    },
+    {
+      'nvim-telescope/telescope-frecency.nvim',
+      requires = { { "tami5/sqlite.lua", module = "sqlite" } },
     },
     { 'nvim-telescope/telescope-symbols.nvim' },
   },
   other = {
     {
       'nvim-telescope/telescope-packer.nvim',
-      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'packer'
       end,
     },
     {
       'jvgrootveld/telescope-zoxide',
-      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'zoxide'
         require('telescope._extensions.zoxide.config').setup {
@@ -334,7 +331,6 @@ M.telescope = {
     },
     {
       'AckslD/nvim-neoclip.lua',
-      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'neoclip'
         require('neoclip').setup {
