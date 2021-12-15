@@ -18,6 +18,12 @@ M.basic = {
       require('young.mod.filetype').done()
     end,
   },
+  { 
+    'rcarriga/nvim-notify',
+    config = function()
+      require('young.mod.notify').done()
+    end
+  }
 }
 
 M.theme = {
