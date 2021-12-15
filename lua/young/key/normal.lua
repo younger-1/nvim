@@ -1,7 +1,7 @@
 local mymappings = {
   [']'] = {
     d = {
-      '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
+      '<cmd>lua vim.diagnostic.goto_next()<cr>',
       'Next Diagnostic',
     },
     -- c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
@@ -9,7 +9,7 @@ local mymappings = {
   },
   ['['] = {
     d = {
-      '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
+      '<cmd>lua vim.diagnostic.goto_prev()<cr>',
       'Prev Diagnostic',
     },
     -- c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },

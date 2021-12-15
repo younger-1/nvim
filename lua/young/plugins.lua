@@ -229,7 +229,6 @@ M.find = {
   fzf = {
     {
       'ibhagwan/fzf-lua',
-      requires = 'vijaymarupudi/nvim-fzf',
       module = 'fzf-lua',
       config = function()
         require 'young.mod.fzf'
