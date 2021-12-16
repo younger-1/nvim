@@ -72,10 +72,14 @@ command! -nargs=+ -complete=command BufMessage call yo#redir#Messages(<q-args>, 
 command! -nargs=+ -complete=command WinMessage call yo#redir#Messages(<q-args>, 'vs new' )
 command! -nargs=+ -complete=command TabMessage call yo#redir#Messages(<q-args>, 'tabnew' )
 
-function! Capture(cmd)
-  execute ":enew|pu=execute('" . a:cmd . "')|1,2d_"
-endfunction
-command! -nargs=+ -complete=command Capture silent call Capture(<q-args>)
+" function! Capture(cmd)
+"   execute ":enew|pu=execute('" . a:cmd . "')|1,2d_"
+" endfunction
+" command! -nargs=+ -complete=command Capture silent call Capture(<q-args>)
+command! -nargs=1 -complete=command Capture
+\ <mods> new |
+\ setlocal buftype=nofile bufhidden=hide noswapfile |
+\ call setline(1, split(execute(<q-args>), '\n'))
 
 " <https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db>
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>

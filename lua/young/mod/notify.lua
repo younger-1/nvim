@@ -1,4 +1,4 @@
-local ntf = require('notify')
+local ntf = require 'notify'
 
 local M = {}
 
@@ -12,8 +12,8 @@ M.yntf = function(str, level)
     test_second = { level, 'n', true },
   }
   ntf(str, level or vim.log.levels.TRACE, {
-    icon = "",
-    title = "Young",
+    icon = '',
+    title = 'Young',
     timeout = 5000,
     on_open = nil,
     on_close = nil,
@@ -77,7 +77,7 @@ M.hot = function(silent)
   M.cfg.stages = styles[idx]
   ntf.setup(M.cfg)
   if not silent then
-    M.yntf("[Notify]: " .. M.cfg.stages)
+    M.yntf('[Notify]: ' .. M.cfg.stages)
   end
 
   idx = idx % #styles

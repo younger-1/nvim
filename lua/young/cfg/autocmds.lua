@@ -64,6 +64,15 @@ function M.load_augroups()
     _general_lsp = {
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
+    _help = {
+      { 'FileType', 'help', 'nnoremap <buffer> <CR> <C-]>' },
+      { 'FileType', 'help', 'nnoremap <buffer> <BS> <C-T>' },
+      { 'FileType', 'help', 'nnoremap <buffer> { <cmd>pop<cr>' },
+      { 'FileType', 'help', 'nnoremap <buffer> } <cmd>tag<cr>' },
+    },
+    _vim = {
+      { 'FileType', 'vim', 'setlocal foldlevel=0 foldmethod=marker foldmarker=\\ {{{,\\ }}}' },
+    },
     custom_groups = {},
   }
 end
