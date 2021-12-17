@@ -103,8 +103,14 @@ M.keys = {
 
     --
     Y = 'y$',
-    ZA = ':wqa<CR>',
-    ['g<C-l>'] = '<cmd>nohlsearch<cr><C-l>',
+    n = 'nzz',
+    N = 'Nzz',
+    ZA = '<cmd>wqa<CR>',
+    ['<BS>'] = '<C-^>',
+    ['<ESC>'] = '<cmd>nohl<CR>',
+    ['g<C-l>'] = '<cmd>nohl<CR><C-l>',
+    ['<S-CR>'] = '<cmd>wqall<CR>', -- Windows Terminal not recognize
+    ['<CR>'] = {"(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true }},
   },
 
   ---@usage change or add keymappings for terminal mode
@@ -116,6 +122,7 @@ M.keys = {
     ['<C-l>'] = '<C-\\><C-N><C-w>l',
 
     -- quitting insert mode
+    ['<C-o>'] = '<C-\\><C-N>',
     JJ = '<C-\\><C-N>',
     JK = '<C-\\><C-N>',
   },
@@ -126,9 +133,9 @@ M.keys = {
     ['<'] = '<gv',
     ['>'] = '>gv',
 
-    Y = [["+y]],
-    d = [["_d]],
-    X = [["+x]],
+    d = [["_d]], -- Use `x` to cut
+    X = [["+x]], -- Use `X` for system-cut
+    Y = [["+y]], -- Use `Y` for system-copy
 
     -- Select to start and end quickly
     H = '^',
@@ -154,13 +161,15 @@ M.keys = {
 
   map_mode = {
     -- Remap for dealing with word wrap
-    k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
-    j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
+    k = { "v:count == 0 ? 'gk' : 'k'", { expr = true } },
+    j = { "v:count == 0 ? 'gj' : 'j'", { expr = true } },
 
     ['<Up>'] = '<C-E>',
     ['<Down>'] = '<C-Y>',
     ['<Left>'] = '2zl',
     ['<Right>'] = '2zh',
+
+    ['<Tab>'] = { '%', { noremap = false } },
   },
 }
 

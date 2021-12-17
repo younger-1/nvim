@@ -19,7 +19,8 @@ function M.load_augroups()
       {
         'TextYankPost',
         '*',
-        "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
+        -- "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
+        "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
       },
       {
         'BufWinEnter',

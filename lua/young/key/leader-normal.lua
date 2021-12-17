@@ -268,6 +268,7 @@ local mappings = {
     S = { '<cmd>PackerSync<cr>', 'Sync' },
     c = { '<cmd>PackerCompile<cr>', 'Compile' },
     i = { '<cmd>PackerInstall<cr>', 'Install' },
+    k = { '<cmd>PackerClean<cr>', 'Clean' },
     p = {
       "<cmd>lua require('telescope').extensions.packer.packer { layout_config = { preview_width = 0.5} }<cr>",
       'Telescope Packer',
