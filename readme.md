@@ -80,6 +80,9 @@ May be useful:
 - [ ]  [neovim-gtk](https://github.com/daa84/neovim-gtk)
 - [ ]  [vimr](https://github.com/qvacua/vimr)
 
+|Function|Mapping|
+|:-----:|:------:|
+
 ## Structure
 
 ```

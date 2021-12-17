@@ -134,6 +134,13 @@ M.change = {
         require 'young.mod.autopairs'
       end,
     },
+    { 
+      'junegunn/vim-easy-align',
+      cmd = 'EasyAlign',
+      config = function()
+        require "young.mod.easy-align"
+      end,
+    },
   },
   comment = {
     {
