@@ -29,7 +29,6 @@ function M.load_augroups()
       },
       { 'BufWritePost', plugins_path, "lua require('young.cfg').reload()" },
       -- { "BufWritePost", plugins_path, ":echomsg '[reload young]'" },
-      { 'FileType', 'qf', 'set nobuflisted' },
       -- { "VimLeavePre", "*", "set title set titleold=" },
     },
     _formatoptions = {
@@ -47,32 +46,12 @@ function M.load_augroups()
       { 'BufRead', '*.zsh', 'setlocal filetype=sh' },
       { 'BufNewFile', '*.zsh', 'setlocal filetype=sh' },
     },
-    _git = {
-      { 'FileType', 'gitcommit', 'setlocal wrap' },
-      { 'FileType', 'gitcommit', 'setlocal spell' },
-    },
-    _markdown = {
-      { 'FileType', 'markdown', 'setlocal wrap' },
-      { 'FileType', 'markdown', 'setlocal spell' },
-    },
-    _buffer_bindings = {
-      { 'FileType', 'floaterm', 'nnoremap <silent> <buffer> q :q<CR>' },
-    },
     _auto_resize = {
       -- will cause split windows to be resized evenly if main window is resized
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-    },
-    _help = {
-      { 'FileType', 'help', 'nnoremap <buffer> <CR> <C-]>' },
-      { 'FileType', 'help', 'nnoremap <buffer> <BS> <C-T>' },
-      { 'FileType', 'help', 'nnoremap <buffer> { <cmd>pop<cr>' },
-      { 'FileType', 'help', 'nnoremap <buffer> } <cmd>tag<cr>' },
-    },
-    _vim = {
-      { 'FileType', 'vim', 'setlocal foldlevel=0 foldmethod=marker foldmarker=\\ {{{,\\ }}}' },
     },
     custom_groups = {},
   }
