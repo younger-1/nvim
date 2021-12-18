@@ -4,27 +4,27 @@ local M = {}
 local generic_opts_any = { noremap = true, silent = true }
 
 local generic_opts = {
+  insert_command_mode = generic_opts_any,
   insert_mode = generic_opts_any,
+  command_mode = generic_opts_any,
+  map_mode = generic_opts_any,
   normal_mode = generic_opts_any,
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
-  command_mode = generic_opts_any,
-  term_mode = { silent = true },
   operator_mode = generic_opts_any,
-  map_mode = generic_opts_any,
-  insert_command_mode = generic_opts_any,
+  term_mode = { silent = true },
 }
 
 local mode_adapters = {
+  insert_command_mode = '!',
   insert_mode = 'i',
+  command_mode = 'c',
+  map_mode = '',
   normal_mode = 'n',
   visual_mode = 'v',
   visual_block_mode = 'x',
-  command_mode = 'c',
-  term_mode = 't',
   operator_mode = 'o',
-  map_mode = '',
-  insert_command_mode = '!',
+  term_mode = 't',
 }
 
 M.keys = {
@@ -36,15 +36,6 @@ M.keys = {
     ['<A-b>'] = '<S-Left>',
     -- ["<C-b>"] = "<Left>",
     -- ["<C-f>"] = "<Right>",
-  },
-  ---@usage change or add keymappings for command mode
-  command_mode = {
-    -- navigate tab completion with <c-j> and <c-k>
-    -- runs conditionally
-    ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true, noremap = true } },
-    ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
-    --
-    ['<C-V>'] = '<C-R>+',
   },
 
   -- ---@usage change or add keymappings for insert mode
@@ -72,6 +63,29 @@ M.keys = {
     -- Move line in insert mode
     ['<C-Up>'] = '<C-o>:m .-2<CR>',
     ['<C-Down>'] = '<C-o>:m .+1<CR>',
+  },
+
+  ---@usage change or add keymappings for command mode
+  command_mode = {
+    -- navigate tab completion with <c-j> and <c-k>
+    -- runs conditionally
+    ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true } },
+    ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true } },
+    --
+    ['<C-V>'] = '<C-R>+',
+  },
+
+  map_mode = {
+    -- Remap for dealing with word wrap
+    k = { "v:count == 0 ? 'gk' : 'k'", { expr = true } },
+    j = { "v:count == 0 ? 'gj' : 'j'", { expr = true } },
+
+    ['<Up>'] = '<C-E>',
+    ['<Down>'] = '<C-Y>',
+    ['<Left>'] = '2zl',
+    ['<Right>'] = '2zh',
+
+    ['<Tab>'] = { '%', { noremap = false } },
   },
 
   ---@usage change or add keymappings for normal mode
@@ -113,20 +127,6 @@ M.keys = {
     ['<CR>'] = {"(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true }},
   },
 
-  ---@usage change or add keymappings for terminal mode
-  term_mode = {
-    -- Terminal window navigation
-    ['<C-h>'] = '<C-\\><C-N><C-w>h',
-    ['<C-j>'] = '<C-\\><C-N><C-w>j',
-    ['<C-k>'] = '<C-\\><C-N><C-w>k',
-    ['<C-l>'] = '<C-\\><C-N><C-w>l',
-
-    -- quitting insert mode
-    ['<C-o>'] = '<C-\\><C-N>',
-    JJ = '<C-\\><C-N>',
-    JK = '<C-\\><C-N>',
-  },
-
   ---@usage change or add keymappings for visual mode
   visual_mode = {
     -- Better indenting
@@ -159,17 +159,18 @@ M.keys = {
     L = '$',
   },
 
-  map_mode = {
-    -- Remap for dealing with word wrap
-    k = { "v:count == 0 ? 'gk' : 'k'", { expr = true } },
-    j = { "v:count == 0 ? 'gj' : 'j'", { expr = true } },
+  ---@usage change or add keymappings for terminal mode
+  term_mode = {
+    -- Terminal window navigation
+    ['<C-h>'] = '<C-\\><C-N><C-w>h',
+    ['<C-j>'] = '<C-\\><C-N><C-w>j',
+    ['<C-k>'] = '<C-\\><C-N><C-w>k',
+    ['<C-l>'] = '<C-\\><C-N><C-w>l',
 
-    ['<Up>'] = '<C-E>',
-    ['<Down>'] = '<C-Y>',
-    ['<Left>'] = '2zl',
-    ['<Right>'] = '2zh',
-
-    ['<Tab>'] = { '%', { noremap = false } },
+    -- quitting insert mode
+    ['<C-o>'] = '<C-\\><C-N>',
+    JJ = '<C-\\><C-N>',
+    JK = '<C-\\><C-N>',
   },
 }
 
@@ -191,7 +192,8 @@ function M.set_keymap(mode, key, val)
   local opt = generic_opts[mode] or generic_opts_any
   mode = mode_adapters[mode] or mode
   if type(val) == 'table' then
-    opt = val[2]
+    -- opt = val[2]
+    opt = vim.tbl_extend('keep', val[2], opt)
     val = val[1]
   end
   vim.api.nvim_set_keymap(mode, key, val, opt)
@@ -210,8 +212,8 @@ end
 -- @param keymaps A list of key mappings for each mode
 function M.load(keymaps)
   keymaps = keymaps or M.keys
-  for mode, mapping in pairs(keymaps) do
-    load_mode(mode, mapping)
+  for mode, mappings in pairs(keymaps) do
+    load_mode(mode, mappings)
   end
 end
 
