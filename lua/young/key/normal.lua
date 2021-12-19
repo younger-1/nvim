@@ -48,6 +48,7 @@ local mymappings = {
       r = { '<cmd>setlocal relativenumber!<cr>', 'relativenumber' },
       ['|'] = { '<cmd>setlocal cursorcolumn!<cr>', 'column' },
       ['-'] = { '<cmd>setlocal cursorline!<cr>', 'line' },
+      ['<Tab>'] = { ':call TabToggle()<cr>', '🦊' },
       l = { '<cmd>setlocal list!<cr>', 'list' },
       s = { '<cmd>setlocal spell!<cr>', 'spell' },
       w = { '<cmd>setlocal wrap!<cr>', 'wrap' },

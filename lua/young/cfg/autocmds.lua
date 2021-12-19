@@ -15,7 +15,7 @@ function M.load_augroups()
 
   return {
     _general_settings = {
-      { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
       {
         'TextYankPost',
         '*',

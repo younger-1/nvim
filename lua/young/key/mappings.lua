@@ -85,7 +85,7 @@ M.keys = {
     ['<Left>'] = '2zl',
     ['<Right>'] = '2zh',
 
-    ['<Tab>'] = { '%', { noremap = false } },
+    -- ['<Tab>'] = { '%', { noremap = false } },
   },
 
   ---@usage change or add keymappings for normal mode

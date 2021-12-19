@@ -44,6 +44,19 @@ function! FoldTextToggle()
   endif
 endfunction
 
+let s:tab_mapped = v:false
+function! TabToggle()
+  if !s:tab_mapped
+    let s:tab_mapped = v:true
+    map <Tab> %
+    echomsg "[Young]: <Tab> mapped"
+  else
+    let s:tab_mapped = v:false
+    unmap <Tab>
+    echomsg "[Young]: <Tab> unmapped"
+  endif
+endfunction
+
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR lua require'young.tools'.rr(<f-args>)
 
