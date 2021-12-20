@@ -110,7 +110,7 @@ Plug 'benekastah/neomake', Cond(has('nvim'), { 'on': 'Neomake' })
 
 Loading plugins manually
 
-```vim
+```viml
 " Load on nothing
 Plug 'SirVer/ultisnips', { 'on': [] }
 Plug 'Valloric/YouCompleteMe', { 'on': [] }
@@ -119,6 +119,19 @@ augroup load_us_ycm
   autocmd!
   autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe')
                      \| autocmd! load_us_ycm
+augroup END
+```
+
+Packer compiled example
+
+```viml
+augroup packer_load_aucmds
+au!
+" Filetype lazy-loads
+au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = "qf" }, _G.packer_plugins)
+" Event lazy-loads
+au CursorMoved * ++once lua require("packer.load")({'vim-wordmotion', 'vim-matchup'}, { event = "CursorMoved *" }, _G.packer_plugins)
+au BufReadPre * ++once lua require("packer.load")({'persistence.nvim', 'indent-blankline.nvim'}, { event = "BufReadPre *" }, _G.packer_plugins)
 augroup END
 ```
 

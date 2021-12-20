@@ -343,24 +343,9 @@ M.telescope = {
     },
     {
       'AckslD/nvim-neoclip.lua',
+      requires = { { "tami5/sqlite.lua", module = "sqlite" } },
       config = function()
-        require('telescope').load_extension 'neoclip'
-        require('neoclip').setup {
-          filter = nil,
-          preview = true,
-          default_register = '"',
-          content_spec_column = false,
-          on_paste = {
-            set_reg = false,
-          },
-          keys = {
-            i = {
-              select = '<cr>',
-              paste = '<c-l>',
-              paste_behind = '<c-h>',
-            },
-          },
-        }
+        require 'young.mod.neoclip'
       end,
     },
   },

@@ -36,6 +36,8 @@ M.cfg = {
   },
   auto_close = true,
   update_cwd = true, -- true good
+  -- hijacks new directory buffers when they are opened
+  -- disable it if using `vim-dirvish` or `lir.nvim`
   update_to_buf_dir = {
     enable = true,
     auto_open = true,

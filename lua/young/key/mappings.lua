@@ -97,10 +97,15 @@ M.keys = {
     ['<C-l>'] = '<C-w>l',
 
     -- Resize with arrows
-    ['<C-Up>'] = ':resize -2<CR>',
-    ['<C-Down>'] = ':resize +2<CR>',
-    ['<C-Left>'] = ':vertical resize -2<CR>',
-    ['<C-Right>'] = ':vertical resize +2<CR>',
+    ['<C-Up>'] = ':resize -5<CR>',
+    ['<C-Down>'] = ':resize +5<CR>',
+    ['<C-Left>'] = ':vertical resize -8<CR>',
+    ['<C-Right>'] = ':vertical resize +8<CR>',
+
+    ['<S-Up>'] = ':resize -1<CR>',
+    ['<S-Down>'] = ':resize +1<CR>',
+    ['<S-Left>'] = ':vertical resize -1<CR>',
+    ['<S-Right>'] = ':vertical resize +1<CR>',
 
     -- Move current line / block with Alt-j/k a la vscode.
     ['<A-j>'] = ':m .+1<CR>==',
@@ -168,9 +173,9 @@ M.keys = {
     ['<C-l>'] = '<C-\\><C-N><C-w>l',
 
     -- quitting insert mode
-    ['<C-o>'] = '<C-\\><C-N>',
+    ['<Esc><Esc>'] = '<C-\\><C-N>',
+    -- ['<C-o>'] = '<C-\\><C-N>',
     JJ = '<C-\\><C-N>',
-    JK = '<C-\\><C-N>',
   },
 }
 

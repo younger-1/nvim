@@ -53,7 +53,8 @@ local default_options = {
   qftf = '{info -> v:lua.require("young.cfg.quickfix").quickfixtextfunc(info)}',
   fileencodings = { 'ucs-bom', 'utf-8', 'utf-16', 'gbk', 'big5', 'gb18030', 'latin1' },
   fileformats = { 'unix', 'dos', 'mac' },
-  synmaxcol=400,
+  synmaxcol = 400,
+  list = true,
   -- TODO:
   fillchars = 'vert:┃',
 }
@@ -66,16 +67,23 @@ vim.opt.shortmess:append 'c'
 
 vim.cmd 'set whichwrap+=<,>,[,],h,l'
 
--- vim.cmd [[set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+]]
+-- vim.cmd [[set listchars=tab:●·,extends:→,precedes:←,trail:■]]
 vim.opt.listchars = {
-  eol = '↲',
-  extends = '>',
-  nbsp = '+',
-  precedes = '<',
-  space = '·',
-  tab = '>-',
-  trail = '~',
+  tab = '●·',
+  extends = '→',
+  precedes = '←',
+  trail = '■',
 }
+-- vim.cmd [[set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+]]
+-- vim.opt.listchars = {
+--   eol = '↲',
+--   extends = '>',
+--   nbsp = '+',
+--   precedes = '<',
+--   space = '·',
+--   tab = '>-',
+--   trail = '~',
+-- }
 
 -- 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
 -- 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
