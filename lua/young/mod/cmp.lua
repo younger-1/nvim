@@ -138,12 +138,12 @@ M.done = function()
       { name = 'buffer' },
     },
   })
-
   cmp.setup.cmdline('?', {
     sources = {
       { name = 'buffer' },
     },
   })
+
   -- Use cmdline & path source for ':'
   cmp.setup.cmdline(':', {
     sources = {

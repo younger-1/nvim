@@ -4,15 +4,15 @@ local M = {}
 local generic_opts_any = { noremap = true, silent = true }
 
 local generic_opts = {
-  insert_command_mode = generic_opts_any,
+  insert_command_mode = { noremap = true },
   insert_mode = generic_opts_any,
-  command_mode = generic_opts_any,
+  command_mode = { noremap = true },
   map_mode = generic_opts_any,
   normal_mode = generic_opts_any,
   visual_mode = generic_opts_any,
   visual_block_mode = generic_opts_any,
   operator_mode = generic_opts_any,
-  term_mode = { silent = true },
+  term_mode = { nowait = true },
 }
 
 local mode_adapters = {
@@ -71,6 +71,9 @@ M.keys = {
     -- runs conditionally
     ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true } },
     ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true } },
+    --
+    ['<A-n>'] = '<Down>',
+    ['<A-p>'] = '<Up>',
     --
     ['<C-V>'] = '<C-R>+',
   },
