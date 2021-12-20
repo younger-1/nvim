@@ -80,10 +80,10 @@ M.keys = {
     k = { "v:count == 0 ? 'gk' : 'k'", { expr = true } },
     j = { "v:count == 0 ? 'gj' : 'j'", { expr = true } },
 
-    ['<Up>'] = '<C-E>',
-    ['<Down>'] = '<C-Y>',
-    ['<Left>'] = '2zl',
-    ['<Right>'] = '2zh',
+    -- ['<Up>'] = '<C-Y>',
+    -- ['<Down>'] = '<C-E>',
+    -- ['<Left>'] = '2zh',
+    -- ['<Right>'] = '2zl',
 
     -- ['<Tab>'] = { '%', { noremap = false } },
   },

@@ -57,6 +57,25 @@ function! TabToggle()
   endif
 endfunction
 
+let s:arrow_mapped = v:false
+function! ArrowKeyToggle()
+  if !s:arrow_mapped
+    let s:arrow_mapped = v:true
+    noremap <Up> <C-y>
+    noremap <Down> <C-e>
+    noremap <Left> 2zh
+    noremap <Right> 2zl
+    echomsg "[Young]: arrow key mapped"
+  else
+    let s:arrow_mapped = v:false
+    unmap <Up>
+    unmap <Down>
+    unmap <Left>
+    unmap <Right>
+    echomsg "[Young]: arrow key unmapped"
+  endif
+endfunction
+
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR lua require'young.tools'.rr(<f-args>)
 
@@ -93,6 +112,9 @@ command! -nargs=1 -complete=command Capture
 \ <mods> new |
 \ setlocal buftype=nofile bufhidden=hide noswapfile |
 \ call setline(1, split(execute(<q-args>), '\n'))
+
+" Count for char in current buffer.
+command! -nargs=0 Wc %s/.//nge
 
 " <https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db>
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>

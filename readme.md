@@ -80,8 +80,17 @@ May be useful:
 - [ ]  [neovim-gtk](https://github.com/daa84/neovim-gtk)
 - [ ]  [vimr](https://github.com/qvacua/vimr)
 
-|Function|Mapping|
-|:-----:|:------:|
+|       Function        |  Mapping  |
+|         :---:         |   :---:   |
+|  Toggle full screen   | `<A-CR>`  |
+|  Increase font size   |  `<C-+>`  |
+|  Decrease font size   |  `<C-->`  |
+|      Change font      | `<C-BS>`  |
+|     Default font      |  `<C-0>`  |
+| Increase transparency |  `<A-+>`  |
+| Decrease transparency |  `<A-->`  |
+|     Change effect     | `<A-BS>`  |
+|    Toggle ligature    | `<A-DEL>` |
 
 ## Structure
 

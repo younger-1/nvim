@@ -50,3 +50,9 @@ disable_distribution()
 if vim.loop.os_uname().sysname == 'Windows_NT' then
   vim.g.sqlite_clib_path = join_paths(os.getenv 'SCOOP', 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
 end
+
+if vim.fn.has('win32') then
+  vim.g.python3_host_prog = join_paths(vim.env.SCOOP .. 'shims', 'python3.exe')
+else
+  vim.g.python3_host_prog = '/usr/bin/python3'
+end
