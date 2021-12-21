@@ -47,12 +47,18 @@ end
 
 disable_distribution()
 
-if vim.loop.os_uname().sysname == 'Windows_NT' then
-  vim.g.sqlite_clib_path = join_paths(os.getenv 'SCOOP', 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
-end
+-- NOTE: in Window, env name is case insensitive. NOT in Linux
+-- vim.env.SCOOP
+-- vim.loop.os_getenv 'scoop'
+local scoop = os.getenv 'scoop'
 
-if vim.fn.has('win32') then
-  vim.g.python3_host_prog = join_paths(vim.env.SCOOP .. 'shims', 'python3.exe')
-else
+if is_windows then
+  if scoop then
+    vim.g.sqlite_clib_path = join_paths(scoop, 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
+    vim.g.python3_host_prog = join_paths(scoop, 'shims', 'python3.exe')
+  else
+    vim.notify("[young]: scoop not installed", vim.log.levels.ERROR)
+  end
+elseif is_unix then
   vim.g.python3_host_prog = '/usr/bin/python3'
 end
