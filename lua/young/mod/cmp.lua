@@ -145,12 +145,12 @@ M.done = function()
   })
 
   -- Use cmdline & path source for ':'
-  cmp.setup.cmdline(':', {
-    sources = {
-      { name = 'path' },
-      { name = 'cmdline' },
-    },
-  })
+  -- cmp.setup.cmdline(':', {
+  --   sources = {
+  --     { name = 'path' },
+  --     { name = 'cmdline' },
+  --   },
+  -- })
 end
 
 return M
