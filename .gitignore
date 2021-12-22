@@ -5,3 +5,5 @@ sessions/
 spell/en.utf-8.add.spl
 
 packer_compiled.lua
+
+__pycache__/
