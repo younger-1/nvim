@@ -31,13 +31,14 @@ local disable_distribution = function()
 
   -- <https://github.com/jdhao/nvim-config/blob/470e35439a76298b485dc7fc5f9a54b6ec8175f1/core/globals.vim#L11>
   -- Disable Python2 support
-  vim.g.loaded_python_provider = 1
+  vim.g.loaded_python_provider = 0
   -- Disable perl provider
-  vim.g.loaded_perl_provider = 1
+  vim.g.loaded_perl_provider = 0
   -- Disable ruby provider
-  vim.g.loaded_ruby_provider = 1
+  vim.g.loaded_ruby_provider = 0
   -- Disable node provider
-  -- vim.g.loaded_node_provider = 1
+  vim.g.loaded_node_provider = 0
+
   -- vim.g.loaded_remote_plugins = 1
 
   -- [](https://github.com/nathom/filetype.nvim/issues/12)
@@ -55,10 +56,9 @@ local scoop = os.getenv 'scoop'
 if is_windows then
   if scoop then
     vim.g.sqlite_clib_path = join_paths(scoop, 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
-    vim.g.python3_host_prog = join_paths(scoop, 'shims', 'python3.exe')
   else
-    vim.notify("[young]: scoop not installed", vim.log.levels.ERROR)
+    vim.notify("[young]: scoop not installed", vim.log.levels.INFO)
   end
-elseif is_unix then
-  vim.g.python3_host_prog = '/usr/bin/python3'
 end
+
+vim.g.python3_host_prog = vim.fn.exepath('python3')

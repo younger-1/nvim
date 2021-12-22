@@ -42,27 +42,24 @@ M.keys = {
   insert_mode = {
     -- 'jk' for quitting insert mode
     ['jk'] = '<ESC>',
-    -- 'kj' for quitting insert mode
-    ['kj'] = '<ESC>',
     -- 'jj' for quitting insert mode
     ['jj'] = '<ESC>',
+
     -- Move current line / block with Alt-j/k ala vscode.
-    ['<A-j>'] = '<Esc>:m .+1<CR>==gi',
-    -- Move current line / block with Alt-j/k ala vscode.
-    ['<A-k>'] = '<Esc>:m .-2<CR>==gi',
-    -- navigation
-    ['<A-Up>'] = '<C-\\><C-N><C-w>k',
-    ['<A-Down>'] = '<C-\\><C-N><C-w>j',
-    ['<A-Left>'] = '<C-\\><C-N><C-w>h',
-    ['<A-Right>'] = '<C-\\><C-N><C-w>l',
-    -- break undo sequence, start new change
+    ['<A-k>'] = '<C-o>:m .-2<CR>',
+    ['<A-j>'] = '<C-o>:m .+1<CR>',
+
+    -- Navigation
+    -- ['<A-Up>'] = '<C-\\><C-N><C-w>k',
+    -- ['<A-Down>'] = '<C-\\><C-N><C-w>j',
+    -- ['<A-Left>'] = '<C-\\><C-N><C-w>h',
+    -- ['<A-Right>'] = '<C-\\><C-N><C-w>l',
+
+    -- Break undo sequence, start new change
     ['<C-U>'] = '<C-G>u<C-U>',
     ['<C-W>'] = '<C-G>u<C-W>',
     ['<C-v>'] = '<C-G>u<C-R><C-O>+',
 
-    -- Move line in insert mode
-    ['<C-Up>'] = '<C-o>:m .-2<CR>',
-    ['<C-Down>'] = '<C-o>:m .+1<CR>',
   },
 
   ---@usage change or add keymappings for command mode
@@ -71,6 +68,9 @@ M.keys = {
     -- runs conditionally
     ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true } },
     ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true } },
+
+    ['<C-n>'] = { 'pumvisible() ? "\\<Down>" : "\\<C-n>"', { expr = true } },
+    ['<C-p>'] = { 'pumvisible() ? "\\<Up>" : "\\<C-p>"', { expr = true } },
     --
     ['<A-n>'] = '<Down>',
     ['<A-p>'] = '<Up>',
@@ -111,8 +111,8 @@ M.keys = {
     ['<S-Right>'] = ':vertical resize +1<CR>',
 
     -- Move current line / block with Alt-j/k a la vscode.
-    ['<A-j>'] = ':m .+1<CR>==',
-    ['<A-k>'] = ':m .-2<CR>==',
+    -- ['<A-j>'] = ':m .+1<CR>==',
+    -- ['<A-k>'] = ':m .-2<CR>==',
 
     -- QuickFix
     [']q'] = ':cnext<CR>',
@@ -131,7 +131,7 @@ M.keys = {
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
     ['g<C-l>'] = '<cmd>nohl<CR><C-l>',
-    ['<S-CR>'] = '<cmd>wqall<CR>', -- Windows Terminal not recognize
+    ['<S-CR>'] = '<cmd>wqa<CR>', -- neovim tui not recognize
     ['<CR>'] = {"(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true }},
   },
 
@@ -157,8 +157,8 @@ M.keys = {
     ['J'] = ":move '>+1<CR>gv-gv",
 
     -- Move current line / block with Alt-j/k ala vscode.
-    ['<A-j>'] = ":m '>+1<CR>gv-gv",
-    ['<A-k>'] = ":m '<-2<CR>gv-gv",
+    -- ['<A-j>'] = ":m '>+1<CR>gv-gv",
+    -- ['<A-k>'] = ":m '<-2<CR>gv-gv",
   },
 
   operator_mode = {

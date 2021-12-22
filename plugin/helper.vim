@@ -119,11 +119,9 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-function! EchoCommaPath(rt)
-  if a:rt
-    echo join(split(&rtp, ','), "\n")
-  else
-    echo join(split(&packpath, ','), "\n")
-  endif
+function! EchoCommaPath(path)
+  echo join(split(a:path, ','), "\n")
 endfunction
-command! -bang EchoPath call EchoCommaPath(<bang>v:true)
+command! -bang Echopath call EchoCommaPath(&path)
+command! -bang Echortp  call EchoCommaPath(&rtp)
+command! -bang Echopack call EchoCommaPath(&packpath)

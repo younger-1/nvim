@@ -8,10 +8,12 @@
 - [ ] once ice hot done
 - [ ] hl cursorline
 - [ ] `yo` <==> require('young')
+- [ ] vim restore text deleted by C-u or C-w in cmdline
+- [ ] vim select files inside current selected folder in cmdline
 
 ## Problem
 
-`project.nvim` 
+`project.nvim`
 
 - echo twice even in the same cwd when open new buffer
 - echo once in the same cwd when switch buffers
@@ -23,8 +25,8 @@
 `surround`
 
 - Normal: ys
-- Visual: S 
-- Operator: ds, cs, 
+- Visual: S
+- Operator: ds, cs,
 
 `lightspeed`
 
@@ -34,7 +36,7 @@
 `alpha`
 
 - <https://wiki.archlinux.org/title/ASCII_art>
-- <https://www.asciiart.eu/> 
+- <https://www.asciiart.eu/>
 - <https://github.com/pi314/ascii-arts>
 
 ## Features

@@ -8,7 +8,6 @@ local default_options = {
   completeopt = { 'menuone', 'noselect' },
   conceallevel = 0, -- so that `` is visible in markdown files
   fileencoding = 'utf-8', -- the encoding written to a file
-  -- fileformat = 'unix',
   foldenable = false,
   foldmethod = 'expr', -- folding, set to "expr" for treesitter based folding
   foldexpr = 'nvim_treesitter#foldexpr()', -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
@@ -35,15 +34,17 @@ local default_options = {
   undofile = true, -- enable persistent undo
   updatetime = 300, -- faster completion
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+  tabstop = 8, -- insert 2 spaces for a tab
   expandtab = true, -- convert tabs to spaces
+  softtabstop = 2,
   shiftwidth = 2, -- the number of spaces inserted for each indentation
-  tabstop = 4, -- insert 2 spaces for a tab
+  smarttab = true,
   cursorline = true, -- highlight the current line
   number = true, -- set numbered lines
   relativenumber = false, -- set relative numbered lines
   numberwidth = 4, -- set number column width to 2 {default 4}
   signcolumn = 'yes', -- always show the sign column, otherwise it would shift the text each time
-  wrap = false, -- display lines as one long line
+  wrap = false,
   spell = false,
   spelllang = 'en',
   scrolloff = 4, -- is one of my fav
@@ -73,6 +74,7 @@ vim.opt.listchars = {
   extends = '→',
   precedes = '←',
   trail = '■',
+  nbsp = '␣',
 }
 -- vim.cmd [[set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+]]
 -- vim.opt.listchars = {
@@ -87,4 +89,4 @@ vim.opt.listchars = {
 
 -- 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
 -- 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
-vim.cmd [[set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。]]
+vim.cmd [[set matchpairs+=<:>,「:」,『:』,【:】,（:）,《:》,‘:’,“:”,；:。,，:。]]
