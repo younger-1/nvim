@@ -45,6 +45,7 @@ M.theme = {
       end,
     },
     'tanvirtin/monokai.nvim',
+    'rebelot/kanagawa.nvim',
   },
 }
 
@@ -381,11 +382,12 @@ M.code = {
     { 'onsails/lspkind-nvim' },
     -- {
     --   "github/copilot.vim",
-    --   setup = function()
-    --     vim.g.copilot_filetypes = {
-    --       ["TelescopePrompt"] = false,
-    --     }
-    --   end,
+    --   requires = { 'hrsh7th/cmp-copilot' },
+    --   -- setup = function()
+    --   --   vim.g.copilot_filetypes = {
+    --   --     ["TelescopePrompt"] = false,
+    --   --   }
+    --   -- end,
     -- },
   },
   -- { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },

@@ -129,6 +129,7 @@ M.done = function()
       { name = 'emoji' },
       { name = 'treesitter' },
       { name = 'crates' },
+      { name = 'copilot' },
     },
   }
 

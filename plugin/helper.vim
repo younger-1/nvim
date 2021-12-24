@@ -89,6 +89,23 @@ function! ArrowKeyToggle()
   endif
 endfunction
 
+function! WinZoomToggle() abort
+    if !exists('w:WinZoomIsZoomed')
+      let w:WinZoomIsZoomed = 0
+    endif
+    if w:WinZoomIsZoomed == 0
+      let w:WinZoomOldWidth = winwidth(0)
+      let w:WinZoomOldHeight = winheight(0)
+      wincmd _
+      wincmd |
+      let w:WinZoomIsZoomed = 1
+    elseif w:WinZoomIsZoomed == 1
+      execute 'resize ' . w:WinZoomOldHeight
+      execute 'vertical resize ' . w:WinZoomOldWidth
+      let w:WinZoomIsZoomed = 0
+   endif
+endfunction
+
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR lua require'young.tools'.rr(<f-args>)
 
@@ -138,3 +155,6 @@ endfunction
 command! -bang Echopath call EchoCommaPath(&path)
 command! -bang Echortp  call EchoCommaPath(&rtp)
 command! -bang Echopack call EchoCommaPath(&packpath)
+
+command! CD lcd %:p:h
+command! FollowSymLink execute "file " . resolve(expand('%')) | edit

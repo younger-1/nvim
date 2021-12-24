@@ -16,7 +16,7 @@ local mymappings = {
     x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev Trouble' },
   },
   ['<C-w>'] = {
-    m = 'Zoom',
+    m = { ':call WinZoomToggle()<cr>', 'Zoom' },
     [' '] = { "<cmd>lua require('focus').focus_toggle()<cr>", 'FocusToggle' },
     -- e = "",
     -- t = "",
