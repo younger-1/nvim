@@ -1,3 +1,10 @@
+if get(g:, 'loaded_young_helper', 0)
+  finish
+endif
+let g:loaded_young_helper = 1
+
+let s:dir = expand('<sfile>:h')
+
 function! QuickFixToggle()
   if empty(filter(getwininfo(), 'v:val.quickfix'))
     copen
@@ -44,16 +51,22 @@ function! FoldTextToggle()
   endif
 endfunction
 
+function! s:echo_warn_msg(msg)
+  echohl WarningMsg
+  echo a:msg
+  echohl None
+endf
+
 let s:tab_mapped = v:false
 function! TabToggle()
   if !s:tab_mapped
     let s:tab_mapped = v:true
     map <Tab> %
-    echomsg "[Young]: <Tab> mapped"
+    call s:echo_warn_msg("[Young]: <Tab> mapped")
   else
     let s:tab_mapped = v:false
     unmap <Tab>
-    echomsg "[Young]: <Tab> unmapped"
+    call s:echo_warn_msg("[Young]: <Tab> unmapped")
   endif
 endfunction
 
@@ -65,14 +78,14 @@ function! ArrowKeyToggle()
     noremap <Down> <C-e>
     noremap <Left> 2zh
     noremap <Right> 2zl
-    echomsg "[Young]: arrow key mapped"
+    call s:echo_warn_msg("[Young]: arrow key mapped")
   else
     let s:arrow_mapped = v:false
     unmap <Up>
     unmap <Down>
     unmap <Left>
     unmap <Right>
-    echomsg "[Young]: arrow key unmapped"
+    call s:echo_warn_msg("[Young]: arrow key unmapped")
   endif
 endfunction
 
