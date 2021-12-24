@@ -1,5 +1,7 @@
 <https://github.com/junegunn/vim-easy-align>
 
+<https://devhints.io/vim-easyalign>
+
 Usage:
 - <CR> to cycle between alignment mode (left, right, or center)
 - N-th delimiter (default: 1)
