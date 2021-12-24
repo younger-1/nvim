@@ -10,6 +10,8 @@
 - [ ] `yo` <==> require('young')
 - [ ] vim restore text deleted by C-u or C-w in cmdline
 - [ ] vim select files inside current selected folder in cmdline
+- [ ] find files when using `Rg`
+- [ ] highlights the search word in quickfix when using `Rg`
 
 ## Problem
 
