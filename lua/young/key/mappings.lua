@@ -91,7 +91,8 @@ M.keys = {
     -- ['<Tab>'] = { '%', { noremap = false } },
 
     -- <https://github.com/yuki-yano/zero.nvim>
-    ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },
+    -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },
+    ['0'] = ':call FirstCharOrFirstCol()<cr>',
   },
 
   ---@usage change or add keymappings for normal mode
