@@ -17,6 +17,8 @@ local mymappings = {
   },
   ['<C-w>'] = {
     m = { ':call WinZoomToggle()<cr>', 'Zoom' },
+    S = { ':bo split<cr>', 'Split' },
+    V = { ':bo vert split<cr>', 'VSplit' },
     [' '] = { "<cmd>lua require('focus').focus_toggle()<cr>", 'FocusToggle' },
     -- e = "",
     -- t = "",
@@ -36,6 +38,10 @@ local mymappings = {
   -- ["<C-f>"] = {},
   -- ["<C-b>"] = {},
   -- ["<C-n>"] = {},
+  g = {
+    ['<C-l>'] = { '<cmd>nohl<CR><C-l>', 'Clear highlight'},
+    ['"'] = { [[:<C-U><C-R><C-R>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-F><left>]], 'Edit or select [R/r]egister'},
+  },
   y = {
     c = {
       name = '+colorscheme',

@@ -6,7 +6,7 @@ class Limit(object):
         self.vim = vim
         self.calls = 0
 
-    @pynvim.command('Cmd', range='', nargs='*', sync=True)
+    @pynvim.command('LimitCmd', range='', nargs='*', sync=True)
     def command_handler(self, args, range):
         self._increment_calls()
         self.vim.current.line = (
@@ -14,21 +14,20 @@ class Limit(object):
                                                                args,
                                                                range))
 
-    @pynvim.autocmd('BufEnter', pattern='*.py', eval='expand("<afile>")',
-                    sync=True)
+    # @pynvim.autocmd('BufEnter', pattern='*.py', eval='expand("<afile>")', sync=True)
     def autocmd_handler(self, filename):
         self._increment_calls()
         self.vim.current.line = (
             'Autocmd: Called %s times, file: %s' % (self.calls, filename))
 
-    @pynvim.function('Func')
+    @pynvim.function('LimitFunc')
     def function_handler(self, args):
         self._increment_calls()
         self.vim.current.line = (
             'Function: Called %d times, args: %s' % (self.calls, args))
 
     def _increment_calls(self):
-        if self.calls == 5:
+        if self.calls == 3:
             raise Exception('Too many calls!')
         self.calls += 1
 

@@ -113,6 +113,12 @@ M.keys = {
     ['<S-Left>'] = ':vertical resize -1<CR>',
     ['<S-Right>'] = ':vertical resize +1<CR>',
 
+    -- Vertical/Horizontal Scrolling
+    ['<A-h>'] = 'zh',
+    ['<A-l>'] = 'zl',
+    ['<A-j>'] = '<C-e>',
+    ['<A-k>'] = '<C-y>',
+
     -- Move current line / block with Alt-j/k a la vscode.
     -- ['<A-j>'] = ':m .+1<CR>==',
     -- ['<A-k>'] = ':m .-2<CR>==',
@@ -133,7 +139,6 @@ M.keys = {
     ZA = '<cmd>wqa<CR>',
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
-    ['g<C-l>'] = '<cmd>nohl<CR><C-l>',
     ['<S-CR>'] = '<cmd>wqa<CR>', -- neovim tui not recognize
     ['<CR>'] = {"(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true }},
   },

@@ -68,15 +68,25 @@ local my_opts = {
   update = false,
 }
 
+local my_vopts = {
+  mode = 'v',
+  noremap = true,
+  nowait = true,
+  silent = true,
+  update = false,
+}
+
 M.ice = function()
   M.leader = {}
   M.leader.n = require 'young.key.leader-normal'
   M.leader.v = require 'young.key.leader-visual'
   M.n = require 'young.key.normal'
+  M.v = require 'young.key.visual'
 
   local key = require 'young.key'
   key.leader = M.leader
   key.n = M.n
+  key.v = M.v
 end
 
 M.done = function()
@@ -86,6 +96,7 @@ M.done = function()
   wk.register(M.leader.n, opts)
   wk.register(M.leader.v, vopts)
   wk.register(M.n, my_opts)
+  wk.register(M.v, my_vopts)
 end
 
 return M
