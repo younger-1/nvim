@@ -102,3 +102,36 @@ function! FirstCharOrFirstCol()
   endif
 endfunction
 
+" <https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript>
+function! RawVirtualSelection()
+  try
+    let a_save = @a
+    normal! gv"ay
+    return @a
+  finally
+    let @a = a_save
+  endtry
+endfunction
+
+function! VirtualSelection()
+  return escape(RawVirtualSelection, '/\')
+endfunction
+
+function! SubstituteVirtualSelection()
+  let selection = VirtualSelection()
+  let change = input('Change the selection with: ')
+  execute ":%s/".selection."/".change."/c"
+endfunction
+
+function! AsciiVirtualSelection()
+  let [l_1, c_1] = getpos("'<")[1:2]
+  let [l_2, c_2] = getpos("'>")[1:2]
+  let l:lines = getline(l_1, l_2)
+  if 0 == len(lines)
+    return ''
+  endif
+  let lines[-1] = lines[-1][: c_2 - 1]
+  let lines[0] = lines[0][c_1 - 1:]
+  return join(lines, "\n")
+endfun
+

@@ -1,6 +1,8 @@
 local M = {
   g = {
-    ['/'] = { [["sy/\V<C-r>=escape(@s,'/\')<CR><CR>``]], 'Search visual selection' },
+    -- ['/'] = { [["ky/\V<C-r>=escape(@k,'/\')<CR><CR>]], 'Search selection' },
+    ['/'] = { [[<esc>/\V<C-r>=VirtualSelection()<cr><cr>]], 'Search selection' },
+    s = { ':<C-u>call SubstituteVirtualSelection()<cr>', 'Substitute selection' },
   },
 }
 

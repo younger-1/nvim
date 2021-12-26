@@ -1,14 +1,3 @@
-" [](https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript)
-function! VirtualSelection()
-  try
-    let a_save = @a
-    normal! "ay
-    return @a
-  finally
-    let @a = a_save
-  endtry
-endfunction
-
 command! -nargs=1 -range=% SaveIt :<line1>,<line2>write! <args>
 
 command! -nargs=+ -complete=expression Test :echo "<args>"
