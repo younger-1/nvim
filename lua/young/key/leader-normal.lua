@@ -263,7 +263,6 @@ local mappings = {
   p = {
     name = '+packer',
     C = { '<cmd>PackerCompile profile=true<cr>', 'Compile++' },
-    I = { ':lua pp()<left>', 'Inspect' },
     P = { '<cmd>PackerProfile<cr>', 'Profile' },
     S = { '<cmd>PackerSync<cr>', 'Sync' },
     c = { '<cmd>PackerCompile<cr>', 'Compile' },

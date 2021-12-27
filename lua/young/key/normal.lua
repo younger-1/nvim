@@ -1,5 +1,8 @@
 local mymappings = {
   [']'] = {
+    -- [' '] = {},
+    -- ['<Tab>'] = {},
+    -- ['<CR>'] = {},
     d = {
       '<cmd>lua vim.diagnostic.goto_next()<cr>',
       'Next Diagnostic',
