@@ -43,6 +43,12 @@ function! OpenLastClosed()
     execute 'e ' . last_buf
 endfunction
 
+function! s:echo_warn_msg(msg)
+  echohl WarningMsg
+  echo a:msg
+  echohl None
+endf
+
 let s:tab_mapped = v:false
 function! TabToggle()
   if !s:tab_mapped

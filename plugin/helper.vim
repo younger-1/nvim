@@ -5,12 +5,6 @@ let g:loaded_young_helper = 1
 
 let s:dir = expand('<sfile>:h')
 
-function! s:echo_warn_msg(msg)
-  echohl WarningMsg
-  echo a:msg
-  echohl None
-endf
-
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR lua require'young.tools'.rr(<f-args>)
 
