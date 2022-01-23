@@ -51,9 +51,19 @@ endfunction
 function! EchoCommaPath(path)
   echo join(split(a:path, ','), "\n")
 endfunction
-command! -bang Echopath call EchoCommaPath(&path)
-command! -bang Echortp  call EchoCommaPath(&rtp)
-command! -bang Echopack call EchoCommaPath(&packpath)
+
+command! Echopath call EchoCommaPath(&path)
+command! Echortp  call EchoCommaPath(&rtp)
+command! Echopack call EchoCommaPath(&packpath)
+
+function! EchoRuntimeFile(pattern, all)
+  echo nvim_get_runtime_file(a:pattern, a:all) ->join("\n")
+endfunction
+
+function! s:rtf_complete(...) abort
+  return ($vimruntime .. '/**/*.vim') ->glob(0, 1) ->map('strpart(v:val, strlen($vimruntime) + 1)') ->join("\n") ->substitute('\', '/', 'g')
+endfunction
+command! -bang -nargs=+ -complete=custom,s:rtf_complete Echofile call EchoRuntimeFile(<f-args>, <bang>1)
 
 command! CD lcd %:p:h
 command! FollowSymLink execute "file " . resolve(expand('%')) | edit
