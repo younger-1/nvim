@@ -305,6 +305,7 @@ local mappings = {
     T = { '<cmd>Telescope grep_string<cr>', 'Text under cursor' },
     a = { '<cmd>Telescope autocommands<cr>', 'Autocommands' },
     b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Buffer String' },
+    B = { '<cmd>Telescope bookmarks<cr>', 'Bookmarks' },
     c = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", 'Colorscheme' },
     f = { '<cmd>Telescope find_files hidden=v:true no_ignore=v:true<cr>', 'Find files' },
     g = { '<cmd>Telescope live_grep <cr>', 'Grep' },

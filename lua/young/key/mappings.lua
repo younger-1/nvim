@@ -45,6 +45,8 @@ M.keys = {
     -- 'jj' for quitting insert mode
     ['jj'] = '<ESC>',
 
+    ['<C-d>'] = '<Del>',
+
     -- Move current line / block with Alt-j/k ala vscode.
     ['<A-k>'] = '<C-o>:m .-2<CR>',
     ['<A-j>'] = '<C-o>:m .+1<CR>',
@@ -77,9 +79,9 @@ M.keys = {
     --
     ['<C-V>'] = '<C-R>+',
     --
-    ['('] = '()<Left>',
-    ['['] = '[]<Left>',
-    ['{'] = '{}<Left>',
+    -- ['('] = '()<Left>',
+    -- ['['] = '[]<Left>',
+    -- ['{'] = '{}<Left>',
   },
 
   map_mode = {
