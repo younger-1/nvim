@@ -9,6 +9,7 @@ setmetatable(M, {
 
 M.basic = {
   { 'wbthomason/packer.nvim' },
+  { 'lewis6991/impatient.nvim' },
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     'nathom/filetype.nvim',
