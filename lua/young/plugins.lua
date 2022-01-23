@@ -24,6 +24,16 @@ M.basic = {
       require('young.mod.notify').done()
     end,
   },
+  {
+    'itchyny/vim-external',
+    config = function()
+      vim.cmd [[
+        map <Leader>ne <Plug>(external-editor)
+        map <Leader>nn <Plug>(external-explorer)
+        map <Leader>nb <Plug>(external-browser)
+      ]]
+    end,
+  },
 }
 
 M.theme = {
@@ -347,6 +357,13 @@ M.telescope = {
       requires = { { "tami5/sqlite.lua", module = "sqlite" } },
       config = function()
         require 'young.mod.neoclip'
+      end,
+    },
+    {
+      'dhruvmanila/telescope-bookmarks.nvim',
+      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
+      config = function()
+        require('telescope').load_extension 'bookmarks'
       end,
     },
   },
