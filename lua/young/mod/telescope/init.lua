@@ -73,9 +73,10 @@ M.cfg = {
       '--smart-case',
       '--hidden',
     },
+    -- <https://www.lua.org/manual/5.1/manual.html#5.4.1>
     file_ignore_patterns = {
       'node_modules',
-      '.git[/\\]',
+      '%.git[/\\]',
     },
     -- horizontal, center, cursor, vertical, flex, bottom_pane
     layout_strategy = 'horizontal',
@@ -175,7 +176,9 @@ M.cfg = {
     commands = { theme = 'ivy' },
     current_buffer_fuzzy_find = view.v2,
     file_browser = view.h2,
-    find_files = view.v1,
+    find_files = vim.tbl_extend('force', view.v1, {
+      hidden = 1,
+    }),
     git_bcommits = view.h3,
     git_commits = view.h3,
     git_files = view.h3,
