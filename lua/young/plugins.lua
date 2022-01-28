@@ -137,6 +137,7 @@ M.change = {
   core = {
     { 'tpope/vim-surround' },
     { 'tpope/vim-repeat' },
+    { 'tpope/vim-abolish' },
   },
   pair = {
     {

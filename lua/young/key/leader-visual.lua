@@ -16,7 +16,7 @@ local vmappings = {
   },
   s = {
     name = 'search',
-    f = { 'y<cmd>Telescope fd<cr><C-r>"', 'Find files' },
+    f = { 'y<cmd>Telescope find_files<cr><C-r>"', 'Find files' },
     g = { 'y<cmd>Telescope live_grep<cr><C-r>"', 'Grep' },
     -- g = { '<Esc><cmd>Telescope live_grep<cr><C-r>=AsciiVirtualSelection()<cr>', 'Grep' },
     y = { 'dh<cmd>Telescope neoclip<cr>', 'Clipboard' },
