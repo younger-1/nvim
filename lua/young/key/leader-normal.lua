@@ -97,6 +97,15 @@ local mappings = {
     r = { '<cmd>TSBufToggle rainbow<cr>', 'Toggle Rainbow' },
     t = { '<cmd>Telescope treesitter<cr>', 'Telescope' },
   },
+  a = {
+    name = '+apps',
+    s = {
+      name = '+sessions',
+      l = { '<cmd>lua require("persistence").load()<cr>', 'Load Session' },
+      L = { '<cmd>lua require("persistence").load({ last = true })<cr>', 'Restore Last Session' },
+      s = { '<cmd>lua require("persistence").stop()<cr>', 'Stop Session' },
+    },
+  },
   b = {
     name = '+buffers',
     B = { '<cmd>BufferOrderByBufferNumber<cr>', 'Sort by BufferNumber' },

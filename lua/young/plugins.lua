@@ -222,7 +222,9 @@ M.files = {
       'folke/persistence.nvim',
       event = 'BufReadPre',
       module = 'persistence',
-      config = require 'plug-config.persistence',
+      config = function()
+        require 'young.mod.persistence'
+      end,
     },
   },
   dir = {
