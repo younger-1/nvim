@@ -16,9 +16,11 @@ M.fonts = {
   moki = is_windows and 'mononoki NF' or 'mononoki',
   moid = is_windows and 'Monoid NF' or 'Monoid',
   term = is_windows and 'TerminessTTF NF' or 'TerminessTTF',
+  vict = is_windows and 'VictorMono NF' or 'VictorMono',
   delu = 'Delugia',
   delu_l = 'Delugia Light',
-  sara = 'Sarasa Term SC',
+  -- sara = 'Sarasa Term SC',
+  -- lxgw = '霞鹜文楷等宽',
 }
 
 M.fallback = { name = 'sauce', size = 12 }
