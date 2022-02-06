@@ -29,7 +29,7 @@ local mymappings = {
     -- a = "",
     -- d = "",
   },
-  ['<C-y>'] = {},
+  ['<C-y>'] = { '<cmd>Telescope command_palette<cr>', 'Command Palette' },
   ['<C-p>'] = {},
   ['<C-s>'] = {},
   -- Must
