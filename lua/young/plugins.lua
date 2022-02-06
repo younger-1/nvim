@@ -420,6 +420,16 @@ M.LSP = {
     -- { "jose-elias-alvarez/null-ls.nvim" },
     -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
     { 'b0o/SchemaStore.nvim' },
+    {
+      "ray-x/lsp_signature.nvim",
+      event = "BufRead",
+      config = function()
+        require('lsp_signature').setup {
+          transpancy = 20,
+          toggle_key = "<C-l>",
+        }
+      end,
+    },
   },
   lua = {
     { 'folke/lua-dev.nvim' },
