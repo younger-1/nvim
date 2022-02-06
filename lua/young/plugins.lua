@@ -369,6 +369,18 @@ M.telescope = {
         require('telescope').load_extension 'bookmarks'
       end,
     },
+    {
+      'LinArcX/telescope-env.nvim',
+      config = function()
+        require('telescope').load_extension 'env'
+      end,
+    },
+    {
+      'LinArcX/telescope-command-palette.nvim',
+      config = function()
+        require('telescope').load_extension 'command_palette'
+      end,
+    },
   },
 }
 
