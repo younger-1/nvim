@@ -1,3 +1,4 @@
+// vim: ft=jsonc
 {
     "Lua.runtime.version": "LuaJIT",
     "Lua.runtime.path": [
