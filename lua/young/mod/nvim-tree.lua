@@ -1,6 +1,11 @@
-local tree_cb = require('nvim-tree.config').nvim_tree_callback
+-- tree_cb and the cb property are deprecated
+-- local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 local M = {}
+
+local function print_node_path(node)
+  print(node.absolute_path)
+end
 
 M.opts = {
   highlight_opened_files = 2,
@@ -28,14 +33,13 @@ M.opts = {
 M.cfg = {
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = true,
+  open_on_setup = false,
   ignore_ft_on_setup = {
-    'startify',
-    'dashboard',
     'alpha',
+    'dashboard',
   },
-  auto_close = true,
-  update_cwd = true, -- true good
+  auto_close = false,
+  update_cwd = true,
   -- hijacks new directory buffers when they are opened
   -- disable it if using `vim-dirvish` or `lir.nvim`
   update_to_buf_dir = {
@@ -44,7 +48,7 @@ M.cfg = {
   },
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = false, -- BUG: in windows, not only update the root directory of the tree, but also change workspace root
     ignore_list = {},
   },
   diagnostics = {
@@ -69,22 +73,27 @@ M.cfg = {
     custom = {},
   },
   view = {
-    width = 30,
     side = 'left',
     hide_root_folder = false,
     auto_resize = false, -- false good
     mappings = {
       custom_only = false,
       list = {
-        { key = 'l', cb = tree_cb 'edit' },
-        { key = 'h', cb = tree_cb 'close_node' },
-        { key = 'u', cb = tree_cb 'parent_node' },
-        { key = 'i', cb = tree_cb 'cd' },
-        { key = '?', cb = tree_cb 'toggle_help' },
-        { key = '.', cb = tree_cb 'toggle_dotfiles' },
+        { key = 'l', action = 'edit' },
+        { key = 'h', action = 'close_node' },
+        { key = 'u', action = 'parent_node' },
+        { key = 'i', action = 'cd' },
+        { key = '?', action = 'toggle_help' },
+        { key = '.', action = 'toggle_dotfiles' },
+        { key = 'P', action = 'print_path', action_cb = print_node_path },
       },
     },
   },
+  actions = {
+    change_dir = {
+      global = false,
+    },
+  }
 }
 
 M.done = function()
