@@ -1,3 +1,4 @@
+// vim: ft=jsonc
 {
     // [coc]
     "coc.preferences.extensionUpdateCheck": "daily",
