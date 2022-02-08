@@ -42,6 +42,23 @@ local function add_true_false()
   })
 end
 
+local function add_direction()
+  dial.augends['custom#up_down'] = dial.common.enum_cyclic {
+    name = 'up_down',
+    strlist = { 'up', 'down' },
+  }
+
+  dial.augends['custom#left_right'] = dial.common.enum_cyclic {
+    name = 'left_right',
+    strlist = { 'left', 'right' },
+  }
+
+  utils.append_to_list(settings, {
+    'custom#up_down',
+    'custom#left_right',
+  })
+end
+
 M.done = function()
   vim.cmd [[
     nmap <C-a> <Plug>(dial-increment)
@@ -53,6 +70,7 @@ M.done = function()
   ]]
 
   add_true_false()
+  add_direction()
 
   -- dial.config.searchlist.normal = settings
 

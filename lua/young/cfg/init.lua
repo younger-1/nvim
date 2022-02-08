@@ -27,23 +27,34 @@ function M.once()
 end
 
 function M.reload()
-  package.loaded['young.plugins'] = nil
+  M.reset_cache()
 
-  local loader = require 'young.plugin-loader'
-  loader.cache_clear()
-  loader.load()
+  M.once()
+  require('young.plugin-loader').done()
+  -- require 'young.lsp'
+  require('young.gui').setup()
 
-  vim.cmd ':PackerInstall'
-  vim.cmd ':PackerCompile'
-  -- vim.cmd ":PackerClean"
-
-  -- require("lvim.lsp").setup()
-
-  -- Log:info "Reloaded configuration"
+  vim.notify 'Reloaded configuration'
 end
 
 function M.get_reload_path()
   return join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
+end
+
+---Reset any startup cache files used by Packer and Impatient
+function M.reset_cache()
+  -- local impatient = _G.__luacache
+  -- if impatient then
+  --   impatient.clear_cache()
+  -- end
+  vim.cmd ':LuaCacheClear'
+
+  for module, _ in pairs(package.loaded) do
+    if vim.startswith(module, 'young') then
+      package.loaded[module] = nil
+    end
+  end
+  -- require("lvim.lsp.templates").generate_templates()
 end
 
 return M

@@ -27,7 +27,7 @@ function M.load_augroups()
         'dashboard',
         'setlocal cursorline signcolumn=yes cursorcolumn number',
       },
-      { 'BufWritePost', plugins_path, "lua require('young.cfg').reload()" },
+      { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
       -- { "BufWritePost", plugins_path, ":echomsg '[reload young]'" },
       -- { "VimLeavePre", "*", "set title set titleold=" },
     },

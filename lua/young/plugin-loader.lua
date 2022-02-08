@@ -29,19 +29,14 @@ plugin_loader.once = function()
   }
 end
 
-plugin_loader.cache_clear = function()
-  if vim.fn.delete(compile_path) == 0 then
-    -- Log:debug "deleted packer_compiled.lua"
-  end
-end
-
 plugin_loader.recompile = function()
-  plugin_loader.cache_clear()
-  packer.compile()
-  if utils.is_file(compile_path) then
-    -- Log:debug "generated packer_compiled.lua"
-    require 'young.packer_compiled'
-  end
+  require_clean('young.plugins')
+
+  plugin_loader.load()
+
+  vim.cmd ':PackerClean'
+  vim.cmd ':PackerCompile'
+  vim.cmd ':PackerInstall'
 end
 
 plugin_loader.load = function()
@@ -62,11 +57,11 @@ plugin_loader.load = function()
   end
 end
 
--- @young
 plugin_loader.source_compiled = function()
   if not utils.is_file(compile_path) then
+    vim.notify('[young.plugin-loader]: not find ' .. compile_path, vim.log.levels.WARN)
+    vim.notify('[young.plugin-loader]: compiling ... ', vim.log.levels.WARN)
     packer.compile()
-    -- vim.notify('[young.plugin-loader]: not find packer_compiled.lua', vim.log.levels.WARN)
     -- return
   end
 
@@ -74,8 +69,11 @@ plugin_loader.source_compiled = function()
   local compiled_ok = function()
     return utils.is_file(compile_path)
   end
-  vim.wait(5000, compiled_ok)
-  require 'young.packer_compiled'
+  vim.wait(20000, compiled_ok)
+
+  -- Use impatient
+  -- dofile(compile_path)
+  pcall(require, 'young.packer_compiled')
 end
 
 plugin_loader.done = function()
