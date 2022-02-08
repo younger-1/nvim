@@ -84,7 +84,7 @@ local mappings = {
     g = { "<cmd>lua require('young.mod.telescope.finder').grep_vim_config()<cr>", 'Grep Config files' },
     i = { "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>", 'Toggle LunarVim Info' },
     k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
-    r = { '<cmd>LvimReload<cr>', "Reload LunarVim's configuration" },
+    r = { "<cmd>lua require('young.cfg').reload()<cr>", "Reload configuration" },
   },
   Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
   T = {

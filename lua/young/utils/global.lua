@@ -58,3 +58,14 @@ end
 function _G.rr(...)
   return require(...)
 end
+
+---Require a module in protected mode without relying on its cached value
+---@param module string
+---@return any
+function _G.require_clean(module)
+  package.loaded[module] = nil
+  _G[module] = nil
+  local _, requested = pcall(require, module)
+  return requested
+end
+
