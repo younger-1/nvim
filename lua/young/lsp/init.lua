@@ -129,13 +129,14 @@ lsp_installer.on_server_ready(function(server)
     --   }
     -- end,
 
-    -- ['pyright'] = function ()
-    --   return vim.tbl_deep_extend('force', default_opts, {
-    --     on_new_config = function(new_config, new_root_dir)
-    --       setup_virtual_env(new_root_dir)
-    --     end
-    --   })
-    -- end,
+    ['pyright'] = function ()
+      return vim.tbl_deep_extend('force', default_opts, {
+        on_new_config = function(new_config, new_root_dir)
+          require('young.lsp.python').env(new_root_dir)
+          new_config.settings.python.analysis.extraPaths = { require('young.lsp.python').pep582(new_root_dir) }
+        end,
+      })
+    end,
 
     ['yamlls'] = function()
       return vim.tbl_deep_extend('force', default_opts, {
