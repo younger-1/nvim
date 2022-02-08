@@ -288,6 +288,15 @@ M.UI = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
     { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
   },
+  cmdline = {
+    {
+      'VonHeikemen/fine-cmdline.nvim',
+      requires = { {'MunifTanjim/nui.nvim'} },
+      config = function()
+        require('young.mod.fine-cmd')
+      end,
+    }
+  },
   terminal = {
     {
       'akinsho/toggleterm.nvim',

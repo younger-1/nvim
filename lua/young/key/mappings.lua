@@ -146,7 +146,7 @@ M.keys = {
     ZA = '<cmd>wqa<CR>',
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
-    ['<S-CR>'] = '<cmd>wqa<CR>', -- neovim tui not recognize
+    ['<S-CR>'] = '<cmd>wqa<CR>', -- windows terminal not recognize
     ['<CR>'] = {"(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true }},
   },
 
