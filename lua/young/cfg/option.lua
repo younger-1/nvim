@@ -56,6 +56,7 @@ local default_options = {
   fileformats = { 'unix', 'dos', 'mac' },
   synmaxcol = 400,
   list = true,
+  lazyredraw = true,
   -- TODO:
   fillchars = 'vert:┃',
 }

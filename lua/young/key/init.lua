@@ -1,10 +1,10 @@
 local M = {}
 
 --@example
--- nnoremap <buffer> <Leader>w :write<CR>
--- vim.api.nvim_set_keymap('n', '<Leader>w', ':write<CR>', { noremap = true, buffer = true })
--- M.map { 'n', '<Leader>w', ':write<CR>', buffer = true }
--- M.nmap('<Leader>w', ':write<CR>', { buffer = true })
+-- nnoremap <nowait> <Leader>w :write<CR>
+-- vim.api.nvim_set_keymap('n', '<Leader>w', ':write<CR>', { noremap = true, nowait = true })
+-- M.map { 'n', '<Leader>w', ':write<CR>', nowait = true }
+-- M.nmap('<Leader>w', ':write<CR>', { nowait = true })
 
 local defaults = { noremap = true, silent = true, nowait = true }
 
