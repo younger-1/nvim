@@ -41,4 +41,9 @@ function M.nmap(key, cmd, opts)
   vim.api.nvim_set_keymap('n', key, cmd, opts)
 end
 
+function M.xmap(key, cmd, opts)
+  opts = vim.tbl_extend('force', defaults, opts or {})
+  vim.api.nvim_set_keymap('x', key, cmd, opts)
+end
+
 return M

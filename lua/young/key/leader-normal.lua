@@ -68,24 +68,6 @@ local mappings = {
     },
     u = { '<cmd>LvimUpdate<cr>', 'Update LunarVim' },
   },
-  Y = {
-    name = '+young',
-    I = {
-      "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
-      "View LunarVim's changelog",
-    },
-    R = { '<cmd>LvimCacheReset<cr>', 'LvimCache Reset' },
-    b = {
-      "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
-      'LunarVim Git Branch',
-    },
-    c = { ':edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua') .. '<cr>', 'Edit init.lua' },
-    f = { "<cmd>lua require('young.mod.telescope.finder').find_vim_config()<cr>", 'Find Config files' },
-    g = { "<cmd>lua require('young.mod.telescope.finder').grep_vim_config()<cr>", 'Grep Config files' },
-    i = { "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>", 'Toggle LunarVim Info' },
-    k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
-    r = { "<cmd>lua require('young.cfg').reload()<cr>", "Reload configuration" },
-  },
   Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
   T = {
     name = '+treesitter',
@@ -99,6 +81,7 @@ local mappings = {
   },
   a = {
     name = '+apps',
+    [' '] = { '<cmd>Telescope command_palette<cr>', 'Command Palette' },
     s = {
       name = '+sessions',
       l = { '<cmd>lua require("persistence").load()<cr>', 'Load Session' },
@@ -382,6 +365,24 @@ local mappings = {
     t = { '<cmd>TodoTrouble<cr>', 'Todo' },
     w = { '<cmd>Trouble lsp_workspace_diagnostics<cr>', 'Workspace Diagnostics' },
     x = { '<cmd>TroubleToggle<cr>', 'Open' },
+  },
+  y = {
+    name = '+young',
+    b = {
+      "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
+      'LunarVim Git Branch',
+    },
+    c = { ':edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua') .. '<cr>', 'Edit init.lua' },
+    f = { "<cmd>lua require('young.mod.telescope.finder').find_vim_config()<cr>", 'Find Config files' },
+    g = { "<cmd>lua require('young.mod.telescope.finder').grep_vim_config()<cr>", 'Grep Config files' },
+    -- i = { "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>", 'Toggle LunarVim Info' },
+    -- I = {
+    --   "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
+    --   "View LunarVim's changelog",
+    -- },
+    -- k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
+    r = { "<cmd>lua require('young.cfg').reload()<cr>", "Reload configuration" },
+    y = { ':edit ' .. require('young.cfg').get_reload_path() .. '<cr>', 'Edit plugins' },
   },
   z = { '<cmd>ZenMode<cr>', 'Zen' },
 }

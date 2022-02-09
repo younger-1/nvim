@@ -1,6 +1,13 @@
-command! -nargs=1 -range=% SaveIt :<line1>,<line2>write! <args>
+com! -nargs=1 -range=% SaveIt :<line1>,<line2>write! <args>
 
-command! -nargs=+ -complete=expression Test :echo "<args>"
+com! -nargs=+ -complete=expression Test :echo "<args>"
+
+" Count the number of lines in the range
+com! -range -nargs=0 Lines  echo <line2> - <line1> + 1 "lines"
+
+com! -range   -nargs=0 JJ  echo 'l1:' . <line1> 'l2:' . <line2> 'c:' . <count>
+com! -range=% -nargs=0 KK  echo 'l1:' . <line1> 'l2:' . <line2> 'c:' . <count>
+com! -range=4 -nargs=0 LL  echo 'l1:' . <line1> 'l2:' . <line2> 'c:' . <count>
 
 " The following example lists user names to a Finger command >
 com! -complete=custom,ListUsers -nargs=1 Finger !finger <args>
@@ -14,15 +21,15 @@ fun! EditFileComplete(A,L,P)
     return split(globpath(&rtp, a:A), "\n")
 endfun
 
-command! -nargs=* -complete=custom,s:PrintLSCompletion Gls lua require'young.tools'.print_ls(<f-args>)
-function! s:PrintLSCompletion(...) abort
+com! -nargs=* -complete=custom,s:PrintLSCompletion Gls lua require'young.tools'.print_ls(<f-args>)
+fun! s:PrintLSCompletion(...) abort
   return luaeval("vim.tbl_keys(require'young.tools'.get_ls())")->sort()->join("\n")
-endfunction
+endfun
 
-command! -nargs=* -complete=customlist,s:PrintLSCompletionList Gls lua require'young.tools'.print_ls(<f-args>)
-function! s:PrintLSCompletionList(lead, ...) abort
+com! -nargs=* -complete=customlist,s:PrintLSCompletionList Gls lua require'young.tools'.print_ls(<f-args>)
+fun! s:PrintLSCompletionList(lead, ...) abort
   return luaeval("vim.tbl_keys(require'young.tools'.get_ls())")
         \ ->filter('v:lua.vim.startswith(v:val, a:lead)')
         \ ->sort()
-endfunction
+endfun
 
