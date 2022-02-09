@@ -537,6 +537,15 @@ M.write = {
       end,
     },
   },
+  zen = {
+    {
+      "folke/zen-mode.nvim",
+      cmd = 'ZenMode',
+      config = function()
+        require('young.mod.zen')
+      end,
+    },
+  }
 }
 
 for _, module in pairs(M) do
