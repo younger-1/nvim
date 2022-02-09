@@ -297,6 +297,15 @@ M.UI = {
       end,
     }
   },
+  search = {
+    {
+      'VonHeikemen/searchbox.nvim',
+      requires = { {'MunifTanjim/nui.nvim'} },
+      config = function()
+        require('young.mod.searchbox')
+      end,
+    }
+  },
   terminal = {
     {
       'akinsho/toggleterm.nvim',
@@ -542,7 +551,7 @@ for _, module in pairs(M) do
         end
       end
       if #plugs == 1 then
-        return unpack(plugs)
+        return unpack(plugs) -- avoid return { { "foo" } } to packer
       end
       return plugs
     end,

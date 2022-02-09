@@ -29,7 +29,7 @@ local mymappings = {
     -- a = "",
     -- d = "",
   },
-  ['<C-y>'] = { '<cmd>Telescope command_palette<cr>', 'Command Palette' },
+  ['<C-y>'] = {},
   ['<C-p>'] = {},
   ['<C-s>'] = {},
   -- Must
@@ -63,6 +63,7 @@ local mymappings = {
     s = {
       name = '+seek',
       c = { '<cmd>Telescope cheat fd<cr>', 'Cheatsheet' },
+      s = { '<cmd>Telescope fd<cr>', 'Why can not see , ' },
       v = { '<cmd>Cheatsheet<cr>', 'Vim Cheatsheet' },
     },
   },

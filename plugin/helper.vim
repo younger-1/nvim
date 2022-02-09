@@ -11,10 +11,7 @@ command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR
 command! -nargs=* -complete=customlist,v:lua.require'young.tools'.print_ls_complete Gls lua require'young.tools'.print_ls(<f-args>)
 
 " Replace a range with the contents of a file
-com! -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d
-
-" Count the number of lines in the range
-com! -range -nargs=0 Lines  echo <line2> - <line1> + 1 "lines"
+command! -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d
 
 " Open in VSCode from Vim
 command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
