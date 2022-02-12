@@ -55,6 +55,7 @@ function M.load_augroups()
     },
     custom_groups = {
       -- { 'DirChanged', '*', 'echomsg v:event' },
+      { 'VimLeave', '*', 'set guicursor=a:ver25' },
     },
   }
 end

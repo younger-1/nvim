@@ -17,8 +17,8 @@ M.fonts = {
   moid = is_windows and 'Monoid NF' or 'Monoid',
   term = is_windows and 'TerminessTTF NF' or 'TerminessTTF',
   vict = is_windows and 'VictorMono NF' or 'VictorMono',
+  hask = is_windows and 'Hasklug NF' or 'Hasklug',
   delu = 'Delugia',
-  delu_l = 'Delugia Light',
   -- sara = 'Sarasa Term SC',
   -- lxgw = '霞鹜文楷等宽',
 }

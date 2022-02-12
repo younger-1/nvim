@@ -1,4 +1,3 @@
 cnoreabbrev Gdiffsplit rightbelow vertical Gdiffsplit
-cnoreabbrev lp lua pp()<Left>
 
-cnoreabbrev term 12split <bar> terminal
+cnoreabbrev terminal 12split <bar> terminal

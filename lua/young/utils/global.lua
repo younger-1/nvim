@@ -51,6 +51,18 @@ function _G.ppp(...)
   return table.concat(objects, '\n')
 end
 
+function _G.gg(name, val)
+  if not name then
+    print("[young] ============")
+    return
+  end
+  if not val then
+    val = name
+    name = "__"
+  end
+  print("[young] " .. name .. ': ' .. vim.inspect(val))
+end
+
 function _G.to_home(path)
   return vim.fn.fnamemodify(path, ':~')
 end

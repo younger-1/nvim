@@ -1,11 +1,10 @@
-require('young.cfg').once()
-
 pcall(require, 'impatient')
+
+require('young.cfg').once()
 
 require('young.plugin-loader').done()
 
-vim.cmd 'syntax on'
-vim.cmd 'colorscheme onedark'
+vim.cmd 'colorscheme monokai'
 
 require 'young.lsp'
 
