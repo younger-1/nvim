@@ -331,7 +331,9 @@ M.treesitter = {
     'nvim-treesitter/nvim-treesitter',
     branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
     run = ':TSUpdate',
-    config = require 'plug-config.treesitter',
+    config = function()
+      require('young.mod.treesitter')
+    end,
   },
   { 'nvim-treesitter/playground' },
 }
