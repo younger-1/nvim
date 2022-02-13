@@ -147,7 +147,7 @@ M.change = {
         require 'young.mod.autopairs'
       end,
     },
-    { 
+    {
       'junegunn/vim-easy-align',
       cmd = 'EasyAlign',
       config = function()
@@ -522,7 +522,13 @@ M.write = {
     },
   },
   org = {
-    { 'nvim-neorg/neorg', branch = 'unstable', config = require 'plug-config.neorg', ft = 'norg' },
+    {
+      'nvim-neorg/neorg',
+      ft = 'norg',
+      config = function()
+        require 'young.mod.neorg'
+      end,
+    },
   },
   markdown = {
     {
