@@ -208,7 +208,7 @@ local mappings = {
     ['<C-e>'] = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Diagnostics LocList' },
     A = { '<cmd>Telescope lsp_range_code_actions<cr>', 'Range Action' },
     C = { '<cmd>CmpStatus<cr>', 'Code Action' },
-    D = { '<cmd>Telescope lsp_workspace_diagnostics<cr>', 'Workspace Diagnostics' },
+    D = { '<cmd>Telescope diagnostics<cr>', 'Workspace Diagnostics' },
     F = {
       function()
         vim.lsp.buf.formatting_sync()
@@ -222,7 +222,7 @@ local mappings = {
     [']'] = { '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Outgoing Calls' },
     a = { '<cmd>Telescope lsp_code_actions<cr>', 'Code Action' },
     c = { '<cmd>CodeActionMenu<cr>', 'Code Action' },
-    d = { '<cmd>Telescope lsp_document_diagnostics<cr>', 'Document Diagnostics' },
+    d = { '<cmd>Telescope diagnostics bufnr=0<cr>', 'Document Diagnostics' },
     f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
     i = { '<cmd>LspInfo<cr>', 'Info' },
     j = {
