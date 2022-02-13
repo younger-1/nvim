@@ -353,6 +353,12 @@ M.telescope = {
         require('telescope').load_extension 'zf-native'
       end,
     },
+    { 
+      'nvim-telescope/telescope-file-browser.nvim',
+      config = function()
+        require('telescope').load_extension 'file_browser'
+      end,
+    },
     {
       'nvim-telescope/telescope-frecency.nvim',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
