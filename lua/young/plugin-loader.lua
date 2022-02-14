@@ -18,6 +18,7 @@ plugin_loader.once = function()
 
   require('packer').init {
     compile_path = compile_path,
+    max_jobs = 8,
     log = { level = 'warn' },
     profile = { enable = true },
     display = {
@@ -34,9 +35,9 @@ plugin_loader.recompile = function()
 
   plugin_loader.load()
 
-  vim.cmd ':PackerClean'
-  vim.cmd ':PackerCompile'
-  vim.cmd ':PackerInstall'
+  vim.cmd 'PackerClean'
+  vim.cmd 'PackerCompile'
+  vim.cmd 'PackerInstall'
 end
 
 plugin_loader.load = function()

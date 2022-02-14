@@ -28,7 +28,7 @@ function M.load_augroups()
         'setlocal cursorline signcolumn=yes cursorcolumn number',
       },
       { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
-      -- { "BufWritePost", plugins_path, ":echomsg '[reload young]'" },
+      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
       -- { "VimLeavePre", "*", "set title set titleold=" },
     },
     _formatoptions = {

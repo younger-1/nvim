@@ -48,7 +48,7 @@ M.cfg = {
   },
   update_focused_file = {
     enable = true,
-    update_cwd = false, -- BUG: in windows, not only update the root directory of the tree, but also change workspace root
+    update_cwd = false,
     ignore_list = {},
   },
   diagnostics = {

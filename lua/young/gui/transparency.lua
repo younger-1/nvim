@@ -10,7 +10,7 @@ end
 
 M.post_transparency = function()
   local msg = '[Transparency]: ' .. M.val
-  vim.notify(msg)
+  print(msg)
 end
 
 return M
