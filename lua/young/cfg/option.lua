@@ -57,6 +57,7 @@ local default_options = {
   synmaxcol = 400,
   list = true,
   lazyredraw = true,
+  path = '.,,',
   -- TODO:
   fillchars = 'vert:┃',
 }

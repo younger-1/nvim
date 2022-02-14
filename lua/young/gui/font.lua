@@ -85,7 +85,7 @@ M.post_font = function(show_default, show_fallback)
   if show_fallback and #vim.opt.guifont:get() > 1 then
     msg = msg .. ', [fallback]: ' .. M.get_guifont(M.fallback)
   end
-  require('young.utils').defer(vim.notify, msg, 120)
+  require('young.utils').defer(print, msg, 120)
 end
 
 M.once()
