@@ -1,3 +1,5 @@
+" TODO: fd "mini.*.vim"
+
 set encoding=utf-8
 scriptencoding utf-8
 

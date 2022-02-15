@@ -18,6 +18,7 @@ plugin_loader.once = function()
 
   require('packer').init {
     compile_path = compile_path,
+    -- git = { cmd = join_paths(vim.env.GIT_INSTALL_ROOT, 'cmd', 'git') },
     max_jobs = 8,
     log = { level = 'warn' },
     profile = { enable = true },
