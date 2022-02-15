@@ -7,3 +7,5 @@ spell/en.utf-8.add.spl
 packer_compiled.lua
 
 __pycache__/
+
+*.packer
