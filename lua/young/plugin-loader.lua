@@ -18,7 +18,6 @@ plugin_loader.once = function()
 
   require('packer').init {
     compile_path = compile_path,
-    -- git = { cmd = join_paths(vim.env.GIT_INSTALL_ROOT, 'cmd', 'git') },
     max_jobs = 8,
     log = { level = 'warn' },
     profile = { enable = true },
@@ -61,21 +60,23 @@ end
 
 plugin_loader.source_compiled = function()
   if not utils.is_file(compile_path) then
-    vim.notify('[young.plugin-loader]: not find ' .. compile_path, vim.log.levels.WARN)
-    vim.notify('[young.plugin-loader]: compiling ... ', vim.log.levels.WARN)
+    vim.notify('[young.plugin-loader]: not find ' .. compile_path .. ', compiling ...', vim.log.levels.WARN)
     packer.compile()
-    -- return
+    -- No need to source compiled file, as PackerCompile will do it
+    -- doautocmd BufWinEnter will load "which-key" and "nvim-tree" at least
+    vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter]]
+    return
   end
 
-  -- TODO: use vim.defer_fn(), plenary's async, timer_start(), wait()
-  local compiled_ok = function()
-    return utils.is_file(compile_path)
-  end
-  vim.wait(20000, compiled_ok)
+  -- DONE: use vim.defer_fn(), plenary's async, timer_start(), wait()
+  -- local compiled_ok = function()
+  --   return utils.is_file(compile_path)
+  -- end
+  -- vim.wait(20000, compiled_ok)
 
-  -- Use impatient
+  -- To use impatient
+  require('young.packer_compiled')
   -- dofile(compile_path)
-  pcall(require, 'young.packer_compiled')
 end
 
 plugin_loader.done = function()
