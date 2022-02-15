@@ -69,6 +69,84 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+local server_opts = {
+  ['sumneko_lua'] = {
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+          path = {
+            'lua/?.lua',
+            'lua/?/init.lua',
+          },
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand '$VIMRUNTIME'] = true,
+            [_G.packer_plugins['lua-dev.nvim'].path] = true,
+            [_G.packer_plugins['plenary.nvim'].path] = true,
+            -- [_G.packer_plugins['telescope.nvim'].path] = true,
+          },
+          maxPreload = 2000,
+          preloadFileSize = 200,
+        },
+        diagnostics = {
+          globals = {
+            'vim',
+          },
+        },
+      },
+    },
+  },
+
+  -- ["sumneko_lua"] = {
+  --   lspconfig = default_opts,
+  --   library = {
+  --     vimruntime = true, -- runtime path
+  --     types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+  --     -- plugins = { "nvim-treesitter", "telescope.nvim" },
+  --     plugins = false,
+  --   },
+  -- },
+
+  ['pyright'] = {
+    on_new_config = function(new_config, new_root_dir)
+      -- pp("[young]: ", vim.keys(new_config))
+      require('young.lsp.python').env(new_root_dir)
+      new_config.settings.python.analysis.extraPaths = { require('young.lsp.python').pep582(new_root_dir) }
+    end,
+  },
+
+  ['yamlls'] = {
+    settings = {
+      yaml = {
+        hover = true,
+        completion = true,
+        validate = true,
+        schemas = require('schemastore').json.schemas(),
+      },
+    },
+  },
+
+  ['jsonls'] = {
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas {
+          replace = {
+            ['Scoop manifest'] = {
+              description = "Scoop bucket app manifest",
+              fileMatch = { "bucket/**.json" },
+              name = "Scoop manifest",
+              url = "https://cdn.jsdelivr.net/gh/lukesampson/scoop@master/schema.json",
+              -- url = "https://raw.githubusercontent.com/lukesampson/scoop/master/schema.json",
+            },
+          },
+        },
+      },
+    },
+  },
+}
+
 -- Register a handler that will be called for all installed servers.
 lsp_installer.on_server_ready(function(server)
   local default_opts = {
@@ -85,100 +163,14 @@ lsp_installer.on_server_ready(function(server)
     },
   }
 
-  local server_opts = {
-    ['sumneko_lua'] = function()
-      return vim.tbl_deep_extend('force', default_opts, {
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-              path = {
-                'lua/?.lua',
-                'lua/?/init.lua',
-              },
-            },
-            workspace = {
-              library = {
-                [vim.fn.expand '$VIMRUNTIME'] = true,
-                [_G.packer_plugins['lua-dev.nvim'].path] = true,
-                [_G.packer_plugins['plenary.nvim'].path] = true,
-                -- [_G.packer_plugins['telescope.nvim'].path] = true,
-              },
-              maxPreload = 2000,
-              preloadFileSize = 200,
-            },
-            diagnostics = {
-              globals = {
-                'vim',
-              },
-            },
-          },
-        },
-      })
-    end,
-
-    -- ["sumneko_lua"] = function()
-    --   return require("lua-dev").setup {
-    --     lspconfig = default_opts,
-    --     library = {
-    --       vimruntime = true, -- runtime path
-    --       types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-    --       -- plugins = { "nvim-treesitter", "telescope.nvim" },
-    --       plugins = false,
-    --     },
-    --   }
-    -- end,
-
-    ['pyright'] = function ()
-      return vim.tbl_deep_extend('force', default_opts, {
-        on_new_config = function(new_config, new_root_dir)
-          -- pp("[young]: ", vim.keys(new_config))
-          require('young.lsp.python').env(new_root_dir)
-          new_config.settings.python.analysis.extraPaths = { require('young.lsp.python').pep582(new_root_dir) }
-        end,
-      })
-    end,
-
-    ['yamlls'] = function()
-      return vim.tbl_deep_extend('force', default_opts, {
-        settings = {
-          yaml = {
-            hover = true,
-            completion = true,
-            validate = true,
-            schemas = require('schemastore').json.schemas(),
-          },
-        },
-      })
-    end,
-
-    ['jsonls'] = function()
-      return vim.tbl_deep_extend('force', default_opts, {
-        settings = {
-          json = {
-            schemas = require('schemastore').json.schemas {
-              replace = {
-                ['Scoop manifest'] = {
-                  description = "Scoop bucket app manifest",
-                  fileMatch = { "bucket/**.json" },
-                  name = "Scoop manifest",
-                  url = "https://cdn.jsdelivr.net/gh/lukesampson/scoop@master/schema.json",
-                  -- url = "https://raw.githubusercontent.com/lukesampson/scoop/master/schema.json",
-                },
-              },
-            },
-          },
-        },
-      })
-    end,
-  }
-
   -- Use the server's custom settings, if they exist, otherwise default to the default options
-  local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
+  if server_opts[server.name] then
+    default_opts = vim.tbl_deep_extend('force', default_opts, server_opts[server.name])
+  end
 
   -- This setup() function is exactly the same as lspconfig's setup function.
   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(server_options)
+  server:setup(default_opts)
 end)
 
 return M
