@@ -18,7 +18,7 @@ plugin_loader.once = function()
 
   require('packer').init {
     compile_path = compile_path,
-    max_jobs = 8,
+    -- max_jobs = 8,
     log = { level = 'warn' },
     profile = { enable = true },
     display = {

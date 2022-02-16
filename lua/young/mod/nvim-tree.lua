@@ -42,7 +42,7 @@ M.cfg = {
   update_cwd = true,
   -- hijacks new directory buffers when they are opened
   -- disable it if using `vim-dirvish` or `lir.nvim`
-  update_to_buf_dir = {
+  hijack_directories = {
     enable = true,
     auto_open = true,
   },

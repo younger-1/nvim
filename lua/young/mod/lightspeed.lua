@@ -5,3 +5,6 @@ require('lightspeed').setup {
   -- repeat_ft_with_target_char = true,
 }
 
+vim.cmd [[
+  map <space><space>s <Plug>Lightspeed_omni_s
+]]
