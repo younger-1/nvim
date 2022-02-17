@@ -596,6 +596,19 @@ M.write = {
   }
 }
 
+M.lang = {
+    js = {
+      {
+        "vuki656/package-info.nvim",
+        ft = "json",
+        requires = { {'MunifTanjim/nui.nvim'} },
+        config = function()
+          require "young.mod.package-info"
+        end,
+      },
+    },
+}
+
 for _, module in pairs(M) do
   setmetatable(module, {
     __call = function(t)
