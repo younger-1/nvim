@@ -1,4 +1,6 @@
-pcall(require, 'impatient')
+pcall(function()
+  require('impatient').enable_profile()
+end)
 
 require('young.cfg').once()
 
