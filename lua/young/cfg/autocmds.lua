@@ -56,6 +56,7 @@ function M.load_augroups()
     custom_groups = {
       -- { 'DirChanged', '*', 'echomsg v:event' },
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
+      { 'User', 'PackerCompileDone', ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
     },
   }
 end

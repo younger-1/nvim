@@ -84,9 +84,17 @@ local mappings = {
     [' '] = { '<cmd>Telescope command_palette<cr>', 'Command Palette' },
     s = {
       name = '+sessions',
-      l = { '<cmd>lua require("persistence").load()<cr>', 'Load Session' },
-      L = { '<cmd>lua require("persistence").load({ last = true })<cr>', 'Restore Last Session' },
+      l = { '<cmd>lua require("persistence").load()<cr>', 'Current Session' },
+      L = { '<cmd>lua require("persistence").load({ last = true })<cr>', 'Last Session' },
       s = { '<cmd>lua require("persistence").stop()<cr>', 'Stop Session' },
+    },
+    S = {
+      name = '+session-man',
+      l = { '<cmd>SessionManager load_current_dir_session<cr>', 'Current Session' },
+      L = { '<cmd>SessionManager load_last_session<cr>', 'Last Session' },
+      a = { '<cmd>SessionManager load_session<cr>', 'All Sessions' },
+      a = { '<cmd>SessionManager delete_session<cr>', 'Delete Session' },
+      S = { '<cmd>SessionManager save_current_session<cr>', 'Save Session' },
     },
   },
   b = {
