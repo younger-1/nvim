@@ -129,11 +129,12 @@ M.done = function()
 
   -- Set menu
   dashboard.section.buttons.val = {
-    dashboard.button('e', '  New file', ':ene <BAR> startinsert<CR>'),
-    dashboard.button('f', '  Find file', ':Telescope find_files<CR>'),
+    dashboard.button('r', '  Recent files', ':Telescope oldfiles<CR>'),
+    dashboard.button('f', '  Find files', ':Telescope find_files<CR>'),
     dashboard.button('p', '  Projects', ':Telescope projects<CR>'),
-    dashboard.button('s', '  Open last session', ":lua require('persistence').load()<CR>"),
-    dashboard.button('q', '  Quit NVIM', ':qa<CR>'),
+    dashboard.button('l', '  Current session', ":lua require('persistence').load()<CR>"),
+    dashboard.button('L', '  Last session', ":lua require('persistence').load({last = true})<CR>"),
+    dashboard.button('q', '  Quit', ':qa<CR>'),
   }
 
   alpha.setup(dashboard.config)
@@ -145,9 +146,9 @@ M.done = function()
   -- ]]
 
   -- Disable the tabline in alpha
-  vim.cmd [[
-    autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-  ]]
+  -- vim.cmd [[
+  --   autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+  -- ]]
 end
 
 -- <https://github.com/rafamadriz/NeoCode/blob/main/lua/modules/plugins/alpha.lua>
