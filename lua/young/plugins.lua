@@ -283,6 +283,13 @@ M.UI = {
         require('young.mod.trouble').done()
       end,
     },
+    -- {
+    --   'nvim-telescope/telescope-ui-select.nvim',
+    --   config = function()
+    --     require("telescope").load_extension("ui-select")
+    --   end,
+    -- },
+    { 'stevearc/dressing.nvim' },
   },
   statusline = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
@@ -407,6 +414,12 @@ M.telescope = {
         require('telescope').load_extension 'command_palette'
       end,
     },
+    {
+      'cljoly/telescope-repo.nvim',
+      config = function()
+        require('telescope').load_extension 'repo'
+      end,
+    },
   },
 }
 
@@ -506,6 +519,12 @@ M.git = {
   --   end,
   --   disable = is_windows,
   -- },
+  {
+    "nvim-telescope/telescope-github.nvim",
+    config = function()
+      require("telescope").load_extension "gh"
+    end,
+  },
 }
 
 M.neovim = {

@@ -295,6 +295,7 @@ local mappings = {
     ['<C-q>'] = { '<cmd>Telescope quickfix<cr>', 'QuickList' },
     ['<tab>'] = { '<cmd>Telescope<cr>', '' },
     ['?'] = { '<cmd>Telescope help_tags<cr>', 'Help' },
+    B = { '<cmd>Telescope bookmarks<cr>', 'Bookmarks' },
     C = { '<cmd>Telescope commands<cr>', 'Commands' },
     G = { '<cmd>Telescope live_grep grep_open_files=v:true<cr>', 'Grep in opened buffer' },
     H = { '<cmd>Telescope highlights<cr>', 'Highlights' },
@@ -305,7 +306,6 @@ local mappings = {
     T = { '<cmd>Telescope grep_string<cr>', 'Text under cursor' },
     a = { '<cmd>Telescope autocommands<cr>', 'Autocommands' },
     b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Buffer String' },
-    B = { '<cmd>Telescope bookmarks<cr>', 'Bookmarks' },
     c = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", 'Colorscheme' },
     e = { '<cmd>Telescope env<cr>', 'Env' },
     f = { '<cmd>Telescope find_files<cr>', 'Find files' },
@@ -338,6 +338,7 @@ local mappings = {
       s = { '<cmd>Telescope symbols<cr>', 'Symbols' },
     },
     t = { '<cmd>TodoTelescope<cr>', 'Todo' },
+    u = { '<cmd>Telescope repo list<cr>', 'Repository' },
     v = {
       name = '+vim',
       T = { '<cmd>Telescope tags<cr>', 'All Tags' },
