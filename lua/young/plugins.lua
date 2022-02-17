@@ -20,12 +20,6 @@ M.basic = {
     end,
   },
   {
-    'rcarriga/nvim-notify',
-    config = function()
-      require('young.mod.notify').done()
-    end,
-  },
-  {
     'itchyny/vim-external',
     config = function()
       vim.cmd [[
@@ -176,15 +170,6 @@ M.change = {
 }
 
 M.BWT = {
-  bufferline = {
-    {
-      'romgrk/barbar.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.mod.barbar').hot()
-      end,
-    },
-  },
   window = {
     {
       'luukvbaal/stabilize.nvim',
@@ -218,6 +203,8 @@ M.files = {
         require 'young.mod.project'
       end,
     },
+  },
+  session = {
     {
       'folke/persistence.nvim',
       event = 'BufReadPre',
@@ -247,6 +234,13 @@ M.find = {
         -- require("user.spectre").config()
       end,
     },
+    {
+      'VonHeikemen/searchbox.nvim',
+      requires = { {'MunifTanjim/nui.nvim'} },
+      config = function()
+        require('young.mod.searchbox')
+      end,
+    }
   },
   fzf = {
     {
@@ -270,6 +264,12 @@ M.UI = {
       end,
     },
     {
+      'rcarriga/nvim-notify',
+      config = function()
+        require('young.mod.notify').done()
+      end,
+    },
+    {
       'folke/which-key.nvim',
       event = 'BufWinEnter',
       config = function()
@@ -283,17 +283,32 @@ M.UI = {
         require('young.mod.trouble').done()
       end,
     },
+    { 'stevearc/dressing.nvim' },
     -- {
     --   'nvim-telescope/telescope-ui-select.nvim',
     --   config = function()
     --     require("telescope").load_extension("ui-select")
     --   end,
     -- },
-    { 'stevearc/dressing.nvim' },
+    -- { 'sidebar-nvim/sidebar.nvim',
+    --   branch = 'dev',
+    --   config = function()
+    --     require("sidebar-nvim").setup {}
+    --   end,
+    -- },
   },
   statusline = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
     { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
+  },
+  bufferline = {
+    {
+      'romgrk/barbar.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require('young.mod.barbar').hot()
+      end,
+    },
   },
   cmdline = {
     {
@@ -301,15 +316,6 @@ M.UI = {
       requires = { {'MunifTanjim/nui.nvim'} },
       config = function()
         require('young.mod.fine-cmd')
-      end,
-    }
-  },
-  search = {
-    {
-      'VonHeikemen/searchbox.nvim',
-      requires = { {'MunifTanjim/nui.nvim'} },
-      config = function()
-        require('young.mod.searchbox')
       end,
     }
   },
@@ -328,6 +334,15 @@ M.UI = {
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
+      end,
+    },
+  },
+  other = {
+    {
+      "wfxr/minimap.vim",
+      cmd = { "MinimapToggle" },
+      config = function()
+        require("young.mod.minimap")
       end,
     },
   },

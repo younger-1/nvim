@@ -22,11 +22,11 @@ function M.load_augroups()
         -- "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
         "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
       },
-      {
-        'BufWinEnter',
-        'dashboard',
-        'setlocal cursorline signcolumn=yes cursorcolumn number',
-      },
+      -- {
+      --   'BufWinEnter',
+      --   'dashboard',
+      --   'setlocal cursorline signcolumn=yes cursorcolumn number',
+      -- },
       { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
       -- { "VimLeavePre", "*", "set title set titleold=" },
@@ -51,7 +51,7 @@ function M.load_augroups()
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,minimap', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
     custom_groups = {
       -- { 'DirChanged', '*', 'echomsg v:event' },
