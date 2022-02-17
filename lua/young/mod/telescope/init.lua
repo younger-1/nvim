@@ -3,6 +3,8 @@ local M = {}
 local previewers = require 'telescope.previewers'
 local sorters = require 'telescope.sorters'
 local actions = require 'telescope.actions'
+local builtin = require 'telescope.builtin'
+local themes = require 'telescope.themes'
 
 local view = require 'young.mod.telescope.view'
 
@@ -288,7 +290,10 @@ M.cfg = {
         { "relative number", ':set relativenumber!' },
         { "search highlighting (F12)", ':set hlsearch!' },
       }
-    }
+    },
+    ["ui-select"] = {
+      theme = 'get_dropdown',
+    },
   },
 }
 
@@ -309,8 +314,6 @@ function M.code_actions()
     previewer = false,
     shorten_path = false,
   }
-  local builtin = require 'telescope.builtin'
-  local themes = require 'telescope.themes'
   builtin.lsp_code_actions(themes.get_dropdown(opts))
 end
 
