@@ -2,6 +2,14 @@ local M = {}
 
 local path = require('lspconfig.util').path
 
+M.opts = {
+  on_new_config = function(new_config, new_root_dir)
+    -- pp("[young]: ", vim.keys(new_config))
+    M.env(new_root_dir)
+    new_config.settings.python.analysis.extraPaths = { M.pep582(new_root_dir) }
+  end,
+}
+
 local function get_pipenv_dir()
   return vim.fn.trim(vim.fn.system('pipenv --venv'))
 end

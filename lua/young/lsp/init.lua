@@ -69,30 +69,11 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local server_opts = {
-  ['sumneko_lua'] = require('young.lsp.lua').cfg,
-
-  -- ["sumneko_lua"] = {
-  --   lspconfig = default_opts,
-  --   library = {
-  --     vimruntime = true, -- runtime path
-  --     types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-  --     -- plugins = { "nvim-treesitter", "telescope.nvim" },
-  --     plugins = false,
-  --   },
-  -- },
-
-  ['pyright'] = {
-    on_new_config = function(new_config, new_root_dir)
-      -- pp("[young]: ", vim.keys(new_config))
-      require('young.lsp.python').env(new_root_dir)
-      new_config.settings.python.analysis.extraPaths = { require('young.lsp.python').pep582(new_root_dir) }
-    end,
-  },
-
-  ['yamlls'] = require('young.lsp.yaml').cfg,
-
-  ['jsonls'] = require('young.lsp.json').cfg,
+local custom_servers = {
+  sumneko_lua = "lua",
+  pyright = 'python',
+  yamlls = 'yaml',
+  jsonls = 'json',
 }
 
 -- Register a handler that will be called for all installed servers.
@@ -112,8 +93,10 @@ lsp_installer.on_server_ready(function(server)
   }
 
   -- Use the server's custom settings, if they exist, otherwise default to the default options
-  if server_opts[server.name] then
-    default_opts = vim.tbl_deep_extend('force', default_opts, server_opts[server.name])
+  local ft = custom_servers[server.name]
+  if ft then
+    local opts = require('young.lsp.' .. ft).opts
+    default_opts = vim.tbl_deep_extend('force', default_opts, opts)
   end
 
   -- This setup() function is exactly the same as lspconfig's setup function.

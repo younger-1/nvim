@@ -1,6 +1,6 @@
 local M = {}
 
-M.cfg = {
+M.opts = {
   settings = {
     json = {
       schemas = require('schemastore').json.schemas {
