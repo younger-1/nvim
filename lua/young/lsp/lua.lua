@@ -1,6 +1,6 @@
 local M = {}
 
-M.cfg = {
+M.opts = {
   settings = {
     Lua = {
       runtime = {
