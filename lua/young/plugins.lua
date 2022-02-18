@@ -173,11 +173,8 @@ M.BWT = {
   window = {
     {
       'luukvbaal/stabilize.nvim',
-      -- disable = true,
       config = function()
-        require('stabilize').setup {
-          nested = 'QuickFixCmdPost,DiagnosticChanged *',
-        }
+        require('stabilize').setup {}
       end,
     },
   },
@@ -317,7 +314,13 @@ M.UI = {
       config = function()
         require('young.mod.fine-cmd')
       end,
-    }
+    },
+    { 'gelguy/wilder.nvim',
+      event = 'CmdlineEnter',
+      config = function()
+        require('young.mod.wilder')
+      end,
+    },
   },
   terminal = {
     {
@@ -555,6 +558,14 @@ M.neovim = {
 }
 
 M.write = {
+  core = {
+    {
+      'crispgm/telescope-heading.nvim',
+      config = function()
+        require('telescope').load_extension('heading')
+      end,
+    },
+  },
   todo = {
     {
       'folke/todo-comments.nvim',
