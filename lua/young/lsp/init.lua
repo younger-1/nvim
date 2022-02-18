@@ -70,34 +70,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local server_opts = {
-  ['sumneko_lua'] = {
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-          path = {
-            'lua/?.lua',
-            'lua/?/init.lua',
-          },
-        },
-        workspace = {
-          library = {
-            [vim.fn.expand '$VIMRUNTIME'] = true,
-            [_G.packer_plugins['lua-dev.nvim'].path] = true,
-            [_G.packer_plugins['plenary.nvim'].path] = true,
-            -- [_G.packer_plugins['telescope.nvim'].path] = true,
-          },
-          maxPreload = 2000,
-          preloadFileSize = 200,
-        },
-        diagnostics = {
-          globals = {
-            'vim',
-          },
-        },
-      },
-    },
-  },
+  ['sumneko_lua'] = require('young.lsp.lua').cfg,
 
   -- ["sumneko_lua"] = {
   --   lspconfig = default_opts,
@@ -117,34 +90,9 @@ local server_opts = {
     end,
   },
 
-  ['yamlls'] = {
-    settings = {
-      yaml = {
-        hover = true,
-        completion = true,
-        validate = true,
-        schemas = require('schemastore').json.schemas(),
-      },
-    },
-  },
+  ['yamlls'] = require('young.lsp.yaml').cfg,
 
-  ['jsonls'] = {
-    settings = {
-      json = {
-        schemas = require('schemastore').json.schemas {
-          replace = {
-            ['Scoop manifest'] = {
-              description = "Scoop bucket app manifest",
-              fileMatch = { "bucket/**.json" },
-              name = "Scoop manifest",
-              url = "https://cdn.jsdelivr.net/gh/lukesampson/scoop@master/schema.json",
-              -- url = "https://raw.githubusercontent.com/lukesampson/scoop/master/schema.json",
-            },
-          },
-        },
-      },
-    },
-  },
+  ['jsonls'] = require('young.lsp.json').cfg,
 }
 
 -- Register a handler that will be called for all installed servers.

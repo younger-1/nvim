@@ -85,6 +85,7 @@ M.hot = function(silent)
 end
 
 M.once = function()
+  require("telescope").load_extension("notify")
   idx = 1
   M.hot(true)
 end
