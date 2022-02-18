@@ -270,10 +270,7 @@ local mappings = {
     c = { '<cmd>PackerCompile<cr>', 'Compile' },
     i = { '<cmd>PackerInstall<cr>', 'Install' },
     k = { '<cmd>PackerClean<cr>', 'Clean' },
-    p = {
-      "<cmd>lua require('telescope').extensions.packer.packer { layout_config = { preview_width = 0.5} }<cr>",
-      'Telescope Packer',
-    },
+    p = { "<cmd>Telescope packer<cr>", 'Telescope Packer', },
     r = { "<cmd>lua require('young.plugin-loader').recompile()<cr>", 'Re-compile' },
     s = { '<cmd>PackerStatus<cr>', 'Status' },
     u = { '<cmd>PackerUpdate<cr>', 'Update' },
@@ -323,10 +320,7 @@ local mappings = {
       m = { "<cmd>lua require('telescope').extensions.frecency.frecency()<cr>", 'Frecency' },
     },
     n = { '<cmd>Telescope notify<cr>', 'Notify' },
-    o = {
-      '<cmd>Telescope sessions layout_strategy=bottom_pane layout_config={"prompt_position":"top"}<cr>',
-      'Sessions',
-    },
+    o = { '<cmd>Telescope heading<cr>', 'Heading', },
     p = { '<cmd>Telescope projects<cr>', 'Projects' },
     r = { '<cmd>Telescope oldfiles<cr>', 'Open Recent File' },
     s = {
