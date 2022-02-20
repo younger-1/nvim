@@ -74,7 +74,7 @@ local mymappings = {
     }
   },
   g = {
-    ['<C-l>'] = { '<cmd>nohl<CR><C-l>', 'Clear highlight'},
+    -- ['<C-l>'] = { '<cmd>nohl<CR><C-l>', 'Clear highlight'},
     ['"'] = { [[:<C-U><C-R><C-R>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-F><left>]], 'Edit or select [R/r]egister'},
   },
   y = {
