@@ -132,6 +132,12 @@ M.change = {
     { 'tpope/vim-surround' },
     { 'tpope/vim-repeat' },
     { 'tpope/vim-abolish' },
+    {
+      "arthurxavierx/vim-caser",
+      setup = function()
+        vim.g.caser_prefix = ";c"
+      end,
+    },
   },
   pair = {
     {
