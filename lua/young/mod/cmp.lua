@@ -118,6 +118,11 @@ M.done = function()
         luasnip.lsp_expand(args.body)
       end,
     },
+    documentation = {
+      -- border = 'single',
+      border = 'rounded',
+      -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
     sources = {
       { name = 'nvim_lsp' },
       { name = 'path' },
