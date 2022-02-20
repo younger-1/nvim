@@ -45,6 +45,9 @@ function M.load_augroups()
       { 'BufWinEnter', '.zsh', 'setlocal filetype=sh' },
       { 'BufRead', '*.zsh', 'setlocal filetype=sh' },
       { 'BufNewFile', '*.zsh', 'setlocal filetype=sh' },
+      --
+      { 'BufRead', 'settings.json', 'setlocal filetype=jsonc' },
+      { 'BufRead', 'coc-settings.json', 'setlocal filetype=jsonc' },
     },
     _auto_resize = {
       -- will cause split windows to be resized evenly if main window is resized
