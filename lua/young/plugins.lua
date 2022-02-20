@@ -168,6 +168,8 @@ M.change = {
     {
       'monaqa/dial.nvim',
       event = 'BufRead',
+      -- FIXME:
+      commit = '3b70b2a',
       config = function()
         require('young.mod.dial').done()
       end,
@@ -237,13 +239,13 @@ M.find = {
         -- require("user.spectre").config()
       end,
     },
-    {
-      'VonHeikemen/searchbox.nvim',
-      requires = { {'MunifTanjim/nui.nvim'} },
-      config = function()
-        require('young.mod.searchbox')
-      end,
-    }
+    -- {
+    --   'VonHeikemen/searchbox.nvim',
+    --   requires = { {'MunifTanjim/nui.nvim'} },
+    --   config = function()
+    --     require('young.mod.searchbox')
+    --   end,
+    -- }
   },
   fzf = {
     {
@@ -509,6 +511,7 @@ M.LSP = {
   lua = {
     { 'folke/lua-dev.nvim' },
     { 'nanotee/luv-vimdocs' },
+    { 'milisims/nvim-luaref' },
   },
   ui = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
@@ -614,16 +617,16 @@ M.write = {
 }
 
 M.lang = {
-    js = {
-      {
-        "vuki656/package-info.nvim",
-        ft = "json",
-        requires = { {'MunifTanjim/nui.nvim'} },
-        config = function()
-          require "young.mod.package-info"
-        end,
-      },
+  js = {
+    {
+      "vuki656/package-info.nvim",
+      ft = "json",
+      requires = { {'MunifTanjim/nui.nvim'} },
+      config = function()
+        require "young.mod.package-info"
+      end,
     },
+  },
 }
 
 for _, module in pairs(M) do
