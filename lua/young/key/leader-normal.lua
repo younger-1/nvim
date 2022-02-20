@@ -348,6 +348,7 @@ local mappings = {
   },
   t = {
     name = '+toggle',
+    [':'] = { ':call wilder#toggle()<cr>', 'Wilder' },
     b = 'Biscuits',
     l = { "<cmd>lua require('user.tools').toggle_tabline()<cr>", 'Tabline' },
     m = { '<cmd>MinimapToggle<cr>', 'Minimap' },
