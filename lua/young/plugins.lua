@@ -533,10 +533,7 @@ M.LSP = {
       "ray-x/lsp_signature.nvim",
       event = "BufRead",
       config = function()
-        require('lsp_signature').setup {
-          transpancy = 20,
-          toggle_key = "<C-l>",
-        }
+        require 'young.mod.lsp-signature'
       end,
     },
   },
