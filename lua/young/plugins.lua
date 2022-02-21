@@ -545,6 +545,13 @@ M.LSP = {
   ui = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     {
+      "kosayoda/nvim-lightbulb",
+      event = "BufRead",
+      config = function()
+        vim.cmd [[ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb() ]]
+      end,
+    },
+    {
       'j-hui/fidget.nvim',
       config = function()
         require 'young.mod.fidget'.done()
