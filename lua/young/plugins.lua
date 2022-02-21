@@ -311,6 +311,19 @@ M.UI = {
         require 'young.mod.lualine'
       end,
     },
+    -- {
+    --   'feline-nvim/feline.nvim',
+    --   config = function()
+    --     require 'young.mod.feline'
+    --   end,
+    -- },
+    -- {
+    --   'SmiteshP/nvim-gps',
+    --   requires = 'nvim-treesitter/nvim-treesitter',
+    --   config = function()
+    --     require 'young.mod.gps'
+    --   end,
+    -- },
   },
   bufferline = {
     {
