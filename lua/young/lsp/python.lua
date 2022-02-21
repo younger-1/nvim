@@ -3,9 +3,12 @@ local M = {}
 local path = require('lspconfig.util').path
 
 M.opts = {
+  -- before_init = function(params, config)
+  --   M.env(config.root_dir)
+  --   config.settings.python.analysis.extraPaths = { M.pep582(config.root_dir) }
+  -- end,
   on_new_config = function(new_config, new_root_dir)
-    -- pp("[young]: ", vim.keys(new_config))
-    M.env(new_root_dir)
+    new_config.cmd_env.PATH = M.env(new_root_dir) .. new_config.cmd_env.PATH
     new_config.settings.python.analysis.extraPaths = { M.pep582(new_root_dir) }
   end,
 }
@@ -56,20 +59,21 @@ local function py_bin_dir()
 end
 
 M.env = function(root_dir)
-  -- print("[young]: ".. root_dir)
   if not vim.env.VIRTUAL_ENV or vim.env.VIRTUAL_ENV == '' then
     _virtual_env = get_python_dir(root_dir)
   end
 
   if _virtual_env ~= '' then
     vim.env.VIRTUAL_ENV = _virtual_env
-    vim.env.PATH = py_bin_dir() .. vim.env.PATH
+    -- vim.env.PATH = py_bin_dir() .. vim.env.PATH
   end
 
   if _virtual_env ~= '' and vim.env.PYTHONHOME then
     vim.env.old_PYTHONHOME = vim.env.PYTHONHOME
     vim.env.PYTHONHOME = ''
   end
+
+  return _virtual_env ~= '' and py_bin_dir() or ''
 end
 
 -- PEP 582 support
