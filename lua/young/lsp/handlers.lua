@@ -11,7 +11,7 @@ end
 
 vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   -- signs = { values = lsp_cfg.signs },
-  virtual_text = false,
+  -- virtual_text = false,
   update_in_insert = false,
   underline = true,
   severity_sort = true,

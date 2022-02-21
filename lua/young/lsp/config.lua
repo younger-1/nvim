@@ -7,7 +7,13 @@ return {
       { name = 'DiagnosticSignHint', text = '' },
       { name = 'DiagnosticSignInfo', text = '' },
     },
-    virtual_text = true,
+    virtual_text = {
+      spacing = 4,
+      prefix = "",
+      severity = {
+        min = vim.diagnostic.severity.WARN,
+      },
+    },
     update_in_insert = true,
     underline = true,
     severity_sort = true,
