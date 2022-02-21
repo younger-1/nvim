@@ -636,6 +636,13 @@ M.write = {
         vim.g.mkdp_open_to_the_world = 0
       end,
     },
+    -- {
+    --   'ellisonleao/glow.nvim',
+    --   config = function()
+    --     vim.g.glow_border = "rounded"
+    --     vim.g.glow_use_pager = true
+    --   end,
+    -- },
   },
   zen = {
     {
