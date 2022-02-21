@@ -8,7 +8,9 @@ M.opts = {
   --   config.settings.python.analysis.extraPaths = { M.pep582(config.root_dir) }
   -- end,
   on_new_config = function(new_config, new_root_dir)
-    new_config.cmd_env.PATH = M.env(new_root_dir) .. new_config.cmd_env.PATH
+    M.env(new_root_dir)
+    new_config.settings.python.pythonPath = vim.fn.exepath('python')
+    -- new_config.cmd_env.PATH = M.env(new_root_dir) .. new_config.cmd_env.PATH
     new_config.settings.python.analysis.extraPaths = { M.pep582(new_root_dir) }
   end,
 }
@@ -65,7 +67,7 @@ M.env = function(root_dir)
 
   if _virtual_env ~= '' then
     vim.env.VIRTUAL_ENV = _virtual_env
-    -- vim.env.PATH = py_bin_dir() .. vim.env.PATH
+    vim.env.PATH = py_bin_dir() .. vim.env.PATH
   end
 
   if _virtual_env ~= '' and vim.env.PYTHONHOME then
