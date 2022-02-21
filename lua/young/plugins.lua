@@ -305,7 +305,12 @@ M.UI = {
   },
   statusline = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
-    { 'nvim-lualine/lualine.nvim', config = require 'plug-config.lualine' },
+    {
+      'nvim-lualine/lualine.nvim',
+      config = function()
+        require 'young.mod.lualine'
+      end,
+    },
   },
   bufferline = {
     {
