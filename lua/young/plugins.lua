@@ -544,6 +544,12 @@ M.LSP = {
   },
   ui = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
+    {
+      'j-hui/fidget.nvim',
+      config = function()
+        require 'young.mod.fidget'.done()
+      end,
+    }
   },
 }
 
