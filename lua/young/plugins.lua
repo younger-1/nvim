@@ -375,6 +375,13 @@ M.UI = {
         require("young.mod.minimap")
       end,
     },
+    -- {
+    --   'dstein64/nvim-scrollview',
+    --   event = 'BufReadPre',
+    --   config = function()
+    --     require 'young.mod.scrollview'
+    --   end,
+    -- },
   },
 }
 
