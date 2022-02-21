@@ -3,6 +3,19 @@ local M = {}
 local path = require('lspconfig.util').path
 
 M.opts = {
+  settings = {
+    python = {
+      analysis = {
+        -- lspconfig-default: <https://github.com/microsoft/pyright/blob/main/docs/settings.md>
+        -- autoSearchPaths = true,
+        -- useLibraryCodeForTypes = true,
+        -- diagnosticMode = 'workspace', -- ["openFilesOnly", "workspace"]
+        -- my:
+        -- typeCheckingMode = 'off', -- ["off", "basic", "strict"]
+        completeFunctionParens = true,
+      },
+    },
+  },
   -- before_init = function(params, config)
   --   M.env(config.root_dir)
   --   config.settings.python.analysis.extraPaths = { M.pep582(config.root_dir) }
