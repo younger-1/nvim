@@ -221,6 +221,12 @@ M.files = {
   },
   dir = {
     {
+      "tamago324/lir.nvim",
+      config = function()
+        require 'young.mod.lir'
+      end,
+    },
+    {
       'ZSaberLv0/ZFVimDirDiff',
       cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
       setup = function()
