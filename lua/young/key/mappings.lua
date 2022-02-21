@@ -141,8 +141,8 @@ M.keys = {
 
     --
     Y = 'y$',
-    n = 'nzz',
-    N = 'Nzz',
+    -- n = 'nzz',
+    -- N = 'Nzz',
     ZA = '<cmd>wqa<CR>',
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
