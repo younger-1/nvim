@@ -21,7 +21,7 @@ lsp_installer.settings {
   },
 }
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -67,10 +67,17 @@ local custom_servers = {
 lsp_installer.on_server_ready(function(server)
   local default_opts = {
     -- before_init = function(params, config)
-    --   pp("[[ params ]]: ", params)
-    --   pp("[[ config ]]: ", config)
-    --   pp(vim.tbl_keys(params)) -- { "rootPath", "rootUri", "processId", "clientInfo", "capabilities", "trace", "initializationOptions", "workspaceFolders" }
-    --   pp(vim.tbl_keys(config)) -- { "before_init", "flags", "get_language_id", "single_file_support", "init_options", "cmd_cwd", "cmd", "workspace_folders", "handlers", "name", "root_dir", "filetypes", "on_exit", "on_attach", "on_new_config", "_on_attach", "capabilities", "message_level", "autostart", "log_level", "on_init", "settings" }
+    --   gg("params", params)
+    --   gg("config", config)
+    --   gg(1, vim.tbl_keys(params)) -- { "rootPath", "rootUri", "processId", "clientInfo", "capabilities", "trace", "initializationOptions", "workspaceFolders" }
+    --   gg(2, vim.tbl_keys(config)) -- { "before_init", "flags", "get_language_id", "single_file_support", "init_options", "cmd_cwd", "cmd", "workspace_folders", "handlers", "name", "root_dir", "filetypes", "on_exit", "on_attach", "on_new_config", "_on_attach", "capabilities", "message_level", "autostart", "log_level", "on_init", "settings" }
+    -- end,
+    -- on_init = function(client, initialize_result)
+    --   gg("client", client)
+    --   gg("initialize_result", initialize_result)
+    -- end,
+    -- on_new_config = function(new_config, new_root_dir)
+    --   gg("new_config", vim.tbl_keys(new_config)) -- { "cmd_env", "flags", "capabilities", "on_new_config", "name", "autostart", "handlers", "cmd", "settings", "message_level", "root_dir", "filetypes", "single_file_support", "on_attach", "before_init", "init_options", "log_level" }
     -- end,
     on_attach = on_attach,
     capabilities = capabilities,
