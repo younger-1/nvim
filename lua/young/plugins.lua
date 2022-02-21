@@ -270,6 +270,7 @@ M.UI = {
     },
     {
       'rcarriga/nvim-notify',
+      after = 'telescope.nvim',
       config = function()
         require('young.mod.notify').done()
       end,
