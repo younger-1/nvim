@@ -398,9 +398,11 @@ M.treesitter = {
     branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
     run = ':TSUpdate',
     config = function()
-      require 'young.mod.treesitter'
+      require('young.mod.treesitter').done()
     end,
   },
+  { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  { 'nvim-treesitter/nvim-treesitter-refactor' },
   { 'nvim-treesitter/playground' },
 }
 
