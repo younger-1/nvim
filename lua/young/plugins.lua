@@ -115,7 +115,7 @@ M.motion = {
       'andymass/vim-matchup',
       event = 'CursorMoved',
       config = function()
-        vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+        require 'young.mod.matchup'
       end,
     },
     -- {

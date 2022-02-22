@@ -30,6 +30,11 @@ function M.load_augroups()
       { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
       -- { "VimLeavePre", "*", "set title set titleold=" },
+      {
+        "BufWinEnter",
+        "*",
+        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
+      },
     },
     _formatoptions = {
       {
