@@ -32,22 +32,22 @@ M.opts = {
   -- end,
   on_new_config = function(new_config, new_root_dir)
     M.env(new_root_dir)
-    new_config.settings.python.pythonPath = vim.fn.exepath('python')
+    new_config.settings.python.pythonPath = vim.fn.exepath 'python'
     -- new_config.cmd_env.PATH = M.env(new_root_dir) .. new_config.cmd_env.PATH
     new_config.settings.python.analysis.extraPaths = { M.pep582(new_root_dir) }
   end,
 }
 
 local function get_pipenv_dir()
-  return vim.fn.trim(vim.fn.system('pipenv --venv'))
+  return vim.fn.trim(vim.fn.system 'pipenv --venv')
 end
 
 local function get_poetry_dir()
-  return vim.fn.trim(vim.fn.system('poetry env info -p'))
+  return vim.fn.trim(vim.fn.system 'poetry env info -p')
 end
 
 local function get_pdm_package()
-  return vim.fn.trim(vim.fn.system('pdm info --packages'))
+  return vim.fn.trim(vim.fn.system 'pdm info --packages')
 end
 
 local function get_python_dir(workspace)
@@ -62,7 +62,7 @@ local function get_python_dir(workspace)
   end
 
   -- Find and use virtualenv in workspace directory.
-  for _, pattern in ipairs({'*', '.*'}) do
+  for _, pattern in ipairs { '*', '.*' } do
     local match = vim.fn.glob(path.join(workspace, pattern, 'pyvenv.cfg'))
     if match ~= '' then
       return path.dirname(match)
@@ -113,7 +113,6 @@ M.pep582 = function(root_dir)
   end
 end
 
-M.conda = function(root_dir)
-end
+M.conda = function(root_dir) end
 
 return M

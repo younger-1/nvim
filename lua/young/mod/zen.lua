@@ -40,9 +40,7 @@ require('zen-mode').setup {
     },
   },
   -- callback where you can add custom code when the Zen window opens
-  on_open = function(win)
-  end,
+  on_open = function(win) end,
   -- callback where you can add custom code when the Zen window closes
-  on_close = function()
-  end,
+  on_close = function() end,
 }

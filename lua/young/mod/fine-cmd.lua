@@ -1,4 +1,4 @@
-local fineline = require('fine-cmdline')
+local fineline = require 'fine-cmdline'
 -- local fn = fineline.fn
 -- pp(fn)
 
@@ -16,9 +16,8 @@ fineline.setup {
       -- imap('<C-c>', fn.close)
       -- imap('<Up>', fn.up_search_history)
       -- imap('<Down>', fn.down_search_history)
-    end
-  }
+    end,
+  },
 }
 
 require('young.key').nmap('<CR>', '<cmd>FineCmdline<CR>')
-

@@ -61,7 +61,6 @@ M.keys = {
     ['<C-U>'] = '<C-G>u<C-U>',
     ['<C-W>'] = '<C-G>u<C-W>',
     ['<C-v>'] = '<C-G>u<C-R><C-O>+',
-
   },
 
   ---@usage change or add keymappings for command mode
@@ -147,7 +146,7 @@ M.keys = {
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
     ['<S-CR>'] = '<cmd>wqa<CR>', -- windows terminal not recognize
-    ['<CR>'] = {"(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true }},
+    ['<CR>'] = { "(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true } },
   },
 
   ---@usage change or add keymappings for visual mode

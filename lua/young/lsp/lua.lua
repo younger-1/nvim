@@ -4,17 +4,17 @@ M.opts = {
   settings = {
     Lua = {
       runtime = {
-        version = "LuaJIT",
+        version = 'LuaJIT',
         path = {
-          "lua/?.lua",
-          "lua/?/init.lua",
+          'lua/?.lua',
+          'lua/?/init.lua',
         },
       },
       workspace = {
         library = {
-          vim.fn.expand "$VIMRUNTIME",
-          _G.packer_plugins["lua-dev.nvim"].path,
-          _G.packer_plugins["plenary.nvim"].path,
+          vim.fn.expand '$VIMRUNTIME',
+          _G.packer_plugins['lua-dev.nvim'].path,
+          _G.packer_plugins['plenary.nvim'].path,
           -- _G.packer_plugins["telescope.nvim"].path,
         },
         maxPreload = 20000,

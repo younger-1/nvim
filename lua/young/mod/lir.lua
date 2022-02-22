@@ -1,42 +1,42 @@
-local actions = require "lir.actions"
-local mark_actions = require "lir.mark.actions"
-local clipboard_actions = require "lir.clipboard.actions"
+local actions = require 'lir.actions'
+local mark_actions = require 'lir.mark.actions'
+local clipboard_actions = require 'lir.clipboard.actions'
 
-require("lir").setup {
+require('lir').setup {
   show_hidden_files = false,
   devicons_enable = true,
   mappings = {
-    ["l"] = actions.edit,
-    ["<cr>"] = actions.edit,
-    ["<C-]>"] = actions.cd,
-    ["<C-s>"] = actions.split,
-    ["<C-v>"] = actions.vsplit,
-    ["<C-t>"] = actions.tabedit,
+    ['l'] = actions.edit,
+    ['<cr>'] = actions.edit,
+    ['<C-]>'] = actions.cd,
+    ['<C-s>'] = actions.split,
+    ['<C-v>'] = actions.vsplit,
+    ['<C-t>'] = actions.tabedit,
 
-    ["u"] = actions.up,
-    ["h"] = actions.up,
-    ["q"] = actions.quit,
-    ["Q"] = actions.wipeout,
+    ['u'] = actions.up,
+    ['h'] = actions.up,
+    ['q'] = actions.quit,
+    ['Q'] = actions.wipeout,
 
-    ["R"] = actions.reload,
-    ["Y"] = actions.yank_path,
-    ["."] = actions.toggle_show_hidden,
+    ['R'] = actions.reload,
+    ['Y'] = actions.yank_path,
+    ['.'] = actions.toggle_show_hidden,
 
-    ["a"] = actions.newfile,
-    ["A"] = actions.mkdir,
-    ["r"] = actions.rename,
-    ["d"] = actions.delete,
-    ["c"] = clipboard_actions.copy,
-    ["x"] = clipboard_actions.cut,
-    ["p"] = clipboard_actions.paste,
+    ['a'] = actions.newfile,
+    ['A'] = actions.mkdir,
+    ['r'] = actions.rename,
+    ['d'] = actions.delete,
+    ['c'] = clipboard_actions.copy,
+    ['x'] = clipboard_actions.cut,
+    ['p'] = clipboard_actions.paste,
 
-    ["m"] = function()
+    ['m'] = function()
       mark_actions.toggle_mark()
-      vim.cmd "normal! j"
+      vim.cmd 'normal! j'
     end,
-    ["M"] = function()
+    ['M'] = function()
       mark_actions.toggle_mark()
-      vim.cmd "normal! k"
+      vim.cmd 'normal! k'
     end,
   },
   hide_cursor = false,
@@ -52,10 +52,10 @@ require("lir").setup {
       -- local border_chars = { "+", "─", "+", "│", "+", "─", "+", "│" }
       -- local border_chars = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃"}
       -- local border_chars = { "▭", "▭", "▭", " ", "▭", "▭", "▭", " " }
-      local border_chars = { "▭", "▭", "▭", " ", "▭", "▭", "▭", " " }
+      local border_chars = { '▭', '▭', '▭', ' ', '▭', '▭', '▭', ' ' }
       return {
         -- border = "single",
-        border = require("lir.float.helper").make_border_opts(border_chars, "Normal"),
+        border = require('lir.float.helper').make_border_opts(border_chars, 'Normal'),
         -- width = width,
         -- height = height,
         -- row = math.floor((vim.o.lines - height) / 2),
@@ -78,14 +78,14 @@ require("lir").setup {
 function _G.LirSettings()
   vim.api.nvim_buf_set_keymap(
     0,
-    "x",
-    "m",
+    'x',
+    'm',
     ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
     { noremap = true, silent = true }
   )
 
   -- echo cwd
-  vim.api.nvim_echo({ { vim.fn.expand "%:p", "Normal" } }, false, {})
+  vim.api.nvim_echo({ { vim.fn.expand '%:p', 'Normal' } }, false, {})
 end
 
 vim.cmd [[augroup lir-settings]]

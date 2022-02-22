@@ -17,25 +17,24 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   severity_sort = true,
   float = {
     focusable = true,
-    style = "minimal",
+    style = 'minimal',
     -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
     -- border = { "/", "-", "\\", "|" },
     -- border = 'rounded',
     border = 'single',
     source = false,
-    header = "",
-    prefix = "",
+    header = '',
+    prefix = '',
     format = function(d)
       local t = vim.deepcopy(d)
       local code = d.code or (d.user_data and d.user_data.lsp.code)
       if code then
-        t.message = string.format(" %s ▌%s▐", t.message, code):gsub("1. ", "")
+        t.message = string.format(' %s ▌%s▐', t.message, code):gsub('1. ', '')
       end
       return t.message
     end,
   },
 }))
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_cfg.float)
-
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_cfg.float)

@@ -93,7 +93,7 @@ M.cfg = {
     change_dir = {
       global = false,
     },
-  }
+  },
 }
 
 M.done = function()
