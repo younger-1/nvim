@@ -16,6 +16,11 @@ require("nvim-treesitter.install").prefer_git = true
 -- }
 
 require('nvim-treesitter.configs').setup {
+  -- 100
+  -- echo json_decode(readfile(glob(stdpath('data') .. '/site/pack/packer/start/nvim-treesitter/lockfile.json'))) ->keys()
+  -- lua pp(vim.tbl_keys(vim.fn.json_decode(vim.fn.readfile(_G.packer_plugins['nvim-treesitter'].path .. '/lockfile.json'))))
+  -- lua pp(vim.tbl_keys(vim.json.decode(vim.fn.join(vim.fn.readfile(_G.packer_plugins['nvim-treesitter'].path .. '/lockfile.json'), ''))))
+  -- ensure_installed = { "javascript", "python", "fortran", "toml", "norg", "bibtex", "hcl", "beancount", "haskell", "supercollider", "scala", "d", "tsx", "typescript", "make", "regex", "c_sharp", "go", "ocamllex", "comment", "ocaml_interface", "ocaml", "lua", "heex", "eex", "surface", "gleam", "elixir", "devicetree", "zig", "erlang", "turtle", "scss", "yang", "css", "yaml", "vue", "godot_resourc e", "julia", "vim", "json", "gdscript", "verilog", "kotlin", "c", "ruby", "java", "tlaplus", "jsdoc", "query", "swift", "fish", "svelte", "bash", "sparql", "lalrpop", "perl", "rust", "pasc al", "vala", "pioasm", "graphql", "php", "gowork", "ql", "elm", "gomod", "teal", "hack", "pug", "fennel", "markdown", "rst", "phpdoc", "rasi", "http", "cmake", "nix", "fusion", "prisma", " ninja", "foam", "r", "dot", "llvm", "dockerfile", "commonlisp", "hocon", "cuda", "glimmer", "hjson", "jsonc", "glsl", "cpp", "dart", "latex", "json5", "ledger", "clojure", "html" },
   ensure_installed = {
     'bash',
     -- 'beancount',
