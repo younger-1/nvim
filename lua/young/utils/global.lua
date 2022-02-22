@@ -18,7 +18,6 @@ WSL-ubuntu:
   version = "#1237-Microsoft Sat Sep 11 14:32:00 PST 2021"
 ]]
 
-
 -- _G.is_windows = vim.fn.has('win32') == 1 and true or false
 -- _G.is_wsl = vim.fn.has('wsl') == 1 and true or false
 _G.is_windows = uv.os_uname().version:match 'Windows' and true or false
@@ -53,14 +52,14 @@ end
 
 function _G.gg(name, val)
   if not name then
-    print("[young] ============")
+    print '[young] ============'
     return
   end
   if not val then
     val = name
-    name = "__"
+    name = '__'
   end
-  print("[young] " .. name .. ': ' .. vim.inspect(val))
+  print('[young] ' .. name .. ': ' .. vim.inspect(val))
 end
 
 function _G.to_home(path)
@@ -80,4 +79,3 @@ function _G.require_clean(module)
   local _, requested = pcall(require, module)
   return requested
 end
-

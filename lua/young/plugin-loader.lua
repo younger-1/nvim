@@ -31,7 +31,7 @@ plugin_loader.once = function()
 end
 
 plugin_loader.recompile = function()
-  require_clean('young.plugins')
+  require_clean 'young.plugins'
 
   plugin_loader.load()
 
@@ -75,7 +75,7 @@ plugin_loader.source_compiled = function()
   -- vim.wait(20000, compiled_ok)
 
   -- To use impatient
-  require('young.packer_compiled')
+  require 'young.packer_compiled'
   -- dofile(compile_path)
 end
 

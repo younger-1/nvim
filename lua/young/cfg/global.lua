@@ -57,11 +57,10 @@ if is_windows then
   if scoop then
     vim.g.sqlite_clib_path = join_paths(scoop, 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
   else
-    vim.notify("[young]: scoop not installed", vim.log.levels.INFO)
+    vim.notify('[young]: scoop not installed', vim.log.levels.INFO)
   end
 end
 
 -- Two reason to use `python3`:
 -- 1. most linux require `python3`; 2. windows's scoop will generete `python3` shim to avoid using conda env
-vim.g.python3_host_prog = vim.fn.exepath('python3')
-
+vim.g.python3_host_prog = vim.fn.exepath 'python3'

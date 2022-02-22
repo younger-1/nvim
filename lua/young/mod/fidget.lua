@@ -1,7 +1,7 @@
 local M = {}
 
 M.done = function()
-  local status_ok, fidget = pcall(require, "fidget")
+  local status_ok, fidget = pcall(require, 'fidget')
   if not status_ok then
     return
   end
@@ -9,38 +9,38 @@ M.done = function()
   fidget.setup {
     text = {
       spinner = {
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
+        ' ',
       },
-      done = "", -- character shown when all tasks are complete
-      commenced = " ", -- message shown when task starts
-      completed = " ", -- message shown when task completes
+      done = '', -- character shown when all tasks are complete
+      commenced = ' ', -- message shown when task starts
+      completed = ' ', -- message shown when task completes
     },
     align = {
       bottom = true, -- align fidgets along bottom edge of buffer
@@ -52,7 +52,7 @@ M.done = function()
       task_decay = 300, -- how long to keep around completed task, in ms
     },
     window = {
-      relative = "editor", -- where to anchor the window, either `"win"` or `"editor"`
+      relative = 'editor', -- where to anchor the window, either `"win"` or `"editor"`
       blend = 100, -- `&winblend` for the window
       zindex = nil, -- the `zindex` value for the window
     },
@@ -61,11 +61,11 @@ M.done = function()
       stack_upwards = true, -- list of tasks grows upwards
       -- function to format fidget title
       fidget = function(fidget_name, spinner)
-        return string.format("%s %s", spinner, fidget_name)
+        return string.format('%s %s', spinner, fidget_name)
       end,
       -- function to format each task line
       task = function(task_name, message, percentage)
-        return string.format("%s%s [%s]", message, percentage and string.format(" (%s%%)", percentage) or "", task_name)
+        return string.format('%s%s [%s]', message, percentage and string.format(' (%s%%)', percentage) or '', task_name)
       end,
     },
     debug = {

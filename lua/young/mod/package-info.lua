@@ -1,4 +1,4 @@
-require("package-info").setup {}
+require('package-info').setup {}
 
 -- TODO: convert to buffer keybindings
 -- -- Show package versions

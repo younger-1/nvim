@@ -8,7 +8,7 @@ local M = {}
 -- end
 vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
 
-require('young.lsp.handlers')
+require 'young.lsp.handlers'
 
 lsp_installer.settings {
   log_level = vim.log.levels.DEBUG,
@@ -35,7 +35,13 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gI', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float(0, { scope = "line", source = "always" })<CR>', opts)
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    'n',
+    'gl',
+    '<cmd>lua vim.diagnostic.open_float(0, { scope = "line", source = "always" })<CR>',
+    opts
+  )
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gp', '<cmd>lua require"lvim.lsp.peek".Peek("definition")<CR>', opts)
 end
 
@@ -57,7 +63,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local custom_servers = {
-  sumneko_lua = "lua",
+  sumneko_lua = 'lua',
   pyright = 'python',
   yamlls = 'yaml',
   jsonls = 'json',

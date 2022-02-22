@@ -70,12 +70,15 @@ local mymappings = {
   c = {
     o = {
       name = '+quickcmd',
-      r = { "<cmd>ProjectRoot<cr>", 'Project Root' },
-    }
+      r = { '<cmd>ProjectRoot<cr>', 'Project Root' },
+    },
   },
   g = {
     -- ['<C-l>'] = { '<cmd>nohl<CR><C-l>', 'Clear highlight'},
-    ['"'] = { [[:<C-U><C-R><C-R>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-F><left>]], 'Edit or select [R/r]egister'},
+    ['"'] = {
+      [[:<C-U><C-R><C-R>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-F><left>]],
+      'Edit or select [R/r]egister',
+    },
   },
   y = {
     c = {

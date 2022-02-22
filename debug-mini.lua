@@ -95,7 +95,6 @@ else
   _G.load_config()
 end
 
-
 -- Options
 local default_options = {
   backup = false,
@@ -236,11 +235,11 @@ local define_augroups = function(definitions)
 end
 
 define_augroups {
-    _general_settings = {
-      { 'TextYankPost', '*', "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 600 })", },
-    },
-    _filetype = {
-      { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-    },
+  _general_settings = {
+    { 'TextYankPost', '*', "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 600 })" },
+  },
+  _filetype = {
+    { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+    { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+  },
 }

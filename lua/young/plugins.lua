@@ -133,9 +133,9 @@ M.change = {
     { 'tpope/vim-repeat' },
     { 'tpope/vim-abolish' },
     {
-      "arthurxavierx/vim-caser",
+      'arthurxavierx/vim-caser',
       setup = function()
-        vim.g.caser_prefix = ";c"
+        vim.g.caser_prefix = ';c'
       end,
     },
   },
@@ -151,7 +151,7 @@ M.change = {
       'junegunn/vim-easy-align',
       cmd = 'EasyAlign',
       config = function()
-        require "young.mod.easy-align"
+        require 'young.mod.easy-align'
       end,
     },
   },
@@ -221,7 +221,7 @@ M.files = {
   },
   dir = {
     {
-      "tamago324/lir.nvim",
+      'tamago324/lir.nvim',
       config = function()
         require 'young.mod.lir'
       end,
@@ -343,15 +343,16 @@ M.UI = {
   cmdline = {
     {
       'VonHeikemen/fine-cmdline.nvim',
-      requires = { {'MunifTanjim/nui.nvim'} },
+      requires = { { 'MunifTanjim/nui.nvim' } },
       config = function()
-        require('young.mod.fine-cmd')
+        require 'young.mod.fine-cmd'
       end,
     },
-    { 'gelguy/wilder.nvim',
+    {
+      'gelguy/wilder.nvim',
       event = 'CmdlineEnter',
       config = function()
-        require('young.mod.wilder')
+        require 'young.mod.wilder'
       end,
     },
   },
@@ -375,10 +376,10 @@ M.UI = {
   },
   other = {
     {
-      "wfxr/minimap.vim",
-      cmd = { "MinimapToggle" },
+      'wfxr/minimap.vim',
+      cmd = { 'MinimapToggle' },
       config = function()
-        require("young.mod.minimap")
+        require 'young.mod.minimap'
       end,
     },
     -- {
@@ -397,7 +398,7 @@ M.treesitter = {
     branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
     run = ':TSUpdate',
     config = function()
-      require('young.mod.treesitter')
+      require 'young.mod.treesitter'
     end,
   },
   { 'nvim-treesitter/playground' },
@@ -448,7 +449,7 @@ M.telescope = {
     },
     {
       'AckslD/nvim-neoclip.lua',
-      requires = { { "tami5/sqlite.lua", module = "sqlite" } },
+      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
       config = function()
         require 'young.mod.neoclip'
       end,
@@ -530,8 +531,8 @@ M.LSP = {
     -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
     { 'b0o/SchemaStore.nvim' },
     {
-      "ray-x/lsp_signature.nvim",
-      event = "BufRead",
+      'ray-x/lsp_signature.nvim',
+      event = 'BufRead',
       config = function()
         require 'young.mod.lsp-signature'
       end,
@@ -545,8 +546,8 @@ M.LSP = {
   ui = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     {
-      "kosayoda/nvim-lightbulb",
-      event = "BufRead",
+      'kosayoda/nvim-lightbulb',
+      event = 'BufRead',
       config = function()
         vim.cmd [[ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb() ]]
       end,
@@ -554,9 +555,9 @@ M.LSP = {
     {
       'j-hui/fidget.nvim',
       config = function()
-        require 'young.mod.fidget'.done()
+        require('young.mod.fidget').done()
       end,
-    }
+    },
   },
 }
 
@@ -589,9 +590,9 @@ M.git = {
   --   disable = is_windows,
   -- },
   {
-    "nvim-telescope/telescope-github.nvim",
+    'nvim-telescope/telescope-github.nvim',
     config = function()
-      require("telescope").load_extension "gh"
+      require('telescope').load_extension 'gh'
     end,
   },
 }
@@ -613,7 +614,7 @@ M.write = {
     {
       'crispgm/telescope-heading.nvim',
       config = function()
-        require('telescope').load_extension('heading')
+        require('telescope').load_extension 'heading'
       end,
     },
   },
@@ -656,23 +657,23 @@ M.write = {
   },
   zen = {
     {
-      "folke/zen-mode.nvim",
+      'folke/zen-mode.nvim',
       cmd = 'ZenMode',
       config = function()
-        require('young.mod.zen')
+        require 'young.mod.zen'
       end,
     },
-  }
+  },
 }
 
 M.lang = {
   js = {
     {
-      "vuki656/package-info.nvim",
-      ft = "json",
-      requires = { {'MunifTanjim/nui.nvim'} },
+      'vuki656/package-info.nvim',
+      ft = 'json',
+      requires = { { 'MunifTanjim/nui.nvim' } },
       config = function()
-        require "young.mod.package-info"
+        require 'young.mod.package-info'
       end,
     },
   },

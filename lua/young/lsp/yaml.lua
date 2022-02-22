@@ -8,7 +8,7 @@ M.opts = {
       validate = true,
       schemas = require('schemastore').json.schemas(),
     },
-  }
+  },
 }
 
 return M
