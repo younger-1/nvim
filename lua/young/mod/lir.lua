@@ -50,7 +50,7 @@ require("lir").setup {
       -- local height = math.floor(vim.o.lines * 0.5)
 
       -- local border_chars = { "+", "─", "+", "│", "+", "─", "+", "│" }
-      -- local border_chars =  { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃"}
+      -- local border_chars = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃"}
       -- local border_chars = { "▭", "▭", "▭", " ", "▭", "▭", "▭", " " }
       local border_chars = { "▭", "▭", "▭", " ", "▭", "▭", "▭", " " }
       return {
