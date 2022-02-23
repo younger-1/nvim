@@ -1,3 +1,4 @@
+local modbase = ...
 local lsp_installer = require 'nvim-lsp-installer'
 
 local M = {}
@@ -76,6 +77,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local custom_servers = {
   lua = 'sumneko_lua',
   python = 'pyright',
+  -- python = 'pylsp',
   cpp = 'clangd',
   yaml = 'yamlls',
   json = 'jsonls',
@@ -104,10 +106,21 @@ lsp_installer.on_server_ready(function(server)
     },
   }
 
-  -- Use the server's custom settings, if they exist, otherwise default to the default options
-  local ft = custom_servers[server.name]
-  if ft then
-    local opts = require('young.lsp.providers' .. ft).opts
+  for _, ft in pairs(server:get_supported_filetypes()) do
+    if custom_servers[ft] and server.name ~= custom_servers[ft] then
+      return
+    end
+  end
+
+  local ok, opts = pcall(require, modbase .. '.providers.' .. server.name)
+  if ok then
+    -- if opts.on_attach then
+    --   local provider_on_attact = opts.on_attach
+    --   opts.on_attach = function(c, b)
+    --     default_opts.on_attach(c, b)
+    --     provider_on_attact(c, b)
+    --   end
+    -- end
     default_opts = vim.tbl_deep_extend('force', default_opts, opts)
   end
 
