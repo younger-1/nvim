@@ -2,42 +2,6 @@ local M = {}
 
 local path = require('lspconfig.util').path
 
-M.opts = {
-  settings = {
-    python = {
-      analysis = {
-        -- lspconfig-default: <https://github.com/microsoft/pyright/blob/main/docs/settings.md>
-        -- autoSearchPaths = true,
-        -- useLibraryCodeForTypes = true,
-        -- diagnosticMode = 'workspace', -- ["openFilesOnly", "workspace"]
-        -- my:
-        -- typeCheckingMode = 'off', -- ["off", "basic", "strict"]
-        completeFunctionParens = true,
-      },
-    },
-    -- pylsp = {
-    --   plugins = {
-    --     pylint = { enabled = true, executable = "pylint" },
-    --     pyflakes = { enabled = false },
-    --     pycodestyle = { enabled = false },
-    --     jedi_completion = { fuzzy = true },
-    --     pyls_isort = { enabled = true },
-    --     pylsp_mypy = { enabled = true },
-    --   },
-    -- },
-  },
-  -- before_init = function(params, config)
-  --   M.env(config.root_dir)
-  --   config.settings.python.analysis.extraPaths = { M.pep582(config.root_dir) }
-  -- end,
-  on_new_config = function(new_config, new_root_dir)
-    M.env(new_root_dir)
-    new_config.settings.python.pythonPath = vim.fn.exepath 'python'
-    -- new_config.cmd_env.PATH = M.env(new_root_dir) .. new_config.cmd_env.PATH
-    new_config.settings.python.analysis.extraPaths = { M.pep582(new_root_dir) }
-  end,
-}
-
 local function get_pipenv_dir()
   return vim.fn.trim(vim.fn.system 'pipenv --venv')
 end

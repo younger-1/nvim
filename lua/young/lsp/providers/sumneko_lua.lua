@@ -1,6 +1,4 @@
-local M = {}
-
-M.opts = {
+return {
   settings = {
     Lua = {
       runtime = {
@@ -31,5 +29,3 @@ M.opts = {
     },
   },
 }
-
-return M

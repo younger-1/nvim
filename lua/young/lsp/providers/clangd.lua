@@ -1,6 +1,4 @@
-local M = {}
-
-M.opts = {
+local opts = {
   args = {
     '--background-index',
     '-std=c++20',
@@ -36,4 +34,4 @@ M.opts = {
   -- end,
 }
 
-return M
+return opts

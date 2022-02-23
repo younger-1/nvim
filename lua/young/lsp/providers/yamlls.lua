@@ -1,6 +1,4 @@
-local M = {}
-
-M.opts = {
+return {
   settings = {
     yaml = {
       hover = true,
@@ -10,5 +8,3 @@ M.opts = {
     },
   },
 }
-
-return M

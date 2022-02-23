@@ -74,11 +74,11 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local custom_servers = {
-  sumneko_lua = 'lua',
-  pyright = 'python',
-  clangd = 'cpp',
-  yamlls = 'yaml',
-  jsonls = 'json',
+  lua = 'sumneko_lua',
+  python = 'pyright',
+  cpp = 'clangd',
+  yaml = 'yamlls',
+  json = 'jsonls',
 }
 
 -- Register a handler that will be called for all installed servers.
@@ -107,7 +107,7 @@ lsp_installer.on_server_ready(function(server)
   -- Use the server's custom settings, if they exist, otherwise default to the default options
   local ft = custom_servers[server.name]
   if ft then
-    local opts = require('young.lsp.' .. ft).opts
+    local opts = require('young.lsp.providers' .. ft).opts
     default_opts = vim.tbl_deep_extend('force', default_opts, opts)
   end
 
