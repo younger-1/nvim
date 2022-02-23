@@ -118,9 +118,9 @@ local function get_opts(server_name)
     --     provider_on_attact(c, b)
     --   end
     -- end
-    opts = vim.tbl_deep_extend('force', default_opts, opts)
+    return vim.tbl_deep_extend('force', default_opts, opts)
   end
-  return opts or default_opts
+  return default_opts
 end
 
 -- Register a handler that will be called for all installed servers.
@@ -129,23 +129,29 @@ lsp_installer.on_server_ready(function(server)
     if custom_servers[ft] then
       if server.name ~= custom_servers[ft] then
         return
-      end
-        done_ft[ft] = 1
       else
+        done_ft[ft] = 1
+      end
     end
   end
 
   -- This setup() function is exactly the same as lspconfig's setup function.
   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   local opts = get_opts(server.name)
+  -- local opts = default_opts
   server:setup(opts)
 end)
 
-for ft, server_name in pairs(custom_servers) do
-  if not done_ft[ft] then
-    local opts = get_opts(server_name)
-    require('lspconfig')[server_name].setup(opts)
+local function end_ls()
+  for ft, server_name in pairs(custom_servers) do
+    -- NOTE: not valid: vim.fn.executable(server_name)
+    if not done_ft[ft] then
+      local opts = get_opts(server_name)
+      require('lspconfig')[server_name].setup(opts)
+    end
   end
 end
+
+vim.cmd [[autocmd User BufReadPre ++once require('young.lsp').end_ls()]]
 
 return M
