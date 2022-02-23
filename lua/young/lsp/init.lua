@@ -43,6 +43,17 @@ local on_attach = function(client, bufnr)
     opts
   )
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gp', '<cmd>lua require"lvim.lsp.peek".Peek("definition")<CR>', opts)
+
+  -- require("lsp_signature").on_attach({
+  --   bind = true,
+  --   use_lspsaga = false,
+  --   floating_window = true,
+  --   fix_pos = true,
+  --   hint_enable = true,
+  --   hi_parameter = "Search",
+  --   handler_opts = { "double" },
+  -- })
+  -- require("aerial").on_attach(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -65,6 +76,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local custom_servers = {
   sumneko_lua = 'lua',
   pyright = 'python',
+  clangd = 'cpp',
   yamlls = 'yaml',
   jsonls = 'json',
 }
