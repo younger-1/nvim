@@ -22,6 +22,19 @@ lsp_installer.settings {
   },
 }
 
+local custom_servers = {
+  lua = 'sumneko_lua',
+  python = 'pyright',
+  -- python = 'pylsp',
+  cpp = 'clangd',
+  yaml = 'yamlls',
+  json = 'jsonls',
+}
+local done_ft = {
+  -- python = 1,
+  -- cpp = 1,
+}
+
 local on_attach = function(client, bufnr)
   -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -74,45 +87,29 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- }
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local custom_servers = {
-  lua = 'sumneko_lua',
-  python = 'pyright',
-  -- python = 'pylsp',
-  cpp = 'clangd',
-  yaml = 'yamlls',
-  json = 'jsonls',
+local default_opts = {
+  -- before_init = function(params, config)
+  --   gg("params", params)
+  --   gg("config", config)
+  --   gg(1, vim.tbl_keys(params)) -- { "rootPath", "rootUri", "processId", "clientInfo", "capabilities", "trace", "initializationOptions", "workspaceFolders" }
+  --   gg(2, vim.tbl_keys(config)) -- { "before_init", "flags", "get_language_id", "single_file_support", "init_options", "cmd_cwd", "cmd", "workspace_folders", "handlers", "name", "root_dir", "filetypes", "on_exit", "on_attach", "on_new_config", "_on_attach", "capabilities", "message_level", "autostart", "log_level", "on_init", "settings" }
+  -- end,
+  -- on_init = function(client, initialize_result)
+  --   gg("client", client)
+  --   gg("initialize_result", initialize_result)
+  -- end,
+  -- on_new_config = function(new_config, new_root_dir)
+  --   gg("new_config", vim.tbl_keys(new_config)) -- { "cmd_env", "flags", "capabilities", "on_new_config", "name", "autostart", "handlers", "cmd", "settings", "message_level", "root_dir", "filetypes", "single_file_support", "on_attach", "before_init", "init_options", "log_level" }
+  -- end,
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 800,
+  },
 }
 
--- Register a handler that will be called for all installed servers.
-lsp_installer.on_server_ready(function(server)
-  local default_opts = {
-    -- before_init = function(params, config)
-    --   gg("params", params)
-    --   gg("config", config)
-    --   gg(1, vim.tbl_keys(params)) -- { "rootPath", "rootUri", "processId", "clientInfo", "capabilities", "trace", "initializationOptions", "workspaceFolders" }
-    --   gg(2, vim.tbl_keys(config)) -- { "before_init", "flags", "get_language_id", "single_file_support", "init_options", "cmd_cwd", "cmd", "workspace_folders", "handlers", "name", "root_dir", "filetypes", "on_exit", "on_attach", "on_new_config", "_on_attach", "capabilities", "message_level", "autostart", "log_level", "on_init", "settings" }
-    -- end,
-    -- on_init = function(client, initialize_result)
-    --   gg("client", client)
-    --   gg("initialize_result", initialize_result)
-    -- end,
-    -- on_new_config = function(new_config, new_root_dir)
-    --   gg("new_config", vim.tbl_keys(new_config)) -- { "cmd_env", "flags", "capabilities", "on_new_config", "name", "autostart", "handlers", "cmd", "settings", "message_level", "root_dir", "filetypes", "single_file_support", "on_attach", "before_init", "init_options", "log_level" }
-    -- end,
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 800,
-    },
-  }
-
-  for _, ft in pairs(server:get_supported_filetypes()) do
-    if custom_servers[ft] and server.name ~= custom_servers[ft] then
-      return
-    end
-  end
-
-  local ok, opts = pcall(require, modbase .. '.providers.' .. server.name)
+local function get_opts(server_name)
+  local ok, opts = pcall(require, modbase .. '.providers.' .. server_name)
   if ok then
     -- if opts.on_attach then
     --   local provider_on_attact = opts.on_attach
@@ -121,12 +118,34 @@ lsp_installer.on_server_ready(function(server)
     --     provider_on_attact(c, b)
     --   end
     -- end
-    default_opts = vim.tbl_deep_extend('force', default_opts, opts)
+    opts = vim.tbl_deep_extend('force', default_opts, opts)
+  end
+  return opts or default_opts
+end
+
+-- Register a handler that will be called for all installed servers.
+lsp_installer.on_server_ready(function(server)
+  for _, ft in ipairs(server:get_supported_filetypes()) do
+    if custom_servers[ft] then
+      if server.name ~= custom_servers[ft] then
+        return
+      end
+        done_ft[ft] = 1
+      else
+    end
   end
 
   -- This setup() function is exactly the same as lspconfig's setup function.
   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(default_opts)
+  local opts = get_opts(server.name)
+  server:setup(opts)
 end)
+
+for ft, server_name in pairs(custom_servers) do
+  if not done_ft[ft] then
+    local opts = get_opts(server_name)
+    require('lspconfig')[server_name].setup(opts)
+  end
+end
 
 return M
