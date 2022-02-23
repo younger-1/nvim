@@ -50,16 +50,18 @@ function _G.ppp(...)
   return table.concat(objects, '\n')
 end
 
-function _G.gg(name, val)
+function _G.gg(name, val, ...)
+  local prefix = '[young]: '
   if not name then
-    print '[young] ============'
+    print(prefix .. '============')
     return
   end
-  if not val then
-    val = name
-    name = '__'
+  if #{...} == 0 then
+    print(prefix .. vim.inspect(name) .. ' => ' .. vim.inspect(val))
+  else
+    local objects = vim.tbl_map(vim.inspect, { name, val, ... })
+    print(prefix .. table.concat(objects, ' -> '))
   end
-  print('[young] ' .. name .. ': ' .. vim.inspect(val))
 end
 
 function _G.to_home(path)
