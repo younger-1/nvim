@@ -610,10 +610,15 @@ M.neovim = {
     },
   },
   { 'gpanders/editorconfig.nvim' },
+  -- {
+  --   'nacro90/numb.nvim',
+  --   event = 'BufReadPost',
+  --   config = function () require('numb').setup() end,
+  -- },
   {
-    'nacro90/numb.nvim',
+    'winston0410/range-highlight.nvim' ,
     event = 'BufReadPost',
-    config = function () require('numb').setup() end,
+    config = function () require('range-highlight').setup() end,
   },
   {
     'lambdalisue/suda.vim',
