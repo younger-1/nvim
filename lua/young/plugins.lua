@@ -427,10 +427,6 @@ M.telescope = {
         require('telescope').load_extension 'file_browser'
       end,
     },
-    {
-      'nvim-telescope/telescope-frecency.nvim',
-      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
-    },
     { 'nvim-telescope/telescope-symbols.nvim' },
   },
   other = {
@@ -448,6 +444,10 @@ M.telescope = {
           prompt_title = '[ Z⏫ ]',
         }
       end,
+    },
+    {
+      'nvim-telescope/telescope-frecency.nvim',
+      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
     },
     {
       'AckslD/nvim-neoclip.lua',
@@ -610,14 +610,15 @@ M.neovim = {
     },
   },
   { 'gpanders/editorconfig.nvim' },
-  -- {
-  --   'nacro90/numb.nvim',
-  --   event = 'BufReadPost',
-  --   config = function () require('numb').setup() end,
-  -- },
+  {
+    'nacro90/numb.nvim',
+    event = 'BufReadPost',
+    config = function () require('numb').setup() end,
+  },
   {
     'winston0410/range-highlight.nvim' ,
     event = 'BufReadPost',
+    requires = { { "winston0410/cmd-parser.nvim", module = "cmd-parser" } },
     config = function () require('range-highlight').setup() end,
   },
   {
