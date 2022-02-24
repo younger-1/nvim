@@ -9,7 +9,14 @@ local M = {}
 -- end
 vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
 
-require 'young.lsp.handlers'
+-- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
+local lspconfig_win = require('lspconfig.ui.windows')
+local default_win_opts = lspconfig_win.default_opts
+lspconfig_win.default_opts = function(options)
+  local opts = default_win_opts(options)
+  opts.border = 'rounded'
+  return opts
+end
 
 lsp_installer.settings {
   log_level = vim.log.levels.DEBUG,
@@ -21,6 +28,8 @@ lsp_installer.settings {
     },
   },
 }
+
+require 'young.lsp.handlers'
 
 local custom_servers = {
   lua = 'sumneko_lua',

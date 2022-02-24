@@ -2,6 +2,16 @@ local M = {}
 
 local path = require('lspconfig.util').path
 
+-- TODO:
+-- https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings
+-- nvim_lsp.rust_analyzer.setup {
+--   on_init = function(client)
+--     client.config.settings.xxx = "yyyy"
+--     client.notify("workspace/didChangeConfiguration")
+--     return true
+--   end
+-- }
+
 local function get_pipenv_dir()
   return vim.fn.trim(vim.fn.system 'pipenv --venv')
 end
