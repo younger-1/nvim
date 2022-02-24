@@ -151,7 +151,8 @@ lsp_installer.on_server_ready(function(server)
   server:setup(opts)
 end)
 
-local function end_ls()
+vim.defer_fn(function()
+  -- gg(done_ft)
   for ft, server_name in pairs(custom_servers) do
     -- NOTE: not valid: vim.fn.executable(server_name)
     if not done_ft[ft] then
@@ -159,8 +160,7 @@ local function end_ls()
       require('lspconfig')[server_name].setup(opts)
     end
   end
-end
-
-vim.cmd [[autocmd User BufReadPre ++once require('young.lsp').end_ls()]]
+  vim.cmd [[ doautocmd FileType ]]
+end, 20)
 
 return M
