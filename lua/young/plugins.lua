@@ -615,6 +615,12 @@ M.neovim = {
     event = 'BufReadPost',
     config = function () require('numb').setup() end,
   },
+  {
+    'lambdalisue/suda.vim',
+    config = function()
+      vim.g['suda#prompt'] = '🔑: '
+    end,
+  },
 }
 
 M.write = {
