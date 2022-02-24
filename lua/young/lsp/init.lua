@@ -151,16 +151,26 @@ lsp_installer.on_server_ready(function(server)
   server:setup(opts)
 end)
 
+-- manually start the server and don't wait for the usual filetype trigger from lspconfig
+local function buf_try_add(server_name, bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  require('lspconfig')[server_name].manager.try_add_wrapper(bufnr)
+end
+
+-- on_server_ready is async
 vim.defer_fn(function()
   -- gg(done_ft)
   for ft, server_name in pairs(custom_servers) do
-    -- NOTE: not valid: vim.fn.executable(server_name)
+    -- local fts = require('lspconfig')[server_name].filetypes
+    -- NOTE: not valid: vim.fn.executable(server_name), eg {"deno", "lsp"}
     if not done_ft[ft] then
       local opts = get_opts(server_name)
-      require('lspconfig')[server_name].setup(opts)
+      pcall(function()
+        require('lspconfig')[server_name].setup(opts)
+        buf_try_add(server_name)
+      end)
     end
   end
-  vim.cmd [[ doautocmd FileType ]]
 end, 20)
 
 return M
