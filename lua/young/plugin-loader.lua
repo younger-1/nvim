@@ -68,7 +68,7 @@ plugin_loader.source_compiled = function()
     return
   end
 
-  -- DONE: use vim.defer_fn(), plenary's async, timer_start(), wait()
+  -- DONE: use vim.schedule(), vim.defer_fn(), plenary's async, timer_start(), wait()
   -- local compiled_ok = function()
   --   return utils.is_file(compile_path)
   -- end
