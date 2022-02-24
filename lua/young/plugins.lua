@@ -29,7 +29,6 @@ M.basic = {
       ]]
     end,
   },
-  { 'gpanders/editorconfig.nvim' },
 }
 
 M.theme = {
@@ -609,6 +608,12 @@ M.neovim = {
         vim.g.startuptime_use_blocks = 0
       end,
     },
+  },
+  { 'gpanders/editorconfig.nvim' },
+  {
+    'nacro90/numb.nvim',
+    event = 'BufReadPost',
+    config = function () require('numb').setup() end,
   },
 }
 
