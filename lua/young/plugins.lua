@@ -551,7 +551,7 @@ M.LSP = {
       'kosayoda/nvim-lightbulb',
       event = 'BufRead',
       config = function()
-        vim.cmd [[ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb() ]]
+        require 'young.mod.lightbulb'
       end,
     },
     {
