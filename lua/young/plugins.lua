@@ -29,6 +29,7 @@ M.basic = {
       ]]
     end,
   },
+  { 'gpanders/editorconfig.nvim' },
 }
 
 M.theme = {
