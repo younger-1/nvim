@@ -1,3 +1,5 @@
+-- BUG: When is wilder is lazy load by packer, `UpdateRemotePlugins` which triggered by `PackerUpdate` will not register wilder's remote plugin if wilder is not loaded yet.
+-- TODO: add <C-j> and <C-k> to select item
 vim.cmd [[
   call wilder#setup({
   \ 'modes': [':'],

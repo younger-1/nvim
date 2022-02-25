@@ -354,13 +354,13 @@ M.UI = {
         require 'young.mod.fine-cmd'
       end,
     },
-    {
-      'gelguy/wilder.nvim',
-      event = 'CmdlineEnter',
-      config = function()
-        require 'young.mod.wilder'
-      end,
-    },
+    -- {
+    --   'gelguy/wilder.nvim',
+    --   event = 'CmdlineEnter',
+    --   config = function()
+    --     require 'young.mod.wilder'
+    --   end,
+    -- },
   },
   terminal = {
     {

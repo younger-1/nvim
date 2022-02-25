@@ -138,6 +138,14 @@ M.done = function()
     },
   }
 
+  -- Use cmdline & path source for ':'
+  cmp.setup.cmdline(':', {
+    sources = {
+      { name = 'path' },
+      { name = 'cmdline' },
+    },
+  })
+
   -- Use buffer source for `/`
   cmp.setup.cmdline('/', {
     sources = {
@@ -149,14 +157,6 @@ M.done = function()
       { name = 'buffer' },
     },
   })
-
-  -- Use cmdline & path source for ':'
-  -- cmp.setup.cmdline(':', {
-  --   sources = {
-  --     { name = 'path' },
-  --     { name = 'cmdline' },
-  --   },
-  -- })
 
   --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
   -- vim.cmd[[

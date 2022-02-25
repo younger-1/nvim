@@ -155,7 +155,7 @@ M.cfg = {
         ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
         t = actions.toggle_selection,
-        T = actions.select_all,
+        T = actions.toggle_all,
         U = actions.drop_all,
         J = actions.cycle_previewers_next,
         K = actions.cycle_previewers_prev,
