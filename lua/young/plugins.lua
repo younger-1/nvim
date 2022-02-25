@@ -714,6 +714,15 @@ M.lang = {
   },
 }
 
+M.tool = {
+  website = {
+    {
+      'wakatime/vim-wakatime',
+      event = 'BufReadPost',
+    },
+  }
+}
+
 for _, module in pairs(M) do
   setmetatable(module, {
     __call = function(t)
@@ -750,6 +759,7 @@ M.done = function()
     M.telescope(),
     M.theme(),
     M.treesitter(),
+    M.tool(),
     M.write(),
   }
 end

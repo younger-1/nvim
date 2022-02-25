@@ -15,7 +15,8 @@ function M.load_augroups()
 
   return {
     _general_settings = {
-      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
+      { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
       {
         'TextYankPost',
         '*',
@@ -27,14 +28,14 @@ function M.load_augroups()
       --   'dashboard',
       --   'setlocal cursorline signcolumn=yes cursorcolumn number',
       -- },
-      { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
-      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
       -- { "VimLeavePre", "*", "set title set titleold=" },
       {
         "BufWinEnter",
         "*",
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
       },
+      -- NOTE: use ftplugin which could be shared with vim
+      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
     _formatoptions = {
       {
