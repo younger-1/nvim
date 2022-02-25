@@ -12,6 +12,10 @@
 - [ ] vim select files inside current selected folder in cmdline
 - [ ] find files when using `Rg`
 - [ ] highlights the search word in quickfix when using `Rg`
+- [ ] in *.lua gf on require() can let Telescope find file in that module
+- [ ] in *.lua gF on require() can let LSP try add that rtp to LSP's workspace library
+- [ ] combine range-highlight and numb to a single plugin
+- [ ] Online community collect @cataloge and #tag metadata of plugin to help easily discover functionality/boundary of plugins
 
 ## Problem
 
