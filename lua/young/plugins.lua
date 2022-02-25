@@ -62,7 +62,7 @@ M.appearance = {
   color = {
     {
       'norcalli/nvim-colorizer.lua',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         require 'young.mod.colorizer'
       end,
@@ -71,7 +71,7 @@ M.appearance = {
   indent = {
     {
       'lukas-reineke/indent-blankline.nvim',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         require('young.mod.indent-blankline').done()
       end,
@@ -81,7 +81,7 @@ M.appearance = {
     { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' },
     {
       'edluffy/specs.nvim',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         require('young.mod.specs').done()
       end,
@@ -160,7 +160,7 @@ M.change = {
   comment = {
     {
       'numToStr/Comment.nvim',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         require 'young.mod.comment'
       end,
@@ -169,7 +169,7 @@ M.change = {
   other = {
     {
       'monaqa/dial.nvim',
-      event = 'BufReadPost',
+      event = 'BufRead',
       -- FIXME:
       commit = '3b70b2a',
       config = function()
@@ -214,7 +214,7 @@ M.file = {
   session = {
     {
       'folke/persistence.nvim',
-      event = 'BufReadPre',
+      event = 'BufRead',
       module = 'persistence',
       config = function()
         require 'young.mod.persistence'
@@ -242,7 +242,7 @@ M.find = {
   core = {
     {
       'windwp/nvim-spectre',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         -- require("user.spectre").config()
       end,
@@ -251,7 +251,7 @@ M.find = {
       'VonHeikemen/searchbox.nvim',
       requires = { {'MunifTanjim/nui.nvim'} },
       -- module = 'searchbox',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         require('young.mod.searchbox')
       end,
@@ -280,7 +280,7 @@ M.UI = {
     },
     {
       'rcarriga/nvim-notify',
-      after = 'telescope.nvim',
+      event = 'BufWinEnter',
       config = function()
         require('young.mod.notify').done()
       end,
@@ -349,7 +349,7 @@ M.UI = {
       'VonHeikemen/fine-cmdline.nvim',
       requires = { { 'MunifTanjim/nui.nvim' } },
       -- cmd = 'FineCmdline',
-      event = 'BufReadPost',
+      event = 'BufRead',
       config = function()
         require 'young.mod.fine-cmd'
       end,
@@ -390,7 +390,7 @@ M.UI = {
     },
     -- {
     --   'dstein64/nvim-scrollview',
-    --   event = 'BufReadPost',
+    --   event = 'BufRead',
     --   config = function()
     --     require 'young.mod.scrollview'
     --   end,
@@ -718,7 +718,7 @@ M.tool = {
   website = {
     {
       'wakatime/vim-wakatime',
-      event = 'BufReadPost',
+      event = 'BufRead',
     },
   }
 }
