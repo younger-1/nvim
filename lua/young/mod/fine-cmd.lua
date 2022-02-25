@@ -7,8 +7,8 @@ require('young.key').nmap('<CR>', '<cmd>FineCmdline<CR>')
 fineline.setup {
   cmdline = {
     -- prompt = '😎 ',
-    -- prompt = '> ',
-    prompt = ': ',
+    -- prompt = ': ',
+    prompt = ' ',
     enable_keymaps = true,
     smart_history = true,
   },
