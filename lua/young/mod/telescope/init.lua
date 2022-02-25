@@ -3,6 +3,7 @@ local M = {}
 local previewers = require 'telescope.previewers'
 local sorters = require 'telescope.sorters'
 local actions = require 'telescope.actions'
+local action_layout = require 'telescope.actions.layout'
 local builtin = require 'telescope.builtin'
 local themes = require 'telescope.themes'
 
@@ -114,6 +115,7 @@ M.cfg = {
     qflist_previewer = previewers.vim_buffer_qflist.new,
     file_sorter = sorters.get_fuzzy_file,
     generic_sorter = sorters.get_generic_fuzzy_sorter,
+    -- exec 'e ' .. stdpath('data') .. '/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua'
     mappings = {
       i = {
         -- ['<C-c>'] = actions.close,
@@ -140,6 +142,11 @@ M.cfg = {
 
         ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
+
+        ['<A-p>'] = action_layout.toggle_preview,
+        ['<A-m>'] = action_layout.toggle_mirror,
+
+        ['<C-g>'] = action_layout.cycle_layout_next,
       },
       n = {
         ['<C-n>'] = actions.cycle_history_next,
@@ -154,11 +161,10 @@ M.cfg = {
         ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
-        t = actions.toggle_selection,
+        -- J = actions.cycle_previewers_next,
+        -- K = actions.cycle_previewers_prev,
         T = actions.toggle_all,
         U = actions.drop_all,
-        J = actions.cycle_previewers_next,
-        K = actions.cycle_previewers_prev,
       },
     },
   },

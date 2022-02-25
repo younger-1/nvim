@@ -2,8 +2,8 @@ local M = {}
 
 local trouble = require 'trouble.providers.telescope'
 local tele = require('young.mod.telescope').cfg
-tele.defaults.mappings.i['<c-g>'] = trouble.open_with_trouble
-tele.defaults.mappings.n['<c-g>'] = trouble.open_with_trouble
+tele.defaults.mappings.i['<c-t>'] = trouble.open_with_trouble
+tele.defaults.mappings.n['<c-t>'] = trouble.open_with_trouble
 
 M.done = function()
   require('trouble').setup {
