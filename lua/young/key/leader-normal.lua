@@ -82,6 +82,7 @@ local mappings = {
   a = {
     name = '+apps',
     [' '] = { '<cmd>Telescope command_palette<cr>', 'Command Palette' },
+    e = { '+external' },
     m = { '<cmd>MarkdownPreviewToggle<cr>', 'Markdown' },
     t = { '<cmd>TodoQuickFix<cr>', 'Todo' },
     s = {

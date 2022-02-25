@@ -23,9 +23,9 @@ M.basic = {
     'itchyny/vim-external',
     config = function()
       vim.cmd [[
-        map <Leader>ne <Plug>(external-editor)
-        map <Leader>nn <Plug>(external-explorer)
-        map <Leader>nb <Plug>(external-browser)
+        map <Leader>aee <Plug>(external-editor)
+        map <Leader>aen <Plug>(external-explorer)
+        map <Leader>aeb <Plug>(external-browser)
       ]]
     end,
   },
@@ -51,6 +51,7 @@ M.theme = {
     },
     'tanvirtin/monokai.nvim',
     'rebelot/kanagawa.nvim',
+    'ellisonleao/gruvbox.nvim',
   },
 }
 
@@ -200,7 +201,7 @@ M.BWT = {
   },
 }
 
-M.files = {
+M.file = {
   project = {
     {
       'ahmedkhalf/project.nvim',
@@ -697,6 +698,15 @@ M.lang = {
       end,
     },
   },
+  http = {
+    {
+      'NTBBloodbath/rest.nvim',
+      ft = 'http',
+      config = function()
+        require 'young.mod.rest'
+      end,
+    },
+  },
 }
 
 for _, module in pairs(M) do
@@ -727,7 +737,7 @@ M.done = function()
     M.basic(),
     M.change(),
     M.code(),
-    M.files(),
+    M.file(),
     M.find(),
     M.git(),
     M.motion(),
