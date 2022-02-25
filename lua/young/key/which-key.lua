@@ -34,7 +34,7 @@ M.cfg = {
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3, -- spacing between columns
   },
-  hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
+  -- hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ', '<Plug>' },
   show_help = true, -- show help message on the command line when the popup is visible
   -- triggers = "auto",
   -- triggers = { "<space>", "," },
