@@ -6,25 +6,25 @@ xmap('<C-f>', ':SearchBoxMatchAll visual_mode=true<CR>')
 -- nmap('<C-b>', ':SearchBoxMatchAll exact=true title=" Search 🦝 "<CR>')
 
 require('searchbox').setup {
-  popup = {
-    relative = 'win',
-    position = {
-      row = '5%',
-      col = '95%',
-    },
-    size = 30,
-    border = {
-      style = 'rounded',
-      highlight = 'FloatBorder',
-      text = {
-        top = ' Search ',
-        top_align = 'left',
-      },
-    },
-    win_options = {
-      winhighlight = 'Normal:Normal',
-    },
-  },
+  -- popup = {
+  --   relative = 'win',
+  --   position = {
+  --     row = '5%',
+  --     col = '95%',
+  --   },
+  --   size = 30,
+  --   border = {
+  --     style = 'rounded',
+  --     highlight = 'FloatBorder',
+  --     text = {
+  --       top = ' Search ',
+  --       top_align = 'left',
+  --     },
+  --   },
+  --   win_options = {
+  --     winhighlight = 'Normal:Normal',
+  --   },
+  -- },
   hooks = {
     before_mount = function(input)
       -- code
