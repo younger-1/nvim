@@ -381,20 +381,29 @@ M.UI = {
     },
   },
   other = {
-    {
-      'wfxr/minimap.vim',
-      cmd = { 'MinimapToggle' },
-      config = function()
-        require 'young.mod.minimap'
-      end,
-    },
+    -- {
+    --   'wfxr/minimap.vim',
+    --   cmd = { 'MinimapToggle' },
+    --   -- event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.minimap'
+    --   end,
+    -- },
     -- {
     --   'dstein64/nvim-scrollview',
-    --   event = 'BufRead',
+    --   event = 'BufWinEnter',
     --   config = function()
     --     require 'young.mod.scrollview'
     --   end,
     -- },
+    {
+      'petertriho/nvim-scrollbar',
+      event = 'BufWinEnter',
+      config = function()
+        require('scrollbar').setup()
+        -- require('scrollbar.handlers.search').setup()
+      end,
+    }
   },
 }
 
