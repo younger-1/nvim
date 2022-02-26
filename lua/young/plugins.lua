@@ -577,6 +577,12 @@ M.LSP = {
         require('young.mod.fidget').done()
       end,
     },
+    -- { -- TODO:
+    --   'ErichDonGubler/lsp_lines.nvim',
+    --   config = function()
+    --     require('lsp_lines').register_lsp_virtual_lines()
+    --   end,
+    -- },
   },
 }
 
