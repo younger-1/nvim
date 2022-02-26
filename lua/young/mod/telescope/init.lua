@@ -76,6 +76,7 @@ M.cfg = {
       '--smart-case',
       '--hidden',
       '--trim',
+      '--glob=!.git/',
     },
     -- [Patterns](https://www.lua.org/manual/5.1/manual.html#5.4.1)
     file_ignore_patterns = {
