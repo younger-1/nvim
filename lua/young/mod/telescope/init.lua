@@ -75,6 +75,7 @@ M.cfg = {
       '--column',
       '--smart-case',
       '--hidden',
+      '--trim',
     },
     -- [Patterns](https://www.lua.org/manual/5.1/manual.html#5.4.1)
     file_ignore_patterns = {
@@ -94,11 +95,22 @@ M.cfg = {
     --   horizontal = { mirror = false },
     --   vertical = { mirror = false },
     -- },
+    -- cycle_layout_list = { 'horizontal', 'vertical', 'center', 'bottom_pane' },
     winblend = 15,
     dynamic_preview_title = true,
     path_display = { truncate = 5 },
     -- path_display = { shorten = 5 },
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    -- borderchars = {
+    --   prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
+    --   results = {' ', '▐', '▄', '▌', '▌', '▐', '▟', '▙' };
+    --   preview = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
+    -- },
+    -- borderchars = {
+    --   prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
+    --   results = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
+    --   preview = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
+    -- };
     color_devicons = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     pickers = {
@@ -122,7 +134,8 @@ M.cfg = {
         -- ['<CR>'] = actions.select_default + actions.center,
 
         -- ['<C-_>'] = actions.which_key, -- Keys to produce <C-/>
-        -- ["<C-_>"] = require("telescope.actions.generate").which_key {
+        -- ['<C-_>'] = require('telescope.actions.generate').which_key {
+        --   only_show_current_mode = true,
         --   name_width = 20, -- typically leads to smaller floats
         --   max_height = 0.2, -- increase potential maximum height
         --   seperator = " ⇐ ", -- change sep between mode, keybind, and name
@@ -147,6 +160,7 @@ M.cfg = {
         ['<A-m>'] = action_layout.toggle_mirror,
 
         ['<C-g>'] = action_layout.cycle_layout_next,
+        ['<C-y>'] = require('young.mod.telescope.actions').print_entry,
       },
       n = {
         ['<C-n>'] = actions.cycle_history_next,
@@ -183,7 +197,6 @@ M.cfg = {
     colorscheme = view.h4,
     commands = { theme = 'ivy' },
     current_buffer_fuzzy_find = view.v2,
-    file_browser = view.h2,
     find_files = vim.tbl_extend('force', view.v1, {
       hidden = 1,
     }),
@@ -235,6 +248,14 @@ M.cfg = {
         ['wiki'] = vim.fn.expand '~/wiki',
       },
     },
+    -- file_browser = view.h2,
+    file_browser = {
+      theme = 'ivy',
+    },
+    -- map("i", "<C-o>", open_online)
+    -- map("i", "<C-f>", open_finder)
+    -- map("i", "<C-b>", open_browser)
+    -- map("i", "<C-g>", open_grep)
     packer = {
       theme = 'ivy',
       layout_config = {
