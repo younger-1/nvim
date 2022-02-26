@@ -515,6 +515,8 @@ M.code = {
         'hrsh7th/cmp-calc',
         'hrsh7th/cmp-emoji',
         'hrsh7th/cmp-cmdline',
+        --
+        { 'petertriho/cmp-git', config = function () require('cmp_git').setup() end },
       },
     },
     { 'onsails/lspkind-nvim' },
