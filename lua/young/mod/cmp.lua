@@ -125,16 +125,18 @@ M.done = function()
     },
     sources = {
       { name = 'nvim_lsp' },
-      { name = 'path' },
-      { name = 'luasnip' },
-      { name = 'cmp_tabnine' },
       { name = 'nvim_lua' },
+      { name = 'path' },
       { name = 'buffer' },
       { name = 'calc' },
       { name = 'emoji' },
+      { name = 'luasnip' },
       { name = 'treesitter' },
-      { name = 'crates' },
+      --
+      { name = 'cmp_git' },
+      { name = 'cmp_tabnine' },
       { name = 'copilot' },
+      { name = 'crates' },
     },
   }
 
