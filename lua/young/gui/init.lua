@@ -10,7 +10,7 @@ local gui_running
 -- https://github.com/akiyosi/goneovim/issues/14
 
 --@Called in ./lua/young/init.lua
-function M.setup()
+function M.done()
   gui_running = true
 
   if vim.g.nvui then

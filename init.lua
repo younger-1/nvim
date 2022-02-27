@@ -9,12 +9,12 @@ pcall(function()
   require('impatient').enable_profile()
 end)
 
-require('young.cfg').once()
+require('young.cfg').done()
 
 require('young.plugin-loader').done()
 
 vim.cmd 'colorscheme monokai'
 
-require 'young.lsp'
+require('young.lsp').done()
 
-require('young.gui').setup()
+require('young.gui').done()
