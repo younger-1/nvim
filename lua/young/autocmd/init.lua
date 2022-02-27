@@ -3,16 +3,16 @@ local M = {}
 
 local config_dir = vim.fn.stdpath 'config'
 
+-- FIXME:
+-- local plugins_path = "plugins.lua"
+local plugins_path = vim.fn.resolve(require('young.cfg').get_reload_path())
+if is_windows then
+  -- autocmds require forward slashes even on windows
+  plugins_path = plugins_path:gsub('\\', '/')
+end
+
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
-  -- FIXME:
-  -- local plugins_path = "plugins.lua"
-  local plugins_path = vim.fn.resolve(require('young.cfg').get_reload_path())
-  if is_windows then
-    -- autocmds require forward slashes even on windows
-    plugins_path = plugins_path:gsub('\\', '/')
-  end
-
   return {
     _general_settings = {
       -- NOTE: use ftplugin which could be shared with vim
@@ -148,11 +148,9 @@ function M.define_augroups(definitions) -- {{{1
   end
 end
 
-M.once = function()
+M.done = function()
   local aus = M.load_augroups()
   M.define_augroups(aus)
 end
-
-M.once()
 
 return M

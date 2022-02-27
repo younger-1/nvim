@@ -251,7 +251,7 @@ function M.ice()
 end
 
 function M.print(mode)
-  print "List of LunarVim's default keymappings (not including which-key)"
+  print "Younger's default keymappings (not including which-key)"
   if mode then
     print(vim.inspect(M.keys[mode]))
   else
@@ -259,11 +259,9 @@ function M.print(mode)
   end
 end
 
-function M.hot()
+M.done = function()
+  M.ice()
   M.load(M.keys)
 end
-
-M.ice()
-M.hot()
 
 return M

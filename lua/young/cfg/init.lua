@@ -12,12 +12,9 @@ function M.done()
 
   require 'young.cfg.global'
   require 'young.cfg.option'
-  require 'young.cfg.autocmds'
 
-  require 'young.key.mappings'
-
-  require('young.key.which-key').ice()
-  vim.g.mapleader = ' '
+  require('young.autocmd').done()
+  require('young.key').done()
 
   -- local lvim_lsp_config = require "lvim.lsp.config"
   -- lvim.lsp = apply_defaults(lvim.lsp, vim.deepcopy(lvim_lsp_config))
