@@ -230,17 +230,19 @@ M.chdir = function(force)
   local root = require('project_nvim.project').get_project_root()
   if root then
     vim.cmd('lcd ' .. root)
+    vim.notify('[Young] dir: ' .. root)
   end
 
-  if not force then
-    return
-  end
-  local cwd = vim.fn.getcwd()
+  -- FIXME: need be implemented in project_nvim
+  -- if not force then
+  --   return
+  -- end
+  -- local cwd = vim.fn.getcwd()
   -- gg(0, cwd_old)
   -- gg(1, cwd)
-  if cwd == cwd_old then
-    vim.cmd [[silent! lcd %:p:h]]
-  end
+  -- if cwd == cwd_old then
+  --   vim.cmd [[silent! lcd %:p:h]]
+  -- end
 end
 
 return M
