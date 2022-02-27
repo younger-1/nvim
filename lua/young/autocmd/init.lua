@@ -29,12 +29,12 @@ function M.load_augroups()
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
       },
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
-      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
       -- TODO: toggle by key
       { 'InsertEnter', '*', 'set norelativenumber' },
       { 'InsertLeave', '*', 'set relativenumber' },
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
-      { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
+      -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
+      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
     },
     _formatoptions = {
       {
@@ -114,6 +114,10 @@ end
 M.done = function()
   local aus = M.load_augroups()
   M.define_augroups(aus)
+  local core = require 'young.autocmd.core'
+  core.enable_auto_chdir()
+  core.enable_format_on_save()
 end
 
+-- return setmetatable(M, { __index = require 'young.autocmd.core' })
 return M

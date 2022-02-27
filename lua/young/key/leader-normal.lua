@@ -350,6 +350,11 @@ local mappings = {
   t = {
     name = '+toggle',
     [':'] = { ':call wilder#toggle()<cr>', 'Wilder' },
+    a = {
+      name = '+autocmd',
+      f = { '<cmd>lua require("young.autocmd").toggle_format_on_save()<cr>', 'Format On Save' },
+      r = { '<cmd>lua require("young.autocmd").toggle_auto_chdir()<cr>', 'Auto Chdir' },
+    },
     b = 'Biscuits',
     l = { "<cmd>lua require('user.tools').toggle_tabline()<cr>", 'Tabline' },
     m = { '<cmd>MinimapToggle<cr>', 'Minimap' },
