@@ -225,4 +225,22 @@ end
 -- M.pick_ls
 -- commands Pls <servername> <key>
 
+M.chdir = function(force)
+  local cwd_old = vim.fn.getcwd()
+  local root = require('project_nvim.project').get_project_root()
+  if root then
+    vim.cmd('lcd ' .. root)
+  end
+
+  if not force then
+    return
+  end
+  local cwd = vim.fn.getcwd()
+  -- gg(0, cwd_old)
+  -- gg(1, cwd)
+  if cwd == cwd_old then
+    vim.cmd [[silent! lcd %:p:h]]
+  end
+end
+
 return M

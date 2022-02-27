@@ -1,23 +1,37 @@
-local M = {}
+local M = require 'young.autocmd'
 
-local get_format_on_save_opts = function()
-  local defaults = {
-    ---@usage pattern string pattern used for the autocommand (Default: '*')
-    pattern = '*',
-    ---@usage timeout number timeout in ms for the format request (Default: 1000)
-    timeout = 1000,
-  }
-
-  return {
-    pattern = defaults.pattern,
-    timeout = defaults.timeout,
+function M.enable_auto_chdir()
+  M.define_augroups {
+    -- Need ++nested to trigger DirChanged event for updating nvim-tree, gitsigns
+    auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested lua require('young.tools').chdir(true)]] } },
   }
 end
 
+function M.disable_auto_chdir()
+  M.disable_augroup 'auto_chdir'
+end
+
+function M.toggle_auto_chdir()
+  -- Must use event here
+  if vim.fn.exists '#auto_chdir#VimEnter,BufWinEnter' == 0 then
+    M.enable_auto_chdir()
+  else
+    M.disable_auto_chdir()
+  end
+end
+
+local format_on_save_opts  = {
+  ---@usage pattern string pattern used for the autocommand (Default: '*')
+  pattern = '*',
+  ---@usage timeout number timeout in ms for the format request (Default: 1000)
+  timeout = 1000,
+}
+
 function M.enable_format_on_save(opts)
-  local fmd_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
+  opts = vim.tbl_extend('force', format_on_save_opts, opts or {})
+  local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
   M.define_augroups {
-    format_on_save = { { 'BufWritePre', opts.pattern, fmd_cmd } },
+    format_on_save = { { 'BufWritePre', opts.pattern, fmt_cmd } },
   }
   -- Log:debug "enabled format-on-save"
 end
@@ -27,19 +41,9 @@ function M.disable_format_on_save()
   -- Log:debug "disabled format-on-save"
 end
 
-function M.configure_format_on_save()
-  if lvim.format_on_save then
-    local opts = get_format_on_save_opts()
-    M.enable_format_on_save(opts)
-  else
-    M.disable_format_on_save()
-  end
-end
-
 function M.toggle_format_on_save()
   if vim.fn.exists '#format_on_save#BufWritePre' == 0 then
-    local opts = get_format_on_save_opts()
-    M.enable_format_on_save(opts)
+    M.enable_format_on_save()
   else
     M.disable_format_on_save()
   end
