@@ -34,7 +34,8 @@ function M.reload()
   -- require 'young.lsp'
   require('young.gui').setup()
 
-  vim.notify 'Reloaded configuration'
+  -- vim.notify 'Reloaded configuration'
+  require('young.mod.notify').yntf('😀 Reloaded configuration')
 end
 
 function M.get_reload_path()

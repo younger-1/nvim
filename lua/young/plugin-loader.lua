@@ -1,5 +1,7 @@
 local plugin_loader = {}
 
+local in_headless = #vim.api.nvim_list_uis() == 0
+
 local utils = require 'young.utils'
 -- local Log = require "lvim.core.log"
 
@@ -13,13 +15,15 @@ local _, packer = pcall(require, 'packer')
 plugin_loader.once = function()
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+    -- WARN: system sync/async
     vim.fn.system { 'git', 'clone', '--depth', '3', 'https://github.com/wbthomason/packer.nvim', install_path }
+    vim.cmd 'packadd packer.nvim' -- To init packer commands after clone it.
   end
 
   require('packer').init {
     compile_path = compile_path,
     -- max_jobs = 8,
-    log = { level = 'warn' },
+    log = { level = in_headless and 'debug' or 'warn' },
     profile = { enable = true },
     display = {
       open_fn = function()
