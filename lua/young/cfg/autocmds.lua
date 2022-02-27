@@ -15,27 +15,27 @@ function M.load_augroups()
 
   return {
     _general_settings = {
-      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
-      { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
+      -- NOTE: use ftplugin which could be shared with vim
+      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { "VimLeavePre", "*", "set title set titleold=" },
       {
         'TextYankPost',
         '*',
         -- "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
         "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
       },
-      -- {
-      --   'BufWinEnter',
-      --   'dashboard',
-      --   'setlocal cursorline signcolumn=yes cursorcolumn number',
-      -- },
-      -- { "VimLeavePre", "*", "set title set titleold=" },
       {
         "BufWinEnter",
         "*",
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
       },
-      -- NOTE: use ftplugin which could be shared with vim
-      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'VimLeave', '*', 'set guicursor=a:ver25' },
+      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
+      -- TODO: toggle by key
+      { 'InsertEnter', '*', 'set norelativenumber' },
+      { 'InsertLeave', '*', 'set relativenumber' },
+      -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
+      { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
     },
     _formatoptions = {
       {
@@ -63,10 +63,10 @@ function M.load_augroups()
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info,minimap', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
     custom_groups = {
-      -- { 'DirChanged', '*', 'echomsg v:event' },
-      { 'VimLeave', '*', 'set guicursor=a:ver25' },
+      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
+      { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
-      { 'User', 'PackerComplete', 'lua doautocmd ColorScheme' },
+      { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
     },
   }
 end

@@ -16,13 +16,15 @@
 - [ ] in *.lua gF on require() can let LSP try add that rtp to LSP's workspace library
 - [ ] combine range-highlight and numb to a single plugin
 - [ ] Online community collect @cataloge and #tag metadata of plugin to help easily discover functionality/boundary of plugins
+- [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
 
 ## Problem
 
 `project.nvim`
 
-- echo twice even in the same cwd when open new buffer
-- echo once in the same cwd when switch buffers
+- ~~echo twice even in the same cwd when open new buffer~~
+- ~~echo once in the same cwd when switch buffers~~
+- use lsd instead of nvim_set_current_dir which use cd
 
 `fzf.lua`
 
