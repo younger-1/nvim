@@ -323,12 +323,24 @@ M.cfg = {
   },
 }
 
+M.once = function()
+  -- avoid running in headless mode since it's harder to detect failures
+  if #vim.api.nvim_list_uis() == 0 then
+    -- Log:debug "headless mode detected, skipping running setup for treesitter"
+    return false
+  end
+  return true
+end
+
 M.done = function()
   -- use a mirror instead of "https://github.com/"
   -- for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
   --   config.install_info.url = config.install_info.url:gsub("https://github.com/", "something else")
   -- end
 
+  if not M.once() then
+    return
+  end
   -- require('nvim-treesitter.install').compilers = { 'clang' }
   require('nvim-treesitter.install').prefer_git = false
 
