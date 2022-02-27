@@ -1,15 +1,14 @@
 local py = require 'young.lang.python'
 
+-- <https://github.com/microsoft/pyright/blob/main/docs/configuration.md>
+-- <https://github.com/microsoft/pyright/blob/main/docs/settings.md>
 return {
   settings = {
     python = {
       analysis = {
-        -- lspconfig-default: <https://github.com/microsoft/pyright/blob/main/docs/settings.md>
-        -- autoSearchPaths = true,
-        -- useLibraryCodeForTypes = true,
         -- diagnosticMode = 'workspace', -- ["openFilesOnly", "workspace"]
-        -- my:
         -- typeCheckingMode = 'off', -- ["off", "basic", "strict"]
+        useLibraryCodeForTypes = true,
         completeFunctionParens = true,
       },
     },

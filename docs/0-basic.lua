@@ -1,3 +1,5 @@
+-- <https://learnxinyminutes.com/docs/lua/>
+
 -- Two dashes start a one-line comment.
 
 --[[
