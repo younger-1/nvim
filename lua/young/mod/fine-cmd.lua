@@ -27,8 +27,8 @@ fineline.setup {
       winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
     },
     buf_options = {
-      filetype = 'FineCmdlinePrompt'
-    }
+      filetype = 'FineCmdlinePrompt',
+    },
   },
   hooks = {
     set_keymaps = function(imap, feedkeys)

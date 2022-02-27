@@ -56,7 +56,7 @@ function _G.gg(name, val, ...)
     print(prefix .. '============')
     return
   end
-  if #{...} == 0 then
+  if #{ ... } == 0 then
     print(prefix .. vim.inspect(name) .. ' => ' .. vim.inspect(val))
   else
     local objects = vim.tbl_map(vim.inspect, { name, val, ... })

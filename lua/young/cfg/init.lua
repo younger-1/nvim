@@ -32,7 +32,7 @@ function M.reload()
   require('young.gui').done()
 
   -- vim.notify 'Reloaded configuration'
-  require('young.mod.notify').yntf('😀 Reloaded configuration')
+  require('young.mod.notify').yntf '😀 Reloaded configuration'
 end
 
 function M.get_reload_path()

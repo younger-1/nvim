@@ -240,13 +240,13 @@ M.find = {
     },
     {
       'VonHeikemen/searchbox.nvim',
-      requires = { {'MunifTanjim/nui.nvim'} },
+      requires = { { 'MunifTanjim/nui.nvim' } },
       -- module = 'searchbox',
       event = 'BufRead',
       config = function()
-        require('young.mod.searchbox')
+        require 'young.mod.searchbox'
       end,
-    }
+    },
   },
   fzf = {
     {
@@ -394,7 +394,7 @@ M.UI = {
         require('scrollbar').setup()
         -- require('scrollbar.handlers.search').setup()
       end,
-    }
+    },
   },
 }
 
@@ -516,7 +516,12 @@ M.code = {
         'hrsh7th/cmp-emoji',
         'hrsh7th/cmp-cmdline',
         --
-        { 'petertriho/cmp-git', config = function () require('cmp_git').setup() end },
+        {
+          'petertriho/cmp-git',
+          config = function()
+            require('cmp_git').setup()
+          end,
+        },
       },
     },
     { 'onsails/lspkind-nvim' },
@@ -639,13 +644,17 @@ M.neovim = {
   {
     'nacro90/numb.nvim',
     event = 'CmdlineEnter',
-    config = function () require('numb').setup() end,
+    config = function()
+      require('numb').setup()
+    end,
   },
   {
-    'winston0410/range-highlight.nvim' ,
+    'winston0410/range-highlight.nvim',
     event = 'CmdlineEnter',
     requires = { { 'winston0410/cmd-parser.nvim', module = 'cmd-parser' } },
-    config = function () require('range-highlight').setup {} end,
+    config = function()
+      require('range-highlight').setup {}
+    end,
   },
   {
     'lambdalisue/suda.vim',
@@ -740,7 +749,7 @@ M.tool = {
       'wakatime/vim-wakatime',
       event = 'BufRead',
     },
-  }
+  },
 }
 
 for _, module in pairs(M) do
