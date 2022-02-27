@@ -3,34 +3,6 @@ local lsp_installer = require 'nvim-lsp-installer'
 
 local M = {}
 
--- vim.lsp.set_log_level("debug")
--- if vim.fn.has 'nvim-0.5.1' == 1 then
---   require('vim.lsp.log').set_format_func(vim.inspect)
--- end
-vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
-
--- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
-local lspconfig_win = require('lspconfig.ui.windows')
-local default_win_opts = lspconfig_win.default_opts
-lspconfig_win.default_opts = function(options)
-  local opts = default_win_opts(options)
-  opts.border = 'rounded'
-  return opts
-end
-
-lsp_installer.settings {
-  log_level = vim.log.levels.DEBUG,
-  ui = {
-    icons = {
-      server_installed = '',
-      server_pending = '',
-      server_uninstalled = '',
-    },
-  },
-}
-
-require 'young.lsp.handlers'
-
 local custom_servers = {
   lua = 'sumneko_lua',
   python = 'pyright',
@@ -67,7 +39,7 @@ local on_attach = function(client, bufnr)
   )
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gp', '<cmd>lua require"lvim.lsp.peek".Peek("definition")<CR>', opts)
 
-  -- require("lsp_signature").on_attach({
+  -- require("lsp_signature").on_attach {
   --   bind = true,
   --   use_lspsaga = false,
   --   floating_window = true,
@@ -75,7 +47,7 @@ local on_attach = function(client, bufnr)
   --   hint_enable = true,
   --   hi_parameter = "Search",
   --   handler_opts = { "double" },
-  -- })
+  -- }
   -- require("aerial").on_attach(client)
 end
 
@@ -132,45 +104,86 @@ local function get_opts(server_name)
   return default_opts
 end
 
--- Register a handler that will be called for all installed servers.
-lsp_installer.on_server_ready(function(server)
-  for _, ft in ipairs(server:get_supported_filetypes()) do
-    if custom_servers[ft] then
-      if server.name ~= custom_servers[ft] then
-        return
-      else
-        done_ft[ft] = 1
-      end
-    end
-  end
-
-  -- This setup() function is exactly the same as lspconfig's setup function.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  local opts = get_opts(server.name)
-  -- local opts = default_opts
-  server:setup(opts)
-end)
-
 -- manually start the server and don't wait for the usual filetype trigger from lspconfig
 local function buf_try_add(server_name, bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   require('lspconfig')[server_name].manager.try_add_wrapper(bufnr)
 end
 
--- on_server_ready is async
-vim.defer_fn(function()
-  -- gg(done_ft)
-  for ft, server_name in pairs(custom_servers) do
-    -- local fts = require('lspconfig')[server_name].filetypes
-    -- NOTE: not valid: vim.fn.executable(server_name), eg {"deno", "lsp"}
-    if not done_ft[ft] then
-      local opts = get_opts(server_name)
-      pcall(function()
-        require('lspconfig')[server_name].setup(opts)
-        buf_try_add(server_name)
-      end)
-    end
+M.once = function()
+  -- vim.lsp.set_log_level("debug")
+  -- if vim.fn.has 'nvim-0.5.1' == 1 then
+  --   require('vim.lsp.log').set_format_func(vim.inspect)
+  -- end
+  vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
+
+  -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
+  local lspconfig_win = require('lspconfig.ui.windows')
+  local default_win_opts = lspconfig_win.default_opts
+  lspconfig_win.default_opts = function(options)
+    local opts = default_win_opts(options)
+    opts.border = 'rounded'
+    return opts
   end
-end, 20)
+
+  lsp_installer.settings {
+    log_level = vim.log.levels.DEBUG,
+    ui = {
+      icons = {
+        server_installed = '',
+        server_pending = '',
+        server_uninstalled = '',
+      },
+    },
+  }
+
+  -- Register a handler that will be called for all installed servers.
+  lsp_installer.on_server_ready(function(server)
+    for _, ft in ipairs(server:get_supported_filetypes()) do
+      if custom_servers[ft] then
+        if server.name ~= custom_servers[ft] then
+          return
+        else
+          done_ft[ft] = 1
+        end
+      end
+    end
+
+    -- This setup() function is exactly the same as lspconfig's setup function.
+    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    local opts = get_opts(server.name)
+    -- local opts = default_opts
+    server:setup(opts)
+  end)
+
+  -- Or vim.schedule, because on_server_ready is async
+  vim.defer_fn(function()
+    -- gg(done_ft)
+    for ft, server_name in pairs(custom_servers) do
+      -- local fts = require('lspconfig')[server_name].filetypes
+      -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
+      if not done_ft[ft] then
+        local opts = get_opts(server_name)
+        pcall(function()
+          require('lspconfig')[server_name].setup(opts)
+          buf_try_add(server_name)
+        end)
+      end
+    end
+  end, 20)
+
+end
+
+M.done = function()
+  M.once()
+
+  require 'young.lsp.handlers'
+
+  -- bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
+
+  -- require("lvim.lsp.null-ls").setup()
+
+  -- autocmds.configure_format_on_save()
+end
 
 return M

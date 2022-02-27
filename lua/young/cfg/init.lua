@@ -7,7 +7,7 @@ local function apply_defaults(configs, defaults)
   return vim.tbl_deep_extend('keep', configs, defaults)
 end
 
-function M.once()
+function M.done()
   require 'young.utils.global'
 
   require 'young.cfg.global'
@@ -29,10 +29,10 @@ end
 function M.reload()
   M.reset_cache()
 
-  M.once()
+  M.done()
   require('young.plugin-loader').done()
-  -- require 'young.lsp'
-  require('young.gui').setup()
+  -- require('young.lsp').done()
+  require('young.gui').done()
 
   -- vim.notify 'Reloaded configuration'
   require('young.mod.notify').yntf('😀 Reloaded configuration')
