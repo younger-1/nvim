@@ -157,15 +157,6 @@ M.change = {
       end,
     },
   },
-  comment = {
-    {
-      'numToStr/Comment.nvim',
-      event = 'BufRead',
-      config = function()
-        require 'young.mod.comment'
-      end,
-    },
-  },
   other = {
     {
       'monaqa/dial.nvim',
@@ -539,7 +530,19 @@ M.code = {
     --   -- end,
     -- },
   },
-  -- { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
+  comment = {
+    {
+      'numToStr/Comment.nvim',
+      event = 'BufRead',
+      config = function()
+        require 'young.mod.comment'
+      end,
+    },
+  },
+  -- task = {
+  --   { 'tpope/vim-dispatch' },
+  --   { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
+  -- },
 }
 
 M.LSP = {
