@@ -46,4 +46,10 @@ function M.xmap(key, cmd, opts)
   vim.api.nvim_set_keymap('x', key, cmd, opts)
 end
 
+M.done = function()
+  require('young.key.mappings').done()
+  require('young.key.which-key').ice()
+  vim.g.mapleader = ' '
+end
+
 return M
