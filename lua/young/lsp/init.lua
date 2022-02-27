@@ -118,7 +118,7 @@ M.once = function()
   vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
 
   -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
-  local lspconfig_win = require('lspconfig.ui.windows')
+  local lspconfig_win = require 'lspconfig.ui.windows'
   local default_win_opts = lspconfig_win.default_opts
   lspconfig_win.default_opts = function(options)
     local opts = default_win_opts(options)
@@ -171,7 +171,6 @@ M.once = function()
       end
     end
   end, 20)
-
 end
 
 M.done = function()

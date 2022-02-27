@@ -5,8 +5,8 @@
 
 local function p(...)
   print(...)
-  print(..., "hi")
-  print("hi", ...)
+  print(..., 'hi')
+  print('hi', ...)
 end
 -- p(1,2,3)
 -- 1 2 3
@@ -21,21 +21,21 @@ assert(3)
 -- loadstring (string [, chunkname])
 -- If there are no errors, returns the compiled chunk as a function; otherwise, returns nil plus the error message
 -- To load and run a given string, use the idiom: assert(loadstring(s))()
-local func = loadstring([[local a = 4]])
+local func = loadstring [[local a = 4]]
 func()
 
-print(loadstring([[1 + 4]]))
-assert(loadstring([[1 + 4]]))
+print(loadstring [[1 + 4]])
+assert(loadstring [[1 + 4]])
 
 -- executing the function return by loadstring
-local a = loadstring([[return 6]])()
+local a = loadstring [[return 6]]()
 print(type(a)) -- number
 
-local b = loadstring([[require('lspconfig')]])()
+local b = loadstring [[require('lspconfig')]]()
 print(type(b)) -- nil
 
 -- WARN:
-pp(loadstring([[return require('lspconfig')]])())
+pp(loadstring [[return require('lspconfig')]]())
 
 -- [unpack](https://www.lua.org/pil/5.1.html)
 ---@returns all elements from the array, starting from index 1
@@ -146,26 +146,26 @@ end
 -- pp(split_string)
 
 pp(string.char(97, 98))
-pp(string.byte "ab")
+pp(string.byte 'ab')
 
 -- [[os]]
 
 -- <https://www.jianshu.com/p/c3c70d046bfc>
 local ret = os.execute()
 if ret ~= 0 then
-  print("the system shell is available, ret = " .. ret .. "\n\n")
+  print('the system shell is available, ret = ' .. ret .. '\n\n')
 else
-  print("the system shell is not available, ret = " .. ret .. "\n\n")
+  print('the system shell is not available, ret = ' .. ret .. '\n\n')
 end
 
 -- [[io]]
 
-local openPop = assert(io.popen("ls -la", "r"))
-local output = openPop:read "*all"
+local openPop = assert(io.popen('ls -la', 'r'))
+local output = openPop:read '*all'
 openPop:close()
 print(output)
 
 -- [[debug]]
-local init_path = debug.getinfo(1, "S").source:sub(2)
-print("[debug]: " .. init_path)
+local init_path = debug.getinfo(1, 'S').source:sub(2)
+print('[debug]: ' .. init_path)
 
