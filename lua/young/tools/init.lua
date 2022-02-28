@@ -247,4 +247,14 @@ M.chdir = function(force)
   -- end
 end
 
+local rnu
+M.nornu = function()
+  rnu = vim.o.rnu
+  vim.o.rnu = false
+end
+
+M.rnu = function()
+  vim.o.rnu = rnu
+end
+
 return M
