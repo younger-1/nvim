@@ -3,7 +3,7 @@ local project = require 'project_nvim'
 local cfg = {
   -- Manual mode doesn't automatically change your root directory, so you have
   -- the option to manually do so using `:ProjectRoot` command.
-  manual_mode = true,
+  manual_mode = false,
 
   -- Methods of detecting the root directory. **"lsp"** uses the native neovim
   -- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
