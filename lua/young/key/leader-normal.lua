@@ -353,6 +353,7 @@ local mappings = {
     a = {
       name = '+autocmd',
       f = { '<cmd>lua require("young.autocmd").toggle_format_on_save()<cr>', 'Format On Save' },
+      p = { '<cmd>lua require("young.autocmd").toggle_print_ascii()<cr>', 'Print ASCII' },
       r = { '<cmd>lua require("young.autocmd").toggle_auto_chdir()<cr>', 'Auto Chdir' },
     },
     b = 'Biscuits',
