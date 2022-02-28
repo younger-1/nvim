@@ -1,25 +1,25 @@
 local M = require 'young.autocmd'
 
-function M.enable_auto_chdir()
-  M.define_augroups {
-    -- Need ++nested to trigger DirChanged event for updating nvim-tree, gitsigns
-    auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
-    -- auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested lua require('young.tools').chdir(true)]] } },
-  }
-end
+-- function M.enable_auto_chdir()
+--   M.define_augroups {
+--     -- Need ++nested to trigger DirChanged event for updating nvim-tree, gitsigns
+--     auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
+--     -- auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested lua require('young.tools').chdir(true)]] } },
+--   }
+-- end
 
-function M.disable_auto_chdir()
-  M.disable_augroup 'auto_chdir'
-end
+-- function M.disable_auto_chdir()
+--   M.disable_augroup 'auto_chdir'
+-- end
 
-function M.toggle_auto_chdir()
-  -- Must use event here
-  if vim.fn.exists '#auto_chdir#VimEnter,BufWinEnter' == 0 then
-    M.enable_auto_chdir()
-  else
-    M.disable_auto_chdir()
-  end
-end
+-- function M.toggle_auto_chdir()
+--   -- Must use event here. Once enable a group, `exists('group_name')` always return 1
+--   if vim.fn.exists '#auto_chdir#VimEnter,BufWinEnter' == 0 then
+--     M.enable_auto_chdir()
+--   else
+--     M.disable_auto_chdir()
+--   end
+-- end
 
 local format_on_save_opts  = {
   ---@usage pattern string pattern used for the autocommand (Default: '*')

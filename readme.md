@@ -1,4 +1,4 @@
-# Neovim
+# NeoVim
 
 > My love, you're the unsolved wave, I'm the naked island.
 
@@ -24,7 +24,7 @@
 
 - ~~echo twice even in the same cwd when open new buffer~~
 - ~~echo once in the same cwd when switch buffers~~
-- use lsd instead of nvim_set_current_dir which use cd
+- use lcd instead of `nvim_set_current_dir`
 
 `fzf.lua`
 
