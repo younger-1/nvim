@@ -110,10 +110,11 @@ function M.define_augroups(definitions, buffer)
   end
 end
 
+local augroup_prefix = '_yo_'
 -- enable augroup by default
 M.build = function(augroups, enable)
   for name, autocmds in pairs(augroups) do
-    local group_name = '_yo_' .. name
+    local group_name = augroup_prefix .. name
 
     M['enable_' .. name] = function()
       M.define_augroups {
@@ -149,6 +150,10 @@ M.done = function()
     auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
     format_on_save = { { 'BufWritePre', format_opts.pattern, fmt_cmd } },
   }
+
+  M.build({
+    print_ascii = { { 'CursorHold', '*', ':normal! ga' } },
+  }, false)
 
   require 'young.autocmd.core'
 end

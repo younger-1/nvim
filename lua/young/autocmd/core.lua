@@ -21,34 +21,34 @@ local M = require 'young.autocmd'
 --   end
 -- end
 
-local format_on_save_opts = {
-  ---@usage pattern string pattern used for the autocommand (Default: '*')
-  pattern = '*',
-  ---@usage timeout number timeout in ms for the format request (Default: 1000)
-  timeout = 1000,
-}
+-- local format_on_save_opts = {
+--   ---@usage pattern string pattern used for the autocommand (Default: '*')
+--   pattern = '*',
+--   ---@usage timeout number timeout in ms for the format request (Default: 1000)
+--   timeout = 1000,
+-- }
 
-function M.enable_format_on_save(opts)
-  opts = vim.tbl_extend('force', format_on_save_opts, opts or {})
-  local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
-  M.define_augroups {
-    format_on_save = { { 'BufWritePre', opts.pattern, fmt_cmd } },
-  }
-  -- Log:debug "enabled format-on-save"
-end
+-- function M.enable_format_on_save(opts)
+--   opts = vim.tbl_extend('force', format_on_save_opts, opts or {})
+--   local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
+--   M.define_augroups {
+--     format_on_save = { { 'BufWritePre', opts.pattern, fmt_cmd } },
+--   }
+--   -- Log:debug "enabled format-on-save"
+-- end
 
-function M.disable_format_on_save()
-  M.disable_augroup 'format_on_save'
-  -- Log:debug "disabled format-on-save"
-end
+-- function M.disable_format_on_save()
+--   M.disable_augroup 'format_on_save'
+--   -- Log:debug "disabled format-on-save"
+-- end
 
-function M.toggle_format_on_save()
-  if vim.fn.exists '#format_on_save#BufWritePre' == 0 then
-    M.enable_format_on_save()
-  else
-    M.disable_format_on_save()
-  end
-end
+-- function M.toggle_format_on_save()
+--   if vim.fn.exists '#format_on_save#BufWritePre' == 0 then
+--     M.enable_format_on_save()
+--   else
+--     M.disable_format_on_save()
+--   end
+-- end
 
 function M.enable_lsp_document_highlight(client_id)
   M.define_augroups({
