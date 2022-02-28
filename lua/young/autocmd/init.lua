@@ -29,9 +29,8 @@ function M.load_augroups()
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
       },
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
-      -- TODO: toggle by key
-      { 'InsertEnter', '*', 'set norelativenumber' },
-      { 'InsertLeave', '*', 'set relativenumber' },
+      { 'InsertEnter', '*', 'lua require("young.tools").nornu()' },
+      { 'InsertLeave', '*', 'lua require("young.tools").rnu()' },
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },

@@ -3,8 +3,8 @@ local M = require 'young.autocmd'
 function M.enable_auto_chdir()
   M.define_augroups {
     -- Need ++nested to trigger DirChanged event for updating nvim-tree, gitsigns
-    auto_chdir = { { 'VimEnter,BufEnter', '*', [[++nested ProjectRoot]] } },
-    -- auto_chdir = { { 'VimEnter,BufEnter', '*', [[++nested lua require('young.tools').chdir(true)]] } },
+    auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
+    -- auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested lua require('young.tools').chdir(true)]] } },
   }
 end
 
