@@ -110,13 +110,14 @@ function M.define_augroups(definitions, buffer)
   end
 end
 
-M.build = function(augroup, enable)
-  for name, definitions in pairs(augroup) do
+-- enable augroup by default
+M.build = function(augroups, enable)
+  for name, autocmds in pairs(augroups) do
     local group_name = '_yo_' .. name
 
     M['enable_' .. name] = function()
       M.define_augroups {
-        [group_name] = definitions,
+        [group_name] = autocmds,
       }
     end
 
@@ -125,14 +126,14 @@ M.build = function(augroup, enable)
     end
 
     M['toggle_' .. name] = function()
-      if 0 == vim.fn.exists('#' .. group_name .. '#' .. definitions[1][1]) then
+      if 0 == vim.fn.exists('#' .. group_name .. '#' .. autocmds[1][1]) then
         M['enable_' .. name]()
       else
         M['disable_' .. name]()
       end
     end
 
-    if enable then
+    if enable ~= false then
       M['enable_' .. name]()
     end
   end
@@ -142,15 +143,12 @@ M.done = function()
   local aus = M.load_augroups()
   M.define_augroups(aus)
 
-  M.build({
-    auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
-  }, true)
-
   local format_opts = { pattern = '*', timeout = 1000 }
   local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)
-  M.build({
+  M.build {
+    auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
     format_on_save = { { 'BufWritePre', format_opts.pattern, fmt_cmd } },
-  }, true)
+  }
 
   require 'young.autocmd.core'
 end
