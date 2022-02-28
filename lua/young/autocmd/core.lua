@@ -21,7 +21,7 @@ local M = require 'young.autocmd'
 --   end
 -- end
 
-local format_on_save_opts  = {
+local format_on_save_opts = {
   ---@usage pattern string pattern used for the autocommand (Default: '*')
   pattern = '*',
   ---@usage timeout number timeout in ms for the format request (Default: 1000)
