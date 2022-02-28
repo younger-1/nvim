@@ -226,6 +226,8 @@ end
 -- commands Pls <servername> <key>
 
 M.chdir = function(force)
+  -- TODO: buftype test
+  -- lcd is only need when running ProjectRoot manually
   local cwd_old = vim.fn.getcwd()
   local root = require('project_nvim.project').get_project_root()
   if root then
@@ -233,7 +235,7 @@ M.chdir = function(force)
     vim.notify('[Young] dir: ' .. root)
   end
 
-  -- FIXME: need be implemented in project_nvim
+  -- FIXME: implemented in project_nvim by using patterns_fallback
   -- if not force then
   --   return
   -- end
