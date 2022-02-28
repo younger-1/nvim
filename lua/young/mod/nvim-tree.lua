@@ -38,7 +38,7 @@ M.cfg = {
     'alpha',
     'dashboard',
   },
-  auto_close = true,
+  auto_close = false,
   update_cwd = true,
   -- hijacks new directory buffers when they are opened
   -- disable it if using `vim-dirvish` or `lir.nvim`
