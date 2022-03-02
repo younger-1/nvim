@@ -25,6 +25,8 @@ return {
       diagnostics = {
         globals = {
           'vim',
+          'pp',
+          'gg',
         },
       },
     },
