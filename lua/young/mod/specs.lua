@@ -12,7 +12,7 @@ M.done = function()
       width = 20, -- default 10
       winhl = 'PmenuThumb', -- default 'Pmenu'
       fader = require('specs').linear_fader,
-      resizer = require('specs').shrink_resizer
+      resizer = require('specs').shrink_resizer,
     },
     -- ignore_filetypes = {},
     -- ignore_buftypes = {
