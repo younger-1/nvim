@@ -32,7 +32,7 @@ plugin_loader.once = function()
       end,
     },
     -- snapshot = 'latest',
-    snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils'),
+    snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot'),
   }
 end
 
