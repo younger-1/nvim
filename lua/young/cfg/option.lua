@@ -92,3 +92,16 @@ vim.opt.listchars = {
 -- 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
 -- 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
 vim.cmd [[set matchpairs+=<:>,「:」,『:』,【:】,（:）,《:》,‘:’,“:”,；:。,，:。]]
+
+vim.cmd [[command! TagsUpdate !ctags -R .]]
+-- vim.cmd [[command! Todo grep TODO]]
+
+local o = vim.o
+if vim.fn.executable 'rg' == 1 then
+  o.grepprg = 'rg --vimgrep --no-heading --color=never'
+  o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+elseif vim.fn.executable 'ag' == 1 then
+  o.grepprg = 'ag --vimgrep --nogroup --nocolor'
+elseif vim.fn.executable 'ack' == 1 then
+  o.grepprg = 'ack'
+end

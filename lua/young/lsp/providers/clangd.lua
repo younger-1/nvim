@@ -32,6 +32,8 @@ local opts = {
   --   client.resolved_capabilities.document_formatting = false
   --   custom_attach(client)
   -- end,
+  -- <https://github.com/clangd/clangd/issues/1013>
+  -- semanticHighlighting = true,
 }
 
 return opts
