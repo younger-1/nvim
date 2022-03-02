@@ -115,6 +115,7 @@ M.cfg = {
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = { 'latex' },
+    -- additional_vim_regex_highlighting = true,
     -- custom_captures = {
     --   ['primitive.type'] = 'Keyword',
     --   ['escape.sequence'] = 'Function',
