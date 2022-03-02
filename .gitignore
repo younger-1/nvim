@@ -9,3 +9,5 @@ packer_compiled.lua
 __pycache__/
 
 *.packer
+
+.nlsp-settings/

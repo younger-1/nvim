@@ -78,7 +78,11 @@ M.appearance = {
     },
   },
   line = {
-    { 'RRethy/vim-illuminate', config = require 'plug-config.illuminate', event = 'BufWinEnter' },
+    {
+      'RRethy/vim-illuminate',
+      event = 'BufWinEnter',
+      config = [[require 'young.mod.illuminate']],
+    },
     {
       'edluffy/specs.nvim',
       event = 'BufRead',
@@ -546,7 +550,7 @@ M.code = {
   },
   -- task = {
   --   { 'tpope/vim-dispatch' },
-  --   { 'pianocomposer321/yabs.nvim', config = require 'plug-config.yabs' },
+  --   { 'pianocomposer321/yabs.nvim', config = require 'young.mod.yabs' },
   -- },
 }
 
@@ -555,7 +559,6 @@ M.LSP = {
     { 'neovim/nvim-lspconfig' },
     { 'williamboman/nvim-lsp-installer' },
     -- { "jose-elias-alvarez/null-ls.nvim" },
-    -- { 'MordechaiHadad/nvim-lspmanager', config = require 'plug-config.lspmanager' },
     { 'b0o/SchemaStore.nvim' },
     {
       'ray-x/lsp_signature.nvim',
@@ -680,7 +683,7 @@ M.write = {
       module = 'todo-comments',
       cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       requires = 'nvim-lua/plenary.nvim',
-      config = require 'plug-config.todo-comments',
+      config = [[require 'young.mod.todo-comments']],
     },
   },
   org = {
