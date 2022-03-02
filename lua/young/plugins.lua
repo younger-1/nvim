@@ -676,7 +676,9 @@ M.write = {
   todo = {
     {
       'folke/todo-comments.nvim',
-      event = 'InsertEnter',
+      -- event = 'BufWinEnter',
+      module = 'todo-comments',
+      cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       requires = 'nvim-lua/plenary.nvim',
       config = require 'plug-config.todo-comments',
     },
@@ -748,6 +750,13 @@ M.tool = {
     {
       'wakatime/vim-wakatime',
       event = 'BufRead',
+    },
+    {
+      'glacambre/firenvim',
+      run = function()
+        vim.fn['firenvim#install'](0)
+      end,
+      disable = not is_windows,
     },
   },
 }

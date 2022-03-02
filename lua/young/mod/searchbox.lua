@@ -1,6 +1,7 @@
 local nmap = require('young.key').nmap
 local xmap = require('young.key').xmap
 
+-- TODO: map add excluded filetypes/buftypes like quickfix
 nmap('<C-f>', ':SearchBoxMatchAll<CR>')
 xmap('<C-f>', ':SearchBoxMatchAll visual_mode=true<CR>')
 -- nmap('<C-b>', ':SearchBoxMatchAll exact=true title=" Search 🦝 "<CR>')
