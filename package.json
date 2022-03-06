@@ -153,6 +153,10 @@
         "path": "./snippets/java.json"
       },
       {
+        "language": "json",
+        "path": "./snippets/json.json"
+      },
+      {
         "language": "julia",
         "path": "./snippets/julia.json"
       },
