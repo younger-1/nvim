@@ -529,6 +529,7 @@ M.code = {
       },
     },
     { 'onsails/lspkind-nvim' },
+    { 'rafamadriz/friendly-snippets' },
     -- {
     --   "github/copilot.vim",
     --   requires = { 'hrsh7th/cmp-copilot' },
@@ -762,6 +763,18 @@ M.tool = {
       disable = not is_windows,
     },
   },
+  -- input = {
+  --   {
+  --     'ZSaberLv0/ZFVimIM',
+  --     -- event = 'InsertEnter',
+  --     keys = '<leader>tZ',
+  --     setup = [[require 'young.mod.ZFVimIM']],
+  --     requires = {
+  --       { 'ZSaberLv0/ZFVimJob', after = 'ZFVimIM' },
+  --       { 'ZSaberLv0/ZFVimIM_openapi', after = 'ZFVimJob' },
+  --     },
+  --   },
+  -- }
 }
 
 for _, module in pairs(M) do
