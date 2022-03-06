@@ -1,0 +1,15 @@
+{
+  "simple snippet": {
+    "prefix": "ss",
+    "body": [
+      "\"${1:short discription}\": {",
+      "\t\"prefix\": \"${2:_}\",",
+      "\t\"body\": [",
+      "\t\t\"${0}\"",
+      "\t],",
+      "\t\"description\": \"${3:long discription}\"",
+      "}"
+    ],
+    "description": "Create a simple snippet template"
+  }
+}
