@@ -1,0 +1,44 @@
+{
+  "global": {
+    "prefix": "g",
+    "body": [
+      "_G.${0}"
+    ],
+    "description": "Declare a global variable"
+  },
+  "global assigment": {
+    "prefix": "gg",
+    "body": [
+      "_G.${1:varName} = ${0:value}"
+    ],
+    "description": "Create a global variable"
+  },
+  "pcall require": {
+    "prefix": "pr",
+    "body": [
+      "pcall(require, \"${1:module}\")"
+    ],
+    "description": "Declare a pcall require"
+  },
+  "pcall": {
+    "prefix": "pl",
+    "body": [
+      "pcall(${1:your_function})"
+    ],
+    "description": "Declare a pcall"
+  },
+  "pcall assigment": {
+    "prefix": "pll",
+    "body": [
+      "local ${1:ok}, ${2:module} = pcall(${3:your_function})"
+    ],
+    "description": "Create a pcall assigment"
+  },
+  "pcall require assigment": {
+    "prefix": "plr",
+    "body": [
+      "local ${1:ok}, ${2:module} = pcall(require, \"$2\")"
+    ],
+    "description": "Create a pcall logic"
+  }
+}
