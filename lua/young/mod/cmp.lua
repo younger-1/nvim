@@ -1,5 +1,7 @@
 local luasnip = require 'luasnip'
 
+require('luasnip.loaders.from_vscode').load()
+
 local M = {}
 
 local has_words_before = function()

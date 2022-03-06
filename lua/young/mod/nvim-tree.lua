@@ -72,6 +72,20 @@ M.cfg = {
     dotfiles = false,
     custom = {},
   },
+  actions = {
+    change_dir = {
+      global = false,
+    },
+    open_file = {
+      window_picker = {
+        enable = true,
+        -- exclude = {
+        --   filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
+        --   buftype = { 'nofile', 'terminal', 'help' },
+        -- },
+      },
+    },
+  },
   view = {
     side = 'left',
     hide_root_folder = false,
@@ -87,11 +101,6 @@ M.cfg = {
         { key = '.', action = 'toggle_dotfiles' },
         { key = 'P', action = 'print_path', action_cb = print_node_path },
       },
-    },
-  },
-  actions = {
-    change_dir = {
-      global = false,
     },
   },
 }
