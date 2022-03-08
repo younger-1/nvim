@@ -166,8 +166,9 @@ M.change = {
     },
     {
       'junegunn/vim-easy-align',
-      cmd = 'EasyAlign',
-      config = function()
+      cmd = { 'EasyAlign', 'LiveEasyAlign' },
+      keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
+      setup = function()
         require 'young.mod.easy-align'
       end,
     },
