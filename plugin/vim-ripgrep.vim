@@ -6,7 +6,7 @@
 " | Setting              | Default                   | Details
 " | ---------------------|---------------------------|----------
 " | g:rg_binary          | rg                        | path to rg
-" | g:rg_format          | %f:%l:%c:%m               | value of grepformat 
+" | g:rg_format          | %f:%l:%c:%m               | value of grepformat
 " | g:rg_command         | g:rg_binary --vimgrep     | search command
 " | g:rg_highlight       | false                     | true if you want matches highlighted
 " | g:rg_derive_root     | false                     | true if you want to find project root from cwd
@@ -164,5 +164,5 @@ fun! s:RgShowRoot()
   endif
 endfun
 
-command! -nargs=* -complete=file Rg :call s:Rg(<q-args>)
-command! RgRoot :call s:RgShowRoot()
+command! -nargs=* -complete=file RgSearch :call s:Rg(<q-args>)
+command! RgSearchRoot :call s:RgShowRoot()
