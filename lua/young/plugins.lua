@@ -138,12 +138,6 @@ M.change = {
     { 'tpope/vim-surround' },
     { 'tpope/vim-repeat' },
     { 'tpope/vim-abolish' },
-    {
-      'arthurxavierx/vim-caser',
-      setup = function()
-        vim.g.caser_prefix = ';c'
-      end,
-    },
   },
   pair = {
     {
@@ -153,6 +147,23 @@ M.change = {
         require 'young.mod.autopairs'
       end,
     },
+  },
+  comment = {
+    {
+      'numToStr/Comment.nvim',
+      event = 'BufRead',
+      config = function()
+        require 'young.mod.comment'
+      end,
+    },
+  },
+  other = {
+    {
+      'arthurxavierx/vim-caser',
+      setup = function()
+        vim.g.caser_prefix = ';c'
+      end,
+    },
     {
       'junegunn/vim-easy-align',
       cmd = 'EasyAlign',
@@ -160,8 +171,6 @@ M.change = {
         require 'young.mod.easy-align'
       end,
     },
-  },
-  other = {
     {
       'monaqa/dial.nvim',
       event = 'BufRead',
@@ -539,15 +548,6 @@ M.code = {
     --   --   }
     --   -- end,
     -- },
-  },
-  comment = {
-    {
-      'numToStr/Comment.nvim',
-      event = 'BufRead',
-      config = function()
-        require 'young.mod.comment'
-      end,
-    },
   },
   -- task = {
   --   { 'tpope/vim-dispatch' },
