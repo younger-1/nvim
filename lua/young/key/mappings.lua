@@ -57,9 +57,10 @@ M.keys = {
     -- ['<A-Left>'] = '<C-\\><C-N><C-w>h',
     -- ['<A-Right>'] = '<C-\\><C-N><C-w>l',
 
-    -- Break undo sequence, start new change
-    ['<C-U>'] = '<C-G>u<C-U>',
-    ['<C-W>'] = '<C-G>u<C-W>',
+    -- [nvim-default] Break undo sequence, start new change
+    -- ['<C-U>'] = '<C-G>u<C-U>',
+    -- ['<C-W>'] = '<C-G>u<C-W>',
+
     ['<C-v>'] = '<C-G>u<C-R><C-O>+',
   },
 
@@ -138,15 +139,17 @@ M.keys = {
     ['[e'] = ':lprev<CR>',
     ['<C-e>'] = ':call LocListToggle()<CR>',
 
-    --
-    Y = 'y$',
+    -- [nvim-default]
+    -- Y = 'y$',
+    Q = '@q', -- qq to record, Q to replay
     -- n = 'nzz',
     -- N = 'Nzz',
     ZA = '<cmd>wqa<CR>',
+
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
-    ['<S-CR>'] = '<cmd>wqa<CR>', -- windows terminal not recognize
-    ['<CR>'] = { "(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true } },
+    -- ['<S-CR>'] = '<cmd>wqa<CR>', -- windows terminal not recognize
+    -- ['<CR>'] = { "(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true } },
   },
 
   ---@usage change or add keymappings for visual mode

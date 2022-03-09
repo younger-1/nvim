@@ -7,21 +7,23 @@ local default_options = {
   cmdheight = 1,
   completeopt = { 'menuone', 'noselect' },
   conceallevel = 0, -- so that `` is visible in markdown files
+  hlsearch = true,
+  incsearch = true,
+  inccommand = 'split',
+  ignorecase = true,
+  smartcase = true,
+  fileformats = { 'unix', 'dos', 'mac' },
   fileencoding = 'utf-8', -- the encoding written to a file
+  fileencodings = { 'ucs-bom', 'utf-8', 'utf-16', 'gbk', 'big5', 'gb18030', 'latin1' },
   foldenable = false,
   foldmethod = 'expr', -- folding, set to "expr" for treesitter based folding
   foldexpr = 'nvim_treesitter#foldexpr()', -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
   -- guifont = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
   guifontwide = { 'Sarasa Term SC' },
-  hidden = true, -- required to keep multiple buffers and open multiple buffers
-  inccommand = 'split',
-  hlsearch = true, -- highlight all matches on previous search pattern
-  ignorecase = true, -- ignore case in search patterns
   mouse = '', -- allow the mouse to be used in neovim
   pumheight = 15, -- pop up menu height
   showmode = false, -- we don't need to see things like -- INSERT -- anymore
   showtabline = 2, -- always show tabs
-  smartcase = true, -- smart case
   smartindent = true, -- make indenting smarter again
   splitbelow = true, -- force all horizontal splits to go below current window
   splitright = true, -- force all vertical splits to go to the right of current window
@@ -52,14 +54,12 @@ local default_options = {
   confirm = true,
   showbreak = '↪',
   qftf = '{info -> v:lua.require("young.cfg.quickfix").quickfixtextfunc(info)}',
-  fileencodings = { 'ucs-bom', 'utf-8', 'utf-16', 'gbk', 'big5', 'gb18030', 'latin1' },
-  fileformats = { 'unix', 'dos', 'mac' },
   synmaxcol = 400,
   list = true,
   lazyredraw = true,
   path = '.,,',
   -- TODO:
-  fillchars = 'vert:┃',
+  -- fillchars = 'vert:┃',
 }
 
 for k, v in pairs(default_options) do
@@ -96,12 +96,11 @@ vim.cmd [[set matchpairs+=<:>,「:」,『:』,【:】,（:）,《:》,‘:’,�
 vim.cmd [[command! TagsUpdate !ctags -R .]]
 -- vim.cmd [[command! Todo grep TODO]]
 
-local o = vim.o
-if vim.fn.executable 'rg' == 1 then
-  o.grepprg = 'rg --vimgrep --no-heading --color=never'
-  o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
-elseif vim.fn.executable 'ag' == 1 then
-  o.grepprg = 'ag --vimgrep --nogroup --nocolor'
-elseif vim.fn.executable 'ack' == 1 then
-  o.grepprg = 'ack'
+if vim.loop.exepath 'rg' then
+  vim.o.grepprg = 'rg --vimgrep --no-heading --color=never'
+  vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+elseif vim.loop.exepath 'ag' then
+  vim.o.grepprg = 'ag --vimgrep --nogroup --nocolor'
+-- elseif vim.fn.executable 'ack' == 1 then
+--   vim.o.grepprg = 'ack'
 end
