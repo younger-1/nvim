@@ -19,16 +19,6 @@ M.basic = {
       require('young.mod.filetype').done()
     end,
   },
-  {
-    'itchyny/vim-external',
-    config = function()
-      vim.cmd [[
-        map <Leader>aee <Plug>(external-editor)
-        map <Leader>aen <Plug>(external-explorer)
-        map <Leader>aeb <Plug>(external-browser)
-      ]]
-    end,
-  },
 }
 
 M.theme = {
@@ -93,8 +83,8 @@ M.appearance = {
   },
 }
 
-M.motion = {
-  core = {
+M.edit = {
+  motion = {
     {
       'haya14busa/vim-asterisk',
       config = function()
@@ -115,8 +105,6 @@ M.motion = {
         -- require 'young.mod.lightspeed'
       end,
     },
-  },
-  pair = {
     {
       'andymass/vim-matchup',
       event = 'CursorMoved',
@@ -130,6 +118,21 @@ M.motion = {
     --     require('tabout').setup()
     --   end,
     -- },
+  },
+  -- textobject = {
+  -- },
+  treesitter = {
+    {
+      'nvim-treesitter/nvim-treesitter',
+      branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
+      run = ':TSUpdate',
+      config = function()
+        require('young.mod.treesitter').done()
+      end,
+    },
+    { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    { 'nvim-treesitter/nvim-treesitter-refactor' },
+    { 'nvim-treesitter/playground' },
   },
 }
 
@@ -173,6 +176,13 @@ M.change = {
       end,
     },
     {
+      'mg979/vim-visual-multi',
+      cmd = { 'VMDebug', 'VMLive', 'VMRegisters', 'VMSearch' },
+      setup = function()
+        vim.g.VM_default_mappings = 0
+      end,
+    },
+    {
       'monaqa/dial.nvim',
       event = 'BufRead',
       -- FIXME:
@@ -184,6 +194,40 @@ M.change = {
   },
 }
 
+M.neovim = {
+  profile = {
+    {
+      'dstein64/vim-startuptime',
+      cmd = 'StartupTime',
+      setup = function()
+        vim.g.startuptime_use_blocks = 0
+      end,
+    },
+  },
+  { 'gpanders/editorconfig.nvim' },
+  {
+    'nacro90/numb.nvim',
+    event = 'CmdlineEnter',
+    config = function()
+      require('numb').setup()
+    end,
+  },
+  {
+    'winston0410/range-highlight.nvim',
+    event = 'CmdlineEnter',
+    requires = { { 'winston0410/cmd-parser.nvim', module = 'cmd-parser' } },
+    config = function()
+      require('range-highlight').setup {}
+    end,
+  },
+  {
+    'lambdalisue/suda.vim',
+    config = function()
+      vim.g['suda#prompt'] = '🔑: '
+    end,
+  },
+}
+
 M.BWT = {
   window = {
     {
@@ -192,6 +236,7 @@ M.BWT = {
         require('stabilize').setup {}
       end,
     },
+    { 'dhruvasagar/vim-zoom' },
   },
   -- tab = {},
   quickfix = {
@@ -274,158 +319,6 @@ M.find = {
   },
 }
 
-M.UI = {
-  core = {
-    {
-      'kyazdani42/nvim-tree.lua',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.mod.nvim-tree').done()
-      end,
-    },
-    {
-      'rcarriga/nvim-notify',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.mod.notify').done()
-      end,
-    },
-    {
-      'folke/which-key.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.key.which-key').done()
-      end,
-    },
-    {
-      'folke/trouble.nvim',
-      event = 'BufRead',
-      config = function()
-        require('young.mod.trouble').done()
-      end,
-    },
-    { 'stevearc/dressing.nvim' },
-    -- {
-    --   'nvim-telescope/telescope-ui-select.nvim',
-    --   config = function()
-    --     require("telescope").load_extension("ui-select")
-    --   end,
-    -- },
-    -- { 'sidebar-nvim/sidebar.nvim',
-    --   branch = 'dev',
-    --   config = function()
-    --     require("sidebar-nvim").setup {}
-    --   end,
-    -- },
-  },
-  statusline = {
-    -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
-    {
-      'nvim-lualine/lualine.nvim',
-      config = function()
-        require 'young.mod.lualine'
-      end,
-    },
-    -- {
-    --   'feline-nvim/feline.nvim',
-    --   config = function()
-    --     require 'young.mod.feline'
-    --   end,
-    -- },
-    -- {
-    --   'SmiteshP/nvim-gps',
-    --   requires = 'nvim-treesitter/nvim-treesitter',
-    --   config = function()
-    --     require 'young.mod.gps'
-    --   end,
-    -- },
-  },
-  bufferline = {
-    {
-      'romgrk/barbar.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.mod.barbar').hot()
-      end,
-    },
-  },
-  cmdline = {
-    {
-      'VonHeikemen/fine-cmdline.nvim',
-      requires = { { 'MunifTanjim/nui.nvim' } },
-      -- cmd = 'FineCmdline',
-      event = 'BufRead',
-      config = function()
-        require 'young.mod.fine-cmd'
-      end,
-    },
-    -- {
-    --   'gelguy/wilder.nvim',
-    --   event = 'CmdlineEnter',
-    --   config = function()
-    --     require 'young.mod.wilder'
-    --   end,
-    -- },
-  },
-  terminal = {
-    {
-      'akinsho/toggleterm.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.mod.toggleterm').done()
-      end,
-    },
-  },
-  screen = {
-    {
-      'goolord/alpha-nvim',
-      config = function()
-        -- require('alpha').setup(require('young.mod.alpha.screen').opts)
-        require('young.mod.alpha').done()
-      end,
-    },
-  },
-  other = {
-    -- {
-    --   'wfxr/minimap.vim',
-    --   cmd = { 'MinimapToggle' },
-    --   -- event = 'BufWinEnter',
-    --   config = function()
-    --     require 'young.mod.minimap'
-    --   end,
-    -- },
-    -- {
-    --   'dstein64/nvim-scrollview',
-    --   event = 'BufWinEnter',
-    --   config = function()
-    --     require 'young.mod.scrollview'
-    --   end,
-    -- },
-    {
-      'petertriho/nvim-scrollbar',
-      event = 'BufWinEnter',
-      config = function()
-        require('scrollbar').setup()
-        -- require('scrollbar.handlers.search').setup()
-      end,
-    },
-  },
-}
-
-M.treesitter = {
-  {
-    'nvim-treesitter/nvim-treesitter',
-    branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
-    run = ':TSUpdate',
-    config = function()
-      require('young.mod.treesitter').done()
-    end,
-  },
-  { 'nvim-treesitter/nvim-treesitter-textobjects' },
-  { 'nvim-treesitter/nvim-treesitter-refactor' },
-  { 'nvim-treesitter/playground' },
-}
-
 M.telescope = {
   core = {
     {
@@ -499,6 +392,180 @@ M.telescope = {
       'cljoly/telescope-repo.nvim',
       config = function()
         require('telescope').load_extension 'repo'
+      end,
+    },
+  },
+}
+
+M.git = {
+  {
+    'lewis6991/gitsigns.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    event = 'BufRead',
+    config = function()
+      require('young.mod.gitsigns').done()
+    end,
+  },
+  {
+    'TimUntersberger/neogit',
+    cmd = 'Neogit',
+    module = 'neogit',
+    config = function()
+      require('neogit').setup {}
+    end,
+  },
+  {
+    'tpope/vim-fugitive',
+  },
+  -- {
+  --   'tanvirtin/vgit.nvim',
+  --   event = 'BufWinEnter',
+  --   config = function()
+  --       require('vgit').setup()
+  --   end,
+  --   disable = is_windows,
+  -- },
+  {
+    'nvim-telescope/telescope-github.nvim',
+    config = function()
+      require('telescope').load_extension 'gh'
+    end,
+  },
+}
+
+M.UI = {
+  core = {
+    {
+      'kyazdani42/nvim-tree.lua',
+      event = 'BufWinEnter',
+      config = function()
+        require('young.mod.nvim-tree').done()
+      end,
+    },
+    {
+      'rcarriga/nvim-notify',
+      event = 'BufWinEnter',
+      config = function()
+        require('young.mod.notify').done()
+      end,
+    },
+    {
+      'folke/which-key.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require('young.key.which-key').done()
+      end,
+    },
+    {
+      'folke/trouble.nvim',
+      event = 'BufRead',
+      config = function()
+        require('young.mod.trouble').done()
+      end,
+    },
+    { 'stevearc/dressing.nvim' },
+    -- {
+    --   'nvim-telescope/telescope-ui-select.nvim',
+    --   config = function()
+    --     require("telescope").load_extension("ui-select")
+    --   end,
+    -- },
+    -- { 'sidebar-nvim/sidebar.nvim',
+    --   branch = 'dev',
+    --   config = function()
+    --     require("sidebar-nvim").setup {}
+    --   end,
+    -- },
+  },
+  bufferline = {
+    {
+      'romgrk/barbar.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require('young.mod.barbar').hot()
+      end,
+    },
+  },
+  statusline = {
+    -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
+    {
+      'nvim-lualine/lualine.nvim',
+      config = function()
+        require 'young.mod.lualine'
+      end,
+    },
+    -- {
+    --   'feline-nvim/feline.nvim',
+    --   config = function()
+    --     require 'young.mod.feline'
+    --   end,
+    -- },
+    -- {
+    --   'SmiteshP/nvim-gps',
+    --   requires = 'nvim-treesitter/nvim-treesitter',
+    --   config = function()
+    --     require 'young.mod.gps'
+    --   end,
+    -- },
+  },
+  cmdline = {
+    {
+      'VonHeikemen/fine-cmdline.nvim',
+      requires = { { 'MunifTanjim/nui.nvim' } },
+      -- cmd = 'FineCmdline',
+      event = 'BufRead',
+      config = function()
+        require 'young.mod.fine-cmd'
+      end,
+    },
+    -- {
+    --   'gelguy/wilder.nvim',
+    --   event = 'CmdlineEnter',
+    --   config = function()
+    --     require 'young.mod.wilder'
+    --   end,
+    -- },
+  },
+  terminal = {
+    {
+      'akinsho/toggleterm.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require('young.mod.toggleterm').done()
+      end,
+    },
+  },
+  screen = {
+    {
+      'goolord/alpha-nvim',
+      config = function()
+        -- require('alpha').setup(require('young.mod.alpha.screen').opts)
+        require('young.mod.alpha').done()
+      end,
+    },
+  },
+  other = {
+    -- {
+    --   'wfxr/minimap.vim',
+    --   cmd = { 'MinimapToggle' },
+    --   -- event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.minimap'
+    --   end,
+    -- },
+    -- {
+    --   'dstein64/nvim-scrollview',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.scrollview'
+    --   end,
+    -- },
+    {
+      'petertriho/nvim-scrollbar',
+      event = 'BufWinEnter',
+      config = function()
+        require('scrollbar').setup()
+        -- require('scrollbar.handlers.search').setup()
       end,
     },
   },
@@ -599,73 +666,25 @@ M.LSP = {
   },
 }
 
-M.git = {
-  {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    event = 'BufRead',
-    config = function()
-      require('young.mod.gitsigns').done()
-    end,
-  },
-  {
-    'TimUntersberger/neogit',
-    cmd = 'Neogit',
-    module = 'neogit',
-    config = function()
-      require('neogit').setup {}
-    end,
-  },
-  {
-    'tpope/vim-fugitive',
-  },
-  -- {
-  --   'tanvirtin/vgit.nvim',
-  --   event = 'BufWinEnter',
-  --   config = function()
-  --       require('vgit').setup()
-  --   end,
-  --   disable = is_windows,
-  -- },
-  {
-    'nvim-telescope/telescope-github.nvim',
-    config = function()
-      require('telescope').load_extension 'gh'
-    end,
-  },
-}
-
-M.neovim = {
-  profile = {
+M.lang = {
+  js = {
     {
-      'dstein64/vim-startuptime',
-      cmd = 'StartupTime',
-      setup = function()
-        vim.g.startuptime_use_blocks = 0
+      'vuki656/package-info.nvim',
+      ft = 'json',
+      requires = { { 'MunifTanjim/nui.nvim' } },
+      config = function()
+        require 'young.mod.package-info'
       end,
     },
   },
-  { 'gpanders/editorconfig.nvim' },
-  {
-    'nacro90/numb.nvim',
-    event = 'CmdlineEnter',
-    config = function()
-      require('numb').setup()
-    end,
-  },
-  {
-    'winston0410/range-highlight.nvim',
-    event = 'CmdlineEnter',
-    requires = { { 'winston0410/cmd-parser.nvim', module = 'cmd-parser' } },
-    config = function()
-      require('range-highlight').setup {}
-    end,
-  },
-  {
-    'lambdalisue/suda.vim',
-    config = function()
-      vim.g['suda#prompt'] = '🔑: '
-    end,
+  http = {
+    {
+      'NTBBloodbath/rest.nvim',
+      ft = 'http',
+      config = function()
+        require 'young.mod.rest'
+      end,
+    },
   },
 }
 
@@ -728,29 +747,19 @@ M.write = {
   },
 }
 
-M.lang = {
-  js = {
-    {
-      'vuki656/package-info.nvim',
-      ft = 'json',
-      requires = { { 'MunifTanjim/nui.nvim' } },
-      config = function()
-        require 'young.mod.package-info'
-      end,
-    },
-  },
-  http = {
-    {
-      'NTBBloodbath/rest.nvim',
-      ft = 'http',
-      config = function()
-        require 'young.mod.rest'
-      end,
-    },
-  },
-}
-
 M.tool = {
+  open = {
+    {
+      'itchyny/vim-external',
+      config = function()
+        vim.cmd [[
+          map <Leader>aee <Plug>(external-editor)
+          map <Leader>aen <Plug>(external-explorer)
+          map <Leader>aeb <Plug>(external-browser)
+        ]]
+      end,
+    },
+  },
   website = {
     {
       'wakatime/vim-wakatime',
@@ -809,11 +818,10 @@ M.done = function()
     M.file(),
     M.find(),
     M.git(),
-    M.motion(),
+    M.edit(),
     M.neovim(),
     M.telescope(),
     M.theme(),
-    M.treesitter(),
     M.tool(),
     M.write(),
   }

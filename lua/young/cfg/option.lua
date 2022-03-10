@@ -101,6 +101,6 @@ if vim.loop.exepath 'rg' then
   vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 elseif vim.loop.exepath 'ag' then
   vim.o.grepprg = 'ag --vimgrep --nogroup --nocolor'
--- elseif vim.fn.executable 'ack' == 1 then
---   vim.o.grepprg = 'ack'
+  -- elseif vim.fn.executable 'ack' == 1 then
+  --   vim.o.grepprg = 'ack'
 end
