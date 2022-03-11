@@ -69,6 +69,8 @@ end
 
 vim.opt.shortmess:append 'c'
 
+vim.opt.diffopt:append 'vertical'
+
 vim.cmd 'set whichwrap+=<,>,[,],h,l'
 
 -- vim.cmd [[set listchars=tab:●·,extends:→,precedes:←,trail:■]]
