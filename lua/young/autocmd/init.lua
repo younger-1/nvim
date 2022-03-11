@@ -35,6 +35,10 @@ function M.load_augroups()
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
     },
+    _colorscheme = {
+      -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
+      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- See :h 'pumblend'
+    },
     _formatoptions = {
       {
         'BufWinEnter,BufRead,BufNewFile',
