@@ -102,6 +102,7 @@ local mymappings = {
       n = { '<cmd>set number!<cr>', 'number' },
       r = { '<cmd>set relativenumber!<cr>', 'relativenumber' },
       s = { '<cmd>set spell!<cr>', 'spell' },
+      v = { [[:set ve=<C-R>=&ve == "" ? "all" : ""<cr><cr>]], 'virtualedit' },
       w = { '<cmd>set wrap!<cr>', 'wrap' },
     },
   },
