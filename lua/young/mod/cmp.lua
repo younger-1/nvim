@@ -2,6 +2,7 @@ local luasnip = require 'luasnip'
 
 require('luasnip.loaders.from_vscode').load()
 -- require('luasnip.loaders.from_vscode').load({ paths = { './utils/' } })
+require('luasnip.loaders.from_snipmate').load()
 
 local M = {}
 
