@@ -35,6 +35,7 @@ M.cfg = {
     spacing = 3, -- spacing between columns
   },
   -- hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ', '<Plug>' },
+  hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'lua', '^:', '^ ', '<Plug>', "require'nvim%-treesitter%.textobjects%.move'%.goto_" },
   show_help = true, -- show help message on the command line when the popup is visible
   -- triggers = "auto",
   -- triggers = { "<space>", "," },
