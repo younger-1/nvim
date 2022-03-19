@@ -39,6 +39,11 @@ function _G.pp(...)
   return ...
 end
 
+function _G.pn(obj, n)
+  print(vim.inspect(obj, { depth = n or 1 }))
+  return obj
+end
+
 -- 1. return fancy string
 function _G.ppp(...)
   local objects = {}

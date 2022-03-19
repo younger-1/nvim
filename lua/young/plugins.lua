@@ -30,6 +30,8 @@ M.theme = {
     'sainnhe/edge',
     'sainnhe/everforest',
     'sainnhe/gruvbox-material',
+    'projekt0n/github-nvim-theme',
+    'mvpopuk/inspired-github.vim',
   },
 
   lua = {
