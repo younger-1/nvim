@@ -32,6 +32,7 @@ M.theme = {
     'sainnhe/gruvbox-material',
     'projekt0n/github-nvim-theme',
     'mvpopuk/inspired-github.vim',
+    'EdenEast/nightfox.nvim',
   },
 
   lua = {
@@ -239,6 +240,14 @@ M.BWT = {
       end,
     },
     { 'dhruvasagar/vim-zoom' },
+    {
+      'mrjones2014/smart-splits.nvim',
+      disable = vim.fn.has('nvim-0.7'),
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.smart-splits'
+      end,
+    },
   },
   -- tab = {},
   quickfix = {
