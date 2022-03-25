@@ -242,7 +242,7 @@ M.BWT = {
     { 'dhruvasagar/vim-zoom' },
     {
       'mrjones2014/smart-splits.nvim',
-      disable = vim.fn.has('nvim-0.7'),
+      disable = vim.fn.has 'nvim-0.7',
       event = 'BufWinEnter',
       config = function()
         require 'young.mod.smart-splits'
@@ -445,10 +445,10 @@ M.git = {
     end,
   },
   {
-    "ruifm/gitlinker.nvim",
-    event = "BufRead",
+    'ruifm/gitlinker.nvim',
+    event = 'BufRead',
     config = function()
-      require("young.mod.gitlinker").done()
+      require('young.mod.gitlinker').done()
     end,
   },
 }

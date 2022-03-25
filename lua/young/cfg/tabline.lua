@@ -2,7 +2,7 @@
 -- <https://github.com/kevinhwang91/dotfiles/blob/f2934e85be3abec07531780a61136e28f872c743/nvim/lua/stl.lua>
 
 -- <https://www.reddit.com/r/neovim/comments/thm6qm/how_to_convert_vim_script_to_lua/>
-vim.cmd[[
+vim.cmd [[
 function! Tabline() abort
     let l:line = ''
     let l:current = tabpagenr()

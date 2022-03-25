@@ -20,8 +20,9 @@ local compile_path = join_paths(install_path, 'plugin', 'packer_compiled.lua')
 local function load_plugins()
   require('packer').startup {
     {
-      'wbthomason/packer.nvim',
-      'neovim/nvim-lspconfig',
+      { 'wbthomason/packer.nvim' },
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/nvim-lsp-installer' },
     },
     config = {
       package_root = package_root,
@@ -31,7 +32,8 @@ local function load_plugins()
 end
 
 _G.load_config = function()
-  vim.lsp.set_log_level 'trace'
+  -- vim.lsp.set_log_level 'trace'
+  vim.lsp.set_log_level 'debug'
   if vim.fn.has 'nvim-0.5.1' == 1 then
     require('vim.lsp.log').set_format_func(vim.inspect)
   end
@@ -165,7 +167,7 @@ vim.opt.listchars = {
 -- Mappings
 vim.g.mapleader = ' '
 local function nmap(key, cmd, opts)
-  opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
+  opts = vim.tbl_extend('force', { noremap = true, nowait = true }, opts or {})
   vim.api.nvim_set_keymap('n', key, cmd, opts)
 end
 
@@ -174,6 +176,7 @@ nmap('<leader>w', ':w<CR>')
 nmap('<leader>c', ':bdel<CR>')
 
 nmap('<leader>li', ':LspInfo<CR>')
+nmap('<leader>ll', ':exe "e " .. v:lua.vim.lsp.get_log_path()<CR>')
 
 nmap('<leader>pc', ':PackerCompile<CR>')
 nmap('<leader>ps', ':PackerStatus<CR>')
