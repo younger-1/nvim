@@ -17,6 +17,23 @@
 - [ ] combine range-highlight and numb to a single plugin
 - [ ] Online community collect @cataloge and #tag metadata of plugin to help easily discover functionality/boundary of plugins
 - [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
+- [ ] `Telescope theme` only list installed themes, see <https://github.com/NvChad/extensions/tree/main/lua/telescope/_extensions>
+- [ ] `Telescope terminal` list terminals
+
+```
+map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
+map("n", term_maps.new_vertical, ":execute 'vnew +terminal' | let b:term_type = 'vert' | startinsert <CR>")
+map("n", term_maps.new_window, ":execute 'terminal' | let b:term_type = 'wind' | startinsert <CR>")
+```
+
+```
+insert_nav = {
+  backward = "<C-h>",
+  forward = "<C-l>",
+  next_line = "<C-k>",
+  prev_line = "<C-j>",
+},
+```
 
 ## Problem
 
