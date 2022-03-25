@@ -40,6 +40,8 @@ plugin_loader.recompile = function()
   require_clean 'young.plugins'
 
   plugin_loader.load()
+  -- NOTE:Do I need source_compiled here? No, PackerCompile will do
+  -- plugin_loader.source_compiled()
 
   vim.cmd 'PackerClean'
   vim.cmd 'PackerCompile'
