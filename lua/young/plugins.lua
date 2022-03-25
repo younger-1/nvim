@@ -442,6 +442,13 @@ M.git = {
       require('telescope').load_extension 'gh'
     end,
   },
+  {
+    "ruifm/gitlinker.nvim",
+    event = "BufRead",
+    config = function()
+      require("young.mod.gitlinker").done()
+    end,
+  },
 }
 
 M.UI = {
