@@ -10,11 +10,11 @@ return {
       },
       workspace = {
         library = {
-          vim.fn.expand '$VIMRUNTIME',
-          _G.packer_plugins['lua-dev.nvim'].path,
-          _G.packer_plugins['plenary.nvim'].path,
-          -- _G.packer_plugins['telescope.nvim'].path,
-          -- _G.packer_plugins['nvim-lspconfig'].path,
+          [vim.fn.expand '$VIMRUNTIME'] = true,
+          [_G.packer_plugins['lua-dev.nvim'].path] = true,
+          [_G.packer_plugins['plenary.nvim'].path] = true,
+          -- [_G.packer_plugins['telescope.nvim'].path] = true,
+          -- [_G.packer_plugins['nvim-lspconfig'].path] = true,
         },
         maxPreload = 20000,
         preloadFileSize = 2000,
