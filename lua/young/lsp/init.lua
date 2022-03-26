@@ -3,13 +3,21 @@ local lsp_installer = require 'nvim-lsp-installer'
 
 local M = {}
 
-local custom_servers = {
+local ensure_servers = {
   lua = 'sumneko_lua',
   python = 'pyright',
   -- python = 'pylsp',
-  cpp = 'clangd',
   yaml = 'yamlls',
   json = 'jsonls',
+  --[[
+    Override local installed by using done_ft
+  ]]
+  rust = 'rust_analyzer',
+  -- cpp = 'clangd',
+}
+local local_servers = {
+  rust = 'rust_analyzer',
+  cpp = 'clangd',
 }
 local done_ft = {
   -- python = 1,
@@ -104,11 +112,30 @@ local function get_opts(server_name)
   return default_opts
 end
 
--- manually start the server and don't wait for the usual filetype trigger from lspconfig
-local function buf_try_add(server_name, bufnr)
-  bufnr = bufnr or vim.api.nvim_get_current_buf()
-  require('lspconfig')[server_name].manager.try_add_wrapper(bufnr)
+-- Manually start the server and don't wait for the usual filetype trigger from lspconfig
+-- local function buf_try_add(server_name, bufnr)
+--   bufnr = bufnr or vim.api.nvim_get_current_buf()
+--   require('lspconfig')[server_name].manager.try_add_wrapper(bufnr)
+-- end
+
+---Attaches this server to all current opened buffers
+local function attach_buffers(server_name)
+  local lsp_server = require('lspconfig')[server_name]
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    -- print(string.format("Attaching server=%s to bufnr=%s", server_name, bufnr))
+    lsp_server.manager.try_add_wrapper(bufnr)
+  end
 end
+
+-- local function install_ensure_servers()
+--   for _, name in pairs(ensure_servers) do
+--     local server_is_found, server = lsp_installer.get_server(name)
+--     if server_is_found and not server:is_installed() then
+--       vim.notify("[young] Installing " .. name)
+--       server:install()
+--     end
+--   end
+-- end
 
 M.once = function()
   -- vim.lsp.set_log_level("debug")
@@ -139,9 +166,11 @@ M.once = function()
 
   -- Register a handler that will be called for all installed servers.
   lsp_installer.on_server_ready(function(server)
+    -- One server for one filetype
     for _, ft in ipairs(server:get_supported_filetypes()) do
-      if custom_servers[ft] then
-        if server.name ~= custom_servers[ft] then
+      -- TODO: when ensure_servers = { javascript = 'tsserver', typescript = 'denols' }, neither tsserver nor denols will be used
+      if ensure_servers[ft] then
+        if server.name ~= ensure_servers[ft] then
           return
         else
           done_ft[ft] = 1
@@ -159,14 +188,14 @@ M.once = function()
   -- Or vim.schedule, because on_server_ready is async
   vim.defer_fn(function()
     -- gg(done_ft)
-    for ft, server_name in pairs(custom_servers) do
+    for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
       -- local fts = require('lspconfig')[server_name].filetypes
       -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
       if not done_ft[ft] then
         local opts = get_opts(server_name)
         pcall(function()
           require('lspconfig')[server_name].setup(opts)
-          buf_try_add(server_name)
+          attach_buffers(server_name)
         end)
       end
     end
