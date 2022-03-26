@@ -6,6 +6,7 @@
 
 - [ ] `yj.telescope`, `M.tele/M.cfg`, `local cfg`
 - [ ] once ice hot done
+- [ ] mod: completion, editor, lang, tool, ui
 - [ ] hl cursorline
 - [ ] `yo` <==> require('young')
 - [ ] vim restore text deleted by C-u or C-w in cmdline
@@ -19,6 +20,7 @@
 - [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
 - [ ] `Telescope theme` only list installed themes, see <https://github.com/NvChad/extensions/tree/main/lua/telescope/_extensions>
 - [ ] `Telescope terminal` list terminals
+- [ ] local/machine/per-user settings, eg. colorscheme, background, font
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

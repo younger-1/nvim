@@ -9,12 +9,8 @@ local ensure_servers = {
   -- python = 'pylsp',
   yaml = 'yamlls',
   json = 'jsonls',
-  --[[
-    Override local installed by using done_ft
-  ]]
-  rust = 'rust_analyzer',
-  -- cpp = 'clangd',
 }
+-- NOTE: servers installed by lsp_installer can override local_servers
 local local_servers = {
   rust = 'rust_analyzer',
   cpp = 'clangd',
@@ -169,12 +165,10 @@ M.once = function()
     -- One server for one filetype
     for _, ft in ipairs(server:get_supported_filetypes()) do
       -- TODO: when ensure_servers = { javascript = 'tsserver', typescript = 'denols' }, neither tsserver nor denols will be used
-      if ensure_servers[ft] then
-        if server.name ~= ensure_servers[ft] then
-          return
-        else
-          done_ft[ft] = 1
-        end
+      if ensure_servers[ft] and server.name ~= ensure_servers[ft] then
+        return
+      else
+        done_ft[ft] = 1
       end
     end
 
