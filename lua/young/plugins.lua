@@ -266,7 +266,9 @@ M.BWT = {
 M.file = {
   project = {
     {
-      'ahmedkhalf/project.nvim',
+      -- 'ahmedkhalf/project.nvim',
+      'younger-1/project.nvim',
+      branch = 'add-patterns-fallback',
       config = function()
         require 'young.mod.project'
       end,
@@ -718,9 +720,9 @@ M.write = {
   todo = {
     {
       'folke/todo-comments.nvim',
-      -- event = 'BufWinEnter',
-      module = 'todo-comments',
-      cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
+      event = 'BufWinEnter',
+      -- module = 'todo-comments',
+      -- cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       requires = 'nvim-lua/plenary.nvim',
       config = [[require 'young.mod.todo-comments']],
     },
