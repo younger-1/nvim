@@ -27,7 +27,7 @@ M.cfg = {
     -- 'elixir',
     -- 'elm',
     -- 'erlang',
-    -- 'fennel',
+    'fennel',
     -- 'fish',
     -- 'foam',
     -- 'fortran',

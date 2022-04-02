@@ -713,6 +713,7 @@ M.lang = {
     {
       'eraserhd/parinfer-rust',
       run = 'cargo build --release',
+      ft = { 'clojure', 'scheme', 'lisp', 'fennel', 'racket', 'fennel', 'hy' },
     },
   },
 }
