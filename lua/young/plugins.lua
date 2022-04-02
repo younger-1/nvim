@@ -30,9 +30,6 @@ M.theme = {
     'sainnhe/edge',
     'sainnhe/everforest',
     'sainnhe/gruvbox-material',
-    'projekt0n/github-nvim-theme',
-    'mvpopuk/inspired-github.vim',
-    'EdenEast/nightfox.nvim',
   },
 
   lua = {
@@ -45,6 +42,9 @@ M.theme = {
     'tanvirtin/monokai.nvim',
     'rebelot/kanagawa.nvim',
     'ellisonleao/gruvbox.nvim',
+    'projekt0n/github-nvim-theme',
+    'mvpopuk/inspired-github.vim',
+    'EdenEast/nightfox.nvim',
   },
 }
 
@@ -706,6 +706,15 @@ M.lang = {
       end,
     },
   },
+  lisp = {
+    -- 'kovisoft/paredit',
+    -- 'kovisoft/slimv',
+    -- 'gpanders/nvim-parinfer',
+    {
+      'eraserhd/parinfer-rust',
+      run = 'cargo build --release',
+    },
+  },
 }
 
 M.write = {
@@ -809,11 +818,15 @@ M.tool = {
 
 for _, module in pairs(M) do
   setmetatable(module, {
-    __call = function(t)
+    __call = function(t, ...)
       local plugs = {}
       for key, item in pairs(module) do
         if type(key) == 'number' then
           plugs[#plugs + 1] = item
+        elseif #{...} > 0 then
+          if vim.tbl_contains({...}, key) then
+            utils.append_to_list(plugs, item)
+          end
         else
           utils.append_to_list(plugs, item)
         end
@@ -835,10 +848,11 @@ M.done = function()
     M.basic(),
     M.change(),
     M.code(),
+    M.edit(),
     M.file(),
     M.find(),
     M.git(),
-    M.edit(),
+    M.lang('lisp'),
     M.neovim(),
     M.telescope(),
     M.theme(),
