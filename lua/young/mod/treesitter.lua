@@ -66,7 +66,7 @@ M.cfg = {
     'markdown',
     -- 'ninja',
     -- 'nix',
-    -- 'norg',
+    'norg',
     -- 'ocaml',
     -- 'ocaml_interface',
     -- 'ocamllex',

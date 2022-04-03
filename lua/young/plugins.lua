@@ -830,8 +830,8 @@ for _, module in pairs(M) do
       for key, item in pairs(module) do
         if type(key) == 'number' then
           plugs[#plugs + 1] = item
-        elseif #{...} > 0 then
-          if vim.tbl_contains({...}, key) then
+        elseif #{ ... } > 0 then
+          if vim.tbl_contains({ ... }, key) then
             utils.append_to_list(plugs, item)
           end
         else
@@ -859,7 +859,7 @@ M.done = function()
     M.file(),
     M.find(),
     M.git(),
-    M.lang('lisp'),
+    M.lang 'lisp',
     M.neovim(),
     M.telescope(),
     M.theme(),

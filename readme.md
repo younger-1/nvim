@@ -20,7 +20,8 @@
 - [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
 - [ ] `Telescope theme` only list installed themes, see <https://github.com/NvChad/extensions/tree/main/lua/telescope/_extensions>
 - [ ] `Telescope terminal` list terminals
-- [ ] local/machine/per-user settings, eg. colorscheme, background, font
+- [ ] local/machine/per-user settings, eg. colorscheme, background, font and even modules of plugins like M.lang('lisp', 'java')
+- [ ] enable syntax and keybind for filetype of `packer`, just like buffer used by `PackerUpdate`
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
