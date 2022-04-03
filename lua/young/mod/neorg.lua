@@ -4,29 +4,30 @@ require('neorg').setup {
     ['core.defaults'] = {}, -- Load all the default modules
     ['core.keybinds'] = {
       config = {
-        default_keybinds = false, -- Generate the default keybinds
+        default_keybinds = true, -- Generate the default keybinds
+        neorg_leader = "<leader>o" -- This is the default if unspecified
       },
     },
     ['core.norg.concealer'] = {}, -- Allows for use of icons
-    ['core.norg.dirman'] = {
-      config = {
-        workspaces = {
-          main = '~/neorg',
-          gtd = '~/gtd',
-        },
-      },
-    },
     ['core.norg.completion'] = {
       config = {
         engine = 'nvim-cmp',
       },
     },
-    ['core.gtd.base'] = {
-      config = {
-        workspace = 'gtd', -- assign the workspace,
-        exclude = { 'file_to_exclude.norg' }, -- Optional: all excluded files from the workspace are not part of the gtd workflow
-      },
-    },
+    -- ['core.norg.dirman'] = {
+    --   config = {
+    --     workspaces = {
+    --       main = '~/neorg',
+    --       gtd = '~/gtd',
+    --     },
+    --   },
+    -- },
+    -- ['core.gtd.base'] = {
+    --   config = {
+    --     workspace = 'gtd', -- assign the workspace,
+    --     exclude = { 'file_to_exclude.norg' }, -- Optional: all excluded files from the workspace are not part of the gtd workflow
+    --   },
+    -- },
   },
 }
 

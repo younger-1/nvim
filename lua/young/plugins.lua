@@ -45,6 +45,12 @@ M.theme = {
     'projekt0n/github-nvim-theme',
     'mvpopuk/inspired-github.vim',
     'EdenEast/nightfox.nvim',
+    {
+      'marko-cerovac/material.nvim',
+      setup = function()
+        vim.g.material_style = 'palenight'
+      end,
+    },
   },
 }
 
