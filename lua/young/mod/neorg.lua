@@ -1,3 +1,23 @@
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+
+-- These two are optional and provide syntax highlighting
+-- for Neorg tables and the @document.meta tag
+parser_configs.norg_meta = {
+  install_info = {
+    url = 'https://github.com/nvim-neorg/tree-sitter-norg-meta',
+    files = { 'src/parser.c' },
+    branch = 'main',
+  },
+}
+
+parser_configs.norg_table = {
+  install_info = {
+    url = 'https://github.com/nvim-neorg/tree-sitter-norg-table',
+    files = { 'src/parser.c' },
+    branch = 'main',
+  },
+}
+
 require('neorg').setup {
   -- Tell Neorg what modules to load
   load = {
@@ -5,7 +25,7 @@ require('neorg').setup {
     ['core.keybinds'] = {
       config = {
         default_keybinds = true, -- Generate the default keybinds
-        neorg_leader = "<leader>o" -- This is the default if unspecified
+        neorg_leader = '<leader>o', -- This is the default if unspecified
       },
     },
     ['core.norg.concealer'] = {}, -- Allows for use of icons
@@ -47,7 +67,6 @@ neorg_callbacks.on_event('core.keybinds.events.enable_keybinds', function(_, key
       { '<CR><CR>', 'core.norg.esupports.goto_link' },
     },
     i = {
-
       -- Telescope integration
       { '<C-l>', 'core.integrations.telescope.insert_link' },
     },

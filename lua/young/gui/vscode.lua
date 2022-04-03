@@ -19,5 +19,10 @@
 -- vim.api.nvim_set_keymap('n', "<S-Tab>", ":Tabprev<CR>", { silent = true, noremap = true })
 
 -- Open which-key
-vim.api.nvim_set_keymap('n', "<Space>", ":call VSCodeNotify('whichkey.show')<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap('x', "<Space>", ":<C-u>call <SID>openWhichKeyInVisualMode()<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap('n', '<Space>', ":call VSCodeNotify('whichkey.show')<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap(
+  'x',
+  '<Space>',
+  ':<C-u>call <SID>openWhichKeyInVisualMode()<CR>',
+  { silent = true, noremap = true }
+)
