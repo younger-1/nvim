@@ -50,13 +50,23 @@ local M = require 'young.autocmd'
 --   end
 -- end
 
+M.conditional_document_highlight = function(id)
+  local client_ok, method_supported = pcall(function()
+    return vim.lsp.get_client_by_id(id).resolved_capabilities.document_highlight
+  end)
+  if not client_ok or not method_supported then
+    return
+  end
+  vim.lsp.buf.document_highlight()
+end
+
 function M.enable_lsp_document_highlight(client_id)
   M.define_augroups({
     lsp_document_highlight = {
       {
         'CursorHold',
         '<buffer>',
-        string.format("lua require('lvim.lsp.utils').conditional_document_highlight(%d)", client_id),
+        string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
       },
       {
         'CursorMoved',
@@ -71,26 +81,26 @@ function M.disable_lsp_document_highlight()
   M.disable_augroup 'lsp_document_highlight'
 end
 
-function M.enable_code_lens_refresh()
-  M.define_augroups({
-    lsp_code_lens_refresh = {
-      {
-        'InsertLeave ',
-        '<buffer>',
-        'lua vim.lsp.codelens.refresh()',
-      },
-      {
-        'InsertLeave ',
-        '<buffer>',
-        'lua vim.lsp.codelens.display()',
-      },
-    },
-  }, true)
-end
+-- function M.enable_code_lens_refresh()
+--   M.define_augroups({
+--     lsp_code_lens_refresh = {
+--       {
+--         'InsertLeave ',
+--         '<buffer>',
+--         'lua vim.lsp.codelens.refresh()',
+--       },
+--       {
+--         'InsertLeave ',
+--         '<buffer>',
+--         'lua vim.lsp.codelens.display()',
+--       },
+--     },
+--   }, true)
+-- end
 
-function M.disable_code_lens_refresh()
-  M.disable_augroup 'lsp_code_lens_refresh'
-end
+-- function M.disable_code_lens_refresh()
+--   M.disable_augroup 'lsp_code_lens_refresh'
+-- end
 
 function M.enable_transparent_mode()
   vim.cmd 'au ColorScheme * hi Normal ctermbg=none guibg=none'

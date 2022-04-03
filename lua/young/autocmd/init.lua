@@ -105,7 +105,7 @@ function M.define_augroups(definitions, buffer)
       vim.cmd [[autocmd!]]
     end
 
-    for _, def in pairs(definition) do
+    for _, def in ipairs(definition) do
       local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
       vim.cmd(command)
     end
@@ -121,9 +121,7 @@ M.build = function(augroups, enable)
     local group_name = augroup_prefix .. name
 
     M['enable_' .. name] = function()
-      M.define_augroups {
-        [group_name] = autocmds,
-      }
+      M.define_augroups({ [group_name] = autocmds }, autocmds.buffer == true)
     end
 
     M['disable_' .. name] = function()
@@ -157,6 +155,32 @@ M.done = function()
 
   M.build({
     print_ascii = { { 'CursorHold', '*', ':normal! ga' } },
+    code_lens_refresh = {
+      buffer = true,
+      {
+        'InsertLeave',
+        '<buffer>',
+        'lua vim.lsp.codelens.refresh()',
+      },
+      {
+        'InsertLeave',
+        '<buffer>',
+        'lua vim.lsp.codelens.display()',
+      },
+    },
+    -- lsp_document_highlight = {
+    --   buffer = true,
+    --   {
+    --     'CursorHold',
+    --     '<buffer>',
+    --     string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
+    --   },
+    --   {
+    --     'CursorMoved',
+    --     '<buffer>',
+    --     'lua vim.lsp.buf.clear_references()',
+    --   },
+    -- },
   }, false)
 
   require 'young.autocmd.core'
