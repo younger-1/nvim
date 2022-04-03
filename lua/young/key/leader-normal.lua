@@ -217,9 +217,15 @@ local mappings = {
       r = { '<cmd>Telescope lsp_references<cr>', 'Ref' },
     },
     ['<C-e>'] = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Diagnostics LocList' },
+    ['['] = { '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Incoming Calls' },
+    [']'] = { '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Outgoing Calls' },
+    a = { '<cmd>Telescope lsp_code_actions<cr>', 'Code Action' },
     A = { '<cmd>Telescope lsp_range_code_actions<cr>', 'Range Action' },
+    c = { '<cmd>CodeActionMenu<cr>', 'Code Action' },
     C = { '<cmd>CmpStatus<cr>', 'Cmp Status' },
+    d = { '<cmd>Telescope diagnostics bufnr=0<cr>', 'Document Diagnostics' },
     D = { '<cmd>Telescope diagnostics<cr>', 'Workspace Diagnostics' },
+    f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
     F = {
       function()
         vim.lsp.buf.formatting_sync()
@@ -227,15 +233,8 @@ local mappings = {
       end,
       'Format & Save',
     },
-    I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
-    S = { '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', 'Workspace Symbols' },
-    ['['] = { '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Incoming Calls' },
-    [']'] = { '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Outgoing Calls' },
-    a = { '<cmd>Telescope lsp_code_actions<cr>', 'Code Action' },
-    c = { '<cmd>CodeActionMenu<cr>', 'Code Action' },
-    d = { '<cmd>Telescope diagnostics bufnr=0<cr>', 'Document Diagnostics' },
-    f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
     i = { '<cmd>LspInfo<cr>', 'Info' },
+    I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
     j = {
       '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
       'Next Diagnostic',
@@ -256,6 +255,7 @@ local mappings = {
     q = { '', 'which_key_ignore' },
     r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document Symbols' },
+    S = { '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', 'Workspace Symbols' },
     v = { '<cmd>Vista!!<cr>', 'Vista' },
     w = {
       w = { '<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>', 'Workspace folders' },
