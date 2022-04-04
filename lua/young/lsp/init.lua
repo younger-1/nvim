@@ -21,19 +21,20 @@ local done_ft = {
   -- cpp = 1,
 }
 
-local function get_opts(server_name)
-  local ok, opts = pcall(require, modbase .. '.providers.' .. server_name)
-  if ok then
-    -- if opts.on_attach then
-    --   local provider_on_attact = opts.on_attach
-    --   opts.on_attach = function(c, b)
-    --     common_opts.on_attach(c, b)
-    --     provider_on_attact(c, b)
-    --   end
-    -- end
-    return vim.tbl_deep_extend('force', common_opts, opts)
+M.get_opts = function(server_name)
+  local ok, server_opts = pcall(require, modbase .. '.providers.' .. server_name)
+  if not ok then
+    return common_opts
   end
-  return common_opts
+
+  if server_opts.on_attach_callback then
+    server_opts.on_attach = function(client, bufnr)
+      common_opts.on_attach(client, bufnr)
+      server_opts.on_attach_callback(client, bufnr)
+    end
+  end
+
+  return vim.tbl_deep_extend('force', common_opts, server_opts)
 end
 
 -- Manually start the server and don't wait for the usual filetype trigger from lspconfig
@@ -109,7 +110,7 @@ M.once = function()
       return
     end
 
-    local opts = get_opts(server.name)
+    local opts = M.get_opts(server.name)
     -- This setup() function is exactly the same as lspconfig's setup function.
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     server:setup(opts)
@@ -122,7 +123,7 @@ M.once = function()
       -- local fts = require('lspconfig')[server_name].filetypes
       -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
       if not done_ft[ft] then
-        local opts = get_opts(server_name)
+        local opts = M.get_opts(server_name)
         pcall(function()
           require('lspconfig')[server_name].setup(opts)
           attach_buffers(server_name)
