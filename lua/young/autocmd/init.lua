@@ -38,6 +38,7 @@ function M.load_augroups()
     _colorscheme = {
       -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
       { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- See :h 'pumblend'
+      { 'ColorScheme', '*', 'lua require("young.tools").lsp_ref()' }, -- See :h 'pumblend'
     },
     _formatoptions = {
       {

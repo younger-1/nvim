@@ -257,4 +257,20 @@ M.rnu = function()
   vim.o.rnu = rnu
 end
 
+M.lsp_ref = function()
+  if vim.o.bg == 'dark' then
+    vim.cmd [[
+      hi LspReferenceText cterm=bold ctermbg=red guibg=DarkCyan
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkGreen
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=DarkRed
+    ]]
+  else
+    vim.cmd [[
+      hi LspReferenceText cterm=bold ctermbg=red guibg=LightCyan
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightGreen
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightRed
+    ]]
+  end
+end
+
 return M
