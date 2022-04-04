@@ -214,6 +214,3 @@ local vmappings = {
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
 
-vim.cmd [[setlocal shiftwidth=2]]
-vim.cmd [[setlocal tabstop=2]]
-

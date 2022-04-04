@@ -12,7 +12,7 @@ require('nvim-lightbulb').setup {
     priority = 10,
   },
   float = {
-    enabled = true,
+    enabled = false,
     -- Text to show in the popup float
     text = '💡',
     -- Available keys for window options:
