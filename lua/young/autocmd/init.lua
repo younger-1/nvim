@@ -150,22 +150,18 @@ M.done = function()
   local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)
   M.build {
     auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
-    format_on_save = { { 'BufWritePre', format_opts.pattern, fmt_cmd } },
   }
 
   M.build({
     print_ascii = { { 'CursorHold', '*', ':normal! ga' } },
+    format_on_save = { { 'BufWritePre', format_opts.pattern, fmt_cmd } },
     code_lens_refresh = {
       buffer = true,
       {
         'InsertLeave',
+        -- 'InsertLeave,BufEnter',
         '<buffer>',
         'lua vim.lsp.codelens.refresh()',
-      },
-      {
-        'InsertLeave',
-        '<buffer>',
-        'lua vim.lsp.codelens.display()',
       },
     },
     -- lsp_document_highlight = {
