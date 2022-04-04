@@ -27,7 +27,7 @@ local function get_opts(server_name)
     -- if opts.on_attach then
     --   local provider_on_attact = opts.on_attach
     --   opts.on_attach = function(c, b)
-    --     default_opts.on_attach(c, b)
+    --     common_opts.on_attach(c, b)
     --     provider_on_attact(c, b)
     --   end
     -- end
@@ -105,10 +105,18 @@ M.once = function()
       end
     end
 
+    if server.name == 'jdtls' and vim.g.young_jdtls then
+      require('young.autocmd').define_augroups {
+        _jdtls_lsp = {
+          { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
+        },
+      }
+      return
+    end
+
+    local opts = get_opts(server.name)
     -- This setup() function is exactly the same as lspconfig's setup function.
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    local opts = get_opts(server.name)
-    -- local opts = default_opts
     server:setup(opts)
   end)
 
