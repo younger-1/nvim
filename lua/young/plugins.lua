@@ -79,6 +79,8 @@ M.appearance = {
   line = {
     {
       'RRethy/vim-illuminate',
+      disable = require('young.lsp.config').document_highlight,
+      -- opt = true,
       event = 'BufWinEnter',
       config = [[require 'young.mod.illuminate']],
     },

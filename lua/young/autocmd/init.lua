@@ -164,22 +164,23 @@ M.done = function()
         'lua vim.lsp.codelens.refresh()',
       },
     },
-    -- lsp_document_highlight = {
-    --   buffer = true,
-    --   {
-    --     'CursorHold',
-    --     '<buffer>',
-    --     string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
-    --   },
-    --   {
-    --     'CursorMoved',
-    --     '<buffer>',
-    --     'lua vim.lsp.buf.clear_references()',
-    --   },
-    -- },
+    lsp_document_highlight = {
+      buffer = true,
+      {
+        'CursorHold',
+        '<buffer>',
+        -- string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
+        'lua vim.lsp.buf.document_highlight()'
+      },
+      {
+        'CursorMoved',
+        '<buffer>',
+        'lua vim.lsp.buf.clear_references()',
+      },
+    },
   }, false)
 
-  require 'young.autocmd.core'
+  -- require 'young.autocmd.core'
 end
 
 -- return setmetatable(M, { __index = require 'young.autocmd.core' })
