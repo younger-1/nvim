@@ -728,6 +728,9 @@ M.lang = {
     {
       'mfussenegger/nvim-jdtls',
       ft = 'java',
+      setup = function()
+        vim.g.young_jdtls = true
+      end,
     },
   },
 }
