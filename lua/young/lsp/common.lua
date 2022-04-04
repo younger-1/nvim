@@ -5,9 +5,19 @@ local autocmd = require 'young.autocmd'
 
 local function lsp_highlight_document(client)
   if lsp_cfg.document_highlight == false then
-    return -- we don't need further
+    return
   end
-  autocmd.enable_lsp_document_highlight(client.id)
+
+  local client_ok, method_supported = pcall(function()
+    return vim.lsp.get_client_by_id(client.id).resolved_capabilities.document_highlight
+  end)
+  if not client_ok or not method_supported then
+    return
+  end
+
+  if client_ok and method_supported then
+    autocmd.enable_lsp_document_highlight()
+  end
 end
 
 local function lsp_code_lens_refresh(client)
@@ -45,7 +55,7 @@ local function add_lsp_buffer_keybindings(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  -- lsp_highlight_document(client)
+  lsp_highlight_document(client)
   lsp_code_lens_refresh(client)
   add_lsp_buffer_keybindings(bufnr)
   -- require("lsp_signature").on_attach {
