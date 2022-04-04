@@ -722,6 +722,12 @@ M.lang = {
       ft = { 'clojure', 'scheme', 'lisp', 'fennel', 'racket', 'fennel', 'hy' },
     },
   },
+  java = {
+    {
+      'mfussenegger/nvim-jdtls',
+      ft = 'java',
+    },
+  },
 }
 
 M.write = {
@@ -859,7 +865,7 @@ M.done = function()
     M.file(),
     M.find(),
     M.git(),
-    M.lang 'lisp',
+    M.lang('lisp', 'java'),
     M.neovim(),
     M.telescope(),
     M.theme(),
