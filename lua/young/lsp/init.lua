@@ -67,11 +67,6 @@ M.once = function()
   --   require('vim.lsp.log').set_format_func(vim.inspect)
   -- end
   vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
-  vim.cmd [[
-    hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-    hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-    hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-  ]]
 
   -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
   local lspconfig_win = require 'lspconfig.ui.windows'
