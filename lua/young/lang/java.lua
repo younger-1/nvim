@@ -124,9 +124,18 @@ M.setup = function()
   })
 
   config.settings = {
-    -- ['java.format.settings.url'] = home .. '/.config/nvim/language-servers/java-google-formatter.xml',
-    ['java.format.settings.profile'] = 'GoogleStyle',
+    -- ['java.format.settings.url'] = home .. '/.config/nvim/.java-google-style.xml',
+    -- ['java.format.settings.profile'] = 'GoogleStyle',
     java = {
+      format = {
+        -- insertSpaces = true,
+        -- tabSize = 4, -- FIXME: Not working
+        comments = { enabled = false },
+        settings = {
+          profile = "GoogleStyle",
+          url = home .. '/.config/nvim/.java-google-style.xml',
+        },
+      },
       signatureHelp = { enabled = true },
       contentProvider = { preferred = 'fernflower' },
       completion = {

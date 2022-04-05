@@ -12,5 +12,5 @@ setlocal path=.,src/main/java/**,src/test/java/**,**/src/main/java/**,**/src/tes
 setlocal include=^\s*import
 setlocal includeexpr=substitute(v:fname,'\\.','/','g')
 
-" setlocal shiftwidth=2
-" setlocal tabstop=2
+setlocal shiftwidth=4
+setlocal tabstop=4
