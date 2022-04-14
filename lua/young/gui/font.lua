@@ -46,6 +46,10 @@ end
 M.get = function(name, size)
   name = name or M.current.name
   size = size or M.current.size
+  if not M.fonts[name] then
+    vim.notify('[young]: ' .. name .. ' is not a valid font')
+    return M.fonts[M.fallback.name], size
+  end
   return M.fonts[name], size
 end
 

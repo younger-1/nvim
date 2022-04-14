@@ -75,7 +75,7 @@ end
 M.config = function()
   M.once()
   -- M.hot()
-  font.once('delu_l', 16)
+  font.once('delu', 16)
   gmap.toggle_fullscreen = M.toggle_fullscreen
   gmap.adjust_transparency = M.adjust_transparency
   gmap.switch_effect = M.switch_effect
