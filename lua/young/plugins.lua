@@ -717,12 +717,15 @@ M.lang = {
   lisp = {
     -- 'kovisoft/paredit',
     -- 'kovisoft/slimv',
-    -- 'gpanders/nvim-parinfer',
     {
-      'eraserhd/parinfer-rust',
-      run = 'cargo build --release',
-      ft = { 'clojure', 'scheme', 'lisp', 'fennel', 'racket', 'fennel', 'hy' },
+      'gpanders/nvim-parinfer',
+      ft = { 'clojure', 'scheme', 'lisp', 'racket', 'hy', 'fennel', 'janet', 'carp', 'wast', 'yuck' },
     },
+    -- {
+    --   'eraserhd/parinfer-rust',
+    --   run = 'cargo build --release',
+    --   ft = { 'clojure', 'scheme', 'lisp', 'fennel', 'racket', 'fennel', 'hy' },
+    -- },
   },
   java = {
     {
