@@ -26,8 +26,9 @@ function M.load_augroups()
       {
         'BufWinEnter',
         '*',
-        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
+        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
       },
+      { 'FocusLost', '*', 'silent! wa' },
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
       { 'InsertEnter', '*', 'lua require("young.tools").nornu()' },
       { 'InsertLeave', '*', 'lua require("young.tools").rnu()' },

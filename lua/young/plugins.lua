@@ -45,6 +45,7 @@ M.theme = {
     'projekt0n/github-nvim-theme',
     'mvpopuk/inspired-github.vim',
     'EdenEast/nightfox.nvim',
+    'Mofiqul/dracula.nvim',
     {
       'marko-cerovac/material.nvim',
       setup = function()

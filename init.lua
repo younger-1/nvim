@@ -13,7 +13,7 @@ require('young.cfg').done()
 
 require('young.plugin-loader').done()
 
-vim.cmd 'colorscheme monokai'
+vim.cmd 'colorscheme dracula'
 
 require('young.lsp').done()
 
