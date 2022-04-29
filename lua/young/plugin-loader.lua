@@ -31,7 +31,7 @@ plugin_loader.once = function()
         return require('packer.util').float { border = 'double' }
       end,
     },
-    -- snapshot = 'latest',
+    snapshot = 'default.json',
     snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot'),
   }
 end
