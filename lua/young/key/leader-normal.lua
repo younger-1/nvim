@@ -275,6 +275,7 @@ local mappings = {
     r = { "<cmd>lua require('young.plugin-loader').recompile()<cr>", 'Re-compile' },
     s = { '<cmd>PackerStatus<cr>', 'Status' },
     u = { '<cmd>PackerUpdate<cr>', 'Update' },
+    n = { '<cmd>lua require("young.plugin-loader").snapshot()<cr>', 'Snapshot' },
   },
   q = { '<cmd>q!<cr>', 'Quit' },
   r = {
