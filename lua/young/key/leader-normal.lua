@@ -216,7 +216,7 @@ local mappings = {
       i = { '<cmd>Telescope lsp_implementations<cr>', 'Impl' },
       r = { '<cmd>Telescope lsp_references<cr>', 'Ref' },
     },
-    ['<C-e>'] = { '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', 'Diagnostics LocList' },
+    ['<C-e>'] = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'Diagnostics LocList' },
     ['['] = { '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Incoming Calls' },
     [']'] = { '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Outgoing Calls' },
     a = { '<cmd>Telescope lsp_code_actions<cr>', 'Code Action' },
@@ -236,11 +236,11 @@ local mappings = {
     i = { '<cmd>LspInfo<cr>', 'Info' },
     I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
     j = {
-      '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
+      '<cmd>lua vim.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
       'Next Diagnostic',
     },
     k = {
-      '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
+      '<cmd>lua vim.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>',
       'Prev Diagnostic',
     },
     l = { '<cmd>lua vim.lsp.codelens.run()<cr>', 'CodeLens Action' },
