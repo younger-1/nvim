@@ -24,8 +24,8 @@ assert(3)
 local func = loadstring [[local a = 4]]
 func()
 
-print(loadstring [[1 + 4]])
-assert(loadstring [[1 + 4]])
+-- print(loadstring [[1 + 4]])
+-- assert(loadstring [[1 + 4]])
 
 -- executing the function return by loadstring
 local a = loadstring [[return 6]]()
@@ -168,3 +168,6 @@ print(output)
 -- [[debug]]
 local init_path = debug.getinfo(1, 'S').source:sub(2)
 print('[debug]: ' .. init_path)
+
+local line = debug.getinfo(1, 'l').currentline
+print('[debug]: ' .. line)

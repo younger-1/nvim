@@ -14,6 +14,7 @@ end
 M.done = function()
   local cmp = require 'cmp'
 
+  -- TODO: move to icons
   local icons = {
     Class = ' ',
     Color = ' ',
@@ -46,7 +47,40 @@ M.done = function()
     -- Variable = " ",
     Variable = '',
   }
+
+  -- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
   cmp.setup {
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'nvim_lua' },
+      { name = 'path' },
+      { name = 'buffer' },
+      { name = 'calc' },
+      { name = 'emoji' },
+      { name = 'luasnip' },
+      { name = 'treesitter' },
+      --
+      { name = 'cmp_git' },
+      { name = 'cmp_tabnine' },
+      { name = 'copilot' },
+      { name = 'crates' },
+    },
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
+    window = {
+      --  { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    -- view = {
+    --   entries = 'native'
+    -- },
+    experimental = {
+      ghost_text = true,
+    },
     formatting = {
       -- format = function(entry, vim_item)
       --   vim_item.kind = icons[vim_item.kind]
@@ -116,31 +150,6 @@ M.done = function()
         'i',
         's',
       }),
-    },
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
-    documentation = {
-      -- border = 'single',
-      border = 'rounded',
-      -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    },
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'nvim_lua' },
-      { name = 'path' },
-      { name = 'buffer' },
-      { name = 'calc' },
-      { name = 'emoji' },
-      { name = 'luasnip' },
-      { name = 'treesitter' },
-      --
-      { name = 'cmp_git' },
-      { name = 'cmp_tabnine' },
-      { name = 'copilot' },
-      { name = 'crates' },
     },
   }
 

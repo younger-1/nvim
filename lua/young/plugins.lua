@@ -1,13 +1,14 @@
 local utils = require 'young.utils'
 local M = {}
+local mods = {}
 
-setmetatable(M, {
+setmetatable(mods, {
   __index = function(t, k)
     error(k .. ' is not a valid module section!')
   end,
 })
 
-M.basic = {
+mods.basic = {
   { 'wbthomason/packer.nvim' },
   { 'lewis6991/impatient.nvim' },
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
@@ -21,7 +22,7 @@ M.basic = {
   },
 }
 
-M.theme = {
+mods.theme = {
   -- { 'rktjmp/lush.nvim' },
 
   vim = {
@@ -55,7 +56,7 @@ M.theme = {
   },
 }
 
-M.appearance = {
+mods.appearance = {
   icon = {
     { 'kyazdani42/nvim-web-devicons' },
   },
@@ -95,7 +96,7 @@ M.appearance = {
   },
 }
 
-M.edit = {
+mods.edit = {
   motion = {
     {
       'haya14busa/vim-asterisk',
@@ -114,7 +115,7 @@ M.edit = {
       'ggandor/lightspeed.nvim',
       event = 'BufWinEnter',
       config = function()
-        -- require 'young.mod.lightspeed'
+        require 'young.mod.lightspeed'
       end,
     },
     {
@@ -148,7 +149,7 @@ M.edit = {
   },
 }
 
-M.change = {
+mods.change = {
   core = {
     { 'tpope/vim-surround' },
     { 'tpope/vim-repeat' },
@@ -206,7 +207,7 @@ M.change = {
   },
 }
 
-M.neovim = {
+mods.neovim = {
   profile = {
     {
       'dstein64/vim-startuptime',
@@ -240,7 +241,7 @@ M.neovim = {
   },
 }
 
-M.BWT = {
+mods.BWT = {
   window = {
     {
       'luukvbaal/stabilize.nvim',
@@ -272,7 +273,7 @@ M.BWT = {
   },
 }
 
-M.file = {
+mods.file = {
   project = {
     {
       -- 'ahmedkhalf/project.nvim',
@@ -310,7 +311,7 @@ M.file = {
   },
 }
 
-M.find = {
+mods.find = {
   core = {
     {
       'windwp/nvim-spectre',
@@ -341,7 +342,7 @@ M.find = {
   },
 }
 
-M.telescope = {
+mods.telescope = {
   core = {
     {
       'nvim-telescope/telescope.nvim',
@@ -419,7 +420,7 @@ M.telescope = {
   },
 }
 
-M.git = {
+mods.git = {
   {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
@@ -462,7 +463,7 @@ M.git = {
   },
 }
 
-M.UI = {
+mods.UI = {
   core = {
     {
       'kyazdani42/nvim-tree.lua',
@@ -600,7 +601,7 @@ M.UI = {
   },
 }
 
-M.code = {
+mods.code = {
   completion = {
     {
       'hrsh7th/nvim-cmp',
@@ -652,7 +653,7 @@ M.code = {
   -- },
 }
 
-M.LSP = {
+mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
     { 'williamboman/nvim-lsp-installer' },
@@ -695,7 +696,7 @@ M.LSP = {
   },
 }
 
-M.lang = {
+mods.lang = {
   js = {
     {
       'vuki656/package-info.nvim',
@@ -739,7 +740,7 @@ M.lang = {
   },
 }
 
-M.write = {
+mods.write = {
   core = {
     {
       'crispgm/telescope-heading.nvim',
@@ -798,7 +799,7 @@ M.write = {
   },
 }
 
-M.tool = {
+mods.tool = {
   open = {
     {
       'itchyny/vim-external',
@@ -838,49 +839,67 @@ M.tool = {
   -- }
 }
 
-for _, module in pairs(M) do
-  setmetatable(module, {
-    __call = function(t, ...)
-      local plugs = {}
-      for key, item in pairs(module) do
-        if type(key) == 'number' then
-          plugs[#plugs + 1] = item
-        elseif #{ ... } > 0 then
-          if vim.tbl_contains({ ... }, key) then
-            utils.append_to_list(plugs, item)
-          end
-        else
-          utils.append_to_list(plugs, item)
-        end
+local to_plugs = function(t, ...)
+  local plugs = {}
+  for key, item in pairs(t) do
+    if type(key) == 'number' then
+      plugs[#plugs + 1] = item
+    elseif #{ ... } > 0 then
+      if vim.tbl_contains({ ... }, key) then
+        utils.append_to_list(plugs, item)
       end
-      if #plugs == 1 then
-        return unpack(plugs) -- avoid return { { "foo" } } to packer
-      end
-      return plugs
-    end,
-  })
+    else
+      utils.append_to_list(plugs, item)
+    end
+  end
+  if #plugs == 1 then
+    return unpack(plugs) -- avoid return { { "foo" } } to packer
+  end
+  return plugs
 end
 
+for _, mod in pairs(mods) do
+  setmetatable(mod, { __call = to_plugs })
+end
+
+M.mods = mods
+
 M.done = function()
-  return {
-    M.BWT(),
-    M.LSP(),
-    M.UI(),
-    M.appearance(),
-    M.basic(),
-    M.change(),
-    M.code(),
-    M.edit(),
-    M.file(),
-    M.find(),
-    M.git(),
-    M.lang('lisp', 'java'),
-    M.neovim(),
-    M.telescope(),
-    M.theme(),
-    M.tool(),
-    M.write(),
+  M.plugins = {
+    mods.BWT(),
+    mods.LSP(),
+    mods.UI(),
+    mods.appearance(),
+    mods.basic(),
+    mods.change(),
+    mods.code(),
+    mods.edit(),
+    mods.file(),
+    mods.find(),
+    mods.git(),
+    mods.lang('lisp', 'java'),
+    mods.neovim(),
+    mods.telescope(),
+    mods.theme(),
+    mods.tool(),
+    mods.write(),
   }
+  return M.plugins
+end
+
+M.pins = function()
+  local pin_plugins = {
+    mods.LSP(),
+    mods.code(),
+    mods.edit(),
+    mods.telescope(),
+  }
+
+  if #pin_plugins == 1 then
+    pin_plugins = unpack(pin_plugins)  -- avoid return { { "foo", "bar" } }
+  end
+
+  return pin_plugins
 end
 
 return M

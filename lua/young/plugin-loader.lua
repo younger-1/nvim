@@ -9,6 +9,7 @@ local runtime_dir = vim.fn.stdpath 'data'
 local config_dir = vim.fn.stdpath 'config'
 local install_path = join_paths(runtime_dir, 'site', 'pack', 'packer', 'start', 'packer.nvim')
 local compile_path = join_paths(config_dir, 'lua', 'young', 'packer_compiled.lua')
+local snapshot_name = 'packer-lock.json'
 
 local _, packer = pcall(require, 'packer')
 
@@ -31,7 +32,8 @@ plugin_loader.once = function()
         return require('packer.util').float { border = 'double' }
       end,
     },
-    snapshot = 'default.json',
+    -- snapshot = 'default.json',
+    -- snapshot = snapshot_name,
     snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot'),
   }
 end
@@ -52,6 +54,7 @@ plugin_loader.load = function()
   local plugins = require('young.plugins').done()
   -- Log:debug "loading plugins configuration"
   local status_ok, _ = xpcall(function()
+    packer.reset()
     packer.startup(function(use)
       for _, plugin in ipairs(plugins) do
         use(plugin)
@@ -85,6 +88,38 @@ plugin_loader.source_compiled = function()
   -- To use impatient
   require 'young.packer_compiled'
   -- dofile(compile_path)
+end
+
+plugin_loader.get_pins = function()
+  local short_names = {}
+
+  local function flatten(spec)
+    local spec_type = type(spec)
+    if spec_type == 'string' then
+      spec = { spec }
+    end
+    if spec_type == 'table' and #spec > 1 then
+      for _, sp in ipairs(spec) do
+        flatten(sp)
+      end
+      return
+    end
+
+    short_names[#short_names + 1] = require 'packer.util'.get_plugin_short_name(spec)
+  end
+
+  local pin_plugins = require('young.plugins').pins()
+  -- local pin_plugins = {
+  --   { 'a/b', 'c/d' },
+  --   { {'e/f'}, {'n/m'} },
+  -- }
+  flatten(pin_plugins)
+
+  return short_names
+end
+
+plugin_loader.snapshot = function()
+  packer.snapshot(snapshot_name, unpack(plugin_loader.get_pins()))
 end
 
 plugin_loader.done = function()
