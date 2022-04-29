@@ -90,30 +90,38 @@ plugin_loader.source_compiled = function()
   -- dofile(compile_path)
 end
 
-plugin_loader.get_pins = function()
-  local short_names = {}
+plugin_loader.flatten_plugin = function(spec)
+  local list = {}
 
-  local function flatten(spec)
-    local spec_type = type(spec)
-    if spec_type == 'string' then
-      spec = { spec }
-    end
-    if spec_type == 'table' and #spec > 1 then
-      for _, sp in ipairs(spec) do
-        flatten(sp)
+  local function flatten(x)
+    if type(x) == 'table' and (#x > 1 or type(x[1]) == 'table') then
+      for _, xx in ipairs(x) do
+        flatten(xx)
       end
       return
     end
 
-    short_names[#short_names + 1] = require 'packer.util'.get_plugin_short_name(spec)
+    list[#list + 1] = x
   end
 
+  flatten(spec)
+  return list
+end
+
+plugin_loader.get_pins = function()
   local pin_plugins = require('young.plugins').pins()
   -- local pin_plugins = {
   --   { 'a/b', 'c/d' },
   --   { {'e/f'}, {'n/m'} },
   -- }
-  flatten(pin_plugins)
+  pin_plugins = vim.tbl_flatten(pin_plugins)
+
+  local get_short = function(name)
+    -- return name:match "/(%S*)"
+    return require('packer.util').get_plugin_short_name { name }
+  end
+
+  local short_names = vim.tbl_map(get_short, pin_plugins)
 
   return short_names
 end
