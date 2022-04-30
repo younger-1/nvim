@@ -252,7 +252,7 @@ mods.BWT = {
     { 'dhruvasagar/vim-zoom' },
     {
       'mrjones2014/smart-splits.nvim',
-      disable = vim.fn.has 'nvim-0.7',
+      disable = not vim.fn.has 'nvim-0.7',
       event = 'BufWinEnter',
       config = function()
         require 'young.mod.smart-splits'
