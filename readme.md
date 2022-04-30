@@ -22,6 +22,7 @@
 - [ ] `Telescope terminal` list terminals
 - [ ] local/machine/per-user settings, eg. colorscheme, background, font and even modules of plugins like M.lang('lisp', 'java')
 - [ ] enable syntax and keybind for filetype of `packer`, just like buffer used by `PackerUpdate`
+- [ ] config for lspkind-nvim
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

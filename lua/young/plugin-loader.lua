@@ -34,7 +34,7 @@ plugin_loader.once = function()
       end,
     },
     -- snapshot = 'default.json',
-    -- snapshot = snapshot_name,
+    snapshot = snapshot_name,
     snapshot_path = snapshot_path,
   }
 end
