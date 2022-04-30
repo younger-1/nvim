@@ -131,6 +131,10 @@ plugin_loader.snapshot = function()
   packer.snapshot(snapshot_name, unpack(plugin_loader.get_pins()))
 end
 
+plugin_loader.rollback = function()
+  packer.rollback(snapshot_name, unpack(plugin_loader.get_pins()))
+end
+
 plugin_loader.snapshot_hook = function()
   -- TODO:not doautocmd for packer.snapshot yet
   local tmpfile = vim.fn.tempname()
