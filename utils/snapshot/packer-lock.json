@@ -1,1 +1,101 @@
-{"lsp_signature.nvim": {"commit": "f7c308e"}, "nvim-treesitter-textobjects": {"commit": "e23fc8a"}, "telescope-zf-native.nvim": {"commit": "dabcdff"}, "luv-vimdocs": {"commit": "fb04e10"}, "friendly-snippets": {"commit": "ad07b28"}, "lua-dev.nvim": {"commit": "a0ee777"}, "fidget.nvim": {"commit": "cbe0db4"}, "nvim-lsp-installer": {"commit": "08b764c"}, "nvim-lspconfig": {"commit": "3d1baa8"}, "nvim-luaref": {"commit": "9cd3ed5"}, "telescope-repo.nvim": {"commit": "c429695"}, "telescope-command-palette.nvim": {"commit": "1944d63"}, "nvim-treesitter-refactor": {"commit": "0dc8069"}, "nvim-code-action-menu": {"commit": "b3671ef"}, "telescope-zoxide": {"commit": "b51b7f4"}, "playground": {"commit": "9df82a2"}, "telescope-packer.nvim": {"commit": "b3cdbdf"}, "vim-matchup": {"commit": "7fd8806"}, "nvim-neoclip.lua": {"commit": "d859891"}, "vim-wordmotion": {"commit": "0d810cc"}, "telescope-frecency.nvim": {"commit": "979a6f3"}, "SchemaStore.nvim": {"commit": "7cb75a0"}, "nvim-lightbulb": {"commit": "29ca814"}, "telescope-symbols.nvim": {"commit": "d2d7d6b"}, "nvim-cmp": {"commit": "74284cf"}, "lspkind-nvim": {"commit": "93e98a0"}, "telescope-env.nvim": {"commit": "5c04e1d"}, "lightspeed.nvim": {"commit": "e53a14b"}, "nvim-treesitter": {"commit": "18c558fd"}, "vim-asterisk": {"commit": "77e9706"}, "telescope.nvim": {"commit": "567ec85"}, "telescope-bookmarks.nvim": {"commit": "d02bbc0"}, "telescope-file-browser.nvim": {"commit": "d06fe1d"}}
+{
+  "SchemaStore.nvim": {
+    "commit": "7cb75a0"
+  },
+  "fidget.nvim": {
+    "commit": "cbe0db4"
+  },
+  "friendly-snippets": {
+    "commit": "ad07b28"
+  },
+  "lightspeed.nvim": {
+    "commit": "e53a14b"
+  },
+  "lsp_signature.nvim": {
+    "commit": "f7c308e"
+  },
+  "lspkind-nvim": {
+    "commit": "93e98a0"
+  },
+  "lua-dev.nvim": {
+    "commit": "a0ee777"
+  },
+  "luv-vimdocs": {
+    "commit": "fb04e10"
+  },
+  "nvim-cmp": {
+    "commit": "74284cf"
+  },
+  "nvim-code-action-menu": {
+    "commit": "b3671ef"
+  },
+  "nvim-lightbulb": {
+    "commit": "29ca814"
+  },
+  "nvim-lsp-installer": {
+    "commit": "08b764c"
+  },
+  "nvim-lspconfig": {
+    "commit": "3d1baa8"
+  },
+  "nvim-luaref": {
+    "commit": "9cd3ed5"
+  },
+  "nvim-neoclip.lua": {
+    "commit": "d859891"
+  },
+  "nvim-treesitter": {
+    "commit": "18c558fd"
+  },
+  "nvim-treesitter-refactor": {
+    "commit": "0dc8069"
+  },
+  "nvim-treesitter-textobjects": {
+    "commit": "e23fc8a"
+  },
+  "playground": {
+    "commit": "9df82a2"
+  },
+  "telescope-bookmarks.nvim": {
+    "commit": "d02bbc0"
+  },
+  "telescope-command-palette.nvim": {
+    "commit": "1944d63"
+  },
+  "telescope-env.nvim": {
+    "commit": "5c04e1d"
+  },
+  "telescope-file-browser.nvim": {
+    "commit": "d06fe1d"
+  },
+  "telescope-frecency.nvim": {
+    "commit": "979a6f3"
+  },
+  "telescope-packer.nvim": {
+    "commit": "b3cdbdf"
+  },
+  "telescope-repo.nvim": {
+    "commit": "c429695"
+  },
+  "telescope-symbols.nvim": {
+    "commit": "d2d7d6b"
+  },
+  "telescope-zf-native.nvim": {
+    "commit": "dabcdff"
+  },
+  "telescope-zoxide": {
+    "commit": "b51b7f4"
+  },
+  "telescope.nvim": {
+    "commit": "567ec85"
+  },
+  "vim-asterisk": {
+    "commit": "77e9706"
+  },
+  "vim-matchup": {
+    "commit": "7fd8806"
+  },
+  "vim-wordmotion": {
+    "commit": "0d810cc"
+  }
+}
