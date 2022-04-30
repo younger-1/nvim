@@ -254,10 +254,19 @@ mods.BWT = {
       'mrjones2014/smart-splits.nvim',
       disable = not vim.fn.has 'nvim-0.7',
       event = 'BufWinEnter',
+      -- module = 'smart-splits',
       config = function()
         require 'young.mod.smart-splits'
       end,
     },
+    {
+      's1n7ax/nvim-window-picker',
+      event = 'BufWinEnter',
+      -- module = 'window-picker',
+      config = function()
+        require 'young.mod.window-picker'
+      end,
+    }
   },
   -- tab = {},
   quickfix = {
