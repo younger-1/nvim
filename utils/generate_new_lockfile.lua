@@ -58,7 +58,7 @@ local plugins_list = {}
 
 local completed = 0
 
-local function write_lockfile(verbose)
+local function write_lockfile(write)
   local default_plugins = {}
   local active_jobs = {}
 
@@ -103,8 +103,10 @@ local function write_lockfile(verbose)
     return completed == #active_jobs
   end)
 
-  if verbose then
-    print(vim.inspect(plugins_list))
+  print(vim.inspect(plugins_list))
+
+  if not write then
+    return
   end
 
   local fd = assert(io.open(sp, "w"))
@@ -113,4 +115,5 @@ local function write_lockfile(verbose)
 end
 
 write_lockfile()
+
 vim.cmd "q"

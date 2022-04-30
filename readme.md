@@ -122,7 +122,7 @@ May be useful:
 |     Change effect     | `<A-BS>`  |
 |    Toggle ligature    | `<A-DEL>` |
 
-## Structure
+## Performance
 
 ❯ hyperfine --min-runs=20 "nvim +qa" "nvim --headless +qa"
 
@@ -133,6 +133,13 @@ Benchmark 1: nvim +qa
 Benchmark 2: nvim --headless +qa
   Time (mean ± σ):     222.3 ms ±  13.4 ms    [User: 114.1 ms, System: 48.3 ms]
   Range (min … max):   198.1 ms … 252.9 ms    20 runs
+
+```sh
+# get latest remote commit of plugins
+nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
+```
+
+## Structure
 
 ```
  nvim

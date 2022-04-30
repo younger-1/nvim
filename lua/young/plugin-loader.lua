@@ -134,9 +134,14 @@ end
 plugin_loader.snapshot_hook = function()
   -- TODO:not doautocmd for packer.snapshot yet
   local tmpfile = vim.fn.tempname()
-  vim.fn.system("jq . " .. join_paths(snapshot_path, snapshot_name) .. " --sort-keys > " .. tmpfile)
-  vim.fn.writefile(vim.fn.readfile(tmpfile), join_paths(snapshot_path, snapshot_name))
-  vim.fn.delete(tmpfile)
+  local snapfile = join_paths(snapshot_path, snapshot_name)
+
+  -- vim.fn.system("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
+  -- vim.fn.writefile(vim.fn.readfile(tmpfile), snapfile)
+  -- vim.fn.delete(tmpfile)
+
+  os.execute("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
+  os.rename(tmpfile, snapfile)
 end
 
 plugin_loader.done = function()
