@@ -10,6 +10,7 @@ local config_dir = vim.fn.stdpath 'config'
 local install_path = join_paths(runtime_dir, 'site', 'pack', 'packer', 'start', 'packer.nvim')
 local compile_path = join_paths(config_dir, 'lua', 'young', 'packer_compiled.lua')
 local snapshot_name = 'packer-lock.json'
+local snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot')
 
 local _, packer = pcall(require, 'packer')
 
@@ -34,7 +35,7 @@ plugin_loader.once = function()
     },
     -- snapshot = 'default.json',
     -- snapshot = snapshot_name,
-    snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot'),
+    snapshot_path = snapshot_path,
   }
 end
 
@@ -128,6 +129,14 @@ end
 
 plugin_loader.snapshot = function()
   packer.snapshot(snapshot_name, unpack(plugin_loader.get_pins()))
+end
+
+plugin_loader.snapshot_hook = function()
+  -- TODO:not doautocmd for packer.snapshot yet
+  local tmpfile = vim.fn.tempname()
+  vim.fn.system("jq . " .. join_paths(snapshot_path, snapshot_name) .. " --sort-keys > " .. tmpfile)
+  vim.fn.writefile(vim.fn.readfile(tmpfile), join_paths(snapshot_path, snapshot_name))
+  vim.fn.delete(tmpfile)
 end
 
 plugin_loader.done = function()
