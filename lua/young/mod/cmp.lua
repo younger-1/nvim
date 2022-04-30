@@ -1,3 +1,5 @@
+local cmp = require 'cmp'
+local cmapping = cmp.mapping
 local luasnip = require 'luasnip'
 
 require('luasnip.loaders.from_vscode').load()
@@ -6,14 +8,7 @@ require('luasnip.loaders.from_snipmate').load()
 
 local M = {}
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
-end
-
 M.done = function()
-  local cmp = require 'cmp'
-
   -- TODO: move to icons
   local icons = {
     Class = ' ',
@@ -60,7 +55,6 @@ M.done = function()
       { name = 'luasnip' },
       { name = 'treesitter' },
       --
-      { name = 'cmp_git' },
       { name = 'cmp_tabnine' },
       { name = 'copilot' },
       { name = 'crates' },
@@ -71,9 +65,13 @@ M.done = function()
       end,
     },
     window = {
-      --  { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      -- completion = cmp.config.window.bordered(),
+      completion = {
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      },
+      documentation = {
+        border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+      },
     },
     -- view = {
     --   entries = 'native'
@@ -112,25 +110,26 @@ M.done = function()
         },
       },
     },
+    -- mapping = cmapping.preset.insert {
     mapping = {
-      ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-      ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      -- ['<C-y>'] = cmp.config.disable, -- `cmp.config.disable` will remove the default `<C-y>` mapping.
-      -- ['<C-e>'] = cmp.mapping({
-      --   i = cmp.mapping.abort(),
-      --   c = cmp.mapping.close(),
-      -- }),
-      ['<CR>'] = cmp.mapping.confirm(),
-      ['<Tab>'] = cmp.mapping(function(fallback)
+      ['<C-j>'] = cmapping(cmapping.select_next_item(), { 'i', 'c' }),
+      ['<C-k>'] = cmapping(cmapping.select_prev_item(), { 'i', 'c' }),
+      ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
+      ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
+      ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmapping(cmapping.confirm({ select = true }), { 'i', 'c' }),
+      ['<C-e>'] = {
+        i = cmapping.abort(),
+        c = cmapping.close(),
+      },
+      ['<CR>'] = cmapping.confirm { select = true },
+      ['<Tab>'] = cmapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
+        elseif luasnip.expandable() then
+          luasnip.expand()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
         else
           fallback()
         end
@@ -138,7 +137,7 @@ M.done = function()
         'i',
         's',
       }),
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
+      ['<S-Tab>'] = cmapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
@@ -150,24 +149,67 @@ M.done = function()
         'i',
         's',
       }),
+      ['<C-x><C-h>'] = cmapping.complete({
+        config = {
+          sources = {
+            { name = 'luasnip' }
+          }
+        }
+      }),
+      -- ['<C-x><C-g>'] = cmapping.complete({}),
+      -- ['<C-x><C-m>'] = cmapping.complete({}),
+      -- ['<C-x><C-b>'] = cmapping.complete({}),
+      -- ['<C-x>h'] = cmapping.complete({}),
+      -- ['<C-x>j'] = cmapping.complete({}),
+      -- ['<C-x>k'] = cmapping.complete({}),
+      -- ['<C-x>l'] = cmapping.complete({}),
     },
   }
 
-  -- Use cmdline & path source for ':'
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  local cmdline_map = {
+    ['<Tab>'] = {
+      c = cmapping.select_next_item(),
+    },
+    ['<S-Tab>'] = {
+      c = cmapping.select_prev_item(),
+    },
+  }
+  -- local cmdline_map = cmp.mapping.preset.cmdline {
+  --   ['<C-n>'] = {
+  --     c = function(fallback) fallback() end,
+  --   },
+  --   ['<C-p>'] = {
+  --     c = function(fallback) fallback() end,
+  --   },
+  -- }
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
+    mapping = cmdline_map,
     sources = {
       { name = 'path' },
       { name = 'cmdline' },
     },
   })
 
-  -- Use buffer source for `/`
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
+    mapping = cmdline_map,
     sources = {
       { name = 'buffer' },
     },
   })
   cmp.setup.cmdline('?', {
+    mapping = cmdline_map,
     sources = {
       { name = 'buffer' },
     },
