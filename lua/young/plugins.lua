@@ -647,10 +647,27 @@ mods.code = {
     --   -- end,
     -- },
   },
-  -- task = {
-  --   { 'tpope/vim-dispatch' },
-  --   { 'pianocomposer321/yabs.nvim', config = require 'young.mod.yabs' },
-  -- },
+  task = {
+    -- { 'tpope/vim-dispatch' },
+    -- { 'pianocomposer321/yabs.nvim', config = require 'young.mod.yabs' },
+    -- {
+    --   'skywind3000/asynctasks.vim',
+    --   cmd = { 'AsyncTask' },
+    --   config = function()
+    --     vim.g.asyncrun_open = 25
+    --     vim.g.asyncrun_bell = 1
+    --     vim.g.asyncrun_rootmarks = { '.svn', '.git', '.root', '_darcs', 'build.xml' }
+    --     vim.g.asynctasks_term_pos = 'floaterm'
+    --     vim.g.asynctasks_term_reuse = 0
+    --   end,
+    --   requires = {
+    --     {
+    --       'skywind3000/asyncrun.vim',
+    --       opt = true,
+    --     }
+    --   },
+    -- },
+  },
 }
 
 mods.LSP = {
@@ -890,6 +907,7 @@ end
 M.pins = function()
   local pin_plugins = {
     mods.LSP(),
+    mods.UI(),
     mods.code(),
     mods.edit(),
     mods.telescope(),

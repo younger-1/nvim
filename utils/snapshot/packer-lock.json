@@ -2,8 +2,20 @@
   "SchemaStore.nvim": {
     "commit": "7cb75a0"
   },
+  "alpha-nvim": {
+    "commit": "4781fcf"
+  },
+  "barbar.nvim": {
+    "commit": "be65945"
+  },
+  "dressing.nvim": {
+    "commit": "f68a91a"
+  },
   "fidget.nvim": {
     "commit": "cbe0db4"
+  },
+  "fine-cmdline.nvim": {
+    "commit": "4087c41"
   },
   "friendly-snippets": {
     "commit": "ad07b28"
@@ -19,6 +31,9 @@
   },
   "lua-dev.nvim": {
     "commit": "a0ee777"
+  },
+  "lualine.nvim": {
+    "commit": "dfac736"
   },
   "luv-vimdocs": {
     "commit": "fb04e10"
@@ -44,8 +59,17 @@
   "nvim-neoclip.lua": {
     "commit": "d859891"
   },
+  "nvim-notify": {
+    "commit": "6f298f2"
+  },
+  "nvim-scrollbar": {
+    "commit": "5f24970"
+  },
+  "nvim-tree.lua": {
+    "commit": "fd2332a"
+  },
   "nvim-treesitter": {
-    "commit": "18c558fd"
+    "commit": "18c558f"
   },
   "nvim-treesitter-refactor": {
     "commit": "0dc8069"
@@ -89,6 +113,12 @@
   "telescope.nvim": {
     "commit": "567ec85"
   },
+  "toggleterm.nvim": {
+    "commit": "5733b24"
+  },
+  "trouble.nvim": {
+    "commit": "691d490"
+  },
   "vim-asterisk": {
     "commit": "77e9706"
   },
@@ -97,5 +127,8 @@
   },
   "vim-wordmotion": {
     "commit": "0d810cc"
+  },
+  "which-key.nvim": {
+    "commit": "a3c19ec"
   }
 }
