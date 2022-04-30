@@ -12,37 +12,37 @@
     "commit": "f68a91a"
   },
   "fidget.nvim": {
-    "commit": "cbe0db4"
+    "commit": "9566831"
   },
   "fine-cmdline.nvim": {
     "commit": "4087c41"
   },
   "friendly-snippets": {
-    "commit": "ad07b28"
+    "commit": "6e0881a"
   },
   "lightspeed.nvim": {
-    "commit": "e53a14b"
+    "commit": "cfde2b2"
   },
   "lsp_signature.nvim": {
     "commit": "f7c308e"
   },
   "lspkind-nvim": {
-    "commit": "93e98a0"
+    "commit": "57e5b5d"
   },
   "lua-dev.nvim": {
     "commit": "a0ee777"
   },
   "lualine.nvim": {
-    "commit": "dfac736"
+    "commit": "030eb62"
   },
   "luv-vimdocs": {
-    "commit": "fb04e10"
+    "commit": "d1e34cb"
   },
   "nvim-cmp": {
     "commit": "74284cf"
   },
   "nvim-code-action-menu": {
-    "commit": "b3671ef"
+    "commit": "a864a79"
   },
   "nvim-lightbulb": {
     "commit": "29ca814"
@@ -51,13 +51,13 @@
     "commit": "08b764c"
   },
   "nvim-lspconfig": {
-    "commit": "3d1baa8"
+    "commit": "21102d5"
   },
   "nvim-luaref": {
     "commit": "9cd3ed5"
   },
   "nvim-neoclip.lua": {
-    "commit": "d859891"
+    "commit": "f3ff164"
   },
   "nvim-notify": {
     "commit": "6f298f2"
@@ -66,10 +66,10 @@
     "commit": "5f24970"
   },
   "nvim-tree.lua": {
-    "commit": "fd2332a"
+    "commit": "4288981"
   },
   "nvim-treesitter": {
-    "commit": "18c558f"
+    "commit": "1f508ff"
   },
   "nvim-treesitter-refactor": {
     "commit": "0dc8069"
@@ -81,7 +81,7 @@
     "commit": "9df82a2"
   },
   "telescope-bookmarks.nvim": {
-    "commit": "d02bbc0"
+    "commit": "75debe6"
   },
   "telescope-command-palette.nvim": {
     "commit": "1944d63"
@@ -96,22 +96,22 @@
     "commit": "979a6f3"
   },
   "telescope-packer.nvim": {
-    "commit": "b3cdbdf"
+    "commit": "56f3255"
   },
   "telescope-repo.nvim": {
-    "commit": "c429695"
+    "commit": "baa1767"
   },
   "telescope-symbols.nvim": {
-    "commit": "d2d7d6b"
+    "commit": "f7d7c84"
   },
   "telescope-zf-native.nvim": {
-    "commit": "dabcdff"
+    "commit": "3f64df2"
   },
   "telescope-zoxide": {
     "commit": "b51b7f4"
   },
   "telescope.nvim": {
-    "commit": "567ec85"
+    "commit": "b702560"
   },
   "toggleterm.nvim": {
     "commit": "5733b24"
@@ -123,10 +123,10 @@
     "commit": "77e9706"
   },
   "vim-matchup": {
-    "commit": "7fd8806"
+    "commit": "1cb069f"
   },
   "vim-wordmotion": {
-    "commit": "0d810cc"
+    "commit": "1f7eaf5"
   },
   "which-key.nvim": {
     "commit": "a3c19ec"
