@@ -129,6 +129,7 @@ end
 
 plugin_loader.snapshot = function()
   packer.snapshot(snapshot_name, unpack(plugin_loader.get_pins()))
+  vim.cmd [[autocmd User PackerSnapshotDone ++once lua require('young.plugin-loader').snapshot_hook()]]
 end
 
 plugin_loader.rollback = function()
@@ -140,12 +141,13 @@ plugin_loader.snapshot_hook = function()
   local tmpfile = vim.fn.tempname()
   local snapfile = join_paths(snapshot_path, snapshot_name)
 
-  -- vim.fn.system("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
-  -- vim.fn.writefile(vim.fn.readfile(tmpfile), snapfile)
-  -- vim.fn.delete(tmpfile)
+  vim.fn.system("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
+  vim.fn.writefile(vim.fn.readfile(tmpfile), snapfile)
+  vim.fn.delete(tmpfile)
 
-  os.execute("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
-  os.rename(tmpfile, snapfile)
+  -- NOTE: Not working on windows, but why
+  -- os.execute("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
+  -- os.rename(tmpfile, snapfile)
 end
 
 plugin_loader.done = function()
