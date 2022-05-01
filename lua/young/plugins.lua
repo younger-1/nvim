@@ -253,7 +253,7 @@ mods.BWT = {
     {
       'mrjones2014/smart-splits.nvim',
       disable = not vim.fn.has 'nvim-0.7',
-      event = 'BufWinEnter',
+      event = 'CursorMoved',
       -- module = 'smart-splits',
       config = function()
         require 'young.mod.smart-splits'
@@ -261,7 +261,7 @@ mods.BWT = {
     },
     {
       's1n7ax/nvim-window-picker',
-      event = 'BufWinEnter',
+      event = 'CursorMoved',
       -- module = 'window-picker',
       config = function()
         require 'young.mod.window-picker'
@@ -884,6 +884,7 @@ local to_plugs = function(t, ...)
   return plugs
 end
 
+-- Or: use __newindex()
 for _, mod in pairs(mods) do
   setmetatable(mod, { __call = to_plugs })
 end

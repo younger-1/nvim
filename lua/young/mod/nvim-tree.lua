@@ -91,12 +91,18 @@ M.cfg = {
   view = {
     side = 'left',
     hide_root_folder = false,
+    -- number = true,
+    -- relativenumber = true,
     mappings = {
       custom_only = false,
       list = {
-        { key = 'l', action = 'edit' },
-        { key = 'h', action = 'close_node' },
+        -- { key = 'l', action = 'edit' },
+        -- { key = 'h', action = 'close_node' },
+        { key = 'L', action = 'cd' },
         { key = 'u', action = 'parent_node' },
+        { key = 'U', action = 'collapse_all' },
+        { key = 's', action = 'search_node' },
+        { key = 'S', action = 'system_open' },
         { key = '?', action = 'toggle_help' },
         { key = 'i', action = 'toggle_file_info' },
         { key = 'C', action = 'toggle_custom' },
