@@ -15,11 +15,13 @@ local snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot')
 local _, packer = pcall(require, 'packer')
 
 plugin_loader.once = function()
+  local first_time = nil
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
     -- WARN: system sync/async
     vim.fn.system { 'git', 'clone', '--depth', '3', 'https://github.com/wbthomason/packer.nvim', install_path }
     vim.cmd 'packadd packer.nvim' -- To init packer commands after clone it.
+    first_time = true
   end
 
   require('packer').init {
@@ -33,8 +35,10 @@ plugin_loader.once = function()
         return require('packer.util').float { border = 'double' }
       end,
     },
+    -- NOTE: only set this the very first time to avoid constantly triggering the rollback function
+    -- <https://github.com/wbthomason/packer.nvim/blob/c576ab3f1488ee86d60fd340d01ade08dcabd256/lua/packer.lua#L998-L995>
     -- snapshot = 'default.json',
-    snapshot = snapshot_name,
+    snapshot = first_time and snapshot_name,
     snapshot_path = snapshot_path,
   }
 end
