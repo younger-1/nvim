@@ -13,9 +13,9 @@ local snapshot_name = 'packer-lock.json'
 local snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot')
 
 local _, packer = pcall(require, 'packer')
+local first_time = nil
 
 plugin_loader.once = function()
-  local first_time = nil
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
     -- WARN: system sync/async
@@ -59,8 +59,8 @@ plugin_loader.load = function()
   local plugins = require('young.plugins').done()
   -- Log:debug "loading plugins configuration"
   local status_ok, _ = xpcall(function()
-    packer.reset()
-    packer.startup(function(use)
+    require('packer').reset()
+    require('packer').startup(function(use)
       for _, plugin in ipairs(plugins) do
         use(plugin)
       end
@@ -75,12 +75,21 @@ plugin_loader.load = function()
 end
 
 plugin_loader.source_compiled = function()
+  if first_time then
+    vim.notify('[young]: Installing plugins...', vim.log.levels.WARN)
+    require('packer').sync()
+    -- No need to source compiled file, as PackerCompile will do it
+
+    return
+  end
+
   if not utils.is_file(compile_path) then
     vim.notify('[young.plugin-loader]: not find ' .. compile_path .. ', compiling ...', vim.log.levels.WARN)
     packer.compile()
     -- No need to source compiled file, as PackerCompile will do it
     -- doautocmd BufWinEnter will load "which-key" and "nvim-tree" at least
     vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter]]
+
     return
   end
 
