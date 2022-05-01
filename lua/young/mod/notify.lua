@@ -11,7 +11,7 @@ M.yntf = function(str, level)
     test_first = { str, 's' },
     test_second = { level, 'n', true },
   }
-  ntf(str, level or vim.log.levels.TRACE, {
+  ntf(str, level or vim.log.levels.INFO, {
     icon = '',
     title = 'Young',
     timeout = 5000,
@@ -22,6 +22,9 @@ M.yntf = function(str, level)
 end
 
 M.cfg = {
+  -- Minimum level to show
+  level = "info",
+
   -- Animation style (see below for details)
   stages = nil,
 
