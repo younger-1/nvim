@@ -26,7 +26,7 @@ mods.theme = {
   -- { 'rktjmp/lush.nvim' },
 
   vim = {
-    'joshdick/onedark.vim',
+    -- 'joshdick/onedark.vim',
     'sainnhe/sonokai',
     'sainnhe/edge',
     'sainnhe/everforest',
@@ -53,6 +53,8 @@ mods.theme = {
         vim.g.material_style = 'palenight'
       end,
     },
+    'rmehri01/onenord.nvim',
+    'daschw/leaf.nvim',
   },
 }
 
@@ -648,13 +650,22 @@ mods.code = {
     { 'rafamadriz/friendly-snippets' },
     -- {
     --   "github/copilot.vim",
-    --   requires = { 'hrsh7th/cmp-copilot' },
-    --   -- setup = function()
-    --   --   vim.g.copilot_filetypes = {
-    --   --     ["TelescopePrompt"] = false,
-    --   --   }
-    --   -- end,
+    --   -- requires = { 'hrsh7th/cmp-copilot' },
+    --   event = 'InsertEnter',
+    --   cmd = 'Copilot',
+    --   setup = function()
+    --     vim.g.copilot_filetypes = {
+    --       ["TelescopePrompt"] = false,
+    --     }
+    --     vim.cmd [[ nnoremap <leader>l<tab> <cmd>Copilot<cr>]]
+    --   end,
     -- },
+    {
+      'zbirenbaum/copilot.lua',
+      requires = { { 'zbirenbaum/copilot-cmp', after = { "copilot.lua", "nvim-cmp" } } },
+      event = 'InsertEnter',
+      config = [[require 'young.mod.copilot']],
+    }
   },
   task = {
     -- { 'tpope/vim-dispatch' },
