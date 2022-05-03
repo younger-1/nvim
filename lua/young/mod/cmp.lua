@@ -8,6 +8,8 @@ require('luasnip.loaders.from_snipmate').load()
 
 local M = {}
 
+local pum_half = (vim.o.pumheight == 0 and 5) or vim.o.pumheight / 2
+
 M.done = function()
   -- TODO: move to icons
   local icons = {
@@ -45,6 +47,10 @@ M.done = function()
 
   -- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
   cmp.setup {
+    -- enabled = function()
+    --   -- disable completion if the cursor is `Comment` syntax group.
+    --   return not cmp.config.context.in_syntax_group('Comment')
+    -- end,
     sources = {
       { name = 'nvim_lsp' },
       { name = 'nvim_lua' },
@@ -79,6 +85,18 @@ M.done = function()
     experimental = {
       ghost_text = true,
     },
+    preselect = cmp.PreselectMode.Item,
+    -- preselect = cmp.PreselectMode.None,
+    sorting = {
+      comparators = {
+        cmp.config.compare.recently_used,
+        cmp.config.compare.offset,
+        cmp.config.compare.score,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
     formatting = {
       -- format = function(entry, vim_item)
       --   vim_item.kind = icons[vim_item.kind]
@@ -101,6 +119,7 @@ M.done = function()
       -- format = require('lspkind').cmp_format(),
       format = require('lspkind').cmp_format {
         with_text = true,
+        maxwidth = 50,
         menu = {
           buffer = '[Buffer]',
           nvim_lsp = '[LSP]',
@@ -122,14 +141,18 @@ M.done = function()
         i = cmapping.abort(),
         c = cmapping.close(),
       },
-      ['<CR>'] = cmapping.confirm { select = true },
+      ['<CR>'] = cmapping.confirm {
+        -- behavior = cmp.ConfirmBehavior.Replace,
+        -- select = false,
+        select = true,
+      },
       ['<Tab>'] = cmapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expandable() then
-          luasnip.expand()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
+        -- elseif luasnip.expandable() then
+        --   luasnip.expand()
+        -- elseif luasnip.expand_or_jumpable() then
+        --   luasnip.expand_or_jump()
         else
           fallback()
         end
@@ -140,8 +163,8 @@ M.done = function()
       ['<S-Tab>'] = cmapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
+        -- elseif luasnip.jumpable(-1) then
+        --   luasnip.jump(-1)
         else
           fallback()
         end
@@ -149,6 +172,16 @@ M.done = function()
         'i',
         's',
       }),
+      ['<PageUp>'] = cmapping(function()
+        for _ = 1, pum_half do
+          cmp.select_prev_item()
+        end
+      end, { 'i', 'c' }),
+      ['<PageDown>'] = cmapping(function()
+        for _ = 1, pum_half do
+          cmp.select_next_item()
+        end
+      end, { 'i', 'c' }),
       ['<C-x><C-h>'] = cmapping.complete({
         config = {
           sources = {
@@ -169,11 +202,17 @@ M.done = function()
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+      { name = 'cmp_git' },
     }, {
       { name = 'buffer' },
     })
   })
+  -- cmp.setup.filetype({ 'markdown', 'help' }, {
+  --   sources = {
+  --     { name = 'path' },
+  --     { name = 'buffer' },
+  --   }
+  -- })
 
   local cmdline_map = {
     ['<Tab>'] = {
