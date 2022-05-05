@@ -41,9 +41,9 @@ M.keys = {
   -- ---@usage change or add keymappings for insert mode
   insert_mode = {
     -- 'jk' for quitting insert mode
-    ['jk'] = '<ESC>',
+    -- ['jk'] = '<ESC>',
     -- 'jj' for quitting insert mode
-    ['jj'] = '<ESC>',
+    -- ['jj'] = '<ESC>',
 
     ['<C-d>'] = '<Del>',
 
