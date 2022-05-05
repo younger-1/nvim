@@ -54,6 +54,7 @@ mods.theme = {
     },
     'rmehri01/onenord.nvim',
     'daschw/leaf.nvim',
+    'Mofiqul/vscode.nvim',
   },
 }
 
@@ -254,6 +255,19 @@ mods.neovim = {
       vim.g['suda#prompt'] = '🔑: '
     end,
   },
+  -- {
+  --   'jdhao/better-escape.vim',
+  --   event = 'InsertEnter',
+  --   setup = function()
+  --     vim.g.better_escape_shortcut = 'jk'
+  --   end
+  -- }
+  {
+    'TheBlob42/houdini.nvim',
+    config = function()
+      require('houdini').setup()
+    end
+  }
 }
 
 mods.BWT = {
