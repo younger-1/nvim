@@ -20,10 +20,7 @@ local local_servers = {
   cpp = 'clangd',
 }
 
-local done_ft = {
-  -- python = 1,
-  -- cpp = 1,
-}
+local done_ft = {}
 
 M.get_opts = function(server_name)
   local ok, server_opts = pcall(require, modbase .. '.providers.' .. server_name)
@@ -65,6 +62,19 @@ end
 --     end
 --   end
 -- end
+
+local function to_done_ft(server_name)
+  local server_fts = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
+
+  -- for _, ft in ipairs(server_fts) do
+  --   done_ft[ft] = (done_ft[ft] or 0) + 1
+  -- end
+
+  for _, ft in ipairs(server_fts) do
+    if not done_ft[ft] then done_ft[ft] = {} end
+    done_ft[ft][#done_ft[ft] + 1] = server_name
+  end
+end
 
 M.once = function()
   -- vim.lsp.set_log_level("debug")
@@ -112,10 +122,6 @@ M.once = function()
       end
     end
 
-    for _, ft in ipairs(server_fts) do
-      done_ft[ft] = (done_ft[ft] or 0) + 1
-    end
-
     if server.name == 'jdtls' and vim.g.young_jdtls then
       require('young.autocmd').define_augroups {
         _jdtls_lsp = {
@@ -128,13 +134,12 @@ M.once = function()
     local opts = M.get_opts(server.name)
     -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
     require('lspconfig')[server.name].setup(opts)
+    to_done_ft(server.name)
 
     ::continue::
   end
 
-  -- gg(done_ft)
   for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
-    -- local fts = require('lspconfig')[server_name].filetypes
     -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
     if not done_ft[ft] then
       local opts = M.get_opts(server_name)
@@ -142,6 +147,7 @@ M.once = function()
         require('lspconfig')[server_name].setup(opts)
         attach_buffers(server_name)
       end)
+      to_done_ft(server_name)
     end
   end
 end
