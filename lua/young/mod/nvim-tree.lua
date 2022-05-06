@@ -35,7 +35,7 @@ M.cfg = {
     ignore_list = {},
   },
   disable_netrw = false,
-  hijack_netrw = false,
+  hijack_netrw = true,
   -- hijacks new directory buffers when they are opened
   -- disable it if using `vim-dirvish` or `lir.nvim`
   hijack_directories = {
