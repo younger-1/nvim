@@ -1,4 +1,5 @@
 local modbase = ...
+local lspconfig = require 'lspconfig'
 local lsp_installer = require 'nvim-lsp-installer'
 local common_opts = require 'young.lsp.common'
 
@@ -78,8 +79,15 @@ M.once = function()
     return opts
   end
 
-  lsp_installer.settings {
-    log_level = vim.log.levels.DEBUG,
+  lsp_installer.setup {
+    -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer", "sumneko_lua" }
+    ensure_installed = {},
+    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
+    --   - false: Servers are not automatically installed.
+    --   - true: All servers set up via lspconfig are automatically installed.
+    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
+    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+    automatic_installation = false,
     ui = {
       icons = {
         server_installed = '',
@@ -87,10 +95,10 @@ M.once = function()
         server_uninstalled = '',
       },
     },
+    log_level = vim.log.levels.INFO,
   }
 
-  -- Register a handler that will be called for all installed servers.
-  lsp_installer.on_server_ready(function(server)
+  for _, server in ipairs(lsp_installer.get_installed_servers()) do
     -- One server for one filetype
     for _, ft in ipairs(server:get_supported_filetypes()) do
       -- TODO: when ensure_servers = { javascript = 'tsserver', typescript = 'denols' }, neither tsserver nor denols will be used
@@ -111,10 +119,9 @@ M.once = function()
     end
 
     local opts = M.get_opts(server.name)
-    -- This setup() function is exactly the same as lspconfig's setup function.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    server:setup(opts)
-  end)
+    -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
+    lspconfig[server.name].setup(opts)
+  end
 
   -- Or vim.schedule, because on_server_ready is async
   vim.defer_fn(function()
