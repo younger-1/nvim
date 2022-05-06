@@ -172,19 +172,21 @@ M.get_ls = function(servername)
     for bufnr, _ in pairs(ls.attached_buffers) do
       if bufnr == vim.fn.bufnr() then
         print '[Cat!]'
-        return ls
+        return
       end
     end
   end
 
+  ls = nil
+
   for _, client in pairs(vim.lsp.buf_get_clients()) do
     if not servername and client.name ~= 'null-ls' then
       ls = client
-      return ls
+      return
     end
     if servername and client.name == servername then
       ls = client
-      return ls
+      return
     end
   end
 end
@@ -212,7 +214,13 @@ end
 
 M.print_ls_complete = function(lead, _, _)
   local completion_list = {}
-  for name, _ in pairs(M.get_ls()) do
+  M.get_ls()
+  if not ls then
+    print '[Failed]: Not such server'
+    return
+  end
+
+  for name, _ in pairs(ls) do
     if vim.startswith(name, lead) then
       table.insert(completion_list, name)
     end
