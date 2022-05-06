@@ -43,3 +43,35 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 --   update_in_insert = true,
 --   virtual_text = false,
 -- })
+
+-- <https://github.com/kylo252/dotfiles/blob/de7cb1e8a08cff3d772a4253dfbcdb94dbba8d4f/.config/nvim/lua/user/lsp/init.lua#L3>
+-- function M.get_lsp_kind()
+--   return {
+--     Class = "",
+--     Color = "",
+--     Constant = "",
+--     Constructor = "",
+--     Enum = "了",
+--     EnumMember = "",
+--     Event = "",
+--     Field = "ﴲ",
+--     File = "",
+--     Folder = "",
+--     Function = "",
+--     Interface = "ﰮ",
+--     Keyword = "",
+--     Method = "",
+--     Module = "",
+--     Operator = "",
+--     Property = " ",
+--     Reference = "",
+--     Snippet = "",
+--     Struct = "",
+--     Text = " ",
+--     TypeParameter = "",
+--     Unit = "",
+--     Value = "",
+--     Variable = "",
+--   }
+-- end
+-- vim.lsp.protocol.CompletionItemKind = M.get_lsp_kind()
