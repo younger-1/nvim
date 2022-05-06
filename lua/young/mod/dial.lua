@@ -36,7 +36,7 @@ local function add_true_false()
     strlist = { 'True', 'False' },
   }
 
-  utils.append_to_list(settings, {
+  vim.list_extend(settings, {
     'custom#Boolean',
     'custom#boolean',
   })
@@ -53,7 +53,7 @@ local function add_direction()
     strlist = { 'left', 'right' },
   }
 
-  utils.append_to_list(settings, {
+  vim.list_extend(settings, {
     'custom#up_down',
     'custom#left_right',
   })

@@ -260,15 +260,15 @@ end
 M.lsp_ref = function()
   if vim.o.bg == 'dark' then
     vim.cmd [[
-      hi LspReferenceText cterm=bold ctermbg=red guibg=DarkCyan
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkGreen
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=DarkRed
+      hi LspReferenceText  cterm=bold ctermbg=DarkCyan  blend=10 gui=bold guibg=DarkCyan
+      hi LspReferenceRead  cterm=bold ctermbg=DarkGreen blend=10 gui=bold guibg=DarkGreen
+      hi LspReferenceWrite cterm=bold ctermbg=DarkRed   blend=10 gui=bold guibg=DarkRed
     ]]
   else
     vim.cmd [[
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightCyan
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightGreen
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightRed
+      hi LspReferenceText  cterm=bold ctermbg=DarkCyan  blend=10 gui=bold guibg=LightCyan
+      hi LspReferenceRead  cterm=bold ctermbg=DarkGreen blend=10 gui=bold guibg=LightGreen
+      hi LspReferenceWrite cterm=bold ctermbg=DarkRed   blend=10 gui=bold guibg=LightRed
     ]]
   end
 end
