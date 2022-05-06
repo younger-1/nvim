@@ -1,5 +1,4 @@
 local modbase = ...
-local lspconfig = require 'lspconfig'
 local lsp_installer = require 'nvim-lsp-installer'
 local common_opts = require 'young.lsp.common'
 
@@ -7,9 +6,10 @@ local M = {}
 
 local ensure_servers = {
   lua = 'sumneko_lua',
+  vim = 'vimls',
   python = 'pyright',
   -- python = 'pylsp',
-  yaml = 'yamlls',
+  go = 'gopls',
   json = 'jsonls',
 }
 -- NOTE: servers installed by lsp_installer can override local_servers
@@ -81,7 +81,7 @@ M.once = function()
 
   lsp_installer.setup {
     -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer", "sumneko_lua" }
-    ensure_installed = {},
+    ensure_installed = vim.tbl_values(ensure_servers),
     -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
     --   - false: Servers are not automatically installed.
     --   - true: All servers set up via lspconfig are automatically installed.
@@ -103,7 +103,7 @@ M.once = function()
     for _, ft in ipairs(server:get_supported_filetypes()) do
       -- TODO: when ensure_servers = { javascript = 'tsserver', typescript = 'denols' }, neither tsserver nor denols will be used
       if ensure_servers[ft] and server.name ~= ensure_servers[ft] then
-        return
+        goto continue
       else
         done_ft[ft] = 1
       end
@@ -115,29 +115,28 @@ M.once = function()
           { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
         },
       }
-      return
+      goto continue
     end
 
     local opts = M.get_opts(server.name)
     -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
-    lspconfig[server.name].setup(opts)
+    require('lspconfig')[server.name].setup(opts)
+
+    ::continue::
   end
 
-  -- Or vim.schedule, because on_server_ready is async
-  vim.defer_fn(function()
-    -- gg(done_ft)
-    for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
-      -- local fts = require('lspconfig')[server_name].filetypes
-      -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
-      if not done_ft[ft] then
-        local opts = M.get_opts(server_name)
-        pcall(function()
-          require('lspconfig')[server_name].setup(opts)
-          attach_buffers(server_name)
-        end)
-      end
+  -- gg(done_ft)
+  for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
+    -- local fts = require('lspconfig')[server_name].filetypes
+    -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
+    if not done_ft[ft] then
+      local opts = M.get_opts(server_name)
+      pcall(function()
+        require('lspconfig')[server_name].setup(opts)
+        attach_buffers(server_name)
+      end)
     end
-  end, 20)
+  end
 end
 
 M.done = function()
