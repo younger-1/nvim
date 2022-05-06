@@ -132,6 +132,20 @@ mods.edit = {
     --     require('tabout').setup()
     --   end,
     -- },
+    -- {
+    --   'karb94/neoscroll.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.neoscroll'
+    --   end,
+    -- },
+    { -- Smooth scrolling for ANY movement command
+      'declancm/cinnamon.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.cinnamon'
+      end,
+    }
   },
   -- textobject = {
   -- },
