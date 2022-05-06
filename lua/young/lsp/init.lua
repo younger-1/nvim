@@ -12,11 +12,14 @@ local ensure_servers = {
   go = 'gopls',
   json = 'jsonls',
 }
+local ensure_installed = vim.tbl_values(ensure_servers)
+
 -- NOTE: servers installed by lsp_installer can override local_servers
 local local_servers = {
   rust = 'rust_analyzer',
   cpp = 'clangd',
 }
+
 local done_ft = {
   -- python = 1,
   -- cpp = 1,
@@ -81,7 +84,7 @@ M.once = function()
 
   lsp_installer.setup {
     -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer", "sumneko_lua" }
-    ensure_installed = vim.tbl_values(ensure_servers),
+    ensure_installed = ensure_installed,
     -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
     --   - false: Servers are not automatically installed.
     --   - true: All servers set up via lspconfig are automatically installed.
@@ -99,14 +102,18 @@ M.once = function()
   }
 
   for _, server in ipairs(lsp_installer.get_installed_servers()) do
-    -- One server for one filetype
-    for _, ft in ipairs(server:get_supported_filetypes()) do
-      -- TODO: when ensure_servers = { javascript = 'tsserver', typescript = 'denols' }, neither tsserver nor denols will be used
-      if ensure_servers[ft] and server.name ~= ensure_servers[ft] then
-        goto continue
-      else
-        done_ft[ft] = 1
+    local server_fts = server:get_supported_filetypes()
+
+    if not vim.tbl_contains(ensure_installed, server.name) then
+      for _, ft in ipairs(server_fts) do
+        if ensure_servers[ft] and server.name ~= ensure_servers[ft] then
+          goto continue
+        end
       end
+    end
+
+    for _, ft in ipairs(server_fts) do
+      done_ft[ft] = (done_ft[ft] or 0) + 1
     end
 
     if server.name == 'jdtls' and vim.g.young_jdtls then
@@ -141,6 +148,7 @@ end
 
 M.done = function()
   M.once()
+  M.fts = done_ft
 
   require 'young.lsp.handlers'
 
