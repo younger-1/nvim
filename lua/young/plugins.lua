@@ -673,12 +673,12 @@ mods.code = {
     --     vim.cmd [[ nnoremap <leader>l<tab> <cmd>Copilot<cr>]]
     --   end,
     -- },
-    {
-      'zbirenbaum/copilot.lua',
-      requires = { { 'zbirenbaum/copilot-cmp', after = { "copilot.lua", "nvim-cmp" } } },
-      event = 'InsertEnter',
-      config = [[require 'young.mod.copilot']],
-    }
+    -- {
+    --   'zbirenbaum/copilot.lua',
+    --   requires = { { 'zbirenbaum/copilot-cmp', after = { "copilot.lua", "nvim-cmp" } } },
+    --   event = 'InsertEnter',
+    --   config = [[require 'young.mod.copilot']],
+    -- }
   },
   task = {
     -- { 'tpope/vim-dispatch' },

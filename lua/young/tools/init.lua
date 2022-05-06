@@ -193,6 +193,7 @@ end
 
 M.print_ls = function(...)
   local keys = { ... }
+
   M.get_ls()
   if not ls then
     print '[Failed]: Not such server'
@@ -214,6 +215,7 @@ end
 
 M.print_ls_complete = function(lead, _, _)
   local completion_list = {}
+
   M.get_ls()
   if not ls then
     print '[Failed]: Not such server'
