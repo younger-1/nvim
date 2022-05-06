@@ -1,4 +1,3 @@
-local utils = require 'young.utils'
 local M = {}
 local mods = {}
 
@@ -883,10 +882,10 @@ local to_plugs = function(t, ...)
       plugs[#plugs + 1] = item
     elseif #{ ... } > 0 then
       if vim.tbl_contains({ ... }, key) then
-        utils.append_to_list(plugs, item)
+        vim.list_extend(plugs, item)
       end
     else
-      utils.append_to_list(plugs, item)
+      vim.list_extend(plugs, item)
     end
   end
   if #plugs == 1 then

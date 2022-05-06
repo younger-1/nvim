@@ -1,3 +1,6 @@
+-- floating window highlights for the cmp menu
+-- @see: https://github.com/zbirenbaum/NvCustom/blob/c92400505e7aa0f6308e434b9311199d578db3da/plugins/completion_plugins/cmp_configs/cmp.lua
+
 local cmp = require 'cmp'
 local cmapping = cmp.mapping
 local luasnip = require 'luasnip'

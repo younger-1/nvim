@@ -65,6 +65,7 @@ function M.load_augroups()
     },
     _general_lsp = {
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info,minimap', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
     custom_groups = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },

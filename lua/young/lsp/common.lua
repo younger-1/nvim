@@ -27,6 +27,7 @@ local function lsp_highlight_document(client)
   end
 
   local client_ok, method_supported = pcall(function()
+    -- return client.resolved_capabilities.document_highlight
     return vim.lsp.get_client_by_id(client.id).resolved_capabilities.document_highlight
   end)
   if not client_ok or not method_supported then

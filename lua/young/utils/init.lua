@@ -80,11 +80,12 @@ function utils.add_to_set(set1, set2)
   end
 end
 
-function utils.append_to_list(a, b)
-  for _, v in ipairs(b) do
-    table.insert(a, v)
-  end
-end
+--@note: use vim.list_extend instead
+-- function utils.append_to_list(a, b)
+--   for _, v in ipairs(b) do
+--     table.insert(a, v)
+--   end
+-- end
 
 --@param para: table or single value
 function utils.defer(fn, para, time)
