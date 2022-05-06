@@ -46,7 +46,7 @@ local default_options = {
   number = true, -- set numbered lines
   relativenumber = false, -- set relative numbered lines
   numberwidth = 4, -- set number column width to 2 {default 4}
-  signcolumn = 'yes', -- always show the sign column, otherwise it would shift the text each time
+  signcolumn = 'auto:1-2', -- always show the sign column, otherwise it would shift the text each time
   wrap = false,
   spell = false,
   spelllang = 'en',
@@ -71,7 +71,10 @@ vim.opt.shortmess:append 'c'
 
 vim.opt.diffopt:append 'vertical'
 
-vim.cmd 'set whichwrap+=<,>,[,],h,l'
+-- vim.cmd 'set whichwrap+=<,>,[,],h,l'
+vim.opt.whichwrap:append '<,>,[,],h,l'
+
+vim.opt.iskeyword:append '-'
 
 -- vim.cmd [[set listchars=tab:●·,extends:→,precedes:←,trail:■]]
 vim.opt.listchars = {

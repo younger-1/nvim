@@ -40,13 +40,15 @@ local disable_distribution = function()
   vim.g.loaded_node_provider = 0
 
   -- vim.g.loaded_remote_plugins = 1
-
-  -- [](https://github.com/nathom/filetype.nvim/issues/12)
-  -- Do not source the default filetype.vim
-  vim.g.did_load_filetypes = 1
 end
 
 disable_distribution()
+
+-- Do not source the default filetype.vim
+-- <https://github.com/nathom/filetype.nvim/issues/12>
+vim.g.did_load_filetypes = 1
+-- For now, Lua filetype detection is opt-in. You can enable it by adding:
+vim.g.do_filetype_lua = 1
 
 vim.filetype.add {
   extension = {
@@ -59,6 +61,20 @@ vim.filetype.add {
     -- ["~/%.config/foo/.*"] = "fooscript",
   },
 }
+
+-- <https://github.com/kylo252/dotfiles/blob/de7cb1e8a08cff3d772a4253dfbcdb94dbba8d4f/.config/nvim/lua/user/settings.lua#L49>
+-- if vim.fn.has "wsl" == 1 then
+--   vim.g.clipboard = {
+--     copy = {
+--       ["+"] = "win32yank.exe -i --crlf",
+--       ["*"] = "win32yank.exe -i --crlf",
+--     },
+--     paste = {
+--       ["+"] = "win32yank.exe -o --lf",
+--       ["*"] = "win32yank.exe -o --lf",
+--     },
+--   }
+-- end
 
 -- NOTE: in Window, env name is case insensitive. NOT in Linux
 -- vim.env.SCOOP
