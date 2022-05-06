@@ -139,10 +139,10 @@ M.done = function()
       ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
       ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
       ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmapping(cmapping.confirm({ select = true }), { 'i', 'c' }),
+      ['<C-y>'] = cmapping(cmapping.confirm({ select = true }), { 'i' }),
       ['<C-e>'] = {
         i = cmapping.abort(),
-        c = cmapping.close(),
+        -- c = cmapping.close(),
       },
       ['<CR>'] = cmapping.confirm {
         -- behavior = cmp.ConfirmBehavior.Replace,
