@@ -48,6 +48,18 @@ end
 
 disable_distribution()
 
+vim.filetype.add {
+  extension = {
+    -- foo = "fooscript",
+  },
+  filename = {
+    -- ["Foofile"] = "fooscript",
+  },
+  pattern = {
+    -- ["~/%.config/foo/.*"] = "fooscript",
+  },
+}
+
 -- NOTE: in Window, env name is case insensitive. NOT in Linux
 -- vim.env.SCOOP
 -- vim.loop.os_getenv 'scoop'
