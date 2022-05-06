@@ -64,6 +64,7 @@ function M.load_augroups()
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
+      { 'BufRead', '*', '++once', "lua require('young.lsp').done()" },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info,minimap', 'nnoremap <silent> <buffer> q :close<CR>' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
