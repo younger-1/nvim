@@ -25,7 +25,7 @@
 - [ ] config for lspkind-nvim
 - [ ] vim/nvim can't open `packer_compiled.lua` normally, but vscode can.
 - [ ] nvim-tree: refine `search_node` to match fuzzy not exactly
-- [ ] add a wrapper for which-key and using in : LSP keymappings
+- [x] add a wrapper for which-key and using in : LSP keymappings
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
