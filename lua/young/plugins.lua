@@ -675,23 +675,18 @@ mods.code = {
     },
     { 'onsails/lspkind-nvim' },
     { 'rafamadriz/friendly-snippets' },
-    -- {
-    --   "github/copilot.vim",
-    --   -- requires = { 'hrsh7th/cmp-copilot' },
-    --   event = 'InsertEnter',
-    --   cmd = 'Copilot',
-    --   setup = function()
-    --     vim.g.copilot_filetypes = {
-    --       ["TelescopePrompt"] = false,
-    --     }
-    --     vim.cmd [[ nnoremap <leader>l<tab> <cmd>Copilot<cr>]]
-    --   end,
-    -- },
+    {
+      "github/copilot.vim",
+      -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
+      -- event = 'InsertEnter',
+      cmd = 'Copilot',
+      setup = [[require('young.mod.copilot').setup_vim()]],
+    },
     -- {
     --   'zbirenbaum/copilot.lua',
     --   requires = { { 'zbirenbaum/copilot-cmp', after = { "copilot.lua", "nvim-cmp" } } },
     --   event = 'InsertEnter',
-    --   config = [[require 'young.mod.copilot']],
+    --   config = [[require('young.mod.copilot').setup_lua()]],
     -- }
   },
   task = {
