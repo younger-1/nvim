@@ -721,7 +721,7 @@ mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
     { 'williamboman/nvim-lsp-installer' },
-    -- { "jose-elias-alvarez/null-ls.nvim" },
+    { "jose-elias-alvarez/null-ls.nvim" },
     { 'b0o/SchemaStore.nvim' },
     {
       'ray-x/lsp_signature.nvim',
