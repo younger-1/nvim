@@ -25,17 +25,17 @@ local function lsp_highlight_document(client)
     return
   end
 
-  local client_ok, method_supported = pcall(function()
+  local status_ok, method_supported = pcall(function()
     -- return client.resolved_capabilities.document_highlight
-    return vim.lsp.get_client_by_id(client.id).resolved_capabilities.document_highlight
+    -- return vim.lsp.get_client_by_id(client.id).resolved_capabilities.document_highlight
+    return client.supports_method 'textDocument/documentHighlight'
   end)
-  if not client_ok or not method_supported then
+
+  if not status_ok or not method_supported then
     return
   end
 
-  if client_ok and method_supported then
-    autocmd.enable_lsp_document_highlight()
-  end
+  autocmd.enable_lsp_document_highlight()
 end
 
 local function lsp_code_lens_refresh(client)
@@ -43,9 +43,15 @@ local function lsp_code_lens_refresh(client)
     return
   end
 
-  if client.resolved_capabilities.code_lens then
-    autocmd.enable_code_lens_refresh()
+  local status_ok, method_supported = pcall(function()
+    return client.supports_method 'textDocument/codeLens'
+  end)
+
+  if not status_ok or not method_supported then
+    return
   end
+
+  autocmd.enable_code_lens_refresh()
 end
 
 local function add_lsp_buffer_keybindings(bufnr)

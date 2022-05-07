@@ -1,3 +1,6 @@
+-- disable null-ls when using firenvim, should used before call null_ls.setup()
+-- vim.g.null_ls_disable = true
+
 vim.cmd [[
 " function! OnUIEnter(event) abort
 "   if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')

@@ -1,7 +1,7 @@
 local M = {}
+local u = require 'null-ls.utils'
 
 local py_cwd = function(params)
-  local u = require 'null-ls.utils'
   local root_files = {
     'pyproject.toml',
     'setup.py',
@@ -27,7 +27,6 @@ local config = {
       extra_args = {},
       filetypes = { 'lua' },
       cwd = function(params) -- force luacheck to find its '.luacheckrc' file
-        local u = require 'null-ls.utils'
         return u.root_pattern '.luacheckrc'(params.bufname)
       end,
     },
@@ -85,7 +84,26 @@ function M.done()
   end
 
   local common_opts = require 'young.lsp.common'
-  local opts = vim.tbl_deep_extend('force', common_opts, { sources = sources, log = { level = 'warn' } })
+  local opts = vim.tbl_deep_extend('force', common_opts, {
+    -- cmd = { "nvim" },
+    -- debounce = 250,
+    -- debug = false,
+    -- default_timeout = 5000,
+    -- diagnostics_format = "#{m}",
+    -- fallback_severity = vim.diagnostic.severity.ERROR,
+    -- log = {
+    --     enable = true,
+    --     level = "warn",
+    --     use_console = "async",
+    -- },
+    -- on_attach = nil,
+    -- on_init = nil,
+    -- on_exit = nil,
+    -- should_attach = nil,
+    -- root_dir = u.root_pattern(".null-ls-root", "Makefile", ".git"),
+    -- update_in_insert = false,
+    sources = sources,
+  })
   null_ls.setup(opts)
   -- require('young.lsp.null-ls.linters')
 end
