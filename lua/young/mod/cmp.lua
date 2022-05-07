@@ -86,7 +86,7 @@ M.done = function()
     --   entries = 'native'
     -- },
     experimental = {
-      ghost_text = true,
+      ghost_text = false,
     },
     preselect = cmp.PreselectMode.Item,
     -- preselect = cmp.PreselectMode.None,
