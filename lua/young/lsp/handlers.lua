@@ -13,18 +13,12 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   -- signs = { values = lsp_cfg.signs },
   -- virtual_text = false,
   update_in_insert = false,
-  underline = true,
-  severity_sort = true,
   float = {
-    focusable = true,
-    style = 'minimal',
     -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
     -- border = { "/", "-", "\\", "|" },
     -- border = 'rounded',
     border = 'single',
     source = false,
-    header = '',
-    prefix = '',
     format = function(d)
       local t = vim.deepcopy(d)
       local code = d.code or (d.user_data and d.user_data.lsp.code)

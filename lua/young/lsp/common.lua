@@ -88,6 +88,9 @@ local function add_lsp_buffer_keybindings(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+  if lsp_cfg.on_attach_callback then
+    lsp_cfg.on_attach_callback(client, bufnr)
+  end
   lsp_highlight_document(client)
   lsp_code_lens_refresh(client)
   add_lsp_buffer_keybindings(bufnr)
@@ -120,11 +123,10 @@ local function select_default_formater(client)
 end
 
 M.on_init = function(client, bufnr)
-  -- if lvim.lsp.on_init_callback then
-  --   lvim.lsp.on_init_callback(client, bufnr)
-  --   Log:debug 'Called lsp.on_init_callback'
-  --   return
-  -- end
+  if lsp_cfg.on_init_callback then
+    lsp_cfg.on_init_callback(client, bufnr)
+    return
+  end
   -- select_default_formater(client)
 end
 
