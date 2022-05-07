@@ -154,7 +154,7 @@ plugin_loader.snapshot_hook = function()
   local tmpfile = vim.fn.tempname()
   local snapfile = join_paths(snapshot_path, snapshot_name)
 
-  vim.fn.system("jq --sort-keys . " .. snapfile .. " > " .. tmpfile)
+  vim.fn.system('jq --sort-keys . ' .. snapfile .. ' > ' .. tmpfile)
   vim.fn.writefile(vim.fn.readfile(tmpfile), snapfile)
   vim.fn.delete(tmpfile)
 

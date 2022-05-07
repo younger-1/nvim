@@ -3,9 +3,9 @@
 --   return
 -- end
 
-local ok, jdtls_server = require('nvim-lsp-installer.servers').get_server('jdtls')
+local ok, jdtls_server = require('nvim-lsp-installer.servers').get_server 'jdtls'
 if not ok or not jdtls_server:is_installed() then
-  vim.notify('[Young]: not install jdtls')
+  vim.notify '[Young]: not install jdtls'
   return
 end
 
@@ -82,15 +82,21 @@ local on_attach_jdtls = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ji', "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jt', "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jn', "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>jv', "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    'v',
+    '<leader>jv',
+    "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>",
+    opts
+  )
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jv', "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>jm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 end
 
 M.setup = function()
   -- Find root of project
-  local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-  local root_dir = require("jdtls.setup").find_root(root_markers)
+  local root_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }
+  local root_dir = require('jdtls.setup').find_root(root_markers)
   local home = os.getenv 'HOME'
   -- local workspace_folder = home .. '/.workspace' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
 
@@ -103,7 +109,7 @@ M.setup = function()
   -- lspconfig_jdtls.root_dir = nil
   -- config = vim.tbl_deep_extend('force', lspconfig_jdtls, common_opts)
 
-  config = vim.tbl_deep_extend('force', common_opts, require('young.lsp.providers.jdtls'))
+  config = vim.tbl_deep_extend('force', common_opts, require 'young.lsp.providers.jdtls')
   config = vim.tbl_deep_extend('force', config, {
     cmd = jdtls_server._default_options.cmd,
     root_dir = root_dir,
@@ -132,7 +138,7 @@ M.setup = function()
         -- tabSize = 4, -- FIXME: Not working
         comments = { enabled = false },
         settings = {
-          profile = "GoogleStyle",
+          profile = 'GoogleStyle',
           url = home .. '/.config/nvim/.java-google-style.xml',
         },
       },

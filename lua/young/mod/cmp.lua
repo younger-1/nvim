@@ -76,10 +76,10 @@ M.done = function()
     window = {
       -- completion = cmp.config.window.bordered(),
       completion = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
       },
       documentation = {
-        border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+        border = { '┏', '━', '┓', '┃', '┛', '━', '┗', '┃' },
       },
     },
     -- view = {
@@ -139,7 +139,7 @@ M.done = function()
       ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
       ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
       ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmapping(cmapping.confirm({ select = true }), { 'i' }),
+      ['<C-y>'] = cmapping(cmapping.confirm { select = true }, { 'i' }),
       ['<C-e>'] = {
         i = cmapping.abort(),
         -- c = cmapping.close(),
@@ -152,10 +152,10 @@ M.done = function()
       ['<Tab>'] = cmapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        -- elseif luasnip.expandable() then
-        --   luasnip.expand()
-        -- elseif luasnip.expand_or_jumpable() then
-        --   luasnip.expand_or_jump()
+          -- elseif luasnip.expandable() then
+          --   luasnip.expand()
+          -- elseif luasnip.expand_or_jumpable() then
+          --   luasnip.expand_or_jump()
         else
           fallback()
         end
@@ -166,8 +166,8 @@ M.done = function()
       ['<S-Tab>'] = cmapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        -- elseif luasnip.jumpable(-1) then
-        --   luasnip.jump(-1)
+          -- elseif luasnip.jumpable(-1) then
+          --   luasnip.jump(-1)
         else
           fallback()
         end
@@ -185,13 +185,13 @@ M.done = function()
           cmp.select_next_item()
         end
       end, { 'i', 'c' }),
-      ['<C-x><C-h>'] = cmapping.complete({
+      ['<C-x><C-h>'] = cmapping.complete {
         config = {
           sources = {
-            { name = 'luasnip' }
-          }
-        }
-      }),
+            { name = 'luasnip' },
+          },
+        },
+      },
       -- ['<C-x><C-g>'] = cmapping.complete({}),
       -- ['<C-x><C-m>'] = cmapping.complete({}),
       -- ['<C-x><C-b>'] = cmapping.complete({}),
@@ -208,7 +208,7 @@ M.done = function()
       { name = 'cmp_git' },
     }, {
       { name = 'buffer' },
-    })
+    }),
   })
   -- cmp.setup.filetype({ 'markdown', 'help' }, {
   --   sources = {
