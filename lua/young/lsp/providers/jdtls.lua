@@ -66,5 +66,5 @@ return {
   handlers = {
     ['language/status'] = handler_status(),
   },
-  -- on_attach_callback = on_attach_jdtls,
+  -- on_attach_cb = on_attach_jdtls,
 }

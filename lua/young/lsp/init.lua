@@ -22,16 +22,26 @@ local local_servers = {
 
 local done_ft = {}
 
-M.get_opts = function(server_name)
+-- local function install_ensure_servers()
+--   for _, name in pairs(ensure_servers) do
+--     local server_is_found, server = lsp_installer.get_server(name)
+--     if server_is_found and not server:is_installed() then
+--       vim.notify("[young] Installing " .. name)
+--       server:install()
+--     end
+--   end
+-- end
+
+local get_opts = function(server_name)
   local ok, server_opts = pcall(require, modbase .. '.providers.' .. server_name)
   if not ok then
     return common_opts
   end
 
-  if server_opts.on_attach_callback then
+  if server_opts.on_attach_cb then
     server_opts.on_attach = function(client, bufnr)
       common_opts.on_attach(client, bufnr)
-      server_opts.on_attach_callback(client, bufnr)
+      server_opts.on_attach_cb(client, bufnr)
     end
   end
 
@@ -53,30 +63,33 @@ local function attach_buffers(server_name)
   end
 end
 
--- local function install_ensure_servers()
---   for _, name in pairs(ensure_servers) do
---     local server_is_found, server = lsp_installer.get_server(name)
---     if server_is_found and not server:is_installed() then
---       vim.notify("[young] Installing " .. name)
---       server:install()
---     end
---   end
--- end
-
 local function to_done_ft(server_name)
-  local server_fts = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
+  -- local server_fts = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
+  local server_fts = require('nvim-lsp-installer._generated.metadata')[server_name].filetypes
 
   -- for _, ft in ipairs(server_fts) do
   --   done_ft[ft] = (done_ft[ft] or 0) + 1
   -- end
 
   for _, ft in ipairs(server_fts) do
-    if not done_ft[ft] then done_ft[ft] = {} end
+    done_ft[ft] = done_ft[ft] or {}
     done_ft[ft][#done_ft[ft] + 1] = server_name
   end
 end
 
-M.once = function()
+local function launch_server(server_name)
+  local opts = get_opts(server_name)
+  -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
+  require('lspconfig')[server_name].setup(opts)
+  -- TODO:use pcall or not?
+  -- pcall(function()
+  --   require('lspconfig')[server_name].setup(opts)
+  --   attach_buffers(server_name)
+  -- end)
+  to_done_ft(server_name)
+end
+
+local config = function()
   -- vim.lsp.set_log_level("debug")
   -- if vim.fn.has 'nvim-0.5.1' == 1 then
   --   require('vim.lsp.log').set_format_func(vim.inspect)
@@ -110,7 +123,9 @@ M.once = function()
     },
     log_level = vim.log.levels.INFO,
   }
+end
 
+local setup = function()
   for _, server in ipairs(lsp_installer.get_installed_servers()) do
     local server_fts = server:get_supported_filetypes()
 
@@ -131,29 +146,22 @@ M.once = function()
       goto continue
     end
 
-    local opts = M.get_opts(server.name)
-    -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
-    require('lspconfig')[server.name].setup(opts)
-    to_done_ft(server.name)
-
+    launch_server(server.name)
     ::continue::
   end
 
   for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
-    -- NOTE: not valid: vim.fn.executable(server_name), eg {"sumneko_lua"},{"deno", "lsp"}
+    -- NOTE: vim.fn.executable(server_name): 1. not valid, eg {"sumneko_lua"},{"deno", "lsp"} 2. too slow
+    -- if not done_ft[ft] and vim.fn.executable(server_name) then
     if not done_ft[ft] then
-      local opts = M.get_opts(server_name)
-      pcall(function()
-        require('lspconfig')[server_name].setup(opts)
-        attach_buffers(server_name)
-      end)
-      to_done_ft(server_name)
+      launch_server(server_name)
     end
   end
 end
 
 M.done = function()
-  M.once()
+  config()
+  setup()
   M.fts = done_ft
 
   require 'young.lsp.handlers'
