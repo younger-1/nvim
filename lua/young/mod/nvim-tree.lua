@@ -21,11 +21,11 @@ M.opts = {
     },
   },
   special_files = {
-    ["Cargo.toml"] = true,
+    ['Cargo.toml'] = true,
     Makefile = true,
-    ["README.md"] = true,
-    ["readme.md"] = true,
-  }
+    ['README.md'] = true,
+    ['readme.md'] = true,
+  },
 }
 
 M.cfg = {
@@ -83,10 +83,10 @@ M.cfg = {
   },
   filters = {
     dotfiles = false, -- Toggle via the `toggle_dotfiles` action, default mapping H
-    custom = {  -- Toggle via the `toggle_custom` action, default mapping U
-      '^\\.git'
+    custom = { -- Toggle via the `toggle_custom` action, default mapping U
+      '^\\.git',
     },
-    exclude = {}
+    exclude = {},
   },
   view = {
     side = 'left',

@@ -1,4 +1,4 @@
-require('smart-splits').setup({
+require('smart-splits').setup {
   -- Ignored filetypes (only while resizing)
   ignored_filetypes = {
     'nofile',
@@ -7,9 +7,9 @@ require('smart-splits').setup({
   },
   -- Ignored buffer types (only while resizing)
   ignored_buftypes = {
-    'NvimTree'
+    'NvimTree',
   },
-})
+}
 
 -- local amount = 3
 -- require('smart-splits').resize_up(amount)

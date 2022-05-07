@@ -2,43 +2,43 @@
 -- <https://github.com/ChristianChiarulli/nvim/blob/481c105ef3040ea9627f6fa39f30eb2fff527bd3/ftplugin/java.lua>
 -- <https://github.com/abzcoding/lvim/blob/c0416c056efc7257e2bb5864d3bff31f626cc9e8/ftplugin/java.lua>
 
-local status_ok, jdtls = pcall(require, "jdtls")
+local status_ok, jdtls = pcall(require, 'jdtls')
 if not status_ok then
   return
 end
 
 -- Determine OS
-local home = os.getenv "HOME"
+local home = os.getenv 'HOME'
 local launcher_path = vim.fn.glob(
-  home .. "/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"
+  home .. '/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar'
 )
-if vim.fn.has "mac" == 1 then
-  WORKSPACE_PATH = home .. "/workspace/"
-  CONFIG = "mac"
+if vim.fn.has 'mac' == 1 then
+  WORKSPACE_PATH = home .. '/workspace/'
+  CONFIG = 'mac'
   launcher_path = vim.fn.glob(
-    home .. "/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar",
+    home .. '/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar',
     1,
     1
   )[1]
-elseif vim.fn.has "unix" == 1 then
-  WORKSPACE_PATH = home .. "/workspace/"
-  CONFIG = "linux"
+elseif vim.fn.has 'unix' == 1 then
+  WORKSPACE_PATH = home .. '/workspace/'
+  CONFIG = 'linux'
 else
-  print "Unsupported system"
+  print 'Unsupported system'
 end
-local config_path = home .. "/.local/share/nvim/lsp_servers/jdtls/config_" .. CONFIG
+local config_path = home .. '/.local/share/nvim/lsp_servers/jdtls/config_' .. CONFIG
 
 -- Find root of project
-local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-local root_dir = require("jdtls.setup").find_root(root_markers)
-if root_dir == "" then
+local root_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }
+local root_dir = require('jdtls.setup').find_root(root_markers)
+if root_dir == '' then
   return
 end
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
 local workspace_dir = WORKSPACE_PATH .. project_name
 
@@ -48,7 +48,7 @@ local workspace_dir = WORKSPACE_PATH .. project_name
 -- ./mvnw clean install
 local bundles = {
   vim.fn.glob(
-    home .. "/.config/lvim/.java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+    home .. '/.config/lvim/.java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'
   ),
 }
 
@@ -58,35 +58,35 @@ local bundles = {
 -- npm install
 -- npm run build-plugin
 
-vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/lvim/.vscode-java-test/server/*.jar"), "\n"))
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/.config/lvim/.vscode-java-test/server/*.jar'), '\n'))
 
 local config = {
   cmd = {
-    "java", -- or '/path/to/java11_or_newer/bin/java'
-    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-    "-Dosgi.bundles.defaultStartLevel=4",
-    "-Declipse.product=org.eclipse.jdt.ls.core.product",
-    "-Dlog.protocol=true",
-    "-Dlog.level=ALL",
-    "-javaagent:" .. home .. "/.local/share/nvim/lsp_servers/jdtls/lombok.jar",
-    "-Xms1g",
-    "--add-modules=ALL-SYSTEM",
-    "--add-opens",
-    "java.base/java.util=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/java.lang=ALL-UNNAMED",
-    "-jar",
+    'java', -- or '/path/to/java11_or_newer/bin/java'
+    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+    '-Dosgi.bundles.defaultStartLevel=4',
+    '-Declipse.product=org.eclipse.jdt.ls.core.product',
+    '-Dlog.protocol=true',
+    '-Dlog.level=ALL',
+    '-javaagent:' .. home .. '/.local/share/nvim/lsp_servers/jdtls/lombok.jar',
+    '-Xms1g',
+    '--add-modules=ALL-SYSTEM',
+    '--add-opens',
+    'java.base/java.util=ALL-UNNAMED',
+    '--add-opens',
+    'java.base/java.lang=ALL-UNNAMED',
+    '-jar',
     launcher_path,
-    "-configuration",
-    home .. "/.local/share/nvim/lsp_servers/jdtls/config_" .. CONFIG,
-    "-data",
+    '-configuration',
+    home .. '/.local/share/nvim/lsp_servers/jdtls/config_' .. CONFIG,
+    '-data',
     workspace_dir,
   },
 
-  on_attach = require("lvim.lsp").common_on_attach,
-  on_init = require("lvim.lsp").common_on_init,
-  on_exit = require("lvim.lsp").common_on_exit,
-  capabilities = require("lvim.lsp").common_capabilities(),
+  on_attach = require('lvim.lsp').common_on_attach,
+  on_init = require('lvim.lsp').common_on_init,
+  on_exit = require('lvim.lsp').common_on_exit,
+  capabilities = require('lvim.lsp').common_capabilities(),
   root_dir = root_dir,
   settings = {
     java = {
@@ -99,7 +99,7 @@ local config = {
         downloadSources = true,
       },
       configuration = {
-        updateBuildConfiguration = "interactive",
+        updateBuildConfiguration = 'interactive',
       },
       maven = {
         downloadSources = true,
@@ -116,24 +116,24 @@ local config = {
       format = {
         enabled = false,
         settings = {
-          profile = "GoogleStyle",
-          url = home .. "/.config/lvim/.java-google-formatter.xml",
+          profile = 'GoogleStyle',
+          url = home .. '/.config/lvim/.java-google-formatter.xml',
         },
       },
     },
     signatureHelp = { enabled = true },
     completion = {
       favoriteStaticMembers = {
-        "org.hamcrest.MatcherAssert.assertThat",
-        "org.hamcrest.Matchers.*",
-        "org.hamcrest.CoreMatchers.*",
-        "org.junit.jupiter.api.Assertions.*",
-        "java.util.Objects.requireNonNull",
-        "java.util.Objects.requireNonNullElse",
-        "org.mockito.Mockito.*",
+        'org.hamcrest.MatcherAssert.assertThat',
+        'org.hamcrest.Matchers.*',
+        'org.hamcrest.CoreMatchers.*',
+        'org.junit.jupiter.api.Assertions.*',
+        'java.util.Objects.requireNonNull',
+        'java.util.Objects.requireNonNullElse',
+        'org.mockito.Mockito.*',
       },
     },
-    contentProvider = { preferred = "fernflower" },
+    contentProvider = { preferred = 'fernflower' },
     extendedClientCapabilities = extendedClientCapabilities,
     sources = {
       organizeImports = {
@@ -143,7 +143,7 @@ local config = {
     },
     codeGeneration = {
       toString = {
-        template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+        template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
       },
       useBlocks = true,
     },
@@ -157,7 +157,7 @@ local config = {
   },
 }
 
-require("jdtls").start_or_attach(config)
+require('jdtls').start_or_attach(config)
 -- require('jdtls').setup_dap()
 
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
@@ -167,14 +167,14 @@ vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_co
 vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
 -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
 
-local wkstatus_ok, which_key = pcall(require, "which-key")
+local wkstatus_ok, which_key = pcall(require, 'which-key')
 if not wkstatus_ok then
   return
 end
 
 local opts = {
-  mode = "n",
-  prefix = "<leader>",
+  mode = 'n',
+  prefix = '<leader>',
   buffer = nil,
   silent = true,
   noremap = true,
@@ -182,8 +182,8 @@ local opts = {
 }
 
 local vopts = {
-  mode = "v",
-  prefix = "<leader>",
+  mode = 'v',
+  prefix = '<leader>',
   buffer = nil,
   silent = true,
   noremap = true,
@@ -192,25 +192,24 @@ local vopts = {
 
 local mappings = {
   j = {
-    name = "Java",
-    o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", "Organize Imports" },
-    v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", "Extract Variable" },
-    c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
-    t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method" },
-    T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class" },
-    u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
+    name = 'Java',
+    o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", 'Organize Imports' },
+    v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", 'Extract Variable' },
+    c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", 'Extract Constant' },
+    t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", 'Test Method' },
+    T = { "<Cmd>lua require'jdtls'.test_class()<CR>", 'Test Class' },
+    u = { '<Cmd>JdtUpdateConfig<CR>', 'Update Config' },
   },
 }
 
 local vmappings = {
   j = {
-    name = "Java",
-    v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable" },
-    c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant" },
-    m = { "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method" },
+    name = 'Java',
+    v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", 'Extract Variable' },
+    c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", 'Extract Constant' },
+    m = { "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", 'Extract Method' },
   },
 }
 
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
-

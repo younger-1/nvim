@@ -17,7 +17,6 @@ local M = {
   },
 }
 
-
 local lsp_cfg = require 'young.lsp.config'
 local autocmd = require 'young.autocmd'
 
@@ -50,7 +49,7 @@ local function lsp_code_lens_refresh(client)
 end
 
 local function add_lsp_buffer_keybindings(bufnr)
-  local status_ok, wk = pcall(require, "which-key")
+  local status_ok, wk = pcall(require, 'which-key')
 
   local mappings = {
     normal_mode = 'n',
@@ -107,15 +106,15 @@ M.on_attach = function(client, bufnr)
 end
 
 local function select_default_formater(client)
-  if client.name == "null-ls" or not client.resolved_capabilities.document_formatting then
+  if client.name == 'null-ls' or not client.resolved_capabilities.document_formatting then
     return
   end
-  Log:debug("Checking for formatter overriding for " .. client.name)
-  local formatters = require "lvim.lsp.null-ls.formatters"
+  Log:debug('Checking for formatter overriding for ' .. client.name)
+  local formatters = require 'lvim.lsp.null-ls.formatters'
   local client_filetypes = client.config.filetypes or {}
   for _, filetype in ipairs(client_filetypes) do
     if #vim.tbl_keys(formatters.list_registered(filetype)) > 0 then
-      Log:debug("Formatter overriding detected. Disabling formatting capabilities for " .. client.name)
+      Log:debug('Formatter overriding detected. Disabling formatting capabilities for ' .. client.name)
       client.resolved_capabilities.document_formatting = false
       client.resolved_capabilities.document_range_formatting = false
     end

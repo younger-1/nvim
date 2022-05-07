@@ -52,7 +52,10 @@ return {
       ['gD'] = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
       ['gr'] = { '<cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
       ['gI'] = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto Implementation' },
-      ['gl'] = { "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })<CR>", 'Show diagnostics' },
+      ['gl'] = {
+        "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })<CR>",
+        'Show diagnostics',
+      },
       -- ['gl'] = { "<cmd>lua require'lvim.lsp.handlers'.show_line_diagnostics()<CR>", 'Show line diagnostics' },
       -- ['gp'] = { "<cmd>lua require'lvim.lsp.peek'.Peek('definition')<CR>", 'Peek definition' },
     },

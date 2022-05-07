@@ -146,7 +146,7 @@ mods.edit = {
       config = function()
         require 'young.mod.cinnamon'
       end,
-    }
+    },
   },
   -- textobject = {
   -- },
@@ -266,8 +266,8 @@ mods.neovim = {
     'TheBlob42/houdini.nvim',
     config = function()
       require('houdini').setup()
-    end
-  }
+    end,
+  },
 }
 
 mods.BWT = {
@@ -295,7 +295,7 @@ mods.BWT = {
       config = function()
         require 'young.mod.window-picker'
       end,
-    }
+    },
   },
   -- tab = {},
   quickfix = {
@@ -721,7 +721,7 @@ mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
     { 'williamboman/nvim-lsp-installer' },
-    { "jose-elias-alvarez/null-ls.nvim" },
+    { 'jose-elias-alvarez/null-ls.nvim' },
     { 'b0o/SchemaStore.nvim' },
     {
       'ray-x/lsp_signature.nvim',
@@ -963,7 +963,7 @@ M.pins = function()
   }
 
   if #pin_plugins == 1 then
-    pin_plugins = unpack(pin_plugins)  -- avoid return { { "foo", "bar" } }
+    pin_plugins = unpack(pin_plugins) -- avoid return { { "foo", "bar" } }
   end
 
   return pin_plugins

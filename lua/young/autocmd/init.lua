@@ -174,7 +174,7 @@ M.done = function()
         'CursorHold',
         '<buffer>',
         -- string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
-        'lua vim.lsp.buf.document_highlight()'
+        'lua vim.lsp.buf.document_highlight()',
       },
       {
         'CursorMoved',

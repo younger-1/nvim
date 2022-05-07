@@ -23,7 +23,7 @@ end
 
 M.cfg = {
   -- Minimum level to show
-  level = "info",
+  level = 'info',
 
   -- Animation style (see below for details)
   stages = nil,

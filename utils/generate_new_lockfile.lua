@@ -1,17 +1,17 @@
 -- local sp = os.getenv "SNAPSHOT_PATH"
-local sp = vim.fn.stdpath('config') .. '/new_lock.json'
+local sp = vim.fn.stdpath 'config' .. '/new_lock.json'
 
 local function call_proc(process, opts, cb)
-  local std_output = ""
-  local error_output = ""
+  local std_output = ''
+  local error_output = ''
 
   local function onread(_, is_stderr)
     return function(err, data)
       if data then
         if is_stderr then
-          error_output = (error_output or "") .. err
+          error_output = (error_output or '') .. err
         else
-          std_output = (std_output or "") .. data
+          std_output = (std_output or '') .. data
         end
       end
     end
@@ -62,12 +62,12 @@ local function write_lockfile(write)
   local default_plugins = {}
   local active_jobs = {}
 
-  local core_plugins = vim.tbl_flatten(require("young.plugins").pins())
+  local core_plugins = vim.tbl_flatten(require('young.plugins').pins())
 
   for _, plugin in pairs(core_plugins) do
-    local name = plugin:match "/(%S*)"
-    local url = "https://github.com/" .. plugin
-    local commit = ""
+    local name = plugin:match '/(%S*)'
+    local url = 'https://github.com/' .. plugin
+    local commit = ''
     table.insert(default_plugins, {
       name = name,
       url = url,
@@ -83,21 +83,21 @@ local function write_lockfile(write)
     local on_done = function(success, result, errors)
       completed = completed + 1
       if not success then
-        print("error: " .. errors)
+        print('error: ' .. errors)
         return
       end
-      local latest_sha = result:gsub("\tHEAD\n", ""):sub(1, 7)
+      local latest_sha = result:gsub('\tHEAD\n', ''):sub(1, 7)
       plugins_list[entry.name] = {
         commit = latest_sha,
       }
     end
 
-    local handle = call_proc("git", { args = { "ls-remote", entry.url, "HEAD" } }, on_done)
+    local handle = call_proc('git', { args = { 'ls-remote', entry.url, 'HEAD' } }, on_done)
     table.insert(active_jobs, handle)
   end
 
-  print("active: " .. #active_jobs)
-  print("parsers: " .. #default_plugins)
+  print('active: ' .. #active_jobs)
+  print('parsers: ' .. #default_plugins)
 
   vim.wait(#active_jobs * 60 * 1000, function()
     return completed == #active_jobs
@@ -109,11 +109,11 @@ local function write_lockfile(write)
     return
   end
 
-  local fd = assert(io.open(sp, "w"))
-  fd:write(vim.json.encode(plugins_list), "\n")
+  local fd = assert(io.open(sp, 'w'))
+  fd:write(vim.json.encode(plugins_list), '\n')
   fd:flush()
 end
 
 write_lockfile()
 
-vim.cmd "q"
+vim.cmd 'q'

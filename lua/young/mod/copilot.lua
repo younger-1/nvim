@@ -3,4 +3,6 @@ local opts = {
   -- server_opts_overrides = { trace = "verbose", name = "AI" },
   -- ft_disable = { "markdown", "terraform" },
 }
-vim.schedule(function() require("copilot").setup(opts) end)
+vim.schedule(function()
+  require('copilot').setup(opts)
+end)
