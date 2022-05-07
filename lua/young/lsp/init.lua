@@ -1,6 +1,5 @@
 local modbase = ...
 local lsp_installer = require 'nvim-lsp-installer'
-local common_opts = require 'young.lsp.common'
 
 local M = {}
 
@@ -34,6 +33,7 @@ local done_ft = {}
 
 local get_opts = function(server_name)
   local ok, server_opts = pcall(require, modbase .. '.providers.' .. server_name)
+  local common_opts = require 'young.lsp.common'
   if not ok then
     return common_opts
   end
@@ -168,7 +168,7 @@ M.done = function()
 
   -- bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
 
-  -- require("lvim.lsp.null-ls").setup()
+  require('young.lsp.null-ls').done()
 
   -- autocmds.configure_format_on_save()
 end
