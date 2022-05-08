@@ -13,6 +13,162 @@ local M = {}
 
 local pum_half = (vim.o.pumheight == 0 and 5) or vim.o.pumheight / 2
 
+-- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
+M.cfg = {
+  -- enabled = function()
+  --   -- disable completion if the cursor is `Comment` syntax group.
+  --   return not cmp.config.context.in_syntax_group('Comment')
+  -- end,
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'path' },
+    { name = 'buffer' },
+    { name = 'calc' },
+    { name = 'emoji' },
+    { name = 'luasnip' },
+    -- { name = 'treesitter' },
+    --
+    -- { name = 'cmp_tabnine' },
+    -- { name = 'crates' },
+  },
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    completion = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    },
+    documentation = {
+      border = { '┏', '━', '┓', '┃', '┛', '━', '┗', '┃' },
+    },
+  },
+  -- view = {
+  --   entries = 'native'
+  -- },
+  experimental = {
+    ghost_text = false,
+  },
+  preselect = cmp.PreselectMode.Item,
+  -- preselect = cmp.PreselectMode.None,
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.score,
+      cmp.config.compare.locality,
+      cmp.config.compare.kind,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
+  },
+  formatting = {
+    -- format = function(entry, vim_item)
+    --   vim_item.kind = icons[vim_item.kind]
+    --   vim_item.menu = ({
+    --     nvim_lsp = '(LSP)',
+    --     path = '(Path)',
+    --     luasnip = '(Snippet)',
+    --     buffer = '(Buffer)',
+    --     neorg = '(Neorg)',
+    --     calc = '(Calculator)',
+    --   })[entry.source.name]
+    --   vim_item.dup = ({
+    --     buffer = 1,
+    --     path = 1,
+    --     nvim_lsp = 0,
+    --   })[entry.source.name] or 0
+    --   return vim_item
+    -- end,
+
+    -- format = require('lspkind').cmp_format(),
+    format = require('lspkind').cmp_format {
+      with_text = true,
+      maxwidth = 50,
+      menu = {
+        buffer = '[Buffer]',
+        nvim_lsp = '[LSP]',
+        luasnip = '[LuaSnip]',
+        nvim_lua = '[Lua]',
+        latex_symbols = '[Latex]',
+      },
+    },
+  },
+  -- mapping = cmapping.preset.insert {
+  mapping = {
+    ['<C-j>'] = cmapping(cmapping.select_next_item(), { 'i', 'c' }),
+    ['<C-k>'] = cmapping(cmapping.select_prev_item(), { 'i', 'c' }),
+    ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
+    ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
+    ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmapping(cmapping.confirm { select = true }, { 'i' }),
+    ['<C-e>'] = {
+      i = cmapping.abort(),
+      -- c = cmapping.close(),
+    },
+    ['<CR>'] = cmapping.confirm {
+      -- behavior = cmp.ConfirmBehavior.Replace,
+      -- select = false,
+      select = true,
+    },
+    ['<Tab>'] = cmapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+        -- elseif luasnip.expandable() then
+        --   luasnip.expand()
+        -- elseif luasnip.expand_or_jumpable() then
+        --   luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, {
+      'i',
+      's',
+    }),
+    ['<S-Tab>'] = cmapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+        -- elseif luasnip.jumpable(-1) then
+        --   luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+      'i',
+      's',
+    }),
+    ['<PageUp>'] = cmapping(function()
+      for _ = 1, pum_half do
+        cmp.select_prev_item()
+      end
+    end, { 'i', 'c' }),
+    ['<PageDown>'] = cmapping(function()
+      for _ = 1, pum_half do
+        cmp.select_next_item()
+      end
+    end, { 'i', 'c' }),
+    ['<C-x><C-h>'] = cmapping.complete {
+      config = {
+        sources = {
+          { name = 'luasnip' },
+        },
+      },
+    },
+    -- ['<C-x><C-g>'] = cmapping.complete({}),
+    -- ['<C-x><C-m>'] = cmapping.complete({}),
+    -- ['<C-x><C-b>'] = cmapping.complete({}),
+    -- ['<C-x>h'] = cmapping.complete({}),
+    -- ['<C-x>j'] = cmapping.complete({}),
+    -- ['<C-x>k'] = cmapping.complete({}),
+    -- ['<C-x>l'] = cmapping.complete({}),
+  },
+}
+
 M.done = function()
   -- TODO: move to icons
   local icons = {
@@ -48,166 +204,15 @@ M.done = function()
     Variable = '',
   }
 
-  -- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
-  cmp.setup {
-    -- enabled = function()
-    --   -- disable completion if the cursor is `Comment` syntax group.
-    --   return not cmp.config.context.in_syntax_group('Comment')
-    -- end,
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'nvim_lua' },
-      { name = 'path' },
-      { name = 'buffer' },
-      { name = 'calc' },
-      { name = 'emoji' },
-      { name = 'luasnip' },
-      { name = 'treesitter' },
-      --
-      { name = 'cmp_tabnine' },
-      { name = 'copilot' },
-      { name = 'crates' },
-    },
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      completion = {
-        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-      },
-      documentation = {
-        border = { '┏', '━', '┓', '┃', '┛', '━', '┗', '┃' },
-      },
-    },
-    -- view = {
-    --   entries = 'native'
-    -- },
-    experimental = {
-      ghost_text = false,
-    },
-    preselect = cmp.PreselectMode.Item,
-    -- preselect = cmp.PreselectMode.None,
-    sorting = {
-      comparators = {
-        cmp.config.compare.recently_used,
-        cmp.config.compare.offset,
-        cmp.config.compare.score,
-        cmp.config.compare.sort_text,
-        cmp.config.compare.length,
-        cmp.config.compare.order,
-      },
-    },
-    formatting = {
-      -- format = function(entry, vim_item)
-      --   vim_item.kind = icons[vim_item.kind]
-      --   vim_item.menu = ({
-      --     nvim_lsp = '(LSP)',
-      --     path = '(Path)',
-      --     luasnip = '(Snippet)',
-      --     buffer = '(Buffer)',
-      --     neorg = '(Neorg)',
-      --     calc = '(Calculator)',
-      --   })[entry.source.name]
-      --   vim_item.dup = ({
-      --     buffer = 1,
-      --     path = 1,
-      --     nvim_lsp = 0,
-      --   })[entry.source.name] or 0
-      --   return vim_item
-      -- end,
-
-      -- format = require('lspkind').cmp_format(),
-      format = require('lspkind').cmp_format {
-        with_text = true,
-        maxwidth = 50,
-        menu = {
-          buffer = '[Buffer]',
-          nvim_lsp = '[LSP]',
-          luasnip = '[LuaSnip]',
-          nvim_lua = '[Lua]',
-          latex_symbols = '[Latex]',
-        },
-      },
-    },
-    -- mapping = cmapping.preset.insert {
-    mapping = {
-      ['<C-j>'] = cmapping(cmapping.select_next_item(), { 'i', 'c' }),
-      ['<C-k>'] = cmapping(cmapping.select_prev_item(), { 'i', 'c' }),
-      ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
-      ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
-      ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmapping(cmapping.confirm { select = true }, { 'i' }),
-      ['<C-e>'] = {
-        i = cmapping.abort(),
-        -- c = cmapping.close(),
-      },
-      ['<CR>'] = cmapping.confirm {
-        -- behavior = cmp.ConfirmBehavior.Replace,
-        -- select = false,
-        select = true,
-      },
-      ['<Tab>'] = cmapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-          -- elseif luasnip.expandable() then
-          --   luasnip.expand()
-          -- elseif luasnip.expand_or_jumpable() then
-          --   luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end, {
-        'i',
-        's',
-      }),
-      ['<S-Tab>'] = cmapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-          -- elseif luasnip.jumpable(-1) then
-          --   luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, {
-        'i',
-        's',
-      }),
-      ['<PageUp>'] = cmapping(function()
-        for _ = 1, pum_half do
-          cmp.select_prev_item()
-        end
-      end, { 'i', 'c' }),
-      ['<PageDown>'] = cmapping(function()
-        for _ = 1, pum_half do
-          cmp.select_next_item()
-        end
-      end, { 'i', 'c' }),
-      ['<C-x><C-h>'] = cmapping.complete {
-        config = {
-          sources = {
-            { name = 'luasnip' },
-          },
-        },
-      },
-      -- ['<C-x><C-g>'] = cmapping.complete({}),
-      -- ['<C-x><C-m>'] = cmapping.complete({}),
-      -- ['<C-x><C-b>'] = cmapping.complete({}),
-      -- ['<C-x>h'] = cmapping.complete({}),
-      -- ['<C-x>j'] = cmapping.complete({}),
-      -- ['<C-x>k'] = cmapping.complete({}),
-      -- ['<C-x>l'] = cmapping.complete({}),
-    },
-  }
-
+  cmp.setup(M.cfg)
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
       { name = 'cmp_git' },
+      { name = 'emoji' },
     }, {
       { name = 'buffer' },
+      { name = 'path' },
     }),
   })
   -- cmp.setup.filetype({ 'markdown', 'help' }, {

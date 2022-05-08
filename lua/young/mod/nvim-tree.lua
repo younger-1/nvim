@@ -85,6 +85,8 @@ M.cfg = {
     dotfiles = false, -- Toggle via the `toggle_dotfiles` action, default mapping H
     custom = { -- Toggle via the `toggle_custom` action, default mapping U
       '^\\.git',
+      -- '^\\.cache',
+      -- 'node_modules',
     },
     exclude = {},
   },

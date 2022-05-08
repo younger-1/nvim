@@ -676,7 +676,7 @@ mods.code = {
     { 'onsails/lspkind-nvim' },
     { 'rafamadriz/friendly-snippets' },
     {
-      "github/copilot.vim",
+      'github/copilot.vim',
       -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
       -- event = 'InsertEnter',
       cmd = 'Copilot',
@@ -684,7 +684,7 @@ mods.code = {
     },
     -- {
     --   'zbirenbaum/copilot.lua',
-    --   requires = { { 'zbirenbaum/copilot-cmp', after = { "copilot.lua", "nvim-cmp" } } },
+    --   requires = { { 'zbirenbaum/copilot-cmp', after = { 'copilot.lua', 'nvim-cmp' } } },
     --   event = 'InsertEnter',
     --   config = [[require('young.mod.copilot').setup_lua()]],
     -- }
