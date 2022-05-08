@@ -6,15 +6,30 @@ local opts = {
 }
 
 M.setup_lua = function()
-  vim.schedule(function()
+  table.insert(require('young.mod.cmp').cfg.sources, { name = 'copilot', group_index = 2 })
+
+  vim.defer_fn(function()
     require('copilot').setup(opts)
-  end)
+  end, 200)
 end
 
 M.setup_vim = function()
   vim.g.copilot_filetypes = {
     ['TelescopePrompt'] = false,
     -- ['*'] = false,
+    -- python = true,
+    -- lua = true,
+    -- go = true,
+    -- rust = true,
+    -- html = true,
+    -- c = true,
+    -- cpp = true,
+    -- java = true,
+    -- javascript = true,
+    -- typescript = true,
+    -- javascriptreact = true,
+    -- typescriptreact = true,
+    -- terraform = true,
   }
 
   vim.cmd [[

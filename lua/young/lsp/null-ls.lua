@@ -1,4 +1,5 @@
 local M = {}
+local null_ls = require 'null-ls'
 local u = require 'null-ls.utils'
 
 local py_cwd = function(params)
@@ -14,22 +15,28 @@ local py_cwd = function(params)
   return u.root_pattern(unpack(root_files))(params.bufname)
 end
 
+-- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting>
+-- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics>
+-- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/hover>
+-- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions>
+-- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion>
+
 local config = {
   formatters = {
-    { command = 'black', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
-    { command = 'isort', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
-    { command = 'stylua', extra_args = {}, filetypes = { 'lua' } },
-    { command = 'shfmt', extra_args = { '-i', '2', '-ci', '-bn' }, filetypes = { 'sh' } },
+    { command = 'black', extra_args = { '--fast' }, filetypes = { 'python' }, cwd = py_cwd },
+    -- { command = 'isort', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
+    { command = 'stylua' },
+    -- { command = 'shfmt', extra_args = { '-i', '2', '-ci', '-bn' }, filetypes = { 'sh' } },
+    { command = 'google_java_format', extra_args = {}, filetypes = { 'java' } },
+    -- { command = 'prettier', extra_filetypes = { 'toml' }, extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' } },
   },
   linters = {
-    {
-      command = 'luacheck',
-      extra_args = {},
-      filetypes = { 'lua' },
-      cwd = function(params) -- force luacheck to find its '.luacheckrc' file
-        return u.root_pattern '.luacheckrc'(params.bufname)
-      end,
-    },
+    -- {
+    --   command = 'luacheck',
+    --   cwd = function(params) -- force luacheck to find its '.luacheckrc' file
+    --     return u.root_pattern '.luacheckrc'(params.bufname)
+    --   end,
+    -- },
     { command = 'flake8', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
     -- { command = "mypy", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
     { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' }, filetypes = { 'sh' } },
@@ -68,7 +75,6 @@ function M.list_registered_linters(filetype)
 end
 
 function M.done()
-  local null_ls = require 'null-ls'
   local sources = {}
   for _, provider in ipairs(config.formatters) do
     local source = null_ls.builtins.formatting[provider.command].with(provider)
