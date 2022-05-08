@@ -65,7 +65,8 @@ function M.load_augroups()
     },
     _general_lsp = {
       { 'BufRead', '*', '++once', "lua require('young.lsp').done()" },
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,minimap', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'null-ls-info', 'lua require("young.tools").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
     custom_groups = {
@@ -162,8 +163,8 @@ M.done = function()
     code_lens_refresh = {
       buffer = true,
       {
-        'InsertLeave',
-        -- 'InsertLeave,BufEnter',
+        -- 'InsertLeave',
+        'CursorHold,BufEnter',
         '<buffer>',
         'lua vim.lsp.codelens.refresh()',
       },
