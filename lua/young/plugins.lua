@@ -513,6 +513,7 @@ mods.UI = {
     {
       'rcarriga/nvim-notify',
       event = 'BufWinEnter',
+      -- after = 'telescope.nvim',
       config = function()
         require('young.mod.notify').done()
       end,
