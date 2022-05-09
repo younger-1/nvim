@@ -1,6 +1,6 @@
--- <https://github.com/williamboman/nvim-config/blob/main/lua/wb/lsp/jdtls-progress.lua>
-
-local handler_status = function()
+-- <https://github.com/williamboman/nvim-config/blob/dbe14ffbd4e380b52016d2407ad23560e346f35a/after/plugin/lsp/servers/jdtls.lua#L6>
+-- LSP $/progress: <https://microsoft.github.io/language-server-protocol/specification#progress>
+local function progress_handler()
   ---@type table<string, boolean>
   local tokens = {}
   ---@type table<string, boolean>
@@ -64,7 +64,7 @@ end
 
 return {
   handlers = {
-    ['language/status'] = handler_status(),
+    ['language/status'] = progress_handler(),
   },
   -- on_attach_cb = on_attach_jdtls,
 }
