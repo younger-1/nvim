@@ -197,9 +197,9 @@ nmap('<C-l>', '<C-w>l')
 nmap(']q', ':cnext<CR>')
 nmap(']q', ':cprev<CR>')
 nmap('<C-q>', ':call QuickFixToggle()<CR>')
-nmap(']e', ':cnext<CR>')
-nmap(']e', ':cprev<CR>')
-nmap('<C-e>', ':call LocListToggle()<CR>')
+nmap(']z', ':cnext<CR>')
+nmap(']z', ':cprev<CR>')
+nmap('<C-z>', ':call LocListToggle()<CR>')
 
 vim.cmd [[
   function! QuickFixToggle()
