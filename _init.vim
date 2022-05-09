@@ -918,11 +918,6 @@ inoremap <C-V> <C-G>u<C-R><C-O>+
 "   set autoindent
 " endfunction
 
-" <C-z> in win10's nvim is dead, so i mapped it.
-if has('win32')
-  noremap <C-z> <Cmd>SSave<CR>
-endif
-
 " Act like D and C
 nnoremap Y y$
 " Copy to system clipboard in Visual and Select mode

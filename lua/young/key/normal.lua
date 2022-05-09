@@ -40,10 +40,7 @@ local mymappings = {
   ['<C-y>'] = {},
   ['<C-p>'] = {},
   ['<C-s>'] = {},
-  -- Must
-  ['<C-z>'] = {
-    ['<C-z>'] = { '<C-z>', 'Suspend' },
-  },
+  ['<C-e>'] = {},
   -- ["<C-a>"] = {},
   -- ["<C-x>"] = {},
   -- ["<C-f>"] = {},
@@ -54,7 +51,7 @@ local mymappings = {
       name = '+fzf',
       [' '] = { "<cmd>lua require('fzf-lua').live_grep_resume()<cr>", 'Grep' },
       ['<C-q>'] = { "<cmd>lua require('fzf-lua').quickfix()<cr>", 'Quickfix' },
-      ['<C-e>'] = { "<cmd>lua require('fzf-lua').loclist()<cr>", 'Loclist' },
+      ['<C-z>'] = { "<cmd>lua require('fzf-lua').loclist()<cr>", 'Loclist' },
       f = { "<cmd>lua require('fzf-lua').files()<cr>", 'Files' },
       b = { "<cmd>lua require('fzf-lua').buffers()<cr>", 'Buffers' },
       r = { "<cmd>lua require('fzf-lua').files_resume()<cr>", 'Resume' },
