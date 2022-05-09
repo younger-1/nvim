@@ -10,6 +10,8 @@
 --  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
 --  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
 
+-- print(vim.inspect(vim.api.nvim_list_runtime_paths()))
+
 pcall(function()
   require('impatient').enable_profile()
 end)
