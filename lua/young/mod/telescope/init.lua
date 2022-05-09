@@ -356,6 +356,8 @@ M.done = function()
   local telescope = require 'telescope'
   telescope.setup(M.cfg)
 
+  vim.cmd [[cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)]]
+
   -- if lvim.builtin.project.active then
   --   pcall(function()
   --     require('telescope').load_extension 'projects'

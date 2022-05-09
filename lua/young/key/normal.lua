@@ -3,11 +3,11 @@ local mymappings = {
     -- [' '] = {},
     -- ['<Tab>'] = {},
     -- ['<CR>'] = {},
-    d = {
+    e = {
       '<cmd>lua vim.diagnostic.goto_next()<cr>',
       'Next Diagnostic',
     },
-    D = {
+    E = {
       '<cmd>lua vim.diagnostic.goto_next { severity = "Error" }<cr>',
       'Next Diagnostic',
     },
@@ -15,11 +15,11 @@ local mymappings = {
     x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next Trouble' },
   },
   ['['] = {
-    d = {
+    e = {
       '<cmd>lua vim.diagnostic.goto_prev()<cr>',
       'Prev Diagnostic',
     },
-    D = {
+    E = {
       '<cmd>lua vim.diagnostic.goto_prev { severity = "Error" }<cr>',
       'Prev Diagnostic',
     },
