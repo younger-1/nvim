@@ -3,24 +3,25 @@ local mymappings = {
     -- [' '] = {},
     -- ['<Tab>'] = {},
     -- ['<CR>'] = {},
-    e = {
-      '<cmd>lua vim.diagnostic.goto_next()<cr>',
-      'Next Diagnostic',
-    },
+    e = { vim.diagnostic.goto_next, 'Prev Diagnostic' },
     E = {
-      '<cmd>lua vim.diagnostic.goto_next { severity = "Error" }<cr>',
-      'Next Diagnostic',
+      function()
+        vim.diagnostic.goto_next { severity = 'Error' }
+      end,
+      'Prev Diagnostic',
     },
     -- c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
     x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next Trouble' },
   },
   ['['] = {
-    e = {
-      '<cmd>lua vim.diagnostic.goto_prev()<cr>',
-      'Prev Diagnostic',
-    },
+    -- [' '] = {},
+    -- ['<Tab>'] = {},
+    -- ['<CR>'] = {},
+    e = { vim.diagnostic.goto_prev, 'Prev Diagnostic' },
     E = {
-      '<cmd>lua vim.diagnostic.goto_prev { severity = "Error" }<cr>',
+      function()
+        vim.diagnostic.goto_prev { severity = 'Error' }
+      end,
       'Prev Diagnostic',
     },
     -- c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
@@ -88,7 +89,7 @@ local mymappings = {
   y = {
     c = {
       name = '+colorscheme',
-      c = { "<cmd>lua require('user.theme').toggle_style()<cr>", 'Style' },
+      c = { "<cmd>lua require('young.theme').toggle_style()<cr>", 'Style' },
       m = { "<cmd>lua require('material.functions').toggle_style()<cr>", 'Material' },
     },
     o = {
@@ -103,7 +104,7 @@ local mymappings = {
       h = { '<cmd>set hls!<cr>', 'hightlight' },
       l = { '<cmd>set list!<cr>', 'list' },
       m = { [[:set mouse=<C-R>=&mouse == "" ? "a" : ""<cr><cr>]], 'mouse' },
-      M = { '<cmd>lua require("young.tools").toggle_mouse()<cr>', 'mouse++' },
+      M = { require('young.tools').toggle_mouse, 'mouse++' },
       n = { '<cmd>set number!<cr>', 'number' },
       r = { '<cmd>set relativenumber!<cr>', 'relativenumber' },
       s = { '<cmd>set spell!<cr>', 'spell' },

@@ -290,4 +290,16 @@ M.add_border = function()
   })
 end
 
+M.toggle_indent_style = function()
+  require('young.mod.indent-blankline').hot()
+end
+
+M.toggle_notify = function()
+  require('young.mod.notify').toggle()
+end
+
+M.toggle_notify_style = function()
+  require('young.mod.notify').hot()
+end
+
 return M

@@ -8,7 +8,7 @@ local vmappings = {
   },
   l = {
     name = 'lsp',
-    f = { '<cmd>vim.lsp.buf.range_formatting()<cr>', 'Format' },
+    f = { vim.lsp.buf.range_formatting, 'Format' },
   },
   p = {
     name = 'pack',

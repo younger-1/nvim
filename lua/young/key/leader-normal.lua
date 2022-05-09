@@ -359,9 +359,9 @@ local mappings = {
     b = 'Biscuits',
     m = { '<cmd>MinimapToggle<cr>', 'Minimap' },
     l = { require('young.tools').toggle_tabline, 'Tabline' },
-    i = { require('young.mod.indent-blankline').hot, 'Indent Style' },
-    n = { require('young.mod.notify').hot, 'Nofity Style' },
-    N = { require('young.mod.notify').toggle, 'Toggle Nofity' },
+    i = { require('young.tools').toggle_indent_style, 'Indent Style' },
+    n = { require('young.tools').toggle_notify_style, 'Nofity Style' },
+    N = { require('young.tools').toggle_notify, 'Toggle Nofity' },
   },
   w = { '<cmd>w!<cr>', 'Save' },
   x = {
