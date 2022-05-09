@@ -7,12 +7,20 @@ local mymappings = {
       '<cmd>lua vim.diagnostic.goto_next()<cr>',
       'Next Diagnostic',
     },
+    D = {
+      '<cmd>lua vim.diagnostic.goto_next { severity = "Error" }<cr>',
+      'Next Diagnostic',
+    },
     -- c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
     x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next Trouble' },
   },
   ['['] = {
     d = {
       '<cmd>lua vim.diagnostic.goto_prev()<cr>',
+      'Prev Diagnostic',
+    },
+    D = {
+      '<cmd>lua vim.diagnostic.goto_prev { severity = "Error" }<cr>',
       'Prev Diagnostic',
     },
     -- c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
