@@ -46,11 +46,11 @@ return {
   automatic_servers_installation = true,
   buffer_mappings = {
     normal_mode = {
-      ['K'] = { vim.lsp.buf.hover(), 'Show hover' },
+      ['K'] = { vim.lsp.buf.hover, 'Show hover' },
       ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
-      ['gd'] = { vim.lsp.buf.definition(), 'Goto definition' },
-      ['gD'] = { vim.lsp.buf.declaration(), 'Goto declaration' },
-      ['gr'] = { vim.lsp.buf.references(), 'Goto references' },
+      ['gd'] = { vim.lsp.buf.definition, 'Goto definition' },
+      ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
+      ['gr'] = { vim.lsp.buf.references, 'Goto references' },
       ['gI'] = { vim.lsp.buf.implementation, 'Goto implementation' },
       ['gl'] = {
         function()
