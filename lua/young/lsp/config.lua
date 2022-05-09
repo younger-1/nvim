@@ -48,10 +48,10 @@ return {
     normal_mode = {
       ['K'] = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Show hover' },
       ['gh'] = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help' },
-      ['gd'] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto Definition' },
+      ['gd'] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition' },
       ['gD'] = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
       ['gr'] = { '<cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
-      ['gI'] = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto Implementation' },
+      ['gI'] = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation' },
       ['gl'] = {
         "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })<CR>",
         'Show diagnostics',
