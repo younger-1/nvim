@@ -94,7 +94,7 @@ local config = function()
   -- if vim.fn.has 'nvim-0.5.1' == 1 then
   --   require('vim.lsp.log').set_format_func(vim.inspect)
   -- end
-  vim.cmd [[ command! LspLog exe 'tabnew ' .. luaeval("vim.lsp.get_log_path()") ]]
+  vim.cmd [[ command! LspLog exe 'split ' .. luaeval("vim.lsp.get_log_path()") ]]
 
   -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
   local lspconfig_win = require 'lspconfig.ui.windows'

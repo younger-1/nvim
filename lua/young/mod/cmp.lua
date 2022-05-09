@@ -109,7 +109,7 @@ M.cfg = {
     ['<C-y>'] = cmapping(cmapping.confirm { select = true }, { 'i' }),
     ['<C-e>'] = {
       i = cmapping.abort(),
-      -- c = cmapping.close(),
+      c = cmapping.close(),
     },
     ['<CR>'] = cmapping.confirm {
       -- behavior = cmp.ConfirmBehavior.Replace,
