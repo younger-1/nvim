@@ -46,18 +46,24 @@ return {
   automatic_servers_installation = true,
   buffer_mappings = {
     normal_mode = {
-      ['K'] = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Show hover' },
-      ['gh'] = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help' },
-      ['gd'] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition' },
-      ['gD'] = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
-      ['gr'] = { '<cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
-      ['gI'] = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation' },
+      ['K'] = { vim.lsp.buf.hover(), 'Show hover' },
+      ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      ['gd'] = { vim.lsp.buf.definition(), 'Goto definition' },
+      ['gD'] = { vim.lsp.buf.declaration(), 'Goto declaration' },
+      ['gr'] = { vim.lsp.buf.references(), 'Goto references' },
+      ['gI'] = { vim.lsp.buf.implementation, 'Goto implementation' },
       ['gl'] = {
-        "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })<CR>",
+        function()
+          vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })
+        end,
         'Show diagnostics',
       },
-      -- ['gl'] = { "<cmd>lua require'lvim.lsp.handlers'.show_line_diagnostics()<CR>", 'Show line diagnostics' },
-      -- ['gp'] = { "<cmd>lua require'lvim.lsp.peek'.Peek('definition')<CR>", 'Peek definition' },
+      -- ['gp'] = {
+      --   function()
+      --     require('young.lsp.misc').Peek 'definition'
+      --   end,
+      --   'Peek definition',
+      -- },
     },
     insert_mode = {},
     visual_mode = {},
