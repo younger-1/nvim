@@ -154,7 +154,8 @@ local mappings = {
     },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
-    l = { "<cmd>lua require 'gitsigns'.blame_line { full=true }<cr>", 'Blame' },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", 'Blame' },
+    L = { "<cmd>lua require 'gitsigns'.blame_line { full=true }<cr>", 'Blame' },
     n = {
       name = '+neogit',
       c = { "<cmd>lua require('neogit').open({ 'commit' })<cr>", 'Commit' },

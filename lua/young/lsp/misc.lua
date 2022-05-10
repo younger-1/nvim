@@ -1,7 +1,7 @@
 local M = {}
 
-local no_code_actions_notify = function()
-  vim.api.nvim_echo({ { ' No code actions available', 'WarningMsg' } }, false, {})
+local no_code_actions_echo = function()
+  young.utils.echo { ' No code actions available' }
 end
 
 -- <https://github.com/axieax/dotconfig/blob/0536a8ec6c4f6fb155dddc27a15aa997ff206089/nvim/lua/axie/lsp/code_actions.lua#L28-L49>
@@ -32,7 +32,7 @@ function M.code_action_better(ignore_null_ls, context)
 
   -- Override vim.notify
   local original_notify = vim.notify
-  vim.notify = no_code_actions_notify
+  vim.notify = no_code_actions_echo
 
   -- Attach to vim.lsp.buf_request_all
   local buf_request_all = vim.lsp.buf_request_all

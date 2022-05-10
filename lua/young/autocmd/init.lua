@@ -153,9 +153,6 @@ M.done = function()
 
   local format_opts = { pattern = '*', timeout = 1000 }
   local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)
-  M.build {
-    auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
-  }
 
   M.build({
     print_ascii = { { 'CursorHold', '*', ':normal! ga' } },

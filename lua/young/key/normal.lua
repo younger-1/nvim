@@ -28,10 +28,9 @@ local mymappings = {
     x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev Trouble' },
   },
   ['<C-w>'] = {
-    m = { ':call WinZoomToggle()<cr>', 'Zoom' },
-    S = { ':bo split<cr>', 'Split' },
-    V = { ':bo vert split<cr>', 'VSplit' },
-    [' '] = { "<cmd>lua require('focus').focus_toggle()<cr>", 'FocusToggle' },
+    -- [' '] = { "<cmd>lua require('focus').focus_toggle()<cr>", 'FocusToggle' },
+    m = { require('young.tools').toggle_zoom, 'Zoom' },
+    w = { require('young.tools').set_cursor_floating_win, 'Zoom' },
     -- e = "",
     -- t = "",
     -- b = "",
