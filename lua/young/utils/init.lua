@@ -1,4 +1,7 @@
 local utils = {}
+
+young.utils = utils
+
 local uv = vim.loop
 
 utils.join_paths = _G.join_paths
@@ -111,6 +114,14 @@ function utils.shallow_keep(a, b)
       a[k] = v
     end
   end
+end
+
+function utils.echo(t)
+  local chunks = {}
+  for _, text in ipairs(t) do
+    chunks[#chunks + 1] = { text, 'WarningMsg' }
+  end
+  vim.api.nvim_echo(chunks, false, {})
 end
 
 return utils

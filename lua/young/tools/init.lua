@@ -302,4 +302,34 @@ M.toggle_notify_style = function()
   require('young.mod.notify').hot()
 end
 
+M.toggle_zoom = function()
+  vim.cmd 'call WinZoomToggle()'
+end
+
+M.set_cursor_floating_win = function()
+  local winids = vim.api.nvim_tabpage_list_wins(0)
+  winids = vim.tbl_filter(function(winid)
+    local wincfg = vim.api.nvim_win_get_config(winid)
+    return wincfg.relative ~= ''
+  end, winids)
+
+  if #winids == 0 then
+    young.utils.echo { 'No floating window' }
+    return
+  end
+
+  if #winids > 1 then
+    young.utils.echo { 'Two or more floating window' }
+    -- M.pick_floating_win(winids)
+  end
+
+  for _, winid in ipairs(winids) do
+    if winid ~= vim.api.nvim_get_current_win() then
+      vim.api.nvim_set_current_win(winid)
+      vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = true })
+      return
+    end
+  end
+end
+
 return M
