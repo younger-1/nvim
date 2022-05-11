@@ -8,8 +8,6 @@ local function apply_defaults(configs, defaults)
 end
 
 function M.done()
-  _G.young = {}
-
   require 'young.utils.global'
 
   require 'young.cfg.global'

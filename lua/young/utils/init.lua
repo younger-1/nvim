@@ -2,8 +2,6 @@ local utils = {}
 
 young.utils = utils
 
-local uv = vim.loop
-
 utils.join_paths = _G.join_paths
 
 function utils.toggle_autoformat()

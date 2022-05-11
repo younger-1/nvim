@@ -1,4 +1,7 @@
-local uv = vim.loop
+_G.young = {}
+
+_G.uv = vim.loop
+_G.api = vim.api
 
 --[[
 Windows:

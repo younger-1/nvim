@@ -1,4 +1,4 @@
-local M = {}
+local tools = {}
 -- local Log = require "lvim.core.log"
 
 -- From: <https://github.com/nvim-lua/plenary.nvim/blob/8c6cc07a68b65eb707be44598f0084647d495978/lua/plenary/reload.lua#L3>
@@ -32,7 +32,7 @@ local unload_module = function(found, module_name, starts_with_only)
   end
 end
 
-M.reload_file = function(pack)
+tools.reload_file = function(pack)
   local luacache = (_G.__luacache or {}).cache
   package.loaded[pack] = nil
   if luacache then
@@ -41,7 +41,7 @@ M.reload_file = function(pack)
 end
 
 -- For manual reload
-M.rr = function(...)
+tools.rr = function(...)
   local mods = { ... }
 
   -- Reload the current buffer
@@ -61,7 +61,7 @@ M.rr = function(...)
       table.insert(pack, 1, bufpath[i])
     end
     pack = table.concat(pack, '.')
-    M.reload_file(pack)
+    tools.reload_file(pack)
     print('Reload: ' .. pack)
     require('utils').reload_lv_config()
     return
@@ -97,7 +97,7 @@ end
 --   return completion_list
 -- end
 
-M.rr_complete = function(lead, _, _)
+tools.rr_complete = function(lead, _, _)
   local completion_list = {}
   for name, _ in pairs(_G.package.loaded) do
     if vim.startswith(name, lead) then
@@ -126,7 +126,7 @@ end
 -- end
 
 local bar_flag = true
-M.toggle_tabline = function()
+tools.toggle_tabline = function()
   if bar_flag then
     vim.cmd 'BarbarDisable'
     require('young.mod.tabline').config()
@@ -149,7 +149,7 @@ M.toggle_tabline = function()
 end
 
 -- Toggle to disable mouse mode and indentlines for easier paste
-M.toggle_mouse = function()
+tools.toggle_mouse = function()
   if vim.o.mouse == '' then
     -- vim.cmd[[IndentBlanklineEnable]]
     vim.o.mouse = 'nvi'
@@ -167,7 +167,7 @@ end
 
 local ls
 
-M.get_ls = function(servername)
+tools.get_ls = function(servername)
   if ls then
     for bufnr, _ in pairs(ls.attached_buffers) do
       if bufnr == vim.fn.bufnr() then
@@ -191,10 +191,10 @@ M.get_ls = function(servername)
   end
 end
 
-M.print_ls = function(...)
+tools.print_ls = function(...)
   local keys = { ... }
 
-  M.get_ls()
+  tools.get_ls()
   if not ls then
     print '[Failed]: Not such server'
     return
@@ -213,10 +213,10 @@ M.print_ls = function(...)
   pp(info)
 end
 
-M.print_ls_complete = function(lead, _, _)
+tools.print_ls_complete = function(lead, _, _)
   local completion_list = {}
 
-  M.get_ls()
+  tools.get_ls()
   if not ls then
     print '[Failed]: Not such server'
     return
@@ -235,7 +235,7 @@ end
 -- M.pick_ls
 -- commands Pls <servername> <key>
 
-M.chdir = function(force)
+tools.chdir = function(force)
   -- TODO: buftype test
   -- lcd is only need when running ProjectRoot manually
   local cwd_old = vim.fn.getcwd()
@@ -258,16 +258,16 @@ M.chdir = function(force)
 end
 
 local rnu
-M.nornu = function()
+tools.nornu = function()
   rnu = vim.o.rnu
   vim.o.rnu = false
 end
 
-M.rnu = function()
+tools.rnu = function()
   vim.o.rnu = rnu
 end
 
-M.lsp_ref = function()
+tools.lsp_ref = function()
   if vim.o.bg == 'dark' then
     vim.cmd [[
       hi LspReferenceText  cterm=bold ctermbg=DarkCyan  blend=10 gui=bold guibg=DarkCyan
@@ -283,30 +283,30 @@ M.lsp_ref = function()
   end
 end
 
-M.add_border = function()
+tools.add_border = function()
   local win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_config(win, {
     border = 'rounded',
   })
 end
 
-M.toggle_indent_style = function()
+tools.toggle_indent_style = function()
   require('young.mod.indent-blankline').hot()
 end
 
-M.toggle_notify = function()
+tools.toggle_notify = function()
   require('young.mod.notify').toggle()
 end
 
-M.toggle_notify_style = function()
+tools.toggle_notify_style = function()
   require('young.mod.notify').hot()
 end
 
-M.toggle_zoom = function()
+tools.toggle_zoom = function()
   vim.cmd 'call WinZoomToggle()'
 end
 
-M.set_cursor_floating_win = function()
+tools.set_cursor_floating_win = function()
   local winids = vim.api.nvim_tabpage_list_wins(0)
   winids = vim.tbl_filter(function(winid)
     local wincfg = vim.api.nvim_win_get_config(winid)
@@ -332,4 +332,4 @@ M.set_cursor_floating_win = function()
   end
 end
 
-return M
+return tools
