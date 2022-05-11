@@ -21,13 +21,14 @@
 - [ ] `Telescope theme` only list installed themes, see <https://github.com/NvChad/extensions/tree/main/lua/telescope/_extensions>
 - [ ] `Telescope terminal` list terminals
 - [ ] `telscope-packer` provide function to open url/commit of repo, fix for windows
-- [ ] `gitsigns` blame_line or preview_hunk, allow pick window or set cursor
+- [x] `gitsigns` blame_line or preview_hunk, allow pick window or set cursor
 - [ ] local/machine/per-user settings, eg. colorscheme, background, font and even modules of plugins like M.lang('lisp', 'java')
 - [ ] enable syntax and keybind for filetype of `packer`, just like buffer used by `PackerUpdate`
 - [ ] config for lspkind-nvim
 - [ ] vim/nvim can't open `packer_compiled.lua` normally, but vscode can.
 - [ ] nvim-tree: refine `search_node` to match fuzzy not exactly
 - [x] add a wrapper for which-key and using in : LSP keymappings
+- [ ] null-ls use notify to avoid [ERROR 10:23:50] ...t/null-ls.nvim/lua/null-ls/helpers/gener...d flake8 is not executable (make sure it's installed and on your $PATH)
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
