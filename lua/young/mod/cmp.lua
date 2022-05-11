@@ -114,7 +114,6 @@ M.cfg = {
     ['<CR>'] = cmapping.confirm {
       -- behavior = cmp.ConfirmBehavior.Replace,
       -- select = false,
-      select = true,
     },
     ['<Tab>'] = cmapping(function(fallback)
       if cmp.visible() then

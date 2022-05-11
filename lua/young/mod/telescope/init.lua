@@ -116,7 +116,8 @@ M.cfg = {
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     pickers = {
       find_files = {
-        find_command = { 'fd', '--type=file', '--hidden', '--smart-case' },
+        -- find_command = { 'fd', '--type=file', '--hidden', '--smart-case' },
+        hidden = true,
       },
       live_grep = {
         --@usage don't include the filename in the search results
