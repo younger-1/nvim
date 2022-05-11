@@ -39,4 +39,17 @@ echo "begin"
 redraw
 echo "finished installing"
 
+" How can I calculate the duration of a function call
+let a_time = reltime()
+let b_time = localtime()
+
+let max = 1500
+for x in range(max)
+  for y in range(max)
+    let a = x * y
+  endfor
+endfor
+
+echom reltimefloat(reltime(a_time))
+echom localtime() - b_time
 " }}}

@@ -1,4 +1,3 @@
-local fn = vim.fn
 local M = {}
 
 -- <https://github.com/kevinhwang91/nvim-bqf/issues/43#issuecomment-962531219>

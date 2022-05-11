@@ -1,13 +1,15 @@
+ytime.b2 = vim.fn.reltime()
+
 _G.young = {}
 
 _G.uv = vim.loop
 _G.api = vim.api
+_G.fn = vim.fn
 
 ----------------------------------------------------------------------------------------------------
 -- Autocommand
 ----------------------------------------------------------------------------------------------------
 ---@class Autocommand
----@field description string
 ---@field event   string[] list of autocommand events
 ---@field pattern string[] list of autocommand patterns
 ---@field command string | function

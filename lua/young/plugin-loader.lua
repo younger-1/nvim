@@ -1,16 +1,14 @@
 local plugin_loader = {}
 
-local in_headless = #vim.api.nvim_list_uis() == 0
+local in_headless = #api.nvim_list_uis() == 0
 
 local utils = require 'young.utils'
 -- local Log = require "lvim.core.log"
 
-local runtime_dir = vim.fn.stdpath 'data'
-local config_dir = vim.fn.stdpath 'config'
-local install_path = join_paths(runtime_dir, 'site', 'pack', 'packer', 'start', 'packer.nvim')
-local compile_path = join_paths(config_dir, 'lua', 'young', 'packer_compiled.lua')
+local install_path = join_paths(fn.stdpath 'data', 'site', 'pack', 'packer', 'start', 'packer.nvim')
+local compile_path = join_paths(fn.stdpath 'config', 'lua', 'young', 'packer_compiled.lua')
 local snapshot_name = 'packer-lock.json'
-local snapshot_path = join_paths(vim.fn.stdpath 'config', 'utils', 'snapshot')
+local snapshot_path = join_paths(fn.stdpath 'config', 'utils', 'snapshot')
 
 local _, packer = pcall(require, 'packer')
 local first_time = nil
