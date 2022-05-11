@@ -8,6 +8,7 @@ local function apply_defaults(configs, defaults)
 end
 
 function M.done()
+  ytime.b1 = vim.fn.reltime()
   require 'young.utils.global'
 
   require 'young.cfg.global'

@@ -1,5 +1,6 @@
 -- <https://github.com/maxxnino/lvim/blob/main/lua/user/neovim.lua>
 -- <https://github.com/n3wborn/nvim/blob/main/init.lua>
+-- <https://github.com/rafamadriz/dotfiles/blob/c285f6e592850565d579350486271173e2795f80/private_dot_config/nvim/lua/settings.lua>
 
 local default_options = {
   backup = false,

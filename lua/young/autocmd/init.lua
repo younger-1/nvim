@@ -32,6 +32,7 @@ function M.load_augroups()
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
       { 'InsertEnter', '*', 'lua require("young.tools").nornu()' },
       { 'InsertLeave', '*', 'lua require("young.tools").rnu()' },
+      { 'VimEnter', '*', 'lua require("young.tools").startup_time()' }
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },

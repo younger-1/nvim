@@ -10,14 +10,25 @@
 --  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
 --  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
 
+_G.ytime = {
+  os = os.clock(),
+  a = vim.fn.reltime(),
+}
+
 pcall(function()
   require('impatient').enable_profile()
 end)
 
+ytime.b = vim.fn.reltime()
 require('young.cfg').done()
 
+ytime.c = vim.fn.reltime()
 require('young.plugin-loader').done()
 
+ytime.d = vim.fn.reltime()
 vim.cmd 'colorscheme dracula'
 
+ytime.e = vim.fn.reltime()
 require('young.gui').done()
+
+ytime.f = vim.fn.reltime()
