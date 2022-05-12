@@ -344,4 +344,9 @@ tools.startup_time = function()
   pp(t)
 end
 
+tools.startup_event = function(event)
+  local now = vim.fn.reltimefloat(vim.fn.reltime(ytime.a))
+  young.utils.echomsg { string.format('%s: %g', event, now) }
+end
+
 return tools

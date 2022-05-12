@@ -122,4 +122,12 @@ function utils.echo(t)
   vim.api.nvim_echo(chunks, false, {})
 end
 
+function utils.echomsg(t)
+  local chunks = {}
+  for _, text in ipairs(t) do
+    chunks[#chunks + 1] = { text, 'WarningMsg' }
+  end
+  vim.api.nvim_echo(chunks, true, {})
+end
+
 return utils

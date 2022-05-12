@@ -51,5 +51,5 @@ require('Comment').setup {
 
 `gC2}` - Toggle until the 2 next blank line
 `gCaf` - Toggle comment around a function (w/ LSP/treesitter support)
-`gCac` - Toggle comment around a class (w/ LSP/treesitter support) 
+`gCac` - Toggle comment around a class (w/ LSP/treesitter support)
 --]]
