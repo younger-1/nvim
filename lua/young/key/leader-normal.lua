@@ -389,8 +389,18 @@ local mappings = {
       'LunarVim Git Branch',
     },
     c = { ':edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua') .. '<cr>', 'Edit init.lua' },
-    f = { require('young.mod.telescope.finder').find_vim_config, 'Find Config files' },
-    g = { require('young.mod.telescope.finder').grep_vim_config, 'Grep Config files' },
+    f = {
+      function()
+        require('young.mod.telescope.finder').find_vim_config()
+      end,
+      'Find Config files',
+    },
+    g = {
+      function()
+        require('young.mod.telescope.finder').grep_vim_config()
+      end,
+      'Grep Config files',
+    },
     -- i = { "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>", 'Toggle LunarVim Info' },
     -- I = {
     --   "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",

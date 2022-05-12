@@ -46,7 +46,7 @@ disable_distribution()
 
 -- Do not source the default filetype.vim
 -- <https://github.com/nathom/filetype.nvim/issues/12>
-vim.g.did_load_filetypes = 1
+vim.g.did_load_filetypes = 0
 -- For now, Lua filetype detection is opt-in. You can enable it by adding:
 vim.g.do_filetype_lua = 1
 
