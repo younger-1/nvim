@@ -11,14 +11,14 @@ mods.basic = {
   { 'wbthomason/packer.nvim' },
   { 'lewis6991/impatient.nvim' },
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-  {
-    'nathom/filetype.nvim',
-    -- opt = true,
-    setup = function() end,
-    config = function()
-      require('young.mod.filetype').done()
-    end,
-  },
+  -- {
+  --   'nathom/filetype.nvim',
+  --   -- opt = true,
+  --   setup = function() end,
+  --   config = function()
+  --     require('young.mod.filetype').done()
+  --   end,
+  -- },
 }
 
 mods.theme = {
@@ -159,9 +159,9 @@ mods.edit = {
         require('young.mod.treesitter').done()
       end,
     },
-    { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    { 'nvim-treesitter/nvim-treesitter-refactor' },
-    { 'nvim-treesitter/playground' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter' },
+    { 'nvim-treesitter/nvim-treesitter-refactor', requires = 'nvim-treesitter/nvim-treesitter' },
+    { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' },
   },
 }
 
@@ -716,7 +716,10 @@ mods.code = {
 mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
-    { 'williamboman/nvim-lsp-installer' },
+    {
+      'williamboman/nvim-lsp-installer',
+      config = [[require('young.lsp').done()]],
+    },
     { 'jose-elias-alvarez/null-ls.nvim' },
     { 'b0o/SchemaStore.nvim' },
     {

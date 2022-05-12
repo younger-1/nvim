@@ -26,7 +26,10 @@ ytime.c = vim.fn.reltime()
 require('young.plugin-loader').done()
 
 ytime.d = vim.fn.reltime()
-vim.cmd 'colorscheme dracula'
+-- vim.cmd [[ syntax clear ]]
+vim.schedule(function()
+  vim.cmd [[ silent! colorscheme dracula ]]
+end)
 
 ytime.e = vim.fn.reltime()
 require('young.gui').done()

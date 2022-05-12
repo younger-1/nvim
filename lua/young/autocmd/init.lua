@@ -64,7 +64,6 @@ function M.load_augroups()
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
-      { 'BufRead', '*', '++once', "lua require('young.lsp').done()" },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'null-ls-info', 'lua require("young.tools").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
@@ -72,11 +71,11 @@ function M.load_augroups()
     _startup = {
       { 'VimEnter', '*', 'lua require("young.tools").startup_time()' },
       --
-      { 'VimEnter', '*', '++once', 'lua require("young.tools").startup_event("VimEnter")' },
-      { 'BufRead', '*', '++once', 'lua require("young.tools").startup_event("BufRead")' },
-      { 'BufReadPost', '*', '++once', 'lua require("young.tools").startup_event("BufReadPost")' },
-      { 'BufEnter', '*', '++once', 'lua require("young.tools").startup_event("BufEnter")' },
-      { 'BufWinEnter', '*', '++once', 'lua require("young.tools").startup_event("BufWinEnter")' },
+      -- { 'VimEnter', '*', '++once', 'lua require("young.tools").startup_event("VimEnter")' },
+      -- { 'BufRead', '*', '++once', 'lua require("young.tools").startup_event("BufRead")' },
+      -- { 'BufReadPost', '*', '++once', 'lua require("young.tools").startup_event("BufReadPost")' },
+      -- { 'BufEnter', '*', '++once', 'lua require("young.tools").startup_event("BufEnter")' },
+      -- { 'BufWinEnter', '*', '++once', 'lua require("young.tools").startup_event("BufWinEnter")' },
     },
     custom_groups = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },

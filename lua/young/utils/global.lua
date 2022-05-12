@@ -1,5 +1,3 @@
-ytime.b2 = vim.fn.reltime()
-
 _G.young = {}
 
 _G.uv = vim.loop
