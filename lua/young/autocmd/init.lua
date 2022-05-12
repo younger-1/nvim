@@ -32,7 +32,6 @@ function M.load_augroups()
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
       { 'InsertEnter', '*', 'lua require("young.tools").nornu()' },
       { 'InsertLeave', '*', 'lua require("young.tools").rnu()' },
-      { 'VimEnter', '*', 'lua require("young.tools").startup_time()' }
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
@@ -69,6 +68,15 @@ function M.load_augroups()
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'null-ls-info', 'lua require("young.tools").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
+    },
+    _startup = {
+      { 'VimEnter', '*', 'lua require("young.tools").startup_time()' },
+      --
+      { 'VimEnter', '*', '++once', 'lua require("young.tools").startup_event("VimEnter")' },
+      { 'BufRead', '*', '++once', 'lua require("young.tools").startup_event("BufRead")' },
+      { 'BufReadPost', '*', '++once', 'lua require("young.tools").startup_event("BufReadPost")' },
+      { 'BufEnter', '*', '++once', 'lua require("young.tools").startup_event("BufEnter")' },
+      { 'BufWinEnter', '*', '++once', 'lua require("young.tools").startup_event("BufWinEnter")' },
     },
     custom_groups = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
@@ -161,8 +169,7 @@ M.done = function()
     code_lens_refresh = {
       buffer = true,
       {
-        -- 'InsertLeave',
-        'CursorHold,BufEnter',
+        'InsertLeave',
         '<buffer>',
         'lua vim.lsp.codelens.refresh()',
       },

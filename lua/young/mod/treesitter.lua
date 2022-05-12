@@ -110,7 +110,7 @@ M.cfg = {
   -- TODO: seems to be broken
   indent = {
     enable = true,
-    disable = { 'yaml' },
+    -- disable = { 'yaml', 'python' },
   },
   highlight = {
     enable = true, -- false will disable the whole extension
@@ -312,15 +312,16 @@ M.cfg = {
   -- <https://github.com/JoosepAlviste/nvim-ts-context-commentstring>
   context_commentstring = {
     enable = true,
-    config = {
-      typescript = '// %s',
-      css = '/* %s */',
-      scss = '/* %s */',
-      html = '<!-- %s -->',
-      svelte = '<!-- %s -->',
-      vue = '<!-- %s -->',
-      json = '',
-    },
+    enable_autocmd = false,
+    -- config = {
+    --   typescript = '// %s',
+    --   css = '/* %s */',
+    --   scss = '/* %s */',
+    --   html = '<!-- %s -->',
+    --   svelte = '<!-- %s -->',
+    --   vue = '<!-- %s -->',
+    --   json = '',
+    -- },
   },
 }
 
