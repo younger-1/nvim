@@ -29,6 +29,7 @@
 - [ ] nvim-tree: refine `search_node` to match fuzzy not exactly
 - [x] add a wrapper for which-key and using in : LSP keymappings
 - [ ] null-ls use notify to avoid [ERROR 10:23:50] ...t/null-ls.nvim/lua/null-ls/helpers/gener...d flake8 is not executable (make sure it's installed and on your $PATH)
+- [ ] highlight for cmdline-history window
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

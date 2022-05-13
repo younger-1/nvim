@@ -7,7 +7,7 @@ local utils = require 'young.utils'
 
 local package_root = join_paths(fn.stdpath 'data', 'site', 'pack')
 local install_path = join_paths(package_root, 'packer', 'start', 'packer.nvim')
-local standard = true
+local standard = false
 local compile_path = standard and join_paths(fn.stdpath 'config', 'plugin', 'packer_compiled.lua')
   or join_paths(fn.stdpath 'config', 'lua', 'young', 'packer_compiled.lua')
 local snapshot_name = 'packer-lock.json'
@@ -107,6 +107,7 @@ plugin_loader.source_compiled = function()
 
   -- Use impatient
   if false == standard then
+    fn.delete(join_paths(fn.stdpath 'config', 'plugin', 'packer_compiled.lua'))
     require 'young.packer_compiled'
     -- dofile(compile_path)
   end
