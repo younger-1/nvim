@@ -166,25 +166,27 @@ openPop:close()
 print(output)
 
 -- [[debug]]
+local what
+local function d1()
+  local level = 1
+  local function d2(aa)
+    aa = 1
+    local bb = '2'
+    pp(debug.getinfo(1, what))
+    -- pp(debug.getlocal(level, 1))
+    -- pp(debug.getlocal(level, 2))
+    -- pp(debug.getlocal(level, 3))
+  end
+  pp(debug.getinfo(1, what))
+  d2()
+end
+pp(debug.getinfo(1, what))
+d1()
+
 local init_path = debug.getinfo(1, 'S').source:sub(2)
 print('[debug]: ' .. init_path)
 
 local line = debug.getinfo(1, 'l').currentline
 print('[debug]: ' .. line)
 
--- [[time]]
-local a_time = os.clock()
-local b_time = vim.fn.reltime()
-
-local max = 2000
-for i = 1, max do
-  for j = 1, max do
-    for k = 1, max do
-      local a = i * j * k
-    end
-  end
-end
-
-pp(os.clock() - a_time)
-pp(vim.fn.reltimestr(vim.fn.reltime(b_time)))
-pp(vim.fn.reltimefloat(vim.fn.reltime(b_time)))
+pp(debug.getinfo(vim.api.nvim__get_runtime, 'S'))
