@@ -151,6 +151,12 @@ M.keys = {
     ['<ESC>'] = '<cmd>nohl<CR>',
     -- ['<S-CR>'] = '<cmd>wqa<CR>', -- windows terminal not recognize
     -- ['<CR>'] = { "(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true } },
+
+    --
+    -- B = '^',
+    -- E = '$',
+    -- gH = 'H',
+    -- gL = 'L',
   },
 
   ---@usage change or add keymappings for visual mode

@@ -36,8 +36,10 @@ echo jobstart(split(&shell) + split(&shellcmdflag) + ["python -m this"], g:cb)
 
 " redraw
 echo "begin"
-redraw
-echo "finished installing"
+" normal! <C-l>
+" mode
+" redraw
+echo "finished"
 
 " How can I calculate the duration of a function call
 let a_time = reltime()

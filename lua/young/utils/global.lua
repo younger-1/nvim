@@ -130,28 +130,31 @@ function _G.join_paths(...)
   return result
 end
 
--- [](https://github.com/glepnir/nvim-lua-guide-zh#tips)
+_G.pp = vim.pretty_print
+
 -- 1. fancy print 2. return parameters
-function _G.pp(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(table.concat(objects, '\n'))
-  return ...
-end
-
-function _G.pn(obj, n)
-  print(vim.inspect(obj, { depth = n or 1 }))
-  return obj
-end
-
--- 1. return fancy string
 function _G.ppp(...)
   local objects = {}
+  -- Not using `{...}` because it removes `nil` input
   for i = 1, select('#', ...) do
     local v = select(i, ...)
     table.insert(objects, vim.inspect(v))
   end
 
-  return table.concat(objects, '\n')
+  print(table.concat(objects, '\n'))
+
+  return ...
+end
+
+-- function _G.ppp(...)
+--   local objects = vim.tbl_map(vim.inspect, { ... })
+--   print(table.concat(objects, '\n'))
+--   return ...
+-- end
+
+function _G.pn(obj, n)
+  print(vim.inspect(obj, { depth = n or 1 }))
+  return obj
 end
 
 function _G.gg(name, val, ...)
@@ -166,6 +169,21 @@ function _G.gg(name, val, ...)
     local objects = vim.tbl_map(vim.inspect, { name, val, ... })
     print(prefix .. table.concat(objects, ' -> '))
   end
+end
+
+function _G.put_text(...)
+  local objects = {}
+  -- Not using `{...}` because it removes `nil` input
+  for i = 1, select('#', ...) do
+    local v = select(i, ...)
+    table.insert(objects, vim.inspect(v))
+  end
+
+  local lines = vim.split(table.concat(objects, '\n'), '\n')
+  local lnum = vim.api.nvim_win_get_cursor(0)[1]
+  vim.fn.append(lnum, lines)
+
+  return ...
 end
 
 function _G.to_home(path)
