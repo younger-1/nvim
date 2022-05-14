@@ -499,6 +499,10 @@ mods.git = {
       require('young.mod.gitlinker').done()
     end,
   },
+  {
+    'akinsho/git-conflict.nvim',
+    config = [[require('young.mod.git-conflict')]],
+  },
 }
 
 mods.UI = {

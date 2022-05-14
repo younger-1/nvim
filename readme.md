@@ -80,6 +80,10 @@ insert_nav = {
 
 - renamed-icon do not appear in the renamed-file
 
+`git-conflict`
+
+- setup(): allow user-defined buffer-mappings
+
 ## Features
 
 ### Lua IDE

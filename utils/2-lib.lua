@@ -43,7 +43,28 @@ m1 = vim.tbl_deep_extend('force', m1, {
 -- Examples:  https://github.com/luvit/luv/tree/master/examples
 
 local uv = vim.loop
-print(uv.cwd())
+
+local stdin = uv.new_pipe(false)
+local stdout = uv.new_pipe(false)
+local stderr = uv.new_pipe(false)
+
+local handle = uv.spawn('rg', {
+  args = { '--files' },
+  stdio = { stdin, stdout, stderr },
+}, function() end)
+
+uv.read_start(stdout, function(err, data)
+  assert(not err, err)
+  if data then
+    print(vim.inspect(data))
+  end
+end)
+
+uv.read_start(stderr, function() end)
+
+uv.shutdown(stdin, function()
+  uv.close(handle, function() end)
+end)
 
 --[[
   3. plenary
@@ -83,13 +104,19 @@ m2 = it
   :tolist()
 print(vim.inspect(m2)) -- { "rust:b", "go:c", "python:a" }
 
---[[
-  3. my utils
---]]
-local ut = require 'young.util'
-local m3 = ut.apply_defaults(m, { a = 'lua', d = 'zig' })
-print(vim.inspect(m3)) -- { a = "python", b = "rust", c = "go", d = "zig" }
+-- [Job]
 
-local t3 = { 'a', 'x', 3 }
-ut.add_to_set(t3, { 'x', 3, 'x' })
-print(vim.inspect(t3))
+local Job = require 'plenary.job'
+Job
+  :new({
+    -- command = 'rg',
+    -- args = { '--files', '.' },
+    command = 'sleep',
+    args = { '2' },
+    on_exit = function(j, ret_code, signal)
+      -- pp(j:result(), ret_code, signal)
+      print(1, 2, 3)
+    end,
+  })
+  -- :sync()
+  :start()
