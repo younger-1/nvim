@@ -1,6 +1,13 @@
 local lsp_cfg = require 'young.lsp.config'
 
-for _, sign in ipairs(lsp_cfg.diagnostics.signs) do
+local signs = {
+  { name = 'DiagnosticSignError', text = '' },
+  { name = 'DiagnosticSignWarn', text = '' },
+  { name = 'DiagnosticSignHint', text = '' },
+  { name = 'DiagnosticSignInfo', text = '' },
+}
+
+for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, {
     -- icon = require('young.tools').get_icon(sign.name),
     text = sign.text,
@@ -10,9 +17,7 @@ for _, sign in ipairs(lsp_cfg.diagnostics.signs) do
 end
 
 vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
-  -- signs = { values = lsp_cfg.signs },
   -- virtual_text = false,
-  update_in_insert = false,
   float = {
     -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
     -- border = { "/", "-", "\\", "|" },
@@ -32,6 +37,21 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_cfg.float)
+
+-- Jump directly to the first available definition every time.
+-- vim.lsp.handlers['textDocument/definition'] = function(_, result)
+--   if not result or vim.tbl_isempty(result) then
+--     print '[LSP] Could not find definition'
+--     return
+--   end
+
+--   if vim.tbl_islist(result) then
+--     vim.lsp.util.jump_to_location(result[1], 'utf-8')
+--   else
+--     vim.lsp.util.jump_to_location(result, 'utf-8')
+--   end
+-- end
+
 -- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 --   signs = false,
 --   update_in_insert = true,

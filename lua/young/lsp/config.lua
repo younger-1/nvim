@@ -1,12 +1,7 @@
 return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
-    signs = {
-      { name = 'DiagnosticSignError', text = '' },
-      { name = 'DiagnosticSignWarn', text = '' },
-      { name = 'DiagnosticSignHint', text = '' },
-      { name = 'DiagnosticSignInfo', text = '' },
-    },
+    signs = true,
     virtual_text = {
       spacing = 4,
       prefix = '',
@@ -14,9 +9,13 @@ return {
         min = vim.diagnostic.severity.WARN,
       },
     },
-    update_in_insert = true,
-    underline = true,
+    underline = {
+      severity = {
+        min = vim.diagnostic.severity.HINT,
+      },
+    },
     severity_sort = true,
+    update_in_insert = false,
     float = {
       focusable = true,
       style = 'minimal',
