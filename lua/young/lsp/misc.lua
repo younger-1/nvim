@@ -1,7 +1,7 @@
 local M = {}
 
 local no_code_actions_echo = function()
-  young.utils.echo { ' No code actions available' }
+  young.util.echo { ' No code actions available' }
 end
 
 -- <https://github.com/axieax/dotconfig/blob/0536a8ec6c4f6fb155dddc27a15aa997ff206089/nvim/lua/axie/lsp/code_actions.lua#L28-L49>

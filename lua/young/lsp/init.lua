@@ -164,9 +164,9 @@ M.done = function()
   setup()
   M.fts = done_ft
 
-  require 'young.lsp.handlers'
+  require 'young.lsp.handler'
 
-  -- bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
+  -- bootstrap_nlsp { config_home = util.join_paths(get_config_dir(), "lsp-settings") }
 
   require('young.lsp.null-ls').done()
 

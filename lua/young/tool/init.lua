@@ -1,4 +1,4 @@
-local tools = {}
+local tool = {}
 -- local Log = require "lvim.core.log"
 
 -- From: <https://github.com/nvim-lua/plenary.nvim/blob/8c6cc07a68b65eb707be44598f0084647d495978/lua/plenary/reload.lua#L3>
@@ -32,7 +32,7 @@ local unload_module = function(found, module_name, starts_with_only)
   end
 end
 
-tools.reload_file = function(pack)
+tool.reload_file = function(pack)
   local luacache = (_G.__luacache or {}).cache
   package.loaded[pack] = nil
   if luacache then
@@ -41,7 +41,7 @@ tools.reload_file = function(pack)
 end
 
 -- For manual reload
-tools.rr = function(...)
+tool.rr = function(...)
   local mods = { ... }
 
   -- Reload the current buffer
@@ -61,9 +61,9 @@ tools.rr = function(...)
       table.insert(pack, 1, bufpath[i])
     end
     pack = table.concat(pack, '.')
-    tools.reload_file(pack)
+    tool.reload_file(pack)
     print('Reload: ' .. pack)
-    require('utils').reload_lv_config()
+    require('util').reload_lv_config()
     return
   end
 
@@ -81,7 +81,7 @@ tools.rr = function(...)
   end
 
   -- TODO: may be to reload
-  -- require("utils").reload_lv_config()
+  -- require("util").reload_lv_config()
 end
 
 -- Completion for not yet loaded plugins
@@ -97,7 +97,7 @@ end
 --   return completion_list
 -- end
 
-tools.rr_complete = function(lead, _, _)
+tool.rr_complete = function(lead, _, _)
   local completion_list = {}
   for name, _ in pairs(_G.package.loaded) do
     if vim.startswith(name, lead) then
@@ -126,7 +126,7 @@ end
 -- end
 
 local bar_flag = true
-tools.toggle_tabline = function()
+tool.toggle_tabline = function()
   if bar_flag then
     vim.cmd 'BarbarDisable'
     require('young.mod.tabline').config()
@@ -149,7 +149,7 @@ tools.toggle_tabline = function()
 end
 
 -- Toggle to disable mouse mode and indentlines for easier paste
-tools.toggle_mouse = function()
+tool.toggle_mouse = function()
   if vim.o.mouse == '' then
     -- vim.cmd[[IndentBlanklineEnable]]
     vim.o.mouse = 'nvi'
@@ -167,7 +167,7 @@ end
 
 local ls
 
-tools.get_ls = function(servername)
+tool.get_ls = function(servername)
   if ls then
     for bufnr, _ in pairs(ls.attached_buffers) do
       if bufnr == vim.fn.bufnr() then
@@ -191,10 +191,10 @@ tools.get_ls = function(servername)
   end
 end
 
-tools.print_ls = function(...)
+tool.print_ls = function(...)
   local keys = { ... }
 
-  tools.get_ls()
+  tool.get_ls()
   if not ls then
     print '[Failed]: Not such server'
     return
@@ -213,10 +213,10 @@ tools.print_ls = function(...)
   pp(info)
 end
 
-tools.print_ls_complete = function(lead, _, _)
+tool.print_ls_complete = function(lead, _, _)
   local completion_list = {}
 
-  tools.get_ls()
+  tool.get_ls()
   if not ls then
     print '[Failed]: Not such server'
     return
@@ -235,7 +235,7 @@ end
 -- M.pick_ls
 -- commands Pls <servername> <key>
 
-tools.chdir = function(force)
+tool.chdir = function(force)
   -- TODO: buftype test
   -- lcd is only need when running ProjectRoot manually
   local cwd_old = vim.fn.getcwd()
@@ -258,16 +258,16 @@ tools.chdir = function(force)
 end
 
 local rnu
-tools.nornu = function()
+tool.nornu = function()
   rnu = vim.o.rnu
   vim.o.rnu = false
 end
 
-tools.rnu = function()
+tool.rnu = function()
   vim.o.rnu = rnu
 end
 
-tools.lsp_ref = function()
+tool.lsp_ref = function()
   if vim.o.bg == 'dark' then
     vim.cmd [[
       hi LspReferenceText  cterm=bold ctermbg=DarkCyan  blend=10 gui=bold guibg=DarkCyan
@@ -283,30 +283,30 @@ tools.lsp_ref = function()
   end
 end
 
-tools.add_border = function()
+tool.add_border = function()
   local win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_config(win, {
     border = 'rounded',
   })
 end
 
-tools.toggle_indent_style = function()
+tool.toggle_indent_style = function()
   require('young.mod.indent-blankline').hot()
 end
 
-tools.toggle_notify = function()
+tool.toggle_notify = function()
   require('young.mod.notify').toggle()
 end
 
-tools.toggle_notify_style = function()
+tool.toggle_notify_style = function()
   require('young.mod.notify').hot()
 end
 
-tools.toggle_zoom = function()
+tool.toggle_zoom = function()
   vim.cmd 'call WinZoomToggle()'
 end
 
-tools.set_cursor_floating_win = function()
+tool.set_cursor_floating_win = function()
   local winids = vim.api.nvim_tabpage_list_wins(0)
   winids = vim.tbl_filter(function(winid)
     local wincfg = vim.api.nvim_win_get_config(winid)
@@ -314,12 +314,12 @@ tools.set_cursor_floating_win = function()
   end, winids)
 
   if #winids == 0 then
-    young.utils.echo { 'No floating window' }
+    young.util.echo { 'No floating window' }
     return
   end
 
   if #winids > 1 then
-    young.utils.echo { 'Two or more floating window' }
+    young.util.echo { 'Two or more floating window' }
     -- M.pick_floating_win(winids)
   end
 
@@ -332,7 +332,7 @@ tools.set_cursor_floating_win = function()
   end
 end
 
-tools.startup_time = function()
+tool.startup_time = function()
   local t = {}
   for key, time in pairs(ytime) do
     if key == 'os' then
@@ -344,9 +344,9 @@ tools.startup_time = function()
   pp(t)
 end
 
-tools.startup_event = function(event)
+tool.startup_event = function(event)
   local now = vim.fn.reltimefloat(vim.fn.reltime(ytime.a))
-  young.utils.echomsg { string.format('%s: %g', event, now) }
+  young.util.echomsg { string.format('%s: %g', event, now) }
 end
 
-return tools
+return tool

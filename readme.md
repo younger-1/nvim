@@ -193,12 +193,12 @@ nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
       │  ├──  tabline.lua
       │  ├──  toggleterm.lua
       │  └──  trouble.lua
-      ├──  tools
+      ├──  tool
       │  ├──  blame.lua
       │  ├──  demo.lua
       │  ├──  init.lua
       │  └──  setup.lua
-      ├──  utils
+      ├──  util
       │  ├──  global.lua
       │  └──  init.lua
       ├──  lsp.lua

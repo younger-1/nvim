@@ -30,8 +30,8 @@ function M.load_augroups()
       },
       { 'FocusLost', '*', 'silent! wa' },
       { 'VimLeave', '*', 'set guicursor=a:ver25' },
-      { 'InsertEnter', '*', 'lua require("young.tools").nornu()' },
-      { 'InsertLeave', '*', 'lua require("young.tools").rnu()' },
+      { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
+      { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
@@ -39,7 +39,7 @@ function M.load_augroups()
     _colorscheme = {
       -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
       { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- See :h 'pumblend'
-      { 'ColorScheme', '*', 'lua require("young.tools").lsp_ref()' }, -- See :h 'pumblend'
+      { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- See :h 'pumblend'
     },
     _formatoptions = {
       {
@@ -65,17 +65,17 @@ function M.load_augroups()
     },
     _general_lsp = {
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'null-ls-info', 'lua require("young.tools").add_border()' },
+      { 'FileType', 'null-ls-info', 'lua require("young.tool").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
     _startup = {
-      { 'VimEnter', '*', 'lua require("young.tools").startup_time()' },
+      { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
       --
-      -- { 'VimEnter', '*', '++once', 'lua require("young.tools").startup_event("VimEnter")' },
-      -- { 'BufRead', '*', '++once', 'lua require("young.tools").startup_event("BufRead")' },
-      -- { 'BufReadPost', '*', '++once', 'lua require("young.tools").startup_event("BufReadPost")' },
-      -- { 'BufEnter', '*', '++once', 'lua require("young.tools").startup_event("BufEnter")' },
-      -- { 'BufWinEnter', '*', '++once', 'lua require("young.tools").startup_event("BufWinEnter")' },
+      -- { 'VimEnter', '*', '++once', 'lua require("young.tool").startup_event("VimEnter")' },
+      -- { 'BufRead', '*', '++once', 'lua require("young.tool").startup_event("BufRead")' },
+      -- { 'BufReadPost', '*', '++once', 'lua require("young.tool").startup_event("BufReadPost")' },
+      -- { 'BufEnter', '*', '++once', 'lua require("young.tool").startup_event("BufEnter")' },
+      -- { 'BufWinEnter', '*', '++once', 'lua require("young.tool").startup_event("BufWinEnter")' },
     },
     custom_groups = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },

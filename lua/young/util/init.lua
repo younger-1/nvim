@@ -1,10 +1,10 @@
-local utils = {}
+local util = {}
 
-young.utils = utils
+young.util = util
 
-utils.join_paths = _G.join_paths
+util.join_paths = _G.join_paths
 
-function utils.toggle_autoformat()
+function util.toggle_autoformat()
   if lvim.format_on_save then
     require('lvim.core.autocmds').define_augroups {
       autoformat = {
@@ -28,12 +28,12 @@ function utils.toggle_autoformat()
   end
 end
 
-function utils.unrequire(m)
+function util.unrequire(m)
   package.loaded[m] = nil
   _G[m] = nil
 end
 
-function utils.gsub_args(args)
+function util.gsub_args(args)
   if args == nil or type(args) ~= 'table' then
     return args
   end
@@ -47,7 +47,7 @@ end
 --- Checks whether a given path exists and is a file.
 --@param path (string) path to check
 --@returns (bool)
-function utils.is_file(path)
+function util.is_file(path)
   local stat = uv.fs_stat(path)
   return stat and stat.type == 'file' or false
 end
@@ -55,7 +55,7 @@ end
 --- Checks whether a given path exists and is a directory
 --@param path (string) path to check
 --@returns (bool)
-function utils.is_directory(path)
+function util.is_directory(path)
   local stat = uv.fs_stat(path)
   return stat and stat.type == 'directory' or false
 end
@@ -64,7 +64,7 @@ end
 --- either paramter can be empty.
 --@param config (table) table containing entries that take priority over defaults
 --@param default_config (table) table contatining default values if found
-function utils.apply_defaults(config, default_config)
+function util.apply_defaults(config, default_config)
   config = config or {}
   default_config = default_config or {}
   local new_config = vim.tbl_deep_extend('keep', vim.empty_dict(), config)
@@ -73,7 +73,7 @@ function utils.apply_defaults(config, default_config)
 end
 
 --@param set1: set to be modified
-function utils.add_to_set(set1, set2)
+function util.add_to_set(set1, set2)
   for _, v in ipairs(set2) do
     if not vim.tbl_contains(set1, v) then
       table.insert(set1, v)
@@ -82,14 +82,14 @@ function utils.add_to_set(set1, set2)
 end
 
 --@note: use vim.list_extend instead
--- function utils.append_to_list(a, b)
+-- function util.append_to_list(a, b)
 --   for _, v in ipairs(b) do
 --     table.insert(a, v)
 --   end
 -- end
 
 --@param para: table or single value
-function utils.defer(fn, para, time)
+function util.defer(fn, para, time)
   -- wrap it!
   para = type(para) == 'table' and para or { para }
   local fn_box = function()
@@ -100,13 +100,13 @@ function utils.defer(fn, para, time)
 end
 
 --@note: pairs also iter over number index
-function utils.shallow_force(a, b)
+function util.shallow_force(a, b)
   for k, v in pairs(b) do
     a[k] = v
   end
 end
 
-function utils.shallow_keep(a, b)
+function util.shallow_keep(a, b)
   for k, v in pairs(b) do
     if not a[k] then
       a[k] = v
@@ -114,7 +114,7 @@ function utils.shallow_keep(a, b)
   end
 end
 
-function utils.echo(t)
+function util.echo(t)
   local chunks = {}
   for _, text in ipairs(t) do
     chunks[#chunks + 1] = { text, 'WarningMsg' }
@@ -122,7 +122,7 @@ function utils.echo(t)
   vim.api.nvim_echo(chunks, false, {})
 end
 
-function utils.echomsg(t)
+function util.echomsg(t)
   local chunks = {}
   for _, text in ipairs(t) do
     chunks[#chunks + 1] = { text, 'WarningMsg' }
@@ -130,4 +130,4 @@ function utils.echomsg(t)
   vim.api.nvim_echo(chunks, true, {})
 end
 
-return utils
+return util

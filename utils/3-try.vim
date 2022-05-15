@@ -21,14 +21,14 @@ fun! EditFileComplete(A,L,P)
     return split(globpath(&rtp, a:A), "\n")
 endfun
 
-com! -nargs=* -complete=custom,s:PrintLSCompletion Gls lua require'young.tools'.print_ls(<f-args>)
+com! -nargs=* -complete=custom,s:PrintLSCompletion Gls lua require'young.tool'.print_ls(<f-args>)
 fun! s:PrintLSCompletion(...) abort
-  return luaeval("vim.tbl_keys(require'young.tools'.get_ls())")->sort()->join("\n")
+  return luaeval("vim.tbl_keys(require'young.tool'.get_ls())")->sort()->join("\n")
 endfun
 
-com! -nargs=* -complete=customlist,s:PrintLSCompletionList Gls lua require'young.tools'.print_ls(<f-args>)
+com! -nargs=* -complete=customlist,s:PrintLSCompletionList Gls lua require'young.tool'.print_ls(<f-args>)
 fun! s:PrintLSCompletionList(lead, ...) abort
-  return luaeval("vim.tbl_keys(require'young.tools'.get_ls())")
+  return luaeval("vim.tbl_keys(require'young.tool'.get_ls())")
         \ ->filter('v:lua.vim.startswith(v:val, a:lead)')
         \ ->sort()
 endfun

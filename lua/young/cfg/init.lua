@@ -9,7 +9,7 @@ end
 
 function M.done()
   ytime.b1 = vim.fn.reltime()
-  require 'young.utils.global'
+  require 'young.util.global'
 
   require 'young.cfg.global'
   require 'young.cfg.option'
