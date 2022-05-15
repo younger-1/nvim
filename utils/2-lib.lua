@@ -86,7 +86,7 @@ print(vim.inspect(m2)) -- { "rust:b", "go:c", "python:a" }
 --[[
   3. my utils
 --]]
-local ut = require 'young.utils'
+local ut = require 'young.util'
 local m3 = ut.apply_defaults(m, { a = 'lua', d = 'zig' })
 print(vim.inspect(m3)) -- { a = "python", b = "rust", c = "go", d = "zig" }
 

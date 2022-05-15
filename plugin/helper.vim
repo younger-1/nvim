@@ -6,9 +6,9 @@ let g:loaded_young_helper = 1
 let s:dir = expand('<sfile>:h')
 
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
-command! -nargs=* -complete=customlist,v:lua.require'young.tools'.rr_complete RR lua require'young.tools'.rr(<f-args>)
+command! -nargs=* -complete=customlist,v:lua.require'young.tool'.rr_complete RR lua require'young.tool'.rr(<f-args>)
 
-command! -nargs=* -complete=customlist,v:lua.require'young.tools'.print_ls_complete Gls lua require'young.tools'.print_ls(<f-args>)
+command! -nargs=* -complete=customlist,v:lua.require'young.tool'.print_ls_complete Gls lua require'young.tool'.print_ls(<f-args>)
 
 " Replace a range with the contents of a file
 command! -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d

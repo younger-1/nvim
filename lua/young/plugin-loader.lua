@@ -2,7 +2,7 @@ local plugin_loader = {}
 
 local in_headless = #api.nvim_list_uis() == 0
 
-local utils = require 'young.utils'
+local util = require 'young.util'
 -- local Log = require "lvim.core.log"
 
 local package_root = join_paths(fn.stdpath 'data', 'site', 'pack')
@@ -92,7 +92,7 @@ plugin_loader.source_compiled = function()
     return
   end
 
-  if not utils.is_file(compile_path) then
+  if not util.is_file(compile_path) then
     vim.notify('[young.plugin-loader]: not find ' .. compile_path .. ', compiling ...', vim.log.levels.WARN)
     packer.compile()
 
@@ -101,7 +101,7 @@ plugin_loader.source_compiled = function()
 
   -- DONE: use vim.schedule(), vim.defer_fn(), plenary's async, timer_start(), wait()
   -- local compiled_ok = function()
-  --   return utils.is_file(compile_path)
+  --   return util.is_file(compile_path)
   -- end
   -- vim.wait(20000, compiled_ok)
 
