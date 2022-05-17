@@ -1,1 +1,1 @@
-setlocal wrap linebreak norelativenumber spell
+setlocal wrap linebreak spell

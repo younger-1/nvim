@@ -12,3 +12,6 @@ colorscheme
 github
 vim
 nvim
+dir
+LSP
+cmdline
