@@ -20,7 +20,7 @@
 - [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
 - [ ] `Telescope theme` only list installed themes, see <https://github.com/NvChad/extensions/tree/main/lua/telescope/_extensions>
 - [ ] `Telescope terminal` list terminals
-- [ ] `telscope-packer` provide function to open url/commit of repo, fix for windows
+- [ ] `telescope-packer` provide function to open url/commit of repo, fix for windows
 - [x] `gitsigns` blame_line or preview_hunk, allow pick window or set cursor
 - [ ] local/machine/per-user settings, eg. colorscheme, background, font and even modules of plugins like M.lang('lisp', 'java')
 - [ ] enable syntax and keybind for filetype of `packer`, just like buffer used by `PackerUpdate`
