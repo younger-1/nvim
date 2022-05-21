@@ -30,6 +30,7 @@
 - [x] add a wrapper for which-key and using in : LSP keymappings
 - [ ] null-ls use notify to avoid [ERROR 10:23:50] ...t/null-ls.nvim/lua/null-ls/helpers/gener...d flake8 is not executable (make sure it's installed and on your $PATH)
 - [ ] highlight for cmdline-history window
+- [ ] an easy way to edit $VIMRUNTIME files, `:e $VIMRUNTIME/ftplugin.vim`
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
@@ -74,6 +75,10 @@ insert_nav = {
 - <https://wiki.archlinux.org/title/ASCII_art>
 - <https://www.asciiart.eu/>
 - <https://github.com/pi314/ascii-arts>
+
+`nvim-tree`
+
+- renamed-icon do not appear in the renamed-file
 
 ## Features
 
@@ -203,7 +208,7 @@ nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
       │  └──  init.lua
       ├──  lsp.lua
       ├──  packer_compiled.lua
-      ├──  plugin-loader.lua
+      ├──  packer.lua
       └──  plugins.lua
 ```
 
