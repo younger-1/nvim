@@ -79,7 +79,7 @@ function M.load_augroups()
     },
     custom_groups = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
-      { 'BufWritePost', plugins_path, "lua require('young.plugin-loader').recompile()" },
+      { 'BufWritePost', plugins_path, "lua require('young.packer').recompile()" },
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
       { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
     },

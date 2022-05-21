@@ -28,7 +28,7 @@ function M.reload()
   M.reset_cache()
 
   M.done()
-  require('young.plugin-loader').done()
+  require('young.packer').done()
   -- require('young.lsp').done()
   require('young.gui').done()
 

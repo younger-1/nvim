@@ -1,4 +1,4 @@
-local plugin_loader = {}
+local M = {}
 
 local in_headless = #api.nvim_list_uis() == 0
 
@@ -16,7 +16,7 @@ local snapshot_path = join_paths(fn.stdpath 'config', 'utils', 'snapshot')
 local _, packer = pcall(require, 'packer')
 local first_time = nil
 
-plugin_loader.once = function()
+M.once = function()
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     first_time = true
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
@@ -31,6 +31,12 @@ plugin_loader.once = function()
     max_jobs = is_windows and 5 or nil,
     log = { level = in_headless and 'debug' or 'warn' },
     profile = { enable = true },
+    -- auto_clean = true, -- During sync(), remove unused plugins
+    -- compile_on_sync = true, -- During sync(), run packer.compile()
+    -- auto_reload_compiled = true, -- Automatically reload the compiled file after creating it.
+    -- opt_default = false, -- Default to using opt (as opposed to start) plugins
+    -- transitive_opt = true, -- Make dependencies of opt plugins also opt by default
+    -- transitive_disable = true, -- Automatically disable dependencies of disabled plugins
     display = {
       open_fn = function()
         -- return require("packer.util").float { border = "rounded" }
@@ -45,19 +51,19 @@ plugin_loader.once = function()
   }
 end
 
-plugin_loader.recompile = function()
+M.recompile = function()
   require_clean 'young.plugins'
 
-  plugin_loader.load()
+  M.load()
   -- NOTE:Do I need source_compiled here? No, PackerCompile will do
-  -- plugin_loader.source_compiled()
+  -- M.source_compiled()
 
   vim.cmd 'PackerClean'
   vim.cmd 'PackerCompile'
   vim.cmd 'PackerInstall'
 end
 
-plugin_loader.load = function()
+M.load = function()
   local plugins = require('young.plugins').done()
   -- Log:debug "loading plugins configuration"
   local status_ok, _ = xpcall(function()
@@ -76,14 +82,14 @@ plugin_loader.load = function()
   end
 end
 
-plugin_loader.source_compiled = function()
+M.source_compiled = function()
   -- doautocmd BufWinEnter will load "which-key" and "nvim-tree" at least
   vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter]]
 
   if first_time then
     vim.notify('[young]: Installing plugins...', vim.log.levels.WARN)
-    -- `sync` runs packer.clean(), packer.update() and packer.compile()
-    -- No need to source compiled file, as PackerCompile will do it
+    -- `sync()` runs packer.clean(), packer.update() and packer.compile()
+    -- No need to source compiled file, as `compile()` will do it
     vim.defer_fn(function()
       require('packer').sync()
     end, 200)
@@ -113,7 +119,7 @@ plugin_loader.source_compiled = function()
   end
 end
 
-plugin_loader.flatten_plugin = function(spec)
+M.flatten_plugin = function(spec)
   local list = {}
 
   local function flatten(x)
@@ -131,7 +137,7 @@ plugin_loader.flatten_plugin = function(spec)
   return list
 end
 
-plugin_loader.get_pins = function()
+M.get_pins = function()
   local pin_plugins = require('young.plugins').pins()
   -- local pin_plugins = {
   --   { 'a/b', 'c/d' },
@@ -149,16 +155,16 @@ plugin_loader.get_pins = function()
   return short_names
 end
 
-plugin_loader.snapshot = function()
-  packer.snapshot(snapshot_name, unpack(plugin_loader.get_pins()))
+M.snapshot = function()
+  packer.snapshot(snapshot_name, unpack(M.get_pins()))
   vim.cmd [[autocmd User PackerSnapshotDone ++once lua require('young.plugin-loader').snapshot_hook()]]
 end
 
-plugin_loader.rollback = function()
-  packer.rollback(snapshot_name, unpack(plugin_loader.get_pins()))
+M.rollback = function()
+  packer.rollback(snapshot_name, unpack(M.get_pins()))
 end
 
-plugin_loader.snapshot_hook = function()
+M.snapshot_hook = function()
   -- TODO:not doautocmd for packer.snapshot yet
   local tmpfile = vim.fn.tempname()
   local snapfile = join_paths(snapshot_path, snapshot_name)
@@ -172,14 +178,14 @@ plugin_loader.snapshot_hook = function()
   -- os.rename(tmpfile, snapfile)
 end
 
-plugin_loader.done = function()
-  plugin_loader.once()
-  plugin_loader.load()
-  plugin_loader.source_compiled()
+M.done = function()
+  M.once()
+  M.load()
+  M.source_compiled()
 end
 
 -- For lua lsp
-plugin_loader.test_path = function()
+M.test_path = function()
   for name, infos in pairs(_G.packer_plugins) do
     if not vim.tbl_contains(vim.tbl_keys(infos), 'path') then
       print(name .. ' do not have `path` attributes')
@@ -187,4 +193,4 @@ plugin_loader.test_path = function()
   end
 end
 
-return plugin_loader
+return M

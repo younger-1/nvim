@@ -23,7 +23,7 @@ ytime.b = vim.fn.reltime()
 require('young.cfg').done()
 
 ytime.c = vim.fn.reltime()
-require('young.plugin-loader').done()
+require('young.packer').done()
 
 ytime.d = vim.fn.reltime()
 -- vim.cmd [[ syntax clear ]]
