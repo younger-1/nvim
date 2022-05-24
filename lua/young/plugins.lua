@@ -8,7 +8,8 @@ setmetatable(mods, {
 })
 
 mods.basic = {
-  { 'wbthomason/packer.nvim' },
+  -- { 'wbthomason/packer.nvim' },
+  { 'younger-1/packer.nvim', branch = 'mydev' },
   { 'lewis6991/impatient.nvim' },
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   -- {
@@ -159,9 +160,9 @@ mods.edit = {
         require('young.mod.treesitter').done()
       end,
     },
-    { 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter' },
-    { 'nvim-treesitter/nvim-treesitter-refactor', requires = 'nvim-treesitter/nvim-treesitter' },
-    { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
+    { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
+    { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
   },
 }
 
@@ -516,8 +517,8 @@ mods.UI = {
     },
     {
       'rcarriga/nvim-notify',
-      event = 'BufWinEnter',
-      -- after = 'telescope.nvim',
+      -- event = 'BufWinEnter',
+      after = 'telescope.nvim',
       config = function()
         require('young.mod.notify').done()
       end,

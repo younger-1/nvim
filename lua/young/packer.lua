@@ -75,7 +75,7 @@ M.load = function()
     end)
   end, debug.traceback)
   if not status_ok then
-    vim.notify('[young.plugin-loader]: loading plugins', vim.log.levels.WARN)
+    vim.notify('[young.packer]: loading plugins', vim.log.levels.WARN)
     -- Log:warn "problems detected while loading plugins' configurations"
     -- Log:trace(debug.traceback())
     return
@@ -99,7 +99,7 @@ M.source_compiled = function()
   end
 
   if not util.is_file(compile_path) then
-    vim.notify('[young.plugin-loader]: not find ' .. compile_path .. ', compiling ...', vim.log.levels.WARN)
+    vim.notify('[young.packer]: not find ' .. compile_path .. ', compiling ...', vim.log.levels.WARN)
     packer.compile()
 
     return
@@ -157,7 +157,7 @@ end
 
 M.snapshot = function()
   packer.snapshot(snapshot_name, unpack(M.get_pins()))
-  vim.cmd [[autocmd User PackerSnapshotDone ++once lua require('young.plugin-loader').snapshot_hook()]]
+  vim.cmd [[autocmd User PackerSnapshotDone ++once lua require('young.packer').snapshot_hook()]]
 end
 
 M.rollback = function()
