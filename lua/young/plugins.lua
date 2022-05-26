@@ -16,9 +16,9 @@ mods.basic = {
   --   'nathom/filetype.nvim',
   --   -- opt = true,
   --   setup = function() end,
-  --   config = [[
+  --   config = function()
   --     require('young.mod.filetype').done()
-  --   ]],
+  --   end,
   -- },
 }
 
@@ -36,9 +36,9 @@ mods.theme = {
   lua = {
     {
       'shaunsingh/nord.nvim',
-      setup = [[
+      setup = function()
         vim.g.nord_borders = true
-      ]],
+      end,
     },
     'tanvirtin/monokai.nvim',
     'rebelot/kanagawa.nvim',
@@ -49,9 +49,9 @@ mods.theme = {
     'Mofiqul/dracula.nvim',
     {
       'marko-cerovac/material.nvim',
-      setup = [[
+      setup = function()
         vim.g.material_style = 'palenight'
-      ]],
+      end,
     },
     'rmehri01/onenord.nvim',
     'daschw/leaf.nvim',
@@ -67,18 +67,18 @@ mods.appearance = {
     {
       'norcalli/nvim-colorizer.lua',
       event = 'BufRead',
-      config = [[
+      config = function()
         require 'young.mod.colorizer'
-      ]],
+      end,
     },
   },
   indent = {
     {
       'lukas-reineke/indent-blankline.nvim',
       event = 'BufRead',
-      config = [[
+      config = function()
         require('young.mod.indent-blankline').done()
-      ]],
+      end,
     },
   },
   line = {
@@ -92,9 +92,9 @@ mods.appearance = {
     {
       'edluffy/specs.nvim',
       event = 'BufRead',
-      config = [[
+      config = function()
         require('young.mod.specs').done()
-      ]],
+      end,
     },
   },
 }
@@ -103,50 +103,50 @@ mods.edit = {
   motion = {
     {
       'haya14busa/vim-asterisk',
-      config = [[
+      config = function()
         require 'young.mod.asterisk'
-      ]],
+      end,
     },
     {
       'chaoren/vim-wordmotion',
       event = 'CursorMoved',
-      setup = [[
+      setup = function()
         vim.g.wordmotion_prefix = ';'
-      ]],
+      end,
     },
     {
       'ggandor/lightspeed.nvim',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require 'young.mod.lightspeed'
-      ]],
+      end,
     },
     {
       'andymass/vim-matchup',
       event = 'CursorMoved',
-      config = [[
+      config = function()
         require 'young.mod.matchup'
-      ]],
+      end,
     },
     -- {
     --   'abecodes/tabout.nvim',
-    --   config = [[
+    --   config = function()
     --     require('tabout').setup()
-    --   ]],
+    --   end,
     -- },
     -- {
     --   'karb94/neoscroll.nvim',
     --   event = 'BufWinEnter',
-    --   config = [[
+    --   config = function()
     --     require 'young.mod.neoscroll'
-    --   ]],
+    --   end,
     -- },
     { -- Smooth scrolling for ANY movement command
       'declancm/cinnamon.nvim',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require 'young.mod.cinnamon'
-      ]],
+      end,
     },
   },
   -- textobject = {
@@ -156,9 +156,9 @@ mods.edit = {
       'nvim-treesitter/nvim-treesitter',
       branch = vim.fn.has 'nvim-0.6' == 1 and 'master' or '0.5-compat',
       run = ':TSUpdate',
-      config = [[
+      config = function()
         require('young.mod.treesitter').done()
-      ]],
+      end,
     },
     { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
     { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
@@ -176,50 +176,50 @@ mods.change = {
     {
       'windwp/nvim-autopairs',
       event = 'InsertEnter',
-      config = [[
+      config = function()
         require 'young.mod.autopairs'
-      ]],
+      end,
     },
   },
   comment = {
     {
       'numToStr/Comment.nvim',
       event = 'BufRead',
-      config = [[
+      config = function()
         require 'young.mod.comment'
-      ]],
+      end,
     },
   },
   other = {
     {
       'arthurxavierx/vim-caser',
-      setup = [[
+      setup = function()
         vim.g.caser_prefix = ';c'
-      ]],
+      end,
     },
     {
       'junegunn/vim-easy-align',
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
-      setup = [[
+      setup = function()
         require 'young.mod.easy-align'
-      ]],
+      end,
     },
     {
       'mg979/vim-visual-multi',
       cmd = { 'VMDebug', 'VMLive', 'VMRegisters', 'VMSearch' },
-      setup = [[
+      setup = function()
         vim.g.VM_default_mappings = 0
-      ]],
+      end,
     },
     {
       'monaqa/dial.nvim',
       event = 'BufRead',
       -- FIXME:
       commit = '3b70b2a',
-      config = [[
+      config = function()
         require('young.mod.dial').done()
-      ]],
+      end,
     },
   },
 }
@@ -229,45 +229,45 @@ mods.neovim = {
     {
       'dstein64/vim-startuptime',
       cmd = 'StartupTime',
-      setup = [[
+      setup = function()
         vim.g.startuptime_use_blocks = 0
-      ]],
+      end,
     },
   },
   { 'gpanders/editorconfig.nvim' },
   {
     'nacro90/numb.nvim',
     event = 'CmdlineEnter',
-    config = [[
+    config = function()
       require('numb').setup()
-    ]],
+    end,
   },
   {
     'winston0410/range-highlight.nvim',
     event = 'CmdlineEnter',
     requires = { { 'winston0410/cmd-parser.nvim', module = 'cmd-parser' } },
-    config = [[
+    config = function()
       require('range-highlight').setup {}
-    ]],
+    end,
   },
   {
     'lambdalisue/suda.vim',
-    config = [[
+    config = function()
       vim.g['suda#prompt'] = '🔑: '
-    ]],
+    end,
   },
   -- {
   --   'jdhao/better-escape.vim',
   --   event = 'InsertEnter',
-  --   setup = [[
+  --   setup = function()
   --     vim.g.better_escape_shortcut = 'jk'
-  --   ]],
+  --   end
   -- }
   {
     'TheBlob42/houdini.nvim',
-    config = [[
+    config = function()
       require('houdini').setup()
-    ]],
+    end,
   },
 }
 
@@ -275,9 +275,9 @@ mods.BWT = {
   window = {
     {
       'luukvbaal/stabilize.nvim',
-      config = [[
+      config = function()
         require('stabilize').setup {}
-      ]],
+      end,
     },
     { 'dhruvasagar/vim-zoom' },
     {
@@ -285,17 +285,17 @@ mods.BWT = {
       disable = not vim.fn.has 'nvim-0.7',
       event = 'CursorMoved',
       -- module = 'smart-splits',
-      config = [[
+      config = function()
         require 'young.mod.smart-splits'
-      ]],
+      end,
     },
     {
       's1n7ax/nvim-window-picker',
       event = 'CursorMoved',
       -- module = 'window-picker',
-      config = [[
+      config = function()
         require 'young.mod.window-picker'
-      ]],
+      end,
     },
   },
   -- tab = {},
@@ -305,9 +305,9 @@ mods.BWT = {
       -- event = "BufRead",
       ft = 'qf',
       -- lua pp((require('bqf.config'))
-      config = [[
+      config = function()
         require('young.mod.bqf').done()
-      ]],
+      end,
     },
   },
 }
@@ -318,9 +318,9 @@ mods.file = {
       -- 'ahmedkhalf/project.nvim',
       'younger-1/project.nvim',
       branch = 'add-patterns-fallback',
-      config = [[
+      config = function()
         require 'young.mod.project'
-      ]],
+      end,
     },
   },
   session = {
@@ -328,24 +328,24 @@ mods.file = {
       'folke/persistence.nvim',
       event = 'BufRead',
       module = 'persistence',
-      config = [[
+      config = function()
         require 'young.mod.persistence'
-      ]],
+      end,
     },
   },
   dir = {
     {
       'tamago324/lir.nvim',
-      config = [[
+      config = function()
         require 'young.mod.lir'
-      ]],
+      end,
     },
     {
       'ZSaberLv0/ZFVimDirDiff',
       cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
-      setup = [[
+      setup = function()
         vim.g.ZFDirDiffUI_dirExpandable = '+'
-      ]],
+      end,
     },
   },
 }
@@ -355,27 +355,27 @@ mods.find = {
     {
       'windwp/nvim-spectre',
       event = 'BufRead',
-      config = [[
+      config = function()
         -- require("user.spectre").config()
-      ]],
+      end,
     },
     {
       'VonHeikemen/searchbox.nvim',
       requires = { { 'MunifTanjim/nui.nvim' } },
       -- module = 'searchbox',
       event = 'BufRead',
-      config = [[
+      config = function()
         require 'young.mod.searchbox'
-      ]],
+      end,
     },
   },
   fzf = {
     {
       'ibhagwan/fzf-lua',
       module = 'fzf-lua',
-      config = [[
+      config = function()
         require 'young.mod.fzf'
-      ]],
+      end,
       disable = is_windows,
     },
   },
@@ -386,39 +386,39 @@ mods.telescope = {
     {
       'nvim-telescope/telescope.nvim',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
-      config = [[
+      config = function()
         require('young.mod.telescope').done()
-      ]],
+      end,
     },
     {
       'natecraddock/telescope-zf-native.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'zf-native'
-      ]],
+      end,
     },
     {
       'nvim-telescope/telescope-file-browser.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'file_browser'
-      ]],
+      end,
     },
     { 'nvim-telescope/telescope-symbols.nvim' },
   },
   other = {
     {
       'nvim-telescope/telescope-packer.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'packer'
-      ]],
+      end,
     },
     {
       'jvgrootveld/telescope-zoxide',
-      config = [[
+      config = function()
         require('telescope').load_extension 'zoxide'
         require('telescope._extensions.zoxide.config').setup {
           prompt_title = '[ Z⏫ ]',
         }
-      ]],
+      end,
     },
     {
       'nvim-telescope/telescope-frecency.nvim',
@@ -427,34 +427,34 @@ mods.telescope = {
     {
       'AckslD/nvim-neoclip.lua',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
-      config = [[
+      config = function()
         require 'young.mod.neoclip'
-      ]],
+      end,
     },
     {
       'dhruvmanila/telescope-bookmarks.nvim',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
-      config = [[
+      config = function()
         require('telescope').load_extension 'bookmarks'
-      ]],
+      end,
     },
     {
       'LinArcX/telescope-env.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'env'
-      ]],
+      end,
     },
     {
       'LinArcX/telescope-command-palette.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'command_palette'
-      ]],
+      end,
     },
     {
       'cljoly/telescope-repo.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'repo'
-      ]],
+      end,
     },
   },
 }
@@ -464,17 +464,17 @@ mods.git = {
     'lewis6991/gitsigns.nvim',
     requires = 'nvim-lua/plenary.nvim',
     event = 'BufRead',
-    config = [[
+    config = function()
       require('young.mod.gitsigns').done()
-    ]],
+    end,
   },
   {
     'TimUntersberger/neogit',
     cmd = 'Neogit',
     module = 'neogit',
-    config = [[
+    config = function()
       require('neogit').setup {}
-    ]],
+    end,
   },
   {
     'tpope/vim-fugitive',
@@ -482,23 +482,23 @@ mods.git = {
   -- {
   --   'tanvirtin/vgit.nvim',
   --   event = 'BufWinEnter',
-  --   config = [[
+  --   config = function()
   --       require('vgit').setup()
-  --   ]],
+  --   end,
   --   disable = is_windows,
   -- },
   {
     'nvim-telescope/telescope-github.nvim',
-    config = [[
+    config = function()
       require('telescope').load_extension 'gh'
-    ]],
+    end,
   },
   {
     'ruifm/gitlinker.nvim',
     event = 'BufRead',
-    config = [[
+    config = function()
       require('young.mod.gitlinker').done()
-    ]],
+    end,
   },
   {
     'akinsho/git-conflict.nvim',
@@ -511,75 +511,75 @@ mods.UI = {
     {
       'kyazdani42/nvim-tree.lua',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require('young.mod.nvim-tree').done()
-      ]],
+      end,
     },
     {
       'rcarriga/nvim-notify',
       -- event = 'BufWinEnter',
       after = 'telescope.nvim',
-      config = [[
+      config = function()
         require('young.mod.notify').done()
-      ]],
+      end,
     },
     {
       'folke/which-key.nvim',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require('young.key.which-key').done()
-      ]],
+      end,
     },
     {
       'folke/trouble.nvim',
       event = 'BufRead',
-      config = [[
+      config = function()
         require('young.mod.trouble').done()
-      ]],
+      end,
     },
     { 'stevearc/dressing.nvim' },
     -- {
     --   'nvim-telescope/telescope-ui-select.nvim',
-    --   config = [[
+    --   config = function()
     --     require("telescope").load_extension("ui-select")
-    --   ]],
+    --   end,
     -- },
     -- { 'sidebar-nvim/sidebar.nvim',
     --   branch = 'dev',
-    --   config = [[
+    --   config = function()
     --     require("sidebar-nvim").setup {}
-    --   ]],
+    --   end,
     -- },
   },
   bufferline = {
     {
       'romgrk/barbar.nvim',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require('young.mod.barbar').hot()
-      ]],
+      end,
     },
   },
   statusline = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
     {
       'nvim-lualine/lualine.nvim',
-      config = [[
+      config = function()
         require 'young.mod.lualine'
-      ]],
+      end,
     },
     -- {
     --   'feline-nvim/feline.nvim',
-    --   config = [[
+    --   config = function()
     --     require 'young.mod.feline'
-    --   ]],
+    --   end,
     -- },
     -- {
     --   'SmiteshP/nvim-gps',
     --   requires = 'nvim-treesitter/nvim-treesitter',
-    --   config = [[
+    --   config = function()
     --     require 'young.mod.gps'
-    --   ]],
+    --   end,
     -- },
   },
   cmdline = {
@@ -588,34 +588,34 @@ mods.UI = {
       requires = { { 'MunifTanjim/nui.nvim' } },
       -- cmd = 'FineCmdline',
       event = 'BufRead',
-      config = [[
+      config = function()
         require 'young.mod.fine-cmd'
-      ]],
+      end,
     },
     -- {
     --   'gelguy/wilder.nvim',
     --   event = 'CmdlineEnter',
-    --   config = [[
+    --   config = function()
     --     require 'young.mod.wilder'
-    --   ]],
+    --   end,
     -- },
   },
   terminal = {
     {
       'akinsho/toggleterm.nvim',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require('young.mod.toggleterm').done()
-      ]],
+      end,
     },
   },
   screen = {
     {
       'goolord/alpha-nvim',
-      config = [[
+      config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
-      ]],
+      end,
     },
   },
   other = {
@@ -623,24 +623,24 @@ mods.UI = {
     --   'wfxr/minimap.vim',
     --   cmd = { 'MinimapToggle' },
     --   -- event = 'BufWinEnter',
-    --   config = [[
+    --   config = function()
     --     require 'young.mod.minimap'
-    --   ]],
+    --   end,
     -- },
     -- {
     --   'dstein64/nvim-scrollview',
     --   event = 'BufWinEnter',
-    --   config = [[
+    --   config = function()
     --     require 'young.mod.scrollview'
-    --   ]],
+    --   end,
     -- },
     {
       'petertriho/nvim-scrollbar',
       event = 'BufWinEnter',
-      config = [[
+      config = function()
         require('scrollbar').setup()
         -- require('scrollbar.handlers.search').setup()
-      ]],
+      end,
     },
   },
 }
@@ -649,9 +649,9 @@ mods.code = {
   completion = {
     {
       'hrsh7th/nvim-cmp',
-      config = [[
+      config = function()
         require('young.mod.cmp').done()
-      ]],
+      end,
       requires = {
         -- [luasnip]
         'L3MON4D3/LuaSnip',
@@ -673,9 +673,9 @@ mods.code = {
         --
         {
           'petertriho/cmp-git',
-          config = [[
+          config = function()
             require('cmp_git').setup()
-          ]],
+          end,
         },
       },
     },
@@ -686,9 +686,7 @@ mods.code = {
       -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
       -- event = 'InsertEnter',
       cmd = 'Copilot',
-      setup = [[
-        require('young.mod.copilot').setup_vim()
-      ]],
+      setup = [[require('young.mod.copilot').setup_vim()]],
     },
     -- {
     --   'zbirenbaum/copilot.lua',
@@ -703,13 +701,13 @@ mods.code = {
     -- {
     --   'skywind3000/asynctasks.vim',
     --   cmd = { 'AsyncTask' },
-    --   config = [[
+    --   config = function()
     --     vim.g.asyncrun_open = 25
     --     vim.g.asyncrun_bell = 1
     --     vim.g.asyncrun_rootmarks = { '.svn', '.git', '.root', '_darcs', 'build.xml' }
     --     vim.g.asynctasks_term_pos = 'floaterm'
     --     vim.g.asynctasks_term_reuse = 0
-    --   ]],
+    --   end,
     --   requires = {
     --     {
     --       'skywind3000/asyncrun.vim',
@@ -732,9 +730,9 @@ mods.LSP = {
     {
       'ray-x/lsp_signature.nvim',
       event = 'BufRead',
-      config = [[
+      config = function()
         require 'young.mod.lsp-signature'
-      ]],
+      end,
     },
   },
   lua = {
@@ -747,21 +745,21 @@ mods.LSP = {
     {
       'kosayoda/nvim-lightbulb',
       event = 'BufRead',
-      config = [[
+      config = function()
         require 'young.mod.lightbulb'
-      ]],
+      end,
     },
     {
       'j-hui/fidget.nvim',
-      config = [[
+      config = function()
         require('young.mod.fidget').done()
-      ]],
+      end,
     },
     -- { -- TODO:
     --   'ErichDonGubler/lsp_lines.nvim',
-    --   config = [[
+    --   config = function()
     --     require('lsp_lines').register_lsp_virtual_lines()
-    --   ]],
+    --   end,
     -- },
   },
 }
@@ -772,18 +770,18 @@ mods.lang = {
       'vuki656/package-info.nvim',
       ft = 'json',
       requires = { { 'MunifTanjim/nui.nvim' } },
-      config = [[
+      config = function()
         require 'young.mod.package-info'
-      ]],
+      end,
     },
   },
   http = {
     {
       'NTBBloodbath/rest.nvim',
       ft = 'http',
-      config = [[
+      config = function()
         require 'young.mod.rest'
-      ]],
+      end,
     },
   },
   lisp = {
@@ -803,9 +801,9 @@ mods.lang = {
     {
       'mfussenegger/nvim-jdtls',
       ft = 'java',
-      setup = [[
+      setup = function()
         vim.g.young_jdtls = true
-      ]],
+      end,
     },
   },
 }
@@ -814,9 +812,9 @@ mods.write = {
   core = {
     {
       'crispgm/telescope-heading.nvim',
-      config = [[
+      config = function()
         require('telescope').load_extension 'heading'
-      ]],
+      end,
     },
   },
   todo = {
@@ -833,9 +831,9 @@ mods.write = {
     {
       'nvim-neorg/neorg',
       ft = 'norg',
-      config = [[
+      config = function()
         require 'young.mod.neorg'
-      ]],
+      end,
     },
   },
   markdown = {
@@ -843,28 +841,28 @@ mods.write = {
       'iamcco/markdown-preview.nvim',
       run = 'cd app && yarn install',
       ft = 'markdown',
-      config = [[
+      config = function()
         vim.g.mkdp_auto_start = 0
         vim.g.mkdp_auto_close = 0
         vim.g.mkdp_command_for_global = 1
         vim.g.mkdp_open_to_the_world = 0
-      ]],
+      end,
     },
     -- {
     --   'ellisonleao/glow.nvim',
-    --   config = [[
+    --   config = function()
     --     vim.g.glow_border = "rounded"
     --     vim.g.glow_use_pager = true
-    --   ]],
+    --   end,
     -- },
   },
   zen = {
     {
       'folke/zen-mode.nvim',
       cmd = 'ZenMode',
-      config = [[
+      config = function()
         require 'young.mod.zen'
-      ]],
+      end,
     },
   },
 }
@@ -901,9 +899,7 @@ mods.tool = {
   --     'ZSaberLv0/ZFVimIM',
   --     -- event = 'InsertEnter',
   --     keys = '<leader>tZ',
-  --     setup = [[
-  --       require 'young.mod.ZFVimIM'
-  --     ]],
+  --     setup = [[require 'young.mod.ZFVimIM']],
   --     requires = {
   --       { 'ZSaberLv0/ZFVimJob', after = 'ZFVimIM' },
   --       { 'ZSaberLv0/ZFVimIM_openapi', after = 'ZFVimJob' },
