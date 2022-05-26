@@ -72,11 +72,11 @@ M.keys = {
     ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true } },
 
     -- search older command-line from history
-    ['<C-n>'] = { 'pumvisible() ? "\\<C-n>" : "\\<Down>"', { expr = true } },
-    ['<C-p>'] = { 'pumvisible() ? "\\<C-p>" : "\\<Up>"', { expr = true } },
+    ['<A-n>'] = { 'pumvisible() ? "\\<C-n>" : "\\<Down>"', { expr = true } },
+    ['<A-p>'] = { 'pumvisible() ? "\\<C-p>" : "\\<Up>"', { expr = true } },
     -- recall older command-line from history
-    ['<A-n>'] = '<S-Down>',
-    ['<A-p>'] = '<S-Up>',
+    -- ['<A-n>'] = '<S-Down>',
+    -- ['<A-p>'] = '<S-Up>',
     --
     ['<C-V>'] = '<C-R>+',
     --
