@@ -22,13 +22,13 @@ M.cfg = {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
-    { name = 'calc' },
-    { name = 'emoji' },
-    { name = 'luasnip' },
-    -- { name = 'treesitter' },
     --
+    { name = 'calc' },
+    -- { name = 'emoji' },
+    -- { name = 'treesitter' },
     -- { name = 'cmp_tabnine' },
     -- { name = 'crates' },
   },
@@ -204,22 +204,21 @@ M.done = function()
   }
 
   cmp.setup(M.cfg)
+
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
       { name = 'cmp_git' },
-      { name = 'emoji' },
     }, {
-      { name = 'buffer' },
-      { name = 'path' },
+      { name = 'emoji' },
     }),
   })
-  -- cmp.setup.filetype({ 'markdown', 'help' }, {
-  --   sources = {
-  --     { name = 'path' },
-  --     { name = 'buffer' },
-  --   }
-  -- })
+
+  cmp.setup.filetype({ 'markdown', 'txt', 'log' }, {
+    sources = {
+      { name = 'emoji' },
+    },
+  })
 
   local cmdline_map = {
     ['<Tab>'] = {
@@ -241,10 +240,11 @@ M.done = function()
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
     mapping = cmdline_map,
-    sources = {
+    sources = cmp.config.sources({
       { name = 'path' },
+    }, {
       { name = 'cmdline' },
-    },
+    }),
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

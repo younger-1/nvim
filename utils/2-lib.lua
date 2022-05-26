@@ -109,13 +109,14 @@ print(vim.inspect(m2)) -- { "rust:b", "go:c", "python:a" }
 local Job = require 'plenary.job'
 Job
   :new({
+    command = 'fd',
+    args = { '.py' },
     -- command = 'rg',
     -- args = { '--files', '.' },
-    command = 'sleep',
-    args = { '2' },
-    on_exit = function(j, ret_code, signal)
-      -- pp(j:result(), ret_code, signal)
-      print(1, 2, 3)
+    -- command = 'sleep',
+    -- args = { '2' },
+    on_exit = function(this, code, signal)
+      pp(this:result(), code, signal)
     end,
   })
   -- :sync()

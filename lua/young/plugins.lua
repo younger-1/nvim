@@ -317,7 +317,7 @@ mods.file = {
     {
       -- 'ahmedkhalf/project.nvim',
       'younger-1/project.nvim',
-      branch = 'add-patterns-fallback',
+      branch = 'mydev',
       config = function()
         require 'young.mod.project'
       end,
