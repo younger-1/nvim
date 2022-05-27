@@ -168,7 +168,7 @@ M.done = function()
     code_lens_refresh = {
       buffer = true,
       {
-        'InsertLeave',
+        'BufEnter,InsertLeave',
         '<buffer>',
         'lua vim.lsp.codelens.refresh()',
       },
