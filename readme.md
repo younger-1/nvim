@@ -25,7 +25,7 @@
 - [ ] local/machine/per-user settings, eg. colorscheme, background, font and even modules of plugins like M.lang('lisp', 'java')
 - [ ] enable syntax and keybind for filetype of `packer`, just like buffer used by `PackerUpdate`
 - [ ] config for lspkind-nvim
-- [ ] vim/nvim can't open `packer_compiled.lua` normally, but vscode can.
+- [x] vim/nvim can't open `packer_compiled.lua` normally, but vscode can.
 - [ ] nvim-tree: refine `search_node` to match fuzzy not exactly
 - [x] add a wrapper for which-key and using in : LSP keymappings
 - [ ] null-ls use notify to avoid [ERROR 10:23:50] ...t/null-ls.nvim/lua/null-ls/helpers/gener...d flake8 is not executable (make sure it's installed and on your $PATH)

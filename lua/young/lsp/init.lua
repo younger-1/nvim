@@ -96,14 +96,14 @@ local config = function()
   -- end
   vim.cmd [[ command! LspLog exe 'split ' .. luaeval("vim.lsp.get_log_path()") ]]
 
-  -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
-  local lspconfig_win = require 'lspconfig.ui.windows'
-  local default_win_opts = lspconfig_win.default_opts
-  lspconfig_win.default_opts = function(options)
-    local opts = default_win_opts(options)
-    opts.border = 'rounded'
-    return opts
-  end
+  -- <https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization>
+  -- local lspconfig_win = require 'lspconfig.ui.windows'
+  -- local default_win_opts = lspconfig_win.default_opts
+  -- lspconfig_win.default_opts = function(options)
+  --   local opts = default_win_opts(options)
+  --   opts.border = 'rounded'
+  --   return opts
+  -- end
 
   lsp_installer.setup {
     -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer", "sumneko_lua" }
@@ -115,6 +115,7 @@ local config = function()
     --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
     automatic_installation = false,
     ui = {
+      check_outdated_servers_on_open = false,
       icons = {
         server_installed = '',
         server_pending = '',

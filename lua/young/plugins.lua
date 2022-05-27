@@ -673,6 +673,7 @@ mods.code = {
         --
         {
           'petertriho/cmp-git',
+          requires = 'nvim-lua/plenary.nvim',
           config = function()
             require('cmp_git').setup()
           end,

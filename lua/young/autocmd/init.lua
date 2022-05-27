@@ -65,7 +65,7 @@ function M.load_augroups()
     },
     _general_lsp = {
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'null-ls-info', 'lua require("young.tool").add_border()' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
     _startup = {
