@@ -82,20 +82,37 @@ mods.appearance = {
     },
   },
   line = {
-    {
+    { -- Highlighting the word under the cursor
       'RRethy/vim-illuminate',
       disable = require('young.lsp.config').document_highlight,
       -- opt = true,
       event = 'BufWinEnter',
       config = [[require 'young.mod.illuminate']],
     },
-    {
+    { -- Show where your cursor moves when jumping large distances
       'edluffy/specs.nvim',
       event = 'BufRead',
       config = function()
         require('young.mod.specs').done()
       end,
     },
+    -- { -- Highlight UI elements based on current mode
+    --   'mvllow/modes.nvim',
+    --   event = 'BufRead',
+    --   config = function()
+    --     vim.opt.cursorline = true
+    --     require('modes').setup {
+    --       colors = {
+    --         insert = '#78ccc5',
+    --         visual = '#f5c359',
+    --         delete = '#c75c6a',
+    --         copy = '#9745be',
+    --       },
+    --       line_opacity = 0.2,
+    --       focus_only = false,
+    --     }
+    --   end,
+    -- },
   },
 }
 
@@ -263,7 +280,7 @@ mods.neovim = {
   --     vim.g.better_escape_shortcut = 'jk'
   --   end
   -- }
-  {
+  { -- Escape from insert, terminal & command mode without delay
     'TheBlob42/houdini.nvim',
     config = function()
       require('houdini').setup()
@@ -766,6 +783,13 @@ mods.LSP = {
 }
 
 mods.lang = {
+  -- {
+  --   'sheerun/vim-polyglot',
+  --   opt = true,
+  --   setup = function()
+  --     vim.g.polyglot_disabled = { 'autoindent', 'ftdetect', 'markdown' }
+  --   end,
+  -- },
   js = {
     {
       'vuki656/package-info.nvim',

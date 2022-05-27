@@ -1,3 +1,20 @@
+-- lua-dev defaults: <https://github.com/folke/lua-dev.nvim>
+-- {
+--   library = {
+--     vimruntime = true, -- runtime path
+--     types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+--     plugins = true, -- installed opt or start plugins in packpath
+--     -- you can also specify the list of plugins to make available as a workspace library
+--     -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+--   },
+--   runtime_path = false, -- enable this to get completion in require strings. Slow!
+--   -- pass any additional options that will be merged in the final lsp config
+--   lspconfig = {
+--     -- cmd = {"lua-language-server"},
+--     -- on_attach = ...
+--   },
+-- }
+
 return {
   settings = {
     Lua = {
@@ -26,6 +43,7 @@ return {
       diagnostics = {
         globals = {
           'vim',
+          'packer_plugins',
           'pp',
           'gg',
         },
