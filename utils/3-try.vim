@@ -33,3 +33,40 @@ fun! s:PrintLSCompletionList(lead, ...) abort
         \ ->sort()
 endfun
 
+let g:jetpack#ignore_patterns =
+  \ get(g:, 'jetpack#ignore_patterns', [
+  \   '/.*',
+  \   '/.*/**/*',
+  \   '/doc/tags*',
+  \   '/t/**/*',
+  \   '/test/**/*',
+  \   '/makefile*',
+  \   '/gemfile*',
+  \   '/rakefile*',
+  \   '/vimflavor*',
+  \   '/readme*',
+  \   '/license*',
+  \   '/licence*',
+  \   '/contributing*',
+  \   '/changelog*',
+  \   '/news*',
+  \ ])
+
+function! s:files(path) abort
+  return filter(glob(a:path . '/**/*', '', 1), { _, val -> !isdirectory(val)})
+endfunction
+
+function! s:ignorable(filename) abort
+  return filter(copy(g:jetpack#ignore_patterns), { _, val -> a:filename =~? glob2regpat(val) }) != []
+endfunction
+
+function! s:do_it()
+  let srcdir = '/home/young/.vim/pack/jetpack/src/vim-sayonara'
+  let files = map(s:files(srcdir), {_, file -> file[len(srcdir):]})
+  let need_files = filter(copy(files), { _, file -> !s:ignorable(file) })
+  echo need_files
+  let ignore_files = filter(copy(files), { _, file -> s:ignorable(file) })
+  echo ignore_files
+endfunction
+
+call s:do_it()

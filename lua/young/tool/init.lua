@@ -284,10 +284,11 @@ tool.lsp_ref = function()
 end
 
 tool.add_border = function()
-  local win = vim.api.nvim_get_current_win()
-  vim.api.nvim_win_set_config(win, {
-    border = 'rounded',
-  })
+  -- local win = vim.api.nvim_get_current_win()
+  -- vim.api.nvim_win_set_config(win, {
+  --   border = 'rounded',
+  -- })
+  vim.api.nvim_win_set_config(0, { border = 'rounded' })
 end
 
 tool.toggle_indent_style = function()
