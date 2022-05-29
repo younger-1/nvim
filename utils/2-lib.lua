@@ -104,6 +104,32 @@ m2 = it
   :tolist()
 print(vim.inspect(m2)) -- { "rust:b", "go:c", "python:a" }
 
+-- [path]
+-- :h telescope.changelog-473
+-- Guide to switch over to plenary.path
+--     - separator
+--         before: require("telescope.path").separator
+--         now:    require("plenary.path").path.sep
+--     - home
+--         before: require("telescope.path").home
+--         now:    require("plenary.path").path.home
+--     - make_relative
+--         before: require("telescope.path").make_relative(filepath, cwd)
+--         now:    require("plenary.path"):new(filepath):make_relative(cwd)
+--     - shorten
+--         before: require("telescope.path").shorten(filepath)
+--         now:    require("plenary.path"):new(filepath):shorten()
+--                 with optional len, default is 1
+--     - normalize
+--         before: require("telescope.path").normalize(filepath, cwd)
+--         now:    require("plenary.path"):new(filepath):normalize(cwd)
+--     - read_file
+--         before: require("telescope.path").read_file(filepath)
+--         now:    require("plenary.path"):new(filepath):read()
+--     - read_file_async
+--         before: require("telescope.path").read_file_async(filepath, callback)
+--         now:    require("plenary.path"):new(filepath):read(callback)
+
 -- [Job]
 
 local Job = require 'plenary.job'
