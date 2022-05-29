@@ -208,8 +208,6 @@ M.cfg = {
     git_status = view.h3,
     grep_string = { theme = 'ivy' },
     live_grep = view.h1,
-    lsp_code_actions = { theme = 'cursor' },
-    lsp_range_code_actions = { theme = 'cursor' },
     man_pages = view.h1,
     marks = view.h1,
     oldfiles = view.v4,
@@ -328,26 +326,6 @@ M.cfg = {
     },
   },
 }
-
-function M.code_actions()
-  local opts = {
-    winblend = 15,
-    layout_config = {
-      prompt_position = 'top',
-      width = 80,
-      height = 12,
-    },
-    borderchars = {
-      prompt = { '─', '│', ' ', '│', '╭', '╮', '│', '│' },
-      results = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
-      preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    },
-    border = {},
-    previewer = false,
-    shorten_path = false,
-  }
-  builtin.lsp_code_actions(themes.get_dropdown(opts))
-end
 
 M.ice = function() end
 
