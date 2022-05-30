@@ -35,3 +35,36 @@ local test_time = function()
   pp((uv.hrtime() - d_time) / 1e9)
 end
 test_time()
+
+local function extract_basename(pats)
+  pp(pats)
+  -- Deconstruct basename from pats
+  for _, pat in ipairs(pats) do
+    for _, npat in ipairs {
+      -- Ordered by most specific
+      'lua/(.*)/init%.lua',
+      'lua/(.*)%.lua',
+    } do
+      local m = pat:match(npat)
+      gg(m)
+      if m and vim.endswith(m, 'init') then
+        m = m:sub(0, -6)
+      end
+    end
+  end
+end
+
+local _load_package = function(name)
+  local basename = name:gsub('%.', '/')
+  local paths = { 'lua/' .. basename .. '.lua', 'lua/' .. basename .. '/init.lua' }
+
+  extract_basename(paths)
+
+  -- local found = nvim__get_runtime(paths, false, {is_lua=true})
+  -- if #found > 0 then
+  --   local f, err = loadfile(found[1])
+  --   return f or error(err)
+  -- end
+end
+
+_load_package 'young.lsp.config'

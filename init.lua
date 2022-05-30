@@ -23,7 +23,7 @@ ytime.b = vim.fn.reltime()
 require('young.cfg').done()
 
 ytime.c = vim.fn.reltime()
-require('young.packer').done()
+rr('young.packer').done()
 
 ytime.d = vim.fn.reltime()
 -- vim.cmd [[ syntax clear ]]
@@ -32,6 +32,6 @@ vim.schedule(function()
 end)
 
 ytime.e = vim.fn.reltime()
-require('young.gui').done()
+rr('young.gui').done()
 
 ytime.f = vim.fn.reltime()
