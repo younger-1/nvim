@@ -127,12 +127,16 @@ end
 -- [[string]]
 -- <https://somedudesays.com/2019/12/lua-string-operations/>
 
--- local s = "hello world"
--- local ans = { string.find(s, "ll", 1, true) }
--- pp(ans) -- { 3, 4 }
--- local ans = { string.find(s, "^he") }
--- pp(ans) -- { 1, 2 }
--- pp(s:sub(2):match "%s") -- " "
+local s = 'hello world'
+local ans = { string.find(s, 'll', 1, true) }
+pp(ans) -- { 3, 4 }
+local ans = { string.find(s, '^hel') }
+pp(ans) -- { 1, 3 }
+pp(s:sub(2)) -- "ello world"
+pp(s:sub(1, 2)) -- "he"
+pp(s:sub(-2)) -- "ld"
+pp(s:sub(1, -2)) -- "hello worl"
+pp(s:match '%s') -- " "
 
 -- [](https://www.codegrepper.com/code-examples/lua/parse+string+lua)
 -- local function split(s, delimiter)

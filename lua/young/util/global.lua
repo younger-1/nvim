@@ -1,8 +1,8 @@
 _G.young = {}
 
 _G.uv = vim.loop
-_G.api = vim.api
 _G.fn = vim.fn
+_G.api = vim.api
 
 ----------------------------------------------------------------------------------------------------
 -- Autocommand
@@ -190,16 +190,23 @@ function _G.to_home(path)
   return vim.fn.fnamemodify(path, ':~')
 end
 
-function _G.rr(...)
-  return require(...)
-end
-
----Require a module in protected mode without relying on its cached value
+---Require a module in protected mode
 ---@param module string
 ---@return any
-function _G.require_clean(module)
+function _G.rr(module)
+  local ok, requested = pcall(require, module)
+  if ok then
+    return requested
+  else
+    return false
+  end
+end
+
+---require_clean: Require a module in protected mode without relying on its cached value
+---@param module string
+---@return any
+function _G.rc(module)
   package.loaded[module] = nil
   _G[module] = nil
-  local _, requested = pcall(require, module)
-  return requested
+  return rr(module)
 end
