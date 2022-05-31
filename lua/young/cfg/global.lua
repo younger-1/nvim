@@ -63,7 +63,7 @@ vim.filetype.add {
 }
 
 -- <https://github.com/kylo252/dotfiles/blob/de7cb1e8a08cff3d772a4253dfbcdb94dbba8d4f/.config/nvim/lua/user/settings.lua#L49>
--- if vim.fn.has "wsl" == 1 then
+-- if has 'wsl' then
 --   vim.g.clipboard = {
 --     copy = {
 --       ["+"] = "win32yank.exe -i --crlf",
