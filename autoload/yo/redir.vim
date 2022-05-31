@@ -60,7 +60,7 @@ function! yo#redir#Source(msgcmd, destcmd)
   redir END
 
   " Close other windows
-  wincmd o
+  silent wincmd o
 
   if strlen(a:destcmd)
     silent execute a:destcmd

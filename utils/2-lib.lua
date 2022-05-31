@@ -48,15 +48,15 @@ local stdin = uv.new_pipe(false)
 local stdout = uv.new_pipe(false)
 local stderr = uv.new_pipe(false)
 
-local handle = uv.spawn('rg', {
-  args = { '--files' },
+local handle, pid = uv.spawn('fd', {
+  args = { '.snippets' },
   stdio = { stdin, stdout, stderr },
 }, function() end)
 
 uv.read_start(stdout, function(err, data)
   assert(not err, err)
   if data then
-    print(vim.inspect(data))
+    pp(data)
   end
 end)
 

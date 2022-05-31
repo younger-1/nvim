@@ -52,7 +52,7 @@ M.once = function()
 end
 
 M.recompile = function()
-  require_clean 'young.plugins'
+  rc 'young.plugins'
 
   M.load()
   -- NOTE:Do I need source_compiled here? No, PackerCompile will do
