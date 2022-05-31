@@ -145,6 +145,7 @@ mods.edit = {
         require 'young.mod.matchup'
       end,
     },
+    { 'sbulav/jump-ray.nvim' },
     -- {
     --   'abecodes/tabout.nvim',
     --   config = function()
