@@ -22,7 +22,7 @@ function M.convertFile()
       fullname,
       '--to=html5',
       '-o',
-      string.format('%s.html', shortname),
+      fmt('%s.html', shortname),
       '-s',
       '--highlight-style',
       'tango',

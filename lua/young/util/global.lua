@@ -3,6 +3,7 @@ _G.young = {}
 _G.uv = vim.loop
 _G.fn = vim.fn
 _G.api = vim.api
+_G.fmt = string.format
 
 ----------------------------------------------------------------------------------------------------
 -- Autocommand
@@ -194,10 +195,11 @@ end
 ---@param module string
 ---@return any
 function _G.rr(module)
-  local ok, requested = pcall(require, module)
+  local ok, result = pcall(require, module)
   if ok then
-    return requested
+    return result
   else
+    vim.notify(result, vim.log.levels.ERROR, { title = fmt('[rr]: Error requiring: %s', module) })
     return false
   end
 end

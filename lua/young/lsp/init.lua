@@ -58,7 +58,7 @@ end
 local function attach_buffers(server_name)
   local lsp_server = require('lspconfig')[server_name]
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    -- print(string.format("Attaching server=%s to bufnr=%s", server_name, bufnr))
+    -- print(fmt("Attaching server=%s to bufnr=%s", server_name, bufnr))
     lsp_server.manager.try_add_wrapper(bufnr)
   end
 end

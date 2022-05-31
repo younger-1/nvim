@@ -30,7 +30,7 @@ local M = require 'young.autocmd'
 
 -- function M.enable_format_on_save(opts)
 --   opts = vim.tbl_extend('force', format_on_save_opts, opts or {})
---   local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
+--   local fmt_cmd = fmt(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
 --   M.define_augroups {
 --     format_on_save = { { 'BufWritePre', opts.pattern, fmt_cmd } },
 --   }
@@ -66,7 +66,7 @@ function M.enable_lsp_document_highlight(client_id)
       {
         'CursorHold',
         '<buffer>',
-        string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
+        fmt("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
       },
       {
         'CursorMoved',
