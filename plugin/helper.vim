@@ -22,18 +22,24 @@ command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand
 "   :BufMessage registers
 "   :WinMessage ls
 "   :TabMessage echo "Key mappings for Control+A:" | map <C-A>
-command! -nargs=+ -complete=command BufMessage call yo#redir#Messages(<q-args>, 'enew'   )
-command! -nargs=+ -complete=command WinMessage call yo#redir#Messages(<q-args>, 'vs new' )
-command! -nargs=+ -complete=command TabMessage call yo#redir#Messages(<q-args>, 'tabnew' )
+command! -nargs=+ -complete=command Message    call yo#redir#Messages(<q-args>, '')
+command! -nargs=+ -complete=command BufMessage call yo#redir#Messages(<q-args>, 'enew')
+command! -nargs=+ -complete=command WinMessage call yo#redir#Messages(<q-args>, 'new')
+command! -nargs=+ -complete=command TabMessage call yo#redir#Messages(<q-args>, 'tabnew')
+command! -nargs=+ -complete=command Capture    call yo#redir#Messages(<q-args>, 'vnew')
 
 " function! Capture(cmd)
-"   execute ":enew|pu=execute('" . a:cmd . "')|1,2d_"
+"   execute ":vnew|pu=execute('" . a:cmd . "')|1,2d_"
 " endfunction
 " command! -nargs=+ -complete=command Capture silent call Capture(<q-args>)
-command! -nargs=1 -complete=command Capture
-\ <mods> new |
-\ setlocal buftype=nofile bufhidden=hide noswapfile |
-\ call setline(1, split(execute(<q-args>), '\n'))
+
+" command! -nargs=+ -complete=command Capture
+" \ <mods> vnew |
+" \ setlocal buftype=nofile bufhidden=hide noswapfile |
+" \ call setline(1, split(execute(<q-args>), '\n'))
+
+" Open a scratch buffer, reuse for output of `source` current file
+command! -nargs=0 -range=% Source call yo#redir#Source('<line1>,<line2>source', 'vnew')
 
 " Count for char in current buffer.
 command! -nargs=0 Wc %s/.//nge
