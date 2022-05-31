@@ -12,7 +12,7 @@ local home = os.getenv 'HOME'
 local launcher_path = vim.fn.glob(
   home .. '/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_*.jar'
 )
-if vim.fn.has 'mac' == 1 then
+if has 'mac' then
   WORKSPACE_PATH = home .. '/workspace/'
   CONFIG = 'mac'
   launcher_path = vim.fn.glob(
@@ -20,7 +20,7 @@ if vim.fn.has 'mac' == 1 then
     1,
     1
   )[1]
-elseif vim.fn.has 'unix' == 1 then
+elseif has 'unix' then
   WORKSPACE_PATH = home .. '/workspace/'
   CONFIG = 'linux'
 else

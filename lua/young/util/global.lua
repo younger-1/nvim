@@ -3,7 +3,16 @@ _G.young = {}
 _G.uv = vim.loop
 _G.fn = vim.fn
 _G.api = vim.api
+
 _G.fmt = string.format
+
+---check if a certain feature/version/commit exists in nvim
+---@param feature string
+---@return boolean
+_G.has = function(feature)
+  return vim.fn.has(feature) > 0
+end
+
 
 ----------------------------------------------------------------------------------------------------
 -- Autocommand

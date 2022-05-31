@@ -350,4 +350,26 @@ tool.startup_event = function(event)
   young.util.echomsg { fmt('%s: %g', event, now) }
 end
 
+--- Usage:
+--- 1. Call `local stop = tool.profile('my-log')` at the top of the file
+--- 2. At the bottom of the file call `stop()`
+--- 3. Restart neovim, the newly created log file should open
+tool.profile = function(filename)
+  local base = '/tmp/config/profile/'
+  vim.fn.mkdir(base, 'p')
+  local success, profile = pcall(require, 'plenary.profile.lua_profiler')
+  if not success then
+    vim.api.nvim_echo({ 'Plenary is not installed.', 'Title' }, true, {})
+  end
+  profile.start()
+  return function()
+    profile.stop()
+    local logfile = base .. filename .. '.log'
+    profile.report(logfile)
+    vim.defer_fn(function()
+      vim.cmd('tabedit ' .. logfile)
+    end, 1000)
+  end
+end
+
 return tool
