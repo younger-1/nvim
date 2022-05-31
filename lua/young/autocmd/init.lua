@@ -160,7 +160,7 @@ M.done = function()
   M.define_augroups(aus)
 
   local format_opts = { pattern = '*', timeout = 1000 }
-  local fmt_cmd = string.format(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)
+  local fmt_cmd = fmt(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)
 
   M.build({
     print_ascii = { { 'CursorHold', '*', ':normal! ga' } },
@@ -178,7 +178,7 @@ M.done = function()
       {
         'CursorHold',
         '<buffer>',
-        -- string.format("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
+        -- fmt("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
         'lua vim.lsp.buf.document_highlight()',
       },
       {

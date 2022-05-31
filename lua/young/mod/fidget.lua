@@ -61,11 +61,11 @@ M.done = function()
       stack_upwards = true, -- list of tasks grows upwards
       -- function to format fidget title
       fidget = function(fidget_name, spinner)
-        return string.format('%s %s', spinner, fidget_name)
+        return fmt('%s %s', spinner, fidget_name)
       end,
       -- function to format each task line
       task = function(task_name, message, percentage)
-        return string.format('%s%s [%s]', message, percentage and string.format(' (%s%%)', percentage) or '', task_name)
+        return fmt('%s%s [%s]', message, percentage and fmt(' (%s%%)', percentage) or '', task_name)
       end,
     },
     debug = {

@@ -347,7 +347,7 @@ end
 
 tool.startup_event = function(event)
   local now = vim.fn.reltimefloat(vim.fn.reltime(ytime.a))
-  young.util.echomsg { string.format('%s: %g', event, now) }
+  young.util.echomsg { fmt('%s: %g', event, now) }
 end
 
 return tool
