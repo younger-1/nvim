@@ -51,8 +51,9 @@ M.keys = {
 
   ---@usage change or add keymappings for command mode
   command_mode = {
-    -- navigate tab completion with <c-j> and <c-k>
-    -- runs conditionally
+    -- navigate tab completion with <c-j> and <c-k> runs conditionally
+    -- cnoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+    -- cnoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
     ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', expr = true },
     ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', expr = true },
 
@@ -191,8 +192,6 @@ M.keys = {
   },
 }
 
-local load_mode = function(mode, keymaps) end
-
 function M.print(mode)
   print "Younger's default keymappings (not including which-key)"
   if mode then
@@ -209,11 +208,8 @@ M.done = function()
       if type(v) == 'string' then
         v = { v }
       end
-      if mode == '' then
-        xy.map { k, unpack(v) }
-      else
-        xy.map[mode] { k, unpack(v) }
-      end
+      table.insert(v, 1, k)
+      xy.map[mode](v)
     end
   end
 end

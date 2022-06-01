@@ -239,7 +239,7 @@ M.done = function()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
-    mapping = cmdline_map,
+    -- mapping = cmdline_map,
     sources = cmp.config.sources({
       { name = 'path' },
     }, {
