@@ -188,7 +188,9 @@ local function mapper(tbl)
 end
 
 setmetatable(xy.map, {
-  __call = mapper,
+  __call = function(t, tbl)
+    mapper(tbl)
+  end,
   __index = function(t, key)
     local silent
     if key == '!' or key == 'c' then
