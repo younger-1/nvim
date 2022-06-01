@@ -81,12 +81,8 @@ vim.g.bufferline = {
 }
 
 M.hot = function()
-  require('young.key.mappings').load {
-    normal_mode = {
-      ['<S-l>'] = ':BufferNext<CR>',
-      ['<S-h>'] = ':BufferPrevious<CR>',
-    },
-  }
+  xy.map.n { '<S-l>', ':BufferNext<CR>' }
+  xy.map.n { '<S-h>', ':BufferPrevious<CR>' }
 end
 
 return M

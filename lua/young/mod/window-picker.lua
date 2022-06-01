@@ -68,6 +68,6 @@ M.pick = function()
   end
 end
 
-xy.map.n { '<C-w>p', M.pick }
+xy.map.n { '<C-w>p', M.pick, desc = 'Pick window' }
 
 return M
