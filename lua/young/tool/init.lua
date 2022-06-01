@@ -315,12 +315,12 @@ tool.set_cursor_floating_win = function()
   end, winids)
 
   if #winids == 0 then
-    young.util.echo { 'No floating window' }
+    xy.util.echo { 'No floating window' }
     return
   end
 
   if #winids > 1 then
-    young.util.echo { 'Two or more floating window' }
+    xy.util.echo { 'Two or more floating window' }
     -- M.pick_floating_win(winids)
   end
 
@@ -347,7 +347,7 @@ end
 
 tool.startup_event = function(event)
   local now = vim.fn.reltimefloat(vim.fn.reltime(ytime.a))
-  young.util.echomsg { fmt('%s: %g', event, now) }
+  xy.util.echomsg { fmt('%s: %g', event, now) }
 end
 
 --- Usage:
