@@ -120,6 +120,19 @@ function _G.rc(module)
 end
 
 ----------------------------------------------------------------------------------------------------
+-- Command
+----------------------------------------------------------------------------------------------------
+xy.command = function(tbl)
+  local opts = {}
+  for k, v in pairs(tbl) do
+    if tonumber(k) == nil then
+      opts[k] = v
+    end
+  end
+  vim.api.nvim_create_user_command(tbl[1], tbl[2], opts)
+end
+
+----------------------------------------------------------------------------------------------------
 -- Autocommand
 ----------------------------------------------------------------------------------------------------
 ---@class Autocommand
@@ -157,63 +170,39 @@ end
 ----------------------------------------------------------------------------------------------------
 -- Mappings
 ----------------------------------------------------------------------------------------------------
+xy.map = function(tbl)
+  local opts = { noremap = true, silent = true }
+  -- Dont want these named fields on the options table
+  local mode = tbl['mode']
+  tbl['mode'] = nil
 
--- source: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/globals.lua
--- credits: akinsho
----create a mapping function factory
----@param mode string
----@param o table
----@return fun(lhs: string, rhs: string|function, opts: table|nil) 'create a mapping'
-local function make_mapper(mode, o)
-  -- copy the opts table as extends will mutate the opts table passed in otherwise
-  local parent_opts = vim.deepcopy(o)
-  ---Create a mapping
-  ---@param lhs string
-  ---@param rhs string|function
-  ---@param opts table
-  return function(lhs, rhs, opts)
-    -- If the label is all that was passed in, set the opts automagically
-    opts = type(opts) == 'string' and { desc = opts } or opts and vim.deepcopy(opts) or {}
-    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('keep', opts, parent_opts))
+  for k, v in pairs(tbl) do
+    if tonumber(k) == nil then
+      opts[k] = v
+    end
   end
+
+  vim.keymap.set(mode, tbl[1], tbl[2], opts)
 end
 
-local map_opts = { remap = true, silent = true }
-local noremap_opts = { silent = true }
+xy.nmap = function(tbl)
+  tbl['mode'] = 'n'
+  xy.map(tbl)
+end
 
--- A recursive normal mapping
-xy.nmap = make_mapper('n', map_opts)
--- A recursive select mapping
-xy.xmap = make_mapper('x', map_opts)
--- A recursive insert mapping
-xy.imap = make_mapper('i', map_opts)
--- A recursive visual mapping
-xy.vmap = make_mapper('v', map_opts)
--- A recursive operator mapping
-xy.omap = make_mapper('o', map_opts)
--- A recursive terminal mapping
-xy.tmap = make_mapper('t', map_opts)
--- A recursive visual & select mapping
-xy.smap = make_mapper('s', map_opts)
--- A recursive commandline mapping
-xy.cmap = make_mapper('c', { remap = true, silent = false })
--- A non recursive normal mapping
-xy.nnoremap = make_mapper('n', noremap_opts)
--- A non recursive select mapping
-xy.xnoremap = make_mapper('x', noremap_opts)
--- A non recursive visual mapping
-xy.vnoremap = make_mapper('v', noremap_opts)
--- A non recursive insert mapping
-xy.inoremap = make_mapper('i', noremap_opts)
--- A non recursive operator mapping
-xy.onoremap = make_mapper('o', noremap_opts)
--- A non recursive terminal mapping
-xy.tnoremap = make_mapper('t', noremap_opts)
--- A non recursive visual & select mapping
-xy.snoremap = make_mapper('s', noremap_opts)
--- A non recursive commandline mapping
-xy.cnoremap = make_mapper('c', { silent = false })
+xy.vmap = function(tbl)
+  tbl['mode'] = 'v'
+  xy.map(tbl)
+end
 
+xy.imap = function(tbl)
+  tbl['mode'] = 'i'
+  xy.map(tbl)
+end
+
+----------------------------------------------------------------------------------------------------
+-- Others
+----------------------------------------------------------------------------------------------------
 ---check if a certain feature/version/commit exists in nvim
 ---@param feature string
 ---@return boolean
@@ -221,3 +210,14 @@ xy.has = function(feature)
   return vim.fn.has(feature) > 0
 end
 
+xy.log = {
+  info = function(msg)
+    vim.notify(msg, vim.log.levels.INFO)
+  end,
+  warn = function(msg)
+    vim.notify(msg, vim.log.levels.WARN)
+  end,
+  err = function(msg)
+    vim.notify(msg, vim.log.levels.ERROR)
+  end,
+}
