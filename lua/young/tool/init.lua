@@ -327,7 +327,7 @@ tool.set_cursor_floating_win = function()
   for _, winid in ipairs(winids) do
     if winid ~= vim.api.nvim_get_current_win() then
       vim.api.nvim_set_current_win(winid)
-      xy.nmap { 'q', '<cmd>close<cr>', buffer = true }
+      xy.map.n { 'q', '<cmd>close<cr>', buffer = true }
       return
     end
   end
