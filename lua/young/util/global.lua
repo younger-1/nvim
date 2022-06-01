@@ -170,10 +170,12 @@ end
 ----------------------------------------------------------------------------------------------------
 -- Mappings
 ----------------------------------------------------------------------------------------------------
-xy.map = function(tbl)
-  local opts = { noremap = true, silent = true }
-  -- Dont want these named fields on the options table
-  local mode = tbl['mode']
+xy.map = {}
+
+local function mapper(tbl)
+  local opts = { noremap = true, silent = true, nowait = true }
+
+  local mode = tbl['mode'] or ''
   tbl['mode'] = nil
 
   for k, v in pairs(tbl) do
@@ -185,20 +187,19 @@ xy.map = function(tbl)
   vim.keymap.set(mode, tbl[1], tbl[2], opts)
 end
 
-xy.nmap = function(tbl)
-  tbl['mode'] = 'n'
-  xy.map(tbl)
-end
-
-xy.vmap = function(tbl)
-  tbl['mode'] = 'v'
-  xy.map(tbl)
-end
-
-xy.imap = function(tbl)
-  tbl['mode'] = 'i'
-  xy.map(tbl)
-end
+setmetatable(xy.map, {
+  __call = mapper,
+  __index = function(t, key)
+    t[key] = function(tbl)
+      if key == '!' or key == 'c' then
+        tbl['silent'] = false
+      end
+      tbl['mode'] = key
+      mapper(tbl)
+    end
+    return t[key]
+  end,
+})
 
 ----------------------------------------------------------------------------------------------------
 -- Others

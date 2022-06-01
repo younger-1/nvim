@@ -68,6 +68,6 @@ M.pick = function()
   end
 end
 
-xy.nmap { '<C-w>p', M.pick }
+xy.map.n { '<C-w>p', M.pick }
 
 return M
