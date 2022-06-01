@@ -85,7 +85,7 @@ function _G.LirSettings()
   )
 
   -- echo cwd
-  young.util.echo { vim.fn.expand '%:p' }
+  xy.util.echo { vim.fn.expand '%:p' }
 end
 
 vim.cmd [[augroup lir-settings]]

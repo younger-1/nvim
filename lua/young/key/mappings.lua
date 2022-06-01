@@ -251,7 +251,7 @@ end
 
 function M.ice()
   local keys = M.keys
-  if has 'mac' then
+  if xy.has 'mac' then
     keys.normal_mode['<A-Up>'] = keys.normal_mode['<C-Up>']
     keys.normal_mode['<A-Down>'] = keys.normal_mode['<C-Down>']
     keys.normal_mode['<A-Left>'] = keys.normal_mode['<C-Left>']

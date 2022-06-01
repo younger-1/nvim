@@ -1,6 +1,6 @@
 local util = {}
 
-young.util = util
+xy.util = util
 
 util.join_paths = _G.join_paths
 

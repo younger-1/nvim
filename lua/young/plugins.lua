@@ -172,7 +172,7 @@ mods.edit = {
   treesitter = {
     {
       'nvim-treesitter/nvim-treesitter',
-      branch = has 'nvim-0.6' and 'master' or '0.5-compat',
+      branch = xy.has 'nvim-0.6' and 'master' or '0.5-compat',
       run = ':TSUpdate',
       config = function()
         require('young.mod.treesitter').done()
@@ -300,7 +300,7 @@ mods.BWT = {
     { 'dhruvasagar/vim-zoom' },
     {
       'mrjones2014/smart-splits.nvim',
-      disable = not has 'nvim-0.7',
+      disable = not xy.has 'nvim-0.7',
       event = 'CursorMoved',
       -- module = 'smart-splits',
       config = function()
