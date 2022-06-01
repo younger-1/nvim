@@ -190,10 +190,13 @@ end
 setmetatable(xy.map, {
   __call = mapper,
   __index = function(t, key)
+    local silent
+    if key == '!' or key == 'c' then
+      silent = false
+    end
+
     t[key] = function(tbl)
-      if key == '!' or key == 'c' then
-        tbl['silent'] = false
-      end
+      tbl['silent'] = tbl['silent'] or silent
       tbl['mode'] = key
       mapper(tbl)
     end
