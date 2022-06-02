@@ -2,8 +2,6 @@ local fineline = require 'fine-cmdline'
 -- local fn = fineline.fn
 -- pp(fn)
 
-require('young.key').nmap('<CR>', '<cmd>FineCmdline<CR>')
-
 fineline.setup {
   cmdline = {
     -- prompt = '😎 ',
@@ -40,4 +38,18 @@ fineline.setup {
       -- imap('<Down>', fn.down_search_history)
     end,
   },
+}
+
+local exclude_buftypes = { 'quickfix', 'nofile' }
+xy.map.n {
+  '<CR>',
+  function()
+    if vim.tbl_contains(exclude_buftypes, vim.bo.buftype) then
+      vim.cmd [[exe "normal! \<CR>"]]
+      return
+    end
+    -- vim.cmd 'FineCmdline '
+    require('fine-cmdline').open { default_value = '' }
+  end,
+  desc = 'FineCmdline',
 }

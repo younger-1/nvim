@@ -1,11 +1,3 @@
-local nmap = require('young.key').nmap
-local xmap = require('young.key').xmap
-
--- TODO: map add excluded filetypes/buftypes like quickfix
-nmap('<C-f>', ':SearchBoxMatchAll<CR>')
-xmap('<C-f>', ':SearchBoxMatchAll visual_mode=true<CR>')
--- nmap('<C-b>', ':SearchBoxMatchAll exact=true title=" Search 🦝 "<CR>')
-
 require('searchbox').setup {
   -- popup = {
   --   relative = 'win',
@@ -51,3 +43,37 @@ require('searchbox').setup {
     end,
   },
 }
+
+-- TODO: exclude command-line window
+local exclude_buftypes = { 'quickfix', 'nofile' }
+xy.map.n {
+  '<C-f>',
+  function()
+    if vim.tbl_contains(exclude_buftypes, vim.bo.buftype) then
+      vim.cmd [[exe "normal! \<C-f>"]] -- ok
+      -- vim.cmd('normal! ' .. xy.util.t '<C-f>') -- ok
+      -- vim.cmd [[exe 'normal! \<C-f>']] -- not ok
+      -- vim.cmd [[normal! \<C-f>]] -- not ok
+      -- vim.fn.feedkeys(xy.util.t '<C-f>')
+      return
+    end
+    -- vim.cmd 'SearchBoxMatchAll title="Match All"'
+    require('searchbox').incsearch()
+  end,
+  desc = 'Searchbox',
+}
+
+xy.map.x {
+  '<C-f>',
+  function()
+    if vim.tbl_contains(exclude_buftypes, vim.bo.buftype) then
+      vim.cmd [[exe "normal! \<C-f>"]]
+      return
+    end
+    -- vim.cmd 'SearchBoxMatchAll title="Match All" visual_mode=true'
+    require('searchbox').incsearch { visual_mode = true }
+  end,
+  desc = 'Searchbox (visual)',
+}
+
+-- xy.map.n { '<C-b>', ':SearchBoxMatchAll exact=true title=" Search 🦝 "<CR>' }
