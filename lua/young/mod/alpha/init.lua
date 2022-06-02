@@ -243,4 +243,26 @@ end
 --     alpha.setup(require("alpha.themes.startify").opts)
 -- end
 
+-- <https://github.com/notken12/nvim/blob/master/lua/user/alpha.lua>
+-- ┌──────────────────────────────────────────────────────────┐
+-- │                  /                                       │
+-- │    header_padding                                        │
+-- │                  \  ┌──────────────┐ ____                │
+-- │                     │    header    │     \               │
+-- │                  /  └──────────────┘      \              │
+-- │ head_butt_padding                          \             │
+-- │                  \                          occu_        │
+-- │                  ┌────────────────────┐     height       │
+-- │                  │       button       │    /             │
+-- │                  │       button       │   /              │
+-- │                  │       button       │  /               │
+-- │                  └────────────────────┘‾‾                │
+-- │                  /                                       │
+-- │ foot_butt_padding                                        │
+-- │                  \  ┌──────────────┐                     │
+-- │                     │    footer    │                     │
+-- │                     └──────────────┘                     │
+-- │                                                          │
+-- └──────────────────────────────────────────────────────────┘
+
 return M
