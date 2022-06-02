@@ -1,4 +1,3 @@
-local nmap = require('young.key').nmap
 local font = require 'young.gui.font'
 
 local M = {}
@@ -32,20 +31,20 @@ end
 M.switch_effect = function() end
 
 M.done = function()
-  nmap('<A-->', "<Cmd>lua require'young.gui.map'.adjust_transparency(-1)<CR>")
-  nmap('<A-=>', "<Cmd>lua require'young.gui.map'.adjust_transparency(1)<CR>")
+  xy.map.n { '<A-->', "<Cmd>lua require'young.gui.map'.adjust_transparency(-1)<CR>" }
+  xy.map.n { '<A-=>', "<Cmd>lua require'young.gui.map'.adjust_transparency(1)<CR>" }
 
-  nmap('<C-->', "<Cmd>lua require'young.gui.map'.adjust_fontsize(-1)<CR>")
-  nmap('<C-=>', "<Cmd>lua require'young.gui.map'.adjust_fontsize(1)<CR>")
+  xy.map.n { '<C-->', "<Cmd>lua require'young.gui.map'.adjust_fontsize(-1)<CR>" }
+  xy.map.n { '<C-=>', "<Cmd>lua require'young.gui.map'.adjust_fontsize(1)<CR>" }
 
-  nmap('<A-DEL>', "<Cmd>lua require'young.gui.map'.toggle_ligature()<CR>")
-  nmap('<A-CR>', "<Cmd>lua require'young.gui.map'.toggle_fullscreen()<CR>")
+  xy.map.n { '<A-DEL>', "<Cmd>lua require'young.gui.map'.toggle_ligature()<CR>" }
+  xy.map.n { '<A-CR>', "<Cmd>lua require'young.gui.map'.toggle_fullscreen()<CR>" }
 
-  -- nmap('<A-\\>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>")
-  nmap('<A-BS>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>")
-  nmap('<C-BS>', "<Cmd>lua require'young.gui.map'.switch_font()<CR>")
+  -- xy.map.n { '<A-\\>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>" }
+  xy.map.n { '<A-BS>', "<Cmd>lua require'young.gui.map'.switch_effect()<CR>" }
+  xy.map.n { '<C-BS>', "<Cmd>lua require'young.gui.map'.switch_font()<CR>" }
 
-  nmap('<C-0>', "<Cmd>lua require'young.gui.map'.default_font()<CR>")
+  xy.map.n { '<C-0>', "<Cmd>lua require'young.gui.map'.default_font()<CR>" }
 end
 
 return M

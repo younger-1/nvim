@@ -1,6 +1,3 @@
--- vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>', { noremap = true, silent = true })
-
 local M = {}
 
 -- Very Dynamic
@@ -81,8 +78,10 @@ vim.g.bufferline = {
 }
 
 M.hot = function()
-  xy.map.n { '<S-l>', ':BufferNext<CR>' }
-  xy.map.n { '<S-h>', ':BufferPrevious<CR>' }
+  xy.map.n { '<S-l>', '<cmd>BufferNext<CR>' }
+  xy.map.n { '<S-h>', '<cmd>BufferPrevious<CR>' }
+  -- vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>', { noremap = true, silent = true })
+  -- vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>', { noremap = true, silent = true })
 end
 
 return M
