@@ -4,7 +4,6 @@ local M = {}
 -- nnoremap <nowait> <Leader>w :write<CR>
 -- vim.api.nvim_set_keymap('n', '<Leader>w', ':write<CR>', { noremap = true, nowait = true })
 -- M.map { 'n', '<Leader>w', ':write<CR>', nowait = true }
--- M.nmap('<Leader>w', ':write<CR>', { nowait = true })
 
 local defaults = { noremap = true, silent = true, nowait = true }
 
@@ -31,23 +30,7 @@ M.map = function(keymap)
   end
 end
 
-function M.bnmap(key, cmd, opts)
-  opts = vim.tbl_extend('force', defaults, opts or {})
-  vim.api.nvim_buf_set_keymap(0, 'n', key, cmd, opts)
-end
-
-function M.nmap(key, cmd, opts)
-  opts = vim.tbl_extend('force', defaults, opts or {})
-  vim.api.nvim_set_keymap('n', key, cmd, opts)
-end
-
-function M.xmap(key, cmd, opts)
-  opts = vim.tbl_extend('force', defaults, opts or {})
-  vim.api.nvim_set_keymap('x', key, cmd, opts)
-end
-
 M.done = function()
-  require('young.key.mappings').done()
   require('young.key.which-key').ice()
   vim.g.mapleader = ' '
 end

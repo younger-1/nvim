@@ -1,8 +1,3 @@
-local nmap = require('young.key').nmap
-
-nmap('<TAB>', ':BufferLineCycleNext<CR>')
-nmap('<S-TAB>', ':BufferLineCyclePrev<CR>')
-
 local colors = {
   foreground = '#E5E9F0',
   background = '#2E3440',
@@ -55,3 +50,6 @@ require('bufferline').setup {
     },
   },
 }
+
+xy.map.n { '<S-l>', '<cmd>BufferLineCycleNext<CR>' }
+xy.map.n { '<S-h>', '<cmd>BufferLineCyclePrev<CR>' }

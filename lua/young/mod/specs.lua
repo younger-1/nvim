@@ -1,4 +1,3 @@
-local nmap = require('young.key').nmap
 local M = {}
 
 M.done = function()
@@ -22,7 +21,9 @@ M.done = function()
 
   -- require('specs').toggle()
 
-  nmap('z ', '<cmd>lua require("specs").show_specs()<CR>')
+  xy.map.n { 'z ', require('specs').show_specs, desc = 'Show Specs' }
+  -- xy.map.n { 'n', 'nz ' }
+  -- xy.map.n { 'N', 'Nz ' }
   -- vim.api.nvim_set_keymap('n', 'n', 'n:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'N', 'N:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
 end

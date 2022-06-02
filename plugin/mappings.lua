@@ -192,15 +192,6 @@ M.keys = {
   },
 }
 
-function M.print(mode)
-  print "Younger's default keymappings (not including which-key)"
-  if mode then
-    print(vim.inspect(M.keys[mode]))
-  else
-    print(vim.inspect(M.keys))
-  end
-end
-
 M.done = function()
   for mode_name, mappings in pairs(M.keys) do
     local mode = mode_adapters[mode_name]
@@ -213,5 +204,7 @@ M.done = function()
     end
   end
 end
+
+M.done()
 
 return M
