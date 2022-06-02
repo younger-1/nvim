@@ -10,6 +10,7 @@ return function()
     blue = '#5d8ac2',
     grey = '#3B4048',
     purple = '#c487b9',
+    violet = '#a9a1e1',
     red = '#d94848',
     light_blue = '#8fc6e3',
     blue_green = '#4EC9B0',
@@ -46,6 +47,7 @@ return function()
       -- Disable sections and component separators
       component_separators = '',
       section_separators = '',
+      -- theme = require 'young.mod.lualine.theme.vscode',
       theme = {
         -- We are going to use lualine_c an lualine_x as left and
         -- right section. Both are highlighted by c theme .  So we
