@@ -62,6 +62,15 @@ local default_options = {
   path = '.,,',
   -- TODO:
   -- fillchars = 'vert:┃',
+  -- fillchars = { -- thicker borders between windows
+  --   horiz = '━',
+  --   horizup = '┻',
+  --   horizdown = '┳',
+  --   vert = '┃',
+  --   vertleft = '┫',
+  --   vertright = '┣',
+  --   verthoriz = '╋',
+  -- },
 }
 
 for k, v in pairs(default_options) do
