@@ -60,6 +60,7 @@ local default_options = {
   list = true,
   lazyredraw = true,
   path = '.,,',
+  virtualedit = 'onemore'
   -- TODO:
   -- fillchars = 'vert:┃',
   -- fillchars = { -- thicker borders between windows
