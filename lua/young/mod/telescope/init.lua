@@ -78,7 +78,6 @@ M.cfg = {
       '--trim',
       '--glob=!.git/',
     },
-    -- [Patterns](https://www.lua.org/manual/5.1/manual.html#5.4.1)
     file_ignore_patterns = {
       'node_modules',
       '%.git[/\\]',
