@@ -364,4 +364,18 @@ tool.profile = function(filename)
   end
 end
 
+tool.open_url = function()
+  local line = fn.getline '.'
+  local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')
+  local name = line:match('[%a%d%.%-%_]+/[%a%d%.%-%_]+')
+  if #name == '' then
+    vim.notify 'Not url for current line!'
+    -- vim.notify_once(fmt('[: %s] not found', url))
+    return
+  end
+  local url = 'https://github.com/' .. name
+  print(url)
+end
+xy.map { 'gs', tool.open_url }
+
 return tool

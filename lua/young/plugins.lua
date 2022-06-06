@@ -906,6 +906,10 @@ mods.tool = {
         ]]
       end,
     },
+    {
+      'axieax/urlview.nvim',
+      opt = true,
+    },
   },
   website = {
     {
