@@ -10,6 +10,26 @@ if is_windows then
   plugins_path = plugins_path:gsub('\\', '/')
 end
 
+if xy.transparent_mode then
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+      local hl_groups = {
+        "Normal",
+        "SignColumn",
+        "NormalNC",
+        "TelescopeBorder",
+        "NvimTreeNormal",
+        "EndOfBuffer",
+        "MsgArea",
+      }
+      for _, name in ipairs(hl_groups) do
+        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+      end
+    end,
+  })
+end
+
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
   return {
