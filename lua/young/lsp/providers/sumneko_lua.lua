@@ -1,3 +1,5 @@
+-- <https://github.com/sumneko/lua-language-server/blob/master/locale/zh-cn/setting.lua>
+--
 -- lua-dev defaults: <https://github.com/folke/lua-dev.nvim>
 -- {
 --   library = {
@@ -23,6 +25,10 @@ return {
         path = {
           'lua/?.lua',
           'lua/?/init.lua',
+        },
+        special = {
+          rr = 'require',
+          rc = 'require',
         },
       },
       workspace = {
