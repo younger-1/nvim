@@ -259,6 +259,16 @@ tool.rnu = function()
   vim.o.rnu = rnu
 end
 
+local ve_on = 'all'
+local ve_off = 'onemore'
+tool.visualedit = function()
+  if vim.o.ve == ve_off then
+    vim.o.ve = ve_on
+  else
+    vim.o.ve = ve_off
+  end
+end
+
 tool.lsp_ref = function()
   if vim.o.bg == 'dark' then
     vim.cmd [[
