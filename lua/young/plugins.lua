@@ -774,12 +774,13 @@ mods.LSP = {
         require('young.mod.fidget').done()
       end,
     },
-    -- { -- TODO:
-    --   'ErichDonGubler/lsp_lines.nvim',
-    --   config = function()
-    --     require('lsp_lines').register_lsp_virtual_lines()
-    --   end,
-    -- },
+    {
+      'Maan2003/lsp_lines.nvim',
+      -- 'ErichDonGubler/lsp_lines.nvim',
+      config = function()
+        require('lsp_lines').register_lsp_virtual_lines()
+      end,
+    },
   },
 }
 
