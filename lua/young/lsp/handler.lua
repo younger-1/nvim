@@ -35,7 +35,31 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   },
 }))
 
+-- This strips out &nbsp; and some ending escaped backslashes out of hover
+-- strings because the pyright LSP is... odd with how it creates hover strings.
+-- local hover = function(_, result, ctx, config)
+--   if not (result and result.contents) then
+--     return vim.lsp.handlers.hover(_, result, ctx, config)
+--   end
+--   if type(result.contents) == "string" then
+--     pp(result.contents)
+--     local s = string.gsub(result.contents or "", "&nbsp;", " ")
+--     -- s = string.gsub(s, [[\\\n]], [[\n]])
+--     s = string.gsub(s, '\r', '')
+--     result.contents = s
+--     return vim.lsp.handlers.hover(_, result, ctx, config)
+--   else
+--     local s = string.gsub((result.contents or {}).value or "", "&nbsp;", " ")
+--     -- s = string.gsub(s, "\\\n", "\n")
+--     s = string.gsub(s, '\r', '')
+--     result.contents.value = s
+--     return vim.lsp.handlers.hover(_, result, ctx, config)
+--   end
+-- end
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(hover, lsp_cfg.float)
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
+
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_cfg.float)
 
 -- Jump directly to the first available definition every time.

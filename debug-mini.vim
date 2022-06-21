@@ -1,8 +1,10 @@
 " TODO: fd "mini.*.vim"
 
+nnoremap <Tab> :echo "TAB"<cr>
+nnoremap <C-I> :echo "C-I"<cr>
+
 set encoding=utf-8
 scriptencoding utf-8
-
 
 let all_plugins=1
 
