@@ -11,20 +11,20 @@ if is_windows then
 end
 
 if xy.transparent_mode then
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
+  vim.api.nvim_create_autocmd('ColorScheme', {
+    pattern = '*',
     callback = function()
       local hl_groups = {
-        "Normal",
-        "SignColumn",
-        "NormalNC",
-        "TelescopeBorder",
-        "NvimTreeNormal",
-        "EndOfBuffer",
-        "MsgArea",
+        'Normal',
+        'SignColumn',
+        'NormalNC',
+        'TelescopeBorder',
+        'NvimTreeNormal',
+        'EndOfBuffer',
+        'MsgArea',
       }
       for _, name in ipairs(hl_groups) do
-        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+        vim.cmd(string.format('highlight %s ctermbg=none guibg=none', name))
       end
     end,
   })
@@ -49,7 +49,8 @@ function M.load_augroups()
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
       },
       { 'FocusLost', '*', 'silent! wa' },
-      { 'VimLeave', '*', 'set guicursor=a:ver25' },
+      { 'VimEnter,VimResume ', '*', 'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100' },
+      { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
       { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
       { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir

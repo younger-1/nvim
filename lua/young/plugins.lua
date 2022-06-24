@@ -56,6 +56,7 @@ mods.theme = {
     'rmehri01/onenord.nvim',
     'daschw/leaf.nvim',
     'Mofiqul/vscode.nvim',
+    'LunarVim/darkplus.nvim',
   },
 }
 
