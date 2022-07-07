@@ -198,7 +198,9 @@ setmetatable(xy.map, {
     end
 
     t[key] = function(tbl)
-      tbl['silent'] = tbl['silent'] or silent
+      if nil == tbl['silent'] then
+        tbl['silent'] = silent
+      end
       tbl['mode'] = key
       mapper(tbl)
     end
