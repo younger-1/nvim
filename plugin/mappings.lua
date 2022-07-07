@@ -143,6 +143,7 @@ M.keys = {
     -- E = '$',
     -- gH = 'H',
     -- gL = 'L',
+    ['/'] = { '/\\v', silent = false },
   },
 
   ---@usage change or add keymappings for visual mode
@@ -157,7 +158,7 @@ M.keys = {
 
     -- Select to start and end quickly
     H = '^',
-    L = '$',
+    L = 'g_',
   },
 
   ---@usage change or add keymappings for visual block mode
@@ -174,7 +175,7 @@ M.keys = {
   operator_mode = {
     -- Operate to start and end quickly
     H = '^',
-    L = '$',
+    L = 'g_',
   },
 
   ---@usage change or add keymappings for terminal mode
