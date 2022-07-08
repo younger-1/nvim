@@ -214,7 +214,7 @@ local mappings = {
     },
     j = { vim.diagnostic.goto_next, 'Next Diagnostic' },
     k = { vim.diagnostic.goto_prev, 'Prev Diagnostic' },
-    l = { vim.lsp.codelens.run, 'CodeLens Action' },
+    L = { vim.lsp.codelens.run, 'CodeLens Action' },
     o = { '<cmd>SymbolsOutline<cr>', 'Outline' },
     -- p = {
     --   name = '+peek',
@@ -223,6 +223,12 @@ local mappings = {
     --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type Definition' },
     -- },
     r = { vim.lsp.buf.rename, 'Rename' },
+    t = {
+      function()
+        require('young.mod.lsp-lines').toggle()
+      end,
+      'Toggle LSP lines',
+    },
     v = { '<cmd>Vista!!<cr>', 'Vista' },
     w = {
       w = { '<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>', 'Workspace folders' },

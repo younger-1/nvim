@@ -48,7 +48,7 @@ function M.load_augroups()
         '*',
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
       },
-      { 'FocusLost', '*', 'silent! wa' },
+      -- { 'FocusLost', '*', 'silent! wa' },
       { 'VimEnter,VimResume ', '*', 'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100' },
       { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
       { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
