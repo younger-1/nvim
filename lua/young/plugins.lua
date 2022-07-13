@@ -741,10 +741,7 @@ mods.code = {
 mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
-    {
-      'williamboman/nvim-lsp-installer',
-      config = [[require('young.lsp').done()]],
-    },
+    { 'williamboman/nvim-lsp-installer' },
     { 'jose-elias-alvarez/null-ls.nvim' },
     { 'b0o/SchemaStore.nvim' },
     {
