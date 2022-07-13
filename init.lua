@@ -35,3 +35,4 @@ ytime.e = vim.fn.reltime()
 rr('young.gui').done()
 
 ytime.f = vim.fn.reltime()
+rr('young.lsp').done()

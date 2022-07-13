@@ -93,7 +93,7 @@ M.source_compiled = function()
     vim.defer_fn(function()
       require('packer').sync()
     end, 200)
-    -- vim.cmd [[autocmd User BufWinEnter ++once lua require('packer').sync()]]
+    -- vim.cmd [[autocmd BufWinEnter ++once lua require('packer').sync()]]
 
     return
   end
