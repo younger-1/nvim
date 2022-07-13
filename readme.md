@@ -57,6 +57,7 @@ insert_nav = {
 - ~~echo twice even in the same cwd when open new buffer~~
 - ~~echo once in the same cwd when switch buffers~~
 - use lcd instead of `nvim_set_current_dir`
+- notify only once when enter the same directory repeatedly
 
 `fzf.lua`
 
