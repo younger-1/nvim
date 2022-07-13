@@ -7,39 +7,16 @@ local function print_node_path(node)
   print(node.absolute_path)
 end
 
-M.opts = {
-  highlight_opened_files = 2,
-  icons = {
-    git = {
-      unstaged = '',
-      staged = '',
-      deleted = '',
-      untracked = '',
-      unmerged = '',
-      renamed = '',
-      ignored = '',
-    },
-  },
-  special_files = {
-    ['Cargo.toml'] = true,
-    Makefile = true,
-    ['README.md'] = true,
-    ['readme.md'] = true,
-  },
-}
-
 M.cfg = {
-  update_cwd = true, -- Changes the tree root directory on DirChanged
+  sync_root_with_cwd = true,
   update_focused_file = {
     enable = true,
     ignore_list = {},
   },
   disable_netrw = false,
   hijack_netrw = true,
-  -- hijacks new directory buffers when they are opened
-  -- disable it if using `vim-dirvish` or `lir.nvim`
   hijack_directories = {
-    enable = true,
+    enable = false,
     auto_open = true,
   },
   -- open_on_setup = true,
@@ -49,8 +26,24 @@ M.cfg = {
   --   'dashboard',
   -- },
   renderer = {
+    group_empty = true,
+    full_name = true,
+    highlight_opened_files = 'name',
     indent_markers = {
       enable = true,
+    },
+    icons = {
+      glyphs = {
+        git = {
+          unstaged = '',
+          staged = '',
+          deleted = '',
+          untracked = '',
+          unmerged = '',
+          renamed = '',
+          ignored = '',
+        },
+      },
     },
   },
   diagnostics = {
@@ -84,7 +77,7 @@ M.cfg = {
   filters = {
     dotfiles = false, -- Toggle via the `toggle_dotfiles` action, default mapping H
     custom = { -- Toggle via the `toggle_custom` action, default mapping U
-      '^\\.git',
+      '^\\.git$',
       -- '^\\.cache',
       -- 'node_modules',
     },
@@ -115,10 +108,6 @@ M.cfg = {
 }
 
 M.done = function()
-  for opt, val in pairs(M.opts) do
-    vim.g['nvim_tree_' .. opt] = val
-  end
-
   require('young.key').leader.n.e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' }
   require('nvim-tree').setup(M.cfg)
 end

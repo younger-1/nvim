@@ -204,6 +204,7 @@ local mappings = {
     a = { vim.lsp.buf.code_action, 'Code action' },
     A = { vim.lsp.buf.range_code_action, 'Range action' },
     c = { '<cmd>CodeActionMenu<cr>', 'Code action' },
+    d = { vim.lsp.buf.type_definition, 'Goto type definition' },
     f = { vim.lsp.buf.formatting, 'Format' },
     F = {
       function()
