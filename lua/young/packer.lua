@@ -8,7 +8,8 @@ local util = require 'young.util'
 local package_root = join_paths(fn.stdpath 'data', 'site', 'pack')
 local install_path = join_paths(package_root, 'packer', 'start', 'packer.nvim')
 local standard = false
-local compile_path = standard and join_paths(fn.stdpath 'config', 'plugin', 'packer_compiled.lua')
+local standard_path = join_paths(fn.stdpath 'config', 'plugin', 'packer_compiled.lua')
+local compile_path = standard and standard_path
   or join_paths(fn.stdpath 'config', 'lua', 'young', 'packer_compiled.lua')
 local snapshot_name = 'packer-lock.json'
 local snapshot_path = join_paths(fn.stdpath 'config', 'utils', 'snapshot')
@@ -17,7 +18,8 @@ local _, packer = pcall(require, 'packer')
 local first_time = nil
 
 M.once = function()
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  -- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  if not util.is_directory(install_path) then
     first_time = true
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
     -- WARN: system sync/async
@@ -28,7 +30,7 @@ M.once = function()
   require('packer').init {
     package_root = package_root,
     compile_path = compile_path,
-    max_jobs = is_windows and 5 or nil,
+    max_jobs = is_windows and 5 or 10,
     log = { level = in_headless and 'debug' or 'warn' },
     profile = { enable = true },
     -- auto_clean = true, -- During sync(), remove unused plugins
@@ -113,7 +115,9 @@ M.source_compiled = function()
 
   -- Use impatient
   if false == standard then
-    fn.delete(join_paths(fn.stdpath 'config', 'plugin', 'packer_compiled.lua'))
+    if util.is_file(standard_path) then
+      fn.delete(standard_path)
+    end
     require 'young.packer_compiled'
     -- dofile(compile_path)
   end

@@ -53,7 +53,7 @@ M.done = function()
     },
     window = {
       relative = 'editor', -- where to anchor the window, either `"win"` or `"editor"`
-      blend = 50, -- `&winblend` for the window
+      blend = 20, -- `&winblend` for the window
       zindex = nil, -- the `zindex` value for the window
     },
     fmt = {
