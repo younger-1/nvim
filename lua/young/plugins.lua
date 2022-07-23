@@ -775,6 +775,7 @@ mods.LSP = {
     {
       'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
+      event = 'BufRead',
       config = function()
         require 'young.mod.lsp-lines'
       end,
