@@ -124,14 +124,15 @@ M.done = function()
   end
 
   for _, server in ipairs(lsp_installer.get_installed_servers()) do
-    -- if not vim.tbl_contains(M.ensure_installed, server.name) then
-    --   local server_fts = server:get_supported_filetypes()
-    --   for _, ft in ipairs(server_fts) do
-    --     if ensure_servers[ft] then
-    --       goto continue
-    --     end
-    --   end
-    -- end
+    -- This avoid launching both pyright and pylsp, if installed
+    if not vim.tbl_contains(vim.tbl_values(ensure_servers), server.name) then
+      local server_fts = server:get_supported_filetypes()
+      for _, ft in ipairs(server_fts) do
+        if ensure_servers[ft] then
+          goto continue
+        end
+      end
+    end
 
     if server.name == 'jdtls' and vim.g.young_jdtls then
       require('young.autocmd').define_augroups {
