@@ -741,8 +741,18 @@ mods.code = {
 mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
-    { 'williamboman/nvim-lsp-installer' },
-    { 'jose-elias-alvarez/null-ls.nvim' },
+    {
+      'williamboman/nvim-lsp-installer',
+      config = function()
+        require('young.lsp.installer')
+      end,
+    },
+    {
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require('young.lsp.null-ls').done()
+      end,
+    },
     { 'b0o/SchemaStore.nvim' },
     {
       'ray-x/lsp_signature.nvim',

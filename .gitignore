@@ -11,3 +11,5 @@ __pycache__/
 *.packer
 
 .nlsp-settings/
+
+utils/local.lua
