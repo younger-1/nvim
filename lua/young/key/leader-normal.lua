@@ -215,7 +215,7 @@ local mappings = {
     },
     j = { vim.diagnostic.goto_next, 'Next Diagnostic' },
     k = { vim.diagnostic.goto_prev, 'Prev Diagnostic' },
-    L = { vim.lsp.codelens.run, 'CodeLens Action' },
+    l = { vim.lsp.codelens.run, 'CodeLens Action' },
     o = { '<cmd>SymbolsOutline<cr>', 'Outline' },
     -- p = {
     --   name = '+peek',
