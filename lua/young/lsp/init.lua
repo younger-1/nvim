@@ -1,29 +1,25 @@
 local modbase = ...
 
-local lsp_status_ok, _ = pcall(require, 'lspconfig')
-if not lsp_status_ok then
-  return
-end
-
-local lsp_installer = require 'nvim-lsp-installer'
-
 local M = {}
 
-local ensure_servers = {
-  lua = 'sumneko_lua',
-  vim = 'vimls',
-  python = 'pyright',
-  -- python = 'pylsp',
-  go = 'gopls',
-  json = 'jsonls',
-}
-local ensure_installed = vim.tbl_values(ensure_servers)
+local config_path = join_paths(fn.stdpath 'config', 'utils', 'local.lua')
+local ok, local_config = pcall(dofile, config_path)
+if not ok then
+  if xy.util.is_file(config_path) then
+    xy.util.echomsg { fmt('[young]: invalid local config file [%s]', config_path) }
+  else
+    xy.util.echomsg { fmt('[young]: unable to find local config file [%s]', config_path) }
+  end
+end
 
--- NOTE: servers installed by lsp_installer can override local_servers
-local local_servers = {
-  rust = 'rust_analyzer',
-  cpp = 'clangd',
-}
+local ensure_servers = (local_config and local_config.ensure_servers) or {}
+
+-- M.ensure_installed = vim.tbl_values(ensure_servers)
+
+-- local local_servers = {
+--   rust = 'rust_analyzer',
+--   cpp = 'clangd',
+-- }
 
 local done_ft = {}
 
@@ -38,9 +34,9 @@ local done_ft = {}
 -- end
 
 local get_opts = function(server_name)
-  local ok, server_opts = pcall(require, modbase .. '.providers.' .. server_name)
+  local provider_ok, server_opts = pcall(require, modbase .. '.providers.' .. server_name)
   local common_opts = require 'young.lsp.common'
-  if not ok then
+  if not provider_ok then
     return common_opts
   end
 
@@ -92,10 +88,11 @@ local function launch_server(server_name)
   --   require('lspconfig')[server_name].setup(opts)
   --   attach_buffers(server_name)
   -- end)
+
   to_done_ft(server_name)
 end
 
-local config = function()
+M.once = function()
   -- vim.lsp.set_log_level("debug")
   -- if xy.has 'nvim-0.5.1' then
   --   require('vim.lsp.log').set_format_func(vim.inspect)
@@ -111,38 +108,30 @@ local config = function()
   --   return opts
   -- end
 
-  lsp_installer.setup {
-    -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer", "sumneko_lua" }
-    ensure_installed = ensure_installed,
-    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-    --   - false: Servers are not automatically installed.
-    --   - true: All servers set up via lspconfig are automatically installed.
-    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
-    automatic_installation = false,
-    ui = {
-      check_outdated_servers_on_open = false,
-      icons = {
-        server_installed = '',
-        server_pending = '',
-        server_uninstalled = '',
-      },
-    },
-    log_level = vim.log.levels.INFO,
-  }
+  require 'young.lsp.handler'
+
+  -- bootstrap_nlsp { config_home = util.join_paths(get_config_dir(), "lsp-settings") }
+
+  -- autocmds.configure_format_on_save()
 end
 
-local setup = function()
-  for _, server in ipairs(lsp_installer.get_installed_servers()) do
-    local server_fts = server:get_supported_filetypes()
+M.done = function()
+  M.once()
 
-    if not vim.tbl_contains(ensure_installed, server.name) then
-      for _, ft in ipairs(server_fts) do
-        if ensure_servers[ft] and server.name ~= ensure_servers[ft] then
-          goto continue
-        end
-      end
-    end
+  local installer_ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
+  if not installer_ok then
+    return
+  end
+
+  for _, server in ipairs(lsp_installer.get_installed_servers()) do
+    -- if not vim.tbl_contains(M.ensure_installed, server.name) then
+    --   local server_fts = server:get_supported_filetypes()
+    --   for _, ft in ipairs(server_fts) do
+    --     if ensure_servers[ft] then
+    --       goto continue
+    --     end
+    --   end
+    -- end
 
     if server.name == 'jdtls' and vim.g.young_jdtls then
       require('young.autocmd').define_augroups {
@@ -157,27 +146,19 @@ local setup = function()
     ::continue::
   end
 
-  for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
+  -- for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
+  for ft, server_name in pairs(ensure_servers) do
     -- NOTE: vim.fn.executable(server_name): 1. not valid, eg {"sumneko_lua"},{"deno", "lsp"} 2. too slow
     -- if not done_ft[ft] and vim.fn.executable(server_name) then
-    if not done_ft[ft] then
+    -- if not done_ft[ft] then
+    --   launch_server(server_name)
+    -- end
+    if not vim.tbl_contains(require('lspconfig').available_servers(), server_name) then
       launch_server(server_name)
     end
   end
-end
 
-M.done = function()
-  config()
-  setup()
-  M.fts = done_ft
-
-  require 'young.lsp.handler'
-
-  -- bootstrap_nlsp { config_home = util.join_paths(get_config_dir(), "lsp-settings") }
-
-  require('young.lsp.null-ls').done()
-
-  -- autocmds.configure_format_on_save()
+  M.ft_servers = done_ft
 end
 
 return M

@@ -1,11 +1,4 @@
--- local Log = require "lvim.core.log"
-
 local M = {}
-
-local function apply_defaults(configs, defaults)
-  configs = configs or {}
-  return vim.tbl_deep_extend('keep', configs, defaults)
-end
 
 function M.done()
   ytime.b1 = vim.fn.reltime()
