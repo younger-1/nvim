@@ -31,6 +31,7 @@ M.map = function(keymap)
 end
 
 M.done = function()
+  tt()
   require('young.key.which-key').ice()
   vim.g.mapleader = ' '
 end

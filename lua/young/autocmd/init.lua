@@ -177,6 +177,7 @@ M.build = function(augroups, enable)
 end
 
 M.done = function()
+  tt()
   local aus = M.load_augroups()
   M.define_augroups(aus)
 
