@@ -245,9 +245,9 @@ local function d1()
     print('[debug.getlocal 3]: ', debug.getlocal(level, 3))
 
     print('[debug.traceback 0]: ', debug.traceback())
-    print('[debug.traceback 1]: ', debug.traceback("", 1))
-    print('[debug.traceback 2]: ', debug.traceback("", 2))
-    print('[debug.traceback 3]: ', debug.traceback("", 3))
+    print('[debug.traceback 1]: ', debug.traceback('', 1))
+    print('[debug.traceback 2]: ', debug.traceback('', 2))
+    print('[debug.traceback 3]: ', debug.traceback('', 3))
   end
   pp('[debug.getinfo d1]: ', debug.getinfo(1, what))
   d2()

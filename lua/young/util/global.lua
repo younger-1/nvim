@@ -126,10 +126,19 @@ function _G.tt()
     hr_start = uv.hrtime(),
   }
 
+  local depth = 0
+  while debug.getinfo(depth + 2, 'n').name do
+    depth = depth + 1
+  end
   table.insert(ytime, {
-    os = os.clock() - ytime.os_start,
-    rel = vim.fn.reltimefloat(vim.fn.reltime(ytime.rel_start)),
-    hr = (uv.hrtime() - ytime.hr_start) / 1e9,
+    os_time = os.clock() - ytime.os_start,
+    rel_time = vim.fn.reltimefloat(vim.fn.reltime(ytime.rel_start)),
+    hr_time = (uv.hrtime() - ytime.hr_start) / 1e9,
+    file_name = debug.getinfo(2, 'S').source:sub(2),
+    func_name = debug.getinfo(2, 'n').name,
+    func_scope = debug.getinfo(2, 'n').namewhat,
+    currentline = debug.getinfo(2, 'l').currentline,
+    depth = depth,
   })
 end
 

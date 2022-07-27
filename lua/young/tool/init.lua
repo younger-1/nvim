@@ -337,7 +337,16 @@ end
 
 tool.startup_time = function()
   for i, times in ipairs(_G.ytime) do
-    pp(times)
+    -- pp(times)
+    -- local str = vim.fn['repeat']('+', times.depth)
+    print(fmt(
+      '[%s]:[%s]:[%d] : %f',
+      xy.util.relative(times.file_name, vim.fn.stdpath 'config' .. '/'),
+      -- xy.util.relative_home(times.file_name),
+      times.func_name,
+      times.depth,
+      times.hr_time
+    ))
   end
 end
 
@@ -371,7 +380,7 @@ end
 tool.open_url = function()
   local line = fn.getline '.'
   local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')
-  local name = line:match('[%a%d%.%-%_]+/[%a%d%.%-%_]+')
+  local name = line:match '[%a%d%.%-%_]+/[%a%d%.%-%_]+'
   if #name == '' then
     vim.notify 'Not url for current line!'
     -- vim.notify_once(fmt('[: %s] not found', url))

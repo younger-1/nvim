@@ -142,4 +142,16 @@ end
 -- end
 -- vim.api.nvim_set_keymap('c', '<C-f>', 'v:lua.smart_tab()', { expr = true, noremap = true })
 
+function util.relative(path, base)
+  return vim.fn.fnamemodify(path, ':s?' .. vim.fn.escape(base, '\\') .. '??')
+end
+
+function util.relative_home(path)
+  return vim.fn.fnamemodify(path, ':~')
+end
+
+function util.relative_current(path)
+  return vim.fn.fnamemodify(path, ':.')
+end
+
 return util
