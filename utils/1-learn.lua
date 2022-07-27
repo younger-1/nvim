@@ -223,27 +223,35 @@ openPop:close()
 print(output)
 
 -- [[debug]]
+
+local init_path = debug.getinfo(1, 'S').source:sub(2)
+pp('[debug.getinfo 1]: ', init_path)
+
+local line = debug.getinfo(1, 'l').currentline
+pp('[debug.getinfo 2]: ', line)
+
+pp('[debug.getinfo 3]: ', debug.getinfo(vim.api.nvim__get_runtime, 'S'))
+
 local what
 local function d1()
   local level = 1
   local function d2(aa)
     aa = 1
     local bb = '2'
-    pp(debug.getinfo(1, what))
-    -- pp(debug.getlocal(level, 1))
-    -- pp(debug.getlocal(level, 2))
-    -- pp(debug.getlocal(level, 3))
+    pp('[debug.getinfo d2]: ', debug.getinfo(1, what))
+
+    print('[debug.getlocal 1]: ', debug.getlocal(level, 1))
+    print('[debug.getlocal 2]: ', debug.getlocal(level, 2))
+    print('[debug.getlocal 3]: ', debug.getlocal(level, 3))
+
+    print('[debug.traceback 0]: ', debug.traceback())
+    print('[debug.traceback 1]: ', debug.traceback("", 1))
+    print('[debug.traceback 2]: ', debug.traceback("", 2))
+    print('[debug.traceback 3]: ', debug.traceback("", 3))
   end
-  pp(debug.getinfo(1, what))
+  pp('[debug.getinfo d1]: ', debug.getinfo(1, what))
   d2()
 end
-pp(debug.getinfo(1, what))
+
+pp('[debug.getinfo main]: ', debug.getinfo(1, what))
 d1()
-
-local init_path = debug.getinfo(1, 'S').source:sub(2)
-print('[debug]: ' .. init_path)
-
-local line = debug.getinfo(1, 'l').currentline
-print('[debug]: ' .. line)
-
-pp(debug.getinfo(vim.api.nvim__get_runtime, 'S'))

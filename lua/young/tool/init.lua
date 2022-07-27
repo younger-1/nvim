@@ -336,15 +336,9 @@ tool.set_cursor_floating_win = function()
 end
 
 tool.startup_time = function()
-  local t = {}
-  for key, time in pairs(ytime) do
-    if key == 'os' then
-      t[key] = os.clock() - time
-    else
-      t[key] = vim.fn.reltimefloat(vim.fn.reltime(time))
-    end
+  for i, times in ipairs(_G.ytime) do
+    pp(times)
   end
-  pp(t)
 end
 
 tool.startup_event = function(event)

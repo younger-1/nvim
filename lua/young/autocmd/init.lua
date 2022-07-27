@@ -90,7 +90,7 @@ function M.load_augroups()
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
     _startup = {
-      -- { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
+      { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
       --
       -- { 'VimEnter', '*', '++once', 'lua require("young.tool").startup_event("VimEnter")' },
       -- { 'BufRead', '*', '++once', 'lua require("young.tool").startup_event("BufRead")' },

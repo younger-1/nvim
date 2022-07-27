@@ -1,7 +1,7 @@
 local M = {}
 
 function M.done()
-  ytime.b1 = vim.fn.reltime()
+  tt()
   require 'young.util.global'
 
   require 'young.cfg.global'
