@@ -119,6 +119,20 @@ function _G.rc(module)
   return rr(module)
 end
 
+function _G.tt()
+  _G.ytime = _G.ytime or {
+    os_start = os.clock(),
+    rel_start = vim.fn.reltime(),
+    hr_start = uv.hrtime(),
+  }
+
+  table.insert(ytime, {
+    os = os.clock() - ytime.os_start,
+    rel = vim.fn.reltimefloat(vim.fn.reltime(ytime.rel_start)),
+    hr = (uv.hrtime() - ytime.hr_start) / 1e9,
+  })
+end
+
 ----------------------------------------------------------------------------------------------------
 -- Command
 ----------------------------------------------------------------------------------------------------

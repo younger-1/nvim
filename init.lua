@@ -10,29 +10,29 @@
 --  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
 --  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
 
-_G.ytime = {
-  os = os.clock(),
-  a = vim.fn.reltime(),
-}
+require 'young.util.global'
+tt()
 
 pcall(function()
   require('impatient').enable_profile()
 end)
 
-ytime.b = vim.fn.reltime()
+tt()
 require('young.cfg').done()
 
-ytime.c = vim.fn.reltime()
+tt()
 rr('young.packer').done()
 
-ytime.d = vim.fn.reltime()
+tt()
 -- vim.cmd [[ syntax clear ]]
 vim.schedule(function()
   vim.cmd [[ silent! colorscheme dracula ]]
 end)
 
-ytime.e = vim.fn.reltime()
+tt()
 rr('young.gui').done()
 
-ytime.f = vim.fn.reltime()
+tt()
 rr('young.lsp').done()
+
+tt()
