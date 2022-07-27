@@ -7,6 +7,7 @@ function M.done()
   require 'young.cfg.global'
   require 'young.cfg.option'
 
+  tt()
   require('young.autocmd').done()
   require('young.key').done()
 

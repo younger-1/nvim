@@ -119,7 +119,7 @@ function _G.rc(module)
   return rr(module)
 end
 
-function _G.tt()
+_G.tt = tt or function()
   _G.ytime = _G.ytime or {
     os_start = os.clock(),
     rel_start = vim.fn.reltime(),

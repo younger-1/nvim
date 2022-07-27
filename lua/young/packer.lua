@@ -183,8 +183,10 @@ M.snapshot_hook = function()
 end
 
 M.done = function()
+  tt()
   M.once()
   M.load()
+  tt()
   M.source_compiled()
 end
 

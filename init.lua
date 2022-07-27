@@ -10,8 +10,9 @@
 --  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
 --  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
 
-require 'young.util.global'
-tt()
+-- require 'young.util.global'
+-- tt()
+tt = tt or function() end
 
 pcall(function()
   require('impatient').enable_profile()
