@@ -143,7 +143,7 @@ M.keys = {
     -- E = '$',
     -- gH = 'H',
     -- gL = 'L',
-    ['/'] = { '/\\v', silent = false },
+    -- ['/'] = { '/\\v', silent = false },
   },
 
   ---@usage change or add keymappings for visual mode
