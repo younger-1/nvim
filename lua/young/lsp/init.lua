@@ -2,7 +2,7 @@ local modbase = ...
 
 local M = {}
 
-local config_path = join_paths(fn.stdpath 'config', 'utils', 'local.lua')
+local config_path = require('young.cfg').get_local_config()
 local ok, local_config = pcall(dofile, config_path)
 if not ok then
   if xy.util.is_file(config_path) then
@@ -11,8 +11,15 @@ if not ok then
     xy.util.echomsg { fmt('[young]: unable to find local config file [%s]', config_path) }
   end
 end
+if not local_config or true == local_config then
+  local_config = {}
+end
+local_config = vim.tbl_extend('keep', local_config, {
+  ensure_servers = {},
+  use_which_key = true,
+})
 
-local ensure_servers = (local_config and local_config.ensure_servers) or {}
+local ensure_servers = local_config.ensure_servers or {}
 
 -- M.ensure_installed = vim.tbl_values(ensure_servers)
 
