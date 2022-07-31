@@ -10,7 +10,6 @@
 
 vim.lsp.buf_get_clients()
 vim.lsp.buf.hover()
-vim.lsp.add_workspace_folder()
 
 local iter = require 'plenary.iterators'
 local it = iter.iter { b = 'rust', c = 'go', a = 'python' }
