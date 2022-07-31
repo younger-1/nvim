@@ -34,7 +34,8 @@ return {
       workspace = {
         library = {
           [vim.fn.expand '$VIMRUNTIME'] = true,
-          [_G.packer_plugins['lua-dev.nvim'].path] = true,
+          -- [_G.packer_plugins['lua-dev.nvim'].path] = true,
+          [_G.packer_plugins['emmylua-nvim'].path] = true,
           [_G.packer_plugins['plenary.nvim'].path] = true,
           -- [_G.packer_plugins['telescope.nvim'].path] = true,
           -- [_G.packer_plugins['nvim-lspconfig'].path] = true,

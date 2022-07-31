@@ -763,7 +763,8 @@ mods.LSP = {
     },
   },
   lua = {
-    { 'folke/lua-dev.nvim' },
+    -- { 'folke/lua-dev.nvim' },
+    { 'ii14/emmylua-nvim' },
     { 'nanotee/luv-vimdocs' },
     { 'milisims/nvim-luaref' },
   },
