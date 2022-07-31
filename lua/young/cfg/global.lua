@@ -52,13 +52,17 @@ vim.g.do_filetype_lua = 1
 
 vim.filetype.add {
   extension = {
-    -- foo = "fooscript",
+    conf = 'config',
   },
   filename = {
-    -- ["Foofile"] = "fooscript",
+    -- ['kitty.conf'] = 'kitty',
+    conf = 'config',
+    config = 'config',
   },
   pattern = {
-    -- ["~/%.config/foo/.*"] = "fooscript",
+    ['.*/git/.*'] = 'gitconfig',
+    ['.*/kitty/.*%.conf'] = 'kitty',
+    ['.*/kitty/.*%.session'] = 'kitty-session',
   },
 }
 
