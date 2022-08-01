@@ -378,15 +378,15 @@ mods.find = {
         -- require("user.spectre").config()
       end,
     },
-    {
-      'VonHeikemen/searchbox.nvim',
-      requires = { { 'MunifTanjim/nui.nvim' } },
-      -- module = 'searchbox',
-      event = 'BufRead',
-      config = function()
-        require 'young.mod.searchbox'
-      end,
-    },
+    -- {
+    --   'VonHeikemen/searchbox.nvim',
+    --   requires = { { 'MunifTanjim/nui.nvim' } },
+    --   -- module = 'searchbox',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require 'young.mod.searchbox'
+    --   end,
+    -- },
   },
   fzf = {
     {
@@ -602,15 +602,15 @@ mods.UI = {
     -- },
   },
   cmdline = {
-    {
-      'VonHeikemen/fine-cmdline.nvim',
-      requires = { { 'MunifTanjim/nui.nvim' } },
-      -- cmd = 'FineCmdline',
-      event = 'BufRead',
-      config = function()
-        require 'young.mod.fine-cmd'
-      end,
-    },
+    -- {
+    --   'VonHeikemen/fine-cmdline.nvim',
+    --   requires = { { 'MunifTanjim/nui.nvim' } },
+    --   -- cmd = 'FineCmdline',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require 'young.mod.fine-cmd'
+    --   end,
+    -- },
     -- {
     --   'gelguy/wilder.nvim',
     --   event = 'CmdlineEnter',
@@ -803,14 +803,14 @@ mods.lang = {
   --   end,
   -- },
   js = {
-    {
-      'vuki656/package-info.nvim',
-      ft = 'json',
-      requires = { { 'MunifTanjim/nui.nvim' } },
-      config = function()
-        require 'young.mod.package-info'
-      end,
-    },
+    -- {
+    --   'vuki656/package-info.nvim',
+    --   ft = 'json',
+    --   requires = { { 'MunifTanjim/nui.nvim' } },
+    --   config = function()
+    --     require 'young.mod.package-info'
+    --   end,
+    -- },
   },
   http = {
     {

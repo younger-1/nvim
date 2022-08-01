@@ -159,6 +159,13 @@ M.keys = {
     -- Select to start and end quickly
     H = '^',
     L = 'g_',
+
+    -- /\%>'<\%<'>
+    -- /\%>2c\%<7c
+    -- /\%>2l\%<7l
+    -- /\%>2l\%>4c\%<5l\%<7c
+    ['/'] = { '<ESC>/\\%V', silent = false },
+    ['?'] = { '<ESC>?\\%V', silent = false },
   },
 
   ---@usage change or add keymappings for visual block mode
