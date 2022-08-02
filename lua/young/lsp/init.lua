@@ -158,7 +158,7 @@ M.done = function()
   -- for ft, server_name in pairs(vim.tbl_deep_extend('force', ensure_servers, local_servers)) do
   for ft, server_name in pairs(ensure_servers) do
     -- NOTE: vim.fn.executable(server_name): 1. not valid, eg {"sumneko_lua"},{"deno", "lsp"} 2. too slow
-    -- if not done_ft[ft] and vim.fn.executable(server_name) then
+    -- if not done_ft[ft] and vim.fn.executable(server_name) == 1 then
     -- if not done_ft[ft] then
     --   launch_server(server_name)
     -- end

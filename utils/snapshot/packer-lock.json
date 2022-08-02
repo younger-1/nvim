@@ -24,7 +24,7 @@
     "commit": "492492e"
   },
   "friendly-snippets": {
-    "commit": "8880d72"
+    "commit": "7339def"
   },
   "jump-ray.nvim": {
     "commit": "4ecf320"
@@ -81,7 +81,7 @@
     "commit": "1685484"
   },
   "nvim-treesitter": {
-    "commit": "abb8b57"
+    "commit": "94806bc5"
   },
   "nvim-treesitter-refactor": {
     "commit": "75f5895"

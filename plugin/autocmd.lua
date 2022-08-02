@@ -29,7 +29,7 @@ young.augroup('JumpToLastPosition', {
 ----------------------------------------------------------------------------------------------------
 -- Chezmoi
 ----------------------------------------------------------------------------------------------------
-if fn.executable 'chezmoi' then
+if fn.executable 'chezmoi' == 1 then
   young.augroup('Chezmoi', {
     {
       event = 'BufWritePost',
