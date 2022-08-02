@@ -10,7 +10,7 @@
 --  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
 --  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
 
--- require 'young.util.global'
+-- require 'young'
 -- tt()
 tt = tt or function() end
 

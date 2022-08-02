@@ -2,7 +2,7 @@ local M = {}
 
 function M.done()
   tt()
-  require 'young.util.global'
+  require 'young'
 
   require 'young.cfg.global'
   require 'young.cfg.option'
