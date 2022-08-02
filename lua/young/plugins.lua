@@ -78,7 +78,7 @@ mods.appearance = {
       'lukas-reineke/indent-blankline.nvim',
       event = 'BufRead',
       config = function()
-        require('young.mod.indent-blankline').done()
+        require('young.mod.indent_blankline').done()
       end,
     },
   },
@@ -221,7 +221,7 @@ mods.change = {
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
       setup = function()
-        require 'young.mod.easy-align'
+        require 'young.mod.easy_align'
       end,
     },
     {
@@ -305,7 +305,7 @@ mods.BWT = {
       event = 'CursorMoved',
       -- module = 'smart-splits',
       config = function()
-        require 'young.mod.smart-splits'
+        require 'young.mod.smart_splits'
       end,
     },
     {
@@ -313,7 +313,7 @@ mods.BWT = {
       event = 'CursorMoved',
       -- module = 'window-picker',
       config = function()
-        require 'young.mod.window-picker'
+        require 'young.mod.window_picker'
       end,
     },
   },
@@ -521,7 +521,7 @@ mods.git = {
   },
   {
     'akinsho/git-conflict.nvim',
-    config = [[require('young.mod.git-conflict')]],
+    config = [[require('young.mod.git_conflict')]],
   },
 }
 
@@ -531,7 +531,7 @@ mods.UI = {
       'kyazdani42/nvim-tree.lua',
       event = 'BufWinEnter',
       config = function()
-        require('young.mod.nvim-tree').done()
+        require('young.mod.nvim_tree').done()
       end,
     },
     {
@@ -546,7 +546,7 @@ mods.UI = {
       'folke/which-key.nvim',
       event = 'BufWinEnter',
       config = function()
-        require('young.key.which-key').done()
+        require('young.key.which_key').done()
       end,
     },
     {
@@ -608,7 +608,7 @@ mods.UI = {
     --   -- cmd = 'FineCmdline',
     --   event = 'BufRead',
     --   config = function()
-    --     require 'young.mod.fine-cmd'
+    --     require 'young.mod.fine_cmd'
     --   end,
     -- },
     -- {
@@ -750,7 +750,7 @@ mods.LSP = {
     {
       'jose-elias-alvarez/null-ls.nvim',
       config = function()
-        require('young.lsp.null-ls').done()
+        require('young.lsp.null_ls').done()
       end,
     },
     { 'b0o/SchemaStore.nvim' },
@@ -758,7 +758,7 @@ mods.LSP = {
       'ray-x/lsp_signature.nvim',
       event = 'BufRead',
       config = function()
-        require 'young.mod.lsp-signature'
+        require 'young.mod.lsp_signature'
       end,
     },
   },
@@ -788,7 +788,7 @@ mods.LSP = {
       -- 'ErichDonGubler/lsp_lines.nvim',
       event = 'BufRead',
       config = function()
-        require 'young.mod.lsp-lines'
+        require 'young.mod.lsp_lines'
       end,
     },
   },
@@ -808,7 +808,7 @@ mods.lang = {
     --   ft = 'json',
     --   requires = { { 'MunifTanjim/nui.nvim' } },
     --   config = function()
-    --     require 'young.mod.package-info'
+    --     require 'young.mod.package_info'
     --   end,
     -- },
   },
@@ -861,7 +861,7 @@ mods.write = {
       -- module = 'todo-comments',
       -- cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       requires = 'nvim-lua/plenary.nvim',
-      config = [[require 'young.mod.todo-comments']],
+      config = [[require 'young.mod.todo_comments']],
     },
   },
   org = {

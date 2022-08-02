@@ -202,23 +202,23 @@ nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 │     │  ├──  init.lua
 │     │  ├──  map.lua
 │     │  ├──  neovide.lua
-│     │  ├──  nvim-qt.lua
+│     │  ├──  nvim_qt.lua
 │     │  ├──  nvui.lua
 │     │  ├──  transparency.lua
 │     │  └──  vscode.lua
 │     ├──  key/
 │     │  ├──  init.lua
-│     │  ├──  leader-normal.lua
-│     │  ├──  leader-visual.lua
+│     │  ├──  leader_normal.lua
+│     │  ├──  leader_visual.lua
 │     │  ├──  normal.lua
 │     │  ├──  visual.lua
-│     │  └──  which-key.lua
+│     │  └──  which_key.lua
 │     ├──  lang/
 │     │  ├──  java.lua
 │     │  ├──  java_.lua
 │     │  └──  python.lua
 │     ├──  lsp/
-│     │  ├──  null-ls/
+│     │  ├──  null_ls/
 │     │  │  └──  linters.lua
 │     │  ├──  providers/
 │     │  │  ├──  clangd.lua
@@ -234,14 +234,14 @@ nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 │     │  ├──  init.lua
 │     │  ├──  installer.lua
 │     │  ├──  misc.lua
-│     │  └──  null-ls.lua
+│     │  └──  null_ls.lua
 │     ├──  mod/
 │     │  ├──  alpha/
 │     │  │  ├──  init.lua
 │     │  │  └──  screen.lua
 │     │  ├──  feline/
 │     │  │  ├──  init.lua
-│     │  │  ├──  nv-ide.lua
+│     │  │  ├──  nv_ide.lua
 │     │  │  └──  nvchad.lua
 │     │  ├──  galaxyline/
 │     │  │  └──  init.lua
@@ -270,48 +270,48 @@ nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 │     │  ├──  comment.lua
 │     │  ├──  copilot.lua
 │     │  ├──  dial.lua
-│     │  ├──  easy-align.lua
+│     │  ├──  easy_align.lua
 │     │  ├──  fidget.lua
 │     │  ├──  filetype.lua
-│     │  ├──  fine-cmd.lua
+│     │  ├──  fine_cmd.lua
 │     │  ├──  fzf.lua
-│     │  ├──  git-conflict.lua
+│     │  ├──  git_conflict.lua
 │     │  ├──  gitlinker.lua
 │     │  ├──  gitsigns.lua
 │     │  ├──  gps.lua
 │     │  ├──  hop.lua
 │     │  ├──  illuminate.lua
-│     │  ├──  indent-blankline.lua
+│     │  ├──  indent_blankline.lua
 │     │  ├──  jabs.lua
 │     │  ├──  lightbulb.lua
 │     │  ├──  lightspeed.lua
 │     │  ├──  lir.lua
-│     │  ├──  lsp-lines.lua
-│     │  ├──  lsp-signature.lua
+│     │  ├──  lsp_lines.lua
+│     │  ├──  lsp_signature.lua
 │     │  ├──  matchup.lua
 │     │  ├──  minimap.lua
 │     │  ├──  neoclip.lua
 │     │  ├──  neorg.lua
 │     │  ├──  neoscroll.lua
 │     │  ├──  notify.lua
-│     │  ├──  nvim-tree.lua
-│     │  ├──  package-info.lua
+│     │  ├──  nvim_tree.lua
+│     │  ├──  package_info.lua
 │     │  ├──  persistence.lua
 │     │  ├──  project.lua
 │     │  ├──  rest.lua
 │     │  ├──  scrollview.lua
 │     │  ├──  searchbox.lua
-│     │  ├──  session-manager.lua
-│     │  ├──  smart-splits.lua
+│     │  ├──  session_manager.lua
+│     │  ├──  smart_splits.lua
 │     │  ├──  specs.lua
 │     │  ├──  spectre.lua
 │     │  ├──  tabline.lua
-│     │  ├──  todo-comments.lua
+│     │  ├──  todo_comments.lua
 │     │  ├──  toggleterm.lua
 │     │  ├──  treesitter.lua
 │     │  ├──  trouble.lua
 │     │  ├──  wilder.lua
-│     │  ├──  window-picker.lua
+│     │  ├──  window_picker.lua
 │     │  ├──  yabs.lua
 │     │  ├──  zen.lua
 │     │  └──  ZFVimIM.lua

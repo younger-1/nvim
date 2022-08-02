@@ -294,7 +294,7 @@ tool.add_border = function()
 end
 
 tool.toggle_indent_style = function()
-  require('young.mod.indent-blankline').hot()
+  require('young.mod.indent_blankline').hot()
 end
 
 tool.toggle_notify = function()
