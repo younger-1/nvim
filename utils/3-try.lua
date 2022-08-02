@@ -68,3 +68,7 @@ local _load_package = function(name)
 end
 
 _load_package 'young.lsp.config'
+
+local x = 1 and nil or 3
+pp(x)
+
