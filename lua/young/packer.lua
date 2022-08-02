@@ -172,8 +172,18 @@ M.snapshot_hook = function()
   -- TODO:not doautocmd for packer.snapshot yet
   local tmpfile = vim.fn.tempname()
   local snapfile = join_paths(snapshot_path, snapshot_name)
-
-  vim.fn.system('jq --sort-keys . ' .. snapfile .. ' > ' .. tmpfile)
+  local jsoner
+  for _, item in ipairs { 'jq' } do
+    if vim.fn.executable(item) == 1 then
+      jsoner = item
+      break
+    end
+  end
+  if not jsoner then
+    vim.notify('[young.packer]: not jsoner to format ' .. snapfile, vim.log.levels.WARN)
+    return
+  end
+  vim.fn.system(fmt('%s --sort-keys . %s > %s', jsoner, snapfile, tmpfile))
   vim.fn.writefile(vim.fn.readfile(tmpfile), snapfile)
   vim.fn.delete(tmpfile)
 

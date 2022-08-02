@@ -49,10 +49,10 @@ tool.rr = function(...)
     local bufpath = vim.api.nvim_buf_get_name(0)
     -- local bufpath = "/home/.local/lua/start/packer.nvim/lua/packer/clean.lua"
     bufpath = vim.split(bufpath, '/') -- { "", "home", ".local", "lua", "start", "packer.nvim", "lua", "packer", "clean.lua" }
-    local pack = { vim.split(bufpath[#bufpath], '.', true)[1] } -- "clean"
+    local pack = { vim.split(bufpath[#bufpath], '.')[1] } -- "clean"
     for i = #bufpath - 1, 1, -1 do
       if i == 1 and bufpath[i] ~= 'lua' then
-        print('Invalid pack path: ' .. vim.api.nvim_buf_get_name(0))
+        print('Invalid lua file path: ' .. vim.api.nvim_buf_get_name(0))
         return
       end
       if bufpath[i] == 'lua' then
@@ -63,7 +63,7 @@ tool.rr = function(...)
     pack = table.concat(pack, '.')
     tool.reload_file(pack)
     print('Reload: ' .. pack)
-    require('util').reload_lv_config()
+    -- require('util').reload_lv_config()
     return
   end
 

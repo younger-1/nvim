@@ -8,8 +8,8 @@ setmetatable(mods, {
 })
 
 mods.basic = {
-  -- { 'wbthomason/packer.nvim' },
-  { 'younger-1/packer.nvim', branch = 'mydev' },
+  { 'wbthomason/packer.nvim' },
+  -- { 'younger-1/packer.nvim', branch = 'mydev' },
   { 'lewis6991/impatient.nvim' },
   { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   -- {
