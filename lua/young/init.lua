@@ -142,6 +142,27 @@ _G.tt = tt or function()
   })
 end
 
+local mt = {}
+-- function mt.__index(t, k)
+function mt:__index(k)
+  if k == '_path' then
+    return nil
+  end
+
+  local ok, ret = pcall(require, 'young.' .. (self._path or '') .. k)
+  -- No use: xy = ok and ret or { no = true }
+  if ok then
+    self[k] = ret
+  else
+    self[k] = { _nil = true, _path = (self._path or '') .. k .. '.' }
+    setmetatable(self[k], mt)
+  end
+
+  return self[k]
+end
+
+setmetatable(xy, mt)
+
 ----------------------------------------------------------------------------------------------------
 -- Command
 ----------------------------------------------------------------------------------------------------

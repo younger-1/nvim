@@ -20,26 +20,32 @@ end)
 -- Should not be required, not in lua runtime.path
 require 'plenary.filetypes.base'
 
+local t = { "hi" }
+function t:say(k)
+  pp(self)
+  self[2] = 3
+end
+t:say(3)
+pp(t)
+
 local x = {
   a = 3,
-  b = 4,
 }
-
-local mt = {}
+local mt = { "hi" }
 -- mt.__index = {
---   c = 5,
 --   a = 6,
+--   c = 5,
 -- }
 function mt:__index(k)
-  pp(self)
-  pp(k)
+  self[k] = "bye~"
+  return self[k]
 end
 
 setmetatable(x, mt)
 
 pp(x.a)
-pp(x.b)
 pp(x.c)
+pp(mt)
 
 local mt = {}
 -- function mt.__index(t, k)
