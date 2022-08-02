@@ -10,7 +10,7 @@ if is_windows then
   plugins_path = plugins_path:gsub('\\', '/')
 end
 
-if xy.transparent_mode then
+if xy.transparent_mode == true then
   vim.api.nvim_create_autocmd('ColorScheme', {
     pattern = '*',
     callback = function()
