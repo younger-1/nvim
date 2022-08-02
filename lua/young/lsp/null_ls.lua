@@ -111,7 +111,7 @@ function M.done()
     sources = sources,
   })
   null_ls.setup(opts)
-  -- require('young.lsp.null-ls.linters')
+  -- require('young.lsp.null_ls.linters')
 end
 
 return M

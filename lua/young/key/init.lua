@@ -32,7 +32,7 @@ end
 
 M.done = function()
   tt()
-  require('young.key.which-key').ice()
+  require('young.key.which_key').ice()
   vim.g.mapleader = ' '
 end
 

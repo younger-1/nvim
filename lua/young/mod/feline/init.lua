@@ -1,3 +1,3 @@
 require('young.mod.feline.nvchad').setup()
--- require 'young.mod.feline.nv-ide'
+-- require 'young.mod.feline.nv_ide'
 -- require('feline').setup()

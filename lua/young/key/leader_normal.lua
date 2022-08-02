@@ -226,7 +226,7 @@ local mappings = {
     r = { vim.lsp.buf.rename, 'Rename' },
     t = {
       function()
-        require('young.mod.lsp-lines').toggle()
+        require('young.mod.lsp_lines').toggle()
       end,
       'Toggle LSP lines',
     },

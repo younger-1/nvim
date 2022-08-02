@@ -92,8 +92,8 @@ local my_vopts = {
 
 M.ice = function()
   M.leader = {}
-  M.leader.n = require 'young.key.leader-normal'
-  M.leader.v = require 'young.key.leader-visual'
+  M.leader.n = require 'young.key.leader_normal'
+  M.leader.v = require 'young.key.leader_visual'
   M.n = require 'young.key.normal'
   M.v = require 'young.key.visual'
 
