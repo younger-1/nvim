@@ -153,6 +153,10 @@ function mt:__index(k)
   -- No use: xy = ok and ret or { no = true }
   if ok then
     self[k] = ret
+    if type(self[k]) == 'table' then
+      self[k]._path = (self._path or '') .. k .. '.'
+      setmetatable(self[k], mt)
+    end
   else
     self[k] = { _nil = true, _path = (self._path or '') .. k .. '.' }
     setmetatable(self[k], mt)
