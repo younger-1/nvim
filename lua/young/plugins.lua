@@ -203,7 +203,8 @@ mods.change = {
   comment = {
     {
       'numToStr/Comment.nvim',
-      event = 'BufRead',
+      -- event = 'BufRead',
+      keys = { { 'n', 'gc' }, { 'v', 'gc' }, { 'n', '<C-_>' }, { 'v', '<C-_>' } },
       config = function()
         require 'young.mod.comment'
       end,
@@ -744,7 +745,7 @@ mods.LSP = {
     {
       'williamboman/nvim-lsp-installer',
       config = function()
-        require('young.lsp.installer')
+        require 'young.lsp.installer'
       end,
     },
     {

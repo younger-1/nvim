@@ -62,9 +62,9 @@ local function write_lockfile(write)
   local default_plugins = {}
   local active_jobs = {}
 
-  local core_plugins = vim.tbl_flatten(require('young.plugins').pins())
+  local pin_plugins = vim.tbl_flatten(require('young.plugins').pins())
 
-  for _, plugin in pairs(core_plugins) do
+  for _, plugin in pairs(pin_plugins) do
     local name = plugin:match '/(%S*)'
     local url = 'https://github.com/' .. plugin
     local commit = ''

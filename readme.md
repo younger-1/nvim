@@ -157,7 +157,7 @@ Benchmark 2: nvim --headless +qa
   Range (min … max):   198.1 ms … 252.9 ms    20 runs
 
 ```sh
-# get latest remote commit of plugins
+# update to latest commit of pin plugins (xy.packer.pins)
 nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 ```
 
