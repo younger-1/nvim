@@ -173,7 +173,8 @@ mods.edit = {
   treesitter = {
     {
       'nvim-treesitter/nvim-treesitter',
-      branch = xy.has 'nvim-0.6' and 'master' or '0.5-compat',
+      -- branch = xy.has 'nvim-0.6' and 'master' or '0.5-compat',
+      event = { 'BufRead', 'BufNewFile' },
       run = ':TSUpdate',
       config = function()
         require('young.mod.treesitter').done()
@@ -537,7 +538,8 @@ mods.UI = {
     },
     {
       'rcarriga/nvim-notify',
-      -- event = 'BufWinEnter',
+      -- event = 'VimEnter',
+      event = 'BufWinEnter',
       after = 'telescope.nvim',
       config = function()
         require('young.mod.notify').done()
@@ -557,7 +559,10 @@ mods.UI = {
         require('young.mod.trouble').done()
       end,
     },
-    { 'stevearc/dressing.nvim' },
+    {
+      'stevearc/dressing.nvim',
+      event = 'BufWinEnter',
+    },
     -- {
     --   'nvim-telescope/telescope-ui-select.nvim',
     --   config = function()
@@ -669,30 +674,23 @@ mods.code = {
   completion = {
     {
       'hrsh7th/nvim-cmp',
+      event = 'InsertEnter',
       config = function()
         require('young.mod.cmp').done()
       end,
       requires = {
-        -- [luasnip]
-        'L3MON4D3/LuaSnip',
-        'saadparwaiz1/cmp_luasnip',
-        -- [vsnip]
-        -- 'hrsh7th/cmp-vsnip',
-        -- 'hrsh7th/vim-vsnip',
-        -- [ultisnips]
-        -- 'SirVer/ultisnips'
-        -- 'quangnguyen30192/cmp-nvim-ultisnips'
         -- [source]
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lua',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-calc',
-        'hrsh7th/cmp-emoji',
-        'hrsh7th/cmp-cmdline',
+        { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+        -- { 'hrsh7th/cmp-nvim-lua' },
+        { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
         --
         {
           'petertriho/cmp-git',
+          after = 'nvim-cmp',
           requires = 'nvim-lua/plenary.nvim',
           config = function()
             require('cmp_git').setup()
@@ -701,7 +699,6 @@ mods.code = {
       },
     },
     { 'onsails/lspkind-nvim' },
-    { 'rafamadriz/friendly-snippets' },
     {
       'github/copilot.vim',
       -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
@@ -715,6 +712,18 @@ mods.code = {
     --   event = 'InsertEnter',
     --   config = [[require('young.mod.copilot').setup_lua()]],
     -- }
+  },
+  snippet = {
+    { 'rafamadriz/friendly-snippets', opts = true },
+    -- [luasnip]
+    { 'L3MON4D3/LuaSnip', module = 'luasnip' },
+    { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+    -- [vsnip]
+    -- 'hrsh7th/cmp-vsnip',
+    -- 'hrsh7th/vim-vsnip',
+    -- [ultisnips]
+    -- 'SirVer/ultisnips'
+    -- 'quangnguyen30192/cmp-nvim-ultisnips'
   },
   task = {
     -- { 'tpope/vim-dispatch' },
@@ -764,8 +773,8 @@ mods.LSP = {
     },
   },
   lua = {
-    -- { 'folke/lua-dev.nvim' },
-    { 'ii14/emmylua-nvim' },
+    -- { 'folke/lua-dev.nvim', opt = true },
+    { 'ii14/emmylua-nvim', opt = true },
     { 'nanotee/luv-vimdocs' },
     { 'milisims/nvim-luaref' },
   },

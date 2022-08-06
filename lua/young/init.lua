@@ -22,6 +22,11 @@ WSL-ubuntu:
   release = "4.4.0-19041-Microsoft",
   sysname = "Linux",
   version = "#1237-Microsoft Sat Sep 11 14:32:00 PST 2021"
+Mac-intel:
+  machine = "x86_64",
+  release = "21.6.0",
+  sysname = "Darwin",
+  version = "Darwin Kernel Version 21.6.0: Sat Jun 18 17:07:25 PDT 2022; root:xnu-8020.140.41~1/RELEASE_X86_64"
 ]]
 
 -- windows, unix(wsl, mac, linux)

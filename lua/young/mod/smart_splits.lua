@@ -4,10 +4,12 @@ require('smart-splits').setup {
     'nofile',
     'quickfix',
     'prompt',
+    -- 'qf',
   },
   -- Ignored buffer types (only while resizing)
   ignored_buftypes = {
     'NvimTree',
+    -- 'nofile',
   },
 }
 
