@@ -103,7 +103,7 @@ local function apply_style()
   if style.hl_cmd then
     style.hl_cmd()
   end
-  require('young.util').shallow_force(M.cfg, style)
+  xy.util.shallow_force(M.cfg, style)
 
   idx = idx % #styles
   idx = idx + 1

@@ -48,11 +48,9 @@ pp(x.c)
 pp(mt)
 
 local mt = {}
--- function mt.__index(t, k)
 function mt:__index(k)
   if self[k] == nil then
     local ok, ret = pcall(require, 'young.' .. (self._path or '') .. k)
-    -- No use: xy = ok and ret or { no = true }
     if ok then
       self[k] = ret
     else
@@ -63,9 +61,3 @@ function mt:__index(k)
   return self[k]
 end
 
-setmetatable(xy, mt)
-
---[[
-xy.a -> require('xy').a -> require('xy.a')
-xy.a.b -> require('xy').a.b -> require('xy.a').b -> require('xy.a.b')
-]]

@@ -72,6 +72,7 @@ local mappings = {
       d = { '<cmd>SessionManager delete_session<cr>', 'Delete Session' },
       S = { '<cmd>SessionManager save_current_session<cr>', 'Save Session' },
     },
+    u = { xy.tool.open_url, 'Open Github Url' },
   },
   b = {
     name = '+buffers',

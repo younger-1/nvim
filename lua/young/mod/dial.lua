@@ -1,7 +1,6 @@
 local M = {}
 
 local dial = require 'dial'
-local util = require 'young.util'
 
 --[[
 
@@ -78,7 +77,7 @@ M.done = function()
   --   table.insert(dial.config.searchlist.normal, v)
   -- end
 
-  util.add_to_set(dial.config.searchlist.normal, settings)
+  xy.util.add_to_set(dial.config.searchlist.normal, settings)
 end
 
 return M
