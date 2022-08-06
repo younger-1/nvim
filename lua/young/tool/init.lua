@@ -1,5 +1,6 @@
 local tool = {}
--- local Log = require "lvim.core.log"
+
+xy.tool = tool
 
 -- From: <https://github.com/nvim-lua/plenary.nvim/blob/8c6cc07a68b65eb707be44598f0084647d495978/lua/plenary/reload.lua#L3>
 local unload_module = function(found, module_name, starts_with_only)
@@ -380,16 +381,15 @@ end
 
 tool.open_url = function()
   local line = fn.getline '.'
-  local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')
+  -- local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')
   local name = line:match '[%a%d%.%-%_]+/[%a%d%.%-%_]+'
-  if #name == '' then
-    vim.notify 'Not url for current line!'
-    -- vim.notify_once(fmt('[: %s] not found', url))
+  if not name then
+    -- vim.notify 'Not url for current line!'
+    vim.notify_once(fmt('[open_url] not url in (%d, %d) of %s', fn.line '.', fn.col '.', fn.bufname()))
     return
   end
   local url = 'https://github.com/' .. name
-  print(url)
+  fn.system { xy.open_cmd, url }
 end
-xy.map { 'gs', tool.open_url }
 
 return tool

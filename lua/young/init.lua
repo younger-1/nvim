@@ -24,11 +24,22 @@ WSL-ubuntu:
   version = "#1237-Microsoft Sat Sep 11 14:32:00 PST 2021"
 ]]
 
+-- windows, unix(wsl, mac, linux)
 -- _G.is_windows = vim.fn.has('win32') == 1 and true or false
 -- _G.is_wsl = vim.fn.has('wsl') == 1 and true or false
 _G.is_windows = uv.os_uname().version:match 'Windows' and true or false
-_G.is_wsl = uv.os_uname().release:lower():match 'microsoft' and true or false
 _G.is_unix = not is_windows
+_G.is_wsl = uv.os_uname().release:lower():match 'microsoft' and true or false
+_G.is_mac = uv.os_uname().sysname:match 'Darwin' and true or false
+_G.is_linux = _G.is_unix and not (_G.is_wsl or _G.is_mac)
+
+if is_mac then
+  xy.open_cmd = 'open'
+elseif is_linux then
+  xy.open_cmd = 'xdg-open'
+else
+  xy.open_cmd = 'explorer'
+end
 
 function _G.join_paths(...)
   local path_sep = is_windows and '\\' or '/'
@@ -142,6 +153,11 @@ _G.tt = tt or function()
   })
 end
 
+--[[
+xy.a -> require('xy').a -> require('xy.a')
+xy.a.b -> require('xy').a.b -> require('xy.a').b -> require('xy.a.b')
+]]
+
 local mt = {}
 -- function mt.__index(t, k)
 function mt:__index(k)
@@ -150,7 +166,6 @@ function mt:__index(k)
   end
 
   local ok, ret = pcall(require, 'young.' .. (self._path or '') .. k)
-  -- No use: xy = ok and ret or { no = true }
   if ok then
     self[k] = ret
     if type(self[k]) == 'table' then

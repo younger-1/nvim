@@ -358,15 +358,15 @@ M.done = function()
 end
 
 -- TODO: <https://github.com/monkoose/neovim-setup/blob/db1a0affc0cc35f8563d25859eb832be569eba87/init.lua#L7-L16>
-function _G.node_at_cursor()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return vim.treesitter.get_parser():parse()[1]:root():descendant_for_range(line - 1, col, line - 1, col + 1)
-end
+-- function _G.node_at_cursor()
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   return vim.treesitter.get_parser():parse()[1]:root():descendant_for_range(line - 1, col, line - 1, col + 1)
+-- end
 
-function _G.parent_childs()
-  for node, field in node_at_cursor():parent():iter_children() do
-    print(node:type())
-  end
-end
+-- function _G.parent_childs()
+--   for node, field in node_at_cursor():parent():iter_children() do
+--     print(node:type())
+--   end
+-- end
 
 return M

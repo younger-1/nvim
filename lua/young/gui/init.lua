@@ -71,7 +71,7 @@ function M.ginit()
 end
 
 M.post_config = function()
-  require('young.util').defer(function()
+  xy.util.defer(function()
     vim.opt.mouse = 'a'
     local gmap = require 'young.gui.map'
     require('young.gui.map').done()

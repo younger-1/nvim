@@ -51,13 +51,15 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-function! EchoCommaPath(path)
-  echo join(split(a:path, ','), "\n")
+function! EchoPathHelper(path, ...)
+  let sep = get(a:000, 0, ',')
+  echo join(split(a:path, sep), "\n")
 endfunction
 
-command! Echopath call EchoCommaPath(&path)
-command! Echortp  call EchoCommaPath(&rtp)
-command! Echopack call EchoCommaPath(&packpath)
+command! Echopath call EchoPathHelper(&path)
+command! Echortp  call EchoPathHelper(&rtp)
+command! Echopack call EchoPathHelper(&packpath)
+command! Echosys  call EchoPathHelper($PATH, has('win32') ? ';' : ':')
 
 function! EchoRuntimeFile(pattern, all)
   echo nvim_get_runtime_file(a:pattern, a:all) ->join("\n")

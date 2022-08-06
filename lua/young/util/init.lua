@@ -1,5 +1,7 @@
 local util = {}
 
+xy.util = util
+
 util.join_paths = _G.join_paths
 
 function util.toggle_autoformat()
