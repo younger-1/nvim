@@ -196,6 +196,7 @@ mods.change = {
     {
       'windwp/nvim-autopairs',
       event = 'InsertEnter',
+      after = 'nvim-cmp',
       config = function()
         require 'young.mod.autopairs'
       end,
@@ -690,7 +691,8 @@ mods.code = {
         --
         {
           'petertriho/cmp-git',
-          after = 'nvim-cmp',
+          after = 'nvim-cmp', -- TODO:load only in gitcommit
+          ft = 'gitcommit',
           requires = 'nvim-lua/plenary.nvim',
           config = function()
             require('cmp_git').setup()
@@ -773,8 +775,8 @@ mods.LSP = {
     },
   },
   lua = {
-    -- { 'folke/lua-dev.nvim', opt = true },
-    { 'ii14/emmylua-nvim', opt = true },
+    { 'folke/lua-dev.nvim', opt = true },
+    -- { 'ii14/emmylua-nvim', opt = true },
     { 'nanotee/luv-vimdocs' },
     { 'milisims/nvim-luaref' },
   },
@@ -917,7 +919,7 @@ mods.write = {
 mods.tool = {
   open = {
     {
-      'itchyny/vim-external',
+      'itchyny/vim-external', -- TODO:gx in WSL
       config = function()
         vim.cmd [[
           map <Leader>aee <Plug>(external-editor)
