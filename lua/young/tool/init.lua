@@ -337,7 +337,7 @@ tool.set_cursor_floating_win = function()
 end
 
 tool.startup_time = function()
-  for i, times in ipairs(_G.ytime or {}) do
+  for i, times in ipairs(xy.startup_time or {}) do
     -- pp(times)
     -- local str = vim.fn['repeat']('+', times.depth)
     print(fmt(
@@ -353,7 +353,7 @@ tool.startup_time = function()
 end
 
 tool.startup_event = function(event)
-  local now = vim.fn.reltimefloat(vim.fn.reltime(ytime.a))
+  local now = vim.fn.reltimefloat(vim.fn.reltime(xy.startup_time.a))
   xy.util.echomsg { fmt('%s: %g', event, now) }
 end
 
@@ -389,7 +389,8 @@ tool.open_url = function()
     return
   end
   local url = 'https://github.com/' .. name
-  fn.system { xy.open_cmd, url }
+  -- fn.system { xy.open_cmd, url }
+  fn.jobstart({ xy.open_cmd, url }, { detach = true })
 end
 
 return tool

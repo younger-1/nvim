@@ -1,5 +1,3 @@
-_G.xy = {}
-
 _G.uv = vim.loop
 _G.fn = vim.fn
 _G.api = vim.api
@@ -37,6 +35,14 @@ _G.is_unix = not is_windows
 _G.is_wsl = uv.os_uname().release:lower():match 'microsoft' and true or false
 _G.is_mac = uv.os_uname().sysname:match 'Darwin' and true or false
 _G.is_linux = _G.is_unix and not (_G.is_wsl or _G.is_mac)
+
+_G.xy = {
+  startup_time = {
+    os_start = os.clock(),
+    rel_start = vim.fn.reltime(),
+    hr_start = uv.hrtime(),
+  },
+}
 
 if is_mac then
   xy.open_cmd = 'open'
@@ -135,21 +141,16 @@ function _G.rc(module)
   return rr(module)
 end
 
+-- stylua: ignore start
 _G.tt = tt or function()
-  _G.ytime = _G.ytime or {
-    os_start = os.clock(),
-    rel_start = vim.fn.reltime(),
-    hr_start = uv.hrtime(),
-  }
-
   local depth = 0
   while debug.getinfo(depth + 2, 'n').name do
     depth = depth + 1
   end
-  table.insert(ytime, {
-    os_time = os.clock() - ytime.os_start,
-    rel_time = vim.fn.reltimefloat(vim.fn.reltime(ytime.rel_start)),
-    hr_time = (uv.hrtime() - ytime.hr_start) / 1e9,
+  table.insert(xy.startup_time, {
+    os_time = os.clock() - xy.startup_time.os_start,
+    rel_time = vim.fn.reltimefloat(vim.fn.reltime(xy.startup_time.rel_start)),
+    hr_time = (uv.hrtime() - xy.startup_time.hr_start) / 1e9,
     file_name = debug.getinfo(2, 'S').source:sub(2),
     func_name = debug.getinfo(2, 'n').name,
     func_scope = debug.getinfo(2, 'n').namewhat,
@@ -157,6 +158,7 @@ _G.tt = tt or function()
     depth = depth,
   })
 end
+-- stylua: ignore end
 
 --[[
 xy.a -> require('xy').a -> require('xy.a')
@@ -238,7 +240,42 @@ end
 ----------------------------------------------------------------------------------------------------
 -- Mappings
 ----------------------------------------------------------------------------------------------------
-xy.map = {}
+
+xy.map = {
+  register = function(mappings, opts)
+    opts = opts or {}
+
+    local prefix = opts.prefix or ''
+    local mode = opts.mode or 'n'
+
+    xy.map._nest(mappings, prefix, mode)
+  end,
+
+  _nest = function(mappings, prefix, mode)
+    for k, v in pairs(mappings) do
+      if k == 'name' or type(v) == 'string' or #v == 1 then
+        goto continue
+      end
+      if #v == 0 then
+        xy.map._nest(v, prefix .. k, mode)
+      else
+        if v[2] == 'which_key_ignore' then
+          v[2] = nil
+        end
+        if v[1] == nil then
+          xy.util.echomsg { fmt('[%s%s] is mapped to nil', prefix, k) }
+        elseif #v == vim.tbl_count(v) then
+          xy.map[mode] { prefix .. k, v[1], desc = v[2] }
+        else
+          local keymap = { prefix .. k, v[1], desc = v[2] }
+          keymap = vim.tbl_extend('keep', keymap, v)
+          xy.map[mode](keymap)
+        end
+      end
+      ::continue::
+    end
+  end,
+}
 
 local function mapper(tbl)
   local opts = { noremap = true, silent = true, nowait = true }

@@ -61,7 +61,6 @@ local opts = {
   noremap = true,
   nowait = true,
   silent = true,
-  update = false,
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 }
 
@@ -71,7 +70,6 @@ local vopts = {
   noremap = true,
   nowait = true,
   silent = true,
-  update = false,
 }
 
 local my_opts = {
@@ -79,7 +77,6 @@ local my_opts = {
   noremap = true,
   nowait = true,
   silent = true,
-  update = false,
 }
 
 local my_vopts = {
@@ -87,7 +84,6 @@ local my_vopts = {
   noremap = true,
   nowait = true,
   silent = true,
-  update = false,
 }
 
 M.ice = function()
@@ -106,11 +102,25 @@ end
 M.done = function()
   local wk = require 'which-key'
 
+  local show = wk.show
+  local ignore_filetype = { 'TelescopePrompt' }
+  wk.show = function(keys, opts)
+    if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
+      return
+    end
+    show(keys, opts)
+  end
+
   wk.setup(M.cfg)
   wk.register(M.leader.n, opts)
   wk.register(M.leader.v, vopts)
   wk.register(M.n, my_opts)
   wk.register(M.v, my_vopts)
+
+  -- xy.map.register(M.leader.n, opts)
+  -- xy.map.register(M.leader.v, vopts)
+  -- xy.map.register(M.n, my_opts)
+  -- xy.map.register(M.v, my_vopts)
 end
 
 return M
