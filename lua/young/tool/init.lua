@@ -341,8 +341,8 @@ tool.startup_time = function()
     -- pp(times)
     -- local str = vim.fn['repeat']('+', times.depth)
     print(fmt(
-      '[%30s:%3d] [%8s] [%d] - %f',
-      xy.util.relative(times.file_name, vim.fn.stdpath 'config' .. '/'),
+      '[%45s:%3d] [%8s] [%d] - %f',
+      xy.util.relative(times.file_name, join_paths(vim.fn.stdpath 'config', '')),
       -- xy.util.relative_home(times.file_name),
       times.currentline,
       times.func_name,
