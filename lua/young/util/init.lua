@@ -143,7 +143,11 @@ end
 -- vim.api.nvim_set_keymap('c', '<C-f>', 'v:lua.smart_tab()', { expr = true, noremap = true })
 
 function util.relative(path, base)
-  return vim.fn.fnamemodify(path, ':s?' .. vim.fn.escape(base, '\\') .. '??')
+  -- for windows: vim.fn.fnamemodify('C:\\Users\\123', ':s?' .. 'C:\\\\Users\\\\' .. '??')
+  -- return vim.fn.fnamemodify(path, ':s?' .. vim.fn.escape(base, '\\') .. '??')
+  path = util.normalize(path)
+  base = util.normalize(base)
+  return vim.fn.fnamemodify(path, ':s?' .. base .. '??')
 end
 
 function util.relative_home(path)
@@ -152,6 +156,11 @@ end
 
 function util.relative_current(path)
   return vim.fn.fnamemodify(path, ':.')
+end
+
+function util.normalize(path)
+  vim.validate({ path = { path, 's' } })
+  return (path:gsub('^~/', vim.env.HOME .. '/'):gsub('%$([%w_]+)', vim.env):gsub('\\', '/'))
 end
 
 return util
