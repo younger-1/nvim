@@ -383,7 +383,7 @@ tool.open_url = function()
   local line = fn.getline '.'
   -- local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')
   local name = line:match '[%a%d%.%-%_]+/[%a%d%.%-%_]+'
-  if not name then
+  if nil == name then
     -- vim.notify 'Not url for current line!'
     vim.notify_once(fmt('[open_url] not url in (%d, %d) of %s', fn.line '.', fn.col '.', fn.bufname()))
     return

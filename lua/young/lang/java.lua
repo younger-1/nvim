@@ -130,7 +130,7 @@ M.setup = function()
   })
 
   config.settings = {
-    -- ['java.format.settings.url'] = home .. '/.config/nvim/.java-google-style.xml',
+    -- ['java.format.settings.url'] = home .. '/.config/nvim/utils/java-google-style.xml',
     -- ['java.format.settings.profile'] = 'GoogleStyle',
     java = {
       format = {
@@ -139,7 +139,7 @@ M.setup = function()
         comments = { enabled = false },
         settings = {
           profile = 'GoogleStyle',
-          url = home .. '/.config/nvim/.java-google-style.xml',
+          url = home .. '/.config/nvim/utils/java-google-style.xml',
         },
       },
       signatureHelp = { enabled = true },
