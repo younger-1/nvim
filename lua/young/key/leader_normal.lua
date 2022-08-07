@@ -363,7 +363,7 @@ local mappings = {
       name = '+autocmd',
       f = { require('young.autocmd').toggle_format_on_save, 'Format On Save' },
       p = { require('young.autocmd').toggle_print_ascii, 'Print ASCII' },
-      r = { require('young.autocmd').toggle_auto_chdir, 'Auto Chdir' },
+      -- r = { require('young.autocmd').toggle_auto_chdir, 'Auto Chdir' },
     },
     b = 'Biscuits',
     m = { '<cmd>MinimapToggle<cr>', 'Minimap' },

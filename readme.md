@@ -13,9 +13,9 @@
 - [ ] vim select files inside current selected folder in cmdline
 - [ ] find files when using `Rg`
 - [ ] highlights the search word in quickfix when using `Rg`
-- [ ] in *.lua gf on require() can let Telescope find file in that module
-- [ ] in *.lua gF on require() can let LSP try add that rtp to LSP's workspace library
-- [ ] in *.lua gf on rr('foo').bar() can be used like require('foo').bar()
+- [ ] in \*.lua gf on require() can let Telescope find file in that module
+- [ ] in \*.lua gF on require() can let LSP try add that rtp to LSP's workspace library
+- [ ] in \*.lua gf on rr('foo').bar() can be used like require('foo').bar()
 - [ ] combine range-highlight and numb to a single plugin
 - [ ] Online community collect @cataloge and #tag metadata of plugin to help easily discover functionality/boundary of plugins
 - [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
@@ -33,9 +33,10 @@
 - [ ] highlight for cmdline-history window
 - [ ] an easy way to edit $VIMRUNTIME files, `:e $VIMRUNTIME/ftplugin.vim`
 - [ ] highlight the put region with autocmd like `vim.highlight.on_yank` - see <https://www.reddit.com/r/neovim/comments/vh5p42/how_to_highlight_the_put_region_with_autocmd_like/> and <https://github.com/neovim/neovim/blob/f479dd0bbef9383df05b1908eec0013ba92499b5/runtime/lua/vim/highlight.lua#L83>
-- [ ] autopair: remove single quote (' and `) rules for lisp file
+- [ ] autopair: remove single quote (\' and \`) rules for lisp file
 - [ ] decouple which-key from core, by using local.lua
 - [ ] a quick-pannel to lookup git/file information such as branch, ff, fenc, sw, which is not very common like changes and diagnostics
+- [ ] split diagnostics and lsp, lazy load lsp setup to filetype(not good for lvim) or event, lazy load lsp_line after diagnostics
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

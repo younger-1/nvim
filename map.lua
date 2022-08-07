@@ -2,21 +2,7 @@
 -- - <https://gist.github.com/cultab/3c364ce879c050cf56040c40d22ceafb>
 -- - <https://github.com/cultab/dotfiles/blob/master/neovim/.config/nvim/lua/user/map.lua>
 
-_G.map = setmetatable({ mappings = {}, parsed = {}, key = {} }, {
-  __call = function(self, key)
-    self.key = key
-    pp(key)
-    return self.parse
-  end,
-})
-
-map 'what' 'will' 'you' { look = 1 }()()
-
 local M = {}
-
-local function P(a)
-  print(vim.inspect(a))
-end
 
 local wk = require 'which-key'
 
@@ -69,7 +55,7 @@ _G.map = setmetatable(prototype(), {
   end,
   __index = {
     register = function(self)
-      -- P(self)
+      -- pp(self)
       for mode, mappings in pairs(self.mappings) do
         for key, mapping_args in pairs(mappings) do
           -- @type string|function|nil
@@ -82,6 +68,12 @@ _G.map = setmetatable(prototype(), {
           else
             wk.register({ [key] = { name = description } }, { mode = mode })
           end
+
+          -- if type(mapping) == 'function' then
+          --   vim.api.nvim_set_keymap(mode, key, '', { callback = mapping, desc = description })
+          -- else
+          --   vim.api.nvim_set_keymap(mode, key, mapping, { desc = description })
+          -- end
         end
       end
       -- empty out registered mappings
@@ -89,11 +81,5 @@ _G.map = setmetatable(prototype(), {
     end,
   },
 })
-
--- if type(mapping) == "function" then
---     vim.api.nvim_set_keymap(mode:sub(i, i), key, '', { callback = mapping, desc = description })
--- else
---     vim.api.nvim_set_keymap(mode:sub(i, i), key, mapping, { desc = description })
--- end
 
 return M
