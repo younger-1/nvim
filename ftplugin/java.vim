@@ -13,4 +13,3 @@ setlocal include=^\s*import
 setlocal includeexpr=substitute(v:fname,'\\.','/','g')
 
 setlocal shiftwidth=4
-setlocal tabstop=4

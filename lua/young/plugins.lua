@@ -291,6 +291,20 @@ mods.neovim = {
       require('houdini').setup()
     end,
   },
+  {
+    'nmac427/guess-indent.nvim',
+    event = 'BufReadPost',
+    config = function()
+      require('guess-indent').setup {}
+    end,
+  },
+  -- {
+  --   'Darazaki/indent-o-matic',
+  --   event = 'BufReadPost',
+  --   config = function()
+  --     require('indent-o-matic').setup {}
+  --   end,
+  -- },
 }
 
 mods.BWT = {
@@ -547,7 +561,8 @@ mods.UI = {
       end,
     },
     {
-      'folke/which-key.nvim',
+      -- 'folke/which-key.nvim',
+      'max397574/which-key.nvim', -- TODO:while lvim use it
       event = 'BufWinEnter',
       config = function()
         require('young.key.which_key').done()
