@@ -1,3 +1,3 @@
-iabbrev <buffer> ret return
-iabbrev <buffer> lo local
-iabbrev <buffer> fun function
+" iabbrev <buffer> ret return
+" iabbrev <buffer> lo local
+" iabbrev <buffer> fun function

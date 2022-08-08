@@ -109,7 +109,7 @@ M.cfg = {
   },
   -- TODO: seems to be broken
   indent = {
-    enable = true,
+    enable = false,
     -- disable = { 'yaml', 'python' },
   },
   highlight = {
