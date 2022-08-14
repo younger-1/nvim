@@ -121,6 +121,7 @@ mods.edit = {
   motion = {
     {
       'haya14busa/vim-asterisk',
+      event = 'BufWinEnter',
       config = function()
         require 'young.mod.asterisk'
       end,
@@ -160,13 +161,13 @@ mods.edit = {
     --     require 'young.mod.neoscroll'
     --   end,
     -- },
-    { -- Smooth scrolling for ANY movement command
-      'declancm/cinnamon.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.cinnamon'
-      end,
-    },
+    -- { -- Smooth scrolling for ANY movement command
+    --   'declancm/cinnamon.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.cinnamon'
+    --   end,
+    -- },
   },
   -- textobject = {
   -- },
@@ -257,21 +258,21 @@ mods.neovim = {
     },
   },
   { 'gpanders/editorconfig.nvim' },
-  {
-    'nacro90/numb.nvim',
-    event = 'CmdlineEnter',
-    config = function()
-      require('numb').setup()
-    end,
-  },
-  {
-    'winston0410/range-highlight.nvim',
-    event = 'CmdlineEnter',
-    requires = { { 'winston0410/cmd-parser.nvim', module = 'cmd-parser' } },
-    config = function()
-      require('range-highlight').setup {}
-    end,
-  },
+  -- {
+  --   'nacro90/numb.nvim',
+  --   event = 'CmdlineEnter',
+  --   config = function()
+  --     require('numb').setup()
+  --   end,
+  -- },
+  -- {
+  --   'winston0410/range-highlight.nvim',
+  --   event = 'CmdlineEnter',
+  --   requires = { { 'winston0410/cmd-parser.nvim', module = 'cmd-parser' } },
+  --   config = function()
+  --     require('range-highlight').setup {}
+  --   end,
+  -- },
   {
     'lambdalisue/suda.vim',
     config = function()
@@ -536,8 +537,10 @@ mods.git = {
       require('young.mod.gitlinker').done()
     end,
   },
-  {
+  { -- Perf: bad for windows when trigger `DirChanged`
     'akinsho/git-conflict.nvim',
+    event = 'BufRead',
+    disable = is_windows,
     config = [[require('young.mod.git_conflict')]],
   },
 }
@@ -784,6 +787,7 @@ mods.LSP = {
     {
       'ray-x/lsp_signature.nvim',
       event = 'BufRead',
+      -- opt = true,
       config = function()
         require 'young.mod.lsp_signature'
       end,

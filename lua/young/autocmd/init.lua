@@ -11,6 +11,8 @@ if is_windows then
 end
 
 if xy.transparent_mode == true then
+  -- hi! Normal ctermbg=none guibg=none
+  -- hi! NonText ctermbg=none guibg=none
   vim.api.nvim_create_autocmd('ColorScheme', {
     pattern = '*',
     callback = function()
