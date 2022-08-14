@@ -10,8 +10,8 @@ local cfg = {
   -- order matters: if one is not detected, the other is used as fallback. You
   -- can also delete or rearangne the detection methods.
   -- NOTE: lsp detection will get annoying with multiple langs in one project
-  -- detection_methods = { 'lsp', 'pattern' },
-  detection_methods = { 'pattern' },
+  detection_methods = { 'lsp', 'pattern' },
+  -- detection_methods = { 'pattern' },
 
   -- All the patterns used to detect root dir, when **"pattern"** is in
   -- detection_methods
@@ -19,7 +19,7 @@ local cfg = {
 
   -- Table of lsp clients to ignore by name
   -- eg: { "efm", ... }
-  ignore_lsp = {},
+  ignore_lsp = { 'null-ls' },
 
   -- Don't calculate root dir on specific directories
   -- Ex: { "~/.cargo/*", ... }
