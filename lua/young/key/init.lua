@@ -33,7 +33,6 @@ end
 M.done = function()
   tt()
   require('young.key.which_key').ice()
-  vim.g.mapleader = ' '
 end
 
 return M

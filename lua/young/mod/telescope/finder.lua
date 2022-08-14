@@ -37,6 +37,20 @@ M.grep_vim_config = function(opts)
   builtin.live_grep(opts)
 end
 
+M.open_changed_vim_config = function(opts)
+  opts = opts or {}
+  local theme_opts = themes.get_ivy {
+    sorting_strategy = 'ascending',
+    layout_strategy = 'bottom_pane',
+    prompt_prefix = '>> ',
+    prompt_title = '~ Open Younger changed config ~',
+    cwd = vim.fn.stdpath 'config',
+    -- search_dirs = { vim.fn.stdpath('config') },
+  }
+  opts = vim.tbl_deep_extend('force', theme_opts, opts)
+  builtin.git_status(opts)
+end
+
 function M.view_lunarvim_changelog()
   local opts = { cwd = get_lvim_base_dir() }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
