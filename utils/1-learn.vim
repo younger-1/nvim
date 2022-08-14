@@ -54,4 +54,10 @@ endfor
 
 echom reltimefloat(reltime(a_time))
 echom localtime() - b_time
+
+au FileType    * echo "FileType"     expand('<afile>') expand('<amatch>')
+au BufRead     * echo "BufRead"      expand('<afile>')
+au BufEnter    * echo "BufEnter"     expand('<afile>')
+au BufWinEnter * echo "BufWinEnter"  expand('<afile>')
+
 " }}}

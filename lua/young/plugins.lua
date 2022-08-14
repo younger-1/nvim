@@ -34,29 +34,29 @@ mods.theme = {
   },
 
   lua = {
+    'Mofiqul/dracula.nvim',
+    'tanvirtin/monokai.nvim',
+    'rebelot/kanagawa.nvim',
+    'ellisonleao/gruvbox.nvim',
+    'daschw/leaf.nvim',
+    'projekt0n/github-nvim-theme',
+    'mvpopuk/inspired-github.vim',
+    'LunarVim/darkplus.nvim',
+    'Mofiqul/vscode.nvim',
+    'EdenEast/nightfox.nvim',
+    'rmehri01/onenord.nvim',
     {
       'shaunsingh/nord.nvim',
       setup = function()
         vim.g.nord_borders = true
       end,
     },
-    'tanvirtin/monokai.nvim',
-    'rebelot/kanagawa.nvim',
-    'ellisonleao/gruvbox.nvim',
-    'projekt0n/github-nvim-theme',
-    'mvpopuk/inspired-github.vim',
-    'EdenEast/nightfox.nvim',
-    'Mofiqul/dracula.nvim',
     {
       'marko-cerovac/material.nvim',
       setup = function()
         vim.g.material_style = 'palenight'
       end,
     },
-    'rmehri01/onenord.nvim',
-    'daschw/leaf.nvim',
-    'Mofiqul/vscode.nvim',
-    'LunarVim/darkplus.nvim',
   },
 }
 
@@ -147,7 +147,6 @@ mods.edit = {
         require 'young.mod.matchup'
       end,
     },
-    { 'sbulav/jump-ray.nvim' },
     -- {
     --   'abecodes/tabout.nvim',
     --   config = function()
@@ -288,20 +287,21 @@ mods.neovim = {
   -- }
   { -- Escape from insert, terminal & command mode without delay
     'TheBlob42/houdini.nvim',
+    event = 'BufRead',
     config = function()
       require('houdini').setup()
     end,
   },
   {
     'nmac427/guess-indent.nvim',
-    event = 'BufReadPost',
+    event = 'BufRead',
     config = function()
       require('guess-indent').setup {}
     end,
   },
   -- {
   --   'Darazaki/indent-o-matic',
-  --   event = 'BufReadPost',
+  --   event = 'BufRead',
   --   config = function()
   --     require('indent-o-matic').setup {}
   --   end,
@@ -719,13 +719,13 @@ mods.code = {
       },
     },
     { 'onsails/lspkind-nvim' },
-    {
-      'github/copilot.vim',
-      -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
-      -- event = 'InsertEnter',
-      cmd = 'Copilot',
-      setup = [[require('young.mod.copilot').setup_vim()]],
-    },
+    -- {
+    --   'github/copilot.vim',
+    --   -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
+    --   event = 'InsertEnter',
+    --   cmd = 'Copilot',
+    --   setup = [[require('young.mod.copilot').setup_vim()]],
+    -- },
     -- {
     --   'zbirenbaum/copilot.lua',
     --   requires = { { 'zbirenbaum/copilot-cmp', after = { 'copilot.lua', 'nvim-cmp' } } },
