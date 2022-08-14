@@ -3,6 +3,17 @@ if true then
   return
 end
 
+-- <https://github.com/solidiquis/dotfiles/blob/master/nvim/lua/autocmds.lua>
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = syntax_group,
+  pattern = "*",
+  callback = function()
+    if vim.api.nvim_buf_line_count(0) > 10000 then
+      vim.cmd [[ syntax off ]]
+    end
+  end
+})
+
 -- <https://github.com/rafamadriz/dotfiles/blob/2628301f9c8ee7397a796ec50c790e83cff1d57b/private_dot_config/nvim/plugin/autocommands.lua>
 young.augroup('TextYankHighlight', {
   {

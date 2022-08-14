@@ -85,7 +85,10 @@ M.keys = {
 
     -- <https://github.com/yuki-yano/zero.nvim>
     -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },
-    ['0'] = ':call FirstCharOrFirstCol()<cr>',
+    ['0'] = ':call FirstCharOrFirstCol()<cr>', -- FIXME:not work in visual_mode
+
+    ['+'] = '<C-a>',
+    ['-'] = '<C-x>',
   },
 
   ---@usage change or add keymappings for normal mode

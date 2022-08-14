@@ -44,6 +44,7 @@ end
 
 disable_distribution()
 
+vim.g.mapleader = ' '
 -- Do not source the default filetype.vim
 -- <https://github.com/nathom/filetype.nvim/issues/12>
 vim.g.did_load_filetypes = 0
