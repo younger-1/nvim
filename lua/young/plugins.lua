@@ -256,6 +256,16 @@ mods.neovim = {
       end,
     },
   },
+  fold = {
+    {
+      'kevinhwang91/nvim-ufo',
+      event = 'BufRead',
+      requires = 'kevinhwang91/promise-async',
+      config = function()
+        require 'young.mod.ufo'
+      end,
+    },
+  },
   { 'gpanders/editorconfig.nvim' },
   -- {
   --   'nacro90/numb.nvim',
