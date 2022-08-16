@@ -1,4 +1,4 @@
--- vim.o.foldcolumn = '1'
+vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
@@ -11,9 +11,19 @@ vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == clo
 vim.keymap.set('n', 'J', function()
   local winid = require('ufo').peekFoldedLinesUnderCursor()
   if not winid then
-    vim.cmd"normal! J"
+    vim.cmd 'normal! J'
   end
 end)
+
+local function peek_prev_fold()
+  require('ufo').goPreviousClosedFold()
+  require('ufo').peekFoldedLinesUnderCursor()
+end
+
+local function peek_next_fold()
+  require('ufo').goNextClosedFold()
+  require('ufo').peekFoldedLinesUnderCursor()
+end
 
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
@@ -43,6 +53,52 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
   return newVirtText
 end
 
+-- return a string type use internal providers
+-- return a string in a table like a string type
+-- return empty string '' will disable any providers
+-- return `nil` will use default value {'lsp', 'indent'}
+local ftMap = {
+  vim = 'indent',
+  python = { 'indent' },
+  git = '',
+}
+
+-- lsp->treesitter->indent
+local function customizeSelector(bufnr)
+  local function handleFallbackException(err, providerName)
+    if type(err) == 'string' and err:match 'UfoFallbackException' then
+      return require('ufo').getFolds(providerName, bufnr)
+    else
+      return require('promise').reject(err)
+    end
+  end
+
+  return require('ufo')
+    .getFolds('lsp', bufnr)
+    :catch(function(err)
+      return handleFallbackException(err, 'treesitter')
+    end)
+    :catch(function(err)
+      return handleFallbackException(err, 'indent')
+    end)
+end
+
 require('ufo').setup {
+  open_fold_hl_timeout = 800,
   fold_virt_text_handler = handler,
+  provider_selector = function(bufnr, filetype, buftype)
+    -- use indent provider for c fieltype
+    -- if filetype == 'c' then
+    --   return function()
+    --     return require('ufo').getFolds('indent', bufnr)
+    --   end
+    -- end
+
+    -- default:
+    -- return { 'lsp', 'indent' }
+    return { 'treesitter', 'indent' }
+    -- return ftMap[filetype] or customizeSelector
+  end,
+  -- For now, only 'lsp' provider contain 'comment', 'imports' and 'region'.
+  close_fold_kinds = { 'imports', 'comment' },
 }
