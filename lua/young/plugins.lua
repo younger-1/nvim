@@ -635,6 +635,12 @@ mods.UI = {
     --     require 'young.mod.gps'
     --   end,
     -- },
+    { -- @see https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/incline.lua
+      'b0o/incline.nvim',
+      config = function()
+        require('incline').setup()
+      end,
+    },
   },
   cmdline = {
     -- {

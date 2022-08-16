@@ -208,14 +208,18 @@ M.done = function()
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-      { name = 'cmp_git' },
+      { name = 'git' },
     }, {
+      { name = 'path' },
+      { name = 'buffer' },
       { name = 'emoji' },
     }),
   })
 
   cmp.setup.filetype({ 'markdown', 'txt', 'log' }, {
     sources = {
+      { name = 'path' },
+      { name = 'buffer' },
       { name = 'emoji' },
     },
   })
