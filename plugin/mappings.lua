@@ -125,9 +125,9 @@ M.keys = {
     ['[q'] = ':cprev<CR>',
     ['<C-q>'] = ':call QuickFixToggle()<CR>',
 
-    [']z'] = ':lnext<CR>',
-    ['[z'] = ':lprev<CR>',
-    ['<C-z>'] = ':call LocListToggle()<CR>',
+    [']a'] = ':lnext<CR>',
+    ['[a'] = ':lprev<CR>',
+    ['<C-a>'] = ':call LocListToggle()<CR>',
 
     -- [nvim-default]
     -- Y = 'y$',

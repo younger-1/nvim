@@ -14,6 +14,7 @@ vim.keymap.set('n', 'J', function()
     vim.cmd 'normal! J'
   end
 end)
+vim.keymap.set('n', 'zk', require('ufo').goPreviousStartFold)
 
 local function peek_prev_fold()
   require('ufo').goPreviousClosedFold()
@@ -24,6 +25,9 @@ local function peek_next_fold()
   require('ufo').goNextClosedFold()
   require('ufo').peekFoldedLinesUnderCursor()
 end
+
+vim.keymap.set('n', 'z[', peek_prev_fold)
+vim.keymap.set('n', 'z]', peek_next_fold)
 
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
