@@ -152,10 +152,10 @@ M.cfg = {
         ['<C-f>'] = actions.results_scrolling_down,
 
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
+        ['<C-a>'] = actions.smart_send_to_loclist + actions.open_loclist,
 
         ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-        ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
+        ['<A-a>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
         ['<A-p>'] = action_layout.toggle_preview,
         ['<A-m>'] = action_layout.toggle_mirror,
@@ -171,10 +171,10 @@ M.cfg = {
         ['<C-f>'] = actions.results_scrolling_down,
 
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
+        ['<C-a>'] = actions.smart_send_to_loclist + actions.open_loclist,
 
         ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-        ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
+        ['<A-a>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
         -- J = actions.cycle_previewers_next,
         -- K = actions.cycle_previewers_prev,
