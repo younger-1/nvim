@@ -59,13 +59,11 @@ M.done = function()
 end
 
 M.add_exec = function(exec, keymap, name)
-  vim.api.nvim_set_keymap(
-    'n',
+  xy.map {
     '<leader>' .. keymap,
     "<cmd>lua require('young.mod.toggleterm')._exec_toggle('" .. exec .. "')<CR>",
-    { noremap = true, silent = true }
-  )
-  require('young.key.which_key').leader.n[keymap] = name
+    desc = name,
+  }
   -- lvim.builtin.which_key.mappings[keymap] = name
 end
 

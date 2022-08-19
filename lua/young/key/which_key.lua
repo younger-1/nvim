@@ -56,7 +56,6 @@ M.cfg = {
 }
 
 local opts = {
-  prefix = '<leader>',
   mode = 'n',
   noremap = true,
   nowait = true,
@@ -65,21 +64,6 @@ local opts = {
 }
 
 local vopts = {
-  prefix = '<leader>',
-  mode = 'v',
-  noremap = true,
-  nowait = true,
-  silent = true,
-}
-
-local my_opts = {
-  mode = 'n',
-  noremap = true,
-  nowait = true,
-  silent = true,
-}
-
-local my_vopts = {
   mode = 'v',
   noremap = true,
   nowait = true,
@@ -87,16 +71,10 @@ local my_vopts = {
 }
 
 M.ice = function()
-  M.leader = {}
-  M.leader.n = require 'young.key.leader_normal'
-  M.leader.v = require 'young.key.leader_visual'
   M.n = require 'young.key.normal'
   M.v = require 'young.key.visual'
-
-  local key = require 'young.key'
-  key.leader = M.leader
-  key.n = M.n
-  key.v = M.v
+  M.n['<leader>'] = require 'young.key.leader_normal'
+  M.v['<leader>'] = require 'young.key.leader_visual'
 end
 
 M.done = function()
@@ -112,15 +90,11 @@ M.done = function()
   end
 
   wk.setup(M.cfg)
-  wk.register(M.leader.n, opts)
-  wk.register(M.leader.v, vopts)
-  wk.register(M.n, my_opts)
-  wk.register(M.v, my_vopts)
+  wk.register(M.n, opts)
+  wk.register(M.v, vopts)
 
-  -- xy.map.register(M.leader.n, opts)
-  -- xy.map.register(M.leader.v, vopts)
-  -- xy.map.register(M.n, my_opts)
-  -- xy.map.register(M.v, my_vopts)
+  -- xy.map.register(M.n, opts)
+  -- xy.map.register(M.v, vopts)
 end
 
 return M

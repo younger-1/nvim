@@ -263,7 +263,7 @@ xy.map = {
           v[2] = nil
         end
         if v[1] == nil then
-          xy.util.echomsg { fmt('[%s%s] is mapped to nil', prefix, k) }
+          xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil', prefix, k) }
         elseif #v == vim.tbl_count(v) then
           xy.map[mode] { prefix .. k, v[1], desc = v[2] }
         else
