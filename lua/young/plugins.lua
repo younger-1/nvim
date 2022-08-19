@@ -282,12 +282,13 @@ mods.neovim = {
   --     require('range-highlight').setup {}
   --   end,
   -- },
-  {
-    'lambdalisue/suda.vim',
-    config = function()
-      vim.g['suda#prompt'] = '🔑: '
-    end,
-  },
+  -- {
+  --   'lambdalisue/suda.vim',
+  --   event = 'BufWinEnter',
+  --   config = function()
+  --     vim.g['suda#prompt'] = '🔑: '
+  --   end,
+  -- },
   -- {
   --   'jdhao/better-escape.vim',
   --   event = 'InsertEnter',
@@ -459,15 +460,6 @@ mods.telescope = {
       end,
     },
     {
-      'jvgrootveld/telescope-zoxide',
-      config = function()
-        require('telescope').load_extension 'zoxide'
-        require('telescope._extensions.zoxide.config').setup {
-          prompt_title = '[ Z⏫ ]',
-        }
-      end,
-    },
-    {
       'nvim-telescope/telescope-frecency.nvim',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
     },
@@ -491,6 +483,15 @@ mods.telescope = {
         require('telescope').load_extension 'env'
       end,
     },
+    -- {
+    --   'jvgrootveld/telescope-zoxide',
+    --   config = function()
+    --     require('telescope').load_extension 'zoxide'
+    --     require('telescope._extensions.zoxide.config').setup {
+    --       prompt_title = '[ Z⏫ ]',
+    --     }
+    --   end,
+    -- },
     {
       'LinArcX/telescope-command-palette.nvim',
       config = function()
@@ -525,6 +526,7 @@ mods.git = {
   },
   {
     'tpope/vim-fugitive',
+    cmd = { 'Git', 'GBrowse' },
   },
   -- {
   --   'tanvirtin/vgit.nvim',
@@ -547,12 +549,12 @@ mods.git = {
       require('young.mod.gitlinker').done()
     end,
   },
-  { -- Perf: bad for windows when trigger `DirChanged`
-    'akinsho/git-conflict.nvim',
-    event = 'BufRead',
-    disable = is_windows,
-    config = [[require('young.mod.git_conflict')]],
-  },
+  -- { -- Perf: bad for windows when trigger `DirChanged`
+  --   'akinsho/git-conflict.nvim',
+  --   event = 'BufRead',
+  --   disable = is_windows,
+  --   config = [[require('young.mod.git_conflict')]],
+  -- },
 }
 
 mods.UI = {
@@ -637,6 +639,7 @@ mods.UI = {
     -- },
     { -- @see https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/incline.lua
       'b0o/incline.nvim',
+      event = 'BufWinEnter',
       config = function()
         require('incline').setup()
       end,
@@ -955,13 +958,9 @@ mods.tool = {
   open = {
     {
       'itchyny/vim-external', -- TODO:gx in WSL
+      event = 'BufWinEnter',
       config = function()
-        vim.cmd [[
-          map <Leader>aee <Plug>(external-editor)
-          map <Leader>aen <Plug>(external-explorer)
-          map <Leader>aeb <Plug>(external-browser)
-          map gx <Plug>(external-browser)
-        ]]
+        require 'young.mod.external'
       end,
     },
     {

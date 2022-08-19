@@ -128,13 +128,13 @@ local mappings = {
     ['"'] = { '<cmd>Gitsigns toggle_current_line_blame<cr>', 'Blames' },
     ["'"] = { '<cmd>Gitsigns toggle_linehl<cr>', 'Line highlight' },
     ['`'] = { '<cmd>Gitsigns toggle_numhl<cr>', 'Number highlight' },
-    ['C-q'] = {
+    ['<C-q>'] = {
       name = '+quickfix',
       a = { "<cmd>lua require 'gitsigns'.setqflist('all')<cr>", 'All git' },
       b = { "<cmd>lua require 'gitsigns'.setqflist('attached')<cr>", 'Buffers' },
       c = { '<cmd>Gitsigns setqflist<cr>', 'Current' },
     },
-    ['C-a'] = {
+    ['<C-a>'] = {
       name = '+loclist',
       a = { "<cmd>lua require 'gitsigns'.setloclist(0, 'all')<cr>", 'All git' },
       b = { "<cmd>lua require 'gitsigns'.setloclist(0, 'attached')<cr>", 'Buffers' },
@@ -174,6 +174,7 @@ local mappings = {
     U = { '<cmd>Gitsigns reset_buffer_index<cr>', 'Reset buffer index' },
     w = { '<cmd>Gitsigns toggle_word_diff<cr>', 'Word diff' },
     y = 'Link',
+    -- y = { 'Link', mode = { 'n', 'v' } },
     Y = { "<cmd>lua require'gitlinker'.get_repo_url()<cr>", 'Link(Repo)' },
   },
   h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },
@@ -199,8 +200,8 @@ local mappings = {
     e = { '<cmd>Telescope diagnostics bufnr=0<cr>', 'Diagnostics' },
     E = { '<cmd>Telescope diagnostics<cr>', 'Diagnostics(All)' },
     --
-    ['C-q'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
-    ['C-a'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
+    ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
+    ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
     --
     a = { vim.lsp.buf.code_action, 'Code action' },
     A = { vim.lsp.buf.range_code_action, 'Range action' },
@@ -300,8 +301,8 @@ local mappings = {
     ['.'] = { '<cmd>Telescope file_browser hidden=v:true<cr>', 'Browser' },
     ['/'] = { '<cmd>Telescope search_history<cr>', 'Search history' },
     [':'] = { '<cmd>Telescope command_history<cr>', 'Command history' },
-    ['C-q'] = { '<cmd>Telescope quickfix<cr>', 'QuickList' },
-    ['C-a'] = { '<cmd>Telescope loclist<cr>', 'LocList' },
+    ['<C-q>'] = { '<cmd>Telescope quickfix<cr>', 'QuickList' },
+    ['<C-a>'] = { '<cmd>Telescope loclist<cr>', 'LocList' },
     ['<tab>'] = { '<cmd>Telescope<cr>', '' },
     ['?'] = { '<cmd>Telescope help_tags<cr>', 'Help' },
     B = { '<cmd>Telescope bookmarks<cr>', 'Bookmarks' },
@@ -380,8 +381,8 @@ local mappings = {
     e = { '<cmd>Trouble document_diagnostics<cr>', 'Diagnostics' },
     E = { '<cmd>Trouble workspace_diagnostics<cr>', 'Diagnostics(All)' },
     --
-    ['C-q'] = { '<cmd>Trouble quickfix<cr>', 'QuickFix' },
-    ['C-a'] = { '<cmd>Trouble loclist<cr>', 'LocList' },
+    ['<C-q>'] = { '<cmd>Trouble quickfix<cr>', 'QuickFix' },
+    ['<C-a>'] = { '<cmd>Trouble loclist<cr>', 'LocList' },
     --
     x = { '<cmd>TroubleToggle<cr>', 'Open' },
     t = { '<cmd>TodoTrouble<cr>', 'Todo' },
