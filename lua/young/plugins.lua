@@ -76,7 +76,7 @@ mods.appearance = {
   indent = {
     {
       'lukas-reineke/indent-blankline.nvim',
-      event = 'BufRead',
+      after = 'nvim-treesitter',
       config = function()
         require('young.mod.indent_blankline').done()
       end,
@@ -365,6 +365,7 @@ mods.file = {
     {
       -- 'ahmedkhalf/project.nvim',
       'younger-1/project.nvim',
+      event = 'BufRead',
       branch = 'mydev',
       config = function()
         require 'young.mod.project'
@@ -433,6 +434,8 @@ mods.telescope = {
   core = {
     {
       'nvim-telescope/telescope.nvim',
+      event = 'BufRead',
+      module = 'telescope',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
       config = function()
         require('young.mod.telescope').done()
@@ -440,31 +443,36 @@ mods.telescope = {
     },
     {
       'natecraddock/telescope-zf-native.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'zf-native'
       end,
     },
     {
       'nvim-telescope/telescope-file-browser.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'file_browser'
       end,
     },
-    { 'nvim-telescope/telescope-symbols.nvim' },
   },
   other = {
+    { 'nvim-telescope/telescope-symbols.nvim' },
     {
       'nvim-telescope/telescope-packer.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'packer'
       end,
     },
     {
       'nvim-telescope/telescope-frecency.nvim',
+      after = 'telescope.nvim',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
     },
     {
       'AckslD/nvim-neoclip.lua',
+      after = 'telescope.nvim',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
       config = function()
         require 'young.mod.neoclip'
@@ -472,6 +480,7 @@ mods.telescope = {
     },
     {
       'dhruvmanila/telescope-bookmarks.nvim',
+      after = 'telescope.nvim',
       requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
       config = function()
         require('telescope').load_extension 'bookmarks'
@@ -479,6 +488,7 @@ mods.telescope = {
     },
     {
       'LinArcX/telescope-env.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'env'
       end,
@@ -494,12 +504,14 @@ mods.telescope = {
     -- },
     {
       'LinArcX/telescope-command-palette.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'command_palette'
       end,
     },
     {
       'cljoly/telescope-repo.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'repo'
       end,
@@ -538,6 +550,7 @@ mods.git = {
   -- },
   {
     'nvim-telescope/telescope-github.nvim',
+    after = 'telescope.nvim',
     config = function()
       require('telescope').load_extension 'gh'
     end,
@@ -569,7 +582,7 @@ mods.UI = {
     {
       'rcarriga/nvim-notify',
       -- event = 'VimEnter',
-      event = 'BufWinEnter',
+      -- event = 'BufWinEnter',
       after = 'telescope.nvim',
       config = function()
         require('young.mod.notify').done()
@@ -585,7 +598,9 @@ mods.UI = {
     },
     {
       'folke/trouble.nvim',
-      event = 'BufRead',
+      -- event = 'BufRead',
+      cmd = 'Trouble',
+      -- after = 'telescope.nvim',
       config = function()
         require('young.mod.trouble').done()
       end,
@@ -899,6 +914,7 @@ mods.write = {
   core = {
     {
       'crispgm/telescope-heading.nvim',
+      after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'heading'
       end,

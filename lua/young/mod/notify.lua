@@ -89,7 +89,7 @@ end
 
 M.once = function()
   -- NOTE: Don't need this by using `after = 'telescope.nvim'`
-  require('telescope').load_extension 'notify'
+  -- require('telescope').load_extension 'notify'
   idx = 1
   M.hot(true)
 end
