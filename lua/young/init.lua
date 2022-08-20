@@ -250,12 +250,21 @@ end
 
 ---@param group     string|integer
 ---@param autocmds  Autocmd[]
----@param is_buf    boolean
-xy.autogroup = function(group, autocmds, is_buf)
+---@param buffer    integer|boolean
+xy.autogroup = function(group, autocmds, buffer)
   if group ~= '' then
     local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group })
-    if not exists then
-      local id = vim.api.nvim_create_augroup(group, { clear = true })
+    if exists and buffer then
+      vim.api.nvim_clear_autocmds {
+        group = group,
+        pattern = '<buffer>',
+      }
+    elseif exists then
+      vim.api.nvim_clear_autocmds {
+        group = group,
+      }
+    else
+      vim.api.nvim_create_augroup(group, { clear = true })
     end
   end
 
