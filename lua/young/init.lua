@@ -252,7 +252,7 @@ end
 ---@param autocmds  Autocmd[]
 ---@param buffer    integer|boolean
 xy.autogroup = function(group, autocmds, buffer)
-  if group ~= '' then
+  if group then
     local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group })
     if exists and buffer then
       vim.api.nvim_clear_autocmds {

@@ -116,20 +116,37 @@ end
 
 --- Disable autocommand groups if it exists
 --- This is more reliable than trying to delete the augroup itself
----@param name string the augroup name
-function M.disable_augroup(name, buffer)
+---@param group string the augroup name
+function M.disable_augroup(group, buffer)
   -- defer the function in case the autocommand is still in-use
-  vim.schedule(function()
-    if vim.fn.exists('#' .. name) == 1 then
-      vim.cmd('augroup ' .. name)
-      if buffer then
-        vim.cmd [[autocmd! * <buffer>]]
-      else
-        vim.cmd [[autocmd!]]
-      end
-      vim.cmd 'augroup END'
-    end
-  end)
+  -- vim.schedule(function()
+  --   if vim.fn.exists('#' .. group) == 1 then
+  --     vim.cmd('augroup ' .. group)
+  --     if buffer then
+  --       vim.cmd [[autocmd! * <buffer>]]
+  --     else
+  --       vim.cmd [[autocmd!]]
+  --     end
+  --     vim.cmd 'augroup END'
+  --   end
+  -- end)
+
+  if buffer then
+    -- augroup group_name
+    --   autocmd! * <buffer>
+    -- augroup END
+    vim.api.nvim_clear_autocmds {
+      group = group,
+      pattern = '<buffer>',
+    }
+  else
+    -- augroup group_name
+    --   autocmd!
+    -- augroup END
+    vim.api.nvim_clear_autocmds {
+      group = group,
+    }
+  end
 end
 
 --- Create autocommand groups based on the passed definitions
