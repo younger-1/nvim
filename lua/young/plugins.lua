@@ -205,35 +205,37 @@ mods.change = {
   comment = {
     {
       'numToStr/Comment.nvim',
-      -- event = 'BufRead',
-      keys = { { 'n', 'gc' }, { 'v', 'gc' }, { 'n', '<C-_>' }, { 'v', '<C-_>' } },
+      event = 'BufRead',
+      -- BUG:PackerCompile will cause `keys` redefined
+      -- keys = { { 'n', 'gc' }, { 'v', 'gc' }, { 'n', '<C-_>' }, { 'v', '<C-_>' } },
       config = function()
         require 'young.mod.comment'
       end,
     },
   },
   other = {
-    {
-      'arthurxavierx/vim-caser',
-      setup = function()
-        vim.g.caser_prefix = ';c'
-      end,
-    },
+    -- {
+    --   'arthurxavierx/vim-caser',
+    --   setup = function()
+    --     vim.g.caser_prefix = ';c'
+    --   end,
+    -- },
     {
       'junegunn/vim-easy-align',
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
+      -- BUG:PackerCompile will cause `keys` redefined
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
       setup = function()
         require 'young.mod.easy_align'
       end,
     },
-    {
-      'mg979/vim-visual-multi',
-      cmd = { 'VMDebug', 'VMLive', 'VMRegisters', 'VMSearch' },
-      setup = function()
-        vim.g.VM_default_mappings = 0
-      end,
-    },
+    -- {
+    --   'mg979/vim-visual-multi',
+    --   cmd = { 'VMDebug', 'VMLive', 'VMRegisters', 'VMSearch' },
+    --   setup = function()
+    --     vim.g.VM_default_mappings = 0
+    --   end,
+    -- },
     {
       'monaqa/dial.nvim',
       event = 'BufRead',
@@ -248,13 +250,13 @@ mods.change = {
 
 mods.neovim = {
   profile = {
-    {
-      'dstein64/vim-startuptime',
-      cmd = 'StartupTime',
-      setup = function()
-        vim.g.startuptime_use_blocks = 0
-      end,
-    },
+    -- {
+    --   'dstein64/vim-startuptime',
+    --   cmd = 'StartupTime',
+    --   setup = function()
+    --     vim.g.startuptime_use_blocks = 0
+    --   end,
+    -- },
   },
   fold = {
     {
@@ -366,6 +368,7 @@ mods.file = {
       -- 'ahmedkhalf/project.nvim',
       'younger-1/project.nvim',
       event = 'BufRead',
+      -- after = 'telescope.nvim',
       branch = 'mydev',
       config = function()
         require 'young.mod.project'
@@ -434,7 +437,7 @@ mods.telescope = {
   core = {
     {
       'nvim-telescope/telescope.nvim',
-      -- cmd = 'Telescope', -- Packer bug: reload this file will cause Telescope command redefined
+      -- cmd = 'Telescope', -- BUG:PackerCompile will cause `cmd` redefined
       event = 'BufRead',
       module = 'telescope',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
@@ -997,6 +1000,13 @@ mods.tool = {
       end,
       disable = not is_windows,
     },
+    -- { -- Use your favorite machine translation engines
+    --   'potamides/pantran.nvim',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require 'young.mod.pantran'
+    --   end,
+    -- },
   },
   -- input = {
   --   {
