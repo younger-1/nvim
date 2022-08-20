@@ -51,10 +51,16 @@ function M.load_augroups()
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
       },
       -- { 'FocusLost', '*', 'silent! wa' },
-      { 'VimEnter,VimResume ', '*', 'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100' },
+      {
+        'VimEnter,VimResume',
+        '*',
+        'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100',
+      },
       { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
       { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
       { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
+      -- { 'InsertEnter', '*', require('young.tool').nornu },
+      -- { 'InsertLeave', '*', require('young.tool').rnu },
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
@@ -72,13 +78,6 @@ function M.load_augroups()
       },
     },
     _filetypechanges = {
-      { 'BufWinEnter', '.tf', 'setlocal filetype=terraform' },
-      { 'BufRead', '*.tf', 'setlocal filetype=terraform' },
-      { 'BufNewFile', '*.tf', 'setlocal filetype=terraform' },
-      { 'BufWinEnter', '.zsh', 'setlocal filetype=sh' },
-      { 'BufRead', '*.zsh', 'setlocal filetype=sh' },
-      { 'BufNewFile', '*.zsh', 'setlocal filetype=sh' },
-      --
       { 'BufRead', 'settings.json', 'setlocal filetype=jsonc' },
       { 'BufRead', 'coc-settings.json', 'setlocal filetype=jsonc' },
     },
@@ -131,11 +130,10 @@ end
 
 --- Create autocommand groups based on the passed definitions
 ---@param definitions table contains trigger, pattern and text. The key will be used as a group name
----@param buffer boolean indicate if the augroup should be local to the buffer
-function M.define_augroups(definitions, buffer)
+function M.enable_augroups(definitions)
   for group_name, definition in pairs(definitions) do
     vim.cmd('augroup ' .. group_name)
-    if buffer then
+    if definition.buffer then
       vim.cmd [[autocmd! * <buffer>]]
     else
       vim.cmd [[autocmd!]]
@@ -148,6 +146,10 @@ function M.define_augroups(definitions, buffer)
 
     vim.cmd [[augroup END]]
   end
+
+  -- for group_name, autocmds in pairs(definitions) do
+  --   xy.autogroup(group_name, autocmds)
+  -- end
 end
 
 local augroup_prefix = '_yo_'
@@ -157,7 +159,7 @@ M.build = function(augroups, enable)
     local group_name = augroup_prefix .. name
 
     M['enable_' .. name] = function()
-      M.define_augroups({ [group_name] = autocmds }, autocmds.buffer == true)
+      M.enable_augroups { [group_name] = autocmds }
     end
 
     M['disable_' .. name] = function()
@@ -181,7 +183,7 @@ end
 M.done = function()
   tt()
   local aus = M.load_augroups()
-  M.define_augroups(aus)
+  M.enable_augroups(aus)
 
   local format_opts = { pattern = '*', timeout = 1000 }
   local fmt_cmd = fmt(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)

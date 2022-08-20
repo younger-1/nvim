@@ -1,7 +1,7 @@
 local M = require 'young.autocmd'
 
 -- function M.enable_auto_chdir()
---   M.define_augroups {
+--   M.enable_augroups {
 --     -- Need ++nested to trigger DirChanged event for updating nvim-tree, gitsigns
 --     auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested ProjectRoot]] } },
 --     -- auto_chdir = { { 'VimEnter,BufWinEnter', '*', [[++nested lua require('young.tool').chdir(true)]] } },
@@ -31,7 +31,7 @@ local M = require 'young.autocmd'
 -- function M.enable_format_on_save(opts)
 --   opts = vim.tbl_extend('force', format_on_save_opts, opts or {})
 --   local fmt_cmd = fmt(':silent lua vim.lsp.buf.formatting_sync({}, %s)', opts.timeout)
---   M.define_augroups {
+--   M.enable_augroups {
 --     format_on_save = { { 'BufWritePre', opts.pattern, fmt_cmd } },
 --   }
 --   -- Log:debug "enabled format-on-save"
@@ -61,8 +61,9 @@ M.conditional_document_highlight = function(id)
 end
 
 function M.enable_lsp_document_highlight(client_id)
-  M.define_augroups({
+  M.enable_augroups {
     lsp_document_highlight = {
+      buffer = true,
       {
         'CursorHold',
         '<buffer>',
@@ -74,7 +75,7 @@ function M.enable_lsp_document_highlight(client_id)
         'lua vim.lsp.buf.clear_references()',
       },
     },
-  }, true)
+  }
 end
 
 function M.disable_lsp_document_highlight()
@@ -82,8 +83,9 @@ function M.disable_lsp_document_highlight()
 end
 
 -- function M.enable_code_lens_refresh()
---   M.define_augroups({
+--   M.enable_augroups {
 --     lsp_code_lens_refresh = {
+--       buffer = true,
 --       {
 --         'InsertLeave ',
 --         '<buffer>',
@@ -95,7 +97,7 @@ end
 --         'lua vim.lsp.codelens.display()',
 --       },
 --     },
---   }, true)
+--   }
 -- end
 
 -- function M.disable_code_lens_refresh()
