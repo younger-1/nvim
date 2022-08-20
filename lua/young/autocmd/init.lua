@@ -57,10 +57,10 @@ function M.load_augroups()
         'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100',
       },
       { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
-      { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
-      { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
-      -- { 'InsertEnter', '*', require('young.tool').nornu },
-      -- { 'InsertLeave', '*', require('young.tool').rnu },
+      -- { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
+      -- { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
+      { 'InsertEnter', '*', require('young.tool').nornu },
+      { 'InsertLeave', '*', require('young.tool').rnu },
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
@@ -117,12 +117,16 @@ end
 --- Disable autocommand groups if it exists
 --- This is more reliable than trying to delete the augroup itself
 ---@param name string the augroup name
-function M.disable_augroup(name)
+function M.disable_augroup(name, buffer)
   -- defer the function in case the autocommand is still in-use
   vim.schedule(function()
     if vim.fn.exists('#' .. name) == 1 then
       vim.cmd('augroup ' .. name)
-      vim.cmd 'autocmd!'
+      if buffer then
+        vim.cmd [[autocmd! * <buffer>]]
+      else
+        vim.cmd [[autocmd!]]
+      end
       vim.cmd 'augroup END'
     end
   end)
@@ -131,50 +135,51 @@ end
 --- Create autocommand groups based on the passed definitions
 ---@param definitions table contains trigger, pattern and text. The key will be used as a group name
 function M.enable_augroups(definitions)
-  for group_name, definition in pairs(definitions) do
-    vim.cmd('augroup ' .. group_name)
-    if definition.buffer then
-      vim.cmd [[autocmd! * <buffer>]]
-    else
-      vim.cmd [[autocmd!]]
-    end
+  -- for group_name, definition in pairs(definitions) do
+  --   vim.cmd('augroup ' .. group_name)
+  --   if definition.buffer then
+  --     vim.cmd [[autocmd! * <buffer>]]
+  --   else
+  --     vim.cmd [[autocmd!]]
+  --   end
 
-    for _, def in ipairs(definition) do
-      local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
-      vim.cmd(command)
-    end
+  --   for _, def in ipairs(definition) do
+  --     local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
+  --     vim.cmd(command)
+  --   end
 
-    vim.cmd [[augroup END]]
-  end
-
-  -- for group_name, autocmds in pairs(definitions) do
-  --   xy.autogroup(group_name, autocmds)
+  --   vim.cmd [[augroup END]]
   -- end
+
+  for group_name, autocmds in pairs(definitions) do
+    xy.autogroup(group_name, autocmds, autocmds.buffer)
+  end
 end
 
 local augroup_prefix = '_yo_'
--- enable augroup by default
-M.build = function(augroups, enable)
+M.build_augroups = function(augroups, enable)
   for name, autocmds in pairs(augroups) do
     local group_name = augroup_prefix .. name
 
-    M['enable_' .. name] = function()
+    M['enable_' .. name] = function(buffer)
+      autocmds.buffer = buffer or autocmds.buffer
       M.enable_augroups { [group_name] = autocmds }
     end
 
-    M['disable_' .. name] = function()
-      M.disable_augroup(group_name)
+    M['disable_' .. name] = function(buffer)
+      M.disable_augroup(group_name, buffer)
     end
 
-    M['toggle_' .. name] = function()
+    M['toggle_' .. name] = function(buffer)
+      autocmds.buffer = buffer or autocmds.buffer
       if 0 == vim.fn.exists('#' .. group_name .. '#' .. autocmds[1][1]) then
-        M['enable_' .. name]()
+        M['enable_' .. name](buffer)
       else
-        M['disable_' .. name]()
+        M['disable_' .. name](buffer)
       end
     end
 
-    if enable ~= false then
+    if enable == true then
       M['enable_' .. name]()
     end
   end
@@ -188,7 +193,7 @@ M.done = function()
   local format_opts = { pattern = '*', timeout = 1000 }
   local fmt_cmd = fmt(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)
 
-  M.build({
+  M.build_augroups {
     print_ascii = { { 'CursorHold', '*', ':normal! ga' } },
     format_on_save = { { 'BufWritePre', format_opts.pattern, fmt_cmd } },
     code_lens_refresh = {
@@ -213,7 +218,7 @@ M.done = function()
         'lua vim.lsp.buf.clear_references()',
       },
     },
-  }, false)
+  }
 
   -- require 'young.autocmd.core'
 end

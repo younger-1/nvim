@@ -242,12 +242,27 @@ end
 --   return id
 -- end
 
-xy.autogroup = function(name, autocmds)
-  local id = vim.api.nvim_create_augroup(name, { clear = true })
+---@class Autocmd
+---@field desc     number
+---@field once     boolean
+---@field buffer   number
+---@field nested   boolean
+
+---@param group     string|integer
+---@param autocmds  Autocmd[]
+---@param is_buf    boolean
+xy.autogroup = function(group, autocmds, is_buf)
+  if group ~= '' then
+    local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group })
+    if not exists then
+      local id = vim.api.nvim_create_augroup(group, { clear = true })
+    end
+  end
+
   for _, autocmd in ipairs(autocmds) do
     local is_callback = type(autocmd[3]) == 'function'
     vim.api.nvim_create_autocmd(autocmd[1], {
-      group = name,
+      group = group,
       pattern = autocmd[2],
       callback = is_callback and autocmd[3] or nil,
       command = not is_callback and autocmd[3] or nil,
@@ -257,7 +272,6 @@ xy.autogroup = function(name, autocmds)
       nested = autocmd.nested,
     })
   end
-  return id
 end
 
 ----------------------------------------------------------------------------------------------------

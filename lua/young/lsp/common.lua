@@ -20,7 +20,7 @@ local M = {
 local lsp_cfg = require 'young.lsp.config'
 local autocmd = require 'young.autocmd'
 
-local function lsp_highlight_document(client)
+local function lsp_highlight_document(client, bufnr)
   if lsp_cfg.document_highlight == false then
     return
   end
@@ -35,10 +35,10 @@ local function lsp_highlight_document(client)
     return
   end
 
-  autocmd.enable_lsp_document_highlight()
+  autocmd.enable_lsp_document_highlight(bufnr)
 end
 
-local function lsp_code_lens_refresh(client)
+local function lsp_code_lens_refresh(client, bufnr)
   if lsp_cfg.code_lens_refresh == false then
     return
   end
@@ -51,7 +51,7 @@ local function lsp_code_lens_refresh(client)
     return
   end
 
-  autocmd.enable_code_lens_refresh()
+  autocmd.enable_code_lens_refresh(bufnr)
 end
 
 local function add_lsp_buffer_keybindings(bufnr)
@@ -92,8 +92,8 @@ M.on_attach = function(client, bufnr)
   if lsp_cfg.on_attach_callback then
     lsp_cfg.on_attach_callback(client, bufnr)
   end
-  lsp_highlight_document(client)
-  lsp_code_lens_refresh(client)
+  lsp_highlight_document(client, bufnr)
+  lsp_code_lens_refresh(client, bufnr)
   add_lsp_buffer_keybindings(bufnr)
   -- require("lsp_signature").on_attach {
   --   bind = true,
@@ -142,8 +142,8 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
 }
 local completionItem = M.capabilities.textDocument.completion.completionItem
 completionItem.snippetSupport = true
