@@ -44,11 +44,13 @@ function M.load_augroups()
         '*',
         -- "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
         "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
+        desc = 'Highlight text on yank',
       },
       {
         'BufWinEnter',
         '*',
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
+        desc = 'Jump to last cursor position when opening a file',
       },
       -- { 'FocusLost', '*', 'silent! wa' },
       {
@@ -64,6 +66,15 @@ function M.load_augroups()
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
+      {
+        'BufEnter',
+        '*',
+        function()
+          if vim.api.nvim_buf_line_count(0) > 10000 then
+            vim.cmd [[syntax off]]
+          end
+        end,
+      },
     },
     _colorscheme = {
       -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
