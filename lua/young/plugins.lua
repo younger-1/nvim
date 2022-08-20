@@ -434,6 +434,7 @@ mods.telescope = {
   core = {
     {
       'nvim-telescope/telescope.nvim',
+      -- cmd = 'Telescope', -- Packer bug: reload this file will cause Telescope command redefined
       event = 'BufRead',
       module = 'telescope',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
@@ -599,7 +600,7 @@ mods.UI = {
     {
       'folke/trouble.nvim',
       -- event = 'BufRead',
-      cmd = 'Trouble',
+      cmd = { 'Trouble', 'TroubleToggle' },
       -- after = 'telescope.nvim',
       config = function()
         require('young.mod.trouble').done()

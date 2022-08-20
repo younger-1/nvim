@@ -190,7 +190,12 @@ end
 setmetatable(xy, mt)
 
 ----------------------------------------------------------------------------------------------------
--- Command
+-- cmd
+----------------------------------------------------------------------------------------------------
+xy.cmd = function(tbl) end
+
+----------------------------------------------------------------------------------------------------
+-- command
 ----------------------------------------------------------------------------------------------------
 xy.command = function(tbl)
   local opts = {}
@@ -203,7 +208,7 @@ xy.command = function(tbl)
 end
 
 ----------------------------------------------------------------------------------------------------
--- Autocommand
+-- autocommand
 ----------------------------------------------------------------------------------------------------
 ---@class Autocommand
 ---@field event   string[] list of autocommand events
@@ -219,26 +224,44 @@ end
 ---@param name string
 ---@param commands Autocommand[]
 ---@return number
-function xy.augroup(name, commands)
-  local id = api.nvim_create_augroup(name, { clear = true })
-  for _, autocmd in ipairs(commands) do
-    local is_callback = type(autocmd.command) == 'function'
-    api.nvim_create_autocmd(autocmd.event, {
+-- function xy.augroup(name, commands)
+--   local id = vim.api.nvim_create_augroup(name, { clear = true })
+--   for _, autocmd in ipairs(commands) do
+--     local is_callback = type(autocmd.command) == 'function'
+--     vim.api.nvim_create_autocmd(autocmd.event, {
+--       group = name,
+--       pattern = autocmd.pattern,
+--       desc = autocmd.desc,
+--       callback = is_callback and autocmd.command or nil,
+--       command = not is_callback and autocmd.command or nil,
+--       once = autocmd.once,
+--       nested = autocmd.nested,
+--       buffer = autocmd.buffer,
+--     })
+--   end
+--   return id
+-- end
+
+xy.autogroup = function(name, autocmds)
+  local id = vim.api.nvim_create_augroup(name, { clear = true })
+  for _, autocmd in ipairs(autocmds) do
+    local is_callback = type(autocmd[3]) == 'function'
+    vim.api.nvim_create_autocmd(autocmd[1], {
       group = name,
-      pattern = autocmd.pattern,
+      pattern = autocmd[2],
+      callback = is_callback and autocmd[3] or nil,
+      command = not is_callback and autocmd[3] or nil,
       desc = autocmd.desc,
-      callback = is_callback and autocmd.command or nil,
-      command = not is_callback and autocmd.command or nil,
+      buffer = autocmd.buffer,
       once = autocmd.once,
       nested = autocmd.nested,
-      buffer = autocmd.buffer,
     })
   end
   return id
 end
 
 ----------------------------------------------------------------------------------------------------
--- Mappings
+-- mappings
 ----------------------------------------------------------------------------------------------------
 
 xy.map = {
