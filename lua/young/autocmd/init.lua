@@ -133,17 +133,17 @@ function M.disable_augroup(name, buffer)
 end
 
 --- Create autocommand groups based on the passed definitions
----@param definitions table contains trigger, pattern and text. The key will be used as a group name
-function M.enable_augroups(definitions)
-  -- for group_name, definition in pairs(definitions) do
+---@param augroups table contains trigger, pattern and text. The key will be used as a group name
+function M.enable_augroups(augroups)
+  -- for group_name, augroup in pairs(augroups) do
   --   vim.cmd('augroup ' .. group_name)
-  --   if definition.buffer then
+  --   if augroup.buffer then
   --     vim.cmd [[autocmd! * <buffer>]]
   --   else
   --     vim.cmd [[autocmd!]]
   --   end
 
-  --   for _, def in ipairs(definition) do
+  --   for _, def in ipairs(augroup) do
   --     local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
   --     vim.cmd(command)
   --   end
@@ -151,7 +151,7 @@ function M.enable_augroups(definitions)
   --   vim.cmd [[augroup END]]
   -- end
 
-  for group_name, autocmds in pairs(definitions) do
+  for group_name, autocmds in pairs(augroups) do
     xy.autogroup(group_name, autocmds, autocmds.buffer)
   end
 end
@@ -167,7 +167,7 @@ M.build_augroups = function(augroups, enable)
     end
 
     M['disable_' .. name] = function(buffer)
-      M.disable_augroup(group_name, buffer)
+      M.disable_augroup(group_name, buffer or autocmds.buffer)
     end
 
     M['toggle_' .. name] = function(buffer)
