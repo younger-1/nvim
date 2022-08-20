@@ -928,3 +928,10 @@ xmap <leader>ax  <Plug>(coc-convert-snippet)
 
 " }}}
 
+augroup _yo_lsp_document_highlight
+  autocmd! <buffer>
+augroup END
+
+augroup _yo_lsp_document_highlight
+  autocmd!
+augroup END
