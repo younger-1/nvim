@@ -809,12 +809,9 @@ mods.code = {
 mods.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
-    {
-      'williamboman/nvim-lsp-installer',
-      config = function()
-        require 'young.lsp.installer'
-      end,
-    },
+    -- { 'williamboman/nvim-lsp-installer' },
+    { 'williamboman/mason.nvim' },
+    { 'williamboman/mason-lspconfig.nvim' },
     {
       'jose-elias-alvarez/null-ls.nvim',
       config = function()

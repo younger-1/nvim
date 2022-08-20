@@ -73,21 +73,32 @@ local function attach_buffers(server_name)
   end
 end
 
-local function to_done_ft(server_name)
+---Get supported filetypes per server
+---@param server_name string can be any server supported by lspconfig
+---@return string[] supported filestypes as a list of strings
+local function get_server_fts(server_name)
+  -- local server_fts = server:get_supported_filetypes()
+  -- local server_fts = require('nvim-lsp-installer._generated.metadata')[server_name].filetypes
   -- local server_fts = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
-  local server_fts = require('nvim-lsp-installer._generated.metadata')[server_name].filetypes
+  local status_ok, config = pcall(require, ('lspconfig.server_configurations.%s'):format(server_name))
+  if not status_ok then
+    return {}
+  end
+  return config.default_config.filetypes or {}
+end
 
+local function to_done_ft(server_name)
+  local server_fts = get_server_fts(server_name)
   -- for _, ft in ipairs(server_fts) do
   --   done_ft[ft] = (done_ft[ft] or 0) + 1
   -- end
-
   for _, ft in ipairs(server_fts) do
     done_ft[ft] = done_ft[ft] or {}
     done_ft[ft][#done_ft[ft] + 1] = server_name
   end
 end
 
-local function launch_server(server_name)
+local function setup_server(server_name)
   local opts = get_opts(server_name)
   -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
   require('lspconfig')[server_name].setup(opts)
@@ -126,15 +137,32 @@ end
 M.done = function()
   M.once()
 
-  local installer_ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
+  local installer_ok, mason_lsp = pcall(require, 'mason-lspconfig')
   if not installer_ok then
     return
   end
 
-  for _, server in ipairs(lsp_installer.get_installed_servers()) do
+  -- require 'young.lsp.installer'
+  require 'young.lsp.mason'
+
+  -- mason_lsp.setup_handlers {
+  --   -- The first entry (without a key) will be the default handler
+  --   -- and will be called for each installed server that doesn't have
+  --   -- a dedicated handler.
+  --   function(server_name) -- default handler (optional)
+  --     setup_server(server_name)
+  --   end,
+  --   -- Next, you can provide targeted overrides for specific servers.
+  --   ['rust_analyzer'] = function()
+  --     require('rust-tools').setup {}
+  --   end,
+  --   ['jdtls'] = function() end,
+  -- }
+
+  for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
     -- This avoid launching both pyright and pylsp, if installed
-    if not vim.tbl_contains(vim.tbl_values(ensure_servers), server.name) then
-      local server_fts = server:get_supported_filetypes()
+    if not vim.tbl_contains(vim.tbl_values(ensure_servers), server_name) then
+      local server_fts = get_server_fts(server_name)
       for _, ft in ipairs(server_fts) do
         if ensure_servers[ft] then
           goto continue
@@ -142,7 +170,7 @@ M.done = function()
       end
     end
 
-    if server.name == 'jdtls' and vim.g.young_jdtls then
+    if server_name == 'jdtls' and vim.g.young_jdtls then
       require('young.autocmd').enable_augroups {
         _jdtls_lsp = {
           { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
@@ -151,7 +179,7 @@ M.done = function()
       goto continue
     end
 
-    launch_server(server.name)
+    setup_server(server_name)
     ::continue::
   end
 
@@ -160,10 +188,10 @@ M.done = function()
     -- NOTE: vim.fn.executable(server_name): 1. not valid, eg {"sumneko_lua"},{"deno", "lsp"} 2. too slow
     -- if not done_ft[ft] and vim.fn.executable(server_name) == 1 then
     -- if not done_ft[ft] then
-    --   launch_server(server_name)
+    --   setup_server(server_name)
     -- end
     if not vim.tbl_contains(require('lspconfig').available_servers(), server_name) then
-      launch_server(server_name)
+      setup_server(server_name)
     end
   end
 

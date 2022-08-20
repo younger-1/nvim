@@ -238,6 +238,12 @@ local mappings = {
       a = { '<cmd>lua pp(vim.lsp.buf.add_workspace_folder())<cr>', 'Add folder' },
       r = { '<cmd>lua pp(vim.lsp.buf.remove_workspace_folder())<cr>', 'Remove folder' },
     },
+    --
+    i = { '<cmd>LspInfo<cr>', 'Info' },
+    m = { '<cmd>Mason<cr>', 'Mason' },
+    n = { '<cmd>NullLsInfo<cr>', 'Null LS' },
+    N = { '<cmd>Copilot status<cr>', 'Copilot status' },
+    C = { '<cmd>CmpStatus<cr>', 'Cmp status' },
   },
   L = {
     name = '+lua',
@@ -264,11 +270,6 @@ local mappings = {
       p = { "<cmd>lua require('lvim.core.terminal').toggle_log_view('packer.nvim')<cr>", 'view packer log' },
       P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", 'Open the Packer logfile' },
     },
-    c = { '<cmd>CmpStatus<cr>', 'Cmp status' },
-    m = { '<cmd>Copilot status<cr>', 'Copilot status' },
-    i = { '<cmd>LspInfo<cr>', 'Info' },
-    I = { '<cmd>LspInstallInfo<cr>', 'Installer info' },
-    n = { '<cmd>NullLsInfo<cr>', 'Null LS' },
   },
   p = {
     name = '+packer',
