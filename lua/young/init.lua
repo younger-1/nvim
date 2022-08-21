@@ -243,7 +243,7 @@ end
 -- end
 
 ---@class Autocmd
----@field desc     number
+---@field desc     string
 ---@field once     boolean
 ---@field nested   boolean
 
@@ -254,11 +254,12 @@ xy.autogroup = function(group, autocmds, reset)
   if not reset then
     vim.api.nvim_create_augroup(group, { clear = false })
   elseif group then
-    local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group })
-    if exists and autocmds.buffer then
+    local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group, buffer = autocmds.bufnr })
+    if exists and autocmds.bufnr then
       vim.api.nvim_clear_autocmds {
         group = group,
-        pattern = '<buffer>',
+        -- pattern = '<buffer>',
+        buffer = autocmds.bufnr,
       }
     elseif exists then
       vim.api.nvim_clear_autocmds {
@@ -269,16 +270,17 @@ xy.autogroup = function(group, autocmds, reset)
     end
   end
 
-  for _, autocmd in ipairs(autocmds) do
-    local is_callback = type(autocmd[3]) == 'function'
-    vim.api.nvim_create_autocmd(autocmd[1], {
+  for _, acmd in ipairs(autocmds) do
+    local is_callback = type(acmd[3]) == 'function'
+    vim.api.nvim_create_autocmd(acmd[1], {
       group = group,
-      pattern = autocmd[2],
-      callback = is_callback and autocmd[3] or nil,
-      command = not is_callback and autocmd[3] or nil,
-      desc = autocmd.desc,
-      once = autocmd.once,
-      nested = autocmd.nested,
+      pattern = acmd[2],
+      callback = is_callback and acmd[3] or nil,
+      command = not is_callback and acmd[3] or nil,
+      desc = acmd.desc,
+      once = acmd.once,
+      buffer = autocmds.bufnr,
+      nested = acmd.nested,
     })
   end
 end

@@ -128,12 +128,12 @@ end
 --- Disable autocommand groups if it exists
 --- This is more reliable than trying to delete the augroup itself
 ---@param group string the augroup name
-function M.disable_augroup(group, buffer)
+function M.disable_augroup(group, bufnr)
   -- defer the function in case the autocommand is still in-use
   -- vim.schedule(function()
   --   if vim.fn.exists('#' .. group) == 1 then
   --     vim.cmd('augroup ' .. group)
-  --     if buffer then
+  --     if bufnr then
   --       vim.cmd [[autocmd! * <buffer>]]
   --     else
   --       vim.cmd [[autocmd!]]
@@ -142,13 +142,14 @@ function M.disable_augroup(group, buffer)
   --   end
   -- end)
 
-  if buffer then
+  if bufnr then
     -- augroup group_name
     --   autocmd! * <buffer>
     -- augroup END
     vim.api.nvim_clear_autocmds {
       group = group,
-      pattern = '<buffer>',
+      -- pattern = '<buffer>',
+      buffer = bufnr,
     }
   else
     -- augroup group_name
@@ -191,21 +192,20 @@ M.build_augroups = function(augroups, enable)
   for name, autocmds in pairs(augroups) do
     local group_name = augroup_prefix .. name
 
-    M['enable_' .. name] = function(buffer)
-      autocmds.buffer = buffer or autocmds.buffer
+    M['enable_' .. name] = function(bufnr)
+      autocmds.bufnr = bufnr
       M.enable_augroups { [group_name] = autocmds }
     end
 
-    M['disable_' .. name] = function(buffer)
-      M.disable_augroup(group_name, buffer or autocmds.buffer)
+    M['disable_' .. name] = function(bufnr)
+      M.disable_augroup(group_name, bufnr)
     end
 
-    M['toggle_' .. name] = function(buffer)
-      autocmds.buffer = buffer or autocmds.buffer
+    M['toggle_' .. name] = function(bufnr)
       if 0 == vim.fn.exists('#' .. group_name .. '#' .. autocmds[1][1]) then
-        M['enable_' .. name](buffer)
+        M['enable_' .. name](bufnr)
       else
-        M['disable_' .. name](buffer)
+        M['disable_' .. name](bufnr)
       end
     end
 
@@ -227,24 +227,22 @@ M.done = function()
     print_ascii = { { 'CursorHold', '*', ':normal! ga' } },
     format_on_save = { { 'BufWritePre', format_opts.pattern, fmt_cmd } },
     code_lens_refresh = {
-      buffer = true,
       {
         'BufEnter,InsertLeave',
-        '<buffer>',
+        nil,
         'lua vim.lsp.codelens.refresh()',
       },
     },
     lsp_document_highlight = {
-      buffer = true,
       {
         'CursorHold',
-        '<buffer>',
+        nil,
         -- fmt("lua require('young.autocmd.core').conditional_document_highlight(%d)", client_id),
         'lua vim.lsp.buf.document_highlight()',
       },
       {
         'CursorMoved',
-        '<buffer>',
+        nil,
         'lua vim.lsp.buf.clear_references()',
       },
     },
