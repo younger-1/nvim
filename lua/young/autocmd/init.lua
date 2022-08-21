@@ -154,9 +154,11 @@ function M.disable_augroup(group, buffer)
     -- augroup group_name
     --   autocmd!
     -- augroup END
-    vim.api.nvim_clear_autocmds {
-      group = group,
-    }
+
+    -- vim.api.nvim_clear_autocmds {
+    --   group = group,
+    -- }
+    vim.api.nvim_create_augroup(group, { clear = true })
   end
 end
 
@@ -180,7 +182,7 @@ function M.enable_augroups(augroups)
   -- end
 
   for group_name, autocmds in pairs(augroups) do
-    xy.autogroup(group_name, autocmds, autocmds.buffer)
+    xy.autogroup(group_name, autocmds, true)
   end
 end
 
