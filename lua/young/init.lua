@@ -245,16 +245,17 @@ end
 ---@class Autocmd
 ---@field desc     number
 ---@field once     boolean
----@field buffer   number
 ---@field nested   boolean
 
----@param group     string|integer
+---@param group     string
 ---@param autocmds  Autocmd[]
----@param buffer    integer|boolean
-xy.autogroup = function(group, autocmds, buffer)
-  if group then
+---@param reset?    boolean    only true will reset autocmds of this group
+xy.autogroup = function(group, autocmds, reset)
+  if not reset then
+    vim.api.nvim_create_augroup(group, { clear = false })
+  elseif group then
     local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group })
-    if exists and buffer then
+    if exists and autocmds.buffer then
       vim.api.nvim_clear_autocmds {
         group = group,
         pattern = '<buffer>',
@@ -276,7 +277,6 @@ xy.autogroup = function(group, autocmds, buffer)
       callback = is_callback and autocmd[3] or nil,
       command = not is_callback and autocmd[3] or nil,
       desc = autocmd.desc,
-      buffer = autocmd.buffer,
       once = autocmd.once,
       nested = autocmd.nested,
     })
