@@ -700,6 +700,22 @@ mods.UI = {
       end,
     },
   },
+  outline = {
+    {
+      'simrat39/symbols-outline.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.symbols_outline'
+      end,
+    },
+    -- {
+    --   'stevearc/aerial.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require('aerial').setup()
+    --   end,
+    -- },
+  },
   other = {
     -- {
     --   'wfxr/minimap.vim',
@@ -835,14 +851,21 @@ mods.LSP = {
     { 'milisims/nvim-luaref' },
   },
   ui = {
-    { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     {
-      'kosayoda/nvim-lightbulb',
-      event = 'BufRead',
+      'glepnir/lspsaga.nvim',
+      event = 'BufWinEnter',
       config = function()
-        require 'young.mod.lightbulb'
+        require 'young.mod.lspsaga'
       end,
     },
+    { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
+    -- {
+    --   'kosayoda/nvim-lightbulb',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require 'young.mod.lightbulb'
+    --   end,
+    -- },
     {
       'j-hui/fidget.nvim',
       config = function()
