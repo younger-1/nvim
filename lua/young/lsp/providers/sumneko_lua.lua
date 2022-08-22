@@ -64,4 +64,7 @@ return {
       -- },
     },
   },
+  on_attach_cb = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false -- Use stylua instead
+  end,
 }
