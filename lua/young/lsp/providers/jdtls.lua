@@ -66,5 +66,5 @@ return {
   handlers = {
     ['language/status'] = progress_handler(),
   },
-  -- on_attach_cb = on_attach_jdtls,
+  -- on_attach = on_attach_jdtls,
 }
