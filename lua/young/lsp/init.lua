@@ -48,13 +48,6 @@ local get_opts = function(server_name)
     return common_opts
   end
 
-  if server_opts.on_attach_cb then
-    server_opts.on_attach = function(client, bufnr)
-      common_opts.on_attach(client, bufnr)
-      server_opts.on_attach_cb(client, bufnr)
-    end
-  end
-
   return vim.tbl_deep_extend('force', common_opts, server_opts)
 end
 

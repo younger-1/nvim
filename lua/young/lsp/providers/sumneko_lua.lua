@@ -64,7 +64,8 @@ return {
       -- },
     },
   },
-  on_attach_cb = function(client, bufnr)
+  on_attach = function(client, bufnr)
+    require('young.lsp.common').on_attach(client, bufnr)
     client.resolved_capabilities.document_formatting = false -- Use stylua instead
   end,
 }
