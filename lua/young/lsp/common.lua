@@ -21,7 +21,7 @@ local lsp_cfg = require 'young.lsp.config'
 local autocmd = require 'young.autocmd'
 
 local function lsp_highlight_document(client, bufnr)
-  if lsp_cfg.document_highlight == false then
+  if not lsp_cfg.document_highlight then
     return
   end
 
@@ -39,7 +39,7 @@ local function lsp_highlight_document(client, bufnr)
 end
 
 local function lsp_code_lens_refresh(client, bufnr)
-  if lsp_cfg.code_lens_refresh == false then
+  if not lsp_cfg.code_lens_refresh then
     return
   end
 

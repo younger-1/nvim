@@ -86,9 +86,10 @@ mods.appearance = {
     { -- Highlighting the word under the cursor
       'RRethy/vim-illuminate',
       disable = require('young.lsp.config').document_highlight,
-      -- opt = true,
       event = 'BufWinEnter',
-      config = [[require 'young.mod.illuminate']],
+      config = function()
+        require 'young.mod.illuminate'
+      end,
     },
     { -- Show where your cursor moves when jumping large distances
       'edluffy/specs.nvim',
