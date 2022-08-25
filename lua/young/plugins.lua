@@ -251,13 +251,13 @@ mods.change = {
 
 mods.neovim = {
   profile = {
-    -- {
-    --   'dstein64/vim-startuptime',
-    --   cmd = 'StartupTime',
-    --   setup = function()
-    --     vim.g.startuptime_use_blocks = 0
-    --   end,
-    -- },
+    {
+      'dstein64/vim-startuptime',
+      cmd = 'StartupTime',
+      setup = function()
+        vim.g.startuptime_use_blocks = 0
+      end,
+    },
   },
   fold = {
     {
