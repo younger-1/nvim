@@ -409,4 +409,11 @@ tool.open_url = function()
   fn.jobstart({ xy.open_cmd, url }, { detach = true })
 end
 
+-- <https://superuser.com/questions/1267574/reload-file-in-vim-without-scrolling>
+tool.keepview = function(cmd)
+  local v = fn.winsaveview()
+  vim.cmd(cmd)
+  fn.winrestview(v)
+end
+
 return tool

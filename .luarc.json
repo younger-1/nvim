@@ -1,0 +1,10 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema-zh-cn.json",
+    "Lua.diagnostics.globals": [
+        "packer_plugins",
+    ],
+    "Lua.runtime.path": [
+        "lua/?.lua",
+        "lua/?/init.lua",
+    ],
+}

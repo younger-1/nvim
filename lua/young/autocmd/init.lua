@@ -32,6 +32,7 @@ if xy.transparent_mode == true then
   })
 end
 
+-- TODO:https://zhuanlan.zhihu.com/p/557199534
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
   return {
@@ -71,7 +72,7 @@ function M.load_augroups()
         '*',
         function()
           if vim.api.nvim_buf_line_count(0) > 10000 then
-            vim.cmd [[syntax off]]
+            vim.cmd [[syntax clear]]
           end
         end,
       },

@@ -59,6 +59,7 @@ vim.filetype.add {
     -- ['kitty.conf'] = 'kitty',
     conf = 'config',
     config = 'config',
+    ['.luarc.json'] = 'jsonc',
   },
   pattern = {
     ['.*/git/.*'] = 'gitconfig',

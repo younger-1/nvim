@@ -18,39 +18,47 @@
 -- }
 
 return {
+  cmd = { 'lua-language-server', '--locale=zh-CN' },
+  -- 将该服务器的工作域范围改成了当前所在目录的工作区，避免了重复运行多个同样的语言服务器的问题
+  -- root_dir = function()
+  --   return vim.fn.getcwd()
+  -- end,
+  on_attach = function(client, bufnr)
+    require('young.lsp.common').on_attach(client, bufnr)
+    client.resolved_capabilities.document_formatting = false -- Use stylua instead
+  end,
   settings = {
     Lua = {
       runtime = {
         version = 'LuaJIT',
-        path = {
-          'lua/?.lua',
-          'lua/?/init.lua',
-        },
+        -- path = {
+        --   'lua/?.lua',
+        --   'lua/?/init.lua',
+        -- },
         special = {
           rr = 'require',
           rc = 'require',
         },
       },
-      workspace = {
-        library = {
-          [vim.fn.expand '$VIMRUNTIME'] = true,
-          [_G.packer_plugins['lua-dev.nvim'].path] = true,
-          -- [_G.packer_plugins['emmylua-nvim'].path] = true,
-          [_G.packer_plugins['plenary.nvim'].path] = true,
-          -- [_G.packer_plugins['telescope.nvim'].path] = true,
-          -- [_G.packer_plugins['nvim-lspconfig'].path] = true,
-        },
-        maxPreload = 20000,
-        preloadFileSize = 2000,
-      },
       -- workspace = {
       --   library = vim.api.nvim_get_runtime_file('', true),
       --   checkThirdParty = false,
       -- },
+      workspace = {
+        library = {
+          [vim.fn.expand '$VIMRUNTIME'] = true,
+          [packer_plugins['lua-dev.nvim'].path] = true,
+          -- [packer_plugins['emmylua-nvim'].path] = true,
+          [packer_plugins['plenary.nvim'].path] = true,
+          -- [packer_plugins['telescope.nvim'].path] = true,
+          -- [packer_plugins['nvim-lspconfig'].path] = true,
+        },
+        maxPreload = 20000,
+        preloadFileSize = 2000,
+      },
       diagnostics = {
         globals = {
           'vim',
-          'packer_plugins',
           'pp',
           'gg',
         },
@@ -62,10 +70,9 @@ return {
       --     indent_size = 2,
       --   },
       -- },
+      telemetry = {
+        enable = false,
+      },
     },
   },
-  on_attach = function(client, bufnr)
-    require('young.lsp.common').on_attach(client, bufnr)
-    client.resolved_capabilities.document_formatting = false -- Use stylua instead
-  end,
 }
