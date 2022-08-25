@@ -1,0 +1,37 @@
+--                       --
+--                       --
+--                  ﴂ ﴃ    --
+--    﫢           ﮲   ﱕ    --
+--   ﯟ     ﰊ ﰉ ﱢ ﱡ 諸喝卑ﰩ    廓--
+
+-- File           
+-- Module         
+-- Namespace      ﱕ
+-- Package        
+-- Class          
+-- Method         
+-- Property       
+-- Field          
+-- Constructor    
+-- Enum           
+-- Interface      
+-- Function       
+-- Variable       
+-- Constant       
+-- String         
+-- Number         
+-- Boolean        
+-- Array          
+-- Object         
+-- Key            
+-- Null           
+-- EnumMember     
+-- Struct         ﯟ
+-- Event          
+-- Operator       
+-- TypeParameter  
+-- TypeAlias      
+-- Parameter      
+-- StaticMethod   ﴂ
+-- Macro          
+
