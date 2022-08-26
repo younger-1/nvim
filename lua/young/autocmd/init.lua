@@ -76,6 +76,13 @@ function M.load_augroups()
           end
         end,
       },
+      {
+        'BufWritePre',
+        '*',
+        function(ctx)
+          fn.mkdir(fn.fnamemodify(ctx.file, ':p:h'), 'p')
+        end,
+      },
     },
     _colorscheme = {
       -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
