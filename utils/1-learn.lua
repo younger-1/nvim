@@ -191,7 +191,7 @@ pp(s:sub(-2)) -- "ld"
 pp(s:sub(1, -2)) -- "hello worl"
 pp(s:match '%s') -- " "
 
--- [](https://www.codegrepper.com/code-examples/lua/parse+string+lua)
+-- <https://www.codegrepper.com/code-examples/lua/parse+string+lua>
 -- local function split(s, delimiter)
 --   local result = {}
 --   for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
@@ -204,6 +204,10 @@ pp(s:match '%s') -- " "
 
 pp(string.char(97, 98))
 pp(string.byte 'ab')
+
+-- string.format
+-- <https://blog.csdn.net/fightsyj/article/details/120240859>
+-- <https://blog.csdn.net/hello_crayon/article/details/50667927>
 
 -- [[os]]
 
