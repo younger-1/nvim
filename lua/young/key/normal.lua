@@ -1,4 +1,7 @@
 local mymappings = {
+  ['\\'] = {
+    c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
+  },
   [']'] = {
     -- [' '] = {},
     -- ['<Tab>'] = {},
