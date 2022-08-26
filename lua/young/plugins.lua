@@ -404,7 +404,7 @@ mods.file = {
 }
 
 mods.find = {
-  core = {
+  grep = {
     {
       'windwp/nvim-spectre',
       event = 'BufRead',
@@ -412,15 +412,6 @@ mods.find = {
         -- require("user.spectre").config()
       end,
     },
-    -- {
-    --   'VonHeikemen/searchbox.nvim',
-    --   requires = { { 'MunifTanjim/nui.nvim' } },
-    --   -- module = 'searchbox',
-    --   event = 'BufRead',
-    --   config = function()
-    --     require 'young.mod.searchbox'
-    --   end,
-    -- },
   },
   fzf = {
     {
@@ -432,6 +423,15 @@ mods.find = {
       disable = is_windows,
     },
   },
+  -- {
+  --   'VonHeikemen/searchbox.nvim',
+  --   requires = { { 'MunifTanjim/nui.nvim' } },
+  --   -- module = 'searchbox',
+  --   event = 'BufRead',
+  --   config = function()
+  --     require 'young.mod.searchbox'
+  --   end,
+  -- },
 }
 
 mods.telescope = {
@@ -893,14 +893,14 @@ mods.lang = {
   --   end,
   -- },
   js = {
-    -- {
-    --   'vuki656/package-info.nvim',
-    --   ft = 'json',
-    --   requires = { { 'MunifTanjim/nui.nvim' } },
-    --   config = function()
-    --     require 'young.mod.package_info'
-    --   end,
-    -- },
+    {
+      'vuki656/package-info.nvim',
+      ft = 'json',
+      requires = { { 'MunifTanjim/nui.nvim' } },
+      config = function()
+        require 'young.mod.package_info'
+      end,
+    },
   },
   http = {
     {
@@ -936,15 +936,6 @@ mods.lang = {
 }
 
 mods.write = {
-  core = {
-    {
-      'crispgm/telescope-heading.nvim',
-      after = 'telescope.nvim',
-      config = function()
-        require('telescope').load_extension 'heading'
-      end,
-    },
-  },
   todo = {
     {
       'folke/todo-comments.nvim',
@@ -965,6 +956,13 @@ mods.write = {
     },
   },
   markdown = {
+    {
+      'crispgm/telescope-heading.nvim',
+      after = 'telescope.nvim',
+      config = function()
+        require('telescope').load_extension 'heading'
+      end,
+    },
     {
       'iamcco/markdown-preview.nvim',
       run = 'cd app && yarn install',
@@ -1043,13 +1041,13 @@ mods.tool = {
   -- }
 }
 
-local to_plugs = function(t, ...)
+local to_plugs = function(t, buckets)
   local plugs = {}
   for key, item in pairs(t) do
     if type(key) == 'number' then
       plugs[#plugs + 1] = item
-    elseif #{ ... } > 0 then
-      if vim.tbl_contains({ ... }, key) then
+    elseif buckets and #buckets > 0 then
+      if vim.tbl_contains(buckets, key) then
         vim.list_extend(plugs, item)
       end
     else
@@ -1082,7 +1080,7 @@ M.done = function()
     mods.file(),
     mods.find(),
     mods.git(),
-    mods.lang('lisp', 'java'),
+    mods.lang { 'lisp', 'java' },
     mods.neovim(),
     mods.telescope(),
     mods.theme(),

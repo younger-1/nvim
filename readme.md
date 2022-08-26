@@ -1,122 +1,69 @@
-# NeoVim
-
 > My love, you're the unsolved wave, I'm the naked island.
 
-## TODO
+## Introduction
 
-- [ ] `yj.telescope`, `M.tele/M.cfg`, `local cfg`
-- [ ] once ice hot done
-- [ ] mod: completion, editor, lang, tool, ui
-- [ ] hl cursorline
-- [ ] `yo` <==> require('young')
-- [ ] vim restore text deleted by C-u or C-w in cmdline
-- [ ] vim select files inside current selected folder in cmdline
-- [ ] find files when using `Rg`
-- [ ] highlights the search word in quickfix when using `Rg`
-- [ ] in \*.lua gf on require() can let Telescope find file in that module
-- [ ] in \*.lua gF on require() can let LSP try add that rtp to LSP's workspace library
-- [ ] in \*.lua gf on rr('foo').bar() can be used like require('foo').bar()
-- [ ] combine range-highlight and numb to a single plugin
-- [ ] Online community collect @cataloge and #tag metadata of plugin to help easily discover functionality/boundary of plugins
-- [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
-- [ ] `Telescope theme` only list installed themes, see <https://github.com/NvChad/extensions/tree/main/lua/telescope/_extensions>
-- [ ] `Telescope terminal` list terminals
-- [ ] `telescope-packer` provide function to open url/commit of repo, fix for windows
-- [x] `gitsigns` blame_line or preview_hunk, allow pick window or set cursor
-- [ ] local/machine/per-user settings, eg. colorscheme, background, font and even modules of plugins like M.lang('lisp', 'java')
-- [ ] enable syntax and keybind for filetype of `packer`, just like buffer used by `PackerUpdate`
-- [ ] config for lspkind-nvim
-- [x] vim/nvim can't open `packer_compiled.lua` normally, but vscode can.
-- [ ] nvim-tree: refine `search_node` to match fuzzy not exactly
-- [x] add a wrapper for which-key and using in : LSP keymappings
-- [ ] null-ls use notify to avoid [ERROR 10:23:50] ...t/null-ls.nvim/lua/null-ls/helpers/gener...d flake8 is not executable (make sure it's installed and on your $PATH)
-- [ ] highlight for cmdline-history window
-- [ ] an easy way to edit $VIMRUNTIME files, `:e $VIMRUNTIME/ftplugin.vim`
-- [ ] highlight the put region with autocmd like `vim.highlight.on_yank` - see <https://www.reddit.com/r/neovim/comments/vh5p42/how_to_highlight_the_put_region_with_autocmd_like/> and <https://github.com/neovim/neovim/blob/f479dd0bbef9383df05b1908eec0013ba92499b5/runtime/lua/vim/highlight.lua#L83>
-- [ ] autopair: remove single quote (\' and \`) rules for lisp file
-- [ ] decouple which-key from core, by using local.lua
-- [ ] a quick-pannel to lookup git/file information such as branch, ff, fenc, sw, which is not very common like changes and diagnostics
-- [ ] split diagnostics and lsp, lazy load lsp setup to filetype(not good for lvim) or event, lazy load lsp_line after diagnostics
+Feature-rich, beautiful and fast neovim config.
 
-```
-map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
-map("n", term_maps.new_vertical, ":execute 'vnew +terminal' | let b:term_type = 'vert' | startinsert <CR>")
-map("n", term_maps.new_window, ":execute 'terminal' | let b:term_type = 'wind' | startinsert <CR>")
-```
-
-```
-insert_nav = {
-  backward = "<C-h>",
-  forward = "<C-l>",
-  next_line = "<C-k>",
-  prev_line = "<C-j>",
-},
-```
-
-## Problem
-
-`project.nvim`
-
-- ~~echo twice even in the same cwd when open new buffer~~
-- ~~echo once in the same cwd when switch buffers~~
-- use lcd instead of `nvim_set_current_dir`
-- notify only once when enter the same directory repeatedly
-
-`fzf.lua`
-
-- Windows support
-
-`surround`
-
-- Normal: ys
-- Visual: S
-- Operator: ds, cs,
-
-`lightspeed`
-
-- Operator-pending mode is invoked with z/Z
-- defaults, mapping to the following keys: `s, S` (Normal and Visual mode), `z, Z, x, X` (Operator-pending mode), and `f, F, t, T` (all modes).
-
-`alpha`
-
-- <https://wiki.archlinux.org/title/ASCII_art>
-- <https://www.asciiart.eu/>
-- <https://github.com/pi314/ascii-arts>
-
-`nvim-tree`
-
-- renamed-icon do not appear in the renamed-file
-
-`git-conflict`
-
-- setup(): allow user-defined buffer-mappings
+- Aesthetic and beautiful appearance
+- Blazing fast startuptime
+  - Lazy load plugins as much as possible
+- Coding friendly
+  - Goto definition/reference and code completion powered by LSP
+  - Highlight and in-file navigation powered by Tree-sitter
+  - Git: git related plugins
+  - Search: telescope related plugins
+- Discoverable UX: out of box and easy to use
+  - Spacemacs-inspired keybinding scheme, centered around leader - ergonomics, mnemonics and consistency
+- Mosular config: extensible and easy to hack
+  - Every piece of configuration can be **reload**
+  - Decouple plugins from core configuration and core keymappings
+  - Sane defaults for each plugin
+  - Pin core plugins for snapshot and rollback
+- For all major platforms: Windows/Linux/macOS/BSD
 
 ## Features
 
-### Lua IDE
+### Langauge
 
-<https://github.com/sumneko/lua-language-server/wiki/Setting>
+|  Lang  |      LSP      | Format |  Lint  | Test  | Debug |
+| :---:  |     :---:     | :---:  | :---:  | :---: | :---: |
+|  Lua   |  sumneko_lua  | stylua | selene |       |       |
+|  C++   |    clangd     |        |        |       |       |
+| Python |    pyright    | black  | flake8 |       |       |
+|   Go   |     gopls     |        |        |       |       |
+|  Rust  | rust_analyzer |        |        |       |       |
 
-Note:
-`.luarc.json` will override the whole settings of `lspconfig`
+see [language](docs/lang.md)
 
 ### Keymappings
 
-Currently used:
+see [shortcut](docs/shortcut.md#GUI)
 
-1. vanilla vim style
-2. LunarVim style
-3. lua api and its thin wrapper
-4. [which-key](https://github.com/folke/which-key.nvim/)
+### Modules
 
-May be useful:
+see [plugins.lua](lua/young/plugins.lua)
 
-- <https://github.com/tjdevries/astronauta.nvim>
-- <https://github.com/b0o/mapx.nvim>
-- <https://github.com/svermeulen/vimpeccable>
-- <https://github.com/LionC/nest.nvim>
+- BWT
+- LSP
+- UI
+- appearance
+- basic
+- change
+- code
+- edit
+- file
+- find
+- git
+- lang
+- neovim
+- telescope
+- theme
+- tool
+- write
 
-### GUI support
+### GUI
+
+For keymappings of these neovim gui, see [shortcut](docs/shortcut.md#GUI)
 
 `init.lua`
 
@@ -134,34 +81,20 @@ May be useful:
 - [ ]  [neovim-gtk](https://github.com/daa84/neovim-gtk)
 - [ ]  [vimr](https://github.com/qvacua/vimr)
 
-|       Function        |  Mapping  |
-|         :---:         |   :---:   |
-|  Toggle full screen   | `<A-CR>`  |
-|  Increase font size   |  `<C-+>`  |
-|  Decrease font size   |  `<C-->`  |
-|      Change font      | `<C-BS>`  |
-|     Default font      |  `<C-0>`  |
-| Increase transparency |  `<A-+>`  |
-| Decrease transparency |  `<A-->`  |
-|     Change effect     | `<A-BS>`  |
-|    Toggle ligature    | `<A-DEL>` |
+### Performance
 
-## Performance
+Start up in 82ms.
 
-❯ hyperfine --min-runs=20 "nvim +qa" "nvim --headless +qa"
+see [startup time](docs/startup-time.md)
 
-Benchmark 1: nvim +qa
-  Time (mean ± σ):     266.7 ms ±  15.4 ms    [User: 121.3 ms, System: 55.7 ms]
-  Range (min … max):   244.1 ms … 293.0 ms    20 runs
-
-Benchmark 2: nvim --headless +qa
-  Time (mean ± σ):     222.3 ms ±  13.4 ms    [User: 114.1 ms, System: 48.3 ms]
-  Range (min … max):   198.1 ms … 252.9 ms    20 runs
+### Update
 
 ```sh
-# update to latest commit of pin plugins (xy.packer.pins)
+# update to latest commit of pin plugins (xy.plugins.pins())
 nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 ```
+
+## Appearance
 
 ## Structure
 
@@ -338,35 +271,11 @@ nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 │  └──  vim-ripgrep.vim
 ```
 
+## TODO
+
+see [todo](docs/todo.md)
+
 ## Acknowledge
 
 see [reference](utils/reference/reference.md)
 
-```
--- <https://github.com/rbtnn/vim-gloaded>
-
-let g:loaded_gloaded = 1
-
-let g:loaded_2html_plugin      = 1 "$VIMRUNTIME/plugin/tohtml.vim
-let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
-let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
-let g:loaded_gzip              = 1 "$VIMRUNTIME/plugin/gzip.vim
-let g:loaded_logipat           = 1 "$VIMRUNTIME/plugin/logiPat.vim
-let g:loaded_logiPat           = 1 "$VIMRUNTIME/plugin/logiPat.vim
-let g:loaded_matchparen        = 1 "$VIMRUNTIME/plugin/matchparen.vim
-let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
-let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
-let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
-let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
-let g:loaded_rrhelper          = 1 "$VIMRUNTIME/plugin/rrhelper.vim
-let g:loaded_spellfile_plugin  = 1 "$VIMRUNTIME/plugin/spellfile.vim
-let g:loaded_sql_completion    = 1 "$VIMRUNTIME/autoload/sqlcomplete.vim
-let g:loaded_syntax_completion = 1 "$VIMRUNTIME/autoload/syntaxcomplete.vim
-let g:loaded_tar               = 1 "$VIMRUNTIME/autoload/tar.vim
-let g:loaded_tarPlugin         = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
-let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
-let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
-let g:loaded_zip               = 1 "$VIMRUNTIME/autoload/zip.vim
-let g:loaded_zipPlugin         = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
-let g:vimsyn_embed             = 1 "$VIMRUNTIME/syntax/vim.vim
-```
