@@ -3,7 +3,7 @@ hyperfine --min-runs=20 "nvim +qa" "nvim --headless +qa"
 
 ### 2022-02-27
 
-```
+```log
 Benchmark 1: nvim +qa
   Time (mean ± σ):     266.7 ms ±  15.4 ms    [User: 121.3 ms, System: 55.7 ms]
   Range (min … max):   244.1 ms … 293.0 ms    20 runs
@@ -11,12 +11,11 @@ Benchmark 1: nvim +qa
 Benchmark 2: nvim --headless +qa
   Time (mean ± σ):     222.3 ms ±  13.4 ms    [User: 114.1 ms, System: 48.3 ms]
   Range (min … max):   198.1 ms … 252.9 ms    20 runs
-
 ```
 
 ### 2022-08-02
 
-```
+```log
 [init.lua                                14 ] [nil     ] [0] - 0.000013
 [init.lua                                21 ] [nil     ] [0] - 0.014216
 [lua/young/cfg/init.lua                  4  ] [done    ] [1] - 0.014270
@@ -34,7 +33,7 @@ Benchmark 2: nvim --headless +qa
 
 ### 2022-08-26
 
-```
+```log
 Benchmark 1: nvim +qa
   Time (mean ± σ):     243.7 ms ±  10.6 ms    [User: 134.4 ms, System: 96.1 ms]
   Range (min … max):   221.7 ms … 257.2 ms    20 runs
@@ -58,7 +57,7 @@ Benchmark 2: nvim --headless +qa
 [init.lua                                39 ] [nil     ] [0] - 0.082844
 ```
 
-```
+```log
 000.008  000.008: --- NVIM STARTING ---
 000.893  000.885: locale set
 001.368  000.475: inits 1

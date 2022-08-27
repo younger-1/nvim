@@ -19,15 +19,18 @@ pcall(function()
 end)
 
 tt()
-require('young.cfg').done()
+require 'young'
+
+tt()
+rr('young.cfg').done()
 
 tt()
 rr('young.packer').done()
 
 tt()
--- vim.cmd [[ syntax clear ]]
+-- vim.cmd [[syntax clear]]
 vim.schedule(function()
-  vim.cmd [[ silent! colorscheme dracula ]]
+  vim.cmd [[silent! colorscheme dracula]]
 end)
 
 tt()
