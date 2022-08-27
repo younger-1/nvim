@@ -108,7 +108,7 @@ M.cfg = {
 }
 
 M.done = function()
-  xy.map.n { '<leader>e', '<cmd>NvimTreeToggle<CR>', desc = 'Explorer' }
+  xy.map.n { '<leader>e', '<cmd>NvimTreeToggle<CR>', 'Explorer' }
   require('nvim-tree').setup(M.cfg)
 end
 

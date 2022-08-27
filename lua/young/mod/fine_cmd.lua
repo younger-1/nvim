@@ -51,5 +51,5 @@ xy.map.n {
     -- vim.cmd 'FineCmdline '
     require('fine-cmdline').open { default_value = '' }
   end,
-  desc = 'FineCmdline',
+  'FineCmdline',
 }
