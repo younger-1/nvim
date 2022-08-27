@@ -457,7 +457,7 @@ local mappings = {
     --   "View LunarVim's changelog",
     -- },
     -- k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
-    l = { ':edit ' .. require('young.cfg').get_local_config() .. '<cr>', 'Edit local config' },
+    l = { require('young.cfg').open_local_config, 'Edit local config' },
     o = {
       function()
         require('young.mod.telescope.finder').open_changed_vim_config()
@@ -465,8 +465,8 @@ local mappings = {
       'Open changed Config files',
     },
     r = { require('young.cfg').reload, 'Reload configuration' },
-    y = { ':edit ' .. require('young.cfg').get_reload_path() .. '<cr>', 'Edit plugins' },
-    -- y = { "<cmd>lua vim.fn.execute('edit ' .. require('young.cfg').get_reload_path())<cr>", 'Edit plugins' },
+    y = { ':edit ' .. require('young.cfg').reload_path .. '<cr>', 'Edit plugins' },
+    -- y = { "<cmd>lua vim.fn.execute('edit ' .. require('young.cfg').reload_path)<cr>", 'Edit plugins' },
   },
   z = { '<cmd>ZenMode<cr>', 'Zen' },
 }

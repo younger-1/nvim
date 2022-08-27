@@ -17,15 +17,15 @@ Feature-rich, beautiful and fast neovim config.
 - Discoverable UX: out of box and easy to use
   - Spacemacs inspired keybinding scheme - ergonomics, mnemonics and consistency
 - Modular config: extensible and easy to hack
-  - Every piece of config can be *reload*
+  - Every piece of config can be **reload**
   - Decouple plugins from core config and core keymappings
   - Sane defaults for each plugin
-  - *Pin* core plugins for snapshot and rollback
+  - **Pin** core plugins for snapshot and rollback
 - For all major platforms: **Windows/Linux/macOS/BSD**
 
 ## Features
 
-### Langauge
+### Langauges
 
 |  Lang  |      LSP      |       Format       |    Lint    | Test  | Debug |
 | :---:  |     :---:     |       :---:        |   :---:    | :---: | :---: |

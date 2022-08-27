@@ -2,14 +2,12 @@ local M = {}
 
 function M.done()
   tt()
-  require 'young'
-
-  require 'young.cfg.global'
-  require 'young.cfg.option'
+  rr 'young.cfg.global'
+  rr 'young.cfg.option'
 
   tt()
-  require('young.autocmd').done()
-  require('young.key').done()
+  rr('young.autocmd').done()
+  rr('young.key').done()
 
   -- local lvim_lsp_config = require "lvim.lsp.config"
   -- lvim.lsp = apply_defaults(lvim.lsp, vim.deepcopy(lvim_lsp_config))
@@ -21,21 +19,29 @@ end
 function M.reload()
   M.reset_cache()
 
+  -- TODO:globals and xy.*
+  -- rr 'young'
+
   M.done()
-  require('young.packer').done()
-  -- require('young.lsp').done()
-  require('young.gui').done()
+  rr('young.packer').done()
+  -- rr('young.lsp').done()
+  rr('young.gui').done()
 
   -- vim.notify 'Reloaded configuration'
-  require('young.mod.notify').yntf '😀 Reloaded configuration'
+  rr('young.mod.notify').yntf '😀 Reloaded configuration'
 end
 
-function M.get_reload_path()
-  return join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
-end
+M.reload_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
 
-function M.get_local_config()
-  return join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
+M.local_config_path = join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
+
+function M.open_local_config()
+  if not xy.util.is_file(M.local_config_path) then
+    local template = join_paths(vim.fn.stdpath 'config', 'utils', 'local.template.lua')
+    fn.mkdir(fn.fnamemodify(M.local_config_path, ':p:h'), 'p')
+    uv.fs_copyfile(template, M.local_config_path)
+  end
+  vim.cmd(':edit ' .. M.local_config_path)
 end
 
 ---Reset any startup cache files used by Packer and Impatient

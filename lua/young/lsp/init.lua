@@ -2,7 +2,7 @@ local modbase = ...
 
 local M = {}
 
-local config_path = require('young.cfg').get_local_config()
+local config_path = require('young.cfg').local_config_path
 local ok, local_config = pcall(dofile, config_path)
 if type(local_config) ~= 'table' then
   if not ok then
