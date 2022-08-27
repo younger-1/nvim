@@ -16,6 +16,17 @@ for _, sign in ipairs(signs) do
   })
 end
 
+-- local signs = {
+--   Error = ' ',
+--   Warn = ' ',
+--   Info = ' ',
+--   Hint = ' ',
+-- }
+-- for type, icon in pairs(signs) do
+--   local hl = 'DiagnosticSign' .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- end
+
 vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   -- virtual_text = false,
   float = {

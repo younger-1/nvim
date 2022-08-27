@@ -35,7 +35,7 @@ function M.get_reload_path()
 end
 
 function M.get_local_config()
-  return join_paths(vim.fn.stdpath 'config', 'utils', 'local.lua')
+  return join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
 end
 
 ---Reset any startup cache files used by Packer and Impatient

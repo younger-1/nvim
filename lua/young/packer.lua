@@ -44,6 +44,11 @@ M.once = function()
         -- return require("packer.util").float { border = "rounded" }
         return require('packer.util').float { border = 'double' }
       end,
+      working_sym = 'ﰭ',
+      error_sym = '',
+      done_sym = '',
+      removed_sym = '',
+      moved_sym = 'ﰳ',
     },
     -- NOTE: only set this the very first time to avoid constantly triggering the rollback function
     -- <https://github.com/wbthomason/packer.nvim/blob/c576ab3f1488ee86d60fd340d01ade08dcabd256/lua/packer.lua#L998-L995>

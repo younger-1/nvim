@@ -5,33 +5,41 @@
 Feature-rich, beautiful and fast neovim config.
 
 - Aesthetic and beautiful appearance
-- Blazing fast startuptime
+- Blazing fast startup time
+  - Builtin startup time check
   - Lazy load plugins as much as possible
+  - Reduce unnecessary plugins by builtin autocmd and function
 - Coding friendly
-  - Goto definition/reference and code completion powered by LSP
-  - Highlight and in-file navigation powered by Tree-sitter
-  - Git: git related plugins
-  - Search: telescope related plugins
+  - Goto definition/reference and code completion powered by *LSP*
+  - Highlight and in-file navigation powered by *Treesitter*
+  - Git: git related action
+  - Search: telescope related action
 - Discoverable UX: out of box and easy to use
-  - Spacemacs-inspired keybinding scheme, centered around leader - ergonomics, mnemonics and consistency
-- Mosular config: extensible and easy to hack
-  - Every piece of configuration can be **reload**
-  - Decouple plugins from core configuration and core keymappings
+  - Spacemacs inspired keybinding scheme - ergonomics, mnemonics and consistency
+- Modular config: extensible and easy to hack
+  - Every piece of config can be *reload*
+  - Decouple plugins from core config and core keymappings
   - Sane defaults for each plugin
-  - Pin core plugins for snapshot and rollback
-- For all major platforms: Windows/Linux/macOS/BSD
+  - *Pin* core plugins for snapshot and rollback
+- For all major platforms: **Windows/Linux/macOS/BSD**
 
 ## Features
 
 ### Langauge
 
-|  Lang  |      LSP      | Format |  Lint  | Test  | Debug |
-| :---:  |     :---:     | :---:  | :---:  | :---: | :---: |
-|  Lua   |  sumneko_lua  | stylua | selene |       |       |
-|  C++   |    clangd     |        |        |       |       |
-| Python |    pyright    | black  | flake8 |       |       |
-|   Go   |     gopls     |        |        |       |       |
-|  Rust  | rust_analyzer |        |        |       |       |
+|  Lang  |      LSP      |       Format       |    Lint    | Test  | Debug |
+| :---:  |     :---:     |       :---:        |   :---:    | :---: | :---: |
+|  Zig   |      zls      |                    |            |       |       |
+|  Rust  | rust_analyzer |                    |            |       |       |
+| C/C++  |    clangd     |                    |            |       |       |
+|   Go   |     gopls     |                    |            |       |       |
+|  Java  |     jdtls     | google_java_format |            |       |       |
+|  Lua   |  sumneko_lua  |       stylua       |   selene   |       |       |
+| Python |    pyright    |       black        |   flake8   |       |       |
+|  Vim   |     vimls     |                    |            |       |       |
+|   Sh   |    bashls     |       shfmt        | shellcheck |       |       |
+|  Yaml  |    yamlls     |                    |            |       |       |
+|  Json  |    jsonls     |                    |            |       |       |
 
 see [language](docs/lang.md)
 
@@ -89,10 +97,20 @@ see [startup time](docs/startup-time.md)
 
 ### Update
 
+Pin plugins to pined commit version
+
 ```sh
-# update to latest commit of pin plugins (xy.plugins.pins())
+# update to latest commit of pin plugins: xy.plugins.pins()
 nvim --headless -c 'luafile ./utils/generate_new_lockfile.lua'
 ```
+
+### Personal
+
+Local machine scope config for overriding defaults without disturb git repo
+
+- `<leader>yl` to open local config, which is a copy of [template](utils/local.template.lua)
+- Only language-server for now.
+- Be able to customize every piece of core/plugin config through `xy` magic! (coming soom)
 
 ## Appearance
 
