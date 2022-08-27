@@ -70,31 +70,27 @@ local vopts = {
   silent = true,
 }
 
-M.ice = function()
-  M.n = require 'young.key.normal'
-  M.v = require 'young.key.visual'
-  M.n['<leader>'] = require 'young.key.leader_normal'
-  M.v['<leader>'] = require 'young.key.leader_visual'
-end
-
 M.done = function()
   local wk = require 'which-key'
 
   local show = wk.show
   local ignore_filetype = { 'TelescopePrompt' }
-  wk.show = function(keys, opts)
+  wk.show = function(keys, option)
     if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
       return
     end
-    show(keys, opts)
+    show(keys, option)
   end
 
-  wk.setup(M.cfg)
-  wk.register(M.n, opts)
-  wk.register(M.v, vopts)
+  local n = require 'young.key.normal'
+  local v = require 'young.key.visual'
 
-  -- xy.map.register(M.n, opts)
-  -- xy.map.register(M.v, vopts)
+  wk.setup(M.cfg)
+  wk.register(n, opts)
+  wk.register(v, vopts)
+
+  -- xy.map.register(n, opts)
+  -- xy.map.register(v, vopts)
 end
 
 return M

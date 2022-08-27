@@ -1,4 +1,4 @@
-local mymappings = {
+local normal = {
   ['\\'] = {
     c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
   },
@@ -120,4 +120,6 @@ local mymappings = {
   },
 }
 
-return mymappings
+normal['<leader>'] = require 'young.key.normal.leader'
+
+return normal

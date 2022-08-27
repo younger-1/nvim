@@ -325,6 +325,7 @@ xy.map = {
   end,
 }
 
+-- TODO:allow tbl[3] as desc
 local function mapper(tbl)
   local opts = { noremap = true, silent = true, nowait = true }
 

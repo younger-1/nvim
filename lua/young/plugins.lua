@@ -598,7 +598,7 @@ mods.UI = {
       'max397574/which-key.nvim', -- TODO:while lvim use it
       event = 'BufWinEnter',
       config = function()
-        require('young.key.which_key').done()
+        require('young.mod.which_key').done()
       end,
     },
     {

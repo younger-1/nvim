@@ -7,11 +7,8 @@ function M.done()
 
   tt()
   rr('young.autocmd').done()
-  rr('young.key').done()
+  -- rr('young.key').done()
 
-  -- local lvim_lsp_config = require "lvim.lsp.config"
-  -- lvim.lsp = apply_defaults(lvim.lsp, vim.deepcopy(lvim_lsp_config))
-  --
   -- local supported_languages = require "lvim.config.supported_languages"
   -- require("lvim.lsp.manager").init_defaults(supported_languages)
 end
