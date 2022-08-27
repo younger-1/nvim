@@ -219,6 +219,18 @@ M.done = function()
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
       { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
     },
+    -- _terminal = {
+    --   -- https://github.com/andrewferrier/dotfiles/blob/main/common/.config/nvim/plugin/terminal.lua
+    --   {
+    --     'TermOpen',
+    --     '*',
+    --     function()
+    --       vim.opt_local.number = false
+    --       vim.opt_local.relativenumber = false
+    --       vim.cmd 'startinsert'
+    --     end,
+    --   },
+    -- },
   }
 
   local format_opts = { pattern = '*', timeout = 1000 }
