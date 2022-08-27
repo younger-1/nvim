@@ -68,6 +68,8 @@ M.cfg = {
     },
   },
   formatting = {
+    -- fields = { 'abbr', 'kind', 'menu' },
+
     -- format = function(entry, vim_item)
     --   vim_item.kind = icons[vim_item.kind]
     --   vim_item.menu = ({
@@ -87,6 +89,7 @@ M.cfg = {
     -- end,
 
     -- format = require('lspkind').cmp_format(),
+
     format = require('lspkind').cmp_format {
       with_text = true,
       maxwidth = 50,
@@ -265,7 +268,7 @@ M.done = function()
     },
   })
 
-  --  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
+  -- @see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
   -- vim.cmd[[
   --   highlight! link CmpItemMenu Comment
   --   " gray

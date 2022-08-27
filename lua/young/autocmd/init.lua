@@ -33,6 +33,7 @@ if xy.transparent_mode == true then
 end
 
 -- TODO:https://zhuanlan.zhihu.com/p/557199534
+-- TODO:https://github.com/akinsho/dotfiles/blob/nightly/.config/nvim/plugin/autocommands.lua
 --- Load the default set of autogroups and autocommands.
 function M.load_augroups()
   return {
@@ -86,8 +87,8 @@ function M.load_augroups()
     },
     _colorscheme = {
       -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
-      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- See :h 'pumblend'
-      { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- See :h 'pumblend'
+      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
+      { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- @see :h 'pumblend'
     },
     _formatoptions = {
       {

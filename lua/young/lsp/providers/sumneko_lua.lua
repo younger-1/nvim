@@ -1,4 +1,4 @@
--- <https://github.com/sumneko/lua-language-server/blob/master/locale/zh-cn/setting.lua>
+-- @see <https://github.com/sumneko/lua-language-server/blob/master/locale/zh-cn/setting.lua>
 --
 -- lua-dev defaults: <https://github.com/folke/lua-dev.nvim>
 -- {
