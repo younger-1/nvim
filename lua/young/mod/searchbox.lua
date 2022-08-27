@@ -60,7 +60,7 @@ xy.map.n {
     -- vim.cmd 'SearchBoxMatchAll title="Match All"'
     require('searchbox').incsearch()
   end,
-  desc = 'Searchbox',
+  'Searchbox',
 }
 
 xy.map.x {
@@ -73,7 +73,7 @@ xy.map.x {
     -- vim.cmd 'SearchBoxMatchAll title="Match All" visual_mode=true'
     require('searchbox').incsearch { visual_mode = true }
   end,
-  desc = 'Searchbox (visual)',
+  'Searchbox (visual)',
 }
 
 -- xy.map.n { '<C-b>', ':SearchBoxMatchAll exact=true title=" Search 🦝 "<CR>' }

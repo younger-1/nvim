@@ -21,7 +21,7 @@ M.done = function()
 
   -- require('specs').toggle()
 
-  xy.map.n { 'z ', require('specs').show_specs, desc = 'Show Specs' }
+  xy.map.n { 'z ', require('specs').show_specs, 'Show Specs' }
   -- xy.map.n { 'n', 'nz ' }
   -- xy.map.n { 'N', 'Nz ' }
   -- vim.api.nvim_set_keymap('n', 'n', 'n:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })

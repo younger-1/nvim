@@ -313,9 +313,9 @@ xy.map = {
         if v[1] == nil then
           xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil', prefix, k) }
         elseif #v == vim.tbl_count(v) then
-          xy.map[mode] { prefix .. k, v[1], desc = v[2] }
+          xy.map[mode] { prefix .. k, v[1], v[2] }
         else
-          local keymap = { prefix .. k, v[1], desc = v[2] }
+          local keymap = { prefix .. k, v[1], v[2] }
           keymap = vim.tbl_extend('keep', keymap, v)
           xy.map[mode](keymap)
         end
@@ -325,7 +325,6 @@ xy.map = {
   end,
 }
 
--- TODO:allow tbl[3] as desc
 local function mapper(tbl)
   local opts = { noremap = true, silent = true, nowait = true }
 
@@ -337,6 +336,7 @@ local function mapper(tbl)
       opts[k] = v
     end
   end
+  opts.desc = tbl[3] or opts.desc
 
   vim.keymap.set(mode, tbl[1], tbl[2], opts)
 end
