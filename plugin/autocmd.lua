@@ -1,4 +1,3 @@
--- if not young then
 if true then
   return
 end

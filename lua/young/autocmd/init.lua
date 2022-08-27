@@ -1,132 +1,4 @@
 local M = {}
--- local Log = require "lvim.core.log"
-
--- FIXME:
--- local config_dir = vim.fn.stdpath 'config'
--- local plugins_path = "plugins.lua"
-local plugins_path = vim.fn.resolve(require('young.cfg').reload_path)
-if is_windows then
-  -- autocmds require forward slashes even on windows
-  plugins_path = plugins_path:gsub('\\', '/')
-end
-
-if xy.transparent_mode == true then
-  -- hi! Normal ctermbg=none guibg=none
-  -- hi! NonText ctermbg=none guibg=none
-  vim.api.nvim_create_autocmd('ColorScheme', {
-    pattern = '*',
-    callback = function()
-      local hl_groups = {
-        'Normal',
-        'SignColumn',
-        'NormalNC',
-        'TelescopeBorder',
-        'NvimTreeNormal',
-        'EndOfBuffer',
-        'MsgArea',
-      }
-      for _, name in ipairs(hl_groups) do
-        vim.cmd(string.format('highlight %s ctermbg=none guibg=none', name))
-      end
-    end,
-  })
-end
-
--- TODO:https://zhuanlan.zhihu.com/p/557199534
--- TODO:https://github.com/akinsho/dotfiles/blob/nightly/.config/nvim/plugin/autocommands.lua
---- Load the default set of autogroups and autocommands.
-function M.load_augroups()
-  return {
-    _general_settings = {
-      -- NOTE: use ftplugin which could be shared with vim
-      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
-      -- { "VimLeavePre", "*", "set title set titleold=" },
-      {
-        'TextYankPost',
-        '*',
-        -- "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
-        "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
-        desc = 'Highlight text on yank',
-      },
-      {
-        'BufWinEnter',
-        '*',
-        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
-        desc = 'Jump to last cursor position when opening a file',
-      },
-      -- { 'FocusLost', '*', 'silent! wa' },
-      {
-        'VimEnter,VimResume',
-        '*',
-        'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100',
-      },
-      { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
-      -- { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
-      -- { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
-      { 'InsertEnter', '*', require('young.tool').nornu },
-      { 'InsertLeave', '*', require('young.tool').rnu },
-      -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
-      -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
-      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
-      {
-        'BufEnter',
-        '*',
-        function()
-          if vim.api.nvim_buf_line_count(0) > 10000 then
-            vim.cmd [[syntax clear]]
-          end
-        end,
-      },
-      {
-        'BufWritePre',
-        '*',
-        function(ctx)
-          fn.mkdir(fn.fnamemodify(ctx.file, ':p:h'), 'p')
-        end,
-      },
-    },
-    _colorscheme = {
-      -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
-      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
-      { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- @see :h 'pumblend'
-    },
-    _formatoptions = {
-      {
-        'BufWinEnter,BufRead,BufNewFile',
-        '*',
-        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
-      },
-    },
-    _filetypechanges = {
-      { 'BufRead', 'settings.json', 'setlocal filetype=jsonc' },
-      { 'BufRead', 'coc-settings.json', 'setlocal filetype=jsonc' },
-    },
-    _auto_resize = {
-      -- will cause split windows to be resized evenly if main window is resized
-      { 'VimResized', '*', 'tabdo wincmd =' },
-    },
-    _general_lsp = {
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
-      -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
-    },
-    _startup = {
-      { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
-      --
-      -- { 'VimEnter', '*', '++once', 'lua require("young.tool").startup_event("VimEnter")' },
-      -- { 'BufRead', '*', '++once', 'lua require("young.tool").startup_event("BufRead")' },
-      -- { 'BufReadPost', '*', '++once', 'lua require("young.tool").startup_event("BufReadPost")' },
-      -- { 'BufEnter', '*', '++once', 'lua require("young.tool").startup_event("BufEnter")' },
-      -- { 'BufWinEnter', '*', '++once', 'lua require("young.tool").startup_event("BufWinEnter")' },
-    },
-    custom_groups = {
-      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
-      { 'BufWritePost', plugins_path, "lua require('young.packer').recompile()" },
-      { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
-      { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
-    },
-  }
-end
 
 -- function M.remove_augroup(name)
 --   if vim.fn.exists('#' .. name) == 1 then
@@ -226,8 +98,128 @@ end
 
 M.done = function()
   tt()
-  local aus = M.load_augroups()
-  M.enable_augroups(aus)
+
+  if xy.transparent_mode == true then
+    -- hi! Normal ctermbg=none guibg=none
+    -- hi! NonText ctermbg=none guibg=none
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      pattern = '*',
+      callback = function()
+        local hl_groups = {
+          'Normal',
+          'SignColumn',
+          'NormalNC',
+          'TelescopeBorder',
+          'NvimTreeNormal',
+          'EndOfBuffer',
+          'MsgArea',
+        }
+        for _, name in ipairs(hl_groups) do
+          vim.cmd(string.format('highlight %s ctermbg=none guibg=none', name))
+        end
+      end,
+    })
+  end
+
+  local plugins_path = vim.fn.resolve(require('young.cfg').reload_path)
+  if is_windows then
+    -- autocmds require forward slashes even on windows
+    plugins_path = plugins_path:gsub('\\', '/')
+  end
+
+  -- TODO:https://zhuanlan.zhihu.com/p/557199534
+  -- TODO:https://github.com/akinsho/dotfiles/blob/nightly/.config/nvim/plugin/autocommands.lua
+  --- Load the default set of autogroups and autocommands.
+  M.enable_augroups {
+    _general = {
+      -- NOTE: use ftplugin which could be shared with vim
+      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { "VimLeavePre", "*", "set title set titleold=" },
+      {
+        'TextYankPost',
+        '*',
+        -- "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 500})",
+        "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
+        desc = 'Highlight text on yank',
+      },
+      {
+        'BufWinEnter',
+        '*',
+        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
+        desc = 'Jump to last cursor position when opening a file',
+      },
+      -- { 'FocusLost', '*', 'silent! wa' },
+      {
+        'VimEnter,VimResume',
+        '*',
+        'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100',
+      },
+      { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
+      -- { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
+      -- { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
+      { 'InsertEnter', '*', require('young.tool').nornu },
+      { 'InsertLeave', '*', require('young.tool').rnu },
+      -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
+      -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
+      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
+      {
+        'BufEnter',
+        '*',
+        function()
+          if vim.api.nvim_buf_line_count(0) > 10000 then
+            vim.cmd [[syntax clear]]
+          end
+        end,
+      },
+      {
+        'BufWritePre',
+        '*',
+        function(ctx)
+          fn.mkdir(fn.fnamemodify(ctx.file, ':p:h'), 'p')
+        end,
+      },
+    },
+    _colorscheme = {
+      -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
+      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
+      { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- @see :h 'pumblend'
+    },
+    _formatoptions = {
+      {
+        'BufWinEnter,BufRead,BufNewFile',
+        '*',
+        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
+      },
+    },
+    _filetypechanges = {
+      { 'BufRead', 'settings.json', 'setlocal filetype=jsonc' },
+      { 'BufRead', 'coc-settings.json', 'setlocal filetype=jsonc' },
+    },
+    _auto_resize = {
+      -- will cause split windows to be resized evenly if main window is resized
+      { 'VimResized', '*', 'tabdo wincmd =' },
+    },
+    _general_lsp = {
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
+      -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
+    },
+    _startup = {
+      { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
+      --
+      -- { 'VimEnter', '*', '++once', 'lua require("young.tool").startup_event("VimEnter")' },
+      -- { 'BufRead', '*', '++once', 'lua require("young.tool").startup_event("BufRead")' },
+      -- { 'BufReadPost', '*', '++once', 'lua require("young.tool").startup_event("BufReadPost")' },
+      -- { 'BufEnter', '*', '++once', 'lua require("young.tool").startup_event("BufEnter")' },
+      -- { 'BufWinEnter', '*', '++once', 'lua require("young.tool").startup_event("BufWinEnter")' },
+    },
+    _reload = {
+      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
+      { 'BufWritePost', plugins_path, "lua require('young.packer').recompile()" },
+      { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
+      { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
+    },
+  }
 
   local format_opts = { pattern = '*', timeout = 1000 }
   local fmt_cmd = fmt(':silent lua vim.lsp.buf.formatting_sync({}, %s)', format_opts.timeout)

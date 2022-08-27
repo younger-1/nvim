@@ -1,4 +1,4 @@
-local M = {
+local visual = {
   g = {
     -- ['/'] = { [["ky/\V<C-r>=escape(@k,'/\')<CR><CR>]], 'Search selection' },
     ['/'] = { [[<esc>/\V<C-r>=VirtualSelection()<cr><cr>]], 'Search selection' },
@@ -6,4 +6,6 @@ local M = {
   },
 }
 
-return M
+visual['<leader>'] = require 'young.key.visual.leader'
+
+return visual

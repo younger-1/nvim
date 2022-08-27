@@ -1,4 +1,4 @@
-local vmappings = {
+return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<cr>', 'Comment' },
   g = {
     name = '+git',
@@ -22,5 +22,3 @@ local vmappings = {
     y = { 'dh<cmd>Telescope neoclip<cr>', 'Clipboard' },
   },
 }
-
-return vmappings

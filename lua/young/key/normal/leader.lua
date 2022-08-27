@@ -1,4 +1,7 @@
-local mappings = {
+local key = require 'young.key'
+
+-- TODO:add function instead of <cmd><cr>
+return {
   [' '] = { ':', 'which_key_ignore', silent = false },
   -- ['`'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -7,6 +10,7 @@ local mappings = {
   -- ['='] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['<BS>'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['<Tab>'] = { '<cmd>Alpha<cr>', 'Alpha' },
+  ['<CR>'] = { ':mes<cr>', 'which_key_ignore' },
   -- ['['] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- [']'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['{'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -19,7 +23,6 @@ local mappings = {
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ["'"] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  -- ['<CR>'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [','] = { '<cmd>Telescope buffers<cr>', 'Buffers' },
   ['.'] = { '<cmd>Telescope find_files layout_strategy=horizontal<cr>', 'Files' },
   ['/'] = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Buffer string' },
@@ -253,7 +256,7 @@ local mappings = {
       function()
         require('young.mod.lsp_lines').toggle()
       end,
-      'Toggle LSP lines',
+      'Toggle virtual text',
     },
     v = { '<cmd>Vista!!<cr>', 'Vista' },
     w = {
@@ -327,6 +330,7 @@ local mappings = {
     -- ['='] = { '<cmd>Alpha<cr>', 'Alpha' },
     -- ['<BS>'] = { '<cmd>Alpha<cr>', 'Alpha' },
     ['<tab>'] = { '<cmd>Telescope<cr>', '' },
+    -- ['<CR>'] = { '<cmd>Alpha<cr>', 'Alpha' },
     -- ['['] = { '<cmd>Alpha<cr>', 'Alpha' },
     -- [']'] = { '<cmd>Alpha<cr>', 'Alpha' },
     -- ['{'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -339,7 +343,6 @@ local mappings = {
     [':'] = { '<cmd>Telescope command_history<cr>', 'Command history' },
     ["'"] = { '<cmd>Telescope marks<cr>', 'Marks' },
     ['"'] = { '<cmd>Telescope registers<cr>', 'Registers' },
-    -- ['<CR>'] = { '<cmd>Alpha<cr>', 'Alpha' },
     [','] = { '<cmd>Telescope buffers<cr>', 'Find' },
     ['.'] = { '<cmd>Telescope file_browser hidden=v:true<cr>', 'Browser' },
     ['/'] = { '<cmd>Telescope search_history<cr>', 'Search history' },
@@ -470,5 +473,3 @@ local mappings = {
   },
   z = { '<cmd>ZenMode<cr>', 'Zen' },
 }
-
-return mappings
