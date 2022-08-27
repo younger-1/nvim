@@ -1,5 +1,6 @@
 -- <https://github.com/ayamir/nvimdots/blob/cbe59f051b4a913fcdc014664ce32b37c3b0f577/lua/core/init.lua#L23>
-local disable_distribution = function()
+
+do
   vim.g.loaded_2html_plugin = 1
   vim.g.loaded_getscript = 1
   vim.g.loaded_getscriptPlugin = 1
@@ -42,18 +43,29 @@ local disable_distribution = function()
   -- vim.g.loaded_remote_plugins = 1
 end
 
-disable_distribution()
-
 vim.g.mapleader = ' '
--- Do not source the default filetype.vim
--- <https://github.com/nathom/filetype.nvim/issues/12>
-vim.g.did_load_filetypes = 0
--- For now, Lua filetype detection is opt-in. You can enable it by adding:
-vim.g.do_filetype_lua = 1
 
+-- In NeoVim 0.8+ this is the default - @see
+-- https://github.com/neovim/neovim/issues/14090#issuecomment-1177933661
+if vim.fn.has 'nvim-0.8.0' == 0 then
+  -- Do not source the default filetype.vim. @see
+  -- <https://github.com/nathom/filetype.nvim/issues/12>
+  vim.g.did_load_filetypes = 0
+  -- Lua filetype detection is opt-in. You can enable it by adding:
+  vim.g.do_filetype_lua = 1
+end
+
+-- TODO:filetype.lua
 vim.filetype.add {
   extension = {
     conf = 'config',
+    tex = 'latex', -- We always want LaTeX, avoid slow detection logic
+    h = function(path, bufnr) -- a heuristic that only sets the filetype to C++ if the header file includes another C++-style header (i.e. one without a trailing .h):
+      if vim.fn.search('\\C^#include <[^>.]\\+>$', 'nw') ~= 0 then
+        return 'cpp'
+      end
+      return 'c'
+    end,
   },
   filename = {
     -- ['kitty.conf'] = 'kitty',
@@ -63,8 +75,13 @@ vim.filetype.add {
   },
   pattern = {
     ['.*/git/.*'] = 'gitconfig',
+    ['.*%.gitignore.*'] = 'gitignore',
     ['.*/kitty/.*%.conf'] = 'kitty',
     ['.*/kitty/.*%.session'] = 'kitty-session',
+    ['.*Dockerfile.*'] = 'dockerfile',
+    ['.*envrc.*'] = 'sh',
+    ['.*/systemd/user/.*'] = 'systemd',
+    ['.*/hugo/layouts/.*%.html'] = 'gohtmltmpl',
   },
 }
 
