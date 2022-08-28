@@ -46,7 +46,7 @@ return {
   buffer_mappings = {
     normal_mode = {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
-      ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      ['gs'] = { vim.lsp.buf.signature_help, 'Signature help' },
       ['gd'] = { vim.lsp.buf.definition, 'Goto definition' },
       ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
       ['gr'] = { vim.lsp.buf.references, 'Goto references' },

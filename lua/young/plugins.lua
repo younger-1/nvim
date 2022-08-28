@@ -882,9 +882,13 @@ mods.LSP = {
   ui = {
     {
       'glepnir/lspsaga.nvim',
-      event = 'BufWinEnter',
+      -- event = 'BufWinEnter',
+      cmd = 'Lspsaga',
+      setup = function()
+        require('young.mod.lspsaga').once()
+      end,
       config = function()
-        require 'young.mod.lspsaga'
+        require('young.mod.lspsaga').done()
       end,
     },
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },

@@ -301,7 +301,8 @@ xy.map = {
 
   _nest = function(mappings, prefix, mode)
     for k, v in pairs(mappings) do
-      if k == 'name' or type(v) == 'string' or #v == 1 then
+      if k == 'name' or type(v) == 'string' then
+        -- #v == 1 which-key will take it as description
         goto continue
       end
       if #v == 0 then
