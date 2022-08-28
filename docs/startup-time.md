@@ -201,12 +201,6 @@ Benchmark #2: nvim --headless +qa
 ```
 
 ```log
-
-
-times in msec
- clock   self+sourced   self:  sourced script
- clock   elapsed:              other lines
-
 000.042  000.042: --- NVIM STARTING ---
 034.271  034.229: locale set
 035.558  001.287: inits 1

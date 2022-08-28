@@ -5,6 +5,7 @@ M.done = function()
   if not status_ok then
     return
   end
+
   spectre.setup {
 
     color_devicons = true,
