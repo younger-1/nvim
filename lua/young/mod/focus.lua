@@ -7,7 +7,7 @@ require('focus').setup {
   excluded_buftypes = { 'nofile', 'prompt', 'help', 'quickfix' },
 }
 
-require('focus').focus_enable()
+require('focus').focus_disable()
 
 -- vim.api.nvim_set_keymap('n', '<C-h>', ":lua require'focus'.split_command('h')<CR>", { silent = true })
 -- vim.api.nvim_set_keymap('n', '<C-j>', ":lua require'focus'.split_command('j')<CR>", { silent = true })

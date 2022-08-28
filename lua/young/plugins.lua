@@ -349,7 +349,7 @@ mods.BWT = {
       -- event = 'CursorMoved',
       module = 'window-picker',
       config = function()
-        require 'young.mod.window_picker'
+        require('young.mod.window_picker').done()
       end,
     },
     {
@@ -362,7 +362,7 @@ mods.BWT = {
     {
       'beauwilliams/focus.nvim',
       -- event = "BufRead",
-      cmd = "FocusToggle",
+      cmd = 'FocusToggle',
       -- module = 'focus',
       config = function()
         require 'young.mod.focus'
@@ -599,7 +599,11 @@ mods.UI = {
   core = {
     {
       'kyazdani42/nvim-tree.lua',
-      event = 'BufWinEnter',
+      -- event = 'BufWinEnter',
+      cmd = 'NvimTreeToggle',
+      setup = function()
+        require('young.mod.nvim_tree').once()
+      end,
       config = function()
         require('young.mod.nvim_tree').done()
       end,
