@@ -25,7 +25,7 @@ Hydra {
     },
   },
   mode = 'n',
-  body = '<C-w>',
+  body = '<C-w> ',
   heads = {
     { 'h', '<C-w>h' },
     { 'j', '<C-w>j' },
@@ -69,8 +69,12 @@ Hydra {
     { 'w', '<C-w>w', { exit = true, desc = false } },
     { '<C-w>', '<C-w>w', { exit = true, desc = false } },
 
-    { 'z', cmd 'MaximizerToggle!', { desc = 'maximize' } },
-    { '<C-z>', cmd 'MaximizerToggle!', { exit = true, desc = false } },
+    { 'z', '<C-w>z', { desc = 'maximize', remap = true } },
+    { '<C-z>', 'C-w>z', { exit = true, desc = false, remap = true } },
+    -- { 'z', cmd 'MaximizerToggle!', { desc = 'maximize' } },
+    -- { '<C-z>', cmd 'MaximizerToggle!', { exit = true, desc = false } },
+    -- { 'z', '<Plug>(zoom-toggle)', { desc = 'maximize' } },
+    -- { '<C-z>', '<Plug>(zoom-toggle)', { exit = true, desc = false } },
 
     { 'o', '<C-w>o', { exit = true, desc = 'remain only' } },
     { '<C-o>', '<C-w>o', { exit = true, desc = false } },
