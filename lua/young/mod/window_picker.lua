@@ -1,8 +1,6 @@
-local win_picker = require 'window-picker'
-
 local M = {}
 
-win_picker.setup {
+M.cfg = {
   -- when there is only one window available to pick from, use that window
   -- without prompting the user to select
   autoselect_one = true,
@@ -60,5 +58,22 @@ win_picker.setup {
   -- other_win_hl_color = '#44cc41',
   other_win_hl_color = '#76946A',
 }
+
+M.pick = function()
+  local wid = require('window-picker').pick_window()
+  if wid then
+    vim.api.nvim_set_current_win(wid)
+    return wid
+  end
+end
+
+M.done = function()
+  -- local status_ok, win_picker = pcall(require, 'window-picker')
+  -- if not status_ok then
+  --   return
+  -- end
+
+  require('window-picker').setup(M.cfg)
+end
 
 return M
