@@ -28,10 +28,7 @@ tt()
 rr('young.packer').done()
 
 tt()
--- vim.cmd [[syntax clear]]
-vim.schedule(function()
-  vim.cmd [[silent! colorscheme dracula]]
-end)
+vim.cmd [[silent! colorscheme dracula]]
 
 tt()
 rr('young.gui').done()

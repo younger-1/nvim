@@ -135,6 +135,10 @@ mods.edit = {
       end,
     },
     {
+      'anuvyklack/vim-smartword',
+      event = 'CursorMoved',
+    },
+    {
       'ggandor/lightspeed.nvim',
       event = 'BufWinEnter',
       config = function()
@@ -599,6 +603,13 @@ mods.UI = {
       event = 'BufWinEnter',
       config = function()
         require('young.mod.which_key').done()
+      end,
+    },
+    {
+      'anuvyklack/hydra.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.hydra'
       end,
     },
     {
