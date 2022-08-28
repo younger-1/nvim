@@ -334,7 +334,7 @@ M.done = function()
   local telescope = require 'telescope'
   telescope.setup(M.cfg)
 
-  vim.cmd [[cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)]]
+  vim.cmd [[cmap <C-R><C-t> <Plug>(TelescopeFuzzyCommandSearch)]]
 
   -- if lvim.builtin.project.active then
   --   pcall(function()
