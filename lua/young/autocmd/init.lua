@@ -96,7 +96,7 @@ M.build_augroups = function(augroups, enable)
   end
 end
 
-M.done = function()
+function M.done()
   tt()
 
   if xy.transparent_mode == true then
@@ -200,7 +200,7 @@ M.done = function()
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,sagahover', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },
