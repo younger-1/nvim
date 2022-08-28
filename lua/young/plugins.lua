@@ -178,7 +178,6 @@ mods.edit = {
   treesitter = {
     {
       'nvim-treesitter/nvim-treesitter',
-      -- branch = xy.has 'nvim-0.6' and 'master' or '0.5-compat',
       event = { 'BufRead', 'BufNewFile' },
       run = ':TSUpdate',
       config = function()
@@ -338,18 +337,35 @@ mods.BWT = {
     {
       'mrjones2014/smart-splits.nvim',
       disable = not xy.has 'nvim-0.7',
-      event = 'CursorMoved',
+      -- event = 'CursorMoved',
       -- module = 'smart-splits',
+      cmd = 'SmartResizeMode',
       config = function()
         require 'young.mod.smart_splits'
       end,
     },
     {
       's1n7ax/nvim-window-picker',
-      event = 'CursorMoved',
-      -- module = 'window-picker',
+      -- event = 'CursorMoved',
+      module = 'window-picker',
       config = function()
         require 'young.mod.window_picker'
+      end,
+    },
+    {
+      'sindrets/winshift.nvim',
+      cmd = 'WinShift',
+      config = function()
+        require 'young.mod.winshift'
+      end,
+    },
+    {
+      'beauwilliams/focus.nvim',
+      -- event = "BufRead",
+      cmd = "FocusToggle",
+      -- module = 'focus',
+      config = function()
+        require 'young.mod.focus'
       end,
     },
   },

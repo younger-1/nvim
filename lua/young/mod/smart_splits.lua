@@ -48,7 +48,7 @@ n { '<C-Up>', require('smart-splits').resize_up }
 n { '<C-Right>', require('smart-splits').resize_right }
 
 -- persistent resize mode
-n { '<C-w>r', require('smart-splits').start_resize_mode, 'Resize mode' }
+-- n { '<C-w>r', require('smart-splits').start_resize_mode, 'Resize mode' }
 
 -- moving between splits
 -- n { '<C-h>', require('smart-splits').move_cursor_left }

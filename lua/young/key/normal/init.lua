@@ -1,3 +1,5 @@
+local cmd = require('young.key').cmd
+
 local normal = {
   ['\\'] = {
     c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
@@ -31,9 +33,26 @@ local normal = {
     x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev trouble' },
   },
   ['<C-w>'] = {
-    -- [' '] = { "<cmd>lua require('focus').focus_toggle()<cr>", 'FocusToggle' },
-    m = { require('young.tool').toggle_zoom, 'Zoom' },
+    z = { require('young.tool').toggle_zoom, 'Zoom' },
     w = { require('young.tool').set_cursor_floating_win, 'Goto float' },
+    r = { '<cmd>SmartResizeMode<cr>', 'SmartResize mode' },
+    -- ['<C-m>'] = { '<Cmd>WinShift<CR>', 'WinShift mode' },
+    -- ['<C-x>'] = { '<Cmd>WinShift swap<CR>', 'Swap windows' },
+    ['<CR>'] = { '<Cmd>WinShift<CR>', 'WinShift mode' },
+    ['\\'] = { '<Cmd>WinShift swap<CR>', 'Swap windows mode' },
+    -- [' '] = { "<cmd>FocusToggle<cr>", 'FocusToggle' },
+    f = { cmd 'FocusToggle', 'FocusToggle' },
+    p = {
+      function()
+        local wid = require('window-picker').pick_window()
+        if wid then
+          vim.api.nvim_set_current_win(wid)
+          return wid
+        end
+      end,
+      'Pick window',
+    },
+
     -- e = "",
     -- t = "",
     -- b = "",
