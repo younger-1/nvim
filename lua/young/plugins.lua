@@ -213,7 +213,7 @@ mods.change = {
       -- BUG:PackerCompile will cause `keys` redefined
       -- keys = { { 'n', 'gc' }, { 'v', 'gc' }, { 'n', '<C-_>' }, { 'v', '<C-_>' } },
       config = function()
-        require 'young.mod.comment'
+        require('young.mod.comment').done()
       end,
     },
   },
@@ -338,7 +338,7 @@ mods.BWT = {
       'mrjones2014/smart-splits.nvim',
       disable = not xy.has 'nvim-0.7',
       -- event = 'CursorMoved',
-      -- module = 'smart-splits',
+      module = 'smart-splits',
       cmd = 'SmartResizeMode',
       config = function()
         require 'young.mod.smart_splits'
@@ -400,7 +400,7 @@ mods.file = {
     {
       'folke/persistence.nvim',
       event = 'BufRead',
-      module = 'persistence',
+      -- module = 'persistence',
       config = function()
         require 'young.mod.persistence'
       end,
@@ -429,7 +429,7 @@ mods.find = {
       'windwp/nvim-spectre',
       event = 'BufRead',
       config = function()
-        -- require("user.spectre").config()
+        require('young.mod.spectre').done()
       end,
     },
   },
@@ -601,9 +601,6 @@ mods.UI = {
       'kyazdani42/nvim-tree.lua',
       -- event = 'BufWinEnter',
       cmd = 'NvimTreeToggle',
-      setup = function()
-        require('young.mod.nvim_tree').once()
-      end,
       config = function()
         require('young.mod.nvim_tree').done()
       end,
@@ -909,7 +906,7 @@ mods.LSP = {
       -- 'ErichDonGubler/lsp_lines.nvim',
       event = 'BufRead',
       config = function()
-        require 'young.mod.lsp_lines'
+        require('young.mod.lsp_lines').done()
       end,
     },
   },

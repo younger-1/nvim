@@ -139,6 +139,7 @@ return {
     t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", 'Toggle breakpoint' },
     u = { "<cmd>lua require'dap'.step_out()<cr>", 'Step out' },
   },
+  e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' },
   f = { "<cmd>lua require('lir.float').toggle()<cr>", 'Files' },
   g = {
     name = '+git',
@@ -252,12 +253,7 @@ return {
     --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type definition' },
     -- },
     r = { vim.lsp.buf.rename, 'Rename' },
-    t = {
-      function()
-        require('young.mod.lsp_lines').toggle()
-      end,
-      'Toggle virtual text',
-    },
+    t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
     v = { '<cmd>Vista!!<cr>', 'Vista' },
     w = {
       w = { '<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>', 'Workspace folders' },

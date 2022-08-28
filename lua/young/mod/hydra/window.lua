@@ -45,7 +45,9 @@ Hydra {
     },
     {
       '<C-j>',
-      function() end,
+      function()
+        require('smart-splits').resize_down(2)
+      end,
     },
     {
       '<C-k>',

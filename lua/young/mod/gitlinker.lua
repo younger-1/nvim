@@ -5,6 +5,7 @@ M.done = function()
   if not status_ok then
     return
   end
+
   gitlinker.setup {
     opts = {
       remote = nil, -- force the use of a specific remote

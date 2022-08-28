@@ -1,6 +1,8 @@
 local M = {}
 
-require('lsp_lines').setup()
+M.done = function()
+  require('lsp_lines').setup()
+end
 
 local state = 2
 
