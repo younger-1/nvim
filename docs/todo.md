@@ -33,6 +33,7 @@
 - [ ] decouple which-key from core, by using local.lua
 - [ ] a quick-pannel to lookup git/file information such as branch, ff, fenc, sw, which is not very common like changes and diagnostics
 - [ ] split diagnostics and lsp, lazy load lsp setup to filetype(not good for lvim) or event, lazy load lsp_line after diagnostics
+- [x] toggle transparence of colorscheme
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

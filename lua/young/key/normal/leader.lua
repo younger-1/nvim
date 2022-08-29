@@ -1,4 +1,4 @@
-local key = require 'young.key'
+local cmd = require('young.key').cmd
 
 -- TODO:add function instead of <cmd><cr>
 return {
@@ -412,6 +412,7 @@ return {
     i = { require('young.tool').toggle_indent_style, 'Indent style' },
     n = { require('young.tool').toggle_notify_style, 'Nofity style' },
     N = { require('young.tool').toggle_notify, 'Toggle nofity' },
+    t = { cmd 'TransparentToggle', 'Transparent' },
   },
   w = { '<cmd>w!<cr>', 'Save' },
   x = {
