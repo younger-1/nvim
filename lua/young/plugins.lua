@@ -72,6 +72,17 @@ mods.appearance = {
         require 'young.mod.colorizer'
       end,
     },
+    {
+      'xiyaowong/nvim-transparent',
+      -- setup = function()
+      --   vim.g.transparent_enabled = false
+      -- end,
+      -- event = 'BufRead',
+      cmd = 'TransparentToggle',
+      config = function()
+        require 'young.mod.transparent'
+      end,
+    },
   },
   indent = {
     {

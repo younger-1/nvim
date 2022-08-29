@@ -159,13 +159,12 @@ function M.once()
     require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }
   end, { silent = true })
 
-  local action = require 'lspsaga.action'
   -- scroll in hover doc or definition preview window
   keymap('n', '<C-f>', function()
-    action.smart_scroll_with_saga(1)
+    require('lspsaga.action').smart_scroll_with_saga(1)
   end, { silent = true })
   keymap('n', '<C-b>', function()
-    action.smart_scroll_with_saga(-1)
+    require('lspsaga.action').smart_scroll_with_saga(-1)
   end, { silent = true })
 end
 
