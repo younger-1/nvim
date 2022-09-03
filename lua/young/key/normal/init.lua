@@ -3,6 +3,7 @@ local cmd = require('young.key').cmd
 local normal = {
   ['\\'] = {
     c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
+    s = { ':so<cr>', ':source' },
   },
   [']'] = {
     -- [' '] = {},
@@ -17,6 +18,12 @@ local normal = {
     },
     -- c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next hunk' },
     x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next trouble' },
+    p = {
+      function()
+        require('young.tool').putline ']p'
+      end,
+      'Put line below',
+    },
   },
   ['['] = {
     -- [' '] = {},
@@ -31,6 +38,12 @@ local normal = {
     },
     -- c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev hunk' },
     x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev trouble' },
+    p = {
+      function()
+        require('young.tool').putline '[p'
+      end,
+      'Put line above',
+    },
   },
   ['<C-w>'] = {
     z = { require('young.tool').toggle_zoom, 'Zoom' },

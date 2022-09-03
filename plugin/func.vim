@@ -1,3 +1,4 @@
+" let MyFoldText = {-> substitute(getline(v:foldstart),"\s*{{{[0-9]\s*$","","")." ▶"}
 function! FoldTextToggle()
   if &foldtext == "foldtext()"
     set foldtext=yo#fold#Text()
@@ -109,6 +110,7 @@ function! FirstCharOrFirstCol()
 endfunction
 
 " <https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript>
+" <https://superuser.com/questions/41378/how-to-search-for-selected-text-in-vim>
 function! RawVirtualSelection()
   try
     let a_save = @a
@@ -120,7 +122,7 @@ function! RawVirtualSelection()
 endfunction
 
 function! VirtualSelection()
-  return escape(RawVirtualSelection, '/\')
+  return escape(RawVirtualSelection(), '/\')
 endfunction
 
 function! SubstituteVirtualSelection()

@@ -124,13 +124,22 @@ M.keys = {
     -- ['<A-k>'] = ':m .-2<CR>==',
 
     -- QuickFix
+    ['<C-q>'] = ':call QuickFixToggle()<CR>',
     [']q'] = ':cnext<CR>',
     ['[q'] = ':cprev<CR>',
-    ['<C-q>'] = ':call QuickFixToggle()<CR>',
+    [']Q'] = ':clast<CR>',
+    ['[Q'] = ':cfirst<CR>',
 
+    ['<C-a>'] = ':call LocListToggle()<CR>',
     [']a'] = ':lnext<CR>',
     ['[a'] = ':lprev<CR>',
-    ['<C-a>'] = ':call LocListToggle()<CR>',
+    [']A'] = ':llast<CR>',
+    ['[A'] = ':lfirst<CR>',
+
+    [']t'] = ':tnext<CR>',
+    ['[t'] = ':tprev<CR>',
+    [']T'] = ':tlast<CR>',
+    ['[T'] = ':tfirst<CR>',
 
     -- [nvim-default]
     -- Y = 'y$',
