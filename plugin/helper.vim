@@ -72,3 +72,8 @@ command! -bang -nargs=+ -complete=custom,s:rtf_complete Echofile call EchoRuntim
 
 command! CD lcd %:p:h
 command! FollowSymLink execute "file " . resolve(expand('%')) | edit
+
+" Find highlight group under cursor
+command! Name echo  "hi: " . synID(line("."), col("."), 1)->synIDattr("name")
+  \ . ", link: " . synID(line("."), col("."), 1)->synIDtrans()->synIDattr("name")
+  \ . ", tran: " . synID(line("."), col("."), 0)->synIDattr("name")

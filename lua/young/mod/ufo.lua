@@ -4,17 +4,21 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
-vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
-vim.keymap.set('n', 'J', function()
-  local winid = require('ufo').peekFoldedLinesUnderCursor()
-  if not winid then
-    vim.cmd 'normal! J'
-  end
-end)
-vim.keymap.set('n', 'zk', require('ufo').goPreviousStartFold)
+xy.map.n { 'zR', require('ufo').openAllFolds, 'Ufo open all folds' }
+xy.map.n { 'zM', require('ufo').closeAllFolds, 'Ufo close all folds' }
+xy.map.n { 'zr', require('ufo').openFoldsExceptKinds, 'Ufo open folds except kinds' }
+xy.map.n { 'zm', require('ufo').closeFoldsWith, 'Ufo close folds with [N]' } -- closeAllFolds == closeFoldsWith(0)
+xy.map.n {
+  'J',
+  function()
+    local winid = require('ufo').peekFoldedLinesUnderCursor()
+    if not winid then
+      vim.cmd 'normal! J'
+    end
+  end,
+  'Ufo peek current fold',
+}
+xy.map.n { 'zk', require('ufo').goPreviousStartFold, 'Ufo go previous start fold' }
 
 local function peek_prev_fold()
   require('ufo').goPreviousClosedFold()
@@ -26,8 +30,8 @@ local function peek_next_fold()
   require('ufo').peekFoldedLinesUnderCursor()
 end
 
-vim.keymap.set('n', 'z[', peek_prev_fold)
-vim.keymap.set('n', 'z]', peek_next_fold)
+xy.map.n { 'z[', peek_prev_fold, 'Ufo peek prev fold' }
+xy.map.n { 'z]', peek_next_fold, 'Ufo peek next fold' }
 
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}

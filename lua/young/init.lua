@@ -115,9 +115,21 @@ function _G.put_text(...)
   return ...
 end
 
-function _G.to_home(path)
-  return vim.fn.fnamemodify(path, ':~')
+function _G.PP(obj)
+  local buf = vim.api.nvim_create_buf(false, true)
+  local lines = vim.split(vim.inspect(obj), '\n', { plain = true })
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.cmd 'vsplit'
+  vim.api.nvim_win_set_buf(0, buf)
 end
+
+-- _G.PP = vim.schedule_wrap(function(...)
+--   local buf = vim.api.nvim_create_buf(false, true)
+--   local lines = vim.split(vim.inspect(...), '\n', { plain = true })
+--   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+--   vim.cmd 'vsplit'
+--   vim.api.nvim_win_set_buf(0, buf)
+-- end)
 
 ---Require a module in protected mode
 ---@param module string
@@ -343,6 +355,7 @@ local function mapper(tbl)
 end
 
 setmetatable(xy.map, {
+  -- default to 'map', not 'nmap'
   __call = function(t, tbl)
     mapper(tbl)
   end,
