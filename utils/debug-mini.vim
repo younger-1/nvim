@@ -935,3 +935,17 @@ augroup END
 augroup _yo_lsp_document_highlight
   autocmd!
 augroup END
+
+augroup my_py
+  autocmd!
+  autocmd FileType python echo expand('<amatch>') . ' -> ' . expand('<afile>')
+augroup END
+augroup my_lua
+  autocmd!
+  autocmd FileType lua echo expand('<amatch>') . ' -> ' . expand('<afile>')
+augroup END
+autocmd FileType lua echo expand('<amatch>') . ' <-> ' . expand('<afile>')
+doautoall FileType
+doautoall my_py FileType
+doautoall my_lua FileType
+

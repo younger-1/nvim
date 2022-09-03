@@ -227,6 +227,12 @@ M.done = function()
     },
   })
 
+  -- cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, {
+  --   sources = {
+  --     { name = 'dap' },
+  --   },
+  -- })
+
   local cmdline_map = {
     ['<Tab>'] = {
       c = cmapping.select_next_item(),

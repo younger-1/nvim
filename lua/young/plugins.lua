@@ -810,6 +810,10 @@ mods.code = {
             require('cmp_git').setup()
           end,
         },
+        {
+          'rcarriga/cmp-dap',
+          after = { 'nvim-cmp', 'nvim-dap' },
+        },
       },
     },
     { 'onsails/lspkind-nvim' },
@@ -843,12 +847,22 @@ mods.code = {
     {
       'mfussenegger/nvim-dap',
       module = 'dap',
+      config = function()
+        require 'young.mod.dap'
+      end,
     },
     {
       'rcarriga/nvim-dap-ui',
       after = 'nvim-dap',
       config = function()
         require 'young.mod.dapui'
+      end,
+    },
+    {
+      'mfussenegger/nvim-dap-python',
+      after = 'nvim-dap',
+      config = function()
+        require('young.mod.dap').setup_python()
       end,
     },
   },
