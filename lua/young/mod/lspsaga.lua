@@ -51,7 +51,7 @@ function M.done()
     -- you may need to increase this value
     finder_request_timeout = 1500,
     finder_action_keys = {
-      open = 'o',
+      open = { 'o', '<CR>' },
       vsplit = 's',
       split = 'i',
       tabe = 't',

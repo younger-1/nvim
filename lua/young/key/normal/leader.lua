@@ -1,4 +1,5 @@
 local cmd = require('young.key').cmd
+local lua = require('young.key').lua
 
 -- TODO:add function instead of <cmd><cr>
 return {
@@ -19,7 +20,7 @@ return {
   -- ['>'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
+  [';'] = { cmd 'Alpha', 'Alpha' },
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ["'"] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -122,25 +123,37 @@ return {
     u = { '<cmd>TablineBuffersClearBind<cr>', 'Tabline unbound' },
     w = { '<cmd>BufferWipeout<cr>', 'Wipeout' },
   },
-  c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
+  -- c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
   d = {
     name = '+debug',
-    C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", 'Run to cursor' },
-    b = { "<cmd>lua require'dap'.step_back()<cr>", 'Step back' },
-    c = { "<cmd>lua require'dap'.continue()<cr>", 'Continue' },
-    d = { "<cmd>lua require'dap'.disconnect()<cr>", 'Disconnect' },
-    g = { "<cmd>lua require'dap'.session()<cr>", 'Get session' },
-    i = { "<cmd>lua require'dap'.step_into()<cr>", 'Step into' },
-    o = { "<cmd>lua require'dap'.step_over()<cr>", 'Step over' },
-    p = { "<cmd>lua require'dap'.pause.toggle()<cr>", 'Pause' },
-    q = { "<cmd>lua require'dap'.close()<cr>", 'Quit' },
-    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", 'Toggle repl' },
-    s = { "<cmd>lua require'dap'.continue()<cr>", 'Start' },
-    t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", 'Toggle breakpoint' },
-    u = { "<cmd>lua require'dap'.step_out()<cr>", 'Step out' },
+    L = { cmd 'DapShowLog', 'Show log' },
+
+    s = { lua "require'dap'.continue()", 'Start' },
+    c = { lua "require'dap'.continue()", 'Continue' },
+    C = { lua "require'dap'.run_to_cursor()", 'Run to cursor' },
+    l = { lua "require'dap'.run_last()", 'Last' },
+    p = { lua "require'dap'.pause.toggle()", 'Pause' },
+
+    t = { lua "require'dap'.toggle_breakpoint()", 'Toggle breakpoint' },
+    T = { lua "require'dap'.toggle()", 'Toggle Repl' },
+    r = { lua "require'dap'.repl.toggle()", 'Toggle repl' },
+
+    o = { lua "require'dap'.step_over()", 'Step over' },
+    i = { lua "require'dap'.step_into()", 'Step into' },
+    u = { lua "require'dap'.step_out()", 'Step out' },
+    b = { lua "require'dap'.step_back()", 'Step back' },
+
+    x = { lua "require'dap'.terminate()", 'Terminate' },
+    z = { lua "require'dap'.disconnect()", 'Disconnect' },
+    q = { lua "require'dap'.close()", 'Quit' },
+
+    g = { lua "require'dap'.session()", 'Get session' },
+    j = { lua "require('dap.ext.vscode').load_launchjs()", 'Load launch JSON' },
+
+    d = { lua "require'dapui'.toggle()", 'UI' },
   },
-  e = { '<cmd>NvimTreeToggle<CR>', 'Explorer' },
-  f = { "<cmd>lua require('lir.float').toggle()<cr>", 'Files' },
+  e = { cmd 'NvimTreeToggle', 'Explorer' },
+  f = { lua "require('lir.float').toggle()", 'Files' },
   g = {
     name = '+git',
     [' '] = {
@@ -212,28 +225,22 @@ return {
     name = '+kit',
   },
   l = {
-    name = '+lsp',
-    [' '] = {
-      name = '+telescope',
-      d = { '<cmd>Telescope lsp_definitions<cr>', 'Def' },
-      i = { '<cmd>Telescope lsp_implementations<cr>', 'Impl' },
-      r = { '<cmd>Telescope lsp_references<cr>', 'Ref' },
-      s = { '<cmd>Telescope lsp_document_symbols<cr>', 'Document symbols' },
-      S = { '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', 'Workspace symbols' },
-    },
+    name = '+lang',
+    i = { cmd 'LspInfo', 'Info' },
+    m = { cmd 'Mason', 'Mason' },
+    n = { cmd 'NullLsInfo', 'Null LS' },
+    c = { cmd 'CmpStatus', 'Cmp status' },
+    C = { cmd 'Copilot status', 'Copilot status' },
+    --
     ['['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
     [']'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
-    --
-    e = { '<cmd>Telescope diagnostics bufnr=0<cr>', 'Diagnostics' },
-    E = { '<cmd>Telescope diagnostics<cr>', 'Diagnostics(All)' },
-    --
     ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
     ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
-    --
     a = { vim.lsp.buf.code_action, 'Code action' },
     A = { vim.lsp.buf.range_code_action, 'Range action' },
-    c = { '<cmd>CodeActionMenu<cr>', 'Code action' },
     d = { vim.lsp.buf.type_definition, 'Goto type definition' },
+    h = { vim.lsp.buf.signature_help, 'Signature help' },
+    s = { vim.lsp.buf.workspace_symbol, 'Goto type definition' },
     f = { vim.lsp.buf.formatting, 'Format' },
     F = {
       function()
@@ -245,34 +252,43 @@ return {
     j = { vim.diagnostic.goto_next, 'Next diagnostic' },
     k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
     l = { vim.lsp.codelens.run, 'CodeLens action' },
-    o = { '<cmd>SymbolsOutline<cr>', 'Outline' },
+    r = { vim.lsp.buf.rename, 'Rename' },
+    --
+    t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
+    w = {
+      name = '+workspace',
+      w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
+      a = { lua 'pp(vim.lsp.buf.add_workspace_folder())', 'Add folder' },
+      r = { lua 'pp(vim.lsp.buf.remove_workspace_folder())', 'Remove folder' },
+    },
+  },
+  c = {
+    name = '+code',
+    [' '] = {},
+    d = { cmd 'Telescope lsp_definitions', 'Def' },
+    i = { cmd 'Telescope lsp_implementations', 'Impl' },
+    r = { cmd 'Telescope lsp_references', 'Ref' },
+    s = { cmd 'Telescope lsp_document_symbols', 'Document symbols' },
+    S = { cmd 'Telescope lsp_dynamic_workspace_symbols', 'Workspace symbols' },
+    e = { cmd 'Telescope diagnostics bufnr=0', 'Diagnostics' },
+    E = { cmd 'Telescope diagnostics', 'Diagnostics(All)' },
+    --
+    c = { cmd 'CodeActionMenu', 'Code action' },
+    o = { cmd 'SymbolsOutline', 'Outline' },
+    v = { cmd 'Vista!!', 'Vista' },
     -- p = {
     --   name = '+peek',
     --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },
     --   i = { "<cmd>lua require('young.lsp.misc').Peek('implementation')<cr>", 'Implementation' },
     --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type definition' },
     -- },
-    r = { vim.lsp.buf.rename, 'Rename' },
-    t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
-    v = { '<cmd>Vista!!<cr>', 'Vista' },
-    w = {
-      w = { '<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>', 'Workspace folders' },
-      a = { '<cmd>lua pp(vim.lsp.buf.add_workspace_folder())<cr>', 'Add folder' },
-      r = { '<cmd>lua pp(vim.lsp.buf.remove_workspace_folder())<cr>', 'Remove folder' },
-    },
-    --
-    i = { '<cmd>LspInfo<cr>', 'Info' },
-    m = { '<cmd>Mason<cr>', 'Mason' },
-    n = { '<cmd>NullLsInfo<cr>', 'Null LS' },
-    N = { '<cmd>Copilot status<cr>', 'Copilot status' },
-    C = { '<cmd>CmpStatus<cr>', 'Cmp status' },
   },
   L = {
     name = '+lua',
-    C = { '<cmd>LuaCacheClear<cr>', 'LuaCache clear' },
-    L = { '<cmd>LuaCacheLog<cr>', 'LuaCache log' },
-    P = { '<cmd>LuaCacheProfile<cr>', 'LuaCache profile' },
-    l = {
+    c = { '<cmd>LuaCacheClear<cr>', 'LuaCache clear' },
+    l = { '<cmd>LuaCacheLog<cr>', 'LuaCache log' },
+    p = { '<cmd>LuaCacheProfile<cr>', 'LuaCache profile' },
+    L = {
       name = '+logs',
       d = {
         "<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",

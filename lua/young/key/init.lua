@@ -15,12 +15,15 @@ local M = {}
 --   end
 -- end
 
-M.cmd = function(str)
+function M.cmd(str)
   return '<Cmd>' .. str .. '<CR>'
 end
 
-M.cu = function(str)
+function M.cu(str)
   return '<C-u><Cmd>' .. str .. '<CR>'
 end
 
+function M.lua(str)
+  return '<Cmd>lua ' .. str .. '<CR>'
+end
 return M

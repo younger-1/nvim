@@ -147,7 +147,7 @@ M.cfg = {
     enable = true,
     -- NOTE: visual
     keymaps = {
-      -- init_selection = ";;",
+      init_selection = ";;",
       node_incremental = ']s',
       node_decremental = '[s',
       scope_incremental = ']S',
