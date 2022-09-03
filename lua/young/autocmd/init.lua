@@ -200,7 +200,8 @@ function M.done()
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,sagahover', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
     },

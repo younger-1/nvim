@@ -839,6 +839,19 @@ mods.code = {
     -- 'SirVer/ultisnips'
     -- 'quangnguyen30192/cmp-nvim-ultisnips'
   },
+  debug = {
+    {
+      'mfussenegger/nvim-dap',
+      module = 'dap',
+    },
+    {
+      'rcarriga/nvim-dap-ui',
+      after = 'nvim-dap',
+      config = function()
+        require 'young.mod.dapui'
+      end,
+    },
+  },
   task = {
     -- { 'tpope/vim-dispatch' },
     -- { 'pianocomposer321/yabs.nvim', config = require 'young.mod.yabs' },
