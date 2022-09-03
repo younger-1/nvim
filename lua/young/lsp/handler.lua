@@ -13,6 +13,8 @@ for _, sign in ipairs(signs) do
     text = sign.text,
     texthl = sign.name,
     numhl = sign.name,
+    -- linehl
+    -- culhl
   })
 end
 
