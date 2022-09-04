@@ -122,50 +122,28 @@ function M.once()
   }
   keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
 
-  -- Hover Doc
-  keymap('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
-
-  -- Definition preview
-  keymap('n', 'gd', '<cmd>Lspsaga preview_definition<CR>', { silent = true })
-
-  -- Show line diagnostics
-  keymap('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', { silent = true })
-
-  -- Show cursor diagnostic
-  keymap('n', 'gL', '<cmd>Lspsaga show_cursor_diagnostics<CR>', { silent = true })
-
-  -- Signature help
-  keymap('n', 'gs', '<Cmd>Lspsaga signature_help<CR>', { silent = true })
-
   -- Code action
-  keymap('n', '<leader>la', '<cmd>Lspsaga code_action<CR>', { silent = true })
-  keymap('v', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
-
-  -- Rename
-  keymap('n', '<leader>lr', '<cmd>Lspsaga rename<CR>', { silent = true })
-
-  -- Outline
-  keymap('n', '<leader>lO', '<cmd>LSoutlineToggle<CR>', { silent = true })
+  -- keymap('v', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
 
   -- Diagnsotic jump
-  keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
-  keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+  -- keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
+  -- keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
 
   -- Only jump to error
-  keymap('n', '[E', function()
-    require('lspsaga.diagnostic').goto_prev { severity = vim.diagnostic.severity.ERROR }
-  end, { silent = true })
-  keymap('n', ']E', function()
-    require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }
-  end, { silent = true })
+  -- keymap('n', '[E', function()
+  --   require('lspsaga.diagnostic').goto_prev { severity = vim.diagnostic.severity.ERROR }
+  -- end, { silent = true })
+  -- keymap('n', ']E', function()
+  --   require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }
+  -- end, { silent = true })
 
   -- scroll in hover doc or definition preview window
-  keymap('n', '<C-f>', function()
-    require('lspsaga.action').smart_scroll_with_saga(1)
-  end, { silent = true })
-  keymap('n', '<C-b>', function()
-    require('lspsaga.action').smart_scroll_with_saga(-1)
-  end, { silent = true })
+  -- keymap('n', '<C-f>', function()
+  --   require('lspsaga.action').smart_scroll_with_saga(1)
+  -- end, { silent = true })
+  -- keymap('n', '<C-b>', function()
+  --   require('lspsaga.action').smart_scroll_with_saga(-1)
+  -- end, { silent = true })
 end
 
 return M

@@ -139,7 +139,7 @@ function _G.rr(module)
   if ok then
     return result
   else
-    vim.notify(result, vim.log.levels.ERROR, { title = fmt('[rr]: Error requiring: %s', module) })
+    -- vim.notify(result, vim.log.levels.ERROR, { title = fmt('[young]: Error requiring: %s', module) })
     return false
   end
 end

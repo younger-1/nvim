@@ -148,6 +148,16 @@ function M.done()
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
         desc = 'Jump to last cursor position when opening a file',
       },
+      -- {
+      --   'BufReadPost',
+      --   '*',
+      --   function()
+      --     local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+      --     if row > 0 and row <= vim.api.nvim_buf_line_count(0) then
+      --       vim.api.nvim_win_set_cursor(0, { row, col })
+      --     end
+      --   end,
+      -- },
       -- { 'FocusLost', '*', 'silent! wa' },
       {
         'VimEnter,VimResume',
@@ -200,10 +210,11 @@ function M.done()
       { 'VimResized', '*', 'tabdo wincmd =' },
     },
     _general_lsp = {
-      { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
-      -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
+      { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'dap-float', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
     _startup = {
       { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
