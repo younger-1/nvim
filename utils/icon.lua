@@ -1,3 +1,36 @@
+local icons = {
+  Class = ' ',
+  Color = ' ',
+  Constant = ' ',
+  Constructor = ' ',
+  Enum = '了 ',
+  EnumMember = ' ',
+  Event = '',
+  -- Field = " ",
+  Field = 'ﰠ',
+  -- File = " ",
+  File = '',
+  Folder = ' ',
+  Function = ' ',
+  Interface = 'ﰮ ',
+  Keyword = ' ',
+  Method = 'ƒ ',
+  Module = ' ',
+  Operator = '',
+  Property = ' ',
+  Reference = '',
+  Snippet = '﬌ ',
+  Struct = ' ',
+  -- Text = " ",
+  Text = '',
+  TypeParameter = '',
+  -- Unit = " ",
+  Unit = '塞',
+  Value = ' ',
+  -- Variable = " ",
+  Variable = '',
+}
+
 --                       --
 --                       --
 --                  ﴂ ﴃ    --
@@ -34,4 +67,3 @@
 -- Parameter      
 -- StaticMethod   ﴂ
 -- Macro          
-

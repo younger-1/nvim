@@ -832,9 +832,14 @@ mods.code = {
     -- }
   },
   snippet = {
-    { 'rafamadriz/friendly-snippets', opts = true },
     -- [luasnip]
-    { 'L3MON4D3/LuaSnip', module = 'luasnip' },
+    {
+      'L3MON4D3/LuaSnip',
+      module = 'luasnip',
+      config = function()
+        require 'young.mod.luasnip'
+      end,
+    },
     { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
     -- [vsnip]
     -- 'hrsh7th/cmp-vsnip',
@@ -842,6 +847,7 @@ mods.code = {
     -- [ultisnips]
     -- 'SirVer/ultisnips'
     -- 'quangnguyen30192/cmp-nvim-ultisnips'
+    { 'rafamadriz/friendly-snippets', opts = true },
   },
   debug = {
     {
@@ -907,6 +913,19 @@ mods.code = {
     --     }
     --   },
     -- },
+  },
+  doc = {
+    {
+      'danymat/neogen',
+      -- cmd = 'Neogen',
+      -- event = 'InsertEnter',
+      after = 'nvim-treesitter',
+      config = function()
+        require('neogen').setup {
+          snippet_engine = 'luasnip',
+        }
+      end,
+    },
   },
 }
 

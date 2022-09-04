@@ -335,6 +335,13 @@ return {
       P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", 'Open the Packer logfile' },
     },
   },
+  n = {
+    name = '+neogen',
+    f = { cmd 'Neogen func', 'Function' },
+    F = { cmd 'Neogen file', 'File' },
+    c = { cmd 'Neogen class', 'Class' },
+    t = { cmd 'Neogen type', 'Type' },
+  },
   p = {
     name = '+packer',
     C = { '<cmd>PackerCompile profile=true<cr>', 'Compile++' },

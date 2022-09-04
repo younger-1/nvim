@@ -123,12 +123,14 @@ M.cfg = {
       -- select = false,
     },
     ['<Tab>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-        -- elseif luasnip.expandable() then
-        --   luasnip.expand()
-        -- elseif luasnip.expand_or_jumpable() then
-        --   luasnip.expand_or_jump()
+      -- if cmp.visible() then
+      --   cmp.select_next_item()
+      -- else
+      -- if require('neogen').jumpable() then
+      --   require('neogen').jump_next()
+      -- else
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -137,10 +139,14 @@ M.cfg = {
       's',
     }),
     ['<S-Tab>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-        -- elseif luasnip.jumpable(-1) then
-        --   luasnip.jump(-1)
+      -- if cmp.visible() then
+      --   cmp.select_prev_item()
+      -- else
+      -- if require('neogen').jumpable(true) then
+      --   require('neogen').jump_prev()
+      -- else
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -176,40 +182,6 @@ M.cfg = {
 }
 
 M.done = function()
-  -- TODO: move to icons
-  local icons = {
-    Class = ' ',
-    Color = ' ',
-    Constant = ' ',
-    Constructor = ' ',
-    Enum = '了 ',
-    EnumMember = ' ',
-    Event = '',
-    -- Field = " ",
-    Field = 'ﰠ',
-    -- File = " ",
-    File = '',
-    Folder = ' ',
-    Function = ' ',
-    Interface = 'ﰮ ',
-    Keyword = ' ',
-    Method = 'ƒ ',
-    Module = ' ',
-    Operator = '',
-    Property = ' ',
-    Reference = '',
-    Snippet = '﬌ ',
-    Struct = ' ',
-    -- Text = " ",
-    Text = '',
-    TypeParameter = '',
-    -- Unit = " ",
-    Unit = '塞',
-    Value = ' ',
-    -- Variable = " ",
-    Variable = '',
-  }
-
   cmp.setup(M.cfg)
 
   -- Set configuration for specific filetype.
