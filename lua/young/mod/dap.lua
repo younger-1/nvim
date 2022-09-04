@@ -1,9 +1,9 @@
+-- dap highlight:
 -- `DapBreakpoint` for breakpoints (default: `B`)
 -- `DapBreakpointCondition` for conditional breakpoints (default: `C`)
 -- `DapLogPoint` for log points (default: `L`)
 -- `DapStopped` to indicate where the debugee is stopped (default: `→`)
 -- `DapBreakpointRejected` to indicate breakpoints rejected by the debug adapter (default: `R`)
-
 local signs = {
   -- { DapBreakpoint = '🛑' },
   DapBreakpoint = { '', 'Error' },
@@ -86,10 +86,32 @@ dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 -- - frames
 -- - expression
 -- - threads
-
+--
 -- The widgets may have the following custom mappings enabled:
 -- - `<CR>` to expand or collapse an entry
 -- - `a` to show a menu with available actions
+
+-- Available widget builder functions:
+-- - sidebar({widget}, {winopts}, {wincmd})
+--     Creates a view for a sidebar.
+--     See |dap.repl.open()| for a description of `winopts` and `wincmd`.
+-- - cursor_float({widget}, {winopts})
+--     Opens the contents of the widget in a floating window anchored at the cursor.
+-- - centered_float({widget}, {winopts})
+--     Opens the contents of the widget in a centered floating window.
+--
+-- - hover({expr}, {winopts})
+--     Evaluates the expression and displays the result in a floating window.
+--     {expr} defaults to `<cexpr>`.
+--     It can be either a string as described in |expand()| or a function that
+--     should return the variable or expression that should be evaluated.
+-- - preview({expr})
+--     Like hover but uses the preview window
+--
+-- All widget builder functions return a `view`. A view has the following methods:
+-- - open()
+-- - close()
+-- - toggle()
 
 -- View the current scopes in a sidebar:
 --   local widgets = require('dap.ui.widgets')
@@ -105,26 +127,12 @@ dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 -- View the value for the expression under the cursor in a floating window:
 --   require('dap.ui.widgets').hover()
 
--- Available widget builder functions:
--- - sidebar({widget}, {winopts}, {wincmd})
---     Creates a view for a sidebar.
---     See |dap.repl.open()| for a description of `winopts` and `wincmd`.
--- - cursor_float({widget}, {winopts})
---     Opens the contents of the widget in a floating window anchored at the cursor.
--- - centered_float({widget}, {winopts})
---     Opens the contents of the widget in a centered floating window.
--- - hover({expr}, {winopts})
---     Evaluates the expression and displays the result in a floating window.
---     {expr} defaults to `<cexpr>`.
---     It can be either a string as described in |expand()| or a function that
---     should return the variable or expression that should be evaluated.
--- - preview({expr})
---     Like hover but uses the preview window
-
--- All widget builder functions return a `view`. A view has the following methods:
--- - open()
--- - close()
--- - toggle()
+vim.cmd [[
+command DapScopesFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').scopes)<CR>
+command DapFramesFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').frames)<CR>
+command DapExpressionFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').expression)<CR>
+command DapThreadsFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').threads)<CR>
+]]
 
 local M = {}
 
@@ -192,6 +200,28 @@ function M.setup_python()
   })
   -- ensure already opened buffer setup mappings
   vim.cmd [[doautoall dap_python FileType]]
+end
+
+function M.setup_go() end
+
+function M.setup_virtual_text()
+  require('nvim-dap-virtual-text').setup {
+    enabled = true, -- enable this plugin (the default)
+    enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+    highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+    highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+    show_stop_reason = true, -- show stop reason when stopped for exceptions
+    commented = true, -- prefix virtual text with comment string
+    only_first_definition = true, -- only show virtual text at first definition (if there are multiple)
+    all_references = false, -- show virtual text on all all references of the variable (not only definitions)
+    filter_references_pattern = '<module', -- filter references (not definitions) pattern when all_references is activated (Lua gmatch pattern, default filters out Python modules)
+    -- experimental features:
+    virt_text_pos = 'eol', -- position of virtual text, see `:h nvim_buf_set_extmark()`
+    all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+    virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
+    virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column),
+    -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
+  }
 end
 
 return M

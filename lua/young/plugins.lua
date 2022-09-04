@@ -859,6 +859,27 @@ mods.code = {
       end,
     },
     {
+      'theHamsta/nvim-dap-virtual-text',
+      after = 'nvim-dap',
+      config = function()
+        require('young.mod.dap').setup_virtual_text()
+      end,
+    },
+    {
+      'nvim-telescope/telescope-dap.nvim',
+      after = { 'nvim-dap', 'telescope.nvim' },
+      -- config = function()
+      --   require('telescope').load_extension 'dap'
+      -- end,
+    },
+    {
+      'Weissle/persistent-breakpoints.nvim',
+      after = 'nvim-dap',
+      config = function()
+        require('persistent-breakpoints').setup {}
+      end,
+    },
+    {
       'mfussenegger/nvim-dap-python',
       after = 'nvim-dap',
       config = function()

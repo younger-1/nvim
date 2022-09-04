@@ -128,6 +128,14 @@ return {
     name = '+debug',
     [' '] = { lua "require'dapui'.toggle()", ' UI' },
     ['<tab>'] = '+lang',
+    f = {
+      s = { cmd 'DapScopesFloat', 'Scopes float' },
+      f = { cmd 'DapFramesFloat', 'Frames Float' },
+      e = { cmd 'DapExpressionFloat', 'Expression float' },
+      t = { cmd 'DapThreadsFloat', 'Threads float' },
+    },
+    h = { lua "require'dap.ui.widgets'.hover()", 'Hover' },
+    t = { cmd 'DapVirtualTextToggle', 'Virtual text' },
 
     L = { cmd 'DapShowLog', 'Show log' },
 
@@ -138,14 +146,10 @@ return {
     v = { lua "require'dap'.goto_()", 'Jump/Skip to line' },
     z = { lua "require'dap'.pause()", '懶 Pause' },
 
-    d = { lua "require'dap'.set_breakpoint()", 'ﴫ Breakpoint' },
-    e = { lua "require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))", ' Condition breakpoint' },
-    f = { lua "require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))", ' Log breakpoint' },
-    h = { lua "require'dap'.set_breakpoint(nil, vim.fn.input('Hit times: '))", ' Hit breakpoint' },
-    D = { lua "require'dap'.toggle_breakpoint()", 'Toggle breakpoint' },
-    E = { lua "require'dap'.toggle_breakpoint(vim.fn.input('Breakpoint condition: '))", 'Condition breakpoint' },
-    F = { lua "require'dap'.toggle_breakpoint(nil, nil, vim.fn.input('Log point message: '))", 'Log breakpoint' },
-    H = { lua "require'dap'.toggle_breakpoint(nil, vim.fn.input('Hit times: '))", 'Hit breakpoint' },
+    d = { lua "require'dap'.toggle_breakpoint()", 'ﴫ Toggle breakpoint' },
+    E = { lua "require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))", ' Condition breakpoint' },
+    F = { lua "require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))", ' Log breakpoint' },
+    H = { lua "require'dap'.set_breakpoint(nil, vim.fn.input('Hit times: '))", ' Hit breakpoint' },
 
     g = { lua "require'dap'.set_exception_breakpoints()", 'Ask exception breakpoints' },
     G = { lua "require'dap'.set_exception_breakpoints('default')", 'Default exception breakpoints' },
@@ -283,7 +287,7 @@ return {
   },
   c = {
     name = '+code',
-    [' '] = {},
+    -- [' '] = {},
     d = { cmd 'Telescope lsp_definitions', 'Def' },
     i = { cmd 'Telescope lsp_implementations', 'Impl' },
     r = { cmd 'Telescope lsp_references', 'Ref' },
@@ -392,6 +396,14 @@ return {
     a = { '<cmd>Telescope autocommands<cr>', 'Autocommands' },
     b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Buffer string' },
     c = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", 'Colorscheme' },
+    d = {
+      name = '+dap',
+      [' '] = { cmd 'Telescope dap configurations', 'Dap configurations' },
+      c = { cmd 'Telescope dap commands', 'Dap commands' },
+      l = { cmd 'Telescope dap list_breakpoints', 'Dap list_breakpoints' },
+      v = { cmd 'Telescope dap variables', 'Dap variables' },
+      f = { cmd 'Telescope dap frames', 'Dap frames' },
+    },
     e = { '<cmd>Telescope env<cr>', 'Env' },
     f = { '<cmd>Telescope find_files<cr>', 'Find files' },
     F = { '<cmd>Telescope find_files no_ignore=1<cr>', 'Find files (more)' },
