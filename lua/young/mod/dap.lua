@@ -134,6 +134,18 @@ command DapExpressionFloat :lua require'dap.ui.widgets'.centered_float(require('
 command DapThreadsFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').threads)<CR>
 ]]
 
+xy.autogroup('dap_loadjson', {
+  {
+    'BufWritePost',
+    'launch.json',
+    function()
+      -- require('dap').configurations = {}
+      require('dap.ext.vscode').load_launchjs()
+    end,
+  },
+})
+require('dap.ext.vscode').load_launchjs()
+
 local M = {}
 
 function M.setup_python()
