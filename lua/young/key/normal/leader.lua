@@ -134,8 +134,11 @@ return {
       e = { cmd 'DapExpressionFloat', 'Expression float' },
       t = { cmd 'DapThreadsFloat', 'Threads float' },
     },
-    h = { lua "require'dap.ui.widgets'.hover()", 'Hover' },
+    -- h = { lua "require'dap.ui.widgets'.hover()", 'Hover' },
+    h = { lua "require'dapui'.eval(nil, { enter = true })", 'Hover' },
     t = { cmd 'DapVirtualTextToggle', 'Virtual text' },
+    ['['] = { lua "require('persistent-breakpoints.api').load_breakpoints()", 'Load breakpoints' },
+    [']'] = { lua "require('persistent-breakpoints.api').store_breakpoints()", 'Store breakpoints' },
 
     L = { cmd 'DapShowLog', 'Show log' },
 
@@ -147,13 +150,13 @@ return {
     z = { lua "require'dap'.pause()", '懶 Pause' },
 
     d = { lua "require'dap'.toggle_breakpoint()", 'ﴫ Toggle breakpoint' },
-    E = { lua "require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))", ' Condition breakpoint' },
+    E = { lua "require'dap'.set_breakpoint(vim.fn.input('Condition: '))", ' Condition breakpoint' },
     F = { lua "require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))", ' Log breakpoint' },
     H = { lua "require'dap'.set_breakpoint(nil, vim.fn.input('Hit times: '))", ' Hit breakpoint' },
 
     g = { lua "require'dap'.set_exception_breakpoints()", 'Ask exception breakpoints' },
     G = { lua "require'dap'.set_exception_breakpoints('default')", 'Default exception breakpoints' },
-    l = { lua "require'dap'.list_breakpoints()", 'List breakpoints' },
+    l = { lua "require'dap'.list_breakpoints(true)", 'List breakpoints' },
     C = { lua "require'dap'.clear_breakpoints()", 'Clear breakpoints' },
 
     r = { lua "require'dap'.repl.toggle()", ' Toggle repl' },
@@ -172,7 +175,7 @@ return {
     Q = { lua "require'dap'.disconnect()", 'Disconnect' },
     -- q = { lua "require'dap'.close()", 'Quit' },
 
-    S = { lua "require'dap'.session()", 'Get session' },
+    m = { lua "pp(require'dap'.status(), require'dap'.session())", 'Print session' },
     J = { lua "require('dap.ext.vscode').load_launchjs()", 'Load launch JSON' },
   },
   e = { cmd 'NvimTreeToggle', 'Explorer' },
