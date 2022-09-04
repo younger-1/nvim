@@ -126,6 +126,21 @@ mods.appearance = {
     --     }
     --   end,
     -- },
+    {
+      'm-demare/hlargs.nvim',
+      after = 'nvim-treesitter',
+      config = function()
+        require('hlargs').setup {
+          color = '#ef9062',
+        }
+      end,
+    },
+    {
+      'monkoose/matchparen.nvim',
+      config = function()
+        require('matchparen').setup()
+      end,
+    },
   },
 }
 
@@ -463,6 +478,14 @@ mods.find = {
   --     require 'young.mod.searchbox'
   --   end,
   -- },
+  {
+    'kevinhwang91/nvim-hlslens',
+    event = 'CursorMoved',
+    config = function()
+      require 'young.mod.hlslens'
+      require('scrollbar.handlers.search').setup()
+    end,
+  },
 }
 
 mods.telescope = {
@@ -777,7 +800,6 @@ mods.UI = {
       event = 'BufWinEnter',
       config = function()
         require('scrollbar').setup()
-        -- require('scrollbar.handlers.search').setup()
       end,
     },
   },
