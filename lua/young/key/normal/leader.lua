@@ -476,7 +476,7 @@ return {
     name = '+trouble',
     ['.'] = { cmd 'Trouble telescope', 'Telescope' },
     --
-    e = { cmd 'TroubleToggle document_diagnostics<cr>', 'Diagnostics' },
+    e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
     E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
     --
     ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
