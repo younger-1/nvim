@@ -474,20 +474,20 @@ return {
   w = { '<cmd>w!<cr>', 'Save' },
   x = {
     name = '+trouble',
-    ['.'] = { '<cmd>Trouble telescope<cr>', 'Telescope' },
+    ['.'] = { cmd 'Trouble telescope', 'Telescope' },
     --
-    e = { '<cmd>Trouble document_diagnostics<cr>', 'Diagnostics' },
-    E = { '<cmd>Trouble workspace_diagnostics<cr>', 'Diagnostics(All)' },
+    e = { cmd 'TroubleToggle document_diagnostics<cr>', 'Diagnostics' },
+    E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
     --
-    ['<C-q>'] = { '<cmd>Trouble quickfix<cr>', 'QuickFix' },
-    ['<C-a>'] = { '<cmd>Trouble loclist<cr>', 'LocList' },
+    ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
+    ['<C-a>'] = { cmd 'TroubleToggle loclist', 'LocList' },
     --
-    x = { '<cmd>TroubleToggle<cr>', 'Open' },
-    t = { '<cmd>TodoTrouble<cr>', 'Todo' },
-    d = { '<cmd>Trouble lsp_definitions<cr>', 'Def' },
-    i = { '<cmd>Trouble lsp_implementations<cr>', 'Impl' },
-    r = { '<cmd>Trouble lsp_references<cr>', 'Ref' },
-    D = { '<cmd>Trouble lsp_type_definitions<cr>', 'Type' },
+    x = { cmd 'TroubleToggle', 'Open' },
+    d = { cmd 'TroubleToggle lsp_definitions', 'Def' },
+    i = { cmd 'TroubleToggle lsp_implementations', 'Impl' },
+    r = { cmd 'TroubleToggle lsp_references', 'Ref' },
+    D = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
+    t = { cmd 'TodoTrouble', 'Todo' },
   },
   y = {
     name = '+young',

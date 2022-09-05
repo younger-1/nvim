@@ -28,6 +28,9 @@ M.cfg = {
   -- Animation style (see below for details)
   stages = nil,
 
+  -- whether or not to position the notifications at the top or not
+  top_down = true,
+
   -- Function called when a new window is opened, use for changing win settings/config
   on_open = nil,
 
