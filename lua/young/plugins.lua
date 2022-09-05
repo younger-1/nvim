@@ -914,6 +914,13 @@ mods.code = {
         require('young.mod.dap').setup_python()
       end,
     },
+    {
+      'leoluz/nvim-dap-go',
+      after = 'nvim-dap',
+      config = function()
+        require('young.mod.dap').setup_go()
+      end,
+    },
   },
   task = {
     -- { 'tpope/vim-dispatch' },

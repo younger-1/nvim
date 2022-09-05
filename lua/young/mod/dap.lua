@@ -155,6 +155,24 @@ function M.setup_python()
     -- require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/bin/python3'
     require('mason-core.path').package_prefix 'debugpy' .. '/venv/bin/python3'
   )
+  xy.autogroup('dap_python', {
+    {
+      'FileType',
+      'python',
+      function()
+        xy.map.register {
+          ['<leader>d<tab>'] = {
+            m = { require('dap-python').test_method, '[py] Test method', buffer = true },
+            c = { require('dap-python').test_class, '[py] Test class', buffer = true },
+            s = { require('dap-python').debug_selection, '[py] Debug selection', buffer = true },
+          },
+        }
+      end,
+    },
+  })
+  -- ensure already opened buffer setup mappings
+  vim.cmd [[doautoall dap_python FileType]]
+
   -- table.insert(require('dap').configurations.python, {
   --   type = 'python',
   --   request = 'launch',
@@ -194,27 +212,26 @@ function M.setup_python()
   --     end,
   --   },
   -- }
+end
 
-  xy.autogroup('dap_python', {
+function M.setup_go()
+  require('dap-go').setup()
+  xy.autogroup('dap_go', {
     {
       'FileType',
-      'python',
+      'go',
       function()
         xy.map.register {
           ['<leader>d<tab>'] = {
-            m = { require('dap-python').test_method, '[py] Test method', buffer = true },
-            c = { require('dap-python').test_class, '[py] Test class', buffer = true },
-            s = { require('dap-python').debug_selection, '[py] Debug selection', buffer = true },
+            m = { require('dap-go').debug_test, '[go] Test method', buffer = true },
           },
         }
       end,
     },
   })
   -- ensure already opened buffer setup mappings
-  vim.cmd [[doautoall dap_python FileType]]
+  vim.cmd [[doautoall dap_go FileType]]
 end
-
-function M.setup_go() end
 
 function M.setup_virtual_text()
   require('nvim-dap-virtual-text').setup {
