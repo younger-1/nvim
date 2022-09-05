@@ -183,7 +183,7 @@ M.done = function()
     -- if not done_ft[ft] then
     --   setup_server(server_name)
     -- end
-    if not vim.tbl_contains(require('lspconfig').available_servers(), server_name) then
+    if not vim.tbl_contains(require('lspconfig.util').available_servers(), server_name) then
       setup_server(server_name)
     end
   end

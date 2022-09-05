@@ -8,6 +8,7 @@ function! FoldTextToggle()
 endfunction
 
 function! QuickFixToggle()
+  lclose
   if empty(filter(getwininfo(), 'v:val.quickfix'))
     copen
   else
@@ -16,7 +17,8 @@ function! QuickFixToggle()
 endfunction
 
 function! LocListToggle()
-  if empty(filter(getwininfo(), 'v:val.quickfix'))
+  cclose
+  if empty(filter(getwininfo(), 'v:val.loclist'))
     silent! lopen
   else
     lclose
