@@ -462,6 +462,7 @@ mods.find = {
   fzf = {
     {
       'ibhagwan/fzf-lua',
+      cmd = 'FzfLua',
       module = 'fzf-lua',
       config = function()
         require 'young.mod.fzf'
@@ -809,7 +810,7 @@ mods.code = {
   completion = {
     {
       'hrsh7th/nvim-cmp',
-      event = 'InsertEnter',
+      event = { 'InsertEnter', 'CmdlineEnter' },
       config = function()
         require('young.mod.cmp').done()
       end,

@@ -112,7 +112,6 @@ function M.once()
         d = { cmd 'Lspsaga preview_definition' },
         l = { cmd 'Lspsaga show_line_diagnostics' },
         L = { cmd 'Lspsaga show_cursor_diagnostics' },
-        s = { cmd 'Lspsaga signature_help' },
         a = { cmd 'Lspsaga code_action' },
         A = { cmd 'Lspsaga range_code_action' },
         r = { cmd 'Lspsaga rename' },
@@ -120,14 +119,17 @@ function M.once()
       },
     },
   }
-  keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', { silent = true })
+  -- Lsp finder find the symbol definition implement reference
+  -- when you use action in finder like open vsplit then you can
+  -- use <C-t> to jump back
+  keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
 
   -- Code action
   -- keymap('v', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
 
-  -- Diagnsotic jump
-  -- keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
-  -- keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+  -- Diagnsotic jump can use `<c-o>` to jump back
+  -- keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+  -- keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
 
   -- Only jump to error
   -- keymap('n', '[E', function()
@@ -137,13 +139,13 @@ function M.once()
   --   require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }
   -- end, { silent = true })
 
-  -- scroll in hover doc or definition preview window
-  -- keymap('n', '<C-f>', function()
-  --   require('lspsaga.action').smart_scroll_with_saga(1)
-  -- end, { silent = true })
-  -- keymap('n', '<C-b>', function()
-  --   require('lspsaga.action').smart_scroll_with_saga(-1)
-  -- end, { silent = true })
+  -- Float terminal
+  keymap('n', '<A-d>', cmd 'Lspsaga open_floaterm', { silent = true })
+  -- if you want pass some cli command into terminal you can do like this
+  -- open lazygit in lspsaga float terminal
+  keymap('n', '<A-g>', cmd 'Lspsaga open_floaterm lazygit', { silent = true })
+  -- close floaterm
+  keymap('t', '<A-d>', [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 end
 
 return M
