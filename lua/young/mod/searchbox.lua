@@ -50,11 +50,13 @@ xy.map.n {
   '<C-f>',
   function()
     if vim.tbl_contains(exclude_buftypes, vim.bo.buftype) then
-      vim.cmd [[exe "normal! \<C-f>"]] -- ok
-      -- vim.cmd('normal! ' .. xy.util.t '<C-f>') -- ok
-      -- vim.cmd [[exe 'normal! \<C-f>']] -- not ok
       -- vim.cmd [[normal! \<C-f>]] -- not ok
-      -- vim.fn.feedkeys(xy.util.t '<C-f>')
+      -- vim.cmd [[exe 'normal! \<C-f>']] -- not ok
+      vim.cmd [[exe "normal! \<C-f>"]] -- ok
+      -- vim.cmd [[call feedkeys('\<C-f>', 'n')]] -- not ok
+      -- vim.cmd [[call feedkeys("\<C-f>", 'n')]] -- ok
+      -- vim.fn.feedkeys(xy.util.t '<C-f>', 'n') -- ok
+      -- vim.cmd('normal! ' .. xy.util.t '<C-f>') -- ok
       return
     end
     -- vim.cmd 'SearchBoxMatchAll title="Match All"'

@@ -150,6 +150,10 @@ M.keys = {
 
     ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
+    ['<C-c>'] = function()
+      vim.cmd 'nohl'
+      vim.fn.feedkeys(xy.util.t '<C-c>', 'n')
+    end,
     -- ['<S-CR>'] = '<cmd>wqa<CR>', -- windows terminal not recognize
     -- ['<CR>'] = { "(&buftype is# '' ? ':w<CR>' : '<CR>')", { expr = true } },
 
@@ -219,7 +223,7 @@ M.done = function()
   for mode_name, mappings in pairs(M.keys) do
     local mode = mode_adapters[mode_name]
     for k, v in pairs(mappings) do
-      if type(v) == 'string' then
+      if type(v) ~= 'table' then
         v = { v }
       end
       table.insert(v, 1, k)
@@ -229,4 +233,3 @@ M.done = function()
 end
 
 M.done()
-
