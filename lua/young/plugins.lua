@@ -651,7 +651,7 @@ mods.UI = {
     },
     {
       -- 'folke/which-key.nvim',
-      'max397574/which-key.nvim', -- TODO:while lvim use it
+      'folke/which-key.nvim', -- TODO:while lvim use it
       event = 'BufWinEnter',
       config = function()
         require('young.mod.which_key').done()
