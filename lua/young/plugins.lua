@@ -66,7 +66,8 @@ mods.appearance = {
   },
   color = {
     {
-      'norcalli/nvim-colorizer.lua',
+      -- 'norcalli/nvim-colorizer.lua',
+      'NvChad/nvim-colorizer.lua',
       event = 'BufRead',
       config = function()
         require 'young.mod.colorizer'
@@ -261,9 +262,10 @@ mods.change = {
     },
     -- {
     --   'mg979/vim-visual-multi',
-    --   cmd = { 'VMDebug', 'VMLive', 'VMRegisters', 'VMSearch' },
+    --   keys = "<A-n>",
+    --   -- cmd = { 'VMDebug', 'VMLive', 'VMRegisters', 'VMSearch' },
     --   setup = function()
-    --     vim.g.VM_default_mappings = 0
+    --     require('young.mod.multi_cursor')
     --   end,
     -- },
     {

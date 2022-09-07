@@ -19,6 +19,7 @@ local default_options = {
   foldenable = false,
   foldmethod = 'expr', -- folding, set to "expr" for treesitter based folding
   foldexpr = 'nvim_treesitter#foldexpr()', -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
+  foldtext = 'yo#fold#Text()',
   -- guifont = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
   guifontwide = { 'Sarasa Term SC' },
   mouse = '', -- allow the mouse to be used in neovim
