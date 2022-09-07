@@ -112,19 +112,9 @@ mods.appearance = {
     },
     -- { -- Highlight UI elements based on current mode
     --   'mvllow/modes.nvim',
-    --   event = 'BufRead',
+    --   event = 'CursorMoved',
     --   config = function()
-    --     vim.opt.cursorline = true
-    --     require('modes').setup {
-    --       colors = {
-    --         insert = '#78ccc5',
-    --         visual = '#f5c359',
-    --         delete = '#c75c6a',
-    --         copy = '#9745be',
-    --       },
-    --       line_opacity = 0.2,
-    --       focus_only = false,
-    --     }
+    --     require('young.mod.modes')
     --   end,
     -- },
     {

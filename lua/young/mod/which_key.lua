@@ -7,7 +7,7 @@ M.cfg = {
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
     presets = {
-      operators = true, -- adds help for operators like d, y, ...
+      operators = false, -- adds help for operators like d, y, ...
       motions = false, -- adds help for motions
       text_objects = false, -- help for text objects triggered after entering an operator
       windows = false, -- default bindings on <c-w>
