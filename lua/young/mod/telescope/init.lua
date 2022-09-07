@@ -66,6 +66,7 @@ M.cfg = {
     initial_mode = 'insert',
     selection_strategy = 'reset',
     sorting_strategy = 'descending',
+    preview = { timeout = 500 },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -113,16 +114,6 @@ M.cfg = {
     -- };
     color_devicons = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    pickers = {
-      find_files = {
-        -- find_command = { 'fd', '--type=file', '--hidden', '--smart-case' },
-        hidden = true,
-      },
-      live_grep = {
-        --@usage don't include the filename in the search results
-        only_sort_text = true,
-      },
-    },
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new,
@@ -199,14 +190,17 @@ M.cfg = {
     commands = { theme = 'ivy' },
     current_buffer_fuzzy_find = view.v2,
     find_files = vim.tbl_extend('force', view.v1, {
-      hidden = 1,
+      -- find_command = { 'fd', '--type=file', '--hidden', '--smart-case' },
+      -- hidden = true, -- TODO:why show hidden without this
     }),
     git_bcommits = view.h3,
     git_commits = view.h3,
     git_files = view.h3,
     git_status = view.h3,
     grep_string = { theme = 'ivy' },
-    live_grep = view.h1,
+    live_grep = vim.tbl_extend('force', view.h1, {
+      disable_coordinates = true,
+    }),
     man_pages = view.h1,
     marks = view.h1,
     oldfiles = view.v4,
