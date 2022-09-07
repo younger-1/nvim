@@ -33,7 +33,7 @@ end
 xy.map.n { 'z[', peek_prev_fold, 'Ufo peek prev fold' }
 xy.map.n { 'z]', peek_next_fold, 'Ufo peek next fold' }
 
-local handler = function(virtText, lnum, endLnum, width, truncate)
+local handler = function(virtText, lnum, endLnum, width, truncate, ctx)
   local newVirtText = {}
   local suffix = ('  %d '):format(endLnum - lnum)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
@@ -58,6 +58,12 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     curWidth = curWidth + chunkWidth
   end
   table.insert(newVirtText, { suffix, 'MoreMsg' })
+
+  -- For treesitter provider
+  if ctx then
+    -- #ctx.end_virt_text == 1
+    table.insert(newVirtText, ctx.end_virt_text[1])
+  end
   return newVirtText
 end
 
@@ -92,7 +98,8 @@ local function customizeSelector(bufnr)
 end
 
 require('ufo').setup {
-  open_fold_hl_timeout = 800,
+  open_fold_hl_timeout = 600,
+  enable_fold_end_virt_text = true,
   fold_virt_text_handler = handler,
   provider_selector = function(bufnr, filetype, buftype)
     -- use indent provider for c fieltype

@@ -60,7 +60,7 @@ local default_options = {
   list = true,
   lazyredraw = true,
   path = '.,,',
-  virtualedit = 'onemore'
+  virtualedit = 'onemore',
   -- TODO:
   -- fillchars = 'vert:┃',
   -- fillchars = { -- thicker borders between windows
@@ -72,6 +72,15 @@ local default_options = {
   --   vertright = '┣',
   --   verthoriz = '╋',
   -- },
+  fillchars = {
+    horiz = '━',
+    horizup = '━',
+    horizdown = '━',
+    vert = ' ',
+    vertleft = '━',
+    vertright = '━',
+    verthoriz = '━',
+  },
 }
 
 for k, v in pairs(default_options) do
@@ -88,13 +97,13 @@ vim.opt.whichwrap:append '<,>,[,],h,l'
 vim.opt.iskeyword:append '-'
 
 -- vim.cmd [[set listchars=tab:●·,extends:→,precedes:←,trail:■]]
-vim.opt.listchars = {
-  tab = '●·',
-  extends = '→',
-  precedes = '←',
-  trail = '■',
-  nbsp = '␣',
-}
+-- vim.opt.listchars = {
+--   tab = '●·',
+--   extends = '→',
+--   precedes = '←',
+--   trail = '■',
+--   nbsp = '␣',
+-- }
 -- vim.cmd [[set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+]]
 -- vim.opt.listchars = {
 --   eol = '↲',
@@ -105,6 +114,16 @@ vim.opt.listchars = {
 --   tab = '>-',
 --   trail = '~',
 -- }
+vim.opt.listchars = {
+  -- space = '·',
+  -- tab = '→ ',
+  tab = '••',
+  extends = '⟩',
+  precedes = '⟨',
+  trail = '■',
+  eol = '↲',
+  nbsp = '␣',
+}
 
 -- 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
 -- 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
