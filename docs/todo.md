@@ -11,7 +11,7 @@
 - [ ] highlights the search word in quickfix when using `Rg`
 - [ ] in \*.lua gf on require() can let Telescope find file in that module
 - [ ] in \*.lua gF on require() can let LSP try add that rtp to LSP's workspace library
-- [ ] in \*.lua gf on rr('foo').bar() can be used like require('foo').bar()
+- [x] in \*.lua gf on rr('foo').bar() can be used like require('foo').bar()
 - [ ] combine range-highlight and numb to a single plugin
 - [ ] Online community collect @cataloge and #tag metadata of plugin to help easily discover functionality/boundary of plugins
 - [ ] cd to current buffer's dir which can toggle cd back, nvim-tree-keymap to cd buffer's dir
@@ -32,7 +32,7 @@
 - [ ] autopair: remove single quote (\' and \`) rules for lisp file
 - [ ] call-tree, no-refenrence-list
 - [ ] decouple which-key from core, by using local.lua
-- [ ] a quick-pannel to lookup git/file information such as branch, ff, fenc, sw, which is not very common like changes and diagnostics
+- [ ] a quick-pannel to lookup git/file information (e.g. branch, ff, fenc, sw) which is not very common like changes and diagnostics
 - [ ] split diagnostics and lsp, lazy load lsp setup to filetype(not good for lvim) or event, lazy load lsp_line after diagnostics
 - [x] toggle transparence of colorscheme
 - [ ] with prefix(XY), autocmd/manually generate vim-commands for all functions of rr('young.tool') and mod's function

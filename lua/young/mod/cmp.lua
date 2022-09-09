@@ -26,10 +26,17 @@ M.cfg = {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    -- For vsnip users.
+    -- { name = 'vsnip' },
+    -- For ultisnips users.
+    -- { name = 'ultisnips' },
+    -- For snippy users.
+    -- { name = 'snippy' },
+    -- For luasnip users.
     { name = 'luasnip' },
+    --
     { name = 'path' },
     { name = 'buffer' },
-    --
     { name = 'calc' },
     -- { name = 'emoji' },
     -- { name = 'treesitter' },
@@ -38,6 +45,16 @@ M.cfg = {
   },
   snippet = {
     expand = function(args)
+      -- For `vsnip` users.
+      -- vim.fn["vsnip#anonymous"](args.body)
+
+      -- For `ultisnips` users.
+      -- vim.fn['UltiSnips#Anon'](args.body)
+
+      -- For `snippy` users.
+      -- require('snippy').expand_snippet(args.body)
+
+      -- For `luasnip` users.
       luasnip.lsp_expand(args.body)
     end,
   },
@@ -98,10 +115,11 @@ M.cfg = {
       with_text = true,
       maxwidth = 50,
       menu = {
-        buffer = '[Buffer]',
         nvim_lsp = '[LSP]',
-        luasnip = '[LuaSnip]',
         nvim_lua = '[Lua]',
+        luasnip = '[LuaSnip]',
+        path = '[Path]',
+        buffer = '[Buffer]',
         latex_symbols = '[Latex]',
       },
     },
