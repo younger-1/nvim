@@ -1,9 +1,11 @@
+local cmd = require('young.key').cmd
+
 return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<cr>', 'Comment' },
   g = {
     name = '+git',
-    s = { '<cmd>lua require "gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Stage Hunk' },
-    r = { '<cmd>lua require "gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Reset Hunk' },
+    s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk' },
+    r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk' },
     y = 'Link',
   },
   l = {

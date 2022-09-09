@@ -574,7 +574,6 @@ mods.telescope = {
 mods.git = {
   {
     'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
     event = 'BufRead',
     config = function()
       require('young.mod.gitsigns').done()
