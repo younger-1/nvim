@@ -134,7 +134,7 @@ vim.cmd [[command! TagsUpdate !ctags -R .]]
 -- vim.cmd [[command! Todo grep TODO]]
 
 if vim.loop.exepath 'rg' then
-  vim.o.grepprg = 'rg --vimgrep --no-heading --color=never'
+  vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --color=never'
   vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 elseif vim.loop.exepath 'ag' then
   vim.o.grepprg = 'ag --vimgrep --nogroup --nocolor'

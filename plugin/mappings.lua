@@ -73,8 +73,17 @@ M.keys = {
 
   map_mode = {
     -- Remap for dealing with word wrap
-    k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
     j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
+    k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
+
+    -- gj = { '' },
+    -- gk = { '' },
+
+    -- gJ = { 'L' },
+    -- gK = { 'H' },
+
+    gH = { 'H' },
+    gL = { 'L' },
 
     -- ['<Up>'] = '<C-Y>',
     -- ['<Down>'] = '<C-E>',

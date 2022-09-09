@@ -121,7 +121,9 @@ function M.done()
     })
   end
 
-  local plugins_path = vim.fn.resolve(require('young.cfg').reload_path)
+  -- can not use resolve when system is hardlink (e.g. docker image)
+  -- local plugins_path = vim.fn.resolve(require('young.cfg').reload_path)
+  local plugins_path = require('young.cfg').reload_path
   if is_windows then
     -- autocmds require forward slashes even on windows
     plugins_path = plugins_path:gsub('\\', '/')
