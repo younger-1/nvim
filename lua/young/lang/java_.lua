@@ -182,7 +182,7 @@ local opts = {
 }
 
 local vopts = {
-  mode = 'v',
+  mode = 'x',
   prefix = '<leader>',
   buffer = nil,
   silent = true,

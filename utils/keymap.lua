@@ -47,7 +47,7 @@ end
 --
 -- Example, let's map <leader>= to vim.lsp.buf.range_formatting in visual mode:
 -- ```lua
--- map '<leader>=' { vim.lsp.buf.range_formatting, "Format range", 'v' }
+-- map '<leader>=' { vim.lsp.buf.range_formatting, "Format range", 'x' }
 -- ```
 -- TODO: other modes? "s", "o", "x", "l", "c", "t"
 local function prototype()

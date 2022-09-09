@@ -62,8 +62,8 @@ M.done = function()
   vim.cmd [[
     map + <Plug>(dial-increment)
     map - <Plug>(dial-decrement)
-    vmap g+ <Plug>(dial-increment-additional)
-    vmap g- <Plug>(dial-decrement-additional)
+    xmap g+ <Plug>(dial-increment-additional)
+    xmap g- <Plug>(dial-decrement-additional)
   ]]
 
   add_true_false()

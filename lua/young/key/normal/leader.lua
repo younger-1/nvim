@@ -242,7 +242,7 @@ return {
     U = { cmd 'Gitsigns reset_buffer_index', 'Reset buffer index' },
     w = { cmd 'Gitsigns toggle_word_diff', 'Word diff' },
     y = 'Link',
-    -- y = { 'Link', mode = { 'n', 'v' } },
+    -- y = { 'Link', mode = { 'n', 'x' } },
     Y = { "<cmd>lua require'gitlinker'.get_repo_url()<cr>", 'Link(Repo)' },
   },
   h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },

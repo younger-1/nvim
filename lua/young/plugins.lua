@@ -228,7 +228,7 @@ mods.change = {
       'numToStr/Comment.nvim',
       event = 'BufRead',
       -- BUG:PackerCompile will cause `keys` redefined
-      -- keys = { { 'n', 'gc' }, { 'v', 'gc' }, { 'n', '<C-_>' }, { 'v', '<C-_>' } },
+      -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
       config = function()
         require('young.mod.comment').done()
       end,
