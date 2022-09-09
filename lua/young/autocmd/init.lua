@@ -203,10 +203,6 @@ function M.done()
         'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
       },
     },
-    _filetypechanges = {
-      { 'BufRead', 'settings.json', 'setlocal filetype=jsonc' },
-      { 'BufRead', 'coc-settings.json', 'setlocal filetype=jsonc' },
-    },
     _auto_resize = {
       -- will cause split windows to be resized evenly if main window is resized
       { 'VimResized', '*', 'tabdo wincmd =' },

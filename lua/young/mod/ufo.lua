@@ -8,12 +8,15 @@ xy.map.n { 'zR', require('ufo').openAllFolds, 'Ufo open all folds' }
 xy.map.n { 'zM', require('ufo').closeAllFolds, 'Ufo close all folds' }
 xy.map.n { 'zr', require('ufo').openFoldsExceptKinds, 'Ufo open folds except kinds' }
 xy.map.n { 'zm', require('ufo').closeFoldsWith, 'Ufo close folds with [N]' } -- closeAllFolds == closeFoldsWith(0)
+
+-- local preview_key = '<tab>' -- TODO:register buffer-map or on_key for <tab>
+local preview_key = 'J'
 xy.map.n {
-  'J',
+  preview_key,
   function()
     local winid = require('ufo').peekFoldedLinesUnderCursor()
     if not winid then
-      vim.cmd 'normal! J'
+      vim.fn.feedkeys(xy.util.t(preview_key), 'n')
     end
   end,
   'Ufo peek current fold',
@@ -116,4 +119,16 @@ require('ufo').setup {
   end,
   -- For now, only 'lsp' provider contain 'comment', 'imports' and 'region'.
   close_fold_kinds = { 'imports', 'comment' },
+  preview = {
+    -- win_config = {
+    --   border = { '', '─', '', '', '', '─', '', '' },
+    --   winhighlight = 'Normal:Folded',
+    --   winblend = 0,
+    -- },
+    mappings = {
+      -- scrollU = '<C-u>',
+      -- scrollD = '<C-d>',
+      switch = preview_key,
+    },
+  },
 }

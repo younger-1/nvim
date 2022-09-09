@@ -60,6 +60,8 @@ vim.filetype.add {
   extension = {
     conf = 'config',
     tex = 'latex', -- We always want LaTeX, avoid slow detection logic
+    edn = 'clojure',
+    boot = 'clojure',
     h = function(path, bufnr) -- a heuristic that only sets the filetype to C++ if the header file includes another C++-style header (i.e. one without a trailing .h):
       if vim.fn.search('\\C^#include <[^>.]\\+>$', 'nw') ~= 0 then
         return 'cpp'
@@ -68,10 +70,14 @@ vim.filetype.add {
     end,
   },
   filename = {
-    -- ['kitty.conf'] = 'kitty',
     conf = 'config',
     config = 'config',
     ['.luarc.json'] = 'jsonc',
+    ['settings.json'] = 'jsonc',
+    ['coc-settings.json'] = 'jsonc',
+    -- ['tsconfig.json'] = 'jsonc',
+    -- ['jsconfig.json'] = 'jsonc',
+    ['.envrc'] = 'bash',
   },
   pattern = {
     ['.*/git/.*'] = 'gitconfig',
