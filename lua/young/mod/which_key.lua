@@ -65,7 +65,7 @@ local opts = {
 }
 
 local vopts = {
-  mode = 'v',
+  mode = 'x',
   noremap = true,
   nowait = true,
   silent = true,

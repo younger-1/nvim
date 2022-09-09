@@ -32,7 +32,7 @@ end
 
 local function basic()
   vim.api.nvim_set_keymap('n', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
-  vim.api.nvim_set_keymap('v', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
+  vim.api.nvim_set_keymap('x', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
 end
 
 M.done = function()

@@ -60,7 +60,7 @@ local function add_lsp_buffer_keybindings(bufnr)
   local mappings = {
     normal_mode = 'n',
     insert_mode = 'i',
-    visual_mode = 'v',
+    visual_mode = 'x',
   }
 
   if status_ok then

@@ -125,7 +125,7 @@ function M.once()
   keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
 
   -- Code action
-  -- keymap('v', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
+  -- keymap('x', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
 
   -- Diagnsotic jump can use `<c-o>` to jump back
   -- keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })

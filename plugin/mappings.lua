@@ -6,8 +6,7 @@ local mode_adapters = {
   command_mode = 'c',
   map_mode = '',
   normal_mode = 'n',
-  visual_mode = 'v',
-  visual_block_mode = 'x',
+  visual_mode = 'x',
   operator_mode = 'o',
   term_mode = 't',
 }
@@ -194,10 +193,7 @@ M.keys = {
     -- /\%>2l\%>4c\%<5l\%<7c
     ['/'] = { '<ESC>/\\%V', silent = false },
     ['?'] = { '<ESC>?\\%V', silent = false },
-  },
 
-  ---@usage change or add keymappings for visual block mode
-  visual_block_mode = {
     -- Move selected line / block of text in visual mode
     ['K'] = ":move '<-2<CR>gv-gv",
     ['J'] = ":move '>+1<CR>gv-gv",

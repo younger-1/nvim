@@ -84,13 +84,13 @@ local on_attach_jdtls = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jn', "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
   vim.api.nvim_buf_set_keymap(
     bufnr,
-    'v',
+    'x',
     '<leader>jv',
     "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>",
     opts
   )
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jv', "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>jm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'x', '<leader>jm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 end
 
 M.setup = function()
