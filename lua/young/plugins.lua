@@ -284,7 +284,7 @@ mods.neovim = {
     {
       'kevinhwang91/nvim-ufo',
       event = 'BufRead',
-      requires = 'kevinhwang91/promise-async',
+      requires = { { 'kevinhwang91/promise-async', module = 'promise' } },
       config = function()
         require 'young.mod.ufo'
       end,
@@ -464,7 +464,7 @@ mods.find = {
   },
   -- {
   --   'VonHeikemen/searchbox.nvim',
-  --   requires = { { 'MunifTanjim/nui.nvim' } },
+  --   requires = { { 'MunifTanjim/nui.nvim', module = 'nui' } },
   --   -- module = 'searchbox',
   --   event = 'BufRead',
   --   config = function()
@@ -722,7 +722,7 @@ mods.UI = {
   cmdline = {
     -- {
     --   'VonHeikemen/fine-cmdline.nvim',
-    --   requires = { { 'MunifTanjim/nui.nvim' } },
+    --   requires = { { 'MunifTanjim/nui.nvim', module = 'nui' } },
     --   -- cmd = 'FineCmdline',
     --   event = 'BufRead',
     --   config = function()
@@ -798,6 +798,17 @@ mods.UI = {
 }
 
 mods.code = {
+  jump = {
+    {
+      -- 'pechorin/any-jump.vim',
+      'younger-1/any-jump.vim',
+      branch = 'remove-pics',
+      cmd = { 'AnyJump', 'AnyJumpVisual', 'AnyJumpArg' },
+      setup = function()
+        require 'young.mod.anyjump'
+      end,
+    },
+  },
   completion = {
     {
       'hrsh7th/nvim-cmp',
@@ -1027,7 +1038,7 @@ mods.lang = {
     {
       'vuki656/package-info.nvim',
       ft = 'json',
-      requires = { { 'MunifTanjim/nui.nvim' } },
+      requires = { { 'MunifTanjim/nui.nvim', module = 'nui' } },
       config = function()
         require 'young.mod.package_info'
       end,
