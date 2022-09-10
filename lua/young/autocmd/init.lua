@@ -210,7 +210,7 @@ function M.done()
     _general_lsp = {
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'lua require("young.tool").add_border()' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,any-jump', 'lua require("young.tool").add_border()' },
       { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'dap-float', 'nnoremap <silent> <buffer> q :close<CR>' },
     },

@@ -1,3 +1,20 @@
+### base
+
+```log
+vim -u NONE --startuptime /tmp/vim.time +'q' && tail -n 5 /tmp/vim.time
+001.055  000.062: start termcap
+001.068  000.013: clearing screen
+001.208  000.140: opening buffers
+001.210  000.002: BufEnter autocommands
+001.211  000.001: editing files in windows
+
+nvim -u NONE --startuptime /tmp/nvim.time +'q' && tail -n 5 /tmp/nvim.time
+004.916  000.030: inits 3
+018.683  013.768: reading ShaDa
+018.884  000.201: opening buffers
+018.888  000.004: BufEnter autocommands
+018.890  000.003: editing files in windows
+```
 
 hyperfine --min-runs=20 "nvim +qa" "nvim --headless +qa"
 
