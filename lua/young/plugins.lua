@@ -680,6 +680,8 @@ mods.UI = {
     --     require("sidebar-nvim").setup {}
     --   end,
     -- },
+    -- { 'simnalamburt/vim-mundo', cmd = 'MundoToggle' },
+    { 'mbbill/undotree', cmd = 'UndotreeToggle' },
   },
   bufferline = {
     {
