@@ -38,6 +38,8 @@ M.cfg = {
     { name = 'path' },
     { name = 'buffer' },
     { name = 'calc' },
+    -- { name = 'look', keyword_length = 2 },
+    { name = 'dictionary', keyword_length = 2 },
     -- { name = 'emoji' },
     -- { name = 'treesitter' },
     -- { name = 'cmp_tabnine' },
@@ -289,6 +291,35 @@ M.done = function()
   --   highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
   --   highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
   -- ]]
+end
+
+function M.setup_dictionary()
+  require('cmp_dictionary').setup {
+    dic = {
+      -- ['*'] = { '/usr/share/dict/words' },
+      -- ['lua'] = 'path/to/lua.dic',
+      -- ['javascript,typescript'] = { 'path/to/js.dic', 'path/to/js2.dic' },
+      -- filename = {
+      --   ['xmake.lua'] = { 'path/to/xmake.dic', 'path/to/lua.dic' },
+      -- },
+      -- filepath = {
+      --   ['%.tmux.*%.conf'] = 'path/to/tmux.dic',
+      -- },
+      -- spelllang = {
+      --   -- en = "./spell/10k.txt"
+      --   -- en = join_paths(vim.fn.stdpath 'config', 'spell', '10k.txt'),
+      -- },
+    },
+    -- The following are default values.
+    exact = 2,
+    first_case_insensitive = false,
+    document = false,
+    document_command = 'wn %s -over',
+    async = false,
+    max_items = -1,
+    capacity = 5,
+    debug = false,
+  }
 end
 
 return M

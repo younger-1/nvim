@@ -822,9 +822,18 @@ mods.code = {
         -- { 'hrsh7th/cmp-nvim-lua' },
         { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+        --
         { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+        -- { 'octaltree/cmp-look', after = 'nvim-cmp' }, -- need binary (look) and file (/usr/share/dict/words)
+        -- {
+        --   'uga-rosa/cmp-dictionary',
+        --   after = 'nvim-cmp',
+        --   config = function()
+        --     require('young.mod.cmp').setup_dictionary()
+        --   end,
+        -- },
         --
         {
           'petertriho/cmp-git',
@@ -988,6 +997,13 @@ mods.LSP = {
     -- { 'ii14/emmylua-nvim', opt = true },
     { 'nanotee/luv-vimdocs' },
     { 'milisims/nvim-luaref' },
+    -- {
+    --   'rafcamlet/nvim-luapad',
+    --   cmd = { 'Luapad', 'LuaRun', 'LuapadToggle' },
+    --   config = function()
+    --     require 'young.mod.luapad'
+    --   end,
+    -- },
   },
   ui = {
     {

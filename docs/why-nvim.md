@@ -1,5 +1,9 @@
 *There are only two kinds of people in the world, the ones like use vim and the ones don't know they like vim*
 
+## Fast
+
+I didn’t think “fast” mattered, but I installed it and... WOW! yeah, fast matters!
+
 ## Keyboard centric
 
 ## Builtin

@@ -91,6 +91,11 @@ insert_nav = {
 
 - setup(): allow user-defined buffer-mappings
 
+dictionary
+
+```sh
+curl -fLo ~/.config/nvim/spell/10k.txt --create-dirs https://github.com/iamcco/coc-zi/raw/master/words/10k.txt
+```
 ## Config
 
 ```
