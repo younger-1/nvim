@@ -26,7 +26,7 @@ Hydra {
     },
   },
   mode = { 'n', 'x' },
-  body = '<leader>o',
+  body = '<leader>o', -- TODO:desc of the body
   heads = {
     {
       'n',
