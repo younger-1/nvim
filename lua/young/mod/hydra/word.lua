@@ -9,10 +9,10 @@ Hydra {
   mode = { 'n', 'x', 'o' },
   body = ',',
   heads = {
-    { 'w', '<Plug>(smartword-w)' },
-    { 'b', '<Plug>(smartword-b)' },
-    { 'e', '<Plug>(smartword-e)' },
-    { 'ge', '<Plug>(smartword-ge)' },
+    { 'w', '<Plug>(smartword-w)', { desc = 'w' } },
+    { 'b', '<Plug>(smartword-b)', { desc = 'b' } },
+    { 'e', '<Plug>(smartword-e)', { desc = 'e' } },
+    { 'ge', '<Plug>(smartword-ge)', { desc = 'ge' } },
     { '<Esc>', nil, { exit = true, mode = 'n' } },
   },
 }

@@ -28,7 +28,7 @@ require('yanky').setup {
 
 -- require('telescope').load_extension 'yank_history'
 
-require 'young.mod.hydra.yanky'
+xy.map.n { 'p', require 'young.mod.hydra.yanky', '[Hydra] Yanky paste' }
 -- xy.map { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' } }
 -- xy.map { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' } }
 -- xy.map { 'gp', '<Plug>(YankyGPutAfter)', mode = { 'n', 'x' } }

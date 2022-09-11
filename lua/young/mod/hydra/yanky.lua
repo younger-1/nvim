@@ -1,9 +1,8 @@
 local Hydra = require 'hydra'
 
-Hydra {
+local yanky_hydra = Hydra {
   name = 'Yank ring',
   mode = 'n',
-  body = 'g',
   heads = {
     { 'p', '<Plug>(YankyPutAfter)', { desc = 'Paste before' } },
     { 'P', '<Plug>(YankyPutBefore)', { desc = 'Paste after' } },
@@ -11,3 +10,9 @@ Hydra {
     { '<C-p>', '<Plug>(YankyCycleBackward)', { private = true, desc = '↑' } },
   },
 }
+
+local function do_yanky()
+  yanky_hydra:activate()
+end
+
+return do_yanky

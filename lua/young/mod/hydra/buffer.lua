@@ -94,6 +94,6 @@ local function choose_buffer()
   end
 end
 
-vim.keymap.set('n', 'gb', choose_buffer)
+xy.map.n { 'gb', choose_buffer, '[Hydra] Choose buffer' }
 
 return choose_buffer
