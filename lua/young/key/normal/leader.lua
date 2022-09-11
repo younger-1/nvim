@@ -457,6 +457,7 @@ return {
       t = { cmd 'Telescope current_buffer_tags', 'Tags' },
     },
     y = { cmd 'Telescope neoclip', 'Clipboard' },
+    Y = { cmd 'YankyRingHistory', 'Yanky Ring' },
     Z = { "<cmd>lua require'telescope'.extensions.zoxide.list{}<cr>", 'Z' },
   },
   t = {
