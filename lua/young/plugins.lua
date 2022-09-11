@@ -341,6 +341,13 @@ mods.neovim = {
   --     require('indent-o-matic').setup {}
   --   end,
   -- },
+  {
+    'gbprod/yanky.nvim',
+    event = 'BufRead',
+    config = function()
+      require 'young.mod.yanky'
+    end,
+  },
 }
 
 mods.BWT = {
@@ -650,6 +657,7 @@ mods.UI = {
     },
     {
       'anuvyklack/hydra.nvim',
+      -- defer = 2,
       event = 'BufWinEnter',
       config = function()
         require 'young.mod.hydra'
