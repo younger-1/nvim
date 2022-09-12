@@ -74,6 +74,7 @@ return {
     name = '+treesitter',
     I = { '<cmd>TSModuleInfo<cr>', 'Telescope' },
     T = { '<cmd>TSHighlightCapturesUnderCursor<cr>', 'Highlight' },
+    c = { '<cmd>TSContextToggle<cr>', 'Toggle context' },
     h = { '<cmd>TSBufToggle highlight<cr>', 'Toggle highlight(Buffer)' },
     i = { '<cmd>TSConfigInfo<cr>', 'Info' },
     p = { '<cmd>TSPlaygroundToggle<cr>', 'Playground' },
