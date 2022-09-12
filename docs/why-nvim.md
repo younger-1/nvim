@@ -6,6 +6,10 @@ I didn’t think “fast” mattered, but I installed it and... WOW! yeah, fast 
 
 ## Keyboard centric
 
+g;
+
+cgn
+
 ## Builtin
 
 - persistent undo cross session
