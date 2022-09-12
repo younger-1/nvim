@@ -145,19 +145,27 @@ M.cfg = {
   },
   incremental_selection = {
     enable = true,
-    -- NOTE: visual
-    keymaps = {
-      init_selection = ";;",
-      node_incremental = ']s',
-      node_decremental = '[s',
-      scope_incremental = ']S',
+    keymaps = { -- NOTE: only for visual mode
+      init_selection = ';;',
+      node_incremental = ';m',
+      node_decremental = ';r',
+      scope_incremental = ';;',
+      -- init_selection = 'gnn',
+      -- node_incremental = 'grn',
+      -- scope_incremental = 'grc',
+      -- node_decremental = 'grm',
     },
-    -- keymaps = {
-    --   init_selection = "gnn",
-    --   node_incremental = "grn",
-    --   scope_incremental = "grc",
-    --   node_decremental = "grm",
-    -- },
+  },
+  -- <https://github.com/RRethy/nvim-treesitter-textsubjects>
+  textsubjects = {
+    enable = true,
+    prev_selection = '<bs>', -- (Optional) keymap to select the previous selection
+    keymaps = { -- NOTE: only for visual mode
+      ['<cr>'] = 'textsubjects-smart',
+      -- ['.'] = 'textsubjects-smart',
+      [')'] = 'textsubjects-container-outer',
+      ['('] = 'textsubjects-container-inner',
+    },
   },
   -- <https://github.com/nvim-treesitter/nvim-treesitter-textobjects>
   textobjects = {
@@ -246,14 +254,14 @@ M.cfg = {
         -- [";pb"] = "@conditional.inner",
       },
     },
-    lsp_interop = {
-      enable = true,
-      border = 'none',
-      peek_definition_code = {
-        ['gmf'] = '@function.outer',
-        ['gmF'] = '@class.outer',
-      },
-    },
+    -- lsp_interop = {
+    --   enable = true,
+    --   border = 'single',
+    --   peek_definition_code = {
+    --     ['gmf'] = '@function.outer',
+    --     ['gmc'] = '@class.outer',
+    --   },
+    -- },
   },
   -- <https://github.com/nvim-treesitter/nvim-treesitter-refactor>
   refactor = {
@@ -269,10 +277,10 @@ M.cfg = {
       enable = true,
       keymaps = {
         goto_definition = 'gmd',
-        list_definitions = 'gmD',
+        list_definitions = 'gml',
         list_definitions_toc = 'gmo',
-        goto_next_usage = ']w',
-        goto_previous_usage = '[w',
+        goto_next_usage = 'gmn',
+        goto_previous_usage = 'gmp',
       },
     },
   },
@@ -298,16 +306,6 @@ M.cfg = {
   -- <https://github.com/nvim-treesitter/nvim-tree-docs>
   tree_docs = {
     enable = false,
-  },
-  -- <https://github.com/RRethy/nvim-treesitter-textsubjects>
-  textsubjects = {
-    enable = true,
-    -- NOTE: visual
-    keymaps = {
-      ['<cr>'] = 'textsubjects-smart',
-      ['+'] = 'textsubjects-container-outer',
-      ['-'] = 'textsubjects-container-inner',
-    },
   },
   -- <https://github.com/windwp/nvim-ts-autotag>
   autotag = {

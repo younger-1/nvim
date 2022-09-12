@@ -204,6 +204,7 @@ mods.edit = {
     { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
     { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
     { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
+    { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' },
   },
 }
 
