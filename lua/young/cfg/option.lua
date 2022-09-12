@@ -73,6 +73,15 @@ local default_options = {
   --   vertright = '┣',
   --   verthoriz = '╋',
   -- },
+  -- fillchars = {
+  --   horiz = '█',
+  --   horizup = '█',
+  --   horizdown = '█',
+  --   vert = '█',
+  --   vertleft = '█',
+  --   vertright = '█',
+  --   verthoriz = '█',
+  -- },
   fillchars = {
     horiz = '━',
     horizup = '━',

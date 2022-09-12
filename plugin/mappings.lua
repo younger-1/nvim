@@ -171,6 +171,9 @@ M.keys = {
     -- gH = 'H',
     -- gL = 'L',
     -- ['/'] = { '/\\v', silent = false },
+
+    -- ['<C-o>'] = '<C-o>zz',
+    -- ['<C-i>'] = '<C-i>zz',
   },
 
   ---@usage change or add keymappings for visual mode
