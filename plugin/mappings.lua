@@ -91,8 +91,10 @@ M.keys = {
 
     -- @see https://github.com/neovim/neovim/issues/14090#issuecomment-1113090354
     -- Windows Terminal: https://github.com/microsoft/terminal/issues/13792
-    -- ['<Tab>'] = { '%', { noremap = false } },
-    -- ['<C-I>'] = { '<C-I>', { noremap = false } },
+    -- ['<Tab>'] = { '%', remap = true },
+    -- ['<C-I>'] = { '<C-I>', remap = true },
+
+    ['g<Tab>'] = { '%', remap = true },
 
     -- <https://github.com/yuki-yano/zero.nvim>
     -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },

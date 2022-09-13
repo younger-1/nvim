@@ -14,6 +14,7 @@ M.cfg = {
   open_mapping = [[<c-t>]],
   hide_numbers = true, -- hide the number column in toggleterm buffers
   shade_filetypes = {},
+  autochdir = false,
   shade_terminals = true,
   shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
   start_in_insert = true,

@@ -141,6 +141,9 @@ local normal = {
       w = { '<cmd>set wrap!<cr>', 'wrap' },
     },
   },
+  z = {
+    ['<CR>'] = { '<cmd>TSContextToggle<cr>', 'Toggle context' },
+  },
 }
 
 normal['<leader>'] = require 'young.key.normal.leader'

@@ -339,7 +339,7 @@ xy.map = {
 }
 
 local function mapper(tbl)
-  local opts = { noremap = true, silent = true, nowait = true }
+  local opts = { nowait = true }
 
   local mode = tbl['mode'] or ''
   tbl['mode'] = nil
@@ -360,16 +360,16 @@ setmetatable(xy.map, {
     mapper(tbl)
   end,
   __index = function(t, key)
-    local silent
-    if key == '!' or key == 'c' then
-      silent = false
-    end
+    -- local silent
+    -- if key ~= '!' and key ~= 'c' then
+    --   silent = true
+    -- end
 
     t[key] = function(tbl)
-      if nil == tbl['silent'] then
-        tbl['silent'] = silent
-      end
-      tbl['mode'] = key
+      -- if nil == tbl['silent'] then
+      --   tbl['silent'] = silent
+      -- end
+      tbl['mode'] = tbl['mode'] or key
       mapper(tbl)
     end
     return t[key]
