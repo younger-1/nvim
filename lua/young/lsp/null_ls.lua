@@ -45,6 +45,10 @@ local config = {
     -- { command = "gitsigns", filetypes = {} },
     { command = 'shellcheck', filetypes = { 'sh' } },
   },
+  hover = {
+    { command = 'dictionary' },
+    { command = 'printenv' },
+  }
 }
 
 function M.list_registered_providers_names(filetype)
@@ -86,6 +90,10 @@ function M.done()
   end
   for _, provider in ipairs(config.code_actions) do
     local source = null_ls.builtins.code_actions[provider.command].with(provider)
+    table.insert(sources, source)
+  end
+  for _, provider in ipairs(config.hover) do
+    local source = null_ls.builtins.hover[provider.command].with(provider)
     table.insert(sources, source)
   end
 
