@@ -1176,6 +1176,8 @@ mods.write = {
       end,
     },
   },
+  { 'jbyuki/venn.nvim', cmd = 'VBox' },
+  { 'jbyuki/nabla.nvim', module = 'nabla' },
 }
 
 mods.tool = {

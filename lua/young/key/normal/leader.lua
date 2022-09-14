@@ -86,6 +86,14 @@ return {
     [' '] = { '<cmd>Telescope command_palette<cr>', 'Command palette' },
     e = { '+external' },
     m = { '<cmd>MarkdownPreviewToggle<cr>', 'Markdown' },
+    n = {
+      name = '+nabla',
+      n = { lua "require('nabla').popup { border = 'rounded' }", 'ASCII LaTeX equations' },
+      r = { lua "require('nabla').replace_current()", 'Replace current LaTeX equations' },
+      a = { lua "require('nabla').replace_all()", 'Replace current LaTeX equations' },
+      d = { lua "require('nabla').draw_overlay()", 'Draw overlay' },
+      t = { lua "require('nabla').toggle_virt()", 'Toggle ASCII LaTeX' },
+    },
     t = { '<cmd>TodoQuickFix<cr>', 'Todo qf' },
     T = { '<cmd>TodoTelescope<cr>', 'Todo telescope' },
     s = {
