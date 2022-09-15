@@ -141,14 +141,14 @@ local normal = {
       w = { '<cmd>set wrap!<cr>', 'wrap' },
     },
   },
-  d = {
-    ['<space>'] = {
-      function()
-        require('nabla').popup { border = 'rounded' }
-      end,
-      'ASCII LaTeX equations',
-    },
-  },
+  -- d = {
+  --   ['<space>'] = {
+  --     function()
+  --       require('nabla').popup { border = 'rounded' }
+  --     end,
+  --     'ASCII LaTeX equations',
+  --   },
+  -- },
   z = {
     ['<CR>'] = { '<cmd>TSContextToggle<cr>', 'Toggle context' },
   },

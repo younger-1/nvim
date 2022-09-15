@@ -26,4 +26,9 @@ end
 function M.lua(str)
   return '<Cmd>lua ' .. str .. '<CR>'
 end
+
+function M.call(str)
+  return ':call ' .. str .. '<CR>'
+end
+
 return M

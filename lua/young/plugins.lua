@@ -1077,6 +1077,23 @@ mods.lang = {
   --     vim.g.polyglot_disabled = { 'autoindent', 'ftdetect', 'markdown' }
   --   end,
   -- },
+  python = {
+    -- {
+    --   'dccsillag/magma-nvim',
+    --   run = ':UpdateRemotePlugins',
+    -- },
+    {
+      'luk400/vim-jukit',
+      ft = 'ipynb',
+      -- cmd = { 'JukitOut', 'JukitOutHist' },
+      setup = function()
+        require('young.mod.jukit').once()
+      end,
+      config = function()
+        require('young.mod.jukit').done()
+      end,
+    },
+  },
   js = {
     {
       'vuki656/package-info.nvim',
@@ -1267,7 +1284,7 @@ M.done = function()
     mods.file(),
     mods.find(),
     mods.git(),
-    mods.lang { 'lisp', 'java' },
+    mods.lang { 'python', 'lisp', 'java' },
     mods.neovim(),
     mods.telescope(),
     mods.theme(),

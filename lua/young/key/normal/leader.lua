@@ -296,6 +296,7 @@ return {
     r = { vim.lsp.buf.rename, 'Rename' },
     --
     t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
+    T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
     w = {
       name = '+workspace',
       w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
