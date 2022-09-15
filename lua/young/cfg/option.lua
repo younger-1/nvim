@@ -152,11 +152,11 @@ vim.cmd [[set matchpairs+=<:>,「:」,『:』,【:】,（:）,《:》,‘:’,�
 vim.cmd [[command! TagsUpdate !ctags -R .]]
 -- vim.cmd [[command! Todo grep TODO]]
 
-if vim.loop.exepath 'rg' then
-  vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --color=never'
-  vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
-elseif vim.loop.exepath 'ag' then
-  vim.o.grepprg = 'ag --vimgrep --nogroup --nocolor'
-  -- elseif vim.fn.executable 'ack' == 1 then
-  --   vim.o.grepprg = 'ack'
-end
+-- if vim.fn.exepath 'rg' then
+vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --color=never'
+vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+-- elseif vim.fn.exepath 'ag' then
+--   vim.o.grepprg = 'ag --vimgrep --nogroup --nocolor'
+-- elseif vim.fn.executable 'ack' == 1 then
+--   vim.o.grepprg = 'ack'
+-- end
