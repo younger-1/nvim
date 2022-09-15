@@ -22,10 +22,6 @@ function M.done()
     -- entry is a table type has these filed
     -- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
     diagnostic_header = { ' ', ' ', ' ', 'ﴞ ' },
-    -- show diagnostic source
-    show_diagnostic_source = true,
-    -- add bracket or something with diagnostic source, just have 2 elements
-    diagnostic_source_bracket = {},
     -- preview lines of lsp_finder and definition preview
     max_preview_lines = 10,
     -- use emoji lightbulb in default
@@ -35,8 +31,10 @@ function M.done()
     -- same as nvim-lightbulb but async
     code_action_lightbulb = {
       enable = true,
-      sign = true,
       enable_in_insert = true,
+      cache_code_action = true,
+      sign = true,
+      update_time = 150,
       sign_priority = 20,
       virtual_text = true,
     },
@@ -56,16 +54,20 @@ function M.done()
       split = 'i',
       tabe = 't',
       quit = 'q',
-      scroll_down = '<C-f>',
-      scroll_up = '<C-b>', -- quit can be a table
     },
     code_action_keys = {
       quit = 'q',
       exec = '<CR>',
     },
+    definition_action_keys = {
+      edit = '<C-c>o',
+      vsplit = '<C-c>v',
+      split = '<C-c>i',
+      tabe = '<C-c>t',
+      quit = 'q',
+    },
     rename_action_quit = '<C-c>',
     rename_in_select = true,
-    definition_preview_icon = '  ',
     -- show symbols in winbar must nightly
     symbol_in_winbar = {
       in_custom = false,
@@ -109,7 +111,7 @@ function M.once()
       j = {
         j = { cmd 'Lspsaga lsp_finder' },
         k = { cmd 'Lspsaga hover_doc' },
-        d = { cmd 'Lspsaga preview_definition' },
+        d = { cmd 'Lspsaga peek_definition' },
         l = { cmd 'Lspsaga show_line_diagnostics' },
         L = { cmd 'Lspsaga show_cursor_diagnostics' },
         a = { cmd 'Lspsaga code_action' },
