@@ -406,50 +406,50 @@ function M.setup_context()
         'method',
         'for',
         'while',
-        'if',
+        -- 'if',
         'switch',
         'case',
       },
       -- Patterns for specific filetypes
       -- If a pattern is missing, *open a PR* so everyone can benefit.
-      tex = {
-        'chapter',
-        'section',
-        'subsection',
-        'subsubsection',
-      },
-      rust = {
-        'impl_item',
-        'struct',
-        'enum',
-      },
-      scala = {
-        'object_definition',
-      },
-      vhdl = {
-        'process_statement',
-        'architecture_body',
-        'entity_declaration',
-      },
-      markdown = {
-        'section',
-      },
-      elixir = {
-        'anonymous_function',
-        'arguments',
-        'block',
-        'do_block',
-        'list',
-        'map',
-        'tuple',
-        'quoted_content',
-      },
-      json = {
-        'pair',
-      },
-      yaml = {
-        'block_mapping_pair',
-      },
+      -- tex = {
+      --   'chapter',
+      --   'section',
+      --   'subsection',
+      --   'subsubsection',
+      -- },
+      -- rust = {
+      --   'impl_item',
+      --   'struct',
+      --   'enum',
+      -- },
+      -- scala = {
+      --   'object_definition',
+      -- },
+      -- vhdl = {
+      --   'process_statement',
+      --   'architecture_body',
+      --   'entity_declaration',
+      -- },
+      -- markdown = {
+      --   'section',
+      -- },
+      -- elixir = {
+      --   'anonymous_function',
+      --   'arguments',
+      --   'block',
+      --   'do_block',
+      --   'list',
+      --   'map',
+      --   'tuple',
+      --   'quoted_content',
+      -- },
+      -- json = {
+      --   'pair',
+      -- },
+      -- yaml = {
+      --   'block_mapping_pair',
+      -- },
     },
     exact_patterns = {
       -- Example for a specific filetype with Lua patterns

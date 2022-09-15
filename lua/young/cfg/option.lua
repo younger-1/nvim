@@ -82,14 +82,24 @@ local default_options = {
   --   vertright = '█',
   --   verthoriz = '█',
   -- },
+  -- fillchars = {
+  --   horiz = '━',
+  --   horizup = '━',
+  --   horizdown = '━',
+  --   vert = ' ',
+  --   vertleft = '━',
+  --   vertright = '━',
+  --   verthoriz = '━',
+  -- },
+  -- <https://github.com/santigo-zero/csjneovim/blob/master/user/init.lua>
   fillchars = {
-    horiz = '━',
-    horizup = '━',
-    horizdown = '━',
-    vert = ' ',
-    vertleft = '━',
-    vertright = '━',
-    verthoriz = '━',
+    horiz = '─',
+    horizup = '⯊',
+    horizdown = '⯋',
+    vert = '│',
+    vertleft = '◖',
+    vertright = '◗',
+    verthoriz = '●',
   },
 }
 
