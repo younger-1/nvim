@@ -213,6 +213,15 @@ mods.edit = {
     { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
     { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' },
   },
+  -- {
+  --   'hoschi/yode-nvim',
+  --   -- event = 'BufWinEnter',
+  --   cmd = { 'YodeCreateSeditorFloating' },
+  --   requires = 'nvim-lua/plenary.nvim',
+  --   config = function()
+  --     require('yode-nvim').setup {}
+  --   end,
+  -- },
 }
 
 mods.change = {
