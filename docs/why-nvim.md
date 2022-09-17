@@ -23,3 +23,8 @@ You could get them in nvim for free.
 plugin is just some lines of code in the right place
 
 do task with filetype you specific, on event you want. Automatically and easily
+
+### diffview.nvim
+
+Show file history of multiple files: `DiffviewFileHistory foo/**/bar`. Git pathspec is supported (see `man gitglossary`)
+LSP works normally in diff mode when possible
