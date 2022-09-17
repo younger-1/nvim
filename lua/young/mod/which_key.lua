@@ -60,7 +60,7 @@ local opts = {
   mode = 'n',
   noremap = true,
   nowait = true,
-  silent = true,
+  silent = false,
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 }
 
@@ -68,7 +68,7 @@ local vopts = {
   mode = 'x',
   noremap = true,
   nowait = true,
-  silent = true,
+  silent = false,
 }
 
 M.done = function()

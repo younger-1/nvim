@@ -597,11 +597,20 @@ mods.telescope = {
 
 mods.git = {
   {
+    'tpope/vim-fugitive',
+    cmd = { 'Git', 'GBrowse' },
+  },
+  {
     'lewis6991/gitsigns.nvim',
     event = 'BufRead',
     config = function()
       require('young.mod.gitsigns').done()
     end,
+  },
+  {
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    event = 'BufRead',
   },
   {
     'TimUntersberger/neogit',
@@ -610,10 +619,6 @@ mods.git = {
     config = function()
       require('neogit').setup {}
     end,
-  },
-  {
-    'tpope/vim-fugitive',
-    cmd = { 'Git', 'GBrowse' },
   },
   -- {
   --   'tanvirtin/vgit.nvim',
