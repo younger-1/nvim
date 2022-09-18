@@ -74,14 +74,14 @@ local vopts = {
 M.done = function()
   local wk = require 'which-key'
 
-  local show = wk.show
-  local ignore_filetype = { 'TelescopePrompt' }
-  wk.show = function(keys, option)
-    if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
-      return
-    end
-    show(keys, option)
-  end
+  -- local show = wk.show
+  -- local ignore_filetype = { 'TelescopePrompt' }
+  -- wk.show = function(keys, option)
+  --   if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
+  --     return
+  --   end
+  --   show(keys, option)
+  -- end
 
   local n = require 'young.key.normal'
   local v = require 'young.key.visual'
