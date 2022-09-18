@@ -1,4 +1,5 @@
 -- @see <https://github.com/sumneko/lua-language-server/blob/master/locale/zh-cn/setting.lua>
+-- @see <https://github.com/sumneko/lua-language-server/blob/master/doc/zh-cn/config.lua>
 --
 -- lua-dev defaults: <https://github.com/folke/lua-dev.nvim>
 -- {
@@ -61,6 +62,9 @@ return {
           'vim',
           'pp',
           'gg',
+        },
+        disable = {
+          'missing-parameter',
         },
       },
       -- format = {
