@@ -611,6 +611,9 @@ mods.git = {
     'sindrets/diffview.nvim',
     requires = 'nvim-lua/plenary.nvim',
     event = 'BufRead',
+    config = function()
+      require 'young.mod.diffview'
+    end,
   },
   {
     'TimUntersberger/neogit',
