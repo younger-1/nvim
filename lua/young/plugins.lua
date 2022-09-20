@@ -212,6 +212,17 @@ mods.edit = {
     },
     { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
     { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' },
+    {
+      'ziontee113/syntax-tree-surfer',
+      after = 'nvim-treesitter',
+      config = function()
+        require 'young.mod.surfer'
+      end,
+    },
+    -- {
+    --   'drybalka/tree-climber.nvim',
+    --   after = 'nvim-treesitter',
+    -- },
   },
   -- {
   --   'hoschi/yode-nvim',

@@ -192,6 +192,9 @@ M.keys = {
     H = '^',
     L = 'g_',
 
+    gh = '^',
+    gl = 'g_',
+
     -- /\%>'<\%<'>
     -- /\%>2c\%<7c
     -- /\%>2l\%<7l
@@ -212,6 +215,9 @@ M.keys = {
     -- Operate to start and end quickly
     H = '^',
     L = 'g_',
+
+    gh = '^',
+    gl = 'g_',
   },
 
   ---@usage change or add keymappings for terminal mode
