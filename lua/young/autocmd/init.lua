@@ -212,7 +212,7 @@ function M.done()
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info,any-jump', 'lua require("young.tool").add_border()' },
       { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'dap-float', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'notify,dap-float', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
     _startup = {
       { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },

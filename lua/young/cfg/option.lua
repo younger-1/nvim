@@ -93,6 +93,7 @@ local default_options = {
   -- },
   -- <https://github.com/santigo-zero/csjneovim/blob/master/user/init.lua>
   fillchars = {
+    diff = '╱',
     horiz = '─',
     horizup = '⯊',
     horizdown = '⯋',
