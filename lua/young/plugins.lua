@@ -386,7 +386,7 @@ mods.BWT = {
         require('stabilize').setup {}
       end,
     },
-    { 'dhruvasagar/vim-zoom' },
+    -- { 'dhruvasagar/vim-zoom' },
     {
       'mrjones2014/smart-splits.nvim',
       disable = not xy.has 'nvim-0.7',
@@ -1099,6 +1099,7 @@ mods.lang = {
   python = {
     -- {
     --   'dccsillag/magma-nvim',
+    --   ft = { 'python' },
     --   run = ':UpdateRemotePlugins',
     -- },
     {

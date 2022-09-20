@@ -10,6 +10,7 @@ return {
   },
   l = {
     name = '+lsp',
+    a = { vim.lsp.buf.range_code_action, 'Code action' },
     f = { vim.lsp.buf.range_formatting, 'Format' },
   },
   p = {

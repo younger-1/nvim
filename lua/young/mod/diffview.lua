@@ -99,7 +99,16 @@ require('diffview').setup {
     DiffviewOpen = { '--imply-local' },
     DiffviewFileHistory = { '--follow' },
   },
-  hooks = {}, -- See |diffview-config-hooks|
+  hooks = {
+    diff_buf_read = function(bufnr)
+      vim.opt_local.wrap = false
+      vim.opt_local.list = false
+      vim.opt_local.colorcolumn = { 80 }
+    end,
+    view_opened = function(view)
+      print(('A new %s was opened on tab page %d!'):format(view:class():name(), view.tabpage))
+    end,
+  }, -- See |diffview-config-hooks|
   keymaps = {
     disable_defaults = false, -- Disable the default keymaps
     view = {
