@@ -255,6 +255,17 @@ M.cfg = {
         height = 0.75,
       },
     },
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      -- override default mappings
+      default_mappings = {
+        i = {
+          ['<C-e>'] = require('telescope-live-grep-args.actions').quote_prompt(),
+        },
+      },
+      -- extend mappings
+      mappings = {},
+    },
     bookmarks = {
       -- Available: 'brave', 'google_chrome', 'safari', 'firefox',
       selected_browser = 'firefox',

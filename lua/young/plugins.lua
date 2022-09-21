@@ -553,14 +553,21 @@ mods.telescope = {
       end,
     },
     {
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      after = 'telescope.nvim',
+      config = function()
+        require('telescope').load_extension 'live_grep_args'
+      end,
+    },
+    {
       'nvim-telescope/telescope-frecency.nvim',
       after = 'telescope.nvim',
-      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
+      requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
     },
     {
       'AckslD/nvim-neoclip.lua',
       after = 'telescope.nvim',
-      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
+      requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
       config = function()
         require 'young.mod.neoclip'
       end,
@@ -568,7 +575,7 @@ mods.telescope = {
     {
       'dhruvmanila/telescope-bookmarks.nvim',
       after = 'telescope.nvim',
-      requires = { { 'tami5/sqlite.lua', module = 'sqlite' } },
+      requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
       config = function()
         require('telescope').load_extension 'bookmarks'
       end,
