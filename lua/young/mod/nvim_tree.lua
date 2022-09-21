@@ -5,6 +5,19 @@ local M = {}
 
 local function print_node_path(node)
   print(node.absolute_path)
+  -- pp(vim.tbl_keys(node)) -- { "parent", "type", "executable", "extension", "name", "fs_stat", "hidden", "absolute_path" }
+  -- pp(node)
+end
+
+local function live_grep_tree_node()
+  local node = require('nvim-tree.lib').get_node_at_cursor()
+  local cwd
+  if node.type == 'file' then
+    cwd = node.parent.absolute_path
+  elseif node.type == 'directory' then
+    cwd = node.absolute_path
+  end
+  require('telescope.builtin').live_grep { cwd = cwd, search_dirs = { node.absolute_path } }
 end
 
 M.cfg = {
@@ -102,6 +115,7 @@ M.cfg = {
         { key = 'i', action = 'toggle_file_info' },
         { key = 'C', action = 'toggle_custom' },
         { key = 'P', action = 'print_path', action_cb = print_node_path },
+        { key = '<leader>sg', cb = live_grep_tree_node },
       },
     },
   },
