@@ -69,9 +69,21 @@ local handler = function(virtText, lnum, endLnum, width, truncate, ctx)
     -- table.insert(newVirtText, ctx.get_fold_virt_text(endLnum)[#ctx.get_fold_virt_text(endLnum)])
 
     -- vim.list_extend(newVirtText, ctx.get_fold_virt_text(endLnum))
-    for _, item in ipairs(ctx.get_fold_virt_text(endLnum)) do
-      if not (vim.startswith(item[1], ' ') or vim.startswith(item[1], '	'))then
-        table.insert(newVirtText, item)
+    local endVirtText = ctx.get_fold_virt_text(endLnum)
+    if #endVirtText > 3 then
+      local pos = #newVirtText + 1
+      for i = #endVirtText, 1, -1 do
+        if vim.tbl_contains({ ')', '}', ']', ',', ';' }, endVirtText[i][1]) then
+          table.insert(newVirtText, pos, endVirtText[i])
+        else
+          break
+        end
+      end
+    else
+      for _, item in ipairs(ctx.get_fold_virt_text(endLnum)) do
+        if not (vim.startswith(item[1], ' ') or vim.startswith(item[1], '	')) then
+          table.insert(newVirtText, item)
+        end
       end
     end
   end
