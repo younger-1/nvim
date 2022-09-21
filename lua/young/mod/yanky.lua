@@ -44,7 +44,8 @@ require('yanky').setup {
 -- vim.keymap.set('n', '=p', '<Plug>(YankyPutAfterFilter)')
 -- vim.keymap.set('n', '=P', '<Plug>(YankyPutBeforeFilter)')
 
-require 'young.mod.hydra.yanky'
+-- ████████████████████████████████████████
+
 -- xy.map { 'p', require('young.mod.hydra.yanky').put_after, '[Hydra] Yanky paste' }
 -- xy.map { 'P', require('young.mod.hydra.yanky').put_before, '[Hydra] Yanky paste' }
 

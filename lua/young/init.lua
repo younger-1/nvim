@@ -338,6 +338,7 @@ xy.map = {
   end,
 }
 
+---@param tbl table: { lhs, rhs, desc, ... }
 local function mapper(tbl)
   local opts = { nowait = true }
 

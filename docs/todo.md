@@ -38,6 +38,8 @@
 - [ ] with prefix(XY), autocmd/manually generate vim-commands for all functions of rr('young.tool') and mod's function
 - [ ] vscode-like highlight selected text, without put it to search history
 - [ ] diffview: allow use other diff tool (e.g. delta, difftastic)
+- [ ] undo: jump to location, display diff, then undo
+- [ ] lsp/diagnostics: diagnostics are updated on as soon as InsertLeave happens. Defer it for 1 second
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
