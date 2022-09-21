@@ -64,8 +64,16 @@ local handler = function(virtText, lnum, endLnum, width, truncate, ctx)
 
   -- For treesitter provider
   if ctx then
-    -- #ctx.end_virt_text == 1
-    table.insert(newVirtText, ctx.end_virt_text[1])
+    -- table.insert(newVirtText, { tostring(#ctx.get_fold_virt_text(endLnum)), 'WarningMsg' })
+    -- table.insert(newVirtText, ctx.get_fold_virt_text(endLnum)[1])
+    -- table.insert(newVirtText, ctx.get_fold_virt_text(endLnum)[#ctx.get_fold_virt_text(endLnum)])
+
+    -- vim.list_extend(newVirtText, ctx.get_fold_virt_text(endLnum))
+    for _, item in ipairs(ctx.get_fold_virt_text(endLnum)) do
+      if not (vim.startswith(item[1], ' ') or vim.startswith(item[1], '	'))then
+        table.insert(newVirtText, item)
+      end
+    end
   end
   return newVirtText
 end
@@ -102,7 +110,7 @@ end
 
 require('ufo').setup {
   open_fold_hl_timeout = 600,
-  enable_fold_end_virt_text = true,
+  enable_get_fold_virt_text = true,
   fold_virt_text_handler = handler,
   provider_selector = function(bufnr, filetype, buftype)
     -- use indent provider for c fieltype
