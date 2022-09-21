@@ -189,6 +189,13 @@ mods.edit = {
     --     require 'young.mod.cinnamon'
     --   end,
     -- },
+    {
+      'gen740/SmoothCursor.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.smooth_cursor'
+      end,
+    },
   },
   -- textobject = {
   -- },
