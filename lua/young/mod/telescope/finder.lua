@@ -9,7 +9,7 @@ local actions = require 'telescope.actions'
 local previews = require 'telescope.previewers'
 local make_entry = require 'telescope.make_entry'
 
-M.find_vim_config = function(opts)
+M.find_config = function(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
     sorting_strategy = 'ascending',
@@ -23,7 +23,7 @@ M.find_vim_config = function(opts)
   builtin.find_files(opts)
 end
 
-M.grep_vim_config = function(opts)
+M.grep_config = function(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
     sorting_strategy = 'ascending',
@@ -37,7 +37,7 @@ M.grep_vim_config = function(opts)
   builtin.live_grep(opts)
 end
 
-M.open_changed_vim_config = function(opts)
+M.open_changed_config = function(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
     sorting_strategy = 'ascending',

@@ -22,7 +22,7 @@ return {
   -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [';'] = { cmd 'Alpha', 'Alpha' },
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  -- ["'"] = { '<cmd>Alpha<cr>', 'Alpha' },
+  ["'"] = { '<cmd>Telescope live_grep_args<cr>', 'Grep' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [','] = { '<cmd>Telescope buffers<cr>', 'Buffers' },
   ['.'] = { '<cmd>Telescope find_files layout_strategy=horizontal<cr>', 'Files' },
@@ -469,7 +469,7 @@ return {
     e = { '<cmd>Telescope env<cr>', 'Env' },
     f = { '<cmd>Telescope find_files<cr>', 'Find files' },
     F = { '<cmd>Telescope find_files no_ignore=1<cr>', 'Find files (more)' },
-    g = { '<cmd>Telescope live_grep <cr>', 'Grep' },
+    g = { '<cmd>Telescope live_grep<cr>', 'Grep' },
     G = {
       function()
         require('telescope.builtin').live_grep {
@@ -548,19 +548,23 @@ return {
   y = {
     name = '+young',
     b = {
-      "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
-      'LunarVim Git Branch',
+      function()
+        require('telescope.builtin').git_commits {
+          cwd = vim.fn.stdpath 'config',
+        }
+      end,
+      'Git commit',
     },
-    c = { ':edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua') .. '<cr>', 'Edit init.lua' },
+    c = { cmd('edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua')), 'Edit init.lua' },
     f = {
       function()
-        require('young.mod.telescope.finder').find_vim_config()
+        require('young.mod.telescope.finder').find_config()
       end,
       'Find Config files',
     },
     g = {
       function()
-        require('young.mod.telescope.finder').grep_vim_config()
+        require('young.mod.telescope.finder').grep_config()
       end,
       'Grep Config files',
     },
@@ -573,12 +577,12 @@ return {
     l = { require('young.cfg').open_local_config, 'Edit local config' },
     o = {
       function()
-        require('young.mod.telescope.finder').open_changed_vim_config()
+        require('young.mod.telescope.finder').open_changed_config()
       end,
       'Open changed Config files',
     },
     r = { require('young.cfg').reload, 'Reload configuration' },
-    y = { ':edit ' .. require('young.cfg').reload_path .. '<cr>', 'Edit plugins' },
+    y = { cmd('edit ' .. require('young.cfg').reload_path), 'Edit plugins' },
     -- y = { "<cmd>lua vim.fn.execute('edit ' .. require('young.cfg').reload_path)<cr>", 'Edit plugins' },
   },
   z = { '<cmd>ZenMode<cr>', 'Zen' },
