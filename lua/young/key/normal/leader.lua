@@ -305,7 +305,8 @@ return {
     ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
     a = { vim.lsp.buf.code_action, 'Code action' },
     A = { vim.lsp.buf.range_code_action, 'Range action' },
-    s = { vim.lsp.buf.workspace_symbol, 'Goto type definition' },
+    s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
+    S = { vim.lsp.buf.document_symbol, 'Document symbol' },
     f = { vim.lsp.buf.formatting, 'Format' },
     F = {
       function()
