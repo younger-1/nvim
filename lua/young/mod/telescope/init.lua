@@ -260,7 +260,9 @@ M.cfg = {
       -- override default mappings
       default_mappings = {
         i = {
-          ['<C-e>'] = require('telescope-live-grep-args.actions').quote_prompt(),
+          ['<C-e>'] = function(prompt_bufnr)
+            require('telescope-live-grep-args.actions').quote_prompt()(prompt_bufnr)
+          end,
         },
       },
       -- extend mappings

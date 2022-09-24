@@ -2,12 +2,12 @@ local M = {}
 
 function M.done()
   tt()
-  rr 'young.cfg.global'
-  rr 'young.cfg.option'
+  require 'young.cfg.global'
+  require 'young.cfg.option'
 
   tt()
-  rr('young.autocmd').done()
-  -- rr('young.key').done()
+  require('young.autocmd').done()
+  -- require('young.key').done()
 
   -- local supported_languages = require "lvim.config.supported_languages"
   -- require("lvim.lsp.manager").init_defaults(supported_languages)
@@ -17,15 +17,15 @@ function M.reload()
   M.reset_cache()
 
   -- TODO:globals and xy.*
-  -- rr 'young'
+  -- require 'young'
 
   M.done()
-  rr('young.packer').done()
-  -- rr('young.lsp').done()
-  rr('young.gui').done()
+  require('young.packer').done()
+  -- require('young.lsp').done()
+  require('young.gui').done()
 
   -- vim.notify 'Reloaded configuration'
-  rr('young.mod.notify').yntf '😀 Reloaded configuration'
+  require('young.mod.notify').yntf '😀 Reloaded configuration'
 end
 
 M.reload_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')

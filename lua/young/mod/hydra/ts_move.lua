@@ -1,4 +1,8 @@
-local ts_move = require 'nvim-treesitter.textobjects.move'
+local ts_move = rr 'nvim-treesitter.textobjects.move'
+if not ts_move then
+  return
+end
+
 local Hydra = require 'hydra'
 
 -- Move up/down functions

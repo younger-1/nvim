@@ -22,18 +22,18 @@ tt()
 require 'young'
 
 tt()
-rr('young.cfg').done()
+require('young.cfg').done()
 
 tt()
-rr('young.packer').done()
+require('young.packer').done()
 
 tt()
 vim.cmd [[silent! colorscheme monokai]]
 
 tt()
-rr('young.gui').done()
+require('young.gui').done()
 
 tt()
-rr('young.lsp').done()
+require('young.lsp').done()
 
 tt()
