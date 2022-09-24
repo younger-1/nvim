@@ -281,6 +281,8 @@ M.cfg = {
         list_definitions_toc = 'gmo',
         goto_next_usage = 'gmn',
         goto_previous_usage = 'gmp',
+        -- goto_next_usage = ']w',
+        -- goto_previous_usage = '[w',
       },
     },
   },

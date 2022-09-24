@@ -46,6 +46,8 @@ M.cfg = {
     '<Plug>',
     "require'nvim%-treesitter%.textobjects%.move'%.goto_",
     "require'nvim%-treesitter%.textobjects%.select'%.select_",
+    "require'nvim%-treesitter%-refactor%.navigation'%.",
+    "require'nvim%-treesitter%-refactor%.smart_rename'%.",
   },
   show_help = true, -- show help message on the command line when the popup is visible
   -- triggers = "auto",

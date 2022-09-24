@@ -35,7 +35,12 @@ mods.theme = {
 
   lua = {
     'Mofiqul/dracula.nvim',
-    'tanvirtin/monokai.nvim',
+    {
+      'tanvirtin/monokai.nvim',
+      config = function()
+        require('young.theme.monokai')
+      end,
+    },
     'rebelot/kanagawa.nvim',
     'ellisonleao/gruvbox.nvim',
     'daschw/leaf.nvim',

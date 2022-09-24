@@ -37,6 +37,7 @@ _G.is_mac = uv.os_uname().sysname:match 'Darwin' and true or false
 _G.is_linux = _G.is_unix and not (_G.is_wsl or _G.is_mac)
 
 _G.xy = {
+  -- colorscheme = 'monokai',
   startup_time = {
     os_start = os.clock(),
     rel_start = vim.fn.reltime(),
@@ -398,3 +399,30 @@ xy.log = {
     vim.notify(msg, vim.log.levels.ERROR)
   end,
 }
+
+local function is_hl_set(hl_name)
+  local exists, hl = pcall(api.nvim_get_hl_by_name, hl_name, true)
+  local color = hl.foreground or hl.background or hl.reverse
+  return exists and color ~= nil
+end
+
+xy.hi = function(hls, force)
+  for name, candidates in pairs(hls) do
+    if force or not is_hl_set(name) then
+      if type(candidates) == 'string' then
+        if is_hl_set(candidates) then
+          vim.api.nvim_set_hl(0, name, {})
+          vim.api.nvim_set_hl(0, name, { link = candidates, default = true })
+        end
+      else
+        for _, d in ipairs(candidates) do
+          if is_hl_set(d) then
+            vim.api.nvim_set_hl(0, name, {})
+            vim.api.nvim_set_hl(0, name, { link = d, default = true })
+            break
+          end
+        end
+      end
+    end
+  end
+end
