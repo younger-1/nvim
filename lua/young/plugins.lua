@@ -57,6 +57,15 @@ mods.theme = {
         vim.g.material_style = 'palenight'
       end,
     },
+    {
+      'lunarvim/onedarker.nvim',
+      disable = xy.colorscheme ~= 'onedarker',
+      branch = 'freeze',
+      config = function()
+        require('onedarker').setup()
+        -- xy.mod.lualine.options.theme = 'onedarker'
+      end,
+    },
   },
 }
 
@@ -103,13 +112,13 @@ mods.appearance = {
         require 'young.mod.illuminate'
       end,
     },
-    { -- Show where your cursor moves when jumping large distances
-      'edluffy/specs.nvim',
-      event = 'BufRead',
-      config = function()
-        require('young.mod.specs').done()
-      end,
-    },
+    -- { -- Show where your cursor moves when jumping large distances
+    --   'edluffy/specs.nvim',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require('young.mod.specs').done()
+    --   end,
+    -- },
     -- { -- Highlight UI elements based on current mode
     --   'mvllow/modes.nvim',
     --   event = 'CursorMoved',
@@ -124,12 +133,6 @@ mods.appearance = {
         require('hlargs').setup {
           -- color = '#ef9062',
         }
-      end,
-    },
-    {
-      'monkoose/matchparen.nvim',
-      config = function()
-        require('matchparen').setup()
       end,
     },
   },
@@ -167,6 +170,12 @@ mods.edit = {
       event = 'CursorMoved',
       config = function()
         require 'young.mod.matchup'
+      end,
+    },
+    {
+      'monkoose/matchparen.nvim',
+      config = function()
+        require('matchparen').setup()
       end,
     },
     -- {

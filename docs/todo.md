@@ -4,7 +4,8 @@
 - [ ] once ice hot done
 - [ ] mod: completion, editor, lang, tool, ui
 - [ ] hl cursorline
-- [ ] `yo` <==> require('young')
+- [x] `xy` <==> require('young')
+- [ ] rename: require('xy')
 - [ ] vim restore text deleted by C-u or C-w in cmdline
 - [ ] vim select files inside current selected folder in cmdline
 - [ ] find files when using `Rg`
@@ -40,6 +41,7 @@
 - [ ] diffview: allow use other diff tool (e.g. delta, difftastic)
 - [ ] undo: jump to location, display diff, then undo
 - [ ] lsp/diagnostics: diagnostics are updated on as soon as InsertLeave happens. Defer it for 1 second
+- [ ] Telescope git_branches: can not show worktree correctly
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
