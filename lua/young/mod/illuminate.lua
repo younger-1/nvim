@@ -33,18 +33,27 @@ require('illuminate').configure {
   under_cursor = true,
 }
 
-vim.cmd [[
-hi! def link IlluminatedWordText  LspReferenceText
-hi! def link IlluminatedWordRead  LspReferenceRead
-hi! def link IlluminatedWordWrite LspReferenceWrite
-]]
+-- vim.cmd [[
+-- hi! def link IlluminatedWordText  LspReferenceText
+-- hi! def link IlluminatedWordRead  LspReferenceRead
+-- hi! def link IlluminatedWordWrite LspReferenceWrite
+-- ]]
+xy.hi {
+  IlluminatedWordText = 'LspReferenceText',
+  IlluminatedWordRead = 'LspReferenceRead',
+  IlluminatedWordWrite = 'LspReferenceWrite',
+}
 
 -- vim.cmd [[
 -- hi def link IlluminatedWordText Visual
 -- hi def link IlluminatedWordRead Visual
 -- hi def link IlluminatedWordWrite Visual
 -- ]]
-
 -- vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
 -- vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
 -- vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+
+vim.keymap.set('n', ']w', require('illuminate').goto_next_reference, { desc = 'Move to next reference' })
+vim.keymap.set('n', '[w', require('illuminate').goto_prev_reference, { desc = 'Move to previous reference' })
+-- vim.keymap.set('o', '<a-i>', require('illuminate').textobj_select)
+-- vim.keymap.set('x', '<a-i>', require('illuminate').textobj_select)
