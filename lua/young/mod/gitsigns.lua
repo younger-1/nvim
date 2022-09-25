@@ -26,10 +26,10 @@ hi def link GitSignsDeleteLn DiffDelete
 hi def link GitSignsChangeLn DiffText
 
 " For word diff
-" override default link to TermCursor
-hi! def link GitSignsAddInline GitSignsAddLn
-hi! def link GitSignsDeleteInline GitSignsDeleteLn
-hi! def link GitSignsChangeInline GitSignsChangeLn
+" avoid link to TermCursor by gitsigns
+hi def link GitSignsAddInline GitSignsAddLn
+hi def link GitSignsDeleteInline GitSignsDeleteLn
+hi def link GitSignsChangeInline GitSignsChangeLn
   ]]
 
 local show_count = true

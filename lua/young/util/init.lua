@@ -159,8 +159,22 @@ function util.relative_current(path)
 end
 
 function util.normalize(path)
-  vim.validate({ path = { path, 's' } })
+  vim.validate { path = { path, 's' } }
   return (path:gsub('^~/', vim.env.HOME .. '/'):gsub('%$([%w_]+)', vim.env):gsub('\\', '/'))
+end
+
+function util.hl_link_name(hl_name)
+  return fn.synIDattr(fn.synIDtrans(fn.hlID(hl_name)), 'name')
+end
+
+function util.is_hl_link(hl_name)
+  return util.hl_link_name(hl_name) ~= hl_name
+end
+
+function util.is_gui_hl_set(hl_name)
+  local exists, hl = pcall(api.nvim_get_hl_by_name, hl_name, true)
+  local color = hl.foreground or hl.background or hl.reverse
+  return exists and color ~= nil
 end
 
 return util

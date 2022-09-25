@@ -39,7 +39,7 @@ require('illuminate').configure {
 -- hi! def link IlluminatedWordWrite LspReferenceWrite
 -- ]]
 
-xy.hi {
+xy.hi_link {
   IlluminatedWordText = 'LspReferenceText',
   IlluminatedWordRead = 'LspReferenceRead',
   IlluminatedWordWrite = 'LspReferenceWrite',

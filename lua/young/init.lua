@@ -400,28 +400,52 @@ xy.log = {
   end,
 }
 
-local function is_gui_hl_set(hl_name)
-  local exists, hl = pcall(api.nvim_get_hl_by_name, hl_name, true)
-  local color = hl.foreground or hl.background or hl.reverse
-  return exists and color ~= nil
-end
+-- only link when <name> do not have highlight
+-- xy.hi_link = function(hls, force)
+--   for name, candidates in pairs(hls) do
+--     if force or not xy.util.is_gui_hl_set(name) then
+--       if type(candidates) == 'string' then
+--         if xy.util.is_gui_hl_set(candidates) then
+--           vim.api.nvim_set_hl(0, name, {})
+--           vim.api.nvim_set_hl(0, name, { link = candidates, default = true })
+--         end
+--       else
+--         for _, d in ipairs(candidates) do
+--           if xy.util.is_gui_hl_set(d) then
+--             vim.api.nvim_set_hl(0, name, {})
+--             vim.api.nvim_set_hl(0, name, { link = d, default = true })
+--             break
+--           end
+--         end
+--       end
+--     end
+--   end
+-- end
 
-xy.hi = function(hls, force)
+--  ┌─────────────────┐
+--  │ is_hl_link      │
+--  │       ┌─────────┼───────┐
+--  │    1  │    2    │   3   │
+--  │       │         │       │
+--  └───────┼─────────┘       │
+--       4  │   is_gui_hl_set │
+--          └─────────────────┘
+
+-- need link hl when
+-- 1, need clear link
+-- 3,
+-- 4
+xy.hi_link = function(hls)
   for name, candidates in pairs(hls) do
-    if force or not is_gui_hl_set(name) then
-      if type(candidates) == 'string' then
-        if is_gui_hl_set(candidates) then
-          vim.api.nvim_set_hl(0, name, {})
-          vim.api.nvim_set_hl(0, name, { link = candidates, default = true })
-        end
-      else
-        for _, d in ipairs(candidates) do
-          if is_gui_hl_set(d) then
-            vim.api.nvim_set_hl(0, name, {})
-            vim.api.nvim_set_hl(0, name, { link = d, default = true })
-            break
-          end
-        end
+    if not xy.util.is_gui_hl_set(name) then
+      vim.cmd(('hi! def link %s %s'):format(name, candidates))
+      -- vim.api.nvim_set_hl(0, name, {})
+      -- vim.api.nvim_set_hl(0, name, { link = candidates, default = true })
+    else
+      if not xy.util.is_hl_link(name) then
+        -- @see <https://github.com/neovim/neovim/issues/20323> nvim_set_hl is missing the ! behavior of hi! def link
+        vim.cmd(('hi def link %s %s'):format(name, candidates))
+        -- vim.api.nvim_set_hl(0, name, { link = candidates, default = true })
       end
     end
   end

@@ -52,8 +52,8 @@ dracula.setup {
     -- LspReferenceRead = { bg = dracula.colors().green },
     -- LspReferenceWrite = { bg = dracula.colors().red },
 
-    LspReferenceText = { bg = '#27406b' },
-    LspReferenceRead = { bg = '#3d5213' },
-    LspReferenceWrite = { bg = '#4a0f23' },
+    -- LspReferenceText = { bg = '#27406b' },
+    -- LspReferenceRead = { bg = '#3d5213' },
+    -- LspReferenceWrite = { bg = '#4a0f23' },
   },
 }
