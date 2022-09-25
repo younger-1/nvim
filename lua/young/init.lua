@@ -400,7 +400,7 @@ xy.log = {
   end,
 }
 
-local function is_hl_set(hl_name)
+local function is_gui_hl_set(hl_name)
   local exists, hl = pcall(api.nvim_get_hl_by_name, hl_name, true)
   local color = hl.foreground or hl.background or hl.reverse
   return exists and color ~= nil
@@ -408,15 +408,15 @@ end
 
 xy.hi = function(hls, force)
   for name, candidates in pairs(hls) do
-    if force or not is_hl_set(name) then
+    if force or not is_gui_hl_set(name) then
       if type(candidates) == 'string' then
-        if is_hl_set(candidates) then
+        if is_gui_hl_set(candidates) then
           vim.api.nvim_set_hl(0, name, {})
           vim.api.nvim_set_hl(0, name, { link = candidates, default = true })
         end
       else
         for _, d in ipairs(candidates) do
-          if is_hl_set(d) then
+          if is_gui_hl_set(d) then
             vim.api.nvim_set_hl(0, name, {})
             vim.api.nvim_set_hl(0, name, { link = d, default = true })
             break

@@ -28,7 +28,7 @@ tt()
 require('young.packer').done()
 
 tt()
-vim.cmd [[silent! colorscheme monokai]]
+vim.cmd [[silent! colorscheme dracula]]
 
 tt()
 require('young.gui').done()

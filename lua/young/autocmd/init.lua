@@ -194,7 +194,7 @@ function M.done()
     _colorscheme = {
       -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
       { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
-      { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- @see :h 'pumblend'
+      -- { 'ColorScheme', '*', 'lua require("young.tool").lsp_ref()' }, -- @see :h 'pumblend'
     },
     _formatoptions = {
       {
