@@ -32,6 +32,8 @@ hi! def link GitSignsDeleteInline GitSignsDeleteLn
 hi! def link GitSignsChangeInline GitSignsChangeLn
   ]]
 
+local show_count = true
+
 M.cfg = {
   signs = {
     add = {
@@ -39,35 +41,53 @@ M.cfg = {
       text = '▍', -- '▎'
       numhl = 'GitSignsAddNr',
       linehl = 'GitSignsAddLn',
+      show_count = show_count,
     },
     change = {
       hl = 'GitSignsChange',
       text = '▍', -- '▎'
       numhl = 'GitSignsChangeNr',
       linehl = 'GitSignsChangeLn',
+      show_count = show_count,
     },
     delete = {
       hl = 'GitSignsDelete',
       text = '▶', -- '▂', -- '_'
       numhl = 'GitSignsDeleteNr',
       linehl = 'GitSignsDeleteLn',
+      show_count = show_count,
     },
     topdelete = {
       hl = 'GitSignsDelete',
       text = '', -- '‾'
       numhl = 'GitSignsDeleteNr',
       linehl = 'GitSignsDeleteLn',
+      show_count = show_count,
     },
     changedelete = {
       hl = 'GitSignsChange',
       text = '▍', -- '~'
       numhl = 'GitSignsChangeNr',
       linehl = 'GitSignsChangeLn',
+      show_count = show_count,
     },
+  },
+  count_chars = {
+    [1] = '₁',
+    [2] = '₂',
+    [3] = '₃',
+    [4] = '₄',
+    [5] = '₅',
+    [6] = '₆',
+    [7] = '₇',
+    [8] = '₈',
+    [9] = '₉',
+    ['+'] = '₊',
   },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
   linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+  -- show_deleted = true,
   word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
   -- diff_opts = {
   --   algorithm = "minimal",
@@ -125,8 +145,7 @@ M.cfg = {
         return ']c'
       end
       vim.schedule(function()
-        -- gs.next_hunk()
-        gs.next_hunk { preview = 1 }
+        gs.next_hunk()
       end)
       return '<Ignore>'
     end, { expr = true })
@@ -137,10 +156,21 @@ M.cfg = {
       end
       vim.schedule(function()
         gs.prev_hunk()
-        gs.prev_hunk { preview = 1 }
       end)
       return '<Ignore>'
     end, { expr = true })
+
+    map('n', ']d', function()
+      vim.schedule(function()
+        gs.next_hunk { preview = 1 }
+      end)
+    end)
+
+    map('n', '[d', function()
+      vim.schedule(function()
+        gs.prev_hunk { preview = 1 }
+      end)
+    end)
 
     -- Text object
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
