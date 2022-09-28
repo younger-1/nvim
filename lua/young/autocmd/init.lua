@@ -217,11 +217,17 @@ function M.done()
     _startup = {
       { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
       --
-      -- { 'VimEnter', '*', '++once', 'lua require("young.tool").startup_event("VimEnter")' },
-      -- { 'BufRead', '*', '++once', 'lua require("young.tool").startup_event("BufRead")' },
-      -- { 'BufReadPost', '*', '++once', 'lua require("young.tool").startup_event("BufReadPost")' },
-      -- { 'BufEnter', '*', '++once', 'lua require("young.tool").startup_event("BufEnter")' },
-      -- { 'BufWinEnter', '*', '++once', 'lua require("young.tool").startup_event("BufWinEnter")' },
+      -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")' },
+      -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")' },
+      -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")' },
+      -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")' },
+      -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")' },
+      --
+      -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")', once = true },
+      -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")', once = true },
+      -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")', once = true },
+      -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")', once = true },
+      -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")', once = true },
     },
     _reload = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
