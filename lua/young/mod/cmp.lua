@@ -19,10 +19,10 @@ M.cfg = {
   --   -- disable completion if the cursor is `Comment` syntax group.
   --   return not cmp.config.context.in_syntax_group('Comment')
   -- end,
-  enabled = function()
-    local cmp_dap = rr 'cmp_dap'
-    return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or (cmp_dap and cmp_dap.is_dap_buffer())
-  end,
+  -- enabled = function()
+  --   local cmp_dap = rr 'cmp_dap'
+  --   return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or (cmp_dap and cmp_dap.is_dap_buffer())
+  -- end,
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
