@@ -78,6 +78,7 @@ vim.filetype.add {
     -- ['tsconfig.json'] = 'jsonc',
     -- ['jsconfig.json'] = 'jsonc',
     ['.envrc'] = 'bash',
+    ['go.mod'] = 'gomod',
   },
   pattern = {
     ['.*/git/.*'] = 'gitconfig',
