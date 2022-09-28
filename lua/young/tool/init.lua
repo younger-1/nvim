@@ -377,8 +377,8 @@ tool.startup_time = function()
 end
 
 tool.startup_event = function(event)
-  local now = vim.fn.reltimefloat(vim.fn.reltime(xy.startup_time.a))
-  xy.util.echomsg { fmt('%s: %g', event, now) }
+  local now = vim.fn.reltimefloat(vim.fn.reltime(xy.startup_time.rel_start))
+  xy.util.echomsg { fmt('%s: %f', event, now) }
 end
 
 --- Usage:
