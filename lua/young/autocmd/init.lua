@@ -182,9 +182,25 @@ function M.done()
       {
         'BufReadPost',
         '*',
-        -- TODO:delay for guess-indent adjust tab
-        [[if !&expandtab && exists(":IndentBlankline") | exe "IndentBlanklineDisable" | endif]],
+        function()
+          vim.defer_fn(function()
+            if not vim.bo.expandtab and fn.exists ':IndentBlankline' then
+              vim.cmd 'IndentBlanklineDisable'
+            end
+          end, 500)
+        end,
       },
+      -- {
+      --   'BufReadPost',
+      --   '*',
+      --   function()
+      --     vim.cmd [[
+      --     call timer_start(500,
+      --         \ {-> execute('if !&expandtab && exists(":IndentBlankline") | exe "IndentBlanklineDisable" | endif')},
+      --         \ {'repeat': 1})
+      --   ]]
+      --   end,
+      -- },
     },
     _syntax = {
       {
