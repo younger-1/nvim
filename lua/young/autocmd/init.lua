@@ -144,10 +144,13 @@ function M.done()
         "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })",
         desc = 'Highlight text on yank',
       },
+      -- { 'FocusLost', '*', 'silent! wa' },
+    },
+    _goto_last_position = {
       {
         'BufWinEnter',
         '*',
-        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif ]],
+        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif]],
         desc = 'Jump to last cursor position when opening a file',
       },
       -- {
@@ -160,20 +163,30 @@ function M.done()
       --     end
       --   end,
       -- },
-      -- { 'FocusLost', '*', 'silent! wa' },
+    },
+    _number = {
+      -- { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
+      -- { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
+      { 'InsertEnter', '*', require('young.tool').nornu },
+      { 'InsertLeave', '*', require('young.tool').rnu },
+    },
+    _cursor = {
       {
         'VimEnter,VimResume',
         '*',
         'set guicursor=n-v-c-sm:block-blinkon100,i-ci-ve:ver25-blinkon100,r-cr-o:hor20-blinkon100',
       },
       { 'VimLeave,VimSuspend', '*', 'set guicursor=a:ver25-blinkon100' },
-      -- { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
-      -- { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
-      { 'InsertEnter', '*', require('young.tool').nornu },
-      { 'InsertLeave', '*', require('young.tool').rnu },
-      -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
-      -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
-      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
+    },
+    _indentline = {
+      {
+        'BufReadPost',
+        '*',
+        -- TODO:delay for guess-indent adjust tab
+        [[if !&expandtab && exists(":IndentBlankline") | exe "IndentBlanklineDisable" | endif]],
+      },
+    },
+    _syntax = {
       {
         'BufEnter',
         '*',
@@ -183,6 +196,43 @@ function M.done()
           end
         end,
       },
+    },
+    _colorscheme = {
+      -- { 'ColorScheme', '*', [[echomsg expand('<afile>') expand('<amatch>')]] },
+      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
+      { 'ColorScheme', '*', 'lua require("young.tool").hi_lsp_ref()' }, -- @see :h 'pumblend'
+    },
+    _formatoptions = {
+      {
+        { 'BufWinEnter', 'BufRead', 'BufNewFile' },
+        '*',
+        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
+      },
+    },
+    _auto_reload = { -- <https://github.com/jdhao/nvim-config/blob/2c7e4aa87aefcc32682d017eae9e3c1395ae8f2b/lua/custom-autocmd.lua#L52>
+      {
+        'FileChangedShellPost',
+        '*',
+        function()
+          vim.notify('File changed on disk. Buffer reloaded!', vim.log.levels.WARN, { title = '' })
+        end,
+      },
+      -- {
+      --   { 'FocusGained', 'CursorHold' },
+      --   '*',
+      --   [[if getcmdwintype() == "" | checktime | endif]],
+      -- },
+    },
+    _auto_resize = {
+      -- will cause split windows to be resized evenly if main window is resized
+      {
+        'VimResized',
+        '*',
+        -- 'tabdo wincmd =',
+        'wincmd =',
+      },
+    },
+    _auto_mkdir = {
       {
         'BufWritePre',
         '*',
@@ -191,23 +241,13 @@ function M.done()
         end,
       },
     },
-    _colorscheme = {
-      -- { 'ColorScheme', '*', 'echomsg expand('<afile>') expand('<amatch>')' },
-      { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
-      { 'ColorScheme', '*', 'lua require("young.tool").hi_lsp_ref()' }, -- @see :h 'pumblend'
+    _auto_cd = {
+      -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
+      -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
+      -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
     },
-    _formatoptions = {
-      {
-        'BufWinEnter,BufRead,BufNewFile',
-        '*',
-        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
-      },
-    },
-    _auto_resize = {
-      -- will cause split windows to be resized evenly if main window is resized
-      { 'VimResized', '*', 'tabdo wincmd =' },
-    },
-    _general_lsp = {
+
+    _lsp = {
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info,any-jump', 'lua require("young.tool").add_border()' },
@@ -229,7 +269,7 @@ function M.done()
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")', once = true },
       -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")', once = true },
     },
-    _reload = {
+    _config_reload = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
       { 'BufWritePost', plugins_path, "lua require('young.packer').recompile()" },
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
