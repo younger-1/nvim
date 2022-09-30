@@ -177,4 +177,12 @@ function util.is_gui_hl_set(hl_name)
   return exists and color ~= nil
 end
 
+-- <https://github.com/tjdevries/leftpad.nvim>
+function util.leftpad(str_or_num, padding, char)
+  if type(str_or_num) == 'string' then
+    return string.format('%' .. tostring(padding) .. 's', str_or_num)
+  else
+    return string.rep(char and tostring(char) or '0', padding - #tostring(str_or_num)) .. tostring(str_or_num)
+  end
+end
 return util
