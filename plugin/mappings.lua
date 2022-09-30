@@ -13,13 +13,17 @@ local mode_adapters = {
 
 M.keys = {
   insert_command_mode = {
+    -- :h emacs-keys
     ['<C-a>'] = '<Home>',
     ['<C-e>'] = '<End>',
     --
     ['<A-f>'] = '<S-Right>',
     ['<A-b>'] = '<S-Left>',
-    -- ["<C-b>"] = "<Left>",
-    -- ["<C-f>"] = "<Right>",
+
+    ['<C-f>'] = '<Right>',
+    ['<C-b>'] = '<Left>',
+    --
+    ['<C-d>'] = '<Del>',
   },
 
   -- ---@usage change or add keymappings for insert mode
@@ -28,8 +32,6 @@ M.keys = {
     -- ['jk'] = '<ESC>',
     -- 'jj' for quitting insert mode
     -- ['jj'] = '<ESC>',
-
-    ['<C-d>'] = '<Del>',
 
     -- Move current line / block with Alt-j/k ala vscode.
     ['<A-k>'] = '<C-o>:m .-2<CR>',
