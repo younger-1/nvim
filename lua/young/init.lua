@@ -46,11 +46,12 @@ _G.xy = {
 }
 
 if is_mac then
-  xy.open_cmd = 'open'
+  xy.open_cmd = 'open' -- <https://ss64.com/osx/open.html>
 elseif is_linux then
-  xy.open_cmd = 'xdg-open'
+  xy.open_cmd = 'xdg-open' -- <https://linux.die.net/man/1/xdg-open>
 else
   xy.open_cmd = 'explorer'
+  -- xy.open_cmd = 'start' -- <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start>
 end
 
 function _G.join_paths(...)
