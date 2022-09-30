@@ -25,7 +25,7 @@ M.cfg = {
   -- end,
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
+    -- { name = 'nvim_lua' },
     -- For vsnip users.
     -- { name = 'vsnip' },
     -- For ultisnips users.
@@ -38,8 +38,18 @@ M.cfg = {
     { name = 'path' },
     { name = 'buffer' },
     { name = 'calc' },
+    {
+      name = 'rg',
+      option = {
+        debounce = 200,
+        additional_arguments = '--smart-case',
+        context_before = 2,
+        context_after = 4,
+      },
+      keyword_length = 2,
+    },
     -- { name = 'look', keyword_length = 2 },
-    { name = 'dictionary', keyword_length = 2 },
+    -- { name = 'dictionary', keyword_length = 2 },
     -- { name = 'emoji' },
     -- { name = 'treesitter' },
     -- { name = 'cmp_tabnine' },

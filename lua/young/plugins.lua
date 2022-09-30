@@ -905,6 +905,7 @@ mods.code = {
         --
         { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' },
+        { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
         -- { 'octaltree/cmp-look', after = 'nvim-cmp' }, -- need binary (look) and file (/usr/share/dict/words)
         -- {
         --   'uga-rosa/cmp-dictionary',
