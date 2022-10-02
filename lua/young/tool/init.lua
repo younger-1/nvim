@@ -286,27 +286,27 @@ tool.visualedit = function()
   end
 end
 
-local hl = function(name, val)
+local function hl (name, val)
   api.nvim_set_hl(0, name, val)
 end
 
 tool.hi_lsp_ref = function()
   if vim.o.bg == 'dark' then
     -- vim.cmd [[
-    --   " hi LspReferenceText  gui=bold guibg=DarkGray
-    --   hi LspReferenceText  gui=bold guibg=DarkCyan
-    --   hi LspReferenceRead  gui=bold guibg=DarkGreen
-    --   hi LspReferenceWrite gui=bold guibg=DarkRed
+    --   " hi LspReferenceText  gui=bold,undercurl guibg=DarkGray
+    --   hi LspReferenceText  gui=bold,undercurl guibg=DarkCyan
+    --   hi LspReferenceRead  gui=bold,undercurl guibg=DarkGreen
+    --   hi LspReferenceWrite gui=bold,undercurl guibg=DarkRed
     -- ]]
-    hl('LspReferenceText', { bg = '#27406b' })
-    hl('LspReferenceRead', { bg = '#3d5213' })
-    hl('LspReferenceWrite', { bg = '#4a0f23' })
+    hl('LspReferenceText', { undercurl = true, --[[ bg = '#27406b' ]] })
+    hl('LspReferenceRead', { undercurl = true, bg = '#3d5213' })
+    hl('LspReferenceWrite', { undercurl = true, bg = '#4a0f23' })
   else
     vim.cmd [[
-      " hi LspReferenceText  gui=bold guibg=LightGray
-      hi LspReferenceText  gui=bold guibg=LightCyan
-      hi LspReferenceRead  gui=bold guibg=LightGreen
-      hi LspReferenceWrite gui=bold guibg=LightRed
+      " hi LspReferenceText  gui=bold,undercurl guibg=LightGray
+      hi LspReferenceText  gui=bold,undercurl guibg=LightCyan
+      hi LspReferenceRead  gui=bold,undercurl guibg=LightGreen
+      hi LspReferenceWrite gui=bold,undercurl guibg=LightRed
     ]]
   end
 end
