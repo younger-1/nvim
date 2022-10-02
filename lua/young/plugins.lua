@@ -191,16 +191,16 @@ mods.edit = {
     {
       'andymass/vim-matchup',
       event = 'CursorMoved',
-      config = function()
+      setup = function()
         require 'young.mod.matchup'
       end,
     },
-    {
-      'monkoose/matchparen.nvim',
-      config = function()
-        require('matchparen').setup()
-      end,
-    },
+    -- {
+    --   'monkoose/matchparen.nvim',
+    --   config = function()
+    --     require('matchparen').setup()
+    --   end,
+    -- },
     -- {
     --   'abecodes/tabout.nvim',
     --   config = function()
