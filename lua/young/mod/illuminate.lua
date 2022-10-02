@@ -33,17 +33,11 @@ require('illuminate').configure {
   under_cursor = true,
 }
 
--- vim.cmd [[
--- hi! def link IlluminatedWordText  LspReferenceText
--- hi! def link IlluminatedWordRead  LspReferenceRead
--- hi! def link IlluminatedWordWrite LspReferenceWrite
--- ]]
-
-xy.hi_link {
-  IlluminatedWordText = 'LspReferenceText',
-  IlluminatedWordRead = 'LspReferenceRead',
-  IlluminatedWordWrite = 'LspReferenceWrite',
-}
+vim.cmd [[
+hi! def link IlluminatedWordText  LspReferenceText
+hi! def link IlluminatedWordRead  LspReferenceRead
+hi! def link IlluminatedWordWrite LspReferenceWrite
+]]
 
 -- vim.cmd [[
 -- hi def link IlluminatedWordText Visual

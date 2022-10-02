@@ -13,9 +13,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     monokai.setup {
       palette = palette,
       custom_hlgroups = {
-        -- TSInclude = {
-        --   fg = palette.aqua,
-        -- },
         GitSignsAdd = {
           fg = palette.green,
           bg = palette.base2,

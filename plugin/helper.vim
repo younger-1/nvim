@@ -77,3 +77,6 @@ command! FollowSymLink execute "file " . resolve(expand('%')) | edit
 command! Name echo  "hi: " . synID(line("."), col("."), 1)->synIDattr("name")
   \ . ", link: " . synID(line("."), col("."), 1)->synIDtrans()->synIDattr("name")
   \ . ", tran: " . synID(line("."), col("."), 0)->synIDattr("name")
+
+" TODO:highlight of treesitter under cursor
+command! -nargs=1 -complete=highlight HiName hi <args> | echo "-> " . hlID(<q-args>)->synIDtrans()->synIDattr("name")
