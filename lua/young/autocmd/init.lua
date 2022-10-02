@@ -216,7 +216,8 @@ function M.done()
     _colorscheme = {
       -- { 'ColorScheme', '*', [[echomsg expand('<afile>') expand('<amatch>')]] },
       { 'ColorScheme', '*', 'hi PmenuSel blend=0' }, -- @see :h 'pumblend'
-      { 'ColorScheme', '*', 'lua require("young.tool").hi_lsp_ref()' }, -- @see :h 'pumblend'
+      { 'ColorScheme', '*', require('young.tool').hi_lsp_ref },
+      { 'ColorScheme', '*', 'hi MatchParen gui=bold,underline' },
     },
     _formatoptions = {
       {
@@ -266,12 +267,12 @@ function M.done()
     _lsp = {
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,any-jump', 'lua require("young.tool").add_border()' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info,any-jump', require('young.tool').add_border },
       { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
       { 'FileType', 'notify,dap-float', 'nnoremap <silent> <buffer> q :close<CR>' },
     },
     _startup = {
-      { 'VimEnter', '*', 'lua require("young.tool").startup_time()' },
+      { 'VimEnter', '*', require('young.tool').startup_time },
       --
       -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")' },
       -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")' },
@@ -287,7 +288,7 @@ function M.done()
     },
     _config_reload = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
-      { 'BufWritePost', plugins_path, "lua require('young.packer').recompile()" },
+      { 'BufWritePost', plugins_path, require('young.packer').recompile },
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
       { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
     },
