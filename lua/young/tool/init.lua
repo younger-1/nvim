@@ -404,6 +404,7 @@ tool.profile = function(filename)
 end
 
 tool.open_url = function()
+  ---@type string
   local line = fn.getline '.'
   -- local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')
   local name = line:match '[%a%d%.%-%_]+/[%a%d%.%-%_]+'
