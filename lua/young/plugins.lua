@@ -837,6 +837,13 @@ mods.UI = {
         require('young.mod.toggleterm').done()
       end,
     },
+    {
+      'samjwill/nvim-unception',
+      -- event = 'TermOpen',
+      setup = function()
+        require 'young.mod.unception'
+      end,
+    },
   },
   screen = {
     {
