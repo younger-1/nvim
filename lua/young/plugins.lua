@@ -82,13 +82,13 @@ mods.theme = {
     --   'tjdevries/colorbuddy.nvim',
     --   module = 'colorbuddy',
     -- },
-    {
-      'Djancyp/custom-theme.nvim',
-      requires = 'nvim-lua/plenary.nvim',
-      config = function()
-        require('custom-theme').setup()
-      end,
-    },
+    -- {
+    --   'Djancyp/custom-theme.nvim',
+    --   requires = 'nvim-lua/plenary.nvim',
+    --   config = function()
+    --     require('custom-theme').setup()
+    --   end,
+    -- },
   },
 }
 
