@@ -11,7 +11,10 @@ mods.basic = {
   { 'wbthomason/packer.nvim' },
   -- { 'younger-1/packer.nvim', branch = 'mydev' },
   { 'lewis6991/impatient.nvim' },
-  { 'antoinemadec/FixCursorHold.nvim' }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  {
+    'antoinemadec/FixCursorHold.nvim',
+    disable = xy.has 'nvim-0.8',
+  },
   -- {
   --   'nathom/filetype.nvim',
   --   -- opt = true,
@@ -127,14 +130,6 @@ mods.appearance = {
     },
   },
   line = {
-    { -- Highlighting the word under the cursor
-      'RRethy/vim-illuminate',
-      disable = require('young.lsp.config').document_highlight,
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.illuminate'
-      end,
-    },
     -- { -- Show where your cursor moves when jumping large distances
     --   'edluffy/specs.nvim',
     --   event = 'BufRead',
@@ -150,12 +145,10 @@ mods.appearance = {
     --   end,
     -- },
     {
-      'm-demare/hlargs.nvim',
-      after = 'nvim-treesitter',
+      'gen740/SmoothCursor.nvim',
+      event = 'BufWinEnter',
       config = function()
-        require('hlargs').setup {
-          -- color = '#ef9062',
-        }
+        require 'young.mod.smooth_cursor'
       end,
     },
   },
@@ -221,13 +214,6 @@ mods.edit = {
     --     require 'young.mod.cinnamon'
     --   end,
     -- },
-    {
-      'gen740/SmoothCursor.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.smooth_cursor'
-      end,
-    },
   },
   -- textobject = {
   -- },
@@ -476,6 +462,22 @@ mods.BWT = {
 }
 
 mods.file = {
+  tree = {
+    {
+      'kyazdani42/nvim-tree.lua',
+      -- event = 'BufWinEnter',
+      cmd = 'NvimTreeToggle',
+      config = function()
+        require('young.mod.nvim_tree').done()
+      end,
+    },
+    {
+      'tamago324/lir.nvim',
+      config = function()
+        require 'young.mod.lir'
+      end,
+    },
+  },
   project = {
     {
       -- 'ahmedkhalf/project.nvim',
@@ -499,17 +501,27 @@ mods.file = {
     },
   },
   dir = {
+    -- {
+    --   'ZSaberLv0/ZFVimDirDiff',
+    --   cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
+    --   setup = function()
+    --     vim.g.ZFDirDiffUI_dirExpandable = '+'
+    --   end,
+    -- },
+  },
+  terminal = {
     {
-      'tamago324/lir.nvim',
+      'akinsho/toggleterm.nvim',
+      event = 'BufWinEnter',
       config = function()
-        require 'young.mod.lir'
+        require('young.mod.toggleterm').done()
       end,
     },
     {
-      'ZSaberLv0/ZFVimDirDiff',
-      cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
+      'samjwill/nvim-unception',
+      -- event = 'TermOpen',
       setup = function()
-        vim.g.ZFDirDiffUI_dirExpandable = '+'
+        require 'young.mod.unception'
       end,
     },
   },
@@ -612,43 +624,51 @@ mods.telescope = {
       end,
     },
     {
-      'dhruvmanila/telescope-bookmarks.nvim',
-      after = 'telescope.nvim',
-      requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
-      config = function()
-        require('telescope').load_extension 'bookmarks'
-      end,
-    },
-    {
       'LinArcX/telescope-env.nvim',
       after = 'telescope.nvim',
       config = function()
         require('telescope').load_extension 'env'
       end,
     },
+    {
+      'jvgrootveld/telescope-zoxide',
+      after = 'telescope.nvim',
+      config = function()
+        require('telescope').load_extension 'zoxide'
+        require('telescope._extensions.zoxide.config').setup {
+          prompt_title = '[ Z⏫ ]',
+        }
+      end,
+    },
     -- {
-    --   'jvgrootveld/telescope-zoxide',
+    --   'dhruvmanila/telescope-bookmarks.nvim',
+    --   after = 'telescope.nvim',
+    --   requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
     --   config = function()
-    --     require('telescope').load_extension 'zoxide'
-    --     require('telescope._extensions.zoxide.config').setup {
-    --       prompt_title = '[ Z⏫ ]',
-    --     }
+    --     require('telescope').load_extension 'bookmarks'
     --   end,
     -- },
-    {
-      'LinArcX/telescope-command-palette.nvim',
-      after = 'telescope.nvim',
-      config = function()
-        require('telescope').load_extension 'command_palette'
-      end,
-    },
-    {
-      'cljoly/telescope-repo.nvim',
-      after = 'telescope.nvim',
-      config = function()
-        require('telescope').load_extension 'repo'
-      end,
-    },
+    -- {
+    --   'LinArcX/telescope-command-palette.nvim',
+    --   after = 'telescope.nvim',
+    --   config = function()
+    --     require('telescope').load_extension 'command_palette'
+    --   end,
+    -- },
+    -- {
+    --   'cljoly/telescope-repo.nvim',
+    --   after = 'telescope.nvim',
+    --   config = function()
+    --     require('telescope').load_extension 'repo'
+    --   end,
+    -- },
+    -- {
+    --   'nvim-telescope/telescope-github.nvim',
+    --   after = 'telescope.nvim',
+    --   config = function()
+    --     require('telescope').load_extension 'gh'
+    --   end,
+    -- },
   },
 }
 
@@ -689,13 +709,6 @@ mods.git = {
   --   disable = is_windows,
   -- },
   {
-    'nvim-telescope/telescope-github.nvim',
-    after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension 'gh'
-    end,
-  },
-  {
     'ruifm/gitlinker.nvim',
     event = 'BufRead',
     config = function()
@@ -712,14 +725,6 @@ mods.git = {
 
 mods.UI = {
   core = {
-    {
-      'kyazdani42/nvim-tree.lua',
-      -- event = 'BufWinEnter',
-      cmd = 'NvimTreeToggle',
-      config = function()
-        require('young.mod.nvim_tree').done()
-      end,
-    },
     {
       'rcarriga/nvim-notify',
       -- event = 'VimEnter',
@@ -828,22 +833,6 @@ mods.UI = {
     --     require 'young.mod.wilder'
     --   end,
     -- },
-  },
-  terminal = {
-    {
-      'akinsho/toggleterm.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require('young.mod.toggleterm').done()
-      end,
-    },
-    {
-      'samjwill/nvim-unception',
-      -- event = 'TermOpen',
-      setup = function()
-        require 'young.mod.unception'
-      end,
-    },
   },
   screen = {
     {
@@ -1137,6 +1126,25 @@ mods.LSP = {
       event = 'BufRead',
       config = function()
         require('young.mod.lsp_lines').done()
+      end,
+    },
+  },
+  highlight = {
+    { -- Highlighting the word under the cursor
+      'RRethy/vim-illuminate',
+      disable = require('young.lsp.config').document_highlight,
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.illuminate'
+      end,
+    },
+    {
+      'm-demare/hlargs.nvim',
+      after = 'nvim-treesitter',
+      config = function()
+        require('hlargs').setup {
+          -- color = '#ef9062',
+        }
       end,
     },
   },
