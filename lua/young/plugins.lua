@@ -473,6 +473,7 @@ mods.file = {
     },
     {
       'tamago324/lir.nvim',
+      module = 'lir',
       config = function()
         require 'young.mod.lir'
       end,
@@ -562,7 +563,6 @@ mods.find = {
     event = 'CursorMoved',
     config = function()
       require 'young.mod.hlslens'
-      require('scrollbar.handlers.search').setup()
     end,
   },
 }
@@ -846,7 +846,7 @@ mods.UI = {
   outline = {
     {
       'simrat39/symbols-outline.nvim',
-      event = 'BufWinEnter',
+      cmd = 'SymbolsOutline',
       config = function()
         require 'young.mod.symbols_outline'
       end,
@@ -877,9 +877,13 @@ mods.UI = {
     -- },
     {
       'petertriho/nvim-scrollbar',
-      event = 'BufWinEnter',
+      after = 'nvim-hlslens',
       config = function()
-        require('scrollbar').setup()
+        require('scrollbar').setup {
+          handlers = {
+            search = true, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
+          },
+        }
       end,
     },
   },
@@ -1074,8 +1078,7 @@ mods.LSP = {
     { 'b0o/SchemaStore.nvim' },
     {
       'ray-x/lsp_signature.nvim',
-      event = 'BufRead',
-      -- opt = true,
+      event = 'InsertEnter',
       config = function()
         require 'young.mod.lsp_signature'
       end,
@@ -1084,8 +1087,14 @@ mods.LSP = {
   lua = {
     { 'folke/lua-dev.nvim', opt = true },
     -- { 'ii14/emmylua-nvim', opt = true },
-    { 'nanotee/luv-vimdocs' },
-    { 'milisims/nvim-luaref' },
+    {
+      'nanotee/luv-vimdocs',
+      disable = xy.has 'nvim-0.8',
+    },
+    {
+      'milisims/nvim-luaref',
+      disable = xy.has 'nvim-0.8',
+    },
     -- {
     --   'rafcamlet/nvim-luapad',
     --   cmd = { 'Luapad', 'LuaRun', 'LuapadToggle' },
@@ -1116,6 +1125,7 @@ mods.LSP = {
     -- },
     {
       'j-hui/fidget.nvim',
+      event = 'LspAttach',
       config = function()
         require('young.mod.fidget').done()
       end,
@@ -1123,7 +1133,7 @@ mods.LSP = {
     {
       'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
-      event = 'BufRead',
+      event = 'LspAttach',
       config = function()
         require('young.mod.lsp_lines').done()
       end,

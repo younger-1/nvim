@@ -184,7 +184,7 @@ function M.done()
         '*',
         function()
           vim.defer_fn(function()
-            if not vim.bo.expandtab and fn.exists ':IndentBlankline' then
+            if not vim.bo.expandtab and fn.exists ':IndentBlankline' > 0 then
               vim.cmd 'IndentBlanklineDisable'
             end
           end, 500)

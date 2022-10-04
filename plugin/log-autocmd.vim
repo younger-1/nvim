@@ -1,5 +1,9 @@
 " <https://github.com/jdhao/nvim-config/blob/6539e72a5d36c308f859a30a97a52deb22f16090/plugin/log-autocmds.vim>
 
+if 1
+  finish
+end
+
 command! LogAutocmds call s:log_autocmds_toggle()
 
 function! s:log_autocmds_toggle()
