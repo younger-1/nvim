@@ -183,7 +183,7 @@ mods.edit = {
     },
     {
       'andymass/vim-matchup',
-      event = 'CursorMoved',
+      event = 'BufRead',
       setup = function()
         require 'young.mod.matchup'
       end,
@@ -781,7 +781,7 @@ mods.UI = {
   bufferline = {
     {
       'romgrk/barbar.nvim',
-      event = 'BufWinEnter',
+      event = 'BufRead',
       config = function()
         require('young.mod.barbar').hot()
       end,
@@ -791,6 +791,7 @@ mods.UI = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
     {
       'nvim-lualine/lualine.nvim',
+      event = 'BufRead',
       config = function()
         require 'young.mod.lualine'
       end,
@@ -837,6 +838,8 @@ mods.UI = {
   screen = {
     {
       'goolord/alpha-nvim',
+      cmd = 'Alpha',
+      -- event = 'BufWinEnter',
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
@@ -1233,11 +1236,13 @@ mods.write = {
   todo = {
     {
       'folke/todo-comments.nvim',
-      event = 'BufWinEnter',
+      event = 'BufRead',
       -- module = 'todo-comments',
       -- cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       requires = 'nvim-lua/plenary.nvim',
-      config = [[require 'young.mod.todo_comments']],
+      config = function()
+        require 'young.mod.todo_comments'
+      end,
     },
   },
   org = {

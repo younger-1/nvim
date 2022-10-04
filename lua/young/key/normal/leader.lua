@@ -4,7 +4,7 @@ local lua = require('young.key').lua
 -- TODO:add function instead of <cmd><cr>
 return {
   [' '] = { ':', 'which_key_ignore', silent = false },
-  -- ['`'] = { '<cmd>Alpha<cr>', 'Alpha' },
+  ['`'] = { '<cmd>intro<cr>', 'Intro' },
   -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['0'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['-'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -20,7 +20,7 @@ return {
   -- ['>'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  [';'] = { cmd 'Alpha', 'Alpha' },
+  [';'] = { cmd 'Alpha', 'Dashboard' },
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
   ["'"] = { '<cmd>Telescope live_grep_args<cr>', 'Grep' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
