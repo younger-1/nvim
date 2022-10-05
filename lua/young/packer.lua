@@ -90,8 +90,8 @@ M.load = function()
 end
 
 M.source_compiled = function()
-  -- doautocmd BufWinEnter will load "which-key" and "nvim-tree" at least
-  vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter]]
+  -- doautocmd BufWinEnter will load "which-key" at least
+  vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter | doautocmd BufRead]]
 
   if first_time then
     vim.notify('[young]: Installing plugins...', vim.log.levels.WARN)

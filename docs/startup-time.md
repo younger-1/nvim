@@ -331,3 +331,21 @@ Benchmark #2: nvim --headless +qa
 1574.862  604.466: first screen update
 1574.877  000.015: --- NVIM STARTED ---
 ```
+
+### 2022-10-05
+
+```log
+[init.lua                                14 ] [nil     ] [0] - 0.000016
+[init.lua                                21 ] [nil     ] [0] - 0.009731
+[init.lua                                24 ] [nil     ] [0] - 0.009742
+[lua/young/cfg/init.lua                  4  ] [done    ] [1] - 0.009804
+[lua/young/cfg/init.lua                  8  ] [done    ] [1] - 0.012830
+[lua/young/autocmd/init.lua              100] [done    ] [2] - 0.012965
+[init.lua                                27 ] [nil     ] [0] - 0.014293
+[lua/young/packer.lua                    201] [done    ] [1] - 0.014302
+[lua/young/packer.lua                    204] [done    ] [1] - 0.019828
+[init.lua                                30 ] [nil     ] [0] - 0.040160
+[init.lua                                33 ] [nil     ] [0] - 0.043805
+[init.lua                                36 ] [nil     ] [0] - 0.043924
+[init.lua                                39 ] [nil     ] [0] - 0.056125
+```
