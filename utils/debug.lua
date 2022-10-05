@@ -8,7 +8,7 @@
 -- vim.treesitter = require("vim.treesitter")
 -- vim.highlight = require("vim.highlight")
 
-vim.lsp.buf_get_clients()
+vim.lsp.get_active_clients()
 vim.lsp.buf.hover()
 
 local iter = require 'plenary.iterators'
@@ -46,4 +46,3 @@ setmetatable(x, mt)
 pp(x.a)
 pp(x.c)
 pp(mt)
-

@@ -26,7 +26,7 @@ return {
   -- end,
   on_attach = function(client, bufnr)
     require('young.lsp.common').on_attach(client, bufnr)
-    client.resolved_capabilities.document_formatting = false -- Use stylua instead
+    client.server_capabilities.documentFormattingProvider = false -- Use stylua instead
   end,
   settings = {
     Lua = {

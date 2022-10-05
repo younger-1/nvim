@@ -177,7 +177,7 @@ return {
   -- },
   -- Disable `clangd`'s format
   -- on_attach = function(client)
-  --   client.resolved_capabilities.document_formatting = false
+  --   client.server_capabilities.documentFormattingProvider = false
   --   custom_attach(client)
   -- end,
   -- @see <https://github.com/clangd/clangd/issues/1013>
