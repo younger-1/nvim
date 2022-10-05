@@ -473,7 +473,7 @@ mods.file = {
     },
     {
       'tamago324/lir.nvim',
-      module = 'lir',
+      -- module = 'lir',
       config = function()
         require 'young.mod.lir'
       end,
@@ -814,7 +814,7 @@ mods.UI = {
       'b0o/incline.nvim',
       event = 'BufWinEnter',
       config = function()
-        require('incline').setup()
+        require 'young.mod.incline'
       end,
     },
   },
