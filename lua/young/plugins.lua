@@ -797,7 +797,7 @@ mods.UI = {
   winbar = {
     { -- breadcrumbs
       'SmiteshP/nvim-navic',
-      event = 'LspAttach',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()
         require 'young.mod.navic'
       end,
@@ -860,6 +860,7 @@ mods.UI = {
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
+        -- vim.cmd[[doautocmd BufRead]]
       end,
     },
   },
@@ -1145,7 +1146,7 @@ mods.LSP = {
     -- },
     {
       'j-hui/fidget.nvim',
-      event = 'LspAttach',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()
         require('young.mod.fidget').done()
       end,
@@ -1153,7 +1154,7 @@ mods.LSP = {
     {
       'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
-      event = 'LspAttach',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()
         require('young.mod.lsp_lines').done()
       end,

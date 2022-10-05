@@ -1,24 +1,73 @@
-### base
+## NONE
+
+vim --version
+VIM - Vi IMproved 9.0 (2022 Jun 28, compiled Sep 01 2022 21:10:19)
+Included patches: 1-354
+Compiled by Arch Linux
+
+nvim --version
+NVIM v0.8.0
+Build type: Release
+LuaJIT 2.1.0-beta3
+Compiled by builduser
 
 ```log
-vim -u NONE --startuptime /tmp/vim.time +'q' && tail -n 5 /tmp/vim.time
+vim -u NONE +qa --startuptime /tmp/vim.time && tail -n 5 /tmp/vim.time
 001.055  000.062: start termcap
 001.068  000.013: clearing screen
 001.208  000.140: opening buffers
 001.210  000.002: BufEnter autocommands
 001.211  000.001: editing files in windows
 
-nvim -u NONE --startuptime /tmp/nvim.time +'q' && tail -n 5 /tmp/nvim.time
-004.916  000.030: inits 3
-018.683  013.768: reading ShaDa
-018.884  000.201: opening buffers
-018.888  000.004: BufEnter autocommands
-018.890  000.003: editing files in windows
+nvim -u NONE +qa --startuptime /tmp/nvim.time && tail -n 5 /tmp/nvim.time
+003.038  000.015: inits 3
+004.877  001.839: reading ShaDa
+005.059  000.183: opening buffers
+005.064  000.004: BufEnter autocommands
+005.067  000.003: editing files in windows
+
+hyperfine --min-runs=20 "vim -u NONE +qa" "nvim -u NONE +qa"
+Benchmark 1: vim -u NONE +qa
+  Time (mean ± σ):      2.042 s ±  0.057 s    [User: 0.024 s, System: 0.013 s]
+  Range (min … max):    2.025 s …  2.282 s    20 runs
+
+Benchmark 2: nvim -u NONE +qa
+  Time (mean ± σ):      17.4 ms ±   3.2 ms    [User: 7.4 ms, System: 6.5 ms]
+  Range (min … max):    14.7 ms …  41.2 ms    65 runs
 ```
 
-hyperfine --min-runs=20 "nvim +qa" "nvim --headless +qa"
+## clean
+
+```log
+vim --clean +qa --startuptime /tmp/vim.time && tail -n 5 /tmp/vim.time
+011.682  000.020: start termcap
+011.708  000.026: clearing screen
+011.841  000.133: opening buffers
+011.843  000.002: BufEnter autocommands
+011.844  000.001: editing files in windows
+
+nvim --clean +qa --startuptime /tmp/nvim.time && tail -n 5 /tmp/nvim.time
+007.144  000.013: inits 3
+007.146  000.002: reading ShaDa
+007.382  000.236: opening buffers
+007.417  000.036: BufEnter autocommands
+007.420  000.003: editing files in windows
+
+hyperfine --min-runs=20 "vim --clean +qa" "nvim --clean +qa"
+Benchmark 1: vim --clean +qa
+  Time (mean ± σ):      2.043 s ±  0.005 s    [User: 0.029 s, System: 0.010 s]
+  Range (min … max):    2.037 s …  2.051 s    20 runs
+
+Benchmark 2: nvim --clean +qa
+  Time (mean ± σ):      24.0 ms ±   2.6 ms    [User: 9.3 ms, System: 6.0 ms]
+  Range (min … max):    20.5 ms …  37.1 ms    104 runs
+```
+
+## config
 
 ### 2022-02-27
+
+hyperfine --min-runs=20 "nvim +qa" "nvim --headless +qa"
 
 linux
 
@@ -190,15 +239,15 @@ Benchmark 2: nvim --headless +qa
 336.214  104.280: first screen update
 ```
 
-windows
+win10
 
 ```log
-Benchmark #1: nvim +qa                                                                                                                                     0
-  Time (mean ± σ):     751.7 ms ±  24.5 ms    [User: 5.7 ms, System: 10.4 ms]                                                                              1
+Benchmark #1: nvim +qa
+  Time (mean ± σ):     751.7 ms ±  24.5 ms    [User: 5.7 ms, System: 10.4 ms]
   Range (min … max):   721.5 ms … 819.7 ms    20 runs
 
 Benchmark #2: nvim --headless +qa
-  Time (mean ± σ):     738.0 ms ±  38.1 ms    [User: 6.6 ms, System: 12.7 ms]                                                                              0
+  Time (mean ± σ):     738.0 ms ±  38.1 ms    [User: 6.6 ms, System: 12.7 ms]
   Range (min … max):   705.0 ms … 856.3 ms    20 runs
 
 [init.lua                                14 ] [nil     ] [0] - 0.000028
@@ -334,6 +383,8 @@ Benchmark #2: nvim --headless +qa
 
 ### 2022-10-05
 
+linux
+
 ```log
 [init.lua                                14 ] [nil     ] [0] - 0.000016
 [init.lua                                21 ] [nil     ] [0] - 0.009731
@@ -348,4 +399,22 @@ Benchmark #2: nvim --headless +qa
 [init.lua                                33 ] [nil     ] [0] - 0.043805
 [init.lua                                36 ] [nil     ] [0] - 0.043924
 [init.lua                                39 ] [nil     ] [0] - 0.056125
+```
+
+win10
+
+```log
+[init.lua                                14 ] [nil     ] [0] - 0.000037
+[init.lua                                21 ] [nil     ] [0] - 0.016609
+[init.lua                                24 ] [nil     ] [0] - 0.016622
+[lua/young/cfg/init.lua                  4  ] [done    ] [1] - 0.016815
+[lua/young/cfg/init.lua                  8  ] [done    ] [1] - 0.045690
+[lua/young/autocmd/init.lua              100] [done    ] [2] - 0.046026
+[init.lua                                27 ] [nil     ] [0] - 0.054560
+[lua/young/packer.lua                    201] [done    ] [1] - 0.054584
+[lua/young/packer.lua                    204] [done    ] [1] - 0.069596
+[init.lua                                30 ] [nil     ] [0] - 0.116192
+[init.lua                                33 ] [nil     ] [0] - 0.128587
+[init.lua                                36 ] [nil     ] [0] - 0.129029
+[init.lua                                39 ] [nil     ] [0] - 0.180397
 ```
