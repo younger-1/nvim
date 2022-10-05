@@ -118,31 +118,39 @@ vim.opt.whichwrap:append '<,>,[,],h,l'
 vim.opt.iskeyword:append '-'
 
 -- vim.cmd [[set listchars=tab:●·,extends:→,precedes:←,trail:■]]
--- vim.opt.listchars = {
---   tab = '●·',
---   extends = '→',
---   precedes = '←',
---   trail = '■',
---   nbsp = '␣',
--- }
--- vim.cmd [[set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+]]
--- vim.opt.listchars = {
---   eol = '↲',
---   extends = '>',
---   nbsp = '+',
---   precedes = '<',
---   space = '·',
---   tab = '>-',
---   trail = '~',
--- }
+-- vim.cmd [[set listchars=tab:>-,space:·,eol:↲,trail:~,extends:>,precedes:<,nbsp:+]]
 vim.opt.listchars = {
+  -- tab = '>- ',
+  -- tab = '→  ',
+  -- tab = '➜  ',
+  -- tab = '●· ',
+  -- tab = '•• ',
+  -- tab = 'ᐧᐧᐧ',
+  -- tab = '»  ',
+  -- tab = ' •»',
+  -- tab = '  ',
+  tab = '  ',
+  -- tab = '  ',
+  -- tab = '  ',
+  -- tab = '  ',
+  -- tab = 'ﲒ  ',
+  -- tab = 'ﲖ  ',
   -- space = '·',
-  -- tab = '→ ',
-  tab = '••',
-  extends = '⟩',
-  precedes = '⟨',
-  trail = '■',
+  -- eol = '⌐',
+  -- eol = '',
   eol = '↲',
+  -- eol = '﬋',
+  -- eol = '﬌',
+  -- trail = '~',
+  trail = '■',
+  -- extends = '>',
+  -- precedes = '<',
+  -- extends = '→',
+  -- precedes = '←',
+  extends = '»',
+  precedes = '«',
+  -- extends = '⟩',
+  -- precedes = '⟨',
   nbsp = '␣',
 }
 
