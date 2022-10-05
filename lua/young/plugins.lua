@@ -572,7 +572,8 @@ mods.telescope = {
     {
       'nvim-telescope/telescope.nvim',
       -- cmd = 'Telescope', -- BUG:PackerCompile will cause `cmd` redefined
-      event = 'BufRead',
+      event = 'VimEnter',
+      -- defer = 2,
       module = 'telescope',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
       config = function()
@@ -839,7 +840,7 @@ mods.UI = {
     {
       'goolord/alpha-nvim',
       cmd = 'Alpha',
-      -- event = 'BufWinEnter',
+      event = 'BufRead',
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
