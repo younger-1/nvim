@@ -148,7 +148,7 @@ function M.done()
     },
     _goto_last_position = {
       {
-        'BufWinEnter',
+        'BufReadPost',
         '*',
         [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif]],
         desc = 'Jump to last cursor position when opening a file',
