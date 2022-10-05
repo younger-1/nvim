@@ -188,7 +188,7 @@ tool.get_ls = function(servername)
 
   ls = nil
 
-  for _, client in pairs(vim.lsp.buf_get_clients()) do
+  for _, client in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
     if not servername and client.name ~= 'null-ls' then
       ls = client
       return
@@ -286,7 +286,7 @@ tool.visualedit = function()
   end
 end
 
-local function hl (name, val)
+local function hl(name, val)
   api.nvim_set_hl(0, name, val)
 end
 
@@ -298,7 +298,9 @@ tool.hi_lsp_ref = function()
     --   hi LspReferenceRead  gui=bold,undercurl guibg=DarkGreen
     --   hi LspReferenceWrite gui=bold,undercurl guibg=DarkRed
     -- ]]
-    hl('LspReferenceText', { undercurl = true, --[[ bg = '#27406b' ]] })
+    hl('LspReferenceText', {
+      undercurl = true, --[[ bg = '#27406b' ]]
+    })
     hl('LspReferenceRead', { undercurl = true, bg = '#3d5213' })
     hl('LspReferenceWrite', { undercurl = true, bg = '#4a0f23' })
   else

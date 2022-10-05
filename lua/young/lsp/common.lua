@@ -26,8 +26,7 @@ local function lsp_highlight_document(client, bufnr)
   end
 
   local status_ok, method_supported = pcall(function()
-    -- return client.resolved_capabilities.document_highlight
-    -- return vim.lsp.get_client_by_id(client.id).resolved_capabilities.document_highlight
+    -- return client.server_capabilities.documentHighlightProvider
     return client.supports_method 'textDocument/documentHighlight'
   end)
 
@@ -75,8 +74,6 @@ local function add_lsp_buffer_keybindings(bufnr)
     end
   end
 
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   -- local opts = { noremap = true, silent = true }
@@ -105,23 +102,30 @@ M.on_attach = function(client, bufnr)
   --   handler_opts = { "double" },
   -- }
   -- require("aerial").on_attach(client)
+
+  if client.server_capabilities.completionProvider then
+    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+  end
+  if client.server_capabilities.definitionProvider then
+    vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
+  end
 end
 
-local function select_default_formater(client)
-  if client.name == 'null-ls' or not client.resolved_capabilities.document_formatting then
-    return
-  end
-  Log:debug('Checking for formatter overriding for ' .. client.name)
-  local formatters = require 'lvim.lsp.null-ls.formatters'
-  local client_filetypes = client.config.filetypes or {}
-  for _, filetype in ipairs(client_filetypes) do
-    if #vim.tbl_keys(formatters.list_registered(filetype)) > 0 then
-      Log:debug('Formatter overriding detected. Disabling formatting capabilities for ' .. client.name)
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-    end
-  end
-end
+-- local function select_default_formater(client)
+--   if client.name == 'null-ls' or not client.resolved_capabilities.document_formatting then
+--     return
+--   end
+--   Log:debug('Checking for formatter overriding for ' .. client.name)
+--   local formatters = require 'lvim.lsp.null-ls.formatters'
+--   local client_filetypes = client.config.filetypes or {}
+--   for _, filetype in ipairs(client_filetypes) do
+--     if #vim.tbl_keys(formatters.list_registered(filetype)) > 0 then
+--       Log:debug('Formatter overriding detected. Disabling formatting capabilities for ' .. client.name)
+--       client.resolved_capabilities.document_formatting = false
+--       client.resolved_capabilities.document_range_formatting = false
+--     end
+--   end
+-- end
 
 M.on_init = function(client, bufnr)
   if lsp_cfg.on_init_callback then
