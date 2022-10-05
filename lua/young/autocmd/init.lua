@@ -263,7 +263,6 @@ function M.done()
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },
       -- { 'DirChanged', '*', 'echo "[cwd]: " .. getcwd()' },
     },
-
     _lsp = {
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
@@ -301,6 +300,30 @@ function M.done()
     --       vim.opt_local.number = false
     --       vim.opt_local.relativenumber = false
     --       vim.cmd 'startinsert'
+    --     end,
+    --   },
+    -- },
+    -- _notify = { -- @see <https://github.com/b0o/nvim-conf/blob/8abde1b6a1e728747af165f813308e4dea24a76f/lua/user/notify.lua#L14>
+    --   {
+    --     'FocusGained',
+    --     '*',
+    --     'let g:nvim_focused = 1',
+    --   },
+    --   {
+    --     'FocusLost',
+    --     '*',
+    --     'let g:nvim_focused = 0',
+    --   },
+    -- },
+    -- _neogit = {
+    --   {
+    --     'User',
+    --     'FugitiveChanged',
+    --     function()
+    --       local neogit = package.loaded.neogit
+    --       if neogit then
+    --         neogit.dispatch_refresh()
+    --       end
     --     end,
     --   },
     -- },

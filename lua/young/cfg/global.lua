@@ -16,7 +16,7 @@ do
   vim.g.loaded_logiPat = 1
   vim.g.loaded_rrhelper = 1
 
-  vim.g.loaded_man = 1
+  -- vim.g.loaded_man = 1
 
   -- Do not use builtin matchit.vim and matchparen.vim since we use vim-matchup
   vim.g.loaded_matchit = 1
@@ -47,7 +47,7 @@ vim.g.mapleader = ' '
 
 -- In NeoVim 0.8+ this is the default - @see
 -- https://github.com/neovim/neovim/issues/14090#issuecomment-1177933661
-if vim.fn.has 'nvim-0.8.0' == 0 then
+if not xy.has 'nvim-0.8.0' then
   -- Do not source the default filetype.vim. @see
   -- <https://github.com/nathom/filetype.nvim/issues/12>
   vim.g.did_load_filetypes = 0

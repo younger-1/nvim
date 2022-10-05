@@ -1,5 +1,7 @@
 local M = {}
 
+-- TODO:https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/bqf.lua
+
 M.cfg = {
   preview = {
     win_height = 12,
