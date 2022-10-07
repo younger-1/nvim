@@ -60,8 +60,8 @@ vim.filetype.add {
   extension = {
     conf = 'config',
     tex = 'latex', -- We always want LaTeX, avoid slow detection logic
-    edn = 'clojure',
-    boot = 'clojure',
+    -- edn = 'clojure',
+    -- boot = 'clojure',
     h = function(path, bufnr) -- a heuristic that only sets the filetype to C++ if the header file includes another C++-style header (i.e. one without a trailing .h):
       if vim.fn.search('\\C^#include <[^>.]\\+>$', 'nw') ~= 0 then
         return 'cpp'
@@ -79,16 +79,19 @@ vim.filetype.add {
     -- ['jsconfig.json'] = 'jsonc',
     ['.envrc'] = 'bash',
     ['go.mod'] = 'gomod',
+    ['.clang-format'] = 'yaml',
   },
   pattern = {
     ['.*/git/.*'] = 'gitconfig',
     ['.*%.gitignore.*'] = 'gitignore',
     ['.*/kitty/.*%.conf'] = 'kitty',
     ['.*/kitty/.*%.session'] = 'kitty-session',
-    ['.*Dockerfile.*'] = 'dockerfile',
-    ['.*envrc.*'] = 'sh',
-    ['.*/systemd/user/.*'] = 'systemd',
-    ['.*/hugo/layouts/.*%.html'] = 'gohtmltmpl',
+    -- ['.*Dockerfile.*'] = 'dockerfile',
+    -- ['.*envrc.*'] = 'sh',
+    -- ['.*/systemd/user/.*'] = 'systemd',
+    -- ['.*/hugo/layouts/.*%.html'] = 'gohtmltmpl',
+    -- ['environment.*'] = 'dosini',
+    -- ['grub.*'] = 'dosini',
   },
 }
 
