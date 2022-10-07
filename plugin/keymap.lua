@@ -242,13 +242,4 @@ M.done = function()
   end
 end
 
--- @see https://github.com/nanotee/nvim-lua-guide#vimapinvim_replace_termcodes
--- vim.cmd [[inoremap <expr> <tab> pumvisible() ? "<C-n>" : "<tab>"]] -- ok
--- vim.keymap.set('i', '<tab>', 'pumvisible() ? "<C-n>" : "<tab>"', { expr = true }) -- ok?
--- vim.keymap.set('i', '<tab>', 'pumvisible() ? "<C-n>" : "<tab>"', { expr = true, replace_keycodes = false }) -- ok
-
--- vim.cmd [[cnoremap <expr> <A-p> pumvisible() ? "<C-p>" : "<Up>"]] -- ok
--- vim.keymap.set('c', '<A-p>', 'pumvisible() ? "<C-p>" : "<Up>"', { expr = true }) -- not ok only nvim >= 0.8 with <Up>
--- vim.keymap.set('c', '<A-p>', 'pumvisible() ? "<C-p>" : "<Up>"', { expr = true, replace_keycodes = false }) -- ok
-
 M.done()
