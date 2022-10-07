@@ -163,10 +163,11 @@ vim.cmd [[command! TagsUpdate !ctags -R .]]
 -- vim.cmd [[command! Todo grep TODO]]
 
 -- if vim.fn.exepath 'rg' then
-vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --color=never'
-vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+--   vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case --color=never'
+--   vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
 -- elseif vim.fn.exepath 'ag' then
 --   vim.o.grepprg = 'ag --vimgrep --nogroup --nocolor'
--- elseif vim.fn.executable 'ack' == 1 then
---   vim.o.grepprg = 'ack'
+-- else
+--   vim.o.grepprg = 'grep --line-number --recursive -I $*'
+--   vim.o.grepformat = '%f:%l:%m'
 -- end

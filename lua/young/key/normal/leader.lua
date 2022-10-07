@@ -528,7 +528,8 @@ return {
     t = { cmd 'TransparentToggle', 'Transparent' },
     u = { cmd 'UndotreeToggle', 'Undotree' },
   },
-  w = { '<cmd>w!<cr>', 'Save' },
+  -- w = { '<cmd>w!<cr>', 'Save' },
+  w = { cmd 'update', 'Save' },
   x = {
     name = '+trouble',
     ['.'] = { cmd 'Trouble telescope', 'Telescope' },
