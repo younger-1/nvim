@@ -26,12 +26,8 @@ M.keys = {
     ['<C-d>'] = '<Del>',
   },
 
-  -- ---@usage change or add keymappings for insert mode
   insert_mode = {
-    -- 'jk' for quitting insert mode
-    -- ['jk'] = '<ESC>',
-    -- 'jj' for quitting insert mode
-    -- ['jj'] = '<ESC>',
+    -- ['<C-v>'] = '<C-G>u<C-R><C-O>+',
 
     -- Move current line / block with Alt-j/k ala vscode.
     ['<A-k>'] = '<C-o>:m .-2<CR>',
@@ -46,26 +42,26 @@ M.keys = {
     -- [nvim-default] Break undo sequence, start new change
     -- ['<C-U>'] = '<C-G>u<C-U>',
     -- ['<C-W>'] = '<C-G>u<C-W>',
-
-    ['<C-v>'] = '<C-G>u<C-R><C-O>+',
   },
 
-  ---@usage change or add keymappings for command mode
   command_mode = {
+    -- ['<C-V>'] = '<C-R>+',
+    --
     -- navigate tab completion with <c-j> and <c-k> runs conditionally
     -- cnoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
     -- cnoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-    ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', expr = true },
-    ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', expr = true },
+    -- ['<C-j>'] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', expr = true },
+    -- ['<C-k>'] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', expr = true },
 
     -- search older command-line from history
-    ['<A-n>'] = { 'pumvisible() ? "\\<C-n>" : "\\<Down>"', expr = true },
-    ['<A-p>'] = { 'pumvisible() ? "\\<C-p>" : "\\<Up>"', expr = true },
+    -- cnoremap <expr> <A-n> pumvisible() ? "\<C-n>" : "\<Down>"
+    -- cnoremap <expr> <A-p> pumvisible() ? "\<C-p>" : "\<Up>"
+    -- ['<A-n>'] = { 'pumvisible() ? "\\<C-n>" : "\\<Down>"', expr = true },
+    -- ['<A-p>'] = { 'pumvisible() ? "\\<C-p>" : "\\<Up>"', expr = true },
+
     -- recall older command-line from history
     -- ['<A-n>'] = '<S-Down>',
     -- ['<A-p>'] = '<S-Up>',
-    --
-    ['<C-V>'] = '<C-R>+',
     --
     -- ['('] = '()<Left>',
     -- ['['] = '[]<Left>',
@@ -74,8 +70,8 @@ M.keys = {
 
   map_mode = {
     -- Remap for dealing with word wrap
-    j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
-    k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
+    -- j = { "v:count == 0 ? 'gj' : 'j'", expr = true },
+    -- k = { "v:count == 0 ? 'gk' : 'k'", expr = true },
 
     -- gj = { '' },
     -- gk = { '' },
@@ -83,8 +79,8 @@ M.keys = {
     -- gJ = { 'L' },
     -- gK = { 'H' },
 
-    gH = { 'H' },
-    gL = { 'L' },
+    -- gH = { 'H' },
+    -- gL = { 'L' },
 
     -- ['<Up>'] = '<C-Y>',
     -- ['<Down>'] = '<C-E>',
@@ -96,17 +92,16 @@ M.keys = {
     -- ['<Tab>'] = { '%', remap = true },
     -- ['<C-I>'] = { '<C-I>', remap = true },
 
-    ['g<Tab>'] = { '%', remap = true },
+    -- ['g<Tab>'] = { '%', remap = true },
 
     -- <https://github.com/yuki-yano/zero.nvim>
     -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },
     ['0'] = ':call FirstCharOrFirstCol()<cr>', -- FIXME:not work in visual_mode
 
-    ['+'] = '<C-a>',
-    ['-'] = '<C-x>',
+    ['+'] = { '<C-a>', remap = true },
+    ['-'] = { '<C-x>', remap = true },
   },
 
-  ---@usage change or add keymappings for normal mode
   normal_mode = {
     -- Better window movement
     ['<C-h>'] = '<C-w>h',
@@ -180,22 +175,21 @@ M.keys = {
     -- ['<C-i>'] = '<C-i>zz',
   },
 
-  ---@usage change or add keymappings for visual mode
   visual_mode = {
     -- Better indenting
-    ['<'] = '<gv',
-    ['>'] = '>gv',
+    -- ['<'] = '<gv',
+    -- ['>'] = '>gv',
 
-    d = [["_d]], -- Use `x` to cut
-    X = [["+x]], -- Use `X` for system-cut
-    Y = [["+y]], -- Use `Y` for system-copy
+    -- d = [["_d]], -- Use `x` to cut
+    -- X = [["+x]], -- Use `X` for system-cut
+    -- Y = [["+y]], -- Use `Y` for system-copy
 
     -- Select to start and end quickly
-    H = '^',
-    L = 'g_',
+    -- H = '^',
+    -- L = 'g_',
 
-    gh = '^',
-    gl = 'g_',
+    -- gh = '^',
+    -- gl = 'g_',
 
     -- /\%>'<\%<'>
     -- /\%>2c\%<7c
@@ -215,25 +209,23 @@ M.keys = {
 
   operator_mode = {
     -- Operate to start and end quickly
-    H = '^',
-    L = 'g_',
+    -- H = '^',
+    -- L = 'g_',
 
-    gh = '^',
-    gl = 'g_',
+    -- gh = '^',
+    -- gl = 'g_',
   },
 
-  ---@usage change or add keymappings for terminal mode
   term_mode = {
-    -- Terminal window navigation
-    ['<C-h>'] = '<C-\\><C-N><C-w>h',
-    ['<C-j>'] = '<C-\\><C-N><C-w>j',
-    ['<C-k>'] = '<C-\\><C-N><C-w>k',
-    ['<C-l>'] = '<C-\\><C-N><C-w>l',
-
     -- quitting insert mode
-    ['<Esc><Esc>'] = '<C-\\><C-N>',
-    -- ['<C-o>'] = '<C-\\><C-N>',
-    JJ = '<C-\\><C-N>',
+    -- ['<Esc><Esc>'] = '<C-\\><C-N>',
+    -- JK = '<C-\\><C-N>',
+
+    -- Terminal window navigation
+    -- ['<C-h>'] = '<C-\\><C-N><C-w>h',
+    -- ['<C-j>'] = '<C-\\><C-N><C-w>j',
+    -- ['<C-k>'] = '<C-\\><C-N><C-w>k',
+    -- ['<C-l>'] = '<C-\\><C-N><C-w>l',
   },
 }
 
