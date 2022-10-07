@@ -258,6 +258,21 @@ function M.done()
         end,
       },
     },
+    -- _auto_save = {
+    --   { -- <https://github.com/regen100/dotfiles/blob/cd03be29af6d361201184c15297625ebfb575c24/nvim/.config/nvim/lua/user/autosave.lua#L17>
+    --     'InsertLeave,BufLeave,TextChanged',
+    --     '*',
+    --     function()
+    --       if fn.filereadable(fn.expand '%:p') == 0 then
+    --         return
+    --       end
+    --       if not vim.bo.modifiable then
+    --         return
+    --       end
+    --       vim.cmd 'silent! noautocmd w'
+    --     end,
+    --   },
+    -- },
     _auto_cd = {
       -- TODO: toggle by key: one key for toggle auto mode, one key for lcd dir
       -- { 'VimEnter,BufWinEnter', '*', '++nested ProjectRoot' },

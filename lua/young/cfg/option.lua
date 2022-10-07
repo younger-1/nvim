@@ -141,6 +141,7 @@ vim.opt.listchars = {
   eol = '↲',
   -- eol = '﬋',
   -- eol = '﬌',
+  -- eol = '↴',
   -- trail = '~',
   trail = '■',
   -- extends = '>',
