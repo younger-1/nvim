@@ -777,7 +777,13 @@ mods.UI = {
     --   end,
     -- },
     -- { 'simnalamburt/vim-mundo', cmd = 'MundoToggle' },
-    { 'mbbill/undotree', cmd = 'UndotreeToggle' },
+    {
+      'mbbill/undotree',
+      cmd = 'UndotreeToggle',
+      setup = function()
+        require 'young.mod.undotree'
+      end,
+    },
   },
   bufferline = {
     {
