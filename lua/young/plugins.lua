@@ -794,6 +794,15 @@ mods.UI = {
       end,
     },
   },
+  winbar = {
+    { -- breadcrumbs
+      'SmiteshP/nvim-navic',
+      event = 'LspAttach',
+      config = function()
+        require 'young.mod.navic'
+      end,
+    },
+  },
   statusline = {
     -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
     {

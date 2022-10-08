@@ -109,6 +109,8 @@ M.on_attach = function(client, bufnr)
   if client.server_capabilities.definitionProvider then
     vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
   end
+  -- TODO:use gq for formatting
+  -- formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
 end
 
 -- local function select_default_formater(client)
