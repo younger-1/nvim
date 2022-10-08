@@ -101,7 +101,7 @@ M.cfg = {
   --   entries = 'native'
   -- },
   experimental = {
-    ghost_text = false,
+    ghost_text = true,
   },
   preselect = cmp.PreselectMode.Item,
   -- preselect = cmp.PreselectMode.None,
@@ -158,6 +158,11 @@ M.cfg = {
   mapping = {
     ['<C-j>'] = cmapping(cmapping.select_next_item(), { 'i', 'c' }),
     ['<C-k>'] = cmapping(cmapping.select_prev_item(), { 'i', 'c' }),
+    ['<C-n>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+    ['<C-p>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+    ['<Down>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
+    ['<Up>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
+    --
     ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
     ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
     ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
@@ -171,13 +176,11 @@ M.cfg = {
       -- select = false,
     },
     ['<Tab>'] = cmapping(function(fallback)
-      -- if cmp.visible() then
-      --   cmp.select_next_item()
-      -- else
-      -- if require('neogen').jumpable() then
+      if cmp.visible() then
+        cmp.select_next_item()
+      -- elseif require('neogen').jumpable() then
       --   require('neogen').jump_next()
-      -- else
-      if luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
@@ -187,13 +190,11 @@ M.cfg = {
       's',
     }),
     ['<S-Tab>'] = cmapping(function(fallback)
-      -- if cmp.visible() then
-      --   cmp.select_prev_item()
-      -- else
-      -- if require('neogen').jumpable(true) then
+      if cmp.visible() then
+        cmp.select_prev_item()
+      -- elseif require('neogen').jumpable(true) then
       --   require('neogen').jump_prev()
-      -- else
-      if luasnip.jumpable(-1) then
+      elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()

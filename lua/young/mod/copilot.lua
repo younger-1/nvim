@@ -32,11 +32,13 @@ M.setup_vim = function()
     -- terraform = true,
   }
 
+  -- @see doc of nvim-cmp
   vim.cmd [[
     nnoremap <leader>l<tab> <cmd>Copilot<cr>
 
     let g:copilot_no_tab_map = v:true
     imap <silent><script><expr> <C-f> copilot#Accept("\<CR>")
+    " imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\<Tab>")
   ]]
 end
 
