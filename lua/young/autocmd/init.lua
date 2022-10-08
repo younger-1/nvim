@@ -306,18 +306,27 @@ function M.done()
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
       { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
     },
-    -- _terminal = {
-    --   -- https://github.com/andrewferrier/dotfiles/blob/main/common/.config/nvim/plugin/terminal.lua
-    --   {
-    --     'TermOpen',
-    --     '*',
-    --     function()
-    --       vim.opt_local.number = false
-    --       vim.opt_local.relativenumber = false
-    --       vim.cmd 'startinsert'
-    --     end,
-    --   },
-    -- },
+    _terminal = {
+      -- { -- https://github.com/andrewferrier/dotfiles/blob/main/common/.config/nvim/plugin/terminal.lua
+      --   'TermOpen',
+      --   '*',
+      --   function()
+      --     vim.opt_local.number = false
+      --     vim.opt_local.relativenumber = false
+      --     vim.cmd 'startinsert'
+      --   end,
+      -- },
+      -- { -- Auto close shell terminals (#15440)
+      --   'TermClose',
+      --   '*',
+      --   [[if !v:event.status |
+      --   \   let info = nvim_get_chan_info(&channel) |
+      --   \   if get(info, 'argv', []) ==# [&shell] |
+      --   \     exec 'bdelete! ' .. expand('<abuf>') |
+      --   \   endif |
+      --   \ endif]],
+      -- },
+    },
     -- _notify = { -- @see <https://github.com/b0o/nvim-conf/blob/8abde1b6a1e728747af165f813308e4dea24a76f/lua/user/notify.lua#L14>
     --   {
     --     'FocusGained',

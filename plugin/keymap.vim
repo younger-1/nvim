@@ -29,6 +29,10 @@ vnoremap d "_d
 vnoremap X "+x
 vnoremap Y "+y
 
+" Swap p and P in visual mode
+vnoremap p P
+vnoremap P p
+
 " operator mode
 
 " terminal mode
