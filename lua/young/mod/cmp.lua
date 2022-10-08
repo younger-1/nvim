@@ -257,14 +257,14 @@ M.done = function()
     },
   })
 
-  local cmdline_map = {
-    ['<Tab>'] = {
-      c = cmapping.select_next_item(),
-    },
-    ['<S-Tab>'] = {
-      c = cmapping.select_prev_item(),
-    },
-  }
+  -- local cmdline_map = {
+  --   ['<Tab>'] = {
+  --     c = cmapping.select_next_item(),
+  --   },
+  --   ['<S-Tab>'] = {
+  --     c = cmapping.select_prev_item(),
+  --   },
+  -- }
   -- local cmdline_map = cmp.mapping.preset.cmdline {
   --   ['<C-n>'] = {
   --     c = function(fallback) fallback() end,
@@ -276,8 +276,8 @@ M.done = function()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
-    mapping = cmdline_map,
-    -- mapping = cmp.mapping.preset.cmdline(),
+    -- mapping = cmdline_map,
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'path' },
     }, {
@@ -287,13 +287,15 @@ M.done = function()
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
-    mapping = cmdline_map,
+    -- mapping = cmdline_map,
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' },
     },
   })
   cmp.setup.cmdline('?', {
-    mapping = cmdline_map,
+    -- mapping = cmdline_map,
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' },
     },

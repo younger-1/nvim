@@ -49,3 +49,5 @@ cnoremap <C-v> <C-R>+
 " cnoremap <expr> <C-k> pumvisible() ? "<C-p>" : "<C-k>"
 cnoremap <expr> <C-j> pumvisible() ? "<C-n>" : "<Down>"
 cnoremap <expr> <C-k> pumvisible() ? "<C-p>" : "<Up>"
+cnoremap <M-n> <Down>
+cnoremap <M-p> <Up>
