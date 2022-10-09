@@ -307,13 +307,18 @@ return {
     A = { vim.lsp.buf.range_code_action, 'Range action' },
     s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
     S = { vim.lsp.buf.document_symbol, 'Document symbol' },
-    f = { vim.lsp.buf.formatting, 'Format' },
-    F = {
+    f = {
       function()
-        vim.lsp.buf.formatting_sync()
+        vim.lsp.buf.format()
         vim.cmd 'write'
       end,
       'Format & Save',
+    },
+    F = {
+      function()
+        vim.lsp.buf.format { async = true }
+      end,
+      'Format',
     },
     j = { vim.diagnostic.goto_next, 'Next diagnostic' },
     k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },

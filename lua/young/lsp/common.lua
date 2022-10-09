@@ -103,13 +103,13 @@ M.on_attach = function(client, bufnr)
   -- }
   -- require("aerial").on_attach(client)
 
-  if client.server_capabilities.completionProvider then
-    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-  end
-  if client.server_capabilities.definitionProvider then
-    vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
-  end
-  -- TODO:use gq for formatting
+  -- if client.server_capabilities.completionProvider then
+  --   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+  -- end
+  -- if client.server_capabilities.definitionProvider then
+  --   vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
+  -- end
+  -- use gq for formatting
   -- formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
 end
 
