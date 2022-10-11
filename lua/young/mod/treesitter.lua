@@ -168,52 +168,109 @@ M.cfg = {
     },
   },
   -- <https://github.com/nvim-treesitter/nvim-treesitter-textobjects>
+  --[[  Built-in Textobjects
+     1. @attribute.inner     [hexx html]
+     2. @attribute.outer     [hexx html]
+     3. @block.inner
+     4. @block.outer
+     5. @call.inner
+     6. @call.outer
+     7. @class.inner
+     8. @class.outer
+     9. @comment.outer
+    10. @conditional.inner
+    11. @conditional.outer
+    12. @frame.inner         [latex]
+    13. @frame.outer         [latex]
+    14. @function.inner
+    15. @function.outer
+    16. @loop.inner
+    17. @loop.outer
+    18. @parameter.inner
+    19. @parameter.outer
+    20. @scopename.inner     [ql]
+    21. @statement.outer
+  ]]
   textobjects = {
     move = {
       enable = true,
-      set_jumps = false, -- whether to set jumps in the jumplist
+      set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        [']1'] = '@block.inner',
-        [']2'] = '@block.outer',
-        [']-'] = '@call.inner',
-        [']='] = '@call.outer',
-        [']3'] = '@class.inner',
-        [']4'] = '@class.outer',
-        [']k'] = '@comment.outer',
-        [']7'] = '@conditional.inner',
-        [']8'] = '@conditional.outer',
-        [']m'] = '@function.inner',
+        [']1'] = '@block.outer',
+        [']2'] = '@block.inner',
+        [']3'] = '@class.outer',
+        [']4'] = '@class.inner',
+        [']7'] = '@conditional.outer',
+        [']8'] = '@conditional.inner',
+        [']9'] = '@loop.outer',
+        [']0'] = '@loop.inner',
         [']f'] = '@function.outer',
-        [']9'] = '@loop.inner',
-        [']0'] = '@loop.outer',
-        ['],'] = '@parameter.inner',
-        ['].'] = '@parameter.outer',
+        [']g'] = '@function.inner',
+        [']-'] = '@call.outer',
+        [']='] = '@call.inner',
+        [']j'] = '@call.outer',
+        [']k'] = '@call.inner',
+        ['],'] = '@parameter.outer',
+        ['].'] = '@parameter.inner',
+        [']/'] = '@comment.outer',
       },
-      -- goto_next_end = {
-      --   [";]F"] = "@function.outer",
-      --   [";]C"] = "@class.outer",
-      -- },
       goto_previous_start = {
-        ['[1'] = '@block.inner',
-        ['[2'] = '@block.outer',
-        ['[-'] = '@call.inner',
-        ['[='] = '@call.outer',
-        ['[3'] = '@class.inner',
-        ['[4'] = '@class.outer',
-        ['[k'] = '@comment.outer',
-        ['[7'] = '@conditional.inner',
-        ['[8'] = '@conditional.outer',
-        ['[m'] = '@function.inner',
+        ['[1'] = '@block.outer',
+        ['[2'] = '@block.inner',
+        ['[3'] = '@class.outer',
+        ['[4'] = '@class.inner',
+        ['[7'] = '@conditional.outer',
+        ['[8'] = '@conditional.inner',
+        ['[9'] = '@loop.outer',
+        ['[0'] = '@loop.inner',
         ['[f'] = '@function.outer',
-        ['[9'] = '@loop.inner',
-        ['[0'] = '@loop.outer',
-        ['[,'] = '@parameter.inner',
-        ['[.'] = '@parameter.outer',
+        ['[g'] = '@function.inner',
+        ['[-'] = '@call.outer',
+        ['[='] = '@call.inner',
+        ['[j'] = '@call.outer',
+        ['[k'] = '@call.inner',
+        ['[,'] = '@parameter.outer',
+        ['[.'] = '@parameter.inner',
+        ['[/'] = '@comment.outer',
       },
-      -- goto_previous_end = {
-      --   [";[F"] = "@function.outer",
-      --   [";[C"] = "@class.outer",
-      -- },
+      goto_next_end = {
+        [']!'] = '@block.outer',
+        [']@'] = '@block.inner',
+        [']#'] = '@class.outer',
+        [']$'] = '@class.inner',
+        [']&'] = '@conditional.outer',
+        [']*'] = '@conditional.inner',
+        [']('] = '@loop.outer',
+        ['])'] = '@loop.inner',
+        [']F'] = '@function.outer',
+        [']G'] = '@function.inner',
+        [']_'] = '@call.outer',
+        [']+'] = '@call.inner',
+        [']J'] = '@call.outer',
+        [']K'] = '@call.inner',
+        [']<'] = '@parameter.outer',
+        [']>'] = '@parameter.inner',
+        [']?'] = '@comment.outer',
+      },
+      goto_previous_end = {
+        ['[!'] = '@block.outer',
+        ['[@'] = '@block.inner',
+        ['[#'] = '@class.outer',
+        ['[$'] = '@class.inner',
+        ['[&'] = '@conditional.outer',
+        ['[*'] = '@conditional.inner',
+        ['[('] = '@loop.outer',
+        ['[)'] = '@loop.inner',
+        ['[F'] = '@function.outer',
+        ['[G'] = '@function.inner',
+        ['[_'] = '@call.outer',
+        ['[+'] = '@call.inner',
+        ['[J'] = '@call.outer',
+        ['[K'] = '@call.inner',
+        ['[<'] = '@parameter.outer',
+        ['[>'] = '@parameter.inner',
+        ['[?'] = '@comment.outer',
+      },
     },
     select = {
       enable = true,
@@ -222,21 +279,23 @@ M.cfg = {
       -- keymaps = textobj_sel_keymaps,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ['i1'] = '@block.inner',
         ['a1'] = '@block.outer',
-        ['i-'] = '@call.inner',
-        ['a-'] = '@call.outer',
-        ['i3'] = '@class.inner',
+        ['i1'] = '@block.inner',
         ['a3'] = '@class.outer',
-        ['ak'] = '@comment.outer',
-        ['i7'] = '@conditional.inner',
+        ['i3'] = '@class.inner',
         ['a7'] = '@conditional.outer',
-        ['if'] = '@function.inner',
-        ['af'] = '@function.outer',
-        ['i9'] = '@loop.inner',
+        ['i7'] = '@conditional.inner',
         ['a9'] = '@loop.outer',
+        ['i9'] = '@loop.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['a-'] = '@call.outer',
+        ['i-'] = '@call.inner',
+        ['aj'] = '@call.outer',
+        ['ij'] = '@call.inner',
+        ['a,'] = '@parameter.outer',
         ['i,'] = '@parameter.inner',
-        ['a.'] = '@parameter.outer',
+        ['a/'] = '@comment.outer',
       },
     },
     swap = {
