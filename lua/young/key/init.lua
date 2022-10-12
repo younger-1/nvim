@@ -20,7 +20,7 @@ function M.cmd(str)
 end
 
 function M.cu(str)
-  return '<C-u><Cmd>' .. str .. '<CR>'
+  return ':<C-u>' .. str .. '<CR>'
 end
 
 function M.lua(str)
@@ -28,7 +28,7 @@ function M.lua(str)
 end
 
 function M.call(str)
-  return ':call ' .. str .. '<CR>'
+  return '<Cmd>call ' .. str .. '<CR>'
 end
 
 return M
