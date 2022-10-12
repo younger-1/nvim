@@ -136,7 +136,10 @@ M.cfg = {
   },
   highlight = {
     enable = true, -- false will disable the whole extension
-    disable = { 'latex' },
+    disable = {
+      'latex',
+      'help', -- TODO:remove until nvim's help parser fixed
+    },
     -- additional_vim_regex_highlighting = true,
     -- custom_captures = {
     --   ['primitive.type'] = 'Keyword',
