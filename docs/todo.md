@@ -43,6 +43,8 @@
 - [ ] lsp/diagnostics: diagnostics are updated on as soon as InsertLeave happens. Defer it for 1 second
 - [ ] Telescope git_branches: can not show worktree correctly
 - [ ] Telescope keymaps or other plugin: open files of lua function used in rhs
+- [ ] Telescope keymaps: only show <Plug> mappings
+- [ ] Telescope commands: only show buf local commands
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
