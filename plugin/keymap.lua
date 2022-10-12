@@ -14,16 +14,16 @@ local mode_adapters = {
 M.keys = {
   insert_command_mode = {
     -- :h emacs-keys
-    ['<C-a>'] = '<Home>',
-    ['<C-e>'] = '<End>',
-    --
-    ['<A-f>'] = '<S-Right>',
-    ['<A-b>'] = '<S-Left>',
+    -- ['<C-a>'] = '<Home>',
+    -- ['<C-e>'] = '<End>',
 
-    ['<C-f>'] = '<Right>',
-    ['<C-b>'] = '<Left>',
-    --
-    ['<C-d>'] = '<Del>',
+    -- ['<C-f>'] = '<Right>',
+    -- ['<C-b>'] = '<Left>',
+
+    -- ['<A-f>'] = '<S-Right>',
+    -- ['<A-b>'] = '<S-Left>',
+
+    -- ['<C-d>'] = '<Del>',
   },
 
   insert_mode = {
