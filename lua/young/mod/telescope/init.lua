@@ -123,6 +123,10 @@ M.cfg = {
       path = join_paths(fn.stdpath 'data', 'telescope_history.sqlite3'),
       limit = 500,
     },
+    cache_picker = {
+      num_pickers = 10,
+      limit_entries = 300,
+    },
     -- exec 'e ' .. stdpath('data') .. '/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua'
     mappings = {
       i = {
