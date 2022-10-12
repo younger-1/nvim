@@ -594,6 +594,14 @@ mods.telescope = {
         require('telescope').load_extension 'file_browser'
       end,
     },
+    {
+      'nvim-telescope/telescope-smart-history.nvim',
+      requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
+      after = 'telescope.nvim',
+      config = function()
+        require('telescope').load_extension 'smart_history'
+      end,
+    },
   },
   other = {
     { 'nvim-telescope/telescope-symbols.nvim' },

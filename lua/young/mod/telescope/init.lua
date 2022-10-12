@@ -119,6 +119,10 @@ M.cfg = {
     qflist_previewer = previewers.vim_buffer_qflist.new,
     file_sorter = sorters.get_fuzzy_file,
     generic_sorter = sorters.get_generic_fuzzy_sorter,
+    history = {
+      path = join_paths(fn.stdpath 'data', 'telescope_history.sqlite3'),
+      limit = 500,
+    },
     -- exec 'e ' .. stdpath('data') .. '/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua'
     mappings = {
       i = {
@@ -196,7 +200,17 @@ M.cfg = {
     git_bcommits = view.h3,
     git_commits = view.h3,
     git_files = view.h3,
-    git_status = view.h3,
+    git_status = vim.tbl_extend('force', view.h3, {
+      git_icons = {
+        added = '',
+        -- changed = '',
+        -- copied = '>',
+        deleted = '',
+        renamed = '',
+        unmerged = '',
+        untracked = '',
+      },
+    }),
     grep_string = { theme = 'ivy' },
     live_grep = vim.tbl_extend('force', view.h1, {
       disable_coordinates = true,
