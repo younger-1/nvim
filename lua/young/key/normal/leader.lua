@@ -446,7 +446,7 @@ return {
     ["'"] = { cmd 'Telescope marks', 'Marks' },
     ['"'] = { cmd 'Telescope registers', 'Registers' },
     [','] = { cmd 'Telescope buffers', 'Find' },
-    ['.'] = { cmd 'Telescope file_browser hidden=v:true', 'Browser' },
+    ['.'] = { cmd 'Telescope file_browser hidden=true', 'Browser' },
     ['/'] = { cmd 'Telescope search_history', 'Search history' },
     ['?'] = { cmd 'Telescope help_tags', 'Help' },
     ['<C-q>'] = { cmd 'Telescope quickfix', 'QuickList' },
@@ -460,7 +460,15 @@ return {
     S = { cmd 'Telescope spell_suggest', 'Spell' },
     a = { cmd 'Telescope autocommands', 'Autocommands' },
     b = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
-    c = { cmd "lua require('telescope.builtin').colorscheme({enable_preview = true})", 'Colorscheme' },
+    -- c = { cmd 'Telescope colorscheme', 'Colorscheme' },
+    -- c = { cmd "lua require('telescope.builtin').colorscheme({enable_preview = true})", 'Colorscheme' },
+    -- c = { cu('Telescope colorscheme enable_preview=' .. '<C-R>=v:count==0 ? "false" : "true"<CR>'), 'Colorscheme' },
+    c = {
+      function()
+        require('telescope.builtin').colorscheme { enable_preview = vim.v.count ~= 0 }
+      end,
+      'Colorscheme',
+    },
     d = {
       name = '+dap',
       [' '] = { cmd 'Telescope dap configurations', 'Dap configurations' },
@@ -471,7 +479,7 @@ return {
     },
     e = { cmd 'Telescope env', 'Env' },
     f = { cmd 'Telescope find_files', 'Find files' },
-    F = { cmd 'Telescope find_files no_ignore=1', 'Find files (more)' },
+    F = { cmd 'Telescope find_files no_ignore=true', 'Find files (more)' },
     g = { cmd 'Telescope live_grep', 'Grep' },
     G = {
       function()
@@ -483,7 +491,7 @@ return {
       end,
       'Grep fixed string',
     },
-    -- G = { cmd'Telescope live_grep grep_open_files=v:true', 'Grep in opened buffer' },
+    -- G = { cmd'Telescope live_grep grep_open_files=true', 'Grep in opened buffer' },
     h = { cmd 'Telescope help_tags', 'Find help' },
     j = { cmd 'Telescope jumplist', 'Gump list' },
     k = { cmd 'Telescope keymaps', 'Keymaps' },
