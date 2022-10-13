@@ -56,6 +56,13 @@ M.cfg = {
           renamed = '',
           ignored = '',
         },
+        folder = {
+          -- default = '',
+          -- empty = '',
+          -- symlink = '',
+          open = '',
+          empty_open = '',
+        },
       },
     },
   },
