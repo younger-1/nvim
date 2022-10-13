@@ -394,6 +394,7 @@ mods.neovim = {
   -- },
   {
     'gbprod/yanky.nvim',
+    requires = { { 'kkharji/sqlite.lua', module = 'sqlite' } },
     event = 'BufRead',
     config = function()
       require 'young.mod.yanky'
