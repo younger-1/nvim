@@ -1,4 +1,9 @@
--- require('colorizer').setup({ '*' }, {
+local colorizer = rr 'colorizer'
+if not colorizer then
+  return
+end
+
+-- colorizer.setup({ '*' }, {
 --   names = true,
 --   RGB = true, -- #RGB hex codes
 --   RRGGBB = true, -- #RRGGBB hex codes
@@ -9,7 +14,7 @@
 --   css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
 -- })
 
-require('colorizer').setup {
+colorizer.setup {
   filetypes = { '*' },
   -- filetypes = {
   --   'css',

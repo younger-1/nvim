@@ -15,14 +15,13 @@ mods.basic = {
     'antoinemadec/FixCursorHold.nvim',
     disable = xy.has 'nvim-0.8',
   },
-  -- {
-  --   'nathom/filetype.nvim',
-  --   -- opt = true,
-  --   setup = function() end,
-  --   config = function()
-  --     require('young.mod.filetype').done()
-  --   end,
-  -- },
+  {
+    'nathom/filetype.nvim',
+    disable = xy.has 'nvim-0.7',
+    config = function()
+      require('young.mod.filetype').done()
+    end,
+  },
 }
 
 mods.theme = {
@@ -75,8 +74,7 @@ mods.theme = {
       disable = xy.colorscheme ~= 'onedarker',
       branch = 'freeze',
       config = function()
-        require('onedarker').setup()
-        -- xy.mod.lualine.options.theme = 'onedarker'
+        require 'young.theme.onedarker'
       end,
     },
   },
@@ -1344,7 +1342,7 @@ mods.tool = {
       run = function()
         vim.fn['firenvim#install'](0)
       end,
-      disable = not is_windows,
+      disable = not (is_windows or is_mac),
     },
     -- { -- Use your favorite machine translation engines
     --   'potamides/pantran.nvim',
