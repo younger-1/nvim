@@ -1,7 +1,11 @@
+local monokai = rr 'monokai'
+if not monokai then
+  return
+end
+
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'monokai*',
   callback = function(ctx)
-    local monokai = require 'monokai'
     local flavour = ({
       monokai = 'classic',
       monokai_pro = 'pro',
