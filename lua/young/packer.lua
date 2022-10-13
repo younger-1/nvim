@@ -25,9 +25,10 @@ M.once = function()
     -- WARN: system sync/async
     vim.fn.system { 'git', 'clone', '--depth', '3', 'https://github.com/wbthomason/packer.nvim', install_path }
     vim.cmd [[packadd packer.nvim]] -- To init packer commands after clone it.
+    packer = require 'packer'
   end
 
-  require('packer').init {
+  packer.init {
     package_root = package_root,
     compile_path = compile_path,
     max_jobs = is_windows and 5 or 10,
@@ -56,6 +57,15 @@ M.once = function()
     snapshot = first_time and snapshot_name,
     snapshot_path = snapshot_path,
   }
+
+  -- @note lua =rr'packer.handlers'
+  -- packer.set_handler('cfg', function(_, plugin, value)
+  --   if value:match '^young.' then
+  --     plugin.config = ([[require('%s')]]):format(value)
+  --   else
+  --     plugin.config = ([[require('young.mod.%s')]]):format(value)
+  --   end
+  -- end)
 end
 
 M.recompile = function()
