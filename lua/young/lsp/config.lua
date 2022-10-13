@@ -46,19 +46,22 @@ return {
   buffer_mappings = {
     normal_mode = {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
-      -- ['gK'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      --
       ['gd'] = { vim.lsp.buf.definition, 'Goto definition' },
       ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
-      ['gr'] = { vim.lsp.buf.references, 'Goto references' },
       ['gy'] = { vim.lsp.buf.type_definition, 'Goto type definition' },
-      ['gI'] = { vim.lsp.buf.implementation, 'Goto implementation' },
+      ['gi'] = { vim.lsp.buf.implementation, 'Goto implementation' },
+      ['gr'] = { vim.lsp.buf.references, 'Goto references' },
+      ['g['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
+      ['g]'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
       ['gl'] = {
         function()
           vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })
         end,
         'Show diagnostics',
       },
-      -- ['gp'] = {
+      -- ['go'] = {
       --   function()
       --     require('young.lsp.misc').Peek 'definition'
       --   end,

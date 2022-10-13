@@ -296,15 +296,23 @@ return {
     n = { cmd 'NullLsInfo', 'Null LS' },
     c = { cmd 'CmpStatus', 'Cmp status' },
     C = { cmd 'Copilot status', 'Copilot status' },
-    --
+    -- lsp goto
+    d = { vim.lsp.buf.definition, 'Def' },
+    D = { vim.lsp.buf.declaration, 'Dec' },
+    y = { vim.lsp.buf.type_definition, 'Type' },
+    -- i = { vim.lsp.buf.implementation, 'Impl' },
+    -- r = { vim.lsp.buf.references, 'Ref' },
+    s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
+    S = { vim.lsp.buf.document_symbol, 'Document symbol' },
     ['['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
     [']'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
     ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
     ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
+    j = { vim.diagnostic.goto_next, 'Next diagnostic' },
+    k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
+    -- lsp action
     a = { vim.lsp.buf.code_action, 'Code action' },
     A = { vim.lsp.buf.range_code_action, 'Range action' },
-    s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
-    S = { vim.lsp.buf.document_symbol, 'Document symbol' },
     f = {
       function()
         vim.lsp.buf.format()
@@ -318,23 +326,22 @@ return {
       end,
       'Format',
     },
-    j = { vim.diagnostic.goto_next, 'Next diagnostic' },
-    k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
     l = { vim.lsp.codelens.run, 'CodeLens action' },
     r = { vim.lsp.buf.rename, 'Rename' },
-    --
-    t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
-    T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
     w = {
       name = '+workspace',
       w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
       a = { lua 'pp(vim.lsp.buf.add_workspace_folder())', 'Add folder' },
       r = { lua 'pp(vim.lsp.buf.remove_workspace_folder())', 'Remove folder' },
     },
+    --
+    t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
+    T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
   },
   c = {
     name = '+code',
     -- [' '] = {},
+    -- lsp goto
     d = { cmd 'Telescope lsp_definitions', 'Def' },
     y = { cmd 'Telescope lsp_type_definitions', 'Type' },
     i = { cmd 'Telescope lsp_implementations', 'Impl' },
@@ -346,8 +353,8 @@ return {
     [']'] = { cmd 'Telescope lsp_outgoing_calls', 'Outgoing calls' },
     e = { cmd 'Telescope diagnostics bufnr=0', 'Diagnostics' },
     E = { cmd 'Telescope diagnostics', 'Diagnostics(All)' },
-    --
-    c = { cmd 'CodeActionMenu', 'Code action' },
+    -- lsp action
+    a = { cmd 'CodeActionMenu', 'Code action' },
     o = { cmd 'SymbolsOutline', 'Outline' },
     v = { cmd 'Vista!!', 'Vista' },
     -- p = {
@@ -559,20 +566,18 @@ return {
   w = { cmd 'update', 'Save' },
   x = {
     name = '+trouble',
+    x = { cmd 'TroubleToggle', 'Open' },
+    t = { cmd 'TodoTrouble', 'Todo' },
     ['.'] = { cmd 'Trouble telescope', 'Telescope' },
-    --
-    e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
-    E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
-    --
     ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
     ['<C-a>'] = { cmd 'TroubleToggle loclist', 'LocList' },
     --
-    x = { cmd 'TroubleToggle', 'Open' },
     d = { cmd 'TroubleToggle lsp_definitions', 'Def' },
+    y = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
     i = { cmd 'TroubleToggle lsp_implementations', 'Impl' },
     r = { cmd 'TroubleToggle lsp_references', 'Ref' },
-    y = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
-    t = { cmd 'TodoTrouble', 'Todo' },
+    e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
+    E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
   },
   y = {
     name = '+young',
