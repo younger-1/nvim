@@ -18,11 +18,11 @@ local yanky_hydra = Hydra {
 for key, putAction in pairs {
   ['p'] = '<Plug>(YankyPutAfter)',
   ['P'] = '<Plug>(YankyPutBefore)',
-  ['gp'] = '<Plug>(YankyGPutAfter)',
-  ['gP'] = '<Plug>(YankyGPutBefore)',
+  -- ['gp'] = '<Plug>(YankyGPutAfter)',
+  -- ['gP'] = '<Plug>(YankyGPutBefore)',
 } do
   vim.keymap.set({ 'n', 'x' }, key, function()
-    vim.fn.feedkeys(xy.util.t(putAction))
+    vim.fn.feedkeys(vim.v.count .. xy.util.t(putAction))
     yanky_hydra:activate()
   end)
 end
@@ -30,19 +30,19 @@ end
 for key, putAction in pairs {
   [']p'] = '<Plug>(YankyPutIndentAfterLinewise)',
   ['[p'] = '<Plug>(YankyPutIndentBeforeLinewise)',
-  [']P'] = '<Plug>(YankyPutIndentAfterLinewise)',
-  ['[P'] = '<Plug>(YankyPutIndentBeforeLinewise)',
+  -- [']P'] = '<Plug>(YankyPutIndentAfterLinewise)',
+  -- ['[P'] = '<Plug>(YankyPutIndentBeforeLinewise)',
 
-  ['>p'] = '<Plug>(YankyPutIndentAfterShiftRight)',
-  ['<p'] = '<Plug>(YankyPutIndentAfterShiftLeft)',
-  ['>P'] = '<Plug>(YankyPutIndentBeforeShiftRight)',
-  ['<P'] = '<Plug>(YankyPutIndentBeforeShiftLeft)',
+  -- ['>p'] = '<Plug>(YankyPutIndentAfterShiftRight)',
+  -- ['<p'] = '<Plug>(YankyPutIndentAfterShiftLeft)',
+  -- ['>P'] = '<Plug>(YankyPutIndentBeforeShiftRight)',
+  -- ['<P'] = '<Plug>(YankyPutIndentBeforeShiftLeft)',
 
   ['=p'] = '<Plug>(YankyPutAfterFilter)',
   ['=P'] = '<Plug>(YankyPutBeforeFilter)',
 } do
   vim.keymap.set('n', key, function()
-    vim.fn.feedkeys(xy.util.t(putAction))
+    vim.fn.feedkeys(vim.v.count .. xy.util.t(putAction))
     yanky_hydra:activate()
   end)
 end

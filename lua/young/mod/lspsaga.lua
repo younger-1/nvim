@@ -124,7 +124,7 @@ function M.once()
   -- Lsp finder find the symbol definition implement reference
   -- when you use action in finder like open vsplit then you can
   -- use <C-t> to jump back
-  keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
+  -- keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
 
   -- Code action
   -- keymap('x', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
@@ -142,12 +142,12 @@ function M.once()
   -- end, { silent = true })
 
   -- Float terminal
-  keymap('n', '<A-d>', cmd 'Lspsaga open_floaterm', { silent = true })
+  -- keymap('n', '<A-d>', cmd 'Lspsaga open_floaterm', { silent = true })
   -- if you want pass some cli command into terminal you can do like this
   -- open lazygit in lspsaga float terminal
-  keymap('n', '<A-g>', cmd 'Lspsaga open_floaterm lazygit', { silent = true })
+  -- keymap('n', '<A-g>', cmd 'Lspsaga open_floaterm lazygit', { silent = true })
   -- close floaterm
-  keymap('t', '<A-d>', [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+  -- keymap('t', '<A-d>', [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 end
 
 return M
