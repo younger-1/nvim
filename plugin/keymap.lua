@@ -131,22 +131,22 @@ M.keys = {
     -- ['<A-k>'] = ':m .-2<CR>==',
 
     -- QuickFix
-    ['<C-q>'] = ':call QuickFixToggle()<CR>',
-    [']q'] = ':cnext<CR>',
-    ['[q'] = ':cprev<CR>',
-    [']Q'] = ':clast<CR>',
-    ['[Q'] = ':cfirst<CR>',
+    ['<C-q>'] = '<Cmd>call QuickFixToggle()<CR>',
+    [']q'] = '<Cmd>cnext<CR>',
+    ['[q'] = '<Cmd>cprev<CR>',
+    [']Q'] = '<Cmd>clast<CR>',
+    ['[Q'] = '<Cmd>cfirst<CR>',
 
-    ['<C-a>'] = ':call LocListToggle()<CR>',
-    [']a'] = ':lnext<CR>',
-    ['[a'] = ':lprev<CR>',
-    [']A'] = ':llast<CR>',
-    ['[A'] = ':lfirst<CR>',
+    ['<C-a>'] = '<Cmd>call LocListToggle()<CR>',
+    [']a'] = '<Cmd>lnext<CR>',
+    ['[a'] = '<Cmd>lprev<CR>',
+    [']A'] = '<Cmd>llast<CR>',
+    ['[A'] = '<Cmd>lfirst<CR>',
 
-    [']t'] = ':tnext<CR>',
-    ['[t'] = ':tprev<CR>',
-    [']T'] = ':tlast<CR>',
-    ['[T'] = ':tfirst<CR>',
+    [']t'] = '<Cmd>tnext<CR>',
+    ['[t'] = '<Cmd>tprev<CR>',
+    [']T'] = '<Cmd>tlast<CR>',
+    ['[T'] = '<Cmd>tfirst<CR>',
 
     -- [nvim-default]
     -- Y = 'y$',
