@@ -45,6 +45,7 @@
 - [ ] Telescope keymaps or other plugin: open files of lua function used in rhs
 - [ ] Telescope keymaps: only show <Plug> mappings
 - [ ] Telescope commands: only show buf local commands
+- [ ] yanky (upstream): allow different notify
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
