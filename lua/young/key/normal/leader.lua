@@ -304,7 +304,13 @@ return {
     w = { cmd 'Gitsigns toggle_word_diff', 'Word diff' },
     y = 'Link',
     -- y = { 'Link', mode = { 'n', 'x' } },
-    Y = { "<cmd>lua require'gitlinker'.get_repo_url()<cr>", 'Link(Repo)' },
+    Y = { require('gitlinker').get_repo_url, 'Link(Repo)' },
+    O = {
+      function()
+        require('gitlinker').get_repo_url { action_callback = require('gitlinker.actions').open_in_browser }
+      end,
+      'Open Link',
+    },
   },
   h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },
   j = {

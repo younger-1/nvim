@@ -54,6 +54,14 @@ else
   -- xy.open_cmd = 'start' -- <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start>
 end
 
+-- local os, open_cmd = jit.os, "xdg-open"
+-- if os == "Darwin" then
+--   open_cmd = "open"
+-- elseif os == "Windows" then
+--   open_cmd = "explorer"
+-- end
+-- xy.open_cmd = open_cmd
+
 function _G.join_paths(...)
   local path_sep = is_windows and '\\' or '/'
   local result = table.concat({ ... }, path_sep)
