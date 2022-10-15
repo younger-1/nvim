@@ -950,3 +950,20 @@ doautoall my_py FileType
 doautoall my_lua FileType
 
 autocmd LspAttach * echomsg expand('<amatch>') . ' <-> ' . expand('<afile>')
+
+" {what}       Type    Description ~
+" cache        String  Cache directory: arbitrary temporary
+"                      storage for plugins, etc.
+" config       String  User configuration directory. |init.vim|
+"                      is stored here.
+" config_dirs  List    Other configuration directories.
+" data         String  User data directory.
+" data_dirs    List    Other data directories.
+" log          String  Logs directory (for use by plugins too).
+" run          String  Run directory: temporary, local storage
+" 		     for sockets, named pipes, etc.
+" state        String  Session state directory: storage for file
+" 		     drafts, undo, |shada|, etc.
+for item in ['config', 'data', 'state', 'cache', 'run', 'log']
+   echo stdpath(item)
+endfor
