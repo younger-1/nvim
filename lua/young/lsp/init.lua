@@ -105,10 +105,8 @@ local function setup_server(server_name)
 end
 
 M.once = function()
-  -- vim.lsp.set_log_level("debug")
-  -- if xy.has 'nvim-0.5.1' then
-  --   require('vim.lsp.log').set_format_func(vim.inspect)
-  -- end
+  -- vim.lsp.set_log_level 'debug'
+  require('vim.lsp.log').set_format_func(vim.inspect)
   -- vim.cmd [[command! LspLog exe 'split ' .. luaeval("vim.lsp.get_log_path()")]]
 
   -- <https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization>
