@@ -48,14 +48,15 @@ return {
       workspace = {
         library = {
           [vim.fn.expand '$VIMRUNTIME'] = true,
+          -- [require('lua-dev.config').types()] = true,
           [packer_plugins['lua-dev.nvim'].path] = true,
           -- [packer_plugins['emmylua-nvim'].path] = true,
           [packer_plugins['plenary.nvim'].path] = true,
           -- [packer_plugins['telescope.nvim'].path] = true,
           -- [packer_plugins['nvim-lspconfig'].path] = true,
         },
-        maxPreload = 20000,
-        preloadFileSize = 2000,
+        maxPreload = 5000,
+        preloadFileSize = 10000,
       },
       diagnostics = {
         globals = {

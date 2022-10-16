@@ -292,6 +292,7 @@ return {
   l = {
     name = '+lsp',
     i = { cmd 'LspInfo', 'Info' },
+    I = { cmd 'LspInstall', 'Install' },
     m = { cmd 'Mason', 'Mason' },
     n = { cmd 'NullLsInfo', 'Null LS' },
     c = { cmd 'CmpStatus', 'Cmp status' },
