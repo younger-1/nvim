@@ -949,3 +949,4 @@ doautoall FileType
 doautoall my_py FileType
 doautoall my_lua FileType
 
+autocmd LspAttach * echomsg expand('<amatch>') . ' <-> ' . expand('<afile>')

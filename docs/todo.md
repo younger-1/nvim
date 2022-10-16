@@ -41,6 +41,7 @@
 - [ ] diffview: allow use other diff tool (e.g. delta, difftastic)
 - [ ] undo: jump to location, display diff, then undo
 - [ ] lsp/diagnostics: diagnostics are updated on as soon as InsertLeave happens. Defer it for 1 second
+- [ ] setlocal winbar: can't disable window-local winbar, but can enable window-local winbar
 - [ ] Telescope git_branches: can not show worktree correctly
 - [ ] Telescope keymaps or other plugin: open files of lua function used in rhs
 - [ ] Telescope keymaps: only show <Plug> mappings

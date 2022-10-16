@@ -80,3 +80,7 @@ command! Name echo  "hi: " . synID(line("."), col("."), 1)->synIDattr("name")
 
 " TODO:highlight of treesitter under cursor
 command! -nargs=1 -complete=highlight HiName hi <args> | echo "-> " . hlID(<q-args>)->synIDtrans()->synIDattr("name")
+
+" From :h DiffOrig
+command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_
+  \ | diffthis | wincmd p | diffthis
