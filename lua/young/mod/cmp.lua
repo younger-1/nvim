@@ -156,61 +156,68 @@ M.cfg = {
   },
   -- mapping = cmapping.preset.insert {
   mapping = {
-    ['<C-j>'] = cmapping(cmapping.select_next_item(), { 'i', 'c' }),
-    ['<C-k>'] = cmapping(cmapping.select_prev_item(), { 'i', 'c' }),
+    ['<C-j>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
+    ['<C-k>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
     ['<C-n>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
     ['<C-p>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
-    ['<Down>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
-    ['<Up>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
     --
     ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
     ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
-    ['<C-Space>'] = cmapping(cmapping.complete(), { 'i', 'c' }),
-    ['<C-y>'] = cmapping(cmapping.confirm { select = true }, { 'i' }),
-    ['<C-e>'] = {
+    ['<C-f>'] = cmapping(cmapping.confirm { select = false }, { 'i', 'c' }), -- select = false is nice in cmdline
+    ['<C-c>'] = {
       i = cmapping.abort(),
       c = cmapping.close(),
     },
     ['<CR>'] = cmapping.confirm {
-      -- behavior = cmp.ConfirmBehavior.Replace,
-      -- select = false,
+      behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
+      select = true,
     },
-    ['<Tab>'] = cmapping(function(fallback)
+    ['<C-Space>'] = cmapping(function(--[[ fallback ]])
       if cmp.visible() then
-        cmp.select_next_item()
+        cmp.close()
+        -- fallback()
+      else
+        cmp.complete()
+      end
+    end, { 'i', 'c' }),
+    ['<Tab>'] = cmapping(function(fallback)
+      -- if cmp.visible() then
+      --   cmp.select_next_item()
       -- elseif require('neogen').jumpable() then
       --   require('neogen').jump_next()
-      elseif luasnip.expand_or_locally_jumpable() then
+      if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
       end
-    end, {
-      'i',
-      's',
-    }),
+    end, { 'i', 's' }),
     ['<S-Tab>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
+      -- if cmp.visible() then
+      --   cmp.select_prev_item()
       -- elseif require('neogen').jumpable(true) then
       --   require('neogen').jump_prev()
-      elseif luasnip.jumpable(-1) then
+      if luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
       end
-    end, {
-      'i',
-      's',
-    }),
-    ['<PageUp>'] = cmapping(function()
-      for _ = 1, pum_half do
-        cmp.select_prev_item()
+    end, { 'i', 's' }),
+    ['<PageUp>'] = cmapping(function(fallback)
+      if cmp.visible() then
+        for _ = 1, pum_half do
+          cmp.select_prev_item()
+        end
+      else
+        fallback()
       end
     end, { 'i', 'c' }),
-    ['<PageDown>'] = cmapping(function()
-      for _ = 1, pum_half do
-        cmp.select_next_item()
+    ['<PageDown>'] = cmapping(function(fallback)
+      if cmp.visible() then
+        for _ = 1, pum_half do
+          cmp.select_next_item()
+        end
+      else
+        fallback()
       end
     end, { 'i', 'c' }),
     ['<C-x><C-h>'] = cmapping.complete {
@@ -227,6 +234,13 @@ M.cfg = {
     -- ['<C-x>j'] = cmapping.complete({}),
     -- ['<C-x>k'] = cmapping.complete({}),
     -- ['<C-x>l'] = cmapping.complete({}),
+    ['<C-l>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        return cmp.complete_common_string()
+      end
+      fallback()
+    end, { 'i', 'c' }),
+    -- ['<C-s>'] = cmapping.complete({}),
   },
 }
 
@@ -266,19 +280,20 @@ M.done = function()
   --     c = cmapping.select_prev_item(),
   --   },
   -- }
-  -- local cmdline_map = cmp.mapping.preset.cmdline {
-  --   ['<C-n>'] = {
-  --     c = function(fallback) fallback() end,
-  --   },
-  --   ['<C-p>'] = {
-  --     c = function(fallback) fallback() end,
-  --   },
-  -- }
+  local cmdline_map = cmp.mapping.preset.cmdline {
+    -- ['<C-n>'] = {
+    --   c = function(fallback) fallback() end,
+    -- },
+    -- ['<C-p>'] = {
+    --   c = function(fallback) fallback() end,
+    -- },
+    ['<C-e>'] = vim.NIL,
+  }
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
-    -- mapping = cmdline_map,
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmdline_map,
+    -- mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'path' },
     }, {
@@ -288,15 +303,15 @@ M.done = function()
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
-    -- mapping = cmdline_map,
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmdline_map,
+    -- mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' },
     },
   })
   cmp.setup.cmdline('?', {
-    -- mapping = cmdline_map,
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmdline_map,
+    -- mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' },
     },

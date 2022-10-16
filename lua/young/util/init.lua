@@ -137,6 +137,18 @@ function util.t(str)
   return api.nvim_replace_termcodes(str, true, true, true)
 end
 
+---Shortcut for nvim_replace_termcodes
+---@param keys string
+---@return string
+-- from: require('cmp.utils.keymap').t
+function util.tt(keys)
+  return (
+    string.gsub(keys, '(<[A-Za-z0-9\\%-%[%]%^@]->)', function(match)
+      return vim.api.nvim_eval(string.format([["\%s"]], match))
+    end)
+  )
+end
+
 -- function _G.smart_tab()
 --   return vim.fn.pumvisible() == 1 and util.t '<C-N>' or util.t '<Tab>'
 -- end
