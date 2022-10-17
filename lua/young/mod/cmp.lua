@@ -163,15 +163,24 @@ M.cfg = {
     --
     ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
     ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
-    ['<C-f>'] = cmapping(cmapping.confirm { select = false }, { 'i', 'c' }), -- select = false is nice in cmdline
+    ['<C-f>'] = cmapping(
+      cmapping.confirm {
+        select = false, -- select = false is nice in cmdline
+        behavior = cmp.ConfirmBehavior.Insert,
+      },
+      { 'i', 'c' }
+    ),
     ['<C-c>'] = {
       i = cmapping.abort(),
       c = cmapping.close(),
     },
-    ['<CR>'] = cmapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
-      select = true,
-    },
+    ['<CR>'] = cmapping(
+      cmapping.confirm {
+        select = true,
+        behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
+      },
+      { 'i', 'c' }
+    ),
     ['<C-Space>'] = cmapping(function(--[[ fallback ]])
       if cmp.visible() then
         cmp.close()

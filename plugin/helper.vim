@@ -65,10 +65,11 @@ function! EchoRuntimeFile(pattern, all)
   echo nvim_get_runtime_file(a:pattern, a:all) ->join("\n")
 endfunction
 
+" TODO:all files in runtimes
 function! s:rtf_complete(...) abort
-  return ($vimruntime .. '/**/*.vim') ->glob(0, 1) ->map('strpart(v:val, strlen($vimruntime) + 1)') ->join("\n") ->substitute('\', '/', 'g')
+  return ($VIMRUNTIME .. '/**/*') ->glob(0, 1) ->map('strpart(v:val, strlen($VIMRUNTIME) + 1)') ->join("\n") ->substitute('\', '/', 'g')
 endfunction
-command! -bang -nargs=+ -complete=custom,s:rtf_complete Echofile call EchoRuntimeFile(<f-args>, <bang>1)
+command! -bang -nargs=+ -complete=custom,s:rtf_complete EchoRuntimeFile call EchoRuntimeFile(<f-args>, <bang>1)
 
 command! CD lcd %:p:h
 command! FollowSymLink execute "file " . resolve(expand('%')) | edit
