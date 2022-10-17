@@ -46,7 +46,6 @@ for key, putAction in pairs {
   ['=P'] = '<Plug>(YankyPutBeforeFilter)',
 } do
   vim.keymap.set('n', key, function()
-    vim.fn.feedkeys(vim.v.count .. xy.util.t(putAction))
     local count = vim.v.count
     if count == 0 then
       count = ''

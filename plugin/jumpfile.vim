@@ -15,6 +15,7 @@ function! JumpFileComputePrevious()
     if previous_list != []
         return pos - previous_list[0][0]
     else
+        echo "[jumpfile]: in first file"
         return 0
     endif
 endfunction
@@ -27,12 +28,13 @@ function! JumpFileComputeNext()
     if next_list != []
         return next_list[0][0] - pos
     else
+        echo "[jumpfile]: in last file"
         return 0
     endif
 endfunction
 
-nnoremap <plug>(JumpPrevFile) <cmd>execute 'normal ' . JumpFileComputePrevious() . "\<c-o>"<cr>
-nnoremap <plug>(JumpNextFile) <cmd>execute 'normal ' . JumpFileComputeNext() . "\<c-i>"<cr>
+nnoremap <plug>(JumpPrevFile) <cmd>execute 'normal! ' . JumpFileComputePrevious() . "\<c-o>"<cr>
+nnoremap <plug>(JumpNextFile) <cmd>execute 'normal! ' . JumpFileComputeNext() . "\<c-i>"<cr>
 
 
 nmap ( <plug>(JumpPrevFile)
