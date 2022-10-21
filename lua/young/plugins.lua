@@ -1365,6 +1365,13 @@ mods.tool = {
   --     },
   --   },
   -- }
+  {
+    'fidian/hexmode',
+    cmd = 'Hexmode',
+    setup = function()
+      -- vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o,*.jpg,*.png'
+    end,
+  },
 }
 
 local to_plugs = function(t, buckets)

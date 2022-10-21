@@ -562,6 +562,7 @@ return {
     n = { require('young.tool').toggle_notify_style, 'Nofity style' },
     N = { require('young.tool').toggle_notify, 'Toggle nofity' },
     t = { cmd 'TransparentToggle', 'Transparent' },
+    x = { cmd 'Hexmode', 'Hex mode' },
     u = { cmd 'UndotreeToggle', 'Undotree' },
   },
   -- w = { '<cmd>w!<cr>', 'Save' },
