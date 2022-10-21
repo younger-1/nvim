@@ -33,7 +33,10 @@
 - [ ] autopair: remove single quote (\' and \`) rules for lisp file
 - [ ] call-tree, no-refenrence-list
 - [ ] decouple which-key from core, by using local.lua
-- [ ] a quick-pannel to lookup git/file information (e.g. branch, ff, fenc, sw) which is not very common like changes and diagnostics
+- [ ] a more powerfull <C-g>
+  - pwd, filepath
+  - statusline info
+  - a quick-pannel to lookup git/file information (e.g. branch, ff, fenc, sw) which is not very common like changes and diagnostics
 - [ ] split diagnostics and lsp, lazy load lsp setup to filetype(not good for lvim) or event, lazy load lsp_line after diagnostics
 - [x] toggle transparence of colorscheme
 - [ ] with prefix(XY), autocmd/manually generate vim-commands for all functions of rr('young.tool') and mod's function
@@ -46,7 +49,10 @@
 - [ ] Telescope keymaps or other plugin: open files of lua function used in rhs
 - [ ] Telescope keymaps: only show <Plug> mappings
 - [ ] Telescope commands: only show buf local commands
+- [ ] Telescope: break dot-repeat
 - [ ] yanky (upstream): allow different notify
+- [ ] yanky (bug): copy `g()` made it to `v:null`
+- [ ] quickfixtextfunc: default not show line and column, apply a key to trigger different quickfixtextfunc
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

@@ -82,8 +82,9 @@ vim.filetype.add {
     ['.clang-format'] = 'yaml',
   },
   pattern = {
-    ['.*/git/.*'] = 'gitconfig',
     ['.*%.gitignore.*'] = 'gitignore',
+    ['.*/%.config/git/.*'] = 'gitconfig',
+    ['.*/dotter/git/.*'] = 'gitconfig',
     ['.*/kitty/.*%.conf'] = 'kitty',
     ['.*/kitty/.*%.session'] = 'kitty-session',
     -- ['.*Dockerfile.*'] = 'dockerfile',

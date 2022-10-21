@@ -20,6 +20,29 @@ local M = {
 local lsp_cfg = require 'young.lsp.config'
 local autocmd = require 'young.autocmd'
 
+-- Available provider, see :lua=vim.lsp._request_name_to_capability
+-- maps request name to the required server_capability in the client:
+-- ['textDocument/hover'] = { 'hoverProvider' },
+-- ['textDocument/signatureHelp'] = { 'signatureHelpProvider' },
+-- ['textDocument/definition'] = { 'definitionProvider' },
+-- ['textDocument/implementation'] = { 'implementationProvider' },
+-- ['textDocument/declaration'] = { 'declarationProvider' },
+-- ['textDocument/typeDefinition'] = { 'typeDefinitionProvider' },
+-- ['textDocument/documentSymbol'] = { 'documentSymbolProvider' },
+-- ['textDocument/prepareCallHierarchy'] = { 'callHierarchyProvider' },
+-- ['textDocument/rename'] = { 'renameProvider' },
+-- ['textDocument/prepareRename'] = { 'renameProvider', 'prepareProvider' },
+-- ['textDocument/codeAction'] = { 'codeActionProvider' },
+-- ['textDocument/codeLens'] = { 'codeLensProvider' },
+-- ['codeLens/resolve'] = { 'codeLensProvider', 'resolveProvider' },
+-- ['workspace/executeCommand'] = { 'executeCommandProvider' },
+-- ['workspace/symbol'] = { 'workspaceSymbolProvider' },
+-- ['textDocument/references'] = { 'referencesProvider' },
+-- ['textDocument/rangeFormatting'] = { 'documentRangeFormattingProvider' },
+-- ['textDocument/formatting'] = { 'documentFormattingProvider' },
+-- ['textDocument/completion'] = { 'completionProvider' },
+-- ['textDocument/documentHighlight'] = { 'documentHighlightProvider' },
+
 local function lsp_highlight_document(client, bufnr)
   if not lsp_cfg.document_highlight then
     return
@@ -103,6 +126,7 @@ M.on_attach = function(client, bufnr)
   -- }
   -- require("aerial").on_attach(client)
 
+  -- Enabled by default, see :h lsp-config
   -- if client.server_capabilities.completionProvider then
   --   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
   -- end
@@ -110,7 +134,7 @@ M.on_attach = function(client, bufnr)
   --   vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
   -- end
   -- use gq for formatting
-  -- formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
+  -- vim.bo[bufnr].formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
 end
 
 -- local function select_default_formater(client)
