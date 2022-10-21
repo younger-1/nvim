@@ -1,4 +1,5 @@
 " <https://gitlab.com/egzvor/vimfiles/-/blob/main/plugin/jumpfile.vim>
+" NOTE: modified with bug fixed
 
 if exists('g:loaded_jumpfile')
     finish
@@ -36,6 +37,6 @@ endfunction
 nnoremap <plug>(JumpPrevFile) <cmd>execute 'normal! ' . JumpFileComputePrevious() . "\<c-o>"<cr>
 nnoremap <plug>(JumpNextFile) <cmd>execute 'normal! ' . JumpFileComputeNext() . "\<c-i>"<cr>
 
-
+" Config
 nmap ( <plug>(JumpPrevFile)
 nmap ) <plug>(JumpNextFile)
