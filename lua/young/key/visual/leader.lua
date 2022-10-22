@@ -19,9 +19,32 @@ return {
   },
   s = {
     name = '+search',
-    f = { 'y<cmd>Telescope find_files<cr><C-r>"', 'Find files' },
-    g = { 'y<cmd>Telescope live_grep<cr><C-r>"', 'Grep' },
+    f = {
+      function()
+        local text = xy.util.get_visual_selection()
+        require('telescope.builtin').find_files {}
+        vim.fn.feedkeys(text)
+      end,
+      'Find files',
+    },
+    g = {
+      function()
+        local text = xy.util.get_visual_selection()
+        require('telescope.builtin').live_grep {}
+        vim.fn.feedkeys(text)
+      end,
+      'Grep',
+    },
+    -- g = { 'y:Telescope live_grep<cr><C-r>"', 'Grep' },
     -- g = { '<Esc><cmd>Telescope live_grep<cr><C-r>=AsciiVirtualSelection()<cr>', 'Grep' },
+    t = {
+      function()
+        require('telescope.builtin').grep_string {
+          search = xy.util.get_visual_selection(),
+        }
+      end,
+      'Search fixed string',
+    },
     y = { 'dh<cmd>Telescope neoclip<cr>', 'Clipboard' },
   },
 }
