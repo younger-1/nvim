@@ -16,23 +16,33 @@ vim.g.bufferline = {
   -- Enable/disable auto-hiding the tab bar when there is a single buffer
   auto_hide = false,
 
+  -- Enable/disable current/total tabpages indicator (top right corner)
+  tabpages = true,
+
+  -- Enable/disable close button
+  closable = true,
+
   -- Enables/disable clickable tabs
   --  - left-click: go to buffer
   --  - middle-click: delete buffer
   clickable = true,
 
-  -- Enable/disable close button
-  closable = true,
-
   -- Excludes buffers from the tabline
-  -- exclude_ft = { "javascript" },
+  exclude_ft = { 'git', 'fugitive' },
   -- exclude_name = { "package.json" },
+
+  -- Show every buffer
+  -- hide = { current = false, inactive = false, visible = false },
 
   -- Enable/disable icons
   -- if set to 'numbers', will show buffer index in the tabline
   -- if set to 'both', will show buffer index and icons in the tabline
-  icons = true,
+  -- if set to 'buffer_number', will show buffer number in the tabline
+  -- if set to 'buffer_number_with_icon', will show buffer number and icons in the tabline
+  icons = 'both',
 
+  -- Sets the icon's highlight group.
+  -- If false, will use nvim-web-devicons colors
   -- If set, the icon color will follow its corresponding buffer
   -- highlight group. By default, the Buffer*Icon group is linked to the
   -- Buffer* group (see Highlighting below). Otherwise, it will take its
@@ -53,7 +63,10 @@ vim.g.bufferline = {
   insert_at_start = false,
 
   -- Sets the maximum padding width with which to surround each tab
-  maximum_padding = 2,
+  -- maximum_padding = 2,
+
+  -- Sets the minimum padding width with which to surround each tab
+  -- minimum_padding = 1,
 
   -- Sets the maximum buffer name length.
   maximum_length = 30,
@@ -72,9 +85,6 @@ vim.g.bufferline = {
   -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
   -- where X is the buffer number. But only a static string is accepted here.
   -- no_name_title = "Empty",
-
-  -- Enable/disable current/total tabpages indicator (top right corner)
-  tabpages = true,
 }
 
 M.hot = function()

@@ -51,38 +51,42 @@ local buffer_hydra = Hydra {
     {
       'd',
       function()
-        vim.cmd 'BufferClose'
+        vim.cmd 'BufferWipeout'
       end,
-      { desc = 'close' },
     },
     {
       'c',
       function()
         vim.cmd 'BufferClose'
       end,
-      { desc = false },
-    },
-    {
-      'q',
-      function()
-        vim.cmd 'BufferClose'
-      end,
-      { desc = false },
+      { desc = 'close' },
     },
 
+    {
+      'ob',
+      function()
+        vim.cmd 'BufferOrderByBufferNumber'
+      end,
+    },
+    {
+      'ow',
+      function()
+        vim.cmd 'BufferOrderByWindowNumber'
+      end,
+      { desc = 'by bufferNum/windowNum' },
+    },
     {
       'od',
       function()
         vim.cmd 'BufferOrderByDirectory'
       end,
-      { desc = 'by directory' },
     },
     {
       'ol',
       function()
         vim.cmd 'BufferOrderByLanguage'
       end,
-      { desc = 'by language' },
+      { desc = 'by directory/language' },
     },
     { '<Esc>', nil, { exit = true } },
   },
