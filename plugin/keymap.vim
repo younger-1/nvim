@@ -17,6 +17,7 @@ map g<Tab> %
 " normal mode
 nnoremap / ms/
 nnoremap ? ms?
+nnoremap <BS> <C-^>
 
 " Format whole buffer with formatprg without changing cursor position
 nnoremap gq<CR> mzgggqG`z
