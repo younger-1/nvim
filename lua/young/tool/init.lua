@@ -428,13 +428,13 @@ tool.keepview = function(cmd)
 end
 
 function tool.putline(how)
-  local body, type = vim.fn.getreg(vim.v.register), vim.fn.getregtype(vim.v.register)
+  local body, type = fn.getreg(vim.v.register), fn.getregtype(vim.v.register)
   if type == 'V' then
     vim.cmd('normal! "' .. vim.v.register .. how)
   else
-    vim.fn.setreg(vim.v.register, body, 'l')
+    fn.setreg(vim.v.register, body, 'l')
     vim.cmd('normal! "' .. vim.v.register .. how)
-    vim.fn.setreg(vim.v.register, body, type)
+    fn.setreg(vim.v.register, body, type)
   end
 end
 
