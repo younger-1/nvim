@@ -135,7 +135,7 @@ function M.done()
   M.enable_augroups {
     _general = {
       -- NOTE: use ftplugin which could be shared with vim
-      -- { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
+      -- { 'FileType', 'qf,help,man', 'nnoremap <buffer> q <Cmd>close<CR>' },
       -- { "VimLeavePre", "*", "set title set titleold=" },
       {
         'TextYankPost',
@@ -280,10 +280,10 @@ function M.done()
     },
     _lsp = {
       -- { 'CursorHold', '*', 'lua vim.diagnostic.open_float(nil, { source = "always" })' },
-      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <buffer> q <Cmd>close<CR>' },
       { 'FileType', 'lspinfo,lsp-installer,null-ls-info,any-jump', require('young.tool').add_border },
-      { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <silent> <buffer> q :close<CR>' },
-      { 'FileType', 'notify,dap-float', 'nnoremap <silent> <buffer> q :close<CR>' },
+      { 'FileType', 'sagahover,sagarename,lspsagaoutline', 'nnoremap <buffer> q <Cmd>close<CR>' },
+      { 'FileType', 'notify,dap-float', 'nnoremap <buffer> q <Cmd>close<CR>' },
     },
     _startup = {
       { 'VimEnter', '*', require('young.tool').startup_time },

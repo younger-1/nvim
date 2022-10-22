@@ -686,6 +686,13 @@ mods.git = {
     cmd = { 'Git', 'GBrowse' },
   },
   {
+    'rbong/vim-flog',
+    branch = 'v2',
+    requires = 'tpope/vim-fugitive',
+    after = 'vim-fugitive',
+    cmd = { 'Flog', 'Flogsplit' },
+  },
+  {
     'lewis6991/gitsigns.nvim',
     event = 'BufRead',
     config = function()

@@ -150,12 +150,13 @@ M.keys = {
 
     -- [nvim-default]
     -- Y = 'y$',
+
     Q = '@q', -- qq to record, Q to replay
     -- n = 'nzz',
     -- N = 'Nzz',
     ZA = '<cmd>wqa<CR>',
 
-    ['<BS>'] = '<C-^>',
+    -- ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',
     ['<C-c>'] = function()
       vim.cmd 'nohl'

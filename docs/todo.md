@@ -53,6 +53,7 @@
 - [ ] yanky (upstream): allow different notify
 - [ ] yanky (bug): copy `g()` made it to `v:null`
 - [ ] quickfixtextfunc: default not show line and column, apply a key to trigger different quickfixtextfunc
+- [ ] Comment style: @see
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

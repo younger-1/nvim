@@ -250,7 +250,7 @@ end
 --         startify.file_button("~/.config/nvim/init.lua", "i"),
 --         startify.file_button("~/.config/nvim/lua/modules/plugins/init.lua", "l"),
 --         { type = "padding", val = 1 },
---         startify.button("q", "Quit", ":quitall<CR>"),
+--         startify.button("q", "Quit", "<Cmd>quitall<CR>"),
 --     }
 --     startify.opts = {
 --         layout = {

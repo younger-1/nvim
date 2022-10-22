@@ -242,7 +242,7 @@ define_augroups {
     { 'TextYankPost', '*', "lua vim.highlight.on_yank({ higroup = 'Search', timeout = 600 })" },
   },
   _filetype = {
-    { 'FileType', 'qf,help,man', 'nnoremap <silent> <buffer> q :close<CR>' },
-    { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <silent> <buffer> q :close<CR>' },
+    { 'FileType', 'qf,help,man', 'nnoremap <buffer> q <Cmd>close<CR>' },
+    { 'FileType', 'lspinfo,lsp-installer,null-ls-info', 'nnoremap <buffer> q <Cmd>close<CR>' },
   },
 }

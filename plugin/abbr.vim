@@ -19,3 +19,6 @@ cnoreabbrev evm e $VIMRUNTIME/macros/
 cnoreabbrev evt e $VIMRUNTIME/tutor/
 cnoreabbrev evT e $VIMRUNTIME/tools/
 
+cnoreabbrev git <C-r>=(getcmdtype() == ':' && getcmdpos() == 1 ? 'Git' : 'git')<CR>
+cnoreabbrev man <C-r>=(getcmdtype() == ':' && getcmdpos() == 1 ? 'Man' : 'man')<CR>
+
