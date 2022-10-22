@@ -50,6 +50,7 @@
 - [ ] Telescope keymaps: only show <Plug> mappings
 - [ ] Telescope commands: only show buf local commands
 - [ ] Telescope: break dot-repeat
+- [ ] Telescope live_grep: use glob_pattern, type_filter, search_dirs
 - [ ] yanky (upstream): allow different notify
 - [ ] yanky (bug): copy `g()` made it to `v:null`
 - [ ] quickfixtextfunc: default not show line and column, apply a key to trigger different quickfixtextfunc

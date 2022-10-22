@@ -193,4 +193,12 @@ function util.leftpad(str_or_num, padding, char)
   end
 end
 
+function util.get_visual_selection()
+  local x, y = fn.getpos('v')[3], fn.getpos('.')[3]
+  if x > y then
+    x, y = y, x
+  end
+  return fn.getline(fn.line '.'):sub(x, y)
+end
+
 return util
