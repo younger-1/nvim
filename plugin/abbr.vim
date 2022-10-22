@@ -19,6 +19,22 @@ cnoreabbrev evm e $VIMRUNTIME/macros/
 cnoreabbrev evt e $VIMRUNTIME/tutor/
 cnoreabbrev evT e $VIMRUNTIME/tools/
 
-cnoreabbrev git <C-r>=(getcmdtype() == ':' && getcmdpos() == 1 ? 'Git' : 'git')<CR>
-cnoreabbrev man <C-r>=(getcmdtype() == ':' && getcmdpos() == 1 ? 'Man' : 'man')<CR>
+" cnoreabbrev git <C-r>=(getcmdtype() == ':' && getcmdpos() == 1 ? 'Git' : 'git')<CR>
+" cnoreabbrev man <C-r>=(getcmdtype() == ':' && getcmdpos() == 1 ? 'Man' : 'man')<CR>
+
+" Create command alias, @see <https://stackoverflow.com/q/3878692/6064933>
+function! Cabbrev(key, value) abort
+  execute printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
+        \ a:key, 1+len(a:key), <SID>Single_quote(a:value), <SID>Single_quote(a:key))
+endfunction
+
+function! s:Single_quote(str) abort
+  return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
+endfunction
+
+call Cabbrev('git', 'Git')
+call Cabbrev('man', 'Man')
+
+command! -bar -bang -nargs=+ -complete=file Edit call yo#MultiEdit([<f-args>])
+call Cabbrev('edit', 'Edit')
 
