@@ -201,4 +201,26 @@ function util.get_visual_selection()
   return fn.getline(fn.line '.'):sub(x, y)
 end
 
+-- Better than util.get_visual_selection()
+-- 1. gv works as usual.
+-- 2. deal with any unicode.
+function util.get_visual_selection_by_reg(reg)
+  reg = reg or vim.v.register
+  local old_text, type = fn.getreg(reg), fn.getregtype(reg)
+
+  -- NOTE:feedkeys do NOT update register
+  -- gg(1, fn.getreg(reg))
+  -- api.nvim_feedkeys('"' .. reg .. 'y', 'n', false)
+  -- fn.feedkeys('"' .. reg .. 'y', 'n')
+  -- gg(2, fn.getreg(reg))
+
+  vim.cmd('normal! "' .. reg .. 'y')
+  local text = fn.getreg(reg)
+
+  if reg == '"' then
+    fn.setreg(vim.v.register, old_text, type)
+  end
+  return text
+end
+
 return util
