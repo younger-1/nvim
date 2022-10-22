@@ -112,6 +112,16 @@ return {
   },
   b = {
     name = '+buffers',
+    b = {
+      function()
+        if vim.v.count >= 1 then
+          vim.cmd('BufferGoto ' .. vim.v.count)
+        else
+          vim.cmd 'b#'
+        end
+      end,
+      'Goto',
+    },
     ['1'] = { cmd 'BufferGoto 1', 'Goto 1' },
     ['2'] = { cmd 'BufferGoto 2', 'Goto 2' },
     ['3'] = { cmd 'BufferGoto 3', 'Goto 3' },
@@ -145,7 +155,6 @@ return {
     --
     T = { ':TablineCustom ', 'Tabline++' },
     a = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
-    b = { cmd 'b#', 'Previous' },
     u = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
     m = { ':TablineBuffersBind ', 'Tabline bound' },
     r = { ':TablineTabRename ', 'Tabline rename' },
@@ -445,7 +454,7 @@ return {
     u = { cmd 'Telescope pickers', 'Resume pickers' },
     [' '] = {
       function()
-        require('telescope.builtin').resume { cache_index = (vim.v.count == 0) and 1 or vim.v.count }
+        require('telescope.builtin').resume { cache_index = vim.v.count1 }
       end,
       '',
     },

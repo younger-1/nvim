@@ -22,11 +22,7 @@ for key, putAction in pairs {
   -- ['gP'] = '<Plug>(YankyGPutBefore)',
 } do
   vim.keymap.set({ 'n', 'x' }, key, function()
-    local count = vim.v.count
-    if count == 0 then
-      count = ''
-    end
-    vim.fn.feedkeys(count .. xy.util.t(putAction))
+    vim.fn.feedkeys(vim.v.count1 .. xy.util.t(putAction))
     yanky_hydra:activate()
   end)
 end
@@ -46,11 +42,7 @@ for key, putAction in pairs {
   ['=P'] = '<Plug>(YankyPutBeforeFilter)',
 } do
   vim.keymap.set('n', key, function()
-    local count = vim.v.count
-    if count == 0 then
-      count = ''
-    end
-    vim.fn.feedkeys(count .. xy.util.t(putAction))
+    vim.fn.feedkeys(vim.v.count1 .. xy.util.t(putAction))
     yanky_hydra:activate()
   end)
 end
