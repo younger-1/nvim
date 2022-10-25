@@ -50,6 +50,7 @@ local default_options = {
   numberwidth = 4, -- set number column width to 2 {default 4}
   signcolumn = 'yes:2', -- always show the sign column, otherwise it would shift the text each time
   wrap = false,
+  linebreak = true,
   spell = false,
   spelllang = 'en',
   scrolloff = 4, -- is one of my fav
