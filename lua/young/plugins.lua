@@ -318,6 +318,13 @@ mods.change = {
         require('young.mod.dial').done()
       end,
     },
+    {
+      'glepnir/mcc.nvim',
+      event = 'InsertEnter',
+      config = function()
+        require 'young.mod.mcc'
+      end,
+    },
   },
 }
 
