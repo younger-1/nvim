@@ -13,6 +13,7 @@ local compile_path = standard and standard_path
   or join_paths(fn.stdpath 'config', 'lua', 'young', 'packer_compiled.lua')
 local snapshot_name = 'packer-lock.json'
 local snapshot_path = join_paths(fn.stdpath 'config', 'utils', 'snapshot')
+-- local default_snapshot = join_paths(snapshot_path, snapshot_name)
 
 local _, packer = pcall(require, 'packer')
 local first_time = nil

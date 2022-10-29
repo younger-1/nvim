@@ -163,6 +163,21 @@ function _G.rc(module)
   return rr(module)
 end
 
+local lazy_mods = {}
+function _G.rl(mod)
+  if lazy_mods[mod] then
+    return lazy_mods[mod]
+  end
+  lazy_mods[mod] = {}
+  return setmetatable(lazy_mods[mod], {
+    __index = function(_, func)
+      return function(para)
+        require(mod)[func](para)
+      end
+    end,
+  })
+end
+
 -- stylua: ignore start
 _G.tt = tt or function()
   local depth = 0
@@ -209,6 +224,7 @@ function mt:__index(k)
   return self[k]
 end
 
+-- TODO:use module(xy)
 setmetatable(xy, mt)
 
 ----------------------------------------------------------------------------------------------------
