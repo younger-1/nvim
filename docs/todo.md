@@ -56,6 +56,10 @@
 - [ ] quickfixtextfunc: default not show line and column, apply a key to trigger different quickfixtextfunc
 - [ ] Comment style: @see
 - [ ] young.tool.run_with_option: run something with options, after finishing running, set options to origin value
+- [ ] winbar: show file path, remove incline
+- [ ] winbar: show markdown headers
+- [ ] remove xy.map, hook vim.keymap.set to record debug info
+- [ ] reserve legacy code in young.legacy.version module
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
