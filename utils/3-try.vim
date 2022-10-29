@@ -9,6 +9,13 @@ com! -range   -nargs=0 JJ  echo 'l1:' . <line1> 'l2:' . <line2> 'c:' . <count>
 com! -range=% -nargs=0 KK  echo 'l1:' . <line1> 'l2:' . <line2> 'c:' . <count>
 com! -range=4 -nargs=0 LL  echo 'l1:' . <line1> 'l2:' . <line2> 'c:' . <count>
 
+command! -nargs=* -count=3 Hello echo repeat('hi ', <count>) .. <q-args>
+" 6Hello young
+" Hello6 young
+" Hello 6 young
+" Hello 6young
+" Hello6young
+
 " The following example lists user names to a Finger command >
 com! -complete=custom,ListUsers -nargs=1 Finger !finger <args>
 fun! ListUsers(A,L,P)

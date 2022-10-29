@@ -55,6 +55,7 @@
 - [ ] yanky (bug): copy `g()` made it to `v:null`
 - [ ] quickfixtextfunc: default not show line and column, apply a key to trigger different quickfixtextfunc
 - [ ] Comment style: @see
+- [ ] young.tool.run_with_option: run something with options, after finishing running, set options to origin value
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
