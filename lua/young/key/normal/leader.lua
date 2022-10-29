@@ -132,6 +132,20 @@ return {
     ['8'] = { cmd 'BufferGoto 8', 'Goto 8' },
     ['9'] = { cmd 'BufferGoto 9', 'Goto 9' },
     ['0'] = { cmd 'BufferLast', 'Goto last' },
+    --
+    ['<'] = {
+      function()
+        vim.cmd('BufferMovePrevious' .. vim.v.count1)
+      end,
+      'Move previous',
+    },
+    ['>'] = {
+      function()
+        vim.cmd('BufferMoveNext' .. vim.v.count1)
+      end,
+      'Move next',
+    },
+    --
     c = { cmd 'BufferClose', 'Close' },
     d = { cmd 'BufferWipeout', 'Wipeout' },
     h = { cmd 'BufferCloseBuffersLeft', 'Close left' },

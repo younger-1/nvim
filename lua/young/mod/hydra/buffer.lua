@@ -1,4 +1,5 @@
 local Hydra = require 'hydra'
+local cmd = require('young.key').cmd
 
 local buffer_hydra = Hydra {
   name = 'Barbar',
@@ -29,11 +30,25 @@ local buffer_hydra = Hydra {
     {
       'H',
       function()
-        vim.cmd 'BufferMovePrevious'
+        vim.cmd 'BufferScrollLeft 20'
       end,
     },
     {
       'L',
+      function()
+        vim.cmd 'BufferScrollRight 20'
+      end,
+      { desc = 'move' },
+    },
+
+    {
+      '[',
+      function()
+        vim.cmd 'BufferMovePrevious'
+      end,
+    },
+    {
+      ']',
       function()
         vim.cmd 'BufferMoveNext'
       end,
@@ -42,50 +57,36 @@ local buffer_hydra = Hydra {
 
     {
       'p',
-      function()
-        vim.cmd 'BufferPin'
-      end,
+      cmd 'BufferPin',
       { desc = 'pin' },
     },
 
     {
       'd',
-      function()
-        vim.cmd 'BufferWipeout'
-      end,
+      cmd 'BufferWipeout',
     },
     {
       'c',
-      function()
-        vim.cmd 'BufferClose'
-      end,
+      cmd 'BufferClose',
       { desc = 'close' },
     },
 
     {
       'ob',
-      function()
-        vim.cmd 'BufferOrderByBufferNumber'
-      end,
+      cmd 'BufferOrderByBufferNumber',
     },
     {
       'ow',
-      function()
-        vim.cmd 'BufferOrderByWindowNumber'
-      end,
+      cmd 'BufferOrderByWindowNumber',
       { desc = 'by bufferNum/windowNum' },
     },
     {
       'od',
-      function()
-        vim.cmd 'BufferOrderByDirectory'
-      end,
+      cmd 'BufferOrderByDirectory',
     },
     {
       'ol',
-      function()
-        vim.cmd 'BufferOrderByLanguage'
-      end,
+      cmd 'BufferOrderByLanguage',
       { desc = 'by directory/language' },
     },
     { '<Esc>', nil, { exit = true } },
