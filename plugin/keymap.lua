@@ -30,8 +30,8 @@ M.keys = {
     -- ['<C-v>'] = '<C-G>u<C-R><C-O>+',
 
     -- Move current line / block with Alt-j/k ala vscode.
-    ['<A-k>'] = '<C-o>:m .-2<CR>',
-    ['<A-j>'] = '<C-o>:m .+1<CR>',
+    -- ['<A-k>'] = '<C-o>:m .-2<CR>',
+    -- ['<A-j>'] = '<C-o>:m .+1<CR>',
 
     -- Navigation
     -- ['<A-Up>'] = '<C-\\><C-N><C-w>k',
@@ -131,22 +131,22 @@ M.keys = {
     -- ['<A-k>'] = ':m .-2<CR>==',
 
     -- QuickFix
-    ['<C-q>'] = '<Cmd>call QuickFixToggle()<CR>',
-    [']q'] = '<Cmd>cnext<CR>',
-    ['[q'] = '<Cmd>cprev<CR>',
-    [']Q'] = '<Cmd>clast<CR>',
-    ['[Q'] = '<Cmd>cfirst<CR>',
+    -- ['<C-q>'] = '<Cmd>call QuickFixToggle()<CR>',
+    -- [']q'] = '<Cmd>cnext<CR>',
+    -- ['[q'] = '<Cmd>cprev<CR>',
+    -- [']Q'] = '<Cmd>clast<CR>',
+    -- ['[Q'] = '<Cmd>cfirst<CR>',
 
-    ['<C-a>'] = '<Cmd>call LocListToggle()<CR>',
-    [']a'] = '<Cmd>lnext<CR>',
-    ['[a'] = '<Cmd>lprev<CR>',
-    [']A'] = '<Cmd>llast<CR>',
-    ['[A'] = '<Cmd>lfirst<CR>',
+    -- ['<C-a>'] = '<Cmd>call LocListToggle()<CR>',
+    -- [']a'] = '<Cmd>lnext<CR>',
+    -- ['[a'] = '<Cmd>lprev<CR>',
+    -- [']A'] = '<Cmd>llast<CR>',
+    -- ['[A'] = '<Cmd>lfirst<CR>',
 
-    [']t'] = '<Cmd>tnext<CR>',
-    ['[t'] = '<Cmd>tprev<CR>',
-    [']T'] = '<Cmd>tlast<CR>',
-    ['[T'] = '<Cmd>tfirst<CR>',
+    -- [']t'] = '<Cmd>tnext<CR>',
+    -- ['[t'] = '<Cmd>tprev<CR>',
+    -- [']T'] = '<Cmd>tlast<CR>',
+    -- ['[T'] = '<Cmd>tfirst<CR>',
 
     -- [nvim-default]
     -- Y = 'y$',
