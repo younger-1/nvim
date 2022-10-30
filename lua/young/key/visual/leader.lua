@@ -6,6 +6,7 @@ return {
     name = '+git',
     s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk' },
     r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk' },
+    u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk' },
     y = 'Link',
   },
   l = {

@@ -88,6 +88,7 @@ vim.filetype.add {
     ['.*/kitty/.*%.conf'] = 'kitty',
     ['.*/kitty/.*%.session'] = 'kitty-session',
     -- ['.*Dockerfile.*'] = 'dockerfile',
+    -- ['%.env.*'] = 'sh',
     -- ['.*envrc.*'] = 'sh',
     -- ['.*/systemd/user/.*'] = 'systemd',
     -- ['.*/hugo/layouts/.*%.html'] = 'gohtmltmpl',
