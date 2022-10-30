@@ -53,7 +53,7 @@ xnoremap <expr> ]l ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>gv'
 nnoremap [<Space> <Cmd>put! =repeat(nr2char(10), v:count1)<CR><CR>:']+1<CR>
 nnoremap ]<Space> <Cmd>put =repeat(nr2char(10), v:count1)<CR><CR>:'[-1<CR>
 
-nnoremap yo- <Cmd>set cul!<Bar>set cul?<CR>
+nnoremap yo-  <Cmd>set cul!<Bar>set cul?<CR>
 nnoremap yo\| <Cmd>set cuc!<Bar>set cuc?<CR>
 nnoremap yon <Cmd>set nu! \|set nu?<CR>
 nnoremap yor <Cmd>set rnu! \|set rnu?<CR>
@@ -62,6 +62,8 @@ nnoremap yos <Cmd>set spell! \|set spell?<CR>
 nnoremap yow <Cmd>set wrap! \|set wrap?<CR>
 nnoremap yob :set bg=<C-R>=&bg == "dark" ? "light" : "dark"<cr> \|set bg?<cr>
 nnoremap yom :set mouse=<C-R>=&mouse == "" ? "a" : ""<cr> \|set mouse?<cr>
+nnoremap yoc :set cc=<C-R>=&cc == "" ? "81,121" : ""<cr> \|set cc?<cr>
+
 nnoremap yoh <Cmd>set hls! \|set hls?<CR>
 nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
 

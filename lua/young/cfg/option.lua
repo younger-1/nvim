@@ -65,6 +65,13 @@ local default_options = {
   lazyredraw = true,
   path = '.,,',
   virtualedit = 'onemore',
+  wildignore = {
+    '**/node_modules/**',
+    '**/coverage/**',
+    '**/.idea/**',
+    '**/.git/**',
+    '**/.nuxt/**',
+  },
   -- TODO:
   -- fillchars = 'vert:┃',
   -- fillchars = { -- thicker borders between windows
@@ -111,6 +118,10 @@ for k, v in pairs(default_options) do
   vim.opt[k] = v
 end
 
+if xy.has '0.9' then
+  vim.o.splitkeep = 'screen'
+end
+
 vim.opt.shortmess:append 'c'
 
 vim.opt.diffopt:append 'vertical'
@@ -155,7 +166,8 @@ vim.opt.listchars = {
   precedes = '«',
   -- extends = '⟩',
   -- precedes = '⟨',
-  nbsp = '␣',
+  -- nbsp = '␣',
+  nbsp = '⦸',
 }
 
 -- 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
