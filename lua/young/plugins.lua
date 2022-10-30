@@ -410,6 +410,14 @@ mods.neovim = {
 }
 
 mods.BWT = {
+  buffer = {
+    {
+      'ThePrimeagen/harpoon',
+      config = function()
+        require 'young.mod.harpoon'
+      end,
+    },
+  },
   window = {
     {
       'luukvbaal/stabilize.nvim',
