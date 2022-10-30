@@ -318,7 +318,7 @@ return {
     w = { cmd 'Gitsigns toggle_word_diff', 'Word diff' },
     y = 'Link',
     -- y = { 'Link', mode = { 'n', 'x' } },
-    Y = { require('gitlinker').get_repo_url, 'Link(Repo)' },
+    Y = { lua "require('gitlinker').get_repo_url", 'Link(Repo)' },
     O = {
       function()
         require('gitlinker').get_repo_url { action_callback = require('gitlinker.actions').open_in_browser }
