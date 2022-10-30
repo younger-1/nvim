@@ -4,6 +4,7 @@ function M.done()
   tt()
   require 'young.cfg.global'
   require 'young.cfg.option'
+  require 'young.cfg.winbar'
 
   tt()
   require('young.autocmd').done()
