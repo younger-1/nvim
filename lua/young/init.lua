@@ -4,6 +4,13 @@ _G.api = vim.api
 
 _G.fmt = string.format
 
+_G.nvim = setmetatable({}, {
+  __index = function(t, k)
+    t[k] = assert(vim.api['nvim_' .. k], k)
+    return t[k]
+  end,
+})
+
 --[[
 Windows:
   machine = "x86_64",

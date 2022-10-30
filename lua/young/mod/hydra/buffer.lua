@@ -42,13 +42,13 @@ local buffer_hydra = Hydra {
     },
 
     {
-      '[',
+      '<',
       function()
         vim.cmd 'BufferMovePrevious'
       end,
     },
     {
-      ']',
+      '<',
       function()
         vim.cmd 'BufferMoveNext'
       end,
