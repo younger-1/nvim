@@ -23,6 +23,48 @@ nnoremap <BS> <C-^>
 nnoremap gq<CR> mzgggqG`z
 nnoremap gq? <Cmd>set formatprg?<CR>
 
+" Unimpaired style mappings
+nnoremap <C-q> <Cmd>call QuickFixToggle()<CR>
+nnoremap <expr> [q '<Cmd>' . v:count1 . 'cprev<CR>'
+nnoremap <expr> ]q '<Cmd>' . v:count1 . 'cnext<CR>'
+nnoremap [Q <Cmd>cfirst<CR>
+nnoremap ]Q <Cmd>clast<CR>
+
+nnoremap <C-a> <Cmd>call LocListToggle()<CR>
+nnoremap <expr> [a '<Cmd>' . v:count1 . 'lprev<CR>'
+nnoremap <expr> ]a '<Cmd>' . v:count1 . 'lnext<CR>'
+nnoremap [A <Cmd>lfirst<CR>
+nnoremap ]A <Cmd>llast<CR>
+
+nnoremap <expr> [t '<Cmd>' . v:count1 . 'tprev<CR>'
+nnoremap <expr> ]t '<Cmd>' . v:count1 . 'tnext<CR>'
+nnoremap [T <Cmd>tfirst<CR>
+nnoremap ]T <Cmd>tlast<CR>
+
+nnoremap <expr> [b '<Cmd>' . v:count1 . 'bprev<CR>'
+nnoremap <expr> ]b '<Cmd>' . v:count1 . 'bnext<CR>'
+nnoremap [B <Cmd>bfirst<CR>
+nnoremap ]B <Cmd>blast<CR>
+
+nnoremap <expr> [l '<Cmd>.move --' . v:count1 . '<CR>'
+nnoremap <expr> ]l '<Cmd>.move +' . v:count1 . '<CR>'
+xnoremap <expr> [l ':move --' . v:count1 . '<CR>gv'
+xnoremap <expr> ]l ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>gv'
+nnoremap [<Space> <Cmd>put! =repeat(nr2char(10), v:count1)<CR><CR>:']+1<CR>
+nnoremap ]<Space> <Cmd>put =repeat(nr2char(10), v:count1)<CR><CR>:'[-1<CR>
+
+nnoremap yo- <Cmd>set cul!<Bar>set cul?<CR>
+nnoremap yo\| <Cmd>set cuc!<Bar>set cuc?<CR>
+nnoremap yon <Cmd>set nu! \|set nu?<CR>
+nnoremap yor <Cmd>set rnu! \|set rnu?<CR>
+nnoremap yol <Cmd>set list! \|set list?<CR>
+nnoremap yos <Cmd>set spell! \|set spell?<CR>
+nnoremap yow <Cmd>set wrap! \|set wrap?<CR>
+nnoremap yob :set bg=<C-R>=&bg == "dark" ? "light" : "dark"<cr> \|set bg?<cr>
+nnoremap yom :set mouse=<C-R>=&mouse == "" ? "a" : ""<cr> \|set mouse?<cr>
+nnoremap yoh <Cmd>set hls! \|set hls?<CR>
+nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
+
 " visual mode
 vnoremap < <gv
 vnoremap > >gv
@@ -54,9 +96,12 @@ noremap! <C-d> <Del>
 
 " insert mode
 inoremap <C-v> <C-G>u<C-R><C-O>+
-cnoremap <C-v> <C-R>+
+
+inoremap <C-Space> <C-X><C-O>
 
 " command mode
+cnoremap <C-v> <C-R>+
+
 " cnoremap <expr> <C-j> pumvisible() ? "<C-n>" : "<C-j>"
 " cnoremap <expr> <C-k> pumvisible() ? "<C-p>" : "<C-k>"
 cnoremap <expr> <C-j> pumvisible() ? "<C-n>" : "<Down>"

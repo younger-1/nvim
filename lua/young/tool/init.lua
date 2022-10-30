@@ -156,6 +156,7 @@ tool.toggle_mouse = function()
     vim.wo.number = false
     vim.cmd 'silent! IndentBlanklineDisable'
   end
+  vim.cmd 'set mouse?'
 end
 
 tool.toggle_foldcolumn = function()
@@ -164,14 +165,16 @@ tool.toggle_foldcolumn = function()
   else
     vim.o.foldcolumn = '0'
   end
+  vim.cmd 'set foldcolumn?'
 end
 
 tool.toggle_signcolumn = function()
-  if vim.o.sign == 'no' then
-    vim.o.foldcolumn = 'yes:2'
+  if vim.o.signcolumn == 'no' then
+    vim.o.signcolumn = 'yes:2'
   else
-    vim.o.foldcolumn = 'no'
+    vim.o.signcolumn = 'no'
   end
+  vim.cmd 'set signcolumn?'
 end
 
 local ls
