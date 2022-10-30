@@ -146,29 +146,31 @@ function M.done()
       },
       -- { 'FocusLost', '*', 'silent! wa' },
     },
-    _goto_last_position = {
-      {
-        'BufReadPost',
-        '*',
-        [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif]],
-        desc = 'Jump to last cursor position when opening a file',
-      },
-      -- {
-      --   'BufReadPost',
-      --   '*',
-      --   function()
-      --     local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
-      --     if row > 0 and row <= vim.api.nvim_buf_line_count(0) then
-      --       vim.api.nvim_win_set_cursor(0, { row, col })
-      --     end
-      --   end,
-      -- },
-    },
+    -- _goto_last_position = {
+    --   {
+    --     'BufReadPost',
+    --     '*',
+    --     [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif]],
+    --     desc = 'Jump to last cursor position when opening a file',
+    --   },
+    --   -- {
+    --   --   'BufReadPost',
+    --   --   '*',
+    --   --   function()
+    --   --     local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+    --   --     if row > 0 and row <= vim.api.nvim_buf_line_count(0) then
+    --   --       vim.api.nvim_win_set_cursor(0, { row, col })
+    --   --     end
+    --   --   end,
+    --   -- },
+    -- },
     _number = {
-      -- { 'InsertEnter', '*', 'lua require("young.tool").nornu()' },
-      -- { 'InsertLeave', '*', 'lua require("young.tool").rnu()' },
-      { 'InsertEnter', '*', require('young.tool').nornu },
+      { 'InsertEnter', '*', require('young.tool').no_rnu },
       { 'InsertLeave', '*', require('young.tool').rnu },
+    },
+    _cursorline = {
+      { 'InsertEnter', '*', require('young.tool').no_cursorline },
+      { 'InsertLeave', '*', require('young.tool').cursorline },
     },
     _cursor = {
       {
@@ -249,15 +251,15 @@ function M.done()
         'wincmd =',
       },
     },
-    _auto_mkdir = {
-      {
-        'BufWritePre',
-        '*',
-        function(ctx)
-          fn.mkdir(fn.fnamemodify(ctx.file, ':p:h'), 'p')
-        end,
-      },
-    },
+    -- _auto_mkdir = {
+    --   {
+    --     'BufWritePre',
+    --     '*',
+    --     function(ctx)
+    --       fn.mkdir(fn.fnamemodify(ctx.file, ':p:h'), 'p')
+    --     end,
+    --   },
+    -- },
     -- _auto_save = {
     --   { -- <https://github.com/regen100/dotfiles/blob/cd03be29af6d361201184c15297625ebfb575c24/nvim/.config/nvim/lua/user/autosave.lua#L17>
     --     'InsertLeave,BufLeave,TextChanged',
@@ -293,12 +295,14 @@ function M.done()
       -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")' },
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")' },
       -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")' },
+      -- { 'CmdlineEnter', '*', 'lua require("young.tool").startup_event("CmdlineEnter")' },
       --
       -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")', once = true },
       -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")', once = true },
       -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")', once = true },
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")', once = true },
       -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")', once = true },
+      -- { 'CmdlineEnter', '*', 'lua require("young.tool").startup_event("CmdlineEnter")', once = true },
     },
     _config_reload = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },

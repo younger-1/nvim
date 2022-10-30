@@ -58,6 +58,7 @@
 - [ ] young.tool.run_with_option: run something with options, after finishing running, set options to origin value
 - [ ] winbar: show file path, remove incline
 - [ ] winbar: show markdown headers
+- [ ] winbar: info in preview window
 - [ ] remove xy.map, hook vim.keymap.set to record debug info
 - [ ] reserve legacy code in young.legacy.version module
 

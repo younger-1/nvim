@@ -126,19 +126,37 @@ end
 --   Log:info "Successfully updated Lunarvim, please restart"
 -- end
 
-local bar_flag = true
-tool.toggle_tabline = function()
-  if bar_flag then
-    vim.cmd 'BarbarDisable'
-    require('young.mod.tabline').config()
-    xy.map.n { '<S-l>', ':TablineBufferNext<CR>' }
-    xy.map.n { '<S-h>', ':TablineBufferPrevious<CR>' }
+local rnu
+tool.no_rnu = function()
+  rnu = vim.wo.rnu
+  vim.wo.rnu = false
+end
+
+tool.rnu = function()
+  vim.wo.rnu = rnu
+end
+
+local cursorline
+tool.no_cursorline = function()
+  -- if vim.wo.diff then
+  --   return
+  -- end
+  cursorline = vim.wo.cursorline
+  vim.wo.cursorline = false
+end
+
+tool.cursorline = function()
+  vim.wo.cursorline = cursorline
+end
+
+local ve_on = 'all'
+local ve_off = 'onemore'
+tool.visualedit = function()
+  if vim.o.ve == ve_off then
+    vim.o.ve = ve_on
   else
-    vim.cmd 'BarbarEnable'
-    xy.map.n { '<S-l>', ':BufferNext<CR>' }
-    xy.map.n { '<S-h>', ':BufferPrevious<CR>' }
+    vim.o.ve = ve_off
   end
-  bar_flag = not bar_flag
 end
 
 -- Toggle to disable mouse mode and indentlines for easier paste
@@ -269,26 +287,6 @@ tool.chdir = function(force)
   -- end
 end
 
-local rnu
-tool.nornu = function()
-  rnu = vim.o.rnu
-  vim.o.rnu = false
-end
-
-tool.rnu = function()
-  vim.o.rnu = rnu
-end
-
-local ve_on = 'all'
-local ve_off = 'onemore'
-tool.visualedit = function()
-  if vim.o.ve == ve_off then
-    vim.o.ve = ve_on
-  else
-    vim.o.ve = ve_off
-  end
-end
-
 local function hl(name, val)
   api.nvim_set_hl(0, name, val)
 end
@@ -322,6 +320,21 @@ tool.add_border = function()
   --   border = 'rounded',
   -- })
   vim.api.nvim_win_set_config(0, { border = 'rounded' })
+end
+
+local bar_flag = true
+tool.toggle_tabline = function()
+  if bar_flag then
+    vim.cmd 'BarbarDisable'
+    require('young.mod.tabline').config()
+    xy.map.n { '<S-l>', ':TablineBufferNext<CR>' }
+    xy.map.n { '<S-h>', ':TablineBufferPrevious<CR>' }
+  else
+    vim.cmd 'BarbarEnable'
+    xy.map.n { '<S-l>', ':BufferNext<CR>' }
+    xy.map.n { '<S-h>', ':BufferPrevious<CR>' }
+  end
+  bar_flag = not bar_flag
 end
 
 tool.toggle_indent_style = function()

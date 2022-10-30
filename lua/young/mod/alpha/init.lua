@@ -290,12 +290,12 @@ __      ___                 _    _____ _             _ _          _____         
 
   -- Set menu
   dashboard.section.buttons.val = {
-    dashboard.button('r', '  Recent files', ':Telescope oldfiles<CR>'),
-    dashboard.button('f', '  Find files', ':Telescope find_files<CR>'),
-    dashboard.button('p', '  Projects', ':Telescope projects<CR>'),
-    dashboard.button('l', '  Current session', ":lua require('persistence').load()<CR>"),
-    dashboard.button('L', '  Last session', ":lua require('persistence').load({last = true})<CR>"),
-    dashboard.button('q', '  Quit', ':qa<CR>'),
+    dashboard.button('r', '  Recent files', '<Cmd>Telescope oldfiles<CR>'),
+    dashboard.button('f', '  Find files', '<Cmd>Telescope find_files<CR>'),
+    dashboard.button('p', '  Projects', '<Cmd>Telescope projects<CR>'),
+    dashboard.button('l', '  Current session', "<Cmd>lua require('persistence').load()<CR>"),
+    dashboard.button('L', '  Last session', "<Cmd>lua require('persistence').load({last = true})<CR>"),
+    dashboard.button('q', '  Quit', '<Cmd>qa<CR>'),
   }
 
   alpha.setup(dashboard.config)

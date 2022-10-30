@@ -83,13 +83,13 @@ local function setup_winbar(client, bufnr)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
+  callback = function(ctx)
     -- BUG:not null-ls, may be packer or neovim upstream
-    if not args.data then
+    if not ctx.data then
       return
     end
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(ctx.data.client_id)
+    local bufnr = ctx.buf
     setup_winbar(client, bufnr)
   end,
 })
