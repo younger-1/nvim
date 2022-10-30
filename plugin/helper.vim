@@ -3,8 +3,6 @@ if get(g:, 'loaded_young_helper', 0)
 endif
 let g:loaded_young_helper = 1
 
-let s:dir = expand('<sfile>:h')
-
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'young.tool'.rr_complete RR lua require'young.tool'.rr(<f-args>)
 
@@ -40,6 +38,17 @@ command! -nargs=+ -complete=command Capture    call yo#redir#Messages(<q-args>, 
 
 " Open a scratch buffer, reuse for output of `source` current file
 command! -nargs=0 -range=% Source call yo#redir#Source('<line1>,<line2>source', 'vnew')
+
+command! -nargs=1 -complete=command Scratch4 call yo#scratch#open(<q-args>, <q-mods>)
+command! -nargs=? Scratch4Marks <mods> Scratch4 marks <args>
+command! -nargs=0 Scratch4Messages <mods> Scratch4 messages
+command! -nargs=? Scratch4Registers <mods> Scratch4 registers <args>
+command! -nargs=? Scratch4Display <mods> Scratch4 display <args>
+command! -nargs=? -complete=highlight Scratch4Highlight <mods> Scratch4 highlight <args>
+command! -nargs=0 Scratch4Jumps <mods> Scratch4 jumps
+command! -nargs=0 Scratch4Changes <mods> Scratch4 changes
+command! -nargs=0 Scratch4Digraphs <mods> Scratch4 digraphs
+command! -nargs=0 Scratch4Scriptnames <mods> Scratch4 scriptnames
 
 " Count for char in current buffer.
 command! -nargs=0 Wc %s/.//nge
