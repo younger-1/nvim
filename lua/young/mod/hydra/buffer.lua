@@ -38,7 +38,7 @@ local buffer_hydra = Hydra {
       function()
         vim.cmd 'BufferScrollRight 20'
       end,
-      { desc = 'move' },
+      { desc = 'scroll' },
     },
 
     {
@@ -48,7 +48,7 @@ local buffer_hydra = Hydra {
       end,
     },
     {
-      '<',
+      '>',
       function()
         vim.cmd 'BufferMoveNext'
       end,
@@ -99,6 +99,6 @@ local function choose_buffer()
   end
 end
 
-xy.map.n { 'gb', choose_buffer, '[Hydra] Choose buffer' }
+xy.map.n { '<leader>b<space>', choose_buffer, '[Hydra] Choose buffer' }
 
 return choose_buffer
