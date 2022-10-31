@@ -10,6 +10,7 @@ map('n', '<leader>oa', mark.add_file)
 map('n', '<leader>oo', function()
   if vim.v.count == 0 then
     ui.toggle_quick_menu()
+    return
   end
   ui.nav_file(vim.v.count)
 end)
