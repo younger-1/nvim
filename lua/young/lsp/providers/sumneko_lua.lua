@@ -24,6 +24,17 @@ return {
   -- root_dir = function()
   --   return vim.fn.getcwd()
   -- end,
+  on_new_config = function(new_config, new_root_dir)
+    -- if fn.finddir('lua', '**') == '' then
+    -- if not next(vim.fs.find('lua', { type = 'directory', path = new_root_dir })) then
+    if vim.fn.isdirectory(new_root_dir .. '/lua') == 0 then
+      return
+    end
+    new_config.settings.Lua.runtime.path = {
+      'lua/?.lua',
+      'lua/?/init.lua',
+    }
+  end,
   on_attach = function(client, bufnr)
     require('young.lsp.common').on_attach(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false -- Use stylua instead
@@ -32,6 +43,7 @@ return {
     Lua = {
       runtime = {
         version = 'LuaJIT',
+        -- NOTE: set only when 1)root_dir is a neovim plugin, or 2)root_dir contains ./lua/
         -- path = {
         --   'lua/?.lua',
         --   'lua/?/init.lua',
