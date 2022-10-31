@@ -110,6 +110,28 @@ insert_nav = {
 `nvim-tree`
 
 - renamed-icon do not appear in the renamed-file
+- press ? in tree, cause error:
+
+```
+E5108: Error executing lua: ...packer/opt/nvim-tree.lua/lua/nvim-tree/renderer/help.lua:14: attempt to index local 'cb' (a function value)
+stack traceback:
+        ...packer/opt/nvim-tree.lua/lua/nvim-tree/renderer/help.lua:14: in function 'compute_lines'
+        ...packer/opt/nvim-tree.lua/lua/nvim-tree/renderer/init.lua:65: in function 'draw'
+        ...ree.lua/lua/nvim-tree/actions/tree-modifiers/toggles.lua:25: in function 'help'
+        ...ker/opt/nvim-tree.lua/lua/nvim-tree/actions/dispatch.lua:54: in function 'handle_action_on_help_ui'
+        ...ker/opt/nvim-tree.lua/lua/nvim-tree/actions/dispatch.lua:116: in function 'dispatch'
+        .../packer/opt/nvim-tree.lua/lua/nvim-tree/actions/init.lua:260: in function <.../packer/opt/nvim-tree.lua/lua/nvim-tree/actions/init.lua:259>
+
+Error executing Lua callback: ...packer/opt/nvim-tree.lua/lua/nvim-tree/renderer/help.lua:14: attempt to index local 'cb' (a function value)
+stack traceback:
+        ...packer/opt/nvim-tree.lua/lua/nvim-tree/renderer/help.lua:14: in function 'compute_lines'
+        ...packer/opt/nvim-tree.lua/lua/nvim-tree/renderer/init.lua:65: in function 'draw'
+        ...site/pack/packer/opt/nvim-tree.lua/lua/nvim-tree/lib.lua:80: in function 'open_view_and_draw'
+        ...site/pack/packer/opt/nvim-tree.lua/lua/nvim-tree/lib.lua:126: in function 'open'
+        ...vim/site/pack/packer/opt/nvim-tree.lua/lua/nvim-tree.lua:95: in function 'open'
+        ...vim/site/pack/packer/opt/nvim-tree.lua/lua/nvim-tree.lua:79: in function 'toggle'
+        ...vim/site/pack/packer/opt/nvim-tree.lua/lua/nvim-tree.lua:300: in function <...vim/site/pack/packer/opt/nvim-tree.lua/lua/nvim-tree.lua:299>
+```
 
 `git-conflict`
 
@@ -120,6 +142,22 @@ dictionary
 ```sh
 curl -fLo ~/.config/nvim/spell/10k.txt --create-dirs https://github.com/iamcco/coc-zi/raw/master/words/10k.txt
 ```
+
+`harpoon`
+
+- `toggle_quick_menu` follow cwd
+- config to allow manually trigger remember marks (col&line of files), not at every `BufLeave, VimLeave`
+- obey col&line when open marks with `nav_file` or `toggle_quick_menu`
+
+```lua
+vim.api.nvim_create_autocmd({ "BufLeave, VimLeave" }, {
+    callback = function()
+        require("harpoon.mark").store_offset()
+    end,
+})
+```
+
+
 ## Config
 
 ```
