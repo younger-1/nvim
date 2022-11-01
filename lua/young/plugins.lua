@@ -1135,7 +1135,7 @@ mods.LSP = {
     },
   },
   lua = {
-    { 'folke/lua-dev.nvim', opt = true },
+    { 'folke/neodev.nvim', module = 'neodev' },
     -- { 'ii14/emmylua-nvim', opt = true },
     {
       'nanotee/luv-vimdocs',

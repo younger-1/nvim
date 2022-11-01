@@ -12,6 +12,9 @@ colorscheme
 github
 vim
 nvim
+neovim
 dir
 LSP
 cmdline
+lua
+init
