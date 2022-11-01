@@ -1,8 +1,10 @@
 " map mode
+noremap ' `
+
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" for overrided by normal mode
+" can be overrided in normal mode
 noremap gh ^
 noremap gl g_
 

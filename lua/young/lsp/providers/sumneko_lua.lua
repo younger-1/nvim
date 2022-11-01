@@ -34,6 +34,17 @@ return {
       'lua/?.lua',
       'lua/?/init.lua',
     }
+    new_config.settings.Lua.workspace.library = {
+      -- Neovim:
+      [vim.fn.expand '$VIMRUNTIME'] = true,
+      [require('neodev.config').types()] = true,
+      -- [packer_plugins['neodev.nvim'].path .. '/types/' .. (vim.version().prerelease and 'nightly' or 'stable')] = true,
+      -- [packer_plugins['emmylua-nvim'].path] = true,
+      -- Plugins:
+      -- [packer_plugins['plenary.nvim'].path] = true,
+      -- [packer_plugins['telescope.nvim'].path] = true,
+      -- [packer_plugins['nvim-lspconfig'].path] = true,
+    }
   end,
   on_attach = function(client, bufnr)
     require('young.lsp.common').on_attach(client, bufnr)
@@ -53,22 +64,12 @@ return {
           rc = 'require',
         },
       },
-      -- workspace = {
-      --   library = vim.api.nvim_get_runtime_file('', true),
-      --   checkThirdParty = false,
-      -- },
       workspace = {
-        library = {
-          [vim.fn.expand '$VIMRUNTIME'] = true,
-          -- [require('lua-dev.config').types()] = true,
-          [packer_plugins['lua-dev.nvim'].path] = true,
-          -- [packer_plugins['emmylua-nvim'].path] = true,
-          [packer_plugins['plenary.nvim'].path] = true,
-          -- [packer_plugins['telescope.nvim'].path] = true,
-          -- [packer_plugins['nvim-lspconfig'].path] = true,
-        },
+        -- library = vim.api.nvim_get_runtime_file('', true),
+        library = {},
         maxPreload = 5000,
         preloadFileSize = 10000,
+        -- checkThirdParty = false,
       },
       diagnostics = {
         globals = {
