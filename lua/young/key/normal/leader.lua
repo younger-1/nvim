@@ -597,6 +597,7 @@ return {
       f = { require('young.autocmd').toggle_format_on_save, 'Format on save' },
       p = { require('young.autocmd').toggle_print_ascii, 'Print ASCII' },
       -- r = { require('young.autocmd').toggle_auto_chdir, 'Auto chdir' },
+      c = { require('young.autocmd').toggle_auto_cursorline, 'Cursorline' },
     },
     b = 'Biscuits',
     m = { cmd 'MinimapToggle', 'Minimap' },

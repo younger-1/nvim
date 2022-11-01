@@ -317,7 +317,11 @@ xy.autogroup = function(group, autocmds, reset)
 
   for _, acmd in ipairs(autocmds) do
     local is_callback = type(acmd[3]) == 'function'
-    vim.api.nvim_create_autocmd(acmd[1], {
+    local events = acmd[1]
+    if type(events) == 'string' then
+      events = vim.split(events, ',')
+    end
+    vim.api.nvim_create_autocmd(events, {
       group = group,
       pattern = acmd[2],
       callback = is_callback and acmd[3] or nil,
