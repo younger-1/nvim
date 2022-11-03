@@ -109,6 +109,7 @@ return {
       S = { cmd 'SessionManager save_current_session', 'Save session' },
     },
     u = { xy.tool.open_url, 'Open github url' },
+    v = { cmd 'OpenInVSCode', 'Open in vscode' },
   },
   b = {
     name = '+buffers',
