@@ -62,6 +62,7 @@
 - [ ] remove xy.map, hook vim.keymap.set to record debug info
 - [ ] reserve legacy code in young.legacy.version module
 - [ ] neovim: winbar: 1)echo winheight(0), 2)resize
+- [ ] neovim: cursorline: local to buffer, not local to window
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
