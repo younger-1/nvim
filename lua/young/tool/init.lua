@@ -136,17 +136,16 @@ tool.rnu = function()
   vim.wo.rnu = rnu
 end
 
-local cursorline
 tool.no_cursorline = function()
   -- if vim.wo.diff then
   --   return
   -- end
-  cursorline = vim.wo.cursorline
+  vim.w._cursorline = vim.wo.cursorline
   vim.wo.cursorline = false
 end
 
 tool.cursorline = function()
-  vim.wo.cursorline = cursorline
+  vim.wo.cursorline = vim.w._cursorline
 end
 
 local ve_on = 'all'

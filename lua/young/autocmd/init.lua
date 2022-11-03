@@ -168,10 +168,10 @@ function M.done()
       { 'InsertEnter', '*', require('young.tool').no_rnu },
       { 'InsertLeave', '*', require('young.tool').rnu },
     },
-    -- _cursorline = {
-    --   { 'InsertEnter', '*', require('young.tool').no_cursorline },
-    --   { 'InsertLeave', '*', require('young.tool').cursorline },
-    -- },
+    _cursorline = {
+      { 'InsertEnter,WinLeave,FocusLost', '*', require('young.tool').no_cursorline },
+      { 'InsertLeave,WinEnter,FocusGained', '*', require('young.tool').cursorline },
+    },
     _cursor = {
       {
         'VimEnter,VimResume',
@@ -390,23 +390,23 @@ function M.done()
     -- autocmd InsertLeave * setlocal cursorline
     -- autocmd WinLeave,FocusLost * if !&diff | setlocal nocursorline | endif
     -- autocmd InsertLeave,WinEnter,FocusGained * let &l:cursorline = mode() !=# 'i'
-    auto_cursorline = {
-      {
-        'InsertEnter',
-        '*',
-        'setlocal nocursorline',
-      },
-      {
-        'WinLeave,FocusLost',
-        '*',
-        'if !&diff | setlocal nocursorline | endif',
-      },
-      {
-        'InsertLeave,WinEnter,FocusGained',
-        '*',
-        'set cursorline',
-      },
-    },
+    -- auto_cursorline = {
+    --   {
+    --     'InsertEnter',
+    --     '*',
+    --     'setlocal nocursorline',
+    --   },
+    --   {
+    --     'WinLeave,FocusLost',
+    --     '*',
+    --     'if !&diff | setlocal nocursorline | endif',
+    --   },
+    --   {
+    --     'InsertLeave,WinEnter,FocusGained',
+    --     '*',
+    --     'set cursorline',
+    --   },
+    -- },
   }, true)
 
   -- require 'young.autocmd.core'
