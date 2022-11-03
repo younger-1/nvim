@@ -1,5 +1,5 @@
 " map mode
-noremap ' `
+" noremap ' `
 
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')

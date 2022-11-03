@@ -417,6 +417,13 @@ mods.BWT = {
         require 'young.mod.harpoon'
       end,
     },
+    {
+      'chentoast/marks.nvim',
+      event = 'BufReadPost',
+      config = function()
+        require 'young.mod.marks'
+      end,
+    },
   },
   window = {
     {
