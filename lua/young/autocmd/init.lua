@@ -242,15 +242,14 @@ function M.done()
       --   [[if getcmdwintype() == "" | checktime | endif]],
       -- },
     },
-    _auto_resize = {
-      -- will cause split windows to be resized evenly if main window is resized
-      {
-        'VimResized',
-        '*',
-        -- 'tabdo wincmd =',
-        'wincmd =',
-      },
-    },
+    -- _auto_resize = {
+    --   { -- will cause split windows to be resized evenly if main window is resized
+    --     'VimResized',
+    --     '*',
+    --     -- 'tabdo wincmd =',
+    --     'wincmd =',
+    --   },
+    -- },
     -- _auto_mkdir = {
     --   {
     --     'BufWritePre',
