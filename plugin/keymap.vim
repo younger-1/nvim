@@ -1,8 +1,8 @@
 " map mode
-" noremap ' `
-
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" noremap ' `
 
 " can be overrided in normal mode
 noremap gh ^
@@ -13,6 +13,9 @@ noremap L  $
 
 noremap gH H
 noremap gL L
+
+noremap <C-i> <C-i>
+map <Tab> %
 
 map g<Tab> %
 
