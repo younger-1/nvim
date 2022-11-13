@@ -79,6 +79,7 @@ return {
         },
         disable = {
           'missing-parameter',
+          'cast-local-type',
         },
       },
       -- format = {
