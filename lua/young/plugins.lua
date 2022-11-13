@@ -705,7 +705,7 @@ mods.telescope = {
 mods.git = {
   {
     'tpope/vim-fugitive',
-    cmd = { 'Git', 'GBrowse' },
+    cmd = { 'Git', 'G', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gdiff' },
   },
   {
     'rbong/vim-flog',

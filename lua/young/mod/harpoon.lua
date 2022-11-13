@@ -4,7 +4,8 @@ local term = require 'harpoon.term'
 
 local map = vim.keymap.set
 
-map('n', '<leader>oa', mark.add_file)
+-- map('n', '<leader>oa', mark.add_file)
+map('n', '<leader>oa', mark.toggle_file)
 
 -- map('n', '<leader>oo', ui.toggle_quick_menu)
 map('n', '<leader>oo', function()
