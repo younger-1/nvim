@@ -125,6 +125,9 @@ end
 vim.opt.shortmess:append 'c'
 
 vim.opt.diffopt:append 'vertical'
+if xy.has '0.9' then
+  vim.opt.diffopt:append 'linematch:60'
+end
 
 -- vim.cmd 'set whichwrap+=<,>,[,],h,l'
 vim.opt.whichwrap:append '<,>,[,],h,l'
