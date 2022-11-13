@@ -57,7 +57,7 @@ local normal = {
   -- ["<C-f>"] = {},
   -- ["<C-b>"] = {},
   -- TODO: display buf&&git info
-  ["<C-g>"] = { require('young.tool.file_info').setup, 'Info'},
+  ['<C-g>'] = { require('young.tool.file_info').setup, 'Info' },
   ['<C-_>'] = { '<Cmd>Man<cr>', 'Man' },
   ['<C-x>'] = { cmd 'TroubleToggle', 'Open' },
   ['<C-w>'] = {
@@ -157,7 +157,11 @@ local normal = {
   --   },
   -- },
   z = {
-    ['<CR>'] = { '<cmd>TSContextToggle<cr>', 'Toggle context' },
+    ['<CR>'] = { cmd 'TSContextToggle', 'Toggle context' },
+    [' '] = {
+      require('young.tool').blink_cursor,
+      'Blink cursor',
+    },
   },
 }
 

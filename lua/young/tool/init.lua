@@ -16,7 +16,7 @@ local unload_module = function(found, module_name, starts_with_only)
     end
   end
 
-  -- Handle impatient.nvim automatically.
+  -- TODO: Handle impatient.nvim automatically.
   local luacache = (_G.__luacache or {}).cache
 
   print 'Start unload:'
@@ -33,38 +33,32 @@ local unload_module = function(found, module_name, starts_with_only)
   end
 end
 
-tool.reload_file = function(pack)
-  local luacache = (_G.__luacache or {}).cache
-  package.loaded[pack] = nil
-  if luacache then
-    luacache[pack] = nil
-  end
-end
-
 -- For manual reload
 tool.rr = function(...)
   local mods = { ... }
 
   -- Reload the current buffer
   if #mods == 0 then
-    local bufpath = vim.api.nvim_buf_get_name(0)
-    -- local bufpath = "/home/.local/lua/start/packer.nvim/lua/packer/clean.lua"
-    bufpath = vim.split(bufpath, '/') -- { "", "home", ".local", "lua", "start", "packer.nvim", "lua", "packer", "clean.lua" }
-    local pack = { vim.split(bufpath[#bufpath], '.')[1] } -- "clean"
+    local bufpath = vim.api.nvim_buf_get_name(0) -- "/home/young/.config/nvim/lua/young/tool/init.lua"
+    bufpath = vim.split(bufpath, '/') -- { "", "home", "young", ".config", "nvim", "lua", "young", "tool", "init.lua" }
+    local modpath = { vim.split(bufpath[#bufpath], '.', { plain = true })[1] } -- { "init" }
+    if modpath[1] == 'init' then
+      modpath = {}
+    end
+
     for i = #bufpath - 1, 1, -1 do
-      if i == 1 and bufpath[i] ~= 'lua' then
+      if i == 1 then
         print('Invalid lua file path: ' .. vim.api.nvim_buf_get_name(0))
         return
       end
       if bufpath[i] == 'lua' then
         break
       end
-      table.insert(pack, 1, bufpath[i])
+      table.insert(modpath, 1, bufpath[i])
     end
-    pack = table.concat(pack, '.')
-    tool.reload_file(pack)
-    print('Reload: ' .. pack)
-    -- require('util').reload_lv_config()
+    modpath = table.concat(modpath, '.')
+    package.loaded[modpath] = nil
+    print('Reload: ' .. modpath)
     return
   end
 
@@ -451,6 +445,28 @@ function tool.putline(how)
     vim.cmd('normal! "' .. vim.v.register .. how)
     fn.setreg(vim.v.register, body, type)
   end
+end
+
+function tool.blink_cursor()
+  local cnt = 0
+  local blink_times = 6
+  local timer = uv.new_timer()
+
+  timer:start(
+    0,
+    100,
+    vim.schedule_wrap(function()
+      vim.cmd [[
+        set cursorcolumn!
+        set cursorline!
+      ]]
+
+      cnt = cnt + 1
+      if cnt == blink_times then
+        timer:stop()
+      end
+    end)
+  )
 end
 
 return tool
