@@ -57,7 +57,7 @@ local default_options = {
   sidescrolloff = 8,
   confirm = true,
   breakindent = true,
-  breakindentopt = { 'sbr', 'shift:4' },
+  breakindentopt = { 'sbr', 'shift:2' },
   showbreak = '↪ ',
   qftf = '{info -> v:lua.require("young.cfg.quickfix").quickfixtextfunc(info)}',
   synmaxcol = 400,
@@ -103,7 +103,6 @@ local default_options = {
   -- },
   -- <https://github.com/santigo-zero/csjneovim/blob/master/user/init.lua>
   fillchars = {
-    diff = '╱',
     horiz = '─',
     horizup = '⯊',
     horizdown = '⯋',
@@ -111,6 +110,9 @@ local default_options = {
     vertleft = '◖',
     vertright = '◗',
     verthoriz = '●',
+    diff = '╱',
+    msgsep = '=',
+    eob = '~',
   },
 }
 
