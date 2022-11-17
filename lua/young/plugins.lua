@@ -85,7 +85,9 @@ mods.theme = {
     -- },
     -- {
     --   'Djancyp/custom-theme.nvim',
+    --   -- 'younger-1/custom-theme.nvim',
     --   requires = 'nvim-lua/plenary.nvim',
+    --   cmd = 'CustomTheme',
     --   config = function()
     --     require('custom-theme').setup()
     --   end,

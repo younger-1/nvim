@@ -72,6 +72,10 @@ nnoremap yoc :set cc=<C-R>=&cc == "" ? "81,121" : ""<cr> \|set cc?<cr>
 nnoremap yoh <Cmd>set hls! \|set hls?<CR>
 nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
 
+" @see <https://vim.fandom.com/wiki/Selecting_your_pasted_text>
+"      <https://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text>
+nnoremap <expr> g<c-v> '`[' . getregtype()[0] . '`]'
+
 " visual mode
 vnoremap < <gv
 vnoremap > >gv
