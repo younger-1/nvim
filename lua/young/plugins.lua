@@ -523,6 +523,12 @@ mods.file = {
         require 'young.mod.persistence'
       end,
     },
+    {
+      'MunifTanjim/exrc.nvim',
+      config = function()
+        require 'young.mod.exrc'
+      end,
+    },
   },
   dir = {
     -- {
