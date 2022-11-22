@@ -65,6 +65,7 @@
 - [ ] neovim: cursorline: local to buffer, not local to window
 - [ ] gcp: comment pasted text
 - [ ] gui: [md+hover] image/math viewer, html/link viewer (like vscode's github-issue-preview, enable viewer for url match regex pattern)
+- [ ] vim: / to search in message, very useful!
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
