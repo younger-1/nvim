@@ -69,6 +69,30 @@ M.once = function()
   -- end)
 end
 
+-- <https://github.com/meuter/nvim/blob/06fa543799f6e4f2cc4945abc093bf2d05ace3a3/lua/user/plugins.lua>
+-- use = wrap_use_with_default_config(use, load_config_from_file)
+-- local function wrap_use_with_default_config(use, config)
+--   return function(plugin_spec)
+--     if type(plugin_spec) == 'string' then
+--       plugin_spec = { plugin_spec }
+--     end
+--     plugin_spec.config = plugin_spec.config or config
+--     use(plugin_spec)
+--   end
+-- end
+-- local function load_config_from_file(plugin_name)
+--   local package_name = plugin_name:gsub('%.', '-')
+--   local config_file = vim.fn.stdpath 'config' .. '/lua/user/configs/' .. package_name .. '.lua'
+--   if vim.fn.filereadable(config_file) == 1 then
+--     require('young.mod.' .. plugin_name:gsub('%.', '-'))
+--   end
+-- end
+
+-- <https://github.com/gennaro-tedesco/dotfiles/blob/1316b4a803eca440d9996492293ecfd40b1b9325/nvim/init.vim>
+-- for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath 'config' .. '/lua/young/mod', [[v:val =~ '\.lua$']])) do
+--   require('young.mod.' .. file:gsub('%.lua$', ''))
+-- end
+
 M.recompile = function()
   rc 'young.plugins'
 
