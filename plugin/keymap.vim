@@ -84,8 +84,8 @@ vnoremap X "+x
 vnoremap Y "+y
 
 " Swap p and P in visual mode
-vnoremap p P
-vnoremap P p
+" vnoremap p P
+" vnoremap P p
 
 " operator mode
 

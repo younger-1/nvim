@@ -223,4 +223,50 @@ function util.get_visual_selection_by_reg(reg)
   return text
 end
 
+-- TODO: verb {keymap,command,autocmd,function,abbr,option,highlight}
+function util.get_definition(tbl)
+  local str = tbl.type
+  if tbl.type == 'map' then
+    str = (tbl.para or '') .. str
+    -- tbl.name = tbl.name:gsub('<Leader>', '<Space>')
+    tbl.name = tbl.name:gsub('<[Ll]eader>', fn.keytrans(vim.g.mapleader))
+  elseif tbl.type == 'autocmd' then
+    str = str .. ' ' .. (tbl.para or '')
+  end
+
+  str = str .. ' ' .. (tbl.name or '')
+  local output = vim.split(vim.trim(fn.execute(str)), '\n')
+  pp(str)
+  pp(output)
+  --[[
+:vmap <leader>sg
+x  <Space>     * <Cmd>lua require("which-key").show(" ", {mode = "v", auto = true})<CR>
+x  <Space>sg   * <Lua 825: ~/.config/nvim/lua/young/key/visual/leader.lua:36>
+                 Grep
+
+:command RegDiff
+    Name              Args Address Complete    Definition
+|   RegDiff           *                        <Lua 54: ~/.config/nvim/plugin/command.lua:3>
+
+:autocmd _number
+--- Autocommands ---
+_number  InsertEnter
+    *         <Lua 24: ~/.config/nvim/lua/young/tool/init.lua:124>
+_number  InsertLeave
+    *         <Lua 25: ~/.config/nvim/lua/young/tool/init.lua:129>
+  ]]
+  for _, item in ipairs(output) do
+    -- local idx = item:find(vim.pesc(tbl.name))
+    local start = item:find(tbl.name, 1, true)
+    if start then
+      local path, line = item:match '<Lua %d+: (.+):(%d+)>'
+      return path, line
+    end
+  end
+end
+
+-- xy.util.get_definition { type = 'map', para = 'v', name = '<Leader>sg' }
+-- xy.util.get_definition { type = 'command', name = 'RegDiff' }
+-- xy.util.get_definition { type = 'autocmd', para = '_auto_reload', name = 'FileChangedShellPost' }
+
 return util
