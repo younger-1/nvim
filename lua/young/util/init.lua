@@ -223,7 +223,7 @@ function util.get_visual_selection_by_reg(reg)
   return text
 end
 
--- TODO: verb {keymap,command,autocmd,function,abbr,option,highlight}
+-- TODO: verb {keymap,command,autocmd,option,function,abbr,highlight}
 function util.get_def_locations(tbl)
   local str = tbl.type
   if tbl.type == 'map' then
@@ -235,15 +235,27 @@ function util.get_def_locations(tbl)
   end
 
   str = str .. ' ' .. (tbl.name or '')
-  local output = vim.trim(fn.execute(str))
-  pp(str)
-  pp(output)
+  if tbl.type == 'set' then
+    str = str .. '?'
+  end
+
+  local output = fn.execute(str)
+  -- pp(str)
+  -- pp(output)
 
   local ret = {}
   -- local idx = output:find(vim.pesc(tbl.name))
   -- local start = output:find(tbl.name, 1, true)
   for path, line in output:gmatch '<Lua %d+: (%S+):(%d+)>' do
     table.insert(ret, { path, line })
+  end
+
+  if next(ret) == nil then
+    str = 'verbose ' .. str
+    output = fn.execute(str)
+    for path, line in output:gmatch 'Last set from (%S+) line (%d+)' do
+      table.insert(ret, { path, line })
+    end
   end
   return ret
 end
@@ -253,6 +265,12 @@ end
 -- xy.util.get_def_locations { type = 'autocmd', para = '_number' }
 -- xy.util.get_def_locations { type = 'autocmd', name = 'BufDelete' }
 -- xy.util.get_def_locations { type = 'map', name = 'j' }
+-- xy.util.get_def_locations { type = 'command', name = 'RR' }
+-- xy.util.get_def_locations { type = 'autocmd', para = 'init' }
+-- xy.util.get_def_locations { type = 'set', name = 'grepprg' }
+-- xy.util.get_def_locations { type = 'set', name = 'scrolloff' }
+-- xy.util.get_def_locations { type = 'function', name = 'QuickFixToggle' }
+-- xy.util.get_def_locations { type = 'highlight', name = 'helpURL' }
 
 --[[
 :vmap <leader>sg
@@ -274,6 +292,19 @@ _number  InsertLeave
 :verb map j
    j           * (v:count == 0 ? 'gj' : 'j')
         Last set from ~/.config/nvim/plugin/keymap.vim line 2
+
+:verb set grepprg
+  grepprg=rg --vimgrep --smart-case
+        Last set from ~/.config/nvim/plugin/option.vim line 6
+
+:verb hi helpURL
+helpURL        xxx links to String
+        Last set from /usr/share/nvim/runtime/syntax/help.vim line 209
+
+:verb hi IlluminatedWordRead
+IlluminatedWordRead xxx gui=underline
+                   links to LspReferenceRead
+        Last set from Lua
 ]]
 
 return util
