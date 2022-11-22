@@ -4,8 +4,8 @@ local previewers = require 'telescope.previewers'
 local sorters = require 'telescope.sorters'
 local actions = require 'telescope.actions'
 local action_layout = require 'telescope.actions.layout'
-local builtin = require 'telescope.builtin'
-local themes = require 'telescope.themes'
+-- local builtin = require 'telescope.builtin'
+-- local themes = require 'telescope.themes'
 
 local view = require 'young.mod.telescope.view'
 
@@ -160,7 +160,9 @@ M.cfg = {
         ['<A-m>'] = action_layout.toggle_mirror,
 
         ['<C-g>'] = action_layout.cycle_layout_next,
+
         ['<C-y>'] = require('young.mod.telescope.actions').print_entry,
+        ['<C-o>'] = require('young.mod.telescope.actions').open_def_locations,
       },
       n = {
         ['<C-n>'] = actions.cycle_history_next,
