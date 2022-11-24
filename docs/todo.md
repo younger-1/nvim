@@ -66,6 +66,7 @@
 - [ ] gcp: comment pasted text
 - [ ] gui: [md+hover] image/math viewer, html/link viewer (like vscode's github-issue-preview, enable viewer for url match regex pattern)
 - [ ] vim: / to search in message, very useful!
+- [ ] Telescope: from child picker go back to parent picker. e.g. Ctrl-f in `Telescope packer` find files in that entry
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
