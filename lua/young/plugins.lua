@@ -609,6 +609,12 @@ mods.telescope = {
         require('young.mod.telescope').done()
       end,
     },
+    -- {
+    --   'nvim-telescope/telescope-fzf-native.nvim',
+    --   after = 'telescope.nvim',
+    --   run = 'make',
+    --   run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    -- },
     {
       'natecraddock/telescope-zf-native.nvim',
       after = 'telescope.nvim',
