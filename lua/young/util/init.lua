@@ -223,7 +223,8 @@ function util.get_visual_selection_by_reg(reg)
   return text
 end
 
--- TODO: verb {keymap,command,autocmd,option,function,abbr,highlight}
+-- TODO: vim.keymap.set (or xy.{map,command}) loction by using debug
+-- TODO: {keymap,command,autocmd,option,function,abbr,highlight,colorscheme,ftplugin}
 function util.get_def_locations(tbl)
   local str = tbl.type
   if tbl.type == 'map' then

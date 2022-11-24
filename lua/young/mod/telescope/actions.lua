@@ -33,7 +33,9 @@ local M = action_mt.transform_mod {
     -- pp(def)
 
     local function open_file(path, line)
-      require('telescope.actions').close(prompt_bufnr)
+      if vim.fn.bufexists(prompt_bufnr) == 1 then
+        require('telescope.actions').close(prompt_bufnr)
+      end
       vim.cmd('e ' .. path)
       -- vim.cmd(':' .. line)
       vim.fn.setpos('.', { 0, line, 1 })
@@ -42,12 +44,9 @@ local M = action_mt.transform_mod {
     local locs = xy.util.get_def_locations(def)
     if #locs == 0 then
       return
-    elseif #locs == 1 then
-      local loc = locs[1]
-      open_file(loc[1], loc[2])
-      return
     end
 
+    -- TODO:preview
     vim.ui.select(locs, {
       prompt = '[young] Jump to def locations',
       format_item = function(item)
