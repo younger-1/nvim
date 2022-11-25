@@ -1,3 +1,8 @@
+local function on_list(options)
+  vim.fn.setqflist({}, ' ', options)
+  vim.cmd 'cfirst'
+end
+
 return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
@@ -48,7 +53,12 @@ return {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
       ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
       --
-      ['gd'] = { vim.lsp.buf.definition, 'Goto definition' },
+      ['gd'] = {
+        function()
+          vim.lsp.buf.definition { on_list = on_list }
+        end,
+        'Goto definition',
+      },
       ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
       ['gy'] = { vim.lsp.buf.type_definition, 'Goto type definition' },
       ['gi'] = { vim.lsp.buf.implementation, 'Goto implementation' },
@@ -57,7 +67,7 @@ return {
       ['g]'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
       ['gl'] = {
         function()
-          vim.diagnostic.open_float(0, { scope = 'line', source = 'always' })
+          vim.diagnostic.open_float { scope = 'line', source = 'always' }
         end,
         'Show diagnostics',
       },
