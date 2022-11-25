@@ -70,7 +70,7 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
 --   end
 -- end
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(hover, lsp_cfg.float)
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(hover, lsp_cfg.float)
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_cfg.float)
@@ -94,6 +94,7 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 --   update_in_insert = true,
 --   virtual_text = false,
 -- })
+
 
 -- <https://github.com/kylo252/dotfiles/blob/de7cb1e8a08cff3d772a4253dfbcdb94dbba8d4f/.config/nvim/lua/user/lsp/init.lua#L3>
 -- function M.get_lsp_kind()
