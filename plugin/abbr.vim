@@ -14,7 +14,7 @@ cnoreabbrev evc e $VIMRUNTIME/colors/
 cnoreabbrev evd e $VIMRUNTIME/doc/
 cnoreabbrev evC e $VIMRUNTIME/compiler/
 cnoreabbrev evk e $VIMRUNTIME/keymap/
-cnoreabbrev evs e $VIMRUNTIME/spell/
+cnoreabbrev evS e $VIMRUNTIME/spell/
 cnoreabbrev evm e $VIMRUNTIME/macros/
 cnoreabbrev evt e $VIMRUNTIME/tutor/
 cnoreabbrev evT e $VIMRUNTIME/tools/
