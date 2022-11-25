@@ -53,3 +53,21 @@ func! yo#fold#Text()
                 \ foldlines_padding,
                 \ foldlines)
 endfunc
+
+function! yo#fold#Text2()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    "expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+    let line = substitute(line, '----{{'.'{', '-▶▶▶{{'.'{', 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line)
+    "return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+    return line . repeat(" ",fillcharcount)
+endfunction

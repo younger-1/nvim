@@ -106,6 +106,9 @@ inoremap <C-v> <C-G>u<C-R><C-O>+
 
 inoremap <C-Space> <C-X><C-O>
 
+imap 【 [
+imap （ (
+
 " command mode
 cnoremap <C-v> <C-R>+
 
