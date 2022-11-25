@@ -513,12 +513,9 @@ return {
     ['<C-a>'] = { cmd 'Telescope loclist', 'LocList' },
     ['q'] = { cmd 'Telescope quickfixhistory', 'QuickList history' },
     -- ['Q'] = { cmd 'Telescope loclisthistory', 'LocList' },
-    B = { cmd 'Telescope bookmarks', 'Bookmarks' },
-    C = { cmd 'Telescope commands', 'Commands' },
-    H = { cmd 'Telescope highlights', 'Highlights' },
-    M = { cmd 'Telescope man_pages', 'Man pages' },
     a = { cmd 'Telescope autocommands', 'Autocommands' },
     b = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
+    B = { cmd 'Telescope bookmarks', 'Bookmarks' },
     -- c = { cmd 'Telescope colorscheme', 'Colorscheme' },
     -- c = { cmd "lua require('telescope.builtin').colorscheme({enable_preview = true})", 'Colorscheme' },
     -- c = { cu('Telescope colorscheme enable_preview=' .. '<C-R>=v:count==0 ? "false" : "true"<CR>'), 'Colorscheme' },
@@ -528,6 +525,7 @@ return {
       end,
       'Colorscheme',
     },
+    C = { cmd 'Telescope commands', 'Commands' },
     d = {
       name = '+dap',
       [' '] = { cmd 'Telescope dap configurations', 'Dap configurations' },
@@ -539,7 +537,14 @@ return {
     e = { cmd 'Telescope env', 'Env' },
     f = { cmd 'Telescope find_files', 'Find files' },
     F = { cmd 'Telescope find_files no_ignore=true', 'Find files (more)' },
-    g = { cmd 'Telescope live_grep', 'Grep' },
+    g = {
+      function()
+        require('telescope.builtin').live_grep {
+          grep_open_files = vim.v.count ~= 0,
+        }
+      end,
+      'Grep',
+    },
     G = {
       function()
         require('telescope.builtin').live_grep {
@@ -550,16 +555,25 @@ return {
       end,
       'Grep fixed string',
     },
-    -- G = { cmd'Telescope live_grep grep_open_files=true', 'Grep in opened buffer' },
     h = { cmd 'Telescope help_tags', 'Find help' },
+    H = { cmd 'Telescope highlights', 'Highlights' },
     j = { cmd 'Telescope jumplist', 'Gump list' },
-    k = { cmd 'Telescope keymaps', 'Keymaps' },
+    k = {
+      function()
+        require('telescope.builtin').keymaps {
+          modes = { 'n', 'i', 'c', 'x' },
+          show_plug = vim.v.count ~= 0,
+        }
+      end,
+      'Keymaps',
+    },
     m = {
       name = '+mru',
       c = { lua "require('telescope').extensions.frecency.frecency{ default_text = ':CWD:' }", 'CWD' },
       l = { lua "require('telescope').extensions.frecency.frecency{ default_text = ':LSP:' }", 'LSP' },
       m = { lua "require('telescope').extensions.frecency.frecency()", 'Frecency' },
     },
+    M = { cmd 'Telescope man_pages', 'Man pages' },
     n = { cmd 'Telescope notify', 'Notify' },
     o = { cmd 'Telescope heading', 'Heading' },
     p = { cmd 'Telescope projects', 'Projects' },

@@ -15,6 +15,22 @@ end
 -- [Disable highlighting for certain files](https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#disable-highlighting-for-certain-files)
 
 -- 1.horizontal
+-- ┌──────────────────────────────────────────────────┐
+-- │                                                  │
+-- │    ┌───────────────────┐┌───────────────────┐    │
+-- │    │                   ││                   │    │
+-- │    │                   ││                   │    │
+-- │    │                   ││                   │    │
+-- │    │      Results      ││                   │    │
+-- │    │                   ││      Preview      │    │
+-- │    │                   ││                   │    │
+-- │    │                   ││                   │    │
+-- │    └───────────────────┘│                   │    │
+-- │    ┌───────────────────┐│                   │    │
+-- │    │      Prompt       ││                   │    │
+-- │    └───────────────────┘└───────────────────┘    │
+-- │                                                  │
+-- └──────────────────────────────────────────────────┘
 M.h1 = {
   layout_strategy = 'horizontal',
   layout_config = { preview_width = 0.5 },
@@ -22,49 +38,98 @@ M.h1 = {
 
 M.h2 = {
   layout_strategy = 'horizontal',
-  layout_config = { preview_width = 0.5, prompt_position = 'top' },
-  sorting_strategy = 'ascending',
+  layout_config = { preview_width = 0.7 },
 }
 
 M.h3 = {
   layout_strategy = 'horizontal',
-  layout_config = { preview_width = 0.6, prompt_position = 'top' },
+  layout_config = { preview_width = 0.5, prompt_position = 'top' },
   sorting_strategy = 'ascending',
 }
 
 M.h4 = {
   layout_strategy = 'horizontal',
-  layout_config = { preview_width = 0.8, prompt_position = 'top' },
+  layout_config = { preview_width = 0.7, prompt_position = 'top' },
   sorting_strategy = 'ascending',
 }
 
 -- 2.vertical
+-- ┌──────────────────────────────────────────────────┐
+-- │                                                  │
+-- │    ┌────────────────────────────────────────┐    │
+-- │    |                 Preview                |    │
+-- │    |                 Preview                |    │
+-- │    |                 Preview                |    │
+-- │    └────────────────────────────────────────┘    │
+-- │    ┌────────────────────────────────────────┐    │
+-- │    |                 Result                 |    │
+-- │    |                 Result                 |    │
+-- │    └────────────────────────────────────────┘    │
+-- │    ┌────────────────────────────────────────┐    │
+-- │    |                 Prompt                 |    │
+-- │    └────────────────────────────────────────┘    │
+-- │                                                  │
+-- └──────────────────────────────────────────────────┘
 M.v1 = {
   layout_strategy = 'vertical',
-  layout_config = {
-    preview_cutoff = 30,
-    height = 0.99,
-    -- preview_height = 0.6,
-  },
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.5 },
 }
 
 M.v2 = {
   layout_strategy = 'vertical',
-  layout_config = { prompt_position = 'top' },
-  sorting_strategy = 'ascending',
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.5, mirror = true },
 }
 
 M.v3 = {
   layout_strategy = 'vertical',
-  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.6, prompt_position = 'top' },
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.5, prompt_position = 'top' },
   sorting_strategy = 'ascending',
 }
 
 M.v4 = {
   layout_strategy = 'vertical',
-  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.6, prompt_position = 'top', mirror = true },
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.5, prompt_position = 'top', mirror = true },
   sorting_strategy = 'ascending',
 }
+
+-- 3.center
+-- ┌──────────────────────────────────────────────────┐
+-- │    ┌────────────────────────────────────────┐    │
+-- │    |                 Preview                |    │
+-- │    |                 Preview                |    │
+-- │    └────────────────────────────────────────┘    │
+-- │    ┌────────────────────────────────────────┐    │
+-- │    |                 Prompt                 |    │
+-- │    ├────────────────────────────────────────┤    │
+-- │    |                 Result                 |    │
+-- │    |                 Result                 |    │
+-- │    └────────────────────────────────────────┘    │
+-- │                                                  │
+-- │                                                  │
+-- │                                                  │
+-- │                                                  │
+-- └──────────────────────────────────────────────────┘
+M.c1 = {
+  layout_strategy = 'center',
+}
+
+-- 4.cursor
+-- ┌──────────────────────────────────────────────────┐
+-- │                                                  │
+-- │   █                                              │
+-- │   ┌──────────────┐┌─────────────────────┐        │
+-- │   │    Prompt    ││      Preview        │        │
+-- │   ├──────────────┤│      Preview        │        │
+-- │   │    Result    ││      Preview        │        │
+-- │   │    Result    ││      Preview        │        │
+-- │   └──────────────┘└─────────────────────┘        │
+-- │                                         █        │
+-- │                                                  │
+-- │                                                  │
+-- │                                                  │
+-- │                                                  │
+-- │                                                  │
+-- └──────────────────────────────────────────────────┘
 
 local function get_theme(opts)
   local theme = themes.get_ivy(opts or {})

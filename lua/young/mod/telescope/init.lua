@@ -96,7 +96,17 @@ M.cfg = {
     --   horizontal = { mirror = false },
     --   vertical = { mirror = false },
     -- },
-    -- cycle_layout_list = { 'horizontal', 'vertical', 'center', 'bottom_pane' },
+    cycle_layout_list = {
+      view.h1,
+      view.h2,
+      view.h3,
+      view.h4,
+      view.v1,
+      view.v2,
+      view.v3,
+      view.v4,
+    },
+    -- cycle_layout_list = { 'horizontal', 'vertical', 'center', 'cursor', 'bottom_pane', 'current_buffer', 'flex' },
     winblend = 15,
     dynamic_preview_title = true,
     path_display = { truncate = 5 },
@@ -130,7 +140,6 @@ M.cfg = {
     -- exec 'e ' .. stdpath('data') .. '/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua'
     mappings = {
       i = {
-        -- ['<C-c>'] = actions.close,
         -- ['<CR>'] = actions.select_default + actions.center,
 
         -- ['<C-_>'] = actions.which_key, -- Keys to produce <C-/>
@@ -144,38 +153,38 @@ M.cfg = {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
 
-        ['<C-n>'] = actions.cycle_history_next,
-        ['<C-p>'] = actions.cycle_history_prev,
+        ['<A-n>'] = actions.cycle_history_next,
+        ['<A-p>'] = actions.cycle_history_prev,
 
         ['<C-b>'] = actions.results_scrolling_up,
         ['<C-f>'] = actions.results_scrolling_down,
 
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-a>'] = actions.smart_send_to_loclist + actions.open_loclist,
+        ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
 
         ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<A-a>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
-        ['<A-p>'] = action_layout.toggle_preview,
-        ['<A-m>'] = action_layout.toggle_mirror,
+        -- ['<C-c>']
+        -- ['<C-g>']
+        -- ['<C-]>']
+        -- ['<C-\\>']
+        ['<C-n>'] = action_layout.cycle_layout_next,
+        ['<C-p>'] = action_layout.cycle_layout_prev,
 
-        ['<C-g>'] = action_layout.cycle_layout_next,
+        ['<A-m>'] = action_layout.toggle_mirror,
+        ['<A-k>'] = action_layout.toggle_preview,
+        ['<A-;>'] = action_layout.toggle_prompt_position,
 
         ['<C-y>'] = require('young.mod.telescope.actions').print_entry,
         ['<C-o>'] = require('young.mod.telescope.actions').open_def_locations,
       },
       n = {
-        ['<C-n>'] = actions.cycle_history_next,
-        ['<C-p>'] = actions.cycle_history_prev,
+        ['<A-n>'] = actions.cycle_history_next,
+        ['<A-p>'] = actions.cycle_history_prev,
 
         ['<C-b>'] = actions.results_scrolling_up,
         ['<C-f>'] = actions.results_scrolling_down,
-
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-a>'] = actions.smart_send_to_loclist + actions.open_loclist,
-
-        ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-        ['<A-a>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
         -- J = actions.cycle_previewers_next,
         -- K = actions.cycle_previewers_prev,
@@ -223,7 +232,7 @@ M.cfg = {
     }),
     man_pages = view.h1,
     marks = view.h1,
-    oldfiles = view.v4,
+    oldfiles = view.v3,
     git_branches = {
       mappings = {
         i = {
