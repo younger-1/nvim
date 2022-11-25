@@ -55,7 +55,7 @@ end
 --- Checks whether a given path exists and is a directory
 --@param path (string) path to check
 --@returns (bool)
-function util.is_directory(path)
+function util.is_dir(path)
   local stat = uv.fs_stat(path)
   return stat and stat.type == 'directory' or false
 end

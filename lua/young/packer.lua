@@ -20,7 +20,7 @@ local first_time = nil
 
 M.once = function()
   -- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  if not util.is_directory(install_path) then
+  if not util.is_dir(install_path) then
     first_time = true
     -- vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
     -- WARN: system sync/async
