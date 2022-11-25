@@ -20,3 +20,10 @@ augroup init
   " Restore cursor position (except for git commits and rebases)
   autocmd BufRead * if &ft !~# 'commit\|rebase' | exec 'silent! normal! g`"' | endif
 augroup END
+
+" augroup fast_escape
+"   autocmd!
+
+"   autocmd InsertEnter * set timeoutlen=100
+"   autocmd InsertLeave * set timeoutlen=500
+" augroup END

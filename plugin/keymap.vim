@@ -8,11 +8,11 @@ noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap gh ^
 noremap gl g_
 
-noremap H  0
-noremap L  $
+" noremap H  0
+" noremap L  $
 
-noremap gH H
-noremap gL L
+" noremap gH H
+" noremap gL L
 
 noremap <C-i> <C-i>
 map <Tab> %
@@ -110,8 +110,13 @@ inoremap <C-v> <C-G>u<C-R><C-O>+
 
 inoremap <C-Space> <C-X><C-O>
 
-imap 【 [
-imap （ (
+" More molecular undo of text
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+inoremap ; ;<C-g>u
+inoremap : :<C-g>u
 
 " command mode
 cnoremap <C-v> <C-R>+
