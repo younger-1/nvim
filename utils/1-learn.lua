@@ -191,6 +191,15 @@ pp(s:sub(-2)) -- "ld"
 pp(s:sub(1, -2)) -- "hello worl"
 pp(s:match '%s') -- " "
 
+local y = string.gsub('cat eat mouse. a lots of', '(%a+)( %a+ )(%a+)', function(v1, v2, v3)
+  return v3 .. v2 .. v1
+end)
+pp(y)
+
+for a1, a2 in string.gmatch('hello world from Lua', '(%a*) (%a*)') do
+  print(a1, a2)
+end
+
 -- <https://www.codegrepper.com/code-examples/lua/parse+string+lua>
 -- local function split(s, delimiter)
 --   local result = {}
