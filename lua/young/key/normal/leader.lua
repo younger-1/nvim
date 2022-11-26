@@ -502,7 +502,22 @@ return {
     -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
     -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
     -- [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
-    [':'] = { cmd 'Telescope command_history', 'Command history' },
+    [':'] = {
+      function()
+        local command_history_ignore = vim.regex 'edit\\|write\\|lua\\s='
+        require('telescope.builtin').command_history {
+          prompt_prefix = '$ ',
+          filter_fn = function(item)
+            if #item < 3 then
+              return false
+            else
+              return not command_history_ignore:match_str(item)
+            end
+          end,
+        }
+      end,
+      'Command history',
+    },
     ["'"] = { cmd 'Telescope marks', 'Marks' },
     ['"'] = { cmd 'Telescope registers', 'Registers' },
     [','] = { cmd 'Telescope buffers', 'Find' },
@@ -563,6 +578,9 @@ return {
         require('telescope.builtin').keymaps {
           modes = { 'n', 'i', 'c', 'x' },
           show_plug = vim.v.count ~= 0,
+          lhs_filter = function(lhs)
+            return not string.find(lhs, 'Þ')
+          end,
         }
       end,
       'Keymaps',
