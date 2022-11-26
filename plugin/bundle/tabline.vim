@@ -1,5 +1,9 @@
 " <https://github.com/luisiacc/nvim-config/blob/dc463e1a97253dd6594c179662cbb99105d394c0/tabline.vim>
 
+if 1
+  finish
+end
+
 let s:time = ''
 let s:file_node_extensions = {
   \  'rust'     : '',
@@ -146,8 +150,6 @@ function! s:init_colors()
   endfor
 endfunction
 
-set tabline=%!MyTabLine()
-
 function! GetFileIcon(path)
   let file = fnamemodify(a:path, ':t')
   if has_key(s:file_node_exact_matches, file)
@@ -226,3 +228,5 @@ endfunction
 
 call s:init_colors()
 call s:start_timer()
+
+set tabline=%!MyTabLine()
