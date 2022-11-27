@@ -228,7 +228,7 @@ M.cfg = {
     }),
     grep_string = { theme = 'ivy' },
     live_grep = vim.tbl_extend('force', view.h1, {
-      disable_coordinates = true,
+      -- disable_coordinates = true,
     }),
     man_pages = view.h1,
     marks = view.h1,

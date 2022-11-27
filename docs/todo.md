@@ -33,7 +33,7 @@
 - [ ] autopair: remove single quote (\' and \`) rules for lisp file
 - [ ] call-tree, no-refenrence-list
 - [ ] decouple which-key from core, by using local.lua
-- [ ] a more powerfull <C-g>
+- [ ] a more powerful <C-g>
   - pwd, filepath
   - statusline info
   - a quick-pannel to lookup git/file information (e.g. branch, ff, fenc, sw) which is not very common like changes and diagnostics
@@ -67,6 +67,7 @@
 - [ ] gui: [md+hover] image/math viewer, html/link viewer (like vscode's github-issue-preview, enable viewer for url match regex pattern)
 - [ ] vim: / to search in message, very useful!
 - [ ] Telescope: from child picker go back to parent picker. e.g. Ctrl-f in `Telescope packer` find files in that entry
+- [ ] Telescope: live_grep toggle 1.regex or fixed string, 2.match case or not
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
