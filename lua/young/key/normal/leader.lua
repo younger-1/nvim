@@ -578,8 +578,9 @@ return {
         require('telescope.builtin').keymaps {
           modes = { 'n', 'i', 'c', 'x' },
           show_plug = vim.v.count ~= 0,
-          only_buf = vim.v.count ~= 0,
+          only_buf = vim.v.count ~= 0, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
           lhs_filter = function(lhs)
+            -- gg(lhs)
             return not string.find(lhs, 'Þ')
           end,
         }

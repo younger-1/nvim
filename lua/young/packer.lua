@@ -93,6 +93,15 @@ end
 --   require('young.mod.' .. file:gsub('%.lua$', ''))
 -- end
 
+-- load all lua files in user directory
+-- files are loaded in order alphabetically
+-- for filename in io.popen('ls -pqAL "$HOME/.config/nvim/lua/user"'):lines() do
+--   filename = filename:match('^(.*)%.lua$')
+--   if filename then
+--     require('user.' .. filename)
+--   end
+-- end
+
 M.recompile = function()
   rc 'young.plugins'
 
