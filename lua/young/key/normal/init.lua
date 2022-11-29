@@ -59,7 +59,7 @@ local normal = {
   -- TODO: display buf&&git info
   ['<C-g>'] = { require('young.tool.file_info').setup, 'Info' },
   ['<C-_>'] = { '<Cmd>Man<cr>', 'Man' },
-  ['<C-x>'] = { cmd 'TroubleToggle', 'Open' },
+  -- ['<C-x>'] = { cmd 'TroubleToggle', 'Open' },
   ['<C-w>'] = {
     z = { require('young.tool').toggle_zoom, 'Zoom' },
     w = { require('young.tool').set_cursor_floating_win, 'Goto float' },
