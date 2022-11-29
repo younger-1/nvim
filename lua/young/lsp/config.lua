@@ -1,7 +1,11 @@
-local function on_list(options)
-  vim.fn.setqflist({}, ' ', options)
-  vim.cmd 'cfirst'
-end
+-- local function on_list(options)
+--   vim.fn.setqflist({}, ' ', options)
+--   vim.cmd 'cfirst'
+
+--   if #options.items == 1 then
+--     vim.fn.setqflist({}, 'r')
+--   end
+-- end
 
 return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
@@ -54,9 +58,10 @@ return {
       ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
       --
       ['gd'] = {
-        function()
-          vim.lsp.buf.definition { on_list = on_list }
-        end,
+        -- function()
+        --   vim.lsp.buf.definition { on_list = on_list }
+        -- end,
+        vim.lsp.buf.definition,
         'Goto definition',
       },
       ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
