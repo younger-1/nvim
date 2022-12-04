@@ -373,18 +373,20 @@ tool.set_cursor_floating_win = function()
 end
 
 tool.startup_time = function()
-  for i, times in ipairs(xy.startup_time or {}) do
-    -- pp(times)
-    -- local str = vim.fn['repeat']('+', times.depth)
-    print(('[%-40s%-3d] [%-8s] [%d] - %f'):format(
-      xy.util.relative(times.file_name, join_paths(vim.fn.stdpath 'config', '')),
-      -- xy.util.relative_home(times.file_name),
-      times.currentline,
-      times.func_name,
-      times.depth,
-      times.hr_time
-    ))
-  end
+  xy.util.defer(function()
+    for i, times in ipairs(xy.startup_time or {}) do
+      -- pp(times)
+      -- local str = vim.fn['repeat']('+', times.depth)
+      print(('[%-40s%-3d] [%-8s] [%d] - %f'):format(
+        xy.util.relative(times.file_name, join_paths(vim.fn.stdpath 'config', '')),
+        -- xy.util.relative_home(times.file_name),
+        times.currentline,
+        times.func_name,
+        times.depth,
+        times.hr_time
+      ))
+    end
+  end)
 end
 
 tool.startup_event = function(event)

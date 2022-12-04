@@ -25,15 +25,16 @@ tt()
 require('young.cfg').done()
 
 tt()
-require('young.packer').done()
+xy.util.defer(function()
+  require('young.packer').done()
+
+  require('young.lsp').done()
+
+  vim.cmd [[doautocmd BufWinEnter | doautocmd BufRead]]
+end)
 
 tt()
 vim.cmd [[silent! colorscheme dracula]]
 
 tt()
 require('young.gui').done()
-
-tt()
-require('young.lsp').done()
-
-tt()

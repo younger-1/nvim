@@ -437,7 +437,6 @@ mods.BWT = {
     -- { 'dhruvasagar/vim-zoom' },
     {
       'mrjones2014/smart-splits.nvim',
-      disable = not xy.has 'nvim-0.7',
       -- event = 'CursorMoved',
       module = 'smart-splits',
       cmd = 'SmartResizeMode',
@@ -847,7 +846,7 @@ mods.UI = {
   winbar = {
     { -- breadcrumbs
       'SmiteshP/nvim-navic',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
       config = function()
         require 'young.mod.navic'
       end,
@@ -1196,7 +1195,7 @@ mods.LSP = {
     -- },
     {
       'j-hui/fidget.nvim',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
       config = function()
         require('young.mod.fidget').done()
       end,
@@ -1204,7 +1203,7 @@ mods.LSP = {
     {
       'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
       config = function()
         require('young.mod.lsp_lines').done()
       end,
