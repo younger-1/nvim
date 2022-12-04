@@ -2,13 +2,6 @@ local cmd = require('young.key').cmd
 
 return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(fn.visualmode())<cr>', 'Comment' },
-  g = {
-    name = '+git',
-    s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk' },
-    r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk' },
-    u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk' },
-    y = 'Link',
-  },
   l = {
     name = '+lsp',
     a = { vim.lsp.buf.range_code_action, 'Code action' },

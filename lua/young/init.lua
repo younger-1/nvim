@@ -117,28 +117,28 @@ function _G.gg(name, val, ...)
   end
 end
 
-function _G.put_text(...)
-  local objects = {}
-  -- Not using `{...}` because it removes `nil` input
-  for i = 1, select('#', ...) do
-    local v = select(i, ...)
-    table.insert(objects, vim.inspect(v))
-  end
+-- function _G.put_text(...)
+--   local objects = {}
+--   -- Not using `{...}` because it removes `nil` input
+--   for i = 1, select('#', ...) do
+--     local v = select(i, ...)
+--     table.insert(objects, vim.inspect(v))
+--   end
 
-  local lines = vim.split(table.concat(objects, '\n'), '\n')
-  local lnum = vim.api.nvim_win_get_cursor(0)[1]
-  vim.fn.append(lnum, lines)
+--   local lines = vim.split(table.concat(objects, '\n'), '\n')
+--   local lnum = vim.api.nvim_win_get_cursor(0)[1]
+--   vim.fn.append(lnum, lines)
 
-  return ...
-end
+--   return ...
+-- end
 
-function _G.PP(obj)
-  local buf = vim.api.nvim_create_buf(false, true)
-  local lines = vim.split(vim.inspect(obj), '\n', { plain = true })
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-  vim.cmd 'vsplit'
-  vim.api.nvim_win_set_buf(0, buf)
-end
+-- function _G.PP(obj)
+--   local buf = vim.api.nvim_create_buf(false, true)
+--   local lines = vim.split(vim.inspect(obj), '\n', { plain = true })
+--   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+--   vim.cmd 'vsplit'
+--   vim.api.nvim_win_set_buf(0, buf)
+-- end
 
 -- _G.PP = vim.schedule_wrap(function(...)
 --   local buf = vim.api.nvim_create_buf(false, true)
@@ -184,6 +184,60 @@ function _G.rl(mod)
     end,
   })
 end
+
+-- local lazy = {}
+-- lazy.require = function(modname)
+--   local ref = nil
+--   local init = false
+
+--   local init_ref = function()
+--     if init then
+--       return
+--     end
+
+--     ref = require(modname)
+--     init = true
+--   end
+
+--   return setmetatable({}, {
+--     __call = function(_, ...)
+--       init_ref()
+
+--       return ref(...)
+--     end,
+
+--     __index = function(_, k)
+--       init_ref()
+
+--       return ref[k]
+--     end,
+
+--     __newindex = function(_, k, v)
+--       init_ref()
+
+--       ref[k] = v
+--     end,
+--   })
+-- end
+
+-- lazy.access = function(table_or_modname, key)
+--   local ref = type(table_or_modname) == 'string' and lazy.require(table_or_modname) or table_or_modname
+
+--   return setmetatable({}, {
+--     __call = function(_, ...)
+--       return ref[key](...)
+--     end,
+
+--     __index = function(_, k)
+--       return ref[key][k]
+--     end,
+
+--     __newindex = function(_, k, v)
+--       ref[key][k] = v
+--     end,
+--   })
+-- end
+-- xy.lazy = lazy
 
 -- stylua: ignore start
 _G.tt = tt or function()
@@ -350,22 +404,20 @@ xy.map = {
 
   _nest = function(mappings, prefix, mode)
     for k, v in pairs(mappings) do
-      if k == 'name' or type(v) == 'string' then
+      if k == 'name' or type(v) == 'string' or #v == 1 then
         -- #v == 1 which-key will take it as description
         goto continue
       end
       if #v == 0 then
         xy.map._nest(v, prefix .. k, mode)
       else
-        if v[2] == 'which_key_ignore' then
-          v[2] = nil
-        end
+        local desc = v[2] ~= 'which_key_ignore' and v[2] or nil
         if v[1] == nil then
           xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil', prefix, k) }
         elseif #v == vim.tbl_count(v) then
-          xy.map[mode] { prefix .. k, v[1], v[2] }
+          xy.map[mode] { prefix .. k, v[1], desc }
         else
-          local keymap = { prefix .. k, v[1], v[2] }
+          local keymap = { prefix .. k, v[1], desc }
           keymap = vim.tbl_extend('keep', keymap, v)
           xy.map[mode](keymap)
         end

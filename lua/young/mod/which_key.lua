@@ -1,6 +1,6 @@
 local M = {}
 
-M.cfg = {
+local cfg = {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -116,6 +116,7 @@ local vopts = {
 
 M.done = function()
   local wk = require 'which-key'
+  wk.setup(cfg)
 
   -- local show = wk.show
   -- local ignore_filetype = { 'TelescopePrompt' }
@@ -126,10 +127,10 @@ M.done = function()
   --   show(keys, option)
   -- end
 
+  vim.o.timeoutlen = 300
+
   local n = require 'young.key.normal'
   local v = require 'young.key.visual'
-
-  wk.setup(M.cfg)
   wk.register(n, opts)
   wk.register(v, vopts)
 
