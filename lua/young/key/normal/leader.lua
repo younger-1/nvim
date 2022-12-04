@@ -3,7 +3,7 @@ local lua = require('young.key').lua
 
 -- TODO:add function instead of <cmd><cr>
 return {
-  [' '] = { ':', 'which_key_ignore', silent = false },
+  [' '] = { ':', 'which_key_ignore', mode = { 'n', 'x' } },
   ['`'] = { '<cmd>intro<cr>', 'Intro' },
   -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['0'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -310,15 +310,15 @@ return {
     },
     o = { cmd 'Telescope git_status', 'Open changed file' },
     p = { cmd 'Gitsigns preview_hunk', 'Preview hunk' },
-    r = { cmd 'Gitsigns reset_hunk', 'Reset hunk' },
+    r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk', mode = { 'n', 'x' } },
     R = { cmd 'Gitsigns reset_buffer', 'Reset buffer' },
-    s = { cmd 'Gitsigns stage_hunk', 'Stage hunk' },
+    s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk', mode = { 'n', 'x' } },
     S = { cmd 'Gitsigns stage_buffer', 'Stage buffer' },
-    u = { cmd 'Gitsigns undo_stage_hunk', 'Undo stage hunk' },
+    u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk', mode = { 'n', 'x' } },
     U = { cmd 'Gitsigns reset_buffer_index', 'Reset buffer index' },
     w = { cmd 'Gitsigns toggle_word_diff', 'Word diff' },
-    y = 'Link',
-    -- y = { 'Link', mode = { 'n', 'x' } },
+    -- y = 'Link',
+    y = { 'Link', mode = { 'n', 'x' } },
     Y = { lua "require('gitlinker').get_repo_url", 'Link(Repo)' },
     O = {
       function()
@@ -632,7 +632,7 @@ return {
       f = { require('young.autocmd').toggle_format_on_save, 'Format on save' },
       p = { require('young.autocmd').toggle_print_ascii, 'Print ASCII' },
       -- r = { require('young.autocmd').toggle_auto_chdir, 'Auto chdir' },
-      c = { require('young.autocmd').toggle_auto_cursorline, 'Cursorline' },
+      -- c = { require('young.autocmd').toggle_auto_cursorline, 'Cursorline' },
     },
     b = 'Biscuits',
     m = { cmd 'MinimapToggle', 'Minimap' },

@@ -1,5 +1,3 @@
-local M = {}
-
 local mode_adapters = {
   insert_command_mode = '!',
   insert_mode = 'i',
@@ -11,7 +9,7 @@ local mode_adapters = {
   term_mode = 't',
 }
 
-M.keys = {
+local keys = {
   insert_command_mode = {
     -- :h emacs-keys
     -- ['<C-a>'] = '<Home>',
@@ -230,17 +228,20 @@ M.keys = {
   },
 }
 
-M.done = function()
-  for mode_name, mappings in pairs(M.keys) do
-    local mode = mode_adapters[mode_name]
-    for k, v in pairs(mappings) do
-      if type(v) ~= 'table' then
-        v = { v }
-      end
-      table.insert(v, 1, k)
-      xy.map[mode](v)
+for mode_name, mappings in pairs(keys) do
+  local mode = mode_adapters[mode_name]
+  for k, v in pairs(mappings) do
+    if type(v) ~= 'table' then
+      v = { v }
     end
+    table.insert(v, 1, k)
+    xy.map[mode](v)
   end
 end
 
-M.done()
+vim.defer_fn(function()
+  local n = require 'young.key.normal'
+  local v = require 'young.key.visual'
+  xy.map.register(n, { mode = 'n' })
+  xy.map.register(v, { mode = 'x' })
+end, 20)
