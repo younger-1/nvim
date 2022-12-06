@@ -489,7 +489,10 @@ mods.file = {
       'kyazdani42/nvim-tree.lua',
       cmd = 'NvimTreeToggle', -- BUG:PackerCompile will cause `cmd` redefined and load `config` again. But `NvimTreeToggle` defined in nvim-tree's `setup` with condition.
       -- event = 'BufWinEnter',
-      module = 'nvim-tree',
+      -- module = 'nvim-tree', -- BUG:require nvim-treesitter also trigger it.
+      -- module_pattern = '^nvim%-tree$',
+      module_pattern = '^' .. vim.pesc 'nvim-tree' .. '$',
+      -- module_pattern = { '^' .. vim.pesc 'nvim-tree' .. '$', '^' .. vim.pesc 'nvim-tree.' },
       config = function()
         require('young.mod.nvim_tree').done()
       end,
@@ -602,7 +605,7 @@ mods.telescope = {
       'nvim-telescope/telescope.nvim',
       -- defer = 2,
       -- cmd = 'Telescope', -- BUG:PackerCompile will cause `cmd` redefined and load `config` again. But `Telescope` defined in its plugin file, which packer do not load again.
-      event = 'BufRead',
+      -- event = 'BufRead',
       module = 'telescope',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
       config = function()
@@ -1469,11 +1472,11 @@ M.done = function()
   M.data = {}
   for _, mod in ipairs(M.plugins) do
     for _, plugin in ipairs(mod) do
-      if type(plugin) == 'table' and plugin.module and plugin.config then
+      if type(plugin) == 'table' and (plugin.module or plugin.module_pattern) and plugin.config then
         local name = require('packer.util').get_plugin_short_name(plugin)
         M.data[name] = {
           config = plugin.config,
-          module = plugin.module,
+          module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
         }
         plugin.config = function(name)
           -- if name == nil then

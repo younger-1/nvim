@@ -19,6 +19,7 @@ function M.cmd(str)
   return '<Cmd>' .. str .. '<CR>'
 end
 
+---NOTE: {1, (function() return 2, 3 end)(), 4} is {1, 2, 4}
 function M.cmd2(str)
   return '<Cmd>' .. str .. '<CR>', str
 end
