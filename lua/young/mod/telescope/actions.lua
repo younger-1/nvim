@@ -6,7 +6,7 @@ local function get_locs(title, entry)
   local def = ({
     ['Key Maps'] = {
       type = 'map',
-      para = (entry.mode):sub(1, 1),
+      para = (entry.mode or ''):sub(1, 1),
       name = entry.lhs,
     },
     ['Commands'] = {

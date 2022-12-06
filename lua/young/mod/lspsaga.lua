@@ -101,23 +101,22 @@ function M.done()
 end
 
 function M.once()
-  local keymap = vim.keymap.set
-  local cmd = require('young.key').cmd
+  local cmd2 = require('young.key').cmd2
   -- Lsp finder find the symbol definition implmement reference
   -- when you use action in finder like open vsplit then your can
   -- use <C-t> to jump back
   xy.map.register {
     ['<leader>'] = {
       j = {
-        j = { cmd 'Lspsaga lsp_finder' },
-        k = { cmd 'Lspsaga hover_doc' },
-        d = { cmd 'Lspsaga peek_definition' },
-        l = { cmd 'Lspsaga show_line_diagnostics' },
-        L = { cmd 'Lspsaga show_cursor_diagnostics' },
-        a = { cmd 'Lspsaga code_action' },
-        A = { cmd 'Lspsaga range_code_action' },
-        r = { cmd 'Lspsaga rename' },
-        o = { cmd 'LSoutlineToggle' },
+        j = { cmd2 'Lspsaga lsp_finder' },
+        k = { cmd2 'Lspsaga hover_doc' },
+        d = { cmd2 'Lspsaga peek_definition' },
+        l = { cmd2 'Lspsaga show_line_diagnostics' },
+        L = { cmd2 'Lspsaga show_cursor_diagnostics' },
+        a = { cmd2 'Lspsaga code_action' },
+        A = { cmd2 'Lspsaga range_code_action' },
+        r = { cmd2 'Lspsaga rename' },
+        o = { cmd2 'LSoutlineToggle' },
       },
     },
   }

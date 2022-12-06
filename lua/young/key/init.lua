@@ -19,6 +19,10 @@ function M.cmd(str)
   return '<Cmd>' .. str .. '<CR>'
 end
 
+function M.cmd2(str)
+  return '<Cmd>' .. str .. '<CR>', str
+end
+
 function M.cu(str)
   return ':<C-u>' .. str .. '<CR>'
 end
