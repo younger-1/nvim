@@ -1416,13 +1416,13 @@ mods.tool = {
   },
 }
 
-local to_plugs = function(t, buckets)
+local to_plugs = function(t, submods)
   local plugs = {}
   for key, item in pairs(t) do
     if type(key) == 'number' then
       plugs[#plugs + 1] = item
-    elseif buckets and #buckets > 0 then
-      if vim.tbl_contains(buckets, key) then
+    elseif submods and #submods > 0 then
+      if vim.tbl_contains(submods, key) then
         vim.list_extend(plugs, item)
       end
     else
@@ -1462,6 +1462,33 @@ M.done = function()
     mods.tool(),
     mods.write(),
   }
+
+  M.data = {}
+  for _, mod in ipairs(M.plugins) do
+    for _, plugin in ipairs(mod) do
+      if type(plugin) == 'table' and plugin.module and plugin.config then
+        local name = require('packer.util').get_plugin_short_name(plugin)
+        M.data[name] = {
+          config = plugin.config,
+          module = plugin.module,
+        }
+        plugin.config = function(name)
+          local plugin_data = require('young.plugins').data[name]
+
+          local plug_mod = rr(plugin_data.module)
+          if not plug_mod then
+            return
+          end
+
+          if type(plugin_data.config) == 'function' then
+            plugin_data.config()
+          else
+            loadstring(plugin_data.config)()
+          end
+        end
+      end
+    end
+  end
   return M.plugins
 end
 
