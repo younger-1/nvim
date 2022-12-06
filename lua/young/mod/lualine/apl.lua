@@ -1,9 +1,6 @@
 -- <https://github.com/ibhagwan/nvim-lua/blob/main/lua/plugins/statusline.lua>
 
-local res, statusline = pcall(require, 'lualine')
-if not res then
-  return
-end
+local lualine = require 'lualine'
 
 local col_from_hl = require('lualine.utils.utils').extract_color_from_hllist
 
@@ -108,7 +105,7 @@ local treesitter = {
   color = { fg = colors.bg, bg = colors.Special },
 }
 
-statusline.setup {
+lualine.setup {
   options = {
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },

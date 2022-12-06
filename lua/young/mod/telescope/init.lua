@@ -54,7 +54,7 @@ local view = require 'young.mod.telescope.view'
   n -> gg      -> move_to_top                     n -> <Tab>   -> toggle_selection + move_selec…
 ]]
 
-M.cfg = {
+local cfg = {
   defaults = {
     -- 🔍
     prompt_prefix = ' ',
@@ -362,29 +362,12 @@ M.cfg = {
   },
 }
 
-M.ice = function() end
-
 M.done = function()
   -- M.cfg = vim.tbl_deep_extend('force', M.cfg, {})
-
   local telescope = require 'telescope'
-  telescope.setup(M.cfg)
+  telescope.setup(cfg)
 
   vim.cmd [[cmap <C-R><C-t> <Plug>(TelescopeFuzzyCommandSearch)]]
-
-  -- if lvim.builtin.project.active then
-  --   pcall(function()
-  --     require('telescope').load_extension 'projects'
-  --   end)
-  -- end
-
-  -- if lvim.builtin.telescope.on_config_done then
-  --   lvim.builtin.telescope.on_config_done(telescope)
-  -- end
-
-  -- if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions.fzf then
-  --   require('telescope').load_extension 'fzf'
-  -- end
 end
 
 return M
