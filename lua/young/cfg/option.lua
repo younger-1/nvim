@@ -134,7 +134,7 @@ end
 -- vim.cmd 'set whichwrap+=<,>,[,],h,l'
 vim.opt.whichwrap:append '<,>,[,],h,l'
 
-vim.opt.iskeyword:append '-'
+-- vim.opt.iskeyword:append '-'
 
 -- vim.cmd [[set listchars=tab:●·,extends:→,precedes:←,trail:■]]
 -- vim.cmd [[set listchars=tab:>-,space:·,eol:↲,trail:~,extends:>,precedes:<,nbsp:+]]

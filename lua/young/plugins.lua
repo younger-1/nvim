@@ -487,8 +487,9 @@ mods.file = {
   tree = {
     {
       'kyazdani42/nvim-tree.lua',
+      cmd = 'NvimTreeToggle', -- BUG:PackerCompile will cause `cmd` redefined and load `config` again. But `NvimTreeToggle` defined in nvim-tree's `setup` with condition.
       -- event = 'BufWinEnter',
-      cmd = 'NvimTreeToggle',
+      module = 'nvim-tree',
       config = function()
         require('young.mod.nvim_tree').done()
       end,
@@ -599,9 +600,9 @@ mods.telescope = {
   core = {
     {
       'nvim-telescope/telescope.nvim',
-      -- cmd = 'Telescope', -- BUG:PackerCompile will cause `cmd` redefined
-      event = 'BufRead',
       -- defer = 2,
+      -- cmd = 'Telescope', -- BUG:PackerCompile will cause `cmd` redefined and load `config` again. But `Telescope` defined in its plugin file, which packer do not load again.
+      event = 'BufRead',
       module = 'telescope',
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
       config = function()
@@ -744,7 +745,7 @@ mods.git = {
   },
   {
     'TimUntersberger/neogit',
-    cmd = 'Neogit',
+    cmd = 'Neogit', -- BUG:PackerCompile will cause `cmd` redefined
     module = 'neogit',
     config = function()
       require('neogit').setup {}
@@ -796,6 +797,7 @@ mods.UI = {
       'anuvyklack/hydra.nvim',
       -- defer = 2,
       event = 'BufWinEnter',
+      module = 'hydra',
       config = function()
         require 'young.mod.hydra'
       end,
@@ -853,7 +855,7 @@ mods.UI = {
     },
   },
   statusline = {
-    -- { 'NTBBloodbath/galaxyline.nvim', config = require('plug-config.galaxyline')}
+    -- { 'glepnir/galaxyline.nvim', config = require('young.mod.galaxyline')}
     {
       'nvim-lualine/lualine.nvim',
       event = 'BufRead',
@@ -905,7 +907,8 @@ mods.UI = {
       'goolord/alpha-nvim',
       cmd = 'Alpha',
       event = 'BufWinEnter',
-      bufread = true,
+      module = 'alpha',
+      -- bufread = true,
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
@@ -1473,6 +1476,9 @@ M.done = function()
           module = plugin.module,
         }
         plugin.config = function(name)
+          -- if name == nil then
+          --   xy.util.echomsg { '[young]: name == nil' }
+          -- end
           local plugin_data = require('young.plugins').data[name]
 
           local plug_mod = rr(plugin_data.module)
