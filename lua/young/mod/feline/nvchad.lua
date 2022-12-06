@@ -1,7 +1,4 @@
-local present, feline = pcall(require, 'feline')
-if not present then
-  return
-end
+local feline = require 'feline'
 
 local hl_themes = {
   onedark = function()

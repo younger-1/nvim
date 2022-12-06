@@ -2,7 +2,7 @@ local ibl = require 'indent_blankline'
 
 local M = {}
 
-M.cfg = {
+local cfg = {
   -- Dynamic keys
   -- char = "▏", -- "│"
   -- char_highlight_list = {},
@@ -97,13 +97,13 @@ local styles = {
   },
 }
 
-local idx
+local idx = 1
 local function apply_style()
   local style = styles[idx]
   if style.hl_cmd then
     style.hl_cmd()
   end
-  xy.util.shallow_force(M.cfg, style)
+  xy.util.shallow_force(cfg, style)
 
   idx = idx % #styles
   idx = idx + 1
@@ -111,13 +111,8 @@ end
 
 M.hot = function()
   apply_style()
-  ibl.setup(M.cfg)
+  ibl.setup(cfg)
   ibl.refresh()
-end
-
-M.once = function()
-  idx = 1
-  M.hot()
 end
 
 M.done = function()
@@ -133,7 +128,8 @@ M.done = function()
 
   -- highlight of current indent char, default is Label
   vim.cmd [[highlight! link IndentBlanklineContextChar Normal]]
-  M.once()
+
+  M.hot()
 end
 
 return M

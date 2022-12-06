@@ -1,6 +1,6 @@
 local M = {}
 
-M.cfg = {
+local cfg = {
   -- when there is only one window available to pick from, use that window
   -- without prompting the user to select
   autoselect_one = true,
@@ -73,7 +73,7 @@ M.done = function()
   --   return
   -- end
 
-  require('window-picker').setup(M.cfg)
+  require('window-picker').setup(cfg)
 end
 
 return M
