@@ -68,6 +68,8 @@
 - [ ] vim: / to search in message, very useful!
 - [ ] Telescope: from child picker go back to parent picker. e.g. Ctrl-f in `Telescope packer` find files in that entry
 - [ ] Telescope: live_grep toggle 1.regex or fixed string, 2.match case or not
+- [ ] magic `q`: quit all modifiable floating window
+- [ ] cmp-cmdline: only load once for `after/plugin/cmp_cmdline.lua`
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
