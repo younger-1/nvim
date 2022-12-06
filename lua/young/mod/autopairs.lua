@@ -1,6 +1,6 @@
 local npairs = require 'nvim-autopairs'
 local Rule = require 'nvim-autopairs.rule'
-local cond = require 'nvim-autopairs.conds'
+-- local cond = require 'nvim-autopairs.conds'
 -- pp(cond)
 
 -- If you want insert `(` after select function, but not for `tex`

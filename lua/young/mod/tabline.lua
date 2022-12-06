@@ -18,9 +18,13 @@ M.done = function()
       show_filename_only = false, -- shows base filename only instead of relative path in filename
     },
   }
+
   vim.cmd [[
     command! -nargs=1 TablineCustom lua require('young.mod.tabline').new_tab(<f-args>)
   ]]
+
+  xy.map.n { '<S-l>', '<Cmd>TablineBufferNext<CR>' }
+  xy.map.n { '<S-h>', '<Cmd>TablineBufferPrevious<CR>' }
 end
 
 M.new_tab = function(name)

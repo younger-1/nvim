@@ -3,18 +3,15 @@
 
 local cmp = require 'cmp'
 local cmapping = cmp.mapping
-local luasnip = require 'luasnip'
-
-require('luasnip.loaders.from_vscode').load()
--- require('luasnip.loaders.from_vscode').load({ paths = { './utils/' } })
-require('luasnip.loaders.from_snipmate').load()
+local luasnip = rr 'luasnip' or nil
+local lspkind = rr 'lspkind' or nil
 
 local M = {}
 
 local pum_half = (vim.o.pumheight == 0 and 5) or vim.o.pumheight / 2
 
 -- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
-M.cfg = {
+local cfg = {
   -- enabled = function()
   --   -- disable completion if the cursor is `Comment` syntax group.
   --   return not cmp.config.context.in_syntax_group('Comment')
@@ -85,7 +82,9 @@ M.cfg = {
       -- require('snippy').expand_snippet(args.body)
 
       -- For `luasnip` users.
-      luasnip.lsp_expand(args.body)
+      if luasnip then
+        luasnip.lsp_expand(args.body)
+      end
     end,
   },
   window = {
@@ -139,9 +138,9 @@ M.cfg = {
     --   return vim_item
     -- end,
 
-    -- format = require('lspkind').cmp_format(),
+    -- format = lspkind.cmp_format(),
 
-    format = require('lspkind').cmp_format {
+    format = lspkind and lspkind.cmp_format {
       with_text = true,
       maxwidth = 50,
       menu = {
@@ -194,7 +193,7 @@ M.cfg = {
       --   cmp.select_next_item()
       -- elseif require('neogen').jumpable() then
       --   require('neogen').jump_next()
-      if luasnip.expand_or_locally_jumpable() then
+      if luasnip and luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
@@ -205,7 +204,7 @@ M.cfg = {
       --   cmp.select_prev_item()
       -- elseif require('neogen').jumpable(true) then
       --   require('neogen').jump_prev()
-      if luasnip.jumpable(-1) then
+      if luasnip and luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -254,7 +253,7 @@ M.cfg = {
 }
 
 M.done = function()
-  cmp.setup(M.cfg)
+  cmp.setup(cfg)
 
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
