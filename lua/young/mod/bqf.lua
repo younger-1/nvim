@@ -2,7 +2,7 @@ local M = {}
 
 -- TODO:https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/bqf.lua
 
-M.cfg = {
+local cfg = {
   preview = {
     win_height = 12,
     win_vheight = 12,
@@ -33,7 +33,8 @@ M.cfg = {
 }
 
 M.done = function()
-  require('bqf').setup(M.cfg)
+  -- pp(require 'bqf.config')
+  require('bqf').setup(cfg)
 end
 
 return M

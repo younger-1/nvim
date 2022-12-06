@@ -1,7 +1,4 @@
-local colorizer = rr 'colorizer'
-if not colorizer then
-  return
-end
+local colorizer = require 'colorizer'
 
 -- colorizer.setup({ '*' }, {
 --   names = true,

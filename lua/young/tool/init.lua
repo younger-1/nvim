@@ -319,13 +319,9 @@ local bar_flag = true
 tool.toggle_tabline = function()
   if bar_flag then
     vim.cmd 'BarbarDisable'
-    require('young.mod.tabline').config()
-    xy.map.n { '<S-l>', ':TablineBufferNext<CR>' }
-    xy.map.n { '<S-h>', ':TablineBufferPrevious<CR>' }
+    require('young.mod.tabline').done()
   else
-    vim.cmd 'BarbarEnable'
-    xy.map.n { '<S-l>', ':BufferNext<CR>' }
-    xy.map.n { '<S-h>', ':BufferPrevious<CR>' }
+    require('young.mod.barbar').done()
   end
   bar_flag = not bar_flag
 end

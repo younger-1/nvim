@@ -87,7 +87,8 @@ vim.g.bufferline = {
   -- no_name_title = "Empty",
 }
 
-M.hot = function()
+M.done = function()
+  vim.cmd 'BarbarEnable'
   xy.map.n { '<S-l>', '<cmd>BufferNext<CR>' }
   xy.map.n { '<S-h>', '<cmd>BufferPrevious<CR>' }
   -- vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>', { noremap = true, silent = true })

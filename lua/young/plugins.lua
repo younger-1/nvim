@@ -104,6 +104,7 @@ mods.appearance = {
       -- 'norcalli/nvim-colorizer.lua',
       'NvChad/nvim-colorizer.lua',
       event = 'BufRead',
+      module = 'colorizer',
       config = function()
         require 'young.mod.colorizer'
       end,
@@ -210,6 +211,7 @@ mods.edit = {
     -- { -- Smooth scrolling for ANY movement command
     --   'declancm/cinnamon.nvim',
     --   event = 'BufWinEnter',
+    --   module = 'cinnamon',
     --   config = function()
     --     require 'young.mod.cinnamon'
     --   end,
@@ -271,6 +273,7 @@ mods.change = {
       'windwp/nvim-autopairs',
       event = 'InsertEnter',
       after = 'nvim-cmp',
+      module = 'nvim-autopairs',
       config = function()
         require 'young.mod.autopairs'
       end,
@@ -280,10 +283,11 @@ mods.change = {
     {
       'numToStr/Comment.nvim',
       event = 'BufRead',
+      module = 'Comment',
       -- BUG:PackerCompile will cause `keys` redefined
       -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
       config = function()
-        require('young.mod.comment').done()
+        require 'young.mod.comment'
       end,
     },
   },
@@ -475,7 +479,7 @@ mods.BWT = {
       'kevinhwang91/nvim-bqf',
       -- event = "BufRead",
       ft = 'qf',
-      -- lua pp((require('bqf.config'))
+      module = 'bqf',
       config = function()
         require('young.mod.bqf').done()
       end,
@@ -844,7 +848,7 @@ mods.UI = {
       'romgrk/barbar.nvim',
       event = 'BufRead',
       config = function()
-        require('young.mod.barbar').hot()
+        require('young.mod.barbar').done()
       end,
     },
   },
@@ -981,10 +985,12 @@ mods.code = {
     {
       'hrsh7th/nvim-cmp',
       event = { 'InsertEnter', 'CmdlineEnter' },
+      module = 'cmp',
       config = function()
         require('young.mod.cmp').done()
       end,
       requires = {
+        { 'onsails/lspkind-nvim' },
         -- [source]
         { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
         -- { 'hrsh7th/cmp-nvim-lua' },
@@ -999,6 +1005,7 @@ mods.code = {
         -- {
         --   'uga-rosa/cmp-dictionary',
         --   after = 'nvim-cmp',
+        --   module = 'cmp_dictionary',
         --   config = function()
         --     require('young.mod.cmp').setup_dictionary()
         --   end,
@@ -1019,7 +1026,6 @@ mods.code = {
         },
       },
     },
-    { 'onsails/lspkind-nvim' },
     -- {
     --   'github/copilot.vim',
     --   -- requires = { { 'hrsh7th/cmp-copilot', after = 'copilot.vim' } },
