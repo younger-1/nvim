@@ -239,9 +239,7 @@ for mode_name, mappings in pairs(keys) do
   end
 end
 
-vim.defer_fn(function()
-  local n = require 'young.key.normal'
-  local v = require 'young.key.visual'
-  xy.map.register(n, { mode = 'n' })
-  xy.map.register(v, { mode = 'x' })
-end, 20)
+local n = require 'young.key.normal'
+local v = require 'young.key.visual'
+xy.map.register(n, { mode = 'n' })
+xy.map.register(v, { mode = 'x' })
