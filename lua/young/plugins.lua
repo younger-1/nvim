@@ -168,7 +168,7 @@ mods.edit = {
       'chaoren/vim-wordmotion',
       event = 'CursorMoved',
       setup = function()
-        vim.g.wordmotion_prefix = ';'
+        vim.g.wordmotion_prefix = ','
       end,
     },
     {
@@ -229,7 +229,9 @@ mods.edit = {
       end,
     },
     { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
-    { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
+    { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' },
+    -- { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' },
+    { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
     {
       'nvim-treesitter/nvim-treesitter-context',
       after = 'nvim-treesitter',
@@ -237,8 +239,6 @@ mods.edit = {
         require('young.mod.treesitter').setup_context()
       end,
     },
-    { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
-    { 'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter' },
     {
       'ziontee113/syntax-tree-surfer',
       after = 'nvim-treesitter',
