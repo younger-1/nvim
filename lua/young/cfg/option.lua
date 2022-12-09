@@ -23,6 +23,7 @@ local default_options = {
   -- guifont = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
   guifontwide = { 'Sarasa Term SC' },
   mouse = '', -- allow the mouse to be used in neovim
+  pumwidth = 25, -- pop up menu width
   pumheight = 20, -- pop up menu height
   pumblend = 30, -- transparency for the |popup-menu|
   showmode = false, -- we don't need to see things like -- INSERT -- anymore

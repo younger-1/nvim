@@ -109,8 +109,8 @@ local cfg = {
     -- cycle_layout_list = { 'horizontal', 'vertical', 'center', 'cursor', 'bottom_pane', 'current_buffer', 'flex' },
     winblend = 15,
     dynamic_preview_title = true,
-    path_display = { truncate = 5 },
     -- path_display = { shorten = 5 },
+    path_display = { truncate = 5 },
     -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
     -- borderchars = {
     --   prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
