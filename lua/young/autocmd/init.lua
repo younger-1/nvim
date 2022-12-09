@@ -64,11 +64,11 @@ function M.enable_augroups(augroups)
   -- end
 
   for group_name, autocmds in pairs(augroups) do
-    xy.autogroup(group_name, autocmds, true)
+    xy.autogroup(group_name, autocmds)
   end
 end
 
-local augroup_prefix = '_yo_'
+local augroup_prefix = '_xy_'
 M.build_augroups = function(augroups, enable)
   for name, autocmds in pairs(augroups) do
     local group_name = augroup_prefix .. name
@@ -103,6 +103,7 @@ function M.done()
     -- hi! Normal ctermbg=none guibg=none
     -- hi! NonText ctermbg=none guibg=none
     vim.api.nvim_create_autocmd('ColorScheme', {
+      group = vim.api.nvim_create_augroup('_transparent', {}),
       pattern = '*',
       callback = function()
         local hl_groups = {
@@ -303,7 +304,7 @@ function M.done()
       -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")', once = true },
       -- { 'CmdlineEnter', '*', 'lua require("young.tool").startup_event("CmdlineEnter")', once = true },
     },
-    _config_reload = {
+    _packer = {
       -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
       { 'BufWritePost', plugins_path, require('young.packer').recompile },
       { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },

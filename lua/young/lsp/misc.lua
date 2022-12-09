@@ -67,6 +67,7 @@ function M.patch_lsp_settings(server_name, settings_patcher)
   end
 
   vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('_lsp_patch', { clear = false }),
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client.name == server_name then

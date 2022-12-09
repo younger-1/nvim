@@ -134,7 +134,7 @@ command DapExpressionFloat :lua require'dap.ui.widgets'.centered_float(require('
 command DapThreadsFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').threads)<CR>
 ]]
 
-xy.autogroup('dap_loadjson', {
+xy.autogroup('_dap_loadjson', {
   {
     'BufWritePost',
     'launch.json',
@@ -155,7 +155,7 @@ function M.setup_python()
     -- require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/bin/python3'
     require('mason-core.path').package_prefix 'debugpy' .. '/venv/bin/python3'
   )
-  xy.autogroup('dap_python', {
+  xy.autogroup('_dap_python', {
     {
       'FileType',
       'python',
@@ -216,7 +216,7 @@ end
 
 function M.setup_go()
   require('dap-go').setup()
-  xy.autogroup('dap_go', {
+  xy.autogroup('_dap_go', {
     {
       'FileType',
       'go',

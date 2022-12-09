@@ -83,6 +83,7 @@ local function setup_winbar(client, bufnr)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('_navic', {}),
   callback = function(ctx)
     -- BUG:not null-ls, may be packer or neovim upstream
     if not ctx.data then
