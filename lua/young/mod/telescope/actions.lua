@@ -6,8 +6,8 @@ local function get_locs(title, entry)
   local def = ({
     ['Key Maps'] = {
       type = 'map',
-      para = (entry.mode or ''):sub(1, 1),
       name = entry.lhs,
+      mode = (entry.mode or ''):sub(1, 1),
     },
     ['Commands'] = {
       type = 'command',
@@ -15,8 +15,8 @@ local function get_locs(title, entry)
     },
     ['autocommands'] = {
       type = 'autocmd',
-      para = entry.value.group_name,
       name = entry.value.event,
+      group = entry.value.group_name:match '^[^<]+' or '',
     },
     ['options'] = {
       type = 'set',

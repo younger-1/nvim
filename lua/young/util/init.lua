@@ -228,14 +228,14 @@ end
 function util.get_def_locations(tbl)
   local str = tbl.type
   if tbl.type == 'map' then
-    str = (tbl.para or '') .. str
+    str = tbl.mode .. str
     -- tbl.name = tbl.name:gsub('<Leader>', '<Space>')
     tbl.name = tbl.name:gsub('<[Ll]eader>', fn.keytrans(vim.g.mapleader))
-  else
-    str = str .. ' ' .. (tbl.para or '')
+  elseif tbl.type == 'autocmd' then
+    str = str .. ' ' .. tbl.group
   end
 
-  str = str .. ' ' .. (tbl.name or '')
+  str = str .. ' ' .. tbl.name
   if tbl.type == 'set' then
     str = str .. '?'
   end
