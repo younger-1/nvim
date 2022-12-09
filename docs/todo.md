@@ -70,6 +70,9 @@
 - [ ] Telescope: live_grep toggle 1.regex or fixed string, 2.match case or not
 - [ ] magic `q`: quit all modifiable floating window
 - [ ] cmp-cmdline: only load once for `after/plugin/cmp_cmdline.lua`
+- [ ] Telescope keymaps: add indicators for expr
+- [ ] refine get_def_locations: 1.keymap: maparg with buffer, 2.autocmd: remove para, 3.autocmd: remove repeated entry
+- [ ] module: use tap instead of auto-pcall in config
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
