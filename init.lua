@@ -30,7 +30,7 @@ xy.util.defer(function()
 
   require('young.lsp').done()
 
-  vim.cmd [[doautocmd BufWinEnter | doautocmd BufRead]]
+  vim.cmd [[doautocmd BufWinEnter | doautocmd BufRead | doautocmd FileType]]
 end)
 
 tt()
