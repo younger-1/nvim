@@ -34,6 +34,7 @@ local make_config = function(config)
     end
 
     autocmd = vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('_LSP', { clear = false }),
       desc = string.format('Attach LSP: %s', client.name),
       pattern = filetypes,
       callback = buf_attach,

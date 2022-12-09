@@ -4,6 +4,7 @@ if not monokai then
 end
 
 vim.api.nvim_create_autocmd('ColorScheme', {
+  group = vim.api.nvim_create_augroup('_monokai', {}),
   pattern = 'monokai*',
   callback = function(ctx)
     local flavour = ({

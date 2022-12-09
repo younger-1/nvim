@@ -348,9 +348,9 @@ end
 
 ---@param group     string
 ---@param autocmds  Autocmd[]
----@param reset?    boolean    only true will reset autocmds of this group
+---@param reset?    boolean    default to reset, unless false
 xy.autogroup = function(group, autocmds, reset)
-  if not reset then
+  if reset == false then
     vim.api.nvim_create_augroup(group, { clear = false })
   elseif group then
     local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = group, buffer = autocmds.bufnr })

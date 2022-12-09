@@ -162,11 +162,9 @@ M.done = function()
     end
 
     if server_name == 'jdtls' and vim.g.young_jdtls then
-      require('young.autocmd').enable_augroups {
-        _jdtls_lsp = {
-          { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
-        },
-      }
+      xy.autogroup('_jdtls_lsp', {
+        { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
+      })
       goto continue
     end
 
