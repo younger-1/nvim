@@ -2,6 +2,7 @@ local Hydra = require 'hydra'
 local gitsigns = require 'gitsigns'
 
 Hydra {
+  name = 'Git',
   hint = table.concat({
     ' _J_: next hunk    _s_: stage hunk        _d_: show deleted   _b_: blame line',
     ' _K_: prev hunk    _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full',
