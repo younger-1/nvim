@@ -89,7 +89,8 @@ local buffer_hydra = Hydra {
       cmd 'BufferOrderByLanguage',
       { desc = 'by directory/language' },
     },
-    { '<Esc>', nil, { exit = true } },
+    -- { '<Esc>', nil, { exit = true, desc = false } },
+    { 'q', nil, { exit = true, desc = false } },
   },
 }
 
