@@ -73,6 +73,7 @@
 - [ ] Telescope keymaps: add indicators for expr
 - [ ] refine get_def_locations: 1.keymap: maparg with buffer, 2.autocmd: remove para, 3.autocmd: remove repeated entry
 - [ ] module: use tap instead of auto-pcall in config
+- [ ] hydra: global keymap e.g. <esc> to quit
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
