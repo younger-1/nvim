@@ -305,4 +305,24 @@ IlluminatedWordRead xxx gui=underline
         Last set from Lua
 ]]
 
+---@see https://github.com/anuvyklack/hydra.nvim/blob/7e2aa29f88d534371c6b0263d3abbfac7c2376ce/lua/hydra/lib/util.lua#L71
+-- Recursive subtables
+local mt = {}
+function mt.__index(self, subtbl)
+   self[subtbl] = setmetatable({}, {
+      __index = mt.__index
+   })
+   return self[subtbl]
+end
+---Return an empty table, in which any nested tables of any level will be created on fly when they will be accessed.
+---Example:
+---```
+---    local t = util.unlimited_depth_table()
+---    t[one][two][three] = 'text'
+---```
+function util.unlimited_depth_table()
+   return setmetatable({}, mt)
+end
+
+
 return util

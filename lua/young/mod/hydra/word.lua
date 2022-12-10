@@ -1,7 +1,7 @@
 local Hydra = require 'hydra'
 
 Hydra {
-  name = 'Quick words',
+  name = 'Smart word',
   config = {
     color = 'pink',
     hint = { type = 'statusline' },
