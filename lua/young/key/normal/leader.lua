@@ -25,7 +25,7 @@ return {
   ["'"] = { cmd 'Telescope live_grep_args', 'Grep' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [','] = { cmd 'Telescope buffers', 'Buffers' },
-  ['.'] = { cmd 'Telescope find_files layout_strategy=horizontal', 'Files' },
+  -- ['.'] = { cmd 'Telescope find_files layout_strategy=horizontal', 'Files' },
   ['/'] = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
   ['?'] = {
     name = '+help',
@@ -555,7 +555,11 @@ return {
     g = {
       function()
         require('telescope.builtin').live_grep {
-          grep_open_files = vim.v.count ~= 0,
+          -- grep_open_files = vim.v.count ~= 0,
+          -- Like how fzf handles spaces with wildcards in rg
+          on_input_filter_cb = vim.v.count == 0 and function(prompt)
+            return { prompt = prompt:gsub('%s', '.*') }
+          end,
         }
       end,
       'Grep',
@@ -576,7 +580,7 @@ return {
     k = {
       function()
         require('telescope.builtin').keymaps {
-          modes = { 'n', 'i', 'c', 'x', 'o'},
+          modes = { 'n', 'i', 'c', 'x', 'o' },
           show_plug = vim.v.count ~= 0,
           only_buf = vim.v.count ~= 0, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
           lhs_filter = function(lhs)

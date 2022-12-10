@@ -1,13 +1,17 @@
 local Hydra = require 'hydra'
 local gitsigns = require 'gitsigns'
 
+local hint = [[
+ _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+ _K_: prev hunk   _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full
+ ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
+ ^
+ ^ ^              _<Enter>_: Neogit              _q_: exit
+ ]]
+
 Hydra {
   name = 'Git',
-  hint = table.concat({
-    ' _J_: next hunk    _s_: stage hunk        _d_: show deleted   _b_: blame line',
-    ' _K_: prev hunk    _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full',
-    ' _r_: reset hunk   _S_: stage buffer      ^ ^                 _/_: show base file',
-  }, '\n'),
+  hint = hint,
   config = {
     color = 'pink',
     invoke_on_body = true,
@@ -16,6 +20,7 @@ Hydra {
       border = 'rounded',
     },
     on_enter = function()
+      vim.bo.modifiable = false
       gitsigns.toggle_signs(true)
       gitsigns.toggle_linehl(true)
     end,
@@ -23,6 +28,7 @@ Hydra {
       gitsigns.toggle_signs(false)
       gitsigns.toggle_linehl(false)
       gitsigns.toggle_deleted(false)
+      vim.cmd 'echo' -- clear the echo area
     end,
   },
   mode = { 'n', 'x' },
@@ -54,7 +60,6 @@ Hydra {
       end,
       { expr = true },
     },
-    { 'r', ':Gitsigns reset_hunk<CR>' },
     { 's', ':Gitsigns stage_hunk<CR>', { silent = true } },
     { 'u', gitsigns.undo_stage_hunk },
     { 'S', gitsigns.stage_buffer },
@@ -68,6 +73,8 @@ Hydra {
       end,
     },
     { '/', gitsigns.show, { exit = true } }, -- show the base of the file
-    { '<Esc>', nil, { exit = true, nowait = true } },
+    { '<Enter>', '<cmd>Neogit<CR>', { exit = true } },
+    -- { '<Esc>', nil, { exit = true, desc = false } },
+    { 'q', nil, { exit = true, desc = false } },
   },
 }

@@ -120,6 +120,7 @@ Hydra {
       end,
       { desc = 'cursor line' },
     },
-    { '<Esc>', nil, { exit = true } },
+    -- { '<Esc>', nil, { exit = true, desc = false } },
+    { 'q', nil, { exit = true, desc = false } },
   },
 }
