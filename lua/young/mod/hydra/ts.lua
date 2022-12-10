@@ -81,7 +81,16 @@ local function ts_init_helper(tbl)
           function()
             xy.util.defer(M.ts_init_hydra.activate, M.ts_init_hydra, 100)
           end,
-          { exit = true, desc = 'Select query' },
+          { exit = true, desc = 'select query' },
+        },
+        {
+          '<CR>',
+          function()
+            xy.util.defer(function()
+              ts_hydra_land[mark .. ({ ['.inner'] = '.outer', ['.outer'] = '.inner' })[io]]:activate()
+            end)
+          end,
+          { exit = true, desc = 'toggle io' },
         },
       }
 
