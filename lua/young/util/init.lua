@@ -88,12 +88,9 @@ end
 --   end
 -- end
 
---@param para: table or single value
 function util.defer(fn, para, time)
-  -- wrap it!
-  para = type(para) == 'table' and para or { para }
   local fn_box = function()
-    fn(unpack(para))
+    fn(para)
   end
   time = time or 20
   vim.defer_fn(fn_box, time)

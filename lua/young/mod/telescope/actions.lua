@@ -16,7 +16,7 @@ local function get_locs(title, entry)
     ['autocommands'] = {
       type = 'autocmd',
       name = entry.value.event,
-      group = entry.value.group_name:match '^[^<]+' or '',
+      group = (entry.value.group_name or ''):match '^[^<]+' or '',
     },
     ['options'] = {
       type = 'set',
