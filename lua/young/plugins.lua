@@ -495,7 +495,7 @@ mods.file = {
       -- event = 'BufWinEnter',
       -- module = 'nvim-tree', -- BUG:require nvim-treesitter also trigger it.
       -- module_pattern = '^nvim%-tree$',
-      module_pattern = '^' .. vim.pesc 'nvim-tree' .. '$',
+      -- module_pattern = '^' .. vim.pesc 'nvim-tree' .. '$',
       -- module_pattern = { '^' .. vim.pesc 'nvim-tree' .. '$', '^' .. vim.pesc 'nvim-tree.' },
       config = function()
         require('young.mod.nvim_tree').done()
@@ -1478,22 +1478,23 @@ M.done = function()
   M.data = {}
   for _, mod in ipairs(M.plugins) do
     for _, plugin in ipairs(mod) do
-      if type(plugin) == 'table' and (plugin.module or plugin.module_pattern) and plugin.config then
+      if type(plugin) == 'table' and plugin.config then
         local name = require('packer.util').get_plugin_short_name(plugin)
         M.data[name] = {
           config = plugin.config,
-          module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
+          -- module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
         }
         plugin.config = function(name)
-          -- if name == nil then
-          --   xy.util.echomsg { '[young]: name == nil' }
-          -- end
-          local plugin_data = require('young.plugins').data[name]
-
-          local plug_mod = rr(plugin_data.module)
-          if not plug_mod then
+          if not xy.util.is_dir(_G.packer_plugins[name].path) then
+            xy.util.echomsg { ('[young]: %s is not install'):format(name) }
             return
           end
+
+          local plugin_data = require('young.plugins').data[name]
+          -- local plug_mod = rr(plugin_data.module)
+          -- if not plug_mod then
+          --   return
+          -- end
 
           if type(plugin_data.config) == 'function' then
             plugin_data.config()
