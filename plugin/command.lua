@@ -35,3 +35,13 @@ vim.api.nvim_create_user_command('RegDiff', function(ctx)
   vim.cmd('aboveleft diffsplit ' .. vim.fn.fnameescape(reg1_name))
   vim.cmd 'wincmd p'
 end, { bar = true, nargs = '*' })
+
+vim.api.nvim_create_user_command('Capture', function(ctx)
+  local lines = vim.split(vim.api.nvim_exec(ctx.args, true), '\n', { plain = true })
+
+  vim.cmd 'vnew'
+  -- vim.o.buflisted = false -- TODO:not flash tabline
+
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+  vim.o.modified = false
+end, { nargs = '+', complete = 'command' })

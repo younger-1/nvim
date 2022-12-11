@@ -11,7 +11,6 @@ local hint = [[
   _n_ %{nu} number
   _r_ %{rnu} relative number
   ^
-       ^^^^                _<Esc>_
 ]]
 
 Hydra {

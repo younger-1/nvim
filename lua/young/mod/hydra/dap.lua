@@ -1,14 +1,14 @@
 local dap = require 'dap'
 local hint = [[
-     ^ ^Step^ ^ ^      ^ ^     Action
- ----^-^-^-^--^-^----  ^-^-------------------
-     ^ ^back^ ^ ^     ^_t_: toggle breakpoint
-     ^ ^ _K_^ ^        _T_: clear breakpoints
- out _H_ ^ ^ _L_ into  _c_: continue
-     ^ ^ _J_ ^ ^       _x_: terminate
-     ^ ^over ^ ^     ^^_r_: open repl
+ ^^     Step     ^^         Action
+ ^^--------------^^  --------------------^^
+ ^^     back     ^^  _t_: toggle breakpoint
+ ^      _K_       ^  _T_: clear breakpoints
+ out _H_   _L_ into  _c_: continue
+ ^      _J_       ^  _x_: terminate
+ ^^     over     ^^  _r_: open repl
 
-     ^ ^  _q_: exit
+       _q_: exit
 ]]
 
 require 'hydra' {
@@ -18,7 +18,7 @@ require 'hydra' {
     color = 'pink',
     invoke_on_body = true,
     hint = {
-      type = 'window',
+      border = 'single',
     },
   },
   mode = { 'n' },

@@ -3,9 +3,11 @@
 -- vim self
 require 'young.mod.hydra.option'
 require 'young.mod.hydra.z_view'
+require 'young.mod.hydra.w_window'
 
 -- with plugin
 -- require 'young.mod.hydra.git'
+-- require 'young.mod.hydra.dap'
 require 'young.mod.hydra.buffer'
 require 'young.mod.hydra.window'
 require 'young.mod.hydra.word'

@@ -19,7 +19,7 @@ command! -nargs=+ -complete=command Message    call yo#redir#Messages(<q-args>, 
 command! -nargs=+ -complete=command BufMessage call yo#redir#Messages(<q-args>, 'enew')
 command! -nargs=+ -complete=command WinMessage call yo#redir#Messages(<q-args>, 'new')
 command! -nargs=+ -complete=command TabMessage call yo#redir#Messages(<q-args>, 'tabnew')
-command! -nargs=+ -complete=command Capture    call yo#redir#Messages(<q-args>, 'vnew')
+command! -nargs=+ -complete=command Redir      call yo#redir#Messages(<q-args>, 'vnew')
 
 " function! Capture(cmd)
 "   execute ":vnew|pu=execute('" . a:cmd . "')|1,2d_"

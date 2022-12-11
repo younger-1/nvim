@@ -127,26 +127,30 @@ dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 -- View the value for the expression under the cursor in a floating window:
 --   require('dap.ui.widgets').hover()
 
-vim.cmd [[
+local M = {}
+
+function M.done()
+  vim.cmd [[
 command DapScopesFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').scopes)<CR>
 command DapFramesFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').frames)<CR>
 command DapExpressionFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').expression)<CR>
 command DapThreadsFloat :lua require'dap.ui.widgets'.centered_float(require('dap.ui.widgets').threads)<CR>
 ]]
 
-xy.autogroup('_dap_loadjson', {
-  {
-    'BufWritePost',
-    'launch.json',
-    function()
-      -- require('dap').configurations = {}
-      require('dap.ext.vscode').load_launchjs()
-    end,
-  },
-})
-require('dap.ext.vscode').load_launchjs()
+  require 'young.mod.hydra.dap'
 
-local M = {}
+  xy.autogroup('_dap_loadjson', {
+    {
+      'BufWritePost',
+      'launch.json',
+      function()
+        -- require('dap').configurations = {}
+        require('dap.ext.vscode').load_launchjs()
+      end,
+    },
+  })
+  require('dap.ext.vscode').load_launchjs()
+end
 
 function M.setup_python()
   -- @see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
@@ -171,7 +175,7 @@ function M.setup_python()
     },
   })
   -- ensure already opened buffer setup mappings
-  vim.cmd [[doautoall dap_python FileType]]
+  vim.cmd [[doautoall _dap_python FileType]]
 
   -- table.insert(require('dap').configurations.python, {
   --   type = 'python',
@@ -230,7 +234,7 @@ function M.setup_go()
     },
   })
   -- ensure already opened buffer setup mappings
-  vim.cmd [[doautoall dap_go FileType]]
+  vim.cmd [[doautoall _dap_go FileType]]
 end
 
 function M.setup_virtual_text()
