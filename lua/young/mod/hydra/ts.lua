@@ -6,13 +6,20 @@ end
 
 local Hydra = require 'hydra'
 -- rr('nvim-treesitter.configs').get_module('textobjects.move')
-local u = require('young.mod.treesitter').cfg.textobjects.move
+local ts_move_cfg = require('young.mod.treesitter').cfg.textobjects.move
 local fts = require('young.mod.treesitter').cfg.ensure_installed
 local map = vim.keymap.set
 
-local goto_fns = { 'goto_next_start', 'goto_next_end', 'goto_previous_start', 'goto_previous_end' }
+local key_prefix = 'g'
 
-local k = {
+local key2goto = {
+  j = 'goto_next_start',
+  J = 'goto_next_end',
+  k = 'goto_previous_start',
+  K = 'goto_previous_end',
+}
+
+local key2mark = {
   ['b'] = '@block',
   ['c'] = '@class',
   ['k'] = '@conditional',
@@ -21,6 +28,11 @@ local k = {
   ['j'] = '@call',
   ['p'] = '@parameter',
   ['/'] = '@comment',
+}
+
+local key2io = {
+  i = '.inner',
+  o = '.outer',
 }
 
 local ts_hydra_meta = {
@@ -79,7 +91,9 @@ local function ts_init_helper(tbl)
         {
           '<BS>',
           function()
-            xy.util.defer(M.ts_init_hydra.activate, M.ts_init_hydra, 100)
+            xy.util.defer(function()
+              M.ts_init_hydra:activate()
+            end, 100)
           end,
           { exit = true, desc = 'select query' },
         },
@@ -125,7 +139,7 @@ M.ts_init_hydra = Hydra {
   },
   mode = { 'n', 'x' },
   body = 'g<space>',
-  heads = ts_init_helper(k),
+  heads = ts_init_helper(key2mark),
 }
 
 function M.setup_hydra(key, fn, query)
@@ -138,17 +152,26 @@ end
 
 local function setup(ctx)
   -- gg(ctx.buf, ctx.match)
-  for _, goto_ in pairs(goto_fns) do
-    for key, query in
-      pairs(
-        u[goto_] --[[@as table]]
-      )
-    do
-      if fn.maparg(key) ~= '' then -- only set keymap when we have original mappings
-        M.setup_hydra(key, goto_, query)
-        -- map('n', key, function()
-        --   ts_move[goto_](query)
-        -- end, { buffer = ctx.buf, desc = query })
+  for key_goto, goto_fn in pairs(key2goto) do
+    for key_mark, mark in pairs(key2mark) do
+      for key_io, io in pairs(key2io) do
+        local key = key_prefix .. key_goto .. key_io .. key_mark
+        local query = mark .. io
+        M.setup_hydra(key, goto_fn, query)
+      end
+    end
+  end
+
+  for goto_, keymaps in pairs(ts_move_cfg) do
+    if vim.startswith(goto_, 'goto_') then
+      for key, query in
+        pairs(
+          keymaps --[[@as table]]
+        )
+      do
+        if fn.maparg(key) ~= '' then -- only set keymap when we have original mappings
+          M.setup_hydra(key, goto_, query)
+        end
       end
     end
   end
