@@ -93,6 +93,15 @@ insert_nav = {
 
 ## Problem
 
+`packer.nvim`
+
+Defer packer made the following unusable
+
+```
+nvim --headless +'PackerUpdate' +q
+nvim --headless +'PackerCompile' +q
+```
+
 `project.nvim`
 
 - ~~echo twice even in the same cwd when open new buffer~~

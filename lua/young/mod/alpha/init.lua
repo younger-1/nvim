@@ -320,6 +320,8 @@ M.done = function()
     dashboard.button('q', '  Quit', '<Cmd>qa<CR>'),
   }
 
+  -- dashboard.config.opts.autostart = false
+
   alpha.setup(dashboard.config)
   -- alpha.setup(startify.config)
 
