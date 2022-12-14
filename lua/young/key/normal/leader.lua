@@ -317,14 +317,26 @@ return {
     u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk', mode = { 'n', 'x' } },
     U = { cmd 'Gitsigns reset_buffer_index', 'Reset buffer index' },
     w = { cmd 'Gitsigns toggle_word_diff', 'Word diff' },
-    -- y = 'Link',
-    y = { 'Link', mode = { 'n', 'x' } },
-    Y = { lua "require('gitlinker').get_repo_url", 'Link(Repo)' },
-    O = {
+    y = {
       function()
-        require('gitlinker').get_repo_url { action_callback = require('gitlinker.actions').open_in_browser }
+        require('gitlinker').get_buf_range_url(fn.mode(), {
+          -- remote = "origin", -- force the use of a specific remote
+          -- add_current_line_on_normal_mode = true, -- if true adds the line nr in the url for normal mode
+          -- action_callback = require("gitlinker.actions").copy_to_clipboard, -- callback for what to do with the url
+          -- print_url = true, -- print the url after action
+          action_callback = vim.v.count ~= 0 and require('gitlinker.actions').open_in_browser or nil,
+        })
       end,
-      'Open Link',
+      'Link',
+      mode = { 'n', 'x' },
+    },
+    Y = {
+      function()
+        require('gitlinker').get_repo_url {
+          action_callback = vim.v.count ~= 0 and require('gitlinker.actions').open_in_browser or nil,
+        }
+      end,
+      'Link(Repo)',
     },
   },
   h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },

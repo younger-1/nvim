@@ -31,7 +31,7 @@ M.done = function()
     -- Default mapping to call url generation with action_callback
     -- mappings = "<leader>gy",
     -- To disable the default mappings
-    -- mappings = nil,
+    mappings = '',
   }
 end
 
