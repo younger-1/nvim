@@ -770,7 +770,8 @@ mods.git = {
   -- },
   {
     'ruifm/gitlinker.nvim',
-    event = 'BufRead',
+    -- event = 'BufRead',
+    module = 'gitlinker',
     config = function()
       require('young.mod.gitlinker').done()
     end,
