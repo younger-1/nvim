@@ -241,6 +241,28 @@ M.snapshot_hook = function()
   -- os.rename(tmpfile, snapfile)
 end
 
+M.loaded = function()
+  local loaded_start, loaded_opt, no_loaded = {}, {}, {}
+  for name, spec in pairs(_G.packer_plugins) do
+    if spec.loaded then
+      if (spec.path):match(join_paths(package_root, 'packer', 'start')) then
+        table.insert(loaded_start, name)
+      else
+        table.insert(loaded_opt, name)
+      end
+    else
+      table.insert(no_loaded, name)
+    end
+  end
+
+  gg(1, 'start:')
+  print(table.concat(loaded_start, '\n'))
+  gg(2, 'opt:')
+  print(table.concat(loaded_opt, '\n'))
+  gg(3, 'no loaded:')
+  print(table.concat(no_loaded, '\n'))
+end
+
 M.done = function()
   tt()
   M.once()

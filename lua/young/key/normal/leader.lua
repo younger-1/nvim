@@ -459,6 +459,7 @@ return {
     b = { require('young.packer').rollback, 'Rollback' },
     n = { require('young.packer').snapshot, 'Snapshot' },
     m = { require('young.packer').snapshot_hook, 'Snapshot sort' },
+    v = { require('young.packer').loaded, 'Loaded' },
   },
   q = { '<cmd>q!<cr>', 'Quit' },
   r = {

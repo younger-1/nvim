@@ -419,6 +419,7 @@ mods.BWT = {
   buffer = {
     {
       'ThePrimeagen/harpoon',
+      event = 'BufRead',
       config = function()
         require 'young.mod.harpoon'
       end,
@@ -532,6 +533,7 @@ mods.file = {
     },
     {
       'MunifTanjim/exrc.nvim',
+      event = 'BufRead',
       config = function()
         require 'young.mod.exrc'
       end,
