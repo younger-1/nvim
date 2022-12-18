@@ -263,6 +263,26 @@ M.loaded = function()
   print(table.concat(no_loaded, '\n'))
 end
 
+M.config_proxy = function(name)
+  -- TODO:upstream this
+  if not xy.util.is_dir(_G.packer_plugins[name].path) then
+    xy.util.echomsg { ('[young]: %s is not install'):format(name) }
+    return
+  end
+
+  local plugin_data = require('young.plugins').data[name]
+  -- local plug_mod = rr(plugin_data.module)
+  -- if not plug_mod then
+  --   return
+  -- end
+
+  if type(plugin_data.config) == 'function' then
+    plugin_data.config()
+  else
+    loadstring(plugin_data.config)()
+  end
+end
+
 M.done = function()
   tt()
   M.once()
