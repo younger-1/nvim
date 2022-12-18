@@ -40,7 +40,7 @@ vim.api.nvim_create_user_command('Capture', function(ctx)
   local lines = vim.split(vim.api.nvim_exec(ctx.args, true), '\n', { plain = true })
 
   vim.cmd 'vnew'
-  -- vim.o.buflisted = false -- TODO:not flash tabline
+  -- vim.o.buflisted = false -- TODO:not flash tabline, as well as lir
 
   vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
   vim.o.modified = false

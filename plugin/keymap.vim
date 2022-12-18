@@ -17,7 +17,7 @@ noremap gl g_
 noremap <C-i> <C-i>
 map <Tab> %
 
-map g<Tab> %
+noremap g<Tab> <C-i>
 
 " normal mode
 " nnoremap / ms/
