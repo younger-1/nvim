@@ -70,7 +70,6 @@ local normal = {
     ['\\'] = { '<Cmd>WinShift swap<CR>', 'Swap windows mode' },
     -- [' '] = { "<cmd>FocusToggle<cr>", 'FocusToggle' },
     f = { cmd 'FocusToggle', 'FocusToggle' },
-    p = { require('young.mod.window_picker').pick, 'Pick window' },
 
     -- e = "",
     -- t = "",
