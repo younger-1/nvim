@@ -1,7 +1,4 @@
-local dracula = rr 'dracula'
-if not dracula then
-  return
-end
+local dracula = require 'dracula'
 
 dracula.setup {
   -- customize dracula color palette

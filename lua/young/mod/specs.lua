@@ -1,5 +1,19 @@
 local M = {}
 
+M.once = function()
+  xy.map.n {
+    'z ',
+    function()
+      require('specs').show_specs()
+    end,
+    'Show Specs',
+  }
+  -- xy.map.n { 'n', 'nz ' }
+  -- xy.map.n { 'N', 'Nz ' }
+  -- vim.api.nvim_set_keymap('n', 'n', 'n:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
+  -- vim.api.nvim_set_keymap('n', 'N', 'N:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
+end
+
 M.done = function()
   require('specs').setup {
     -- show_jumps  = true,
@@ -20,12 +34,6 @@ M.done = function()
   }
 
   -- require('specs').toggle()
-
-  xy.map.n { 'z ', require('specs').show_specs, 'Show Specs' }
-  -- xy.map.n { 'n', 'nz ' }
-  -- xy.map.n { 'N', 'Nz ' }
-  -- vim.api.nvim_set_keymap('n', 'n', 'n:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
-  -- vim.api.nvim_set_keymap('n', 'N', 'N:lua require("specs").show_specs()<CR>', { noremap = true, silent = true })
 end
 
 return M

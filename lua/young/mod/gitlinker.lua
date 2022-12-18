@@ -1,10 +1,7 @@
 local M = {}
 
 M.done = function()
-  local status_ok, gitlinker = pcall(require, 'gitlinker')
-  if not status_ok then
-    return
-  end
+  local gitlinker = require 'gitlinker'
 
   gitlinker.setup {
     opts = {

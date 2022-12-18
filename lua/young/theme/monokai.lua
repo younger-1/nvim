@@ -1,7 +1,4 @@
-local monokai = rr 'monokai'
-if not monokai then
-  return
-end
+local monokai = require 'monokai'
 
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = vim.api.nvim_create_augroup('_monokai', {}),

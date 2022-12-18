@@ -90,15 +90,12 @@ M.hot = function(silent)
   idx = idx + 1
 end
 
-M.once = function()
+M.done = function()
   -- NOTE: Don't need this by using `after = 'telescope.nvim'`
   -- require('telescope').load_extension 'notify'
   idx = 1
   M.hot(true)
-end
 
-M.done = function()
-  M.once()
   M.toggle()
 end
 

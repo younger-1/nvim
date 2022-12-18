@@ -1,40 +1,4 @@
--- vim.o.foldcolumn = '1'
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-vim.opt.fillchars:append [[fold: ,foldopen:,foldsep: ,foldclose:]]
-
-xy.map.n { 'zR', require('ufo').openAllFolds, 'Ufo open all folds' }
-xy.map.n { 'zM', require('ufo').closeAllFolds, 'Ufo close all folds' }
-xy.map.n { 'zr', require('ufo').openFoldsExceptKinds, 'Ufo open folds except kinds' }
-xy.map.n { 'zm', require('ufo').closeFoldsWith, 'Ufo close folds with [N]' } -- closeAllFolds == closeFoldsWith(0)
-
--- local preview_key = '<tab>' -- TODO:register buffer-map or on_key for <tab>
-local preview_key = 'J'
-xy.map.n {
-  preview_key,
-  function()
-    local winid = require('ufo').peekFoldedLinesUnderCursor()
-    if not winid then
-      vim.fn.feedkeys(xy.util.t(preview_key), 'n')
-    end
-  end,
-  'Ufo peek current fold',
-}
-xy.map.n { 'zk', require('ufo').goPreviousStartFold, 'Ufo go previous start fold' }
-
-local function peek_prev_fold()
-  require('ufo').goPreviousClosedFold()
-  require('ufo').peekFoldedLinesUnderCursor()
-end
-
-local function peek_next_fold()
-  require('ufo').goNextClosedFold()
-  require('ufo').peekFoldedLinesUnderCursor()
-end
-
-xy.map.n { 'z[', peek_prev_fold, 'Ufo peek prev fold' }
-xy.map.n { 'z]', peek_next_fold, 'Ufo peek next fold' }
+local M = {}
 
 local handler = function(virtText, lnum, endLnum, width, truncate, ctx)
   local newVirtText = {}
@@ -120,35 +84,86 @@ local function customizeSelector(bufnr)
     end)
 end
 
-require('ufo').setup {
-  open_fold_hl_timeout = 600,
-  enable_get_fold_virt_text = true,
-  fold_virt_text_handler = handler,
-  provider_selector = function(bufnr, filetype, buftype)
-    -- use indent provider for c fieltype
-    -- if filetype == 'c' then
-    --   return function()
-    --     return require('ufo').getFolds('indent', bufnr)
-    --   end
-    -- end
+M.done = function()
+  -- vim.o.foldcolumn = '1'
+  vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+  vim.o.foldlevelstart = 99
+  vim.o.foldenable = true
+  vim.opt.fillchars:append [[fold: ,foldopen:,foldsep: ,foldclose:]]
 
-    -- default:
-    -- return { 'lsp', 'indent' }
-    return { 'treesitter', 'indent' }
-    -- return ftMap[filetype] or customizeSelector
-  end,
-  -- For now, only 'lsp' provider contain 'comment', 'imports' and 'region'.
-  close_fold_kinds = { 'imports', 'comment' },
-  preview = {
-    -- win_config = {
-    --   border = { '', '─', '', '', '', '─', '', '' },
-    --   winhighlight = 'Normal:Folded',
-    --   winblend = 0,
-    -- },
-    mappings = {
-      -- scrollU = '<C-u>',
-      -- scrollD = '<C-d>',
-      switch = preview_key,
+  require('ufo').setup {
+    open_fold_hl_timeout = 600,
+    enable_get_fold_virt_text = true,
+    fold_virt_text_handler = handler,
+    provider_selector = function(bufnr, filetype, buftype)
+      -- use indent provider for c fieltype
+      -- if filetype == 'c' then
+      --   return function()
+      --     return require('ufo').getFolds('indent', bufnr)
+      --   end
+      -- end
+
+      -- default:
+      -- return { 'lsp', 'indent' }
+      return { 'treesitter', 'indent' }
+      -- return ftMap[filetype] or customizeSelector
+    end,
+    -- For now, only 'lsp' provider contain 'comment', 'imports' and 'region'.
+    close_fold_kinds = { 'imports', 'comment' },
+    preview = {
+      -- win_config = {
+      --   border = { '', '─', '', '', '', '─', '', '' },
+      --   winhighlight = 'Normal:Folded',
+      --   winblend = 0,
+      -- },
+      mappings = {
+        -- scrollU = '<C-u>',
+        -- scrollD = '<C-d>',
+        switch = preview_key,
+      },
     },
-  },
-}
+  }
+
+  xy.map.n { 'zR', require('ufo').openAllFolds, 'Ufo open all folds' }
+  xy.map.n { 'zM', require('ufo').closeAllFolds, 'Ufo close all folds' }
+  xy.map.n { 'zr', require('ufo').openFoldsExceptKinds, 'Ufo open folds except kinds' }
+  xy.map.n { 'zm', require('ufo').closeFoldsWith, 'Ufo close folds with [N]' } -- closeAllFolds == closeFoldsWith(0)
+end
+
+M.once = function()
+  -- local preview_key = '<tab>' -- TODO:register buffer-map or on_key for <tab>
+  local preview_key = 'J'
+  xy.map.n {
+    preview_key,
+    function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.fn.feedkeys(xy.util.t(preview_key), 'n')
+      end
+    end,
+    'Ufo peek current fold',
+  }
+
+  xy.map.n {
+    'zk',
+    function()
+      require('ufo').goPreviousStartFold()
+    end,
+    'Ufo go previous start fold',
+  }
+
+  local function peek_prev_fold()
+    require('ufo').goPreviousClosedFold()
+    require('ufo').peekFoldedLinesUnderCursor()
+  end
+
+  local function peek_next_fold()
+    require('ufo').goNextClosedFold()
+    require('ufo').peekFoldedLinesUnderCursor()
+  end
+
+  xy.map.n { 'z[', peek_prev_fold, 'Ufo peek prev fold' }
+  xy.map.n { 'z]', peek_next_fold, 'Ufo peek next fold' }
+end
+
+return M

@@ -1,5 +1,5 @@
 local M = {}
-local opts = {
+local cfg = {
   -- plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
   -- server_opts_overrides = { trace = "verbose", name = "AI" },
   -- ft_disable = { "markdown", "terraform" },
@@ -9,7 +9,7 @@ M.setup_lua = function()
   table.insert(require('young.mod.cmp').cfg.sources, { name = 'copilot', group_index = 2 })
 
   vim.defer_fn(function()
-    require('copilot').setup(opts)
+    require('copilot').setup(cfg)
   end, 200)
 end
 

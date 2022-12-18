@@ -11,7 +11,7 @@ local M = {}
 local pum_half = (vim.o.pumheight == 0 and 5) or vim.o.pumheight / 2
 
 -- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
-local cfg = {
+M.cfg = {
   -- enabled = function()
   --   -- disable completion if the cursor is `Comment` syntax group.
   --   return not cmp.config.context.in_syntax_group('Comment')
@@ -253,7 +253,7 @@ local cfg = {
 }
 
 M.done = function()
-  cmp.setup(cfg)
+  cmp.setup(M.cfg)
 
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
