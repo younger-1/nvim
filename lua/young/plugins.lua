@@ -1477,6 +1477,7 @@ M.done = function()
   for _, mod in ipairs(M.plugins) do
     for _, plugin in ipairs(mod) do
       local short_name = require('packer.util').get_plugin_short_name(plugin)
+      M.data[short_name] = {}
 
       if type(plugin) == 'table' and (not plugin.config and not plugin.setup) then
         -- ('nvim-abc.lua'):match('^[^.]+'):gsub('^n?vim%-', '')
@@ -1488,33 +1489,21 @@ M.done = function()
         if ok and type(xy_mod) == 'table' then
           plugin.setup = xy_mod.once and ("require('young.mod.%s').once()"):format(xy_name)
           plugin.config = xy_mod.done and ("require('young.mod.%s').done()"):format(xy_name)
+
+          -- log for debug
+          M.data[short_name].setup = plugin.setup
+          M.data[short_name].config = plugin.config
         end
       end
 
       if type(plugin) == 'table' and plugin.config then
-        M.data[short_name] = {}
         M.data[short_name].config = plugin.config
         -- module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
 
-        plugin.config = function(name)
-          -- TODO:upstream this
-          if not xy.util.is_dir(_G.packer_plugins[name].path) then
-            xy.util.echomsg { ('[young]: %s is not install'):format(name) }
-            return
-          end
-
-          local plugin_data = require('young.plugins').data[name]
-          -- local plug_mod = rr(plugin_data.module)
-          -- if not plug_mod then
-          --   return
-          -- end
-
-          if type(plugin_data.config) == 'function' then
-            plugin_data.config()
-          else
-            loadstring(plugin_data.config)()
-          end
-        end
+        plugin.config = ("require('young.packer').config_proxy('%s')"):format(short_name)
+        -- plugin.config = function(name)
+        --   require('young.packer').config_proxy(name)
+        -- end
       end
     end
   end

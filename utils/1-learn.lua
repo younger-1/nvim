@@ -37,6 +37,21 @@ print(type(b)) -- nil
 -- WARN:
 pp(loadstring [[return require('lspconfig')]]())
 
+-- passing arguments to loadstring in Lua 5.0.2
+-- @see <https://lua-users.org/lists/lua-l/2005-05/msg00058.html>
+function myloadstring(str, name)
+  local f, err = loadstring('return function (arg) ' .. str .. ' end', name or str)
+
+  if f then
+    return f()
+  else
+    return f, err
+  end
+end
+class = { x = 10, y = 20 }
+f = myloadstring ' print("X:", arg.x, " Y:", arg.y) '
+f(class)
+
 -- [unpack](https://www.lua.org/pil/5.1.html)
 ---@returns all elements from the array, starting from index 1
 -- print(unpack { 10, 20, 30 }) --> 10   20   30
