@@ -58,14 +58,16 @@ local function add_direction()
   })
 end
 
-M.done = function()
+M.once = function()
   vim.cmd [[
     map + <Plug>(dial-increment)
     map - <Plug>(dial-decrement)
     xmap g+ <Plug>(dial-increment-additional)
     xmap g- <Plug>(dial-decrement-additional)
   ]]
+end
 
+M.done = function()
   add_true_false()
   add_direction()
 

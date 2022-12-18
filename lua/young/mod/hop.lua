@@ -1,9 +1,11 @@
 local M = {}
 
-local function map_f_t()
+M.once = function()
+  vim.api.nvim_set_keymap('n', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
+  vim.api.nvim_set_keymap('x', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
+
   -- vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1{ inclusive_jump = true }<cr>", {})
   -- vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1{ inclusive_jump = false }<cr>", {})
-
   vim.api.nvim_set_keymap(
     'n',
     'f',
@@ -30,17 +32,8 @@ local function map_f_t()
   )
 end
 
-local function basic()
-  vim.api.nvim_set_keymap('n', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
-  vim.api.nvim_set_keymap('x', 's', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
-end
-
 M.done = function()
   require('hop').setup()
-
-  map_f_t()
-
-  basic()
 end
 
 return M

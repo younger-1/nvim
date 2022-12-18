@@ -59,20 +59,17 @@ local cfg = {
   other_win_hl_color = '#76946A',
 }
 
-M.pick = function()
-  local wid = require('window-picker').pick_window()
-  if wid then
-    vim.api.nvim_set_current_win(wid)
-    return wid
-  end
+M.once = function()
+  xy.map.n('<C-w>p', function()
+    local wid = require('window-picker').pick_window()
+    if wid then
+      vim.api.nvim_set_current_win(wid)
+      return wid
+    end
+  end, 'Pick window')
 end
 
 M.done = function()
-  -- local status_ok, win_picker = pcall(require, 'window-picker')
-  -- if not status_ok then
-  --   return
-  -- end
-
   require('window-picker').setup(cfg)
 end
 

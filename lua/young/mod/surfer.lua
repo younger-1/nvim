@@ -31,7 +31,6 @@ require('syntax-tree-surfer').setup {
   },
 }
 
-local sts = require 'syntax-tree-surfer'
 local opts = { noremap = true, silent = true }
 
 -- Syntax Tree Surfer
@@ -64,8 +63,8 @@ end, { silent = true, expr = true })
 -- vim.keymap.set("n", "vU", '<cmd>STSSwapUpNormal<cr>', opts)
 
 -- Visual Selection from Normal Mode
-vim.keymap.set('n', 'v<cr>', '<cmd>STSSelectMasterNode<cr>', opts)
-vim.keymap.set('n', 'v<space>', '<cmd>STSSelectCurrentNode<cr>', opts)
+vim.keymap.set('n', 'v<space>', '<cmd>STSSelectMasterNode<cr>', opts)
+-- vim.keymap.set('n', 'v<space>', '<cmd>STSSelectCurrentNode<cr>', opts)
 
 -- Select Nodes in Visual Mode
 vim.keymap.set('x', 'J', '<cmd>STSSelectNextSiblingNode<cr>', opts)
@@ -79,6 +78,7 @@ vim.keymap.set('x', '<A-k>', '<cmd>STSSwapPrevVisual<cr>', opts)
 
 -- Syntax Tree Surfer V2 Mappings
 -- Targeted Jump with virtual_text
+-- local sts = require 'syntax-tree-surfer'
 -- vim.keymap.set('n', 'gv', function() -- only jump to variable_declarations
 --   sts.targeted_jump { 'variable_declaration' }
 -- end, opts)

@@ -104,7 +104,6 @@ mods.appearance = {
       -- 'norcalli/nvim-colorizer.lua',
       'NvChad/nvim-colorizer.lua',
       event = 'BufRead',
-      module = 'colorizer',
       config = function()
         require 'young.mod.colorizer'
       end,
@@ -211,7 +210,6 @@ mods.edit = {
     -- { -- Smooth scrolling for ANY movement command
     --   'declancm/cinnamon.nvim',
     --   event = 'BufWinEnter',
-    --   module = 'cinnamon',
     --   config = function()
     --     require 'young.mod.cinnamon'
     --   end,
@@ -273,7 +271,6 @@ mods.change = {
       'windwp/nvim-autopairs',
       event = 'InsertEnter',
       after = 'nvim-cmp',
-      module = 'nvim-autopairs',
       config = function()
         require 'young.mod.autopairs'
       end,
@@ -283,7 +280,6 @@ mods.change = {
     {
       'numToStr/Comment.nvim',
       event = 'BufRead',
-      module = 'Comment',
       -- BUG:PackerCompile will cause `keys` redefined
       -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
       config = function()
@@ -347,10 +343,11 @@ mods.neovim = {
   fold = {
     {
       'kevinhwang91/nvim-ufo',
-      event = 'BufRead',
+      -- event = 'BufRead',
+      module = 'ufo',
       requires = { { 'kevinhwang91/promise-async', module = 'promise' } },
       config = function()
-        require 'young.mod.ufo'
+        require('young.mod.ufo').done()
       end,
     },
   },
@@ -468,9 +465,9 @@ mods.BWT = {
       'beauwilliams/focus.nvim',
       -- event = "BufRead",
       cmd = 'FocusToggle',
-      -- module = 'focus',
+      module = 'focus',
       config = function()
-        require 'young.mod.focus'
+        require('young.mod.focus').done()
       end,
     },
   },
@@ -480,7 +477,6 @@ mods.BWT = {
       'kevinhwang91/nvim-bqf',
       -- event = "BufRead",
       ft = 'qf',
-      module = 'bqf',
       config = function()
         require('young.mod.bqf').done()
       end,
@@ -504,7 +500,7 @@ mods.file = {
     },
     {
       'tamago324/lir.nvim',
-      -- module = 'lir',
+      module = 'lir',
       config = function()
         require 'young.mod.lir'
       end,
@@ -570,7 +566,7 @@ mods.find = {
   grep = {
     {
       'windwp/nvim-spectre',
-      event = 'BufRead',
+      module = 'spectre',
       config = function()
         require('young.mod.spectre').done()
       end,
@@ -590,8 +586,8 @@ mods.find = {
   -- {
   --   'VonHeikemen/searchbox.nvim',
   --   requires = { { 'MunifTanjim/nui.nvim', module = 'nui' } },
-  --   -- module = 'searchbox',
-  --   event = 'BufRead',
+  --   module = 'searchbox',
+  --   -- event = 'BufRead',
   --   config = function()
   --     require 'young.mod.searchbox'
   --   end,
@@ -747,7 +743,7 @@ mods.git = {
   {
     'sindrets/diffview.nvim',
     requires = 'nvim-lua/plenary.nvim',
-    event = 'BufRead',
+    cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
     config = function()
       require 'young.mod.diffview'
     end,
@@ -788,7 +784,6 @@ mods.UI = {
   core = {
     {
       'rcarriga/nvim-notify',
-      -- event = 'VimEnter',
       -- event = 'BufWinEnter',
       after = 'telescope.nvim',
       config = function()
@@ -851,11 +846,25 @@ mods.UI = {
       'romgrk/barbar.nvim',
       event = 'BufRead',
       config = function()
-        require('young.mod.barbar').done()
+        require 'young.mod.barbar'
       end,
     },
   },
   winbar = {
+    -- {
+    --   'SmiteshP/nvim-gps',
+    --   after = 'nvim-treesitter',
+    --   config = function()
+    --     require 'young.mod.gps'
+    --   end,
+    -- },
+    { -- @see https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/incline.lua
+      'b0o/incline.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.incline'
+      end,
+    },
     { -- breadcrumbs
       'SmiteshP/nvim-navic',
       event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
@@ -875,31 +884,18 @@ mods.UI = {
     },
     -- {
     --   'feline-nvim/feline.nvim',
+    --   event = 'BufRead',
     --   config = function()
     --     require 'young.mod.feline'
     --   end,
     -- },
-    -- {
-    --   'SmiteshP/nvim-gps',
-    --   requires = 'nvim-treesitter/nvim-treesitter',
-    --   config = function()
-    --     require 'young.mod.gps'
-    --   end,
-    -- },
-    { -- @see https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/incline.lua
-      'b0o/incline.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.incline'
-      end,
-    },
   },
   cmdline = {
     -- {
     --   'VonHeikemen/fine-cmdline.nvim',
     --   requires = { { 'MunifTanjim/nui.nvim', module = 'nui' } },
-    --   -- cmd = 'FineCmdline',
-    --   event = 'BufRead',
+    --   module = 'fine-cmdline',
+    --   -- event = 'BufRead',
     --   config = function()
     --     require 'young.mod.fine_cmd'
     --   end,
@@ -917,7 +913,6 @@ mods.UI = {
       'goolord/alpha-nvim',
       cmd = 'Alpha',
       event = 'BufWinEnter',
-      module = 'alpha',
       -- bufread = true,
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
@@ -988,7 +983,6 @@ mods.code = {
     {
       'hrsh7th/nvim-cmp',
       event = { 'InsertEnter', 'CmdlineEnter' },
-      module = 'cmp',
       config = function()
         require('young.mod.cmp').done()
       end,
@@ -1203,7 +1197,7 @@ mods.LSP = {
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     -- {
     --   'kosayoda/nvim-lightbulb',
-    --   event = 'BufRead',
+    --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
     --   config = function()
     --     require 'young.mod.lightbulb'
     --   end,
@@ -1380,7 +1374,8 @@ mods.tool = {
   open = {
     {
       'itchyny/vim-external', -- TODO:gx in WSL
-      event = 'BufWinEnter',
+      -- event = 'BufWinEnter',
+      keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
       config = function()
         require 'young.mod.external'
       end,

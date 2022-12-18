@@ -1,4 +1,4 @@
-local opts = {
+require('todo-comments').setup {
   signs = true, -- show icons in the signs column
   sign_priority = 8, -- sign priority
   keywords = {
@@ -52,5 +52,3 @@ local opts = {
     -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
   },
 }
-
-require('todo-comments').setup(opts)

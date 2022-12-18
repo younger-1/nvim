@@ -1,6 +1,5 @@
-local project = require 'project_nvim'
-
-local cfg = {
+require('telescope').load_extension 'projects'
+require('project_nvim').setup {
   -- Manual mode doesn't automatically change your root directory, so you have
   -- the option to manually do so using `:ProjectRoot` command.
   manual_mode = false,
@@ -41,7 +40,3 @@ local cfg = {
 
   patterns_fallback = true,
 }
-
-project.setup(cfg)
-
-require('telescope').load_extension 'projects'

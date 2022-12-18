@@ -22,8 +22,7 @@ vim.g.matchup_matchparen_hi_surround_always = 1
 
 vim.cmd [[
 nnoremap <CR>  <cmd>MatchupWhereAmI?<cr>
-inoremap <c-y> <cmd>MatchupWhereAmI?<cr>
-inoremap <c-p> <cmd>MatchupWhereAmI?<cr>
+inoremap <C-y> <cmd>MatchupWhereAmI?<cr>
 ]]
 
 local map = vim.keymap.set
