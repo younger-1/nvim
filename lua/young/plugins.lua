@@ -1187,12 +1187,12 @@ mods.LSP = {
       'glepnir/lspsaga.nvim',
       -- event = 'BufWinEnter',
       cmd = 'Lspsaga',
-      setup = function()
-        require('young.mod.lspsaga').once()
-      end,
-      config = function()
-        require('young.mod.lspsaga').done()
-      end,
+      -- setup = function()
+      --   require('young.mod.lspsaga').once()
+      -- end,
+      -- config = function()
+      --   require('young.mod.lspsaga').done()
+      -- end,
     },
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     -- {
@@ -1257,12 +1257,12 @@ mods.lang = {
       'luk400/vim-jukit',
       ft = 'ipynb',
       -- cmd = { 'JukitOut', 'JukitOutHist' },
-      setup = function()
-        require('young.mod.jukit').once()
-      end,
-      config = function()
-        require('young.mod.jukit').done()
-      end,
+      -- setup = function()
+      --   require('young.mod.jukit').once()
+      -- end,
+      -- config = function()
+      --   require('young.mod.jukit').done()
+      -- end,
     },
   },
   js = {
@@ -1477,23 +1477,27 @@ M.done = function()
   for _, mod in ipairs(M.plugins) do
     for _, plugin in ipairs(mod) do
       local short_name = require('packer.util').get_plugin_short_name(plugin)
-      if type(plugin) == 'table' and (not plugin.config and not plugin.setup) then
-        -- ('nvim-abc.efg'):match('^[^.]+'):gsub('^n?vim%-', '')
-        local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
-        local ok, xy_mod = rr('young.mod.' .. xy_name)
-        if ok then
-          plugin.setup = ("require('young.mod.%s').once({ 'young-debug' })"):format(xy_name)
-          plugin.config = ("require('young.mod.%s').done({ 'young-debug' })"):format(xy_name)
-        end
 
+      if type(plugin) == 'table' and (not plugin.config and not plugin.setup) then
+        -- ('nvim-abc.lua'):match('^[^.]+'):gsub('^n?vim%-', '')
+        local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+        -- M.data[short_name].xy_name = xy_name
+        -- print(('[%-30s] => [%-30s]'):format(short_name, xy_name))
+
+        local ok, xy_mod = pcall(require, 'young.mod.' .. xy_name)
+        if ok and type(xy_mod) == 'table' then
+          plugin.setup = xy_mod.once and ("require('young.mod.%s').once()"):format(xy_name)
+          plugin.config = xy_mod.done and ("require('young.mod.%s').done()"):format(xy_name)
+        end
       end
 
       if type(plugin) == 'table' and plugin.config then
-        M.data[short_name] = {
-          config = plugin.config,
-          -- module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
-        }
+        M.data[short_name] = {}
+        M.data[short_name].config = plugin.config
+        -- module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
+
         plugin.config = function(name)
+          -- TODO:upstream this
           if not xy.util.is_dir(_G.packer_plugins[name].path) then
             xy.util.echomsg { ('[young]: %s is not install'):format(name) }
             return
