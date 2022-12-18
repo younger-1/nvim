@@ -1476,9 +1476,20 @@ M.done = function()
   M.data = {}
   for _, mod in ipairs(M.plugins) do
     for _, plugin in ipairs(mod) do
+      local short_name = require('packer.util').get_plugin_short_name(plugin)
+      if type(plugin) == 'table' and (not plugin.config and not plugin.setup) then
+        -- ('nvim-abc.efg'):match('^[^.]+'):gsub('^n?vim%-', '')
+        local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+        local ok, xy_mod = rr('young.mod.' .. xy_name)
+        if ok then
+          plugin.setup = ("require('young.mod.%s').once({ 'young-debug' })"):format(xy_name)
+          plugin.config = ("require('young.mod.%s').done({ 'young-debug' })"):format(xy_name)
+        end
+
+      end
+
       if type(plugin) == 'table' and plugin.config then
-        local name = require('packer.util').get_plugin_short_name(plugin)
-        M.data[name] = {
+        M.data[short_name] = {
           config = plugin.config,
           -- module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
         }
