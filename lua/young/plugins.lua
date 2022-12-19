@@ -299,9 +299,9 @@ mods.change = {
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
       -- BUG:PackerCompile will cause `keys` redefined
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
-      setup = function()
-        require 'young.mod.easy_align'
-      end,
+      -- setup = function()
+      --   require 'young.mod.easy-align'
+      -- end,
     },
     -- {
     --   'mg979/vim-visual-multi',
@@ -1489,11 +1489,14 @@ M.done = function()
         if ok and type(xy_mod) == 'table' then
           plugin.setup = xy_mod.once and ("require('young.mod.%s').once()"):format(xy_name)
           plugin.config = xy_mod.done and ("require('young.mod.%s').done()"):format(xy_name)
-
-          -- log for debug
-          M.data[short_name].setup = plugin.setup
-          M.data[short_name].config = plugin.config
         end
+        if ok and type(xy_mod) == 'string' then
+          plugin[({ once = 'setup', done = 'config' })[xy_mod]] = ("require('young.mod.%s')"):format(xy_name)
+        end
+
+        -- log for debug
+        M.data[short_name].setup = plugin.setup
+        M.data[short_name].config = plugin.config
       end
 
       if type(plugin) == 'table' and plugin.config then
