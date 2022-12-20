@@ -761,8 +761,10 @@ mods.git = {
   --   disable = is_windows,
   -- },
   {
-    'ruifm/gitlinker.nvim',
+    -- 'ruifm/gitlinker.nvim',
+    'younger-1/gitlinker.nvim',
     -- event = 'BufRead',
+    branch = 'up-to-0.8',
     module = 'gitlinker',
     config = function()
       require('young.mod.gitlinker').done()
