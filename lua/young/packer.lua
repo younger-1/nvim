@@ -263,6 +263,23 @@ M.loaded = function()
   print(table.concat(no_loaded, '\n'))
 end
 
+M.auto_require = function(plugin, short_name)
+  -- ('nvim-abc.lua'):match('^[^.]+'):gsub('^n?vim%-', '')
+  local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+  -- M.data[short_name].xy_name = xy_name
+  -- print(('[%-30s] => [%-30s]'):format(short_name, xy_name))
+
+  local ok, xy_mod = pcall(require, 'young.mod.' .. xy_name)
+  if ok and type(xy_mod) == 'table' then
+    plugin.setup = xy_mod.once and ("require('young.mod.%s').once()"):format(xy_name)
+    plugin.config = xy_mod.done and ("require('young.mod.%s').done()"):format(xy_name)
+  end
+  if ok and type(xy_mod) == 'string' then
+    -- print(xy_mod, xy_name, short_name)
+    plugin[({ once = 'setup', done = 'config' })[xy_mod]] = ("require('young.mod.%s')"):format(xy_name)
+  end
+end
+
 M.config_proxy = function(name)
   -- TODO:upstream this
   if not xy.util.is_dir(_G.packer_plugins[name].path) then

@@ -110,10 +110,6 @@ mods.appearance = {
     },
     {
       'xiyaowong/nvim-transparent',
-      -- setup = function()
-      --   vim.g.transparent_enabled = false
-      -- end,
-      -- event = 'BufRead',
       cmd = 'TransparentToggle',
       config = function()
         require 'young.mod.transparent'
@@ -299,9 +295,9 @@ mods.change = {
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
       -- BUG:PackerCompile will cause `keys` redefined
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
-      -- setup = function()
-      --   require 'young.mod.easy-align'
-      -- end,
+      setup = function()
+        require 'young.mod.easy-align'
+      end,
     },
     -- {
     --   'mg979/vim-visual-multi',
@@ -1187,12 +1183,12 @@ mods.LSP = {
       'glepnir/lspsaga.nvim',
       -- event = 'BufWinEnter',
       cmd = 'Lspsaga',
-      -- setup = function()
-      --   require('young.mod.lspsaga').once()
-      -- end,
-      -- config = function()
-      --   require('young.mod.lspsaga').done()
-      -- end,
+      setup = function()
+        require('young.mod.lspsaga').once()
+      end,
+      config = function()
+        require('young.mod.lspsaga').done()
+      end,
     },
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     -- {
@@ -1257,12 +1253,12 @@ mods.lang = {
       'luk400/vim-jukit',
       ft = 'ipynb',
       -- cmd = { 'JukitOut', 'JukitOutHist' },
-      -- setup = function()
-      --   require('young.mod.jukit').once()
-      -- end,
-      -- config = function()
-      --   require('young.mod.jukit').done()
-      -- end,
+      setup = function()
+        require('young.mod.jukit').once()
+      end,
+      config = function()
+        require('young.mod.jukit').done()
+      end,
     },
   },
   js = {
@@ -1479,34 +1475,17 @@ M.done = function()
       local short_name = require('packer.util').get_plugin_short_name(plugin)
       M.data[short_name] = {}
 
-      if type(plugin) == 'table' and (not plugin.config and not plugin.setup) then
-        -- ('nvim-abc.lua'):match('^[^.]+'):gsub('^n?vim%-', '')
-        local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
-        -- M.data[short_name].xy_name = xy_name
-        -- print(('[%-30s] => [%-30s]'):format(short_name, xy_name))
-
-        local ok, xy_mod = pcall(require, 'young.mod.' .. xy_name)
-        if ok and type(xy_mod) == 'table' then
-          plugin.setup = xy_mod.once and ("require('young.mod.%s').once()"):format(xy_name)
-          plugin.config = xy_mod.done and ("require('young.mod.%s').done()"):format(xy_name)
-        end
-        if ok and type(xy_mod) == 'string' then
-          plugin[({ once = 'setup', done = 'config' })[xy_mod]] = ("require('young.mod.%s')"):format(xy_name)
-        end
-
-        -- log for debug
-        M.data[short_name].setup = plugin.setup
-        M.data[short_name].config = plugin.config
-      end
+      -- if type(plugin) == 'table' and (not plugin.config and not plugin.setup) then
+      --   require('young.packer').auto_require(plugin, short_name)
+      --   -- log for debug
+      --   M.data[short_name].setup = plugin.setup
+      --   M.data[short_name].config = plugin.config
+      -- end
 
       if type(plugin) == 'table' and plugin.config then
         M.data[short_name].config = plugin.config
         -- module = plugin.module or plugin.module_pattern:gsub('[%%%^%$]', ''),
-
         plugin.config = ("require('young.packer').config_proxy('%s')"):format(short_name)
-        -- plugin.config = function(name)
-        --   require('young.packer').config_proxy(name)
-        -- end
       end
     end
   end

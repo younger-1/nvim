@@ -6,5 +6,3 @@ vim.cmd [[
   " Start interactive EasyAlign for a motion/text object (e.g. gaip)
   nmap gA <Plug>(LiveEasyAlign)
 ]]
-
-return 'once'
