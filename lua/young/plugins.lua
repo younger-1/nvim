@@ -185,6 +185,13 @@ mods.edit = {
       end,
     },
     {
+      'ggandor/flit.nvim',
+      after = 'leap.nvim',
+      config = function()
+        require('flit').setup {}
+      end,
+    },
+    {
       'andymass/vim-matchup',
       event = 'BufRead',
       setup = function()
