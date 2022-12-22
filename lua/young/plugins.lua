@@ -170,11 +170,18 @@ mods.edit = {
       'anuvyklack/vim-smartword',
       event = 'CursorMoved',
     },
+    -- {
+    --   'ggandor/lightspeed.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.lightspeed'
+    --   end,
+    -- },
     {
-      'ggandor/lightspeed.nvim',
+      'ggandor/leap.nvim',
       event = 'BufWinEnter',
       config = function()
-        require 'young.mod.lightspeed'
+        require 'young.mod.leap'
       end,
     },
     {
