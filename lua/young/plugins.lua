@@ -942,6 +942,13 @@ mods.UI = {
         -- vim.cmd[[doautocmd BufRead]]
       end,
     },
+    -- {
+    --   'folke/drop.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.drop'
+    --   end,
+    -- },
   },
   outline = {
     {
