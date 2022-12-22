@@ -1,3 +1,33 @@
+-- automatically disable search highlight
+-- <https://github.com/glepnir/hlsearch.nvim>
+local function stop_hl()
+  if vim.v.hlsearch == 0 then
+    return
+  end
+  local keycode = api.nvim_replace_termcodes('<Cmd>nohl<CR>', true, false, true)
+  api.nvim_feedkeys(keycode, 'n', false)
+end
+
+local function start_hl()
+  local res = vim.fn.getreg '/'
+  if vim.v.hlsearch == 1 and vim.fn.search([[\%#\zs]] .. res, 'cnW') == 0 then
+    stop_hl()
+  end
+end
+
+xy.autogroup('_hls', {
+  {
+    'CursorMoved',
+    '*',
+    start_hl,
+  },
+  {
+    'InsertEnter',
+    '*',
+    stop_hl,
+  },
+})
+
 if true then
   return
 end
