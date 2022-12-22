@@ -790,6 +790,23 @@ mods.git = {
   --   disable = is_windows,
   --   config = [[require('young.mod.git_conflict')]],
   -- },
+  undo = {
+    {
+      'mbbill/undotree',
+      cmd = 'UndotreeToggle',
+      setup = function()
+        require 'young.mod.undotree'
+      end,
+    },
+    {
+      'kevinhwang91/nvim-fundo',
+      event = 'BufRead',
+      requires = { { 'kevinhwang91/promise-async', module = 'promise' } },
+      config = function()
+        require('fundo').setup()
+      end,
+    },
+  },
 }
 
 mods.UI = {
@@ -845,13 +862,6 @@ mods.UI = {
     --   end,
     -- },
     -- { 'simnalamburt/vim-mundo', cmd = 'MundoToggle' },
-    {
-      'mbbill/undotree',
-      cmd = 'UndotreeToggle',
-      setup = function()
-        require 'young.mod.undotree'
-      end,
-    },
   },
   bufferline = {
     {
