@@ -291,6 +291,7 @@ function M.done()
       { 'VimEnter', '*', require('young.tool').startup_time },
       --
       -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")' },
+      -- { 'BufReadPre', '*', 'lua require("young.tool").startup_event("BufReadPre")' },
       -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")' },
       -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")' },
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")' },
@@ -298,6 +299,7 @@ function M.done()
       -- { 'CmdlineEnter', '*', 'lua require("young.tool").startup_event("CmdlineEnter")' },
       --
       -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")', once = true },
+      -- { 'BufReadPre', '*', 'lua require("young.tool").startup_event("BufReadPre")', once = true },
       -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")', once = true },
       -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")', once = true },
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")', once = true },
