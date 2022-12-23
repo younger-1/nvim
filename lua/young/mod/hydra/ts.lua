@@ -152,15 +152,15 @@ end
 
 local function setup(ctx)
   -- gg(ctx.buf, ctx.match)
-  for key_goto, goto_fn in pairs(key2goto) do
-    for key_mark, mark in pairs(key2mark) do
-      for key_io, io in pairs(key2io) do
-        local key = key_prefix .. key_goto .. key_io .. key_mark
-        local query = mark .. io
-        M.setup_hydra(key, goto_fn, query)
-      end
-    end
-  end
+  -- for key_goto, goto_fn in pairs(key2goto) do
+  --   for key_mark, mark in pairs(key2mark) do
+  --     for key_io, io in pairs(key2io) do
+  --       local key = key_prefix .. key_goto .. key_io .. key_mark
+  --       local query = mark .. io
+  --       M.setup_hydra(key, goto_fn, query)
+  --     end
+  --   end
+  -- end
 
   for goto_, keymaps in pairs(ts_move_cfg) do
     if vim.startswith(goto_, 'goto_') then
