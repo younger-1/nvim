@@ -26,7 +26,19 @@ mods.basic = {
 
 mods.theme = {
   -- { 'rktjmp/lush.nvim' },
-
+  {
+    'folke/styler.nvim',
+    event = 'BufWinEnter',
+    config = function()
+      require('styler').setup {
+        themes = {
+          markdown = { colorscheme = 'nightfox' },
+          help = { colorscheme = 'kanagawa' },
+          -- noice = { colorscheme = "gruvbox", background = "dark" },
+        },
+      }
+    end,
+  },
   vim = {
     -- 'joshdick/onedark.vim',
     'sainnhe/sonokai',
