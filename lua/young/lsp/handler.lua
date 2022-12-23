@@ -1,22 +1,21 @@
 local lsp_cfg = require 'young.lsp.config'
 
-local signs = {
-  { name = 'DiagnosticSignError', text = '' },
-  { name = 'DiagnosticSignWarn', text = '' },
-  { name = 'DiagnosticSignHint', text = '' },
-  { name = 'DiagnosticSignInfo', text = '' },
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, {
-    -- icon = require('young.tool').get_icon(sign.name),
-    text = sign.text,
-    texthl = sign.name,
-    numhl = sign.name,
-    -- linehl
-    -- culhl
-  })
-end
+-- local signs = {
+--   { name = 'DiagnosticSignError', text = '' },
+--   { name = 'DiagnosticSignWarn', text = '' },
+--   { name = 'DiagnosticSignInfo', text = '' },
+--   { name = 'DiagnosticSignHint', text = '' },
+-- }
+-- for _, sign in ipairs(signs) do
+--   vim.fn.sign_define(sign.name, {
+--     -- icon = require('young.tool').get_icon(sign.name),
+--     text = sign.text,
+--     texthl = sign.name,
+--     numhl = sign.name,
+--     -- linehl
+--     -- culhl
+--   })
+-- end
 
 -- local signs = {
 --   Error = ' ',
@@ -28,6 +27,11 @@ end
 --   local hl = 'DiagnosticSign' .. type
 --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 -- end
+
+vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
 vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   -- virtual_text = false,
@@ -94,7 +98,6 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 --   update_in_insert = true,
 --   virtual_text = false,
 -- })
-
 
 -- <https://github.com/kylo252/dotfiles/blob/de7cb1e8a08cff3d772a4253dfbcdb94dbba8d4f/.config/nvim/lua/user/lsp/init.lua#L3>
 -- function M.get_lsp_kind()

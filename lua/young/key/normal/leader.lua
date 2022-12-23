@@ -230,7 +230,6 @@ return {
     m = { lua "pp(require'dap'.status(), require'dap'.session())", 'Print session' },
     J = { lua "require('dap.ext.vscode').load_launchjs()", 'Load launch JSON' },
   },
-  e = { cmd 'NvimTreeToggle', 'Explorer' },
   f = { lua "require('lir.float').toggle()", 'Files' },
   g = {
     name = '+git',

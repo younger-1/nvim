@@ -31,10 +31,10 @@ local cfg = {
     -- filter using buffer options
     bo = {
       -- if the file type is one of following, the window will be ignored
-      -- filetype = { 'NvimTree', 'neo-tree', 'notify' },
-      filetype = { 'notify' },
+      -- filetype = { 'notify' },
+      filetype = { 'notify', 'NvimTree', 'neo-tree', 'neo-tree-popup' },
       -- if the buffer type is one of following, the window will be ignored
-      buftype = { 'terminal' },
+      buftype = { 'terminal', 'quickfix' },
     },
 
     -- filter using window options
@@ -56,21 +56,24 @@ local cfg = {
 
   -- all the windows except the curren window will be highlighted using this color
   -- other_win_hl_color = '#44cc41',
-  other_win_hl_color = '#76946A',
+  -- other_win_hl_color = '#76946A',
+  other_win_hl_color = '#e35e4f',
 }
-
-M.once = function()
-  xy.map.n('<C-w>p', function()
-    local wid = require('window-picker').pick_window()
-    if wid then
-      vim.api.nvim_set_current_win(wid)
-      return wid
-    end
-  end, 'Pick window')
-end
 
 M.done = function()
   require('window-picker').setup(cfg)
+
+  xy.map.n {
+    '<C-w>p',
+    function()
+      local wid = require('window-picker').pick_window()
+      if wid then
+        vim.api.nvim_set_current_win(wid)
+        return wid
+      end
+    end,
+    'Pick window',
+  }
 end
 
 return M
