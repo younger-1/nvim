@@ -268,6 +268,22 @@ mods.edit = {
   --     require('yode-nvim').setup {}
   --   end,
   -- },
+  {
+    'Wansmer/treesj',
+    after = 'nvim-treesitter',
+    config = function()
+      require 'young.mod.treesj'
+    end,
+  },
+  {
+    'AndrewRadev/splitjoin.vim',
+    event = 'BufWinEnter',
+    -- cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
+    setup = function()
+      vim.g.splitjoin_join_mapping = 'gsj'
+      vim.g.splitjoin_split_mapping = 'gss'
+    end,
+  },
 }
 
 mods.change = {
