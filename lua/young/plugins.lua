@@ -486,8 +486,8 @@ mods.BWT = {
     },
     {
       's1n7ax/nvim-window-picker',
-      -- event = 'CursorMoved',
-      module = 'window-picker',
+      event = 'CursorMoved',
+      -- module = 'window-picker',
       config = function()
         require('young.mod.window_picker').done()
       end,
@@ -524,16 +524,33 @@ mods.BWT = {
 
 mods.file = {
   tree = {
+    -- {
+    --   'nvim-tree/nvim-tree.lua',
+    --   cmd = 'NvimTreeToggle', -- BUG:PackerCompile will cause `cmd` redefined and load `config` again. But `NvimTreeToggle` defined in nvim-tree's `setup` with condition.
+    --   -- event = 'BufWinEnter',
+    --   -- module = 'nvim-tree', -- BUG:require nvim-treesitter also trigger it.
+    --   -- module_pattern = '^nvim%-tree$',
+    --   -- module_pattern = '^' .. vim.pesc 'nvim-tree' .. '$',
+    --   -- module_pattern = { '^' .. vim.pesc 'nvim-tree' .. '$', '^' .. vim.pesc 'nvim-tree.' },
+    --   setup = function()
+    --     require('young.mod.nvim_tree').once()
+    --   end,
+    --   config = function()
+    --     require('young.mod.nvim_tree').done()
+    --   end,
+    -- },
     {
-      'kyazdani42/nvim-tree.lua',
-      cmd = 'NvimTreeToggle', -- BUG:PackerCompile will cause `cmd` redefined and load `config` again. But `NvimTreeToggle` defined in nvim-tree's `setup` with condition.
-      -- event = 'BufWinEnter',
-      -- module = 'nvim-tree', -- BUG:require nvim-treesitter also trigger it.
-      -- module_pattern = '^nvim%-tree$',
-      -- module_pattern = '^' .. vim.pesc 'nvim-tree' .. '$',
-      -- module_pattern = { '^' .. vim.pesc 'nvim-tree' .. '$', '^' .. vim.pesc 'nvim-tree.' },
+      'nvim-neo-tree/neo-tree.nvim',
+      cmd = 'Neotree',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        { 'MunifTanjim/nui.nvim', module = 'nui' },
+      },
+      setup = function()
+        require('young.mod.neo-tree').once()
+      end,
       config = function()
-        require('young.mod.nvim_tree').done()
+        require('young.mod.neo-tree').done()
       end,
     },
     {
