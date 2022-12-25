@@ -55,7 +55,7 @@ return {
   buffer_mappings = {
     normal_mode = {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
-      ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      -- ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
       --
       ['gd'] = {
         -- function()
@@ -76,6 +76,15 @@ return {
         end,
         'Show diagnostics',
       },
+      -- ['gw'] = {
+      --   function()
+      --     require('telescope.builtin').lsp_workspace_symbols {
+      --       query = fn.expand '<cword>',
+      --       -- symbols = { 'class', 'function' },
+      --     }
+      --   end,
+      --   'Show diagnostics',
+      -- },
       -- ['go'] = {
       --   function()
       --     require('young.lsp.misc').Peek 'definition'

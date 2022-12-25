@@ -50,10 +50,10 @@ function M.done()
     finder_request_timeout = 1500,
     finder_action_keys = {
       open = { 'o', '<CR>' },
-      vsplit = 's',
-      split = 'i',
+      vsplit = 'v',
+      split = 's',
       tabe = 't',
-      quit = 'q',
+      quit = { 'q', '<ESC>' },
     },
     code_action_keys = {
       quit = 'q',
@@ -66,6 +66,7 @@ function M.done()
       tabe = '<C-c>t',
       quit = 'q',
     },
+    hover_action_quit = 'q',
     rename_action_quit = '<C-c>',
     rename_in_select = true,
     -- show symbols in winbar must nightly
@@ -106,6 +107,10 @@ function M.once()
   -- when you use action in finder like open vsplit then your can
   -- use <C-t> to jump back
   xy.map.register {
+    g = {
+      h = { cmd2 'Lspsaga lsp_finder' },
+      o = { cmd2 'Lspsaga peek_definition' },
+    },
     ['<leader>'] = {
       j = {
         j = { cmd2 'Lspsaga lsp_finder' },
@@ -116,7 +121,7 @@ function M.once()
         a = { cmd2 'Lspsaga code_action' },
         A = { cmd2 'Lspsaga range_code_action' },
         r = { cmd2 'Lspsaga rename' },
-        o = { cmd2 'LSoutlineToggle' },
+        o = { cmd2 'Lspsaga outline' },
       },
     },
   }

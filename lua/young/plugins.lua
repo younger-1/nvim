@@ -1268,6 +1268,27 @@ mods.LSP = {
         require('young.mod.lspsaga').done()
       end,
     },
+    -- {
+    --   'rmagatti/goto-preview',
+    --   module = 'goto-preview',
+    --   setup = function()
+    --     require('young.mod.goto-preview').once()
+    --   end,
+    --   config = function()
+    --     require('young.mod.goto-preview').done()
+    --   end,
+    -- },
+    {
+      'dnlhc/glance.nvim',
+      cmd = 'Glance',
+      -- module = 'goto-preview',
+      setup = function()
+        require('young.mod.glance').once()
+      end,
+      config = function()
+        require('young.mod.glance').done()
+      end,
+    },
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     -- {
     --   'kosayoda/nvim-lightbulb',
