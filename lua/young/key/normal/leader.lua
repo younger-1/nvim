@@ -569,7 +569,7 @@ return {
         require('telescope.builtin').live_grep {
           -- grep_open_files = vim.v.count ~= 0,
           -- Like how fzf handles spaces with wildcards in rg
-          on_input_filter_cb = vim.v.count == 0 and function(prompt)
+          on_input_filter_cb = vim.v.count ~= 0 and function(prompt)
             return { prompt = prompt:gsub('%s', '.*') }
           end,
         }
