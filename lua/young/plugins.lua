@@ -1469,8 +1469,8 @@ mods.tool = {
   open = {
     {
       'itchyny/vim-external', -- TODO:gx in WSL
-      -- event = 'BufWinEnter',
-      keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
+      event = 'BufWinEnter',
+      -- keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
       config = function()
         require 'young.mod.external'
       end,
