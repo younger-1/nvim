@@ -68,6 +68,7 @@ return {
   },
   C = { ':call OpenLastClosed()<cr>', 'which_key_ignore' },
   Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
+  N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   T = {
     name = '+treesitter',
     I = { cmd 'TSModuleInfo', 'Telescope' },

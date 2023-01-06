@@ -60,6 +60,12 @@ mods.theme = {
         require 'young.theme.monokai'
       end,
     },
+    -- {
+    --   'navarasu/onedark.nvim',
+    --   config = function()
+    --     require 'young.theme.onedark'
+    --   end,
+    -- },
     'rebelot/kanagawa.nvim',
     'ellisonleao/gruvbox.nvim',
     'daschw/leaf.nvim',
@@ -464,6 +470,13 @@ mods.BWT = {
       event = 'BufReadPost',
       config = function()
         require 'young.mod.marks'
+      end,
+    },
+    {
+      'stevearc/three.nvim',
+      event = 'BufRead',
+      config = function()
+        require 'young.mod.three'
       end,
     },
   },
