@@ -472,13 +472,13 @@ mods.BWT = {
         require 'young.mod.marks'
       end,
     },
-    {
-      'stevearc/three.nvim',
-      event = 'BufRead',
-      config = function()
-        require 'young.mod.three'
-      end,
-    },
+    -- {
+    --   'stevearc/three.nvim',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require 'young.mod.three'
+    --   end,
+    -- },
   },
   window = {
     {
@@ -1007,6 +1007,13 @@ mods.UI = {
     --     require 'young.mod.drop'
     --   end,
     -- },
+    {
+      'eandrju/cellular-automaton.nvim',
+      cmd = 'CellularAutomaton',
+      config = function()
+        require 'young.mod.cellular'
+      end
+    },
   },
   outline = {
     {
