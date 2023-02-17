@@ -50,6 +50,7 @@ _G.xy = {
     rel_start = vim.fn.reltime(),
     hr_start = uv.hrtime(),
   },
+  o = {},
 }
 
 if is_mac then
