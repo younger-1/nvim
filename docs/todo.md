@@ -76,6 +76,7 @@
 - [ ] hydra: global keymap e.g. <esc> to quit
 - [ ] ts-hydra: use extmarks display jumpable location in screen
 - [ ] open hex file toooooooooooooooooooooo slow
+- [ ] autocmd: relative number only in visual mode
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

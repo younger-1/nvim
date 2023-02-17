@@ -192,3 +192,11 @@ vim.cmd [[command! TagsUpdate !ctags -R .]]
 --   vim.o.grepprg = 'grep --line-number --recursive -I $*'
 --   vim.o.grepformat = '%f:%l:%m'
 -- end
+
+for _, k in ipairs {
+  'number',
+  'relativenumber',
+  'signcolumn',
+} do
+  xy.o[k] = vim.o[k]
+end
