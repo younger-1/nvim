@@ -69,7 +69,7 @@ return {
         library = {},
         maxPreload = 5000,
         preloadFileSize = 10000,
-        -- checkThirdParty = false,
+        checkThirdParty = false,
       },
       diagnostics = {
         globals = {
