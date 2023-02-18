@@ -60,12 +60,12 @@ mods.theme = {
         require 'young.theme.monokai'
       end,
     },
-    -- {
-    --   'navarasu/onedark.nvim',
-    --   config = function()
-    --     require 'young.theme.onedark'
-    --   end,
-    -- },
+    {
+      'navarasu/onedark.nvim',
+      config = function()
+        require 'young.theme.onedark'
+      end,
+    },
     'rebelot/kanagawa.nvim',
     'ellisonleao/gruvbox.nvim',
     'daschw/leaf.nvim',
@@ -452,6 +452,13 @@ mods.neovim = {
     event = 'BufRead',
     config = function()
       require 'young.mod.yanky'
+    end,
+  },
+  {
+    'ojroques/nvim-osc52',
+    event = 'BufRead',
+    config = function()
+      require 'young.mod.osc52'
     end,
   },
 }
@@ -1012,7 +1019,7 @@ mods.UI = {
       cmd = 'CellularAutomaton',
       config = function()
         require 'young.mod.cellular'
-      end
+      end,
     },
   },
   outline = {
