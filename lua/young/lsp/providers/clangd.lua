@@ -141,6 +141,7 @@ return {
     '--pch-storage=disk',
     '-j=12',
     '-include-ineligible-results',
+    -- '--compile-commands-dir=build',
     -- '--std=c++20',
     -- '--header-insertion=iwyu',
     -- '--header-insertion-decorators',

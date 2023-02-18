@@ -70,6 +70,7 @@ end
 M.done = function()
   add_true_false()
   add_direction()
+  -- TODO:on,off,yes,no
 
   -- dial.config.searchlist.normal = settings
 
