@@ -57,4 +57,15 @@ return {
     },
     y = { 'dh<cmd>Telescope neoclip<cr>', 'Clipboard' },
   },
+  y = {
+    name = '+young',
+    g = {
+      function()
+        local text = xy.util.get_visual_selection_by_reg()
+        require('young.mod.telescope.finder').grep_config()
+        fn.feedkeys(text)
+      end,
+      'Grep',
+    },
+  }
 }
