@@ -238,8 +238,3 @@ for mode_name, mappings in pairs(keys) do
     xy.map[mode](v)
   end
 end
-
-local n = require 'young.key.normal'
-local v = require 'young.key.visual'
-xy.map.register(n, { mode = 'n' })
-xy.map.register(v, { mode = 'x' })

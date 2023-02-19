@@ -36,4 +36,11 @@ function M.call(str)
   return '<Cmd>call ' .. str .. '<CR>'
 end
 
+M.done = function()
+  local n = require 'young.key.normal'
+  local v = require 'young.key.visual'
+  xy.map.register(n, { mode = 'n' })
+  xy.map.register(v, { mode = 'x' })
+end
+
 return M
