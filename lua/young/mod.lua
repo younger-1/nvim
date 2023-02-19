@@ -899,21 +899,21 @@ M.UI = {
     {
       'rcarriga/nvim-notify',
       -- event = 'BufWinEnter',
-      lazy = true,
+      event = 'VeryLazy',
       config = function()
         require('young.mod.notify').done()
       end,
     },
     {
       'folke/which-key.nvim',
-      lazy = true,
+      event = 'VeryLazy',
       config = function()
         require('young.mod.which_key').done()
       end,
     },
     {
       'anuvyklack/hydra.nvim',
-      lazy = true,
+      event = 'VeryLazy',
       config = function()
         require 'young.mod.hydra'
       end,
