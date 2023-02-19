@@ -506,6 +506,13 @@ M.neovim = {
       require 'young.mod.osc52'
     end,
   },
+  {
+    'lunarvim/bigfile.nvim',
+    event = { 'FileReadPre', 'BufReadPre', 'User FileOpened' },
+    config = function()
+      require('bigfile').config()
+    end,
+  },
 }
 
 M.BWT = {
@@ -614,6 +621,7 @@ M.file = {
     {
       'tamago324/lir.nvim',
       event = 'BufRead',
+      -- event = 'User DirOpened',
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
         require 'young.mod.lir'
@@ -833,7 +841,8 @@ M.git = {
   },
   {
     'lewis6991/gitsigns.nvim',
-    event = 'BufRead',
+    -- event = 'BufRead',
+    event = 'VeryLazy',
     config = function()
       require('young.mod.gitsigns').done()
     end,
@@ -1355,7 +1364,8 @@ M.LSP = {
     { -- Highlighting the word under the cursor
       'RRethy/vim-illuminate',
       enabled = not require('young.lsp.config').document_highlight,
-      event = 'BufWinEnter',
+      -- event = 'BufWinEnter',
+      event = 'VeryLazy',
       config = function()
         require 'young.mod.illuminate'
       end,
