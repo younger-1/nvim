@@ -52,6 +52,8 @@ M.cfg = {
         end,
       },
     },
+    { name = 'nvim_lsp_signature_help' },
+    --
     { name = 'calc' },
     {
       name = 'rg',
