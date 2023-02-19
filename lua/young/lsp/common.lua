@@ -77,23 +77,22 @@ local function lsp_code_lens_refresh(client, bufnr)
 end
 
 local function add_lsp_buffer_keybindings(bufnr)
-  local status_ok, wk = pcall(require, 'which-key')
-
   local mappings = {
     normal_mode = 'n',
     insert_mode = 'i',
     visual_mode = 'x',
   }
 
-  if status_ok then
-    for mode_name, mode_char in pairs(mappings) do
-      wk.register(lsp_cfg.buffer_mappings[mode_name], { mode = mode_char, buffer = bufnr })
-    end
-  else
-    for mode_name, mode_char in pairs(mappings) do
-      for key, remap in pairs(lsp_cfg.buffer_mappings[mode_name]) do
-        vim.keymap.set(mode_char, key, remap[1], { buffer = true })
-      end
+  -- local status_ok, wk = pcall(require, 'which-key')
+  -- if status_ok then
+  --   for mode_name, mode_char in pairs(mappings) do
+  --     wk.register(lsp_cfg.buffer_mappings[mode_name], { mode = mode_char, buffer = bufnr })
+  --   end
+  -- end
+
+  for mode_name, mode_char in pairs(mappings) do
+    for key, remap in pairs(lsp_cfg.buffer_mappings[mode_name]) do
+      vim.keymap.set(mode_char, key, remap[1], { buffer = true })
     end
   end
 
