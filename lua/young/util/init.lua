@@ -309,10 +309,10 @@ IlluminatedWordRead xxx gui=underline
 -- Recursive subtables
 local mt = {}
 function mt.__index(self, subtbl)
-   self[subtbl] = setmetatable({}, {
-      __index = mt.__index
-   })
-   return self[subtbl]
+  self[subtbl] = setmetatable({}, {
+    __index = mt.__index,
+  })
+  return self[subtbl]
 end
 ---Return an empty table, in which any nested tables of any level will be created on fly when they will be accessed.
 ---Example:
@@ -321,8 +321,56 @@ end
 ---    t[one][two][three] = 'text'
 ---```
 function util.unlimited_depth_table()
-   return setmetatable({}, mt)
+  return setmetatable({}, mt)
 end
 
+function util.get_loc()
+  local me = debug.getinfo(1, 'S')
+  local level = 2
+  local info = debug.getinfo(level, 'S')
+  while info and info.source == me.source do
+    level = level + 1
+    info = debug.getinfo(level, 'S')
+  end
+  info = info or me
+  local source = info.source:sub(2)
+  source = vim.loop.fs_realpath(source) or source
+  return source .. ':' .. info.linedefined
+end
+
+---@param value any
+---@param opts? {loc:string}
+function util.dump(value, opts)
+  opts = opts or {}
+  opts.loc = opts.loc or util.get_loc()
+  if vim.in_fast_event() then
+    return vim.schedule(function()
+      util.dump(value, opts)
+    end)
+  end
+  opts.loc = vim.fn.fnamemodify(opts.loc, ':~:.')
+  local msg = vim.inspect(value)
+  vim.notify(msg, vim.log.levels.INFO, {
+    title = 'Debug: ' .. opts.loc,
+    on_open = function(win)
+      vim.wo[win].conceallevel = 3
+      vim.wo[win].concealcursor = ''
+      vim.wo[win].spell = false
+      local buf = vim.api.nvim_win_get_buf(win)
+      if not pcall(vim.treesitter.start, buf, 'lua') then
+        vim.bo[buf].filetype = 'lua'
+      end
+    end,
+  })
+end
+
+function util.get_value(...)
+  local value = { ... }
+  return vim.tbl_islist(value) and vim.tbl_count(value) <= 1 and value[1] or value
+end
+
+function util.dd(...)
+  util.dump(util.get_value(...))
+end
 
 return util
