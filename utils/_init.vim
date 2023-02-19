@@ -528,7 +528,6 @@ set splitright                  " Vertical windows should be split to right
 set splitbelow                  " Horizontal windows should split to bottom
 set hidden                      " Buffer should still exist if window is closed
 set backspace=indent,eol,start
-set lazyredraw                  " Don't redraw while executing macros (good performance config)
 
 set noerrorbells                " No beeps when error happens
 
