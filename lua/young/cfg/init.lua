@@ -23,7 +23,7 @@ function M.done()
 
   tt()
   require('young.autocmd').done()
-  -- require('young.key').done()
+  require('young.key').done()
 
   -- local supported_languages = require "lvim.config.supported_languages"
   -- require("lvim.lsp.manager").init_defaults(supported_languages)
@@ -56,6 +56,8 @@ function M.reload()
 end
 
 M.reload_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
+
+M.lazy_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'module', 'init.lua')
 
 M.local_config_path = join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
 

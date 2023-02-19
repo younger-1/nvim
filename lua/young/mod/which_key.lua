@@ -115,6 +115,8 @@ local vopts = {
 }
 
 M.done = function()
+  vim.o.timeoutlen = 300
+
   local wk = require 'which-key'
   wk.setup(cfg)
 
@@ -127,15 +129,10 @@ M.done = function()
   --   show(keys, option)
   -- end
 
-  vim.o.timeoutlen = 300
-
   local n = require 'young.key.normal'
   local v = require 'young.key.visual'
   wk.register(n, opts)
   wk.register(v, vopts)
-
-  -- xy.map.register(n, opts)
-  -- xy.map.register(v, vopts)
 end
 
 return M

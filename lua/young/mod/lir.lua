@@ -4,7 +4,11 @@ local clipboard_actions = require 'lir.clipboard.actions'
 
 require('lir').setup {
   show_hidden_files = false,
-  devicons_enable = true,
+  ignore = {}, -- { ".DS_Store", "node_modules" } etc.
+  devicons = {
+    enable = true,
+    highlight_dirname = false,
+  },
   mappings = {
     ['l'] = actions.edit,
     ['<cr>'] = actions.edit,
@@ -66,13 +70,13 @@ require('lir').setup {
 }
 
 -- custom folder icon
--- require("nvim-web-devicons").set_icon {
---   lir_folder_icon = {
---     icon = "",
---     color = "#569CD6",
---     name = "LirFolderNode",
---   },
--- }
+require("nvim-web-devicons").set_icon {
+  lir_folder_icon = {
+    icon = "",
+    color = "#caa4ec",
+    name = "LirFolderNode",
+  },
+}
 
 -- use visual mode
 function _G.LirSettings()

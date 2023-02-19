@@ -298,9 +298,11 @@ M.change = {
   comment = {
     {
       'numToStr/Comment.nvim',
-      event = 'BufRead',
-      -- BUG:PackerCompile will cause `keys` redefined
+      -- event = 'BufRead',
       -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
+      keys = {
+        { 'gc', mode = { 'n', 'x' } },
+      },
       config = function()
         require 'young.mod.comment'
       end,
@@ -316,7 +318,6 @@ M.change = {
     {
       'junegunn/vim-easy-align',
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
-      -- BUG:PackerCompile will cause `keys` redefined
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
       init = function()
         require 'young.mod.easy-align'
@@ -777,7 +778,7 @@ M.git = {
   },
   {
     'TimUntersberger/neogit',
-    cmd = 'Neogit', -- BUG:PackerCompile will cause `cmd` redefined
+    cmd = 'Neogit',
     config = function()
       require('neogit').setup {}
     end,
@@ -1430,7 +1431,7 @@ M.tool = {
     {
       'itchyny/vim-external', -- TODO:gx in WSL
       event = 'BufWinEnter',
-      -- keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
+      keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
       config = function()
         require 'young.mod.external'
       end,
