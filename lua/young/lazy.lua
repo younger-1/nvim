@@ -15,7 +15,7 @@ end
 
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-require('lazy').setup {
+require('lazy').setup(require 'young.mod', {
   root = vim.fn.stdpath 'data' .. '/lazy', -- directory where plugins will be installed
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?
@@ -31,7 +31,6 @@ require('lazy').setup {
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
-    { import = 'young.module' },
     -- { import = 'young.mod.theme' },
     -- { import = 'young.mod.edit' },
     -- { import = 'young.mod.appearance' },
@@ -187,6 +186,6 @@ require('lazy').setup {
     skip_if_doc_exists = true,
   },
   state = vim.fn.stdpath 'state' .. '/lazy/state.json', -- state info for checker and other things
-}
+})
 
 vim.keymap.set('n', '<leader>pp', '<Cmd>Lazy<CR>', { silent = true, desc = 'Plugin manager' })
