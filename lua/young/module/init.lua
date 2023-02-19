@@ -1,5 +1,53 @@
 local M = {}
 
+local to_plugs = function(t, submods)
+  local plugs = {}
+  for key, item in pairs(t) do
+    if type(key) == 'number' then
+      plugs[#plugs + 1] = item
+    elseif submods and #submods > 0 then
+      if vim.tbl_contains(submods, key) then
+        vim.list_extend(plugs, item)
+      end
+    else
+      vim.list_extend(plugs, item)
+    end
+  end
+
+  return plugs
+end
+
+local function auto_require_mod(plugs)
+  for i, plug in ipairs(plugs) do
+    if type(plug) == 'string' then
+      plug = { plug }
+    end
+    if not plug.config and not plug.init then
+      local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
+      local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+      -- gg(plug[1], short_name, xy_name)
+
+      local ok, xy_mod = pcall(require, 'young.mod.' .. xy_name)
+      plug.init = ok and xy_mod.once
+      plug.config = ok and xy_mod.done
+    end
+    plugs[i] = plug
+  end
+  return plugs
+end
+
+-- for _, mod in pairs(M) do
+--   setmetatable(mod, { __call = to_plugs })
+-- end
+setmetatable(M, {
+  __newindex = function(t, k, v)
+    rawset(t, k, function(s)
+      -- return to_plugs(v, s)
+      return auto_require_mod(to_plugs(v, s))
+    end)
+  end,
+})
+
 M.theme = {
   -- { 'rktjmp/lush.nvim' },
   {
@@ -104,9 +152,6 @@ M.appearance = {
     {
       'xiyaowong/nvim-transparent',
       cmd = 'TransparentToggle',
-      config = function()
-        require 'young.mod.transparent'
-      end,
     },
   },
   indent = {
@@ -1417,9 +1462,6 @@ M.write = {
     {
       'folke/zen-mode.nvim',
       cmd = 'ZenMode',
-      config = function()
-        require 'young.mod.zen'
-      end,
     },
   },
   { 'jbyuki/venn.nvim', cmd = 'VBox' },
@@ -1481,30 +1523,6 @@ M.tool = {
     end,
   },
 }
-
-local to_plugs = function(t, submods)
-  local plugs = {}
-  for key, item in pairs(t) do
-    if type(key) == 'number' then
-      plugs[#plugs + 1] = item
-    elseif submods and #submods > 0 then
-      if vim.tbl_contains(submods, key) then
-        vim.list_extend(plugs, item)
-      end
-    else
-      vim.list_extend(plugs, item)
-    end
-  end
-  if #plugs == 1 then
-    return unpack(plugs) -- avoid return { { "foo" } } to packer
-  end
-  return plugs
-end
-
--- Or: use __newindex()
-for _, mod in pairs(M) do
-  setmetatable(mod, { __call = to_plugs })
-end
 
 return {
   M.BWT(),

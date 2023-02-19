@@ -658,7 +658,7 @@ return {
     I = { cmd 'IndentBlanklineToggle', 'Toggle indentline' },
     n = { require('young.tool').toggle_notify_style, 'Nofity style' },
     N = { require('young.tool').toggle_notify, 'Toggle nofity' },
-    t = { cmd 'TransparentToggle', 'Transparent' },
+    -- t = { cmd 'TransparentToggle', 'Transparent' },
     x = { cmd 'Hexmode', 'Hex mode' },
     u = { cmd 'UndotreeToggle', 'Undotree' },
   },
@@ -720,5 +720,5 @@ return {
     -- y = { cmd('edit ' .. require('young.cfg').reload_path), 'Edit plugins' },
     -- y = { "<cmd>lua vim.fn.execute('edit ' .. require('young.cfg').reload_path)<cr>", 'Edit plugins' },
   },
-  z = { '<cmd>ZenMode<cr>', 'Zen' },
+  -- z = { '<cmd>ZenMode<cr>', 'Zen' },
 }

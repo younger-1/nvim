@@ -1,4 +1,4 @@
-require('zen-mode').setup {
+local cfg = {
   window = {
     backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
     -- height and width can be:
@@ -43,4 +43,13 @@ require('zen-mode').setup {
   on_open = function(win) end,
   -- callback where you can add custom code when the Zen window closes
   on_close = function() end,
+}
+
+return {
+  once = function()
+    xy.map.n { '<leader>z', '<cmd>ZenMode<cr>' }
+  end,
+  done = function()
+    require('zen-mode').setup(cfg)
+  end,
 }
