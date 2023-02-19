@@ -17,7 +17,7 @@ local to_plugs = function(t, submods)
   return plugs
 end
 
-local function auto_require_mod(plugs)
+local function auto_require_mod(plugs, layer)
   for i, plug in ipairs(plugs) do
     if type(plug) == 'string' then
       plug = { plug }
@@ -27,9 +27,33 @@ local function auto_require_mod(plugs)
       local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
       -- gg(plug[1], short_name, xy_name)
 
-      local ok, xy_mod = pcall(require, 'young.mod.' .. xy_name)
-      plug.init = ok and xy_mod.once
-      plug.config = ok and xy_mod.done
+      -- local ok, xy_mod = pcall(require, 'young.mod.' .. layer .. xy_name)
+      local mod_path
+      for _, paths in ipairs {
+        { 'young', 'mod', xy_name },
+        { 'young', 'mod', layer, xy_name },
+      } do
+        local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
+        if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
+          mod_path = table.concat(paths, '.')
+          -- gg(mod_path)
+        end
+      end
+
+      if mod_path then
+        plug.init = function()
+          local m = require(mod_path)
+          if m and m.once and type(m.once) == 'function' then
+            m.once()
+          end
+        end
+        plug.config = function()
+          local m = require(mod_path)
+          if m and m.done and type(m.done) == 'function' then
+            m.done()
+          end
+        end
+      end
     end
     plugs[i] = plug
   end
@@ -43,7 +67,7 @@ setmetatable(M, {
   __newindex = function(t, k, v)
     rawset(t, k, function(s)
       -- return to_plugs(v, s)
-      return auto_require_mod(to_plugs(v, s))
+      return auto_require_mod(to_plugs(v, s), k)
     end)
   end,
 })
