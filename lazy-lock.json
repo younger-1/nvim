@@ -6,6 +6,7 @@
   "alpha-nvim": { "branch": "main", "commit": "b3eef69e95674905bf26c7740dd4bbb09b355494" },
   "any-jump.vim": { "branch": "remove-pics", "commit": "fb7fbd07ef9e21d5341c04e37a6deaf031aba1a9" },
   "barbar.nvim": { "branch": "master", "commit": "00512bab6983fb8b996f36a9688b0c8478a1f4f0" },
+  "bigfile.nvim": { "branch": "main", "commit": "c1bad34ce742b4f360b67ca23c873fef998240fc" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "679943b8e1e5ef79aaeeaf4b00782c52eb4e928f" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-calc": { "branch": "main", "commit": "50792f34a628ea6eb31d2c90e8df174671e4e7a0" },

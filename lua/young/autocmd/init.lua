@@ -147,6 +147,33 @@ function M.done()
       },
       -- { 'FocusLost', '*', 'silent! wa' },
     },
+    _dir_opened = { -- taken from AstroNvim
+      {
+        'BufEnter',
+        '*',
+        function(args)
+          local bufname = vim.api.nvim_buf_get_name(args.buf)
+          if xy.util.is_dir(bufname) then
+            vim.api.nvim_del_augroup_by_name '_dir_opened'
+            vim.cmd 'do User DirOpened'
+            vim.api.nvim_exec_autocmds('BufEnter', {})
+          end
+        end,
+      },
+    },
+    _file_opened = { -- taken from AstroNvim
+      {
+        { 'BufRead', 'BufWinEnter', 'BufNewFile' },
+        '*',
+        function(args)
+          local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
+          if not (vim.fn.expand '%' == '' or buftype == 'nofile') then
+            vim.cmd 'do User FileOpened'
+            -- require('young.lsp').done()
+          end
+        end,
+      },
+    },
     -- _goto_last_position = {
     --   {
     --     'BufReadPost',
