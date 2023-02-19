@@ -36,6 +36,7 @@ local function auto_require_mod(plugs, layer)
         local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
         if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
           mod_path = table.concat(paths, '.')
+          break
           -- gg(mod_path)
         end
       end

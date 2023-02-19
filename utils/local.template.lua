@@ -1,6 +1,6 @@
 return {
   ensure_servers = {
-    lua = 'sumneko_lua',
+    lua = 'lua_ls',
     vim = 'vimls',
     python = 'pyright',
     -- python = 'pylsp',

@@ -31,6 +31,7 @@ tt()
 --   vim.cmd [[doautocmd BufWinEnter | doautocmd BufRead | doautocmd FileType]]
 -- end)
 require 'young.lazy'
+require('young.lsp').done()
 
 tt()
 vim.cmd [[silent! colorscheme dracula]]
