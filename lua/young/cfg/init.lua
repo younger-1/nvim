@@ -57,7 +57,7 @@ end
 
 M.reload_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
 
-M.lazy_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'mod.lua')
+M.lazy_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'modules.lua')
 
 M.local_config_path = join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
 

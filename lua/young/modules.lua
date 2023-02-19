@@ -1,4 +1,4 @@
-local M = {}
+local modules = {}
 
 local to_plugs = function(t, submods)
   local plugs = {}
@@ -17,21 +17,21 @@ local to_plugs = function(t, submods)
   return plugs
 end
 
-local function auto_require_mod(plugs, layer)
+local function auto_require_mod(plugs, mod_name)
   for i, plug in ipairs(plugs) do
     if type(plug) == 'string' then
       plug = { plug }
     end
     if not plug.config and not plug.init then
       local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
-      local xy_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
-      -- gg(plug[1], short_name, xy_name)
+      local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+      -- gg(plug[1], short_name, plug_name)
 
-      -- local ok, xy_mod = pcall(require, 'young.mod.' .. layer .. xy_name)
+      -- local ok, mod = pcall(require, 'young.mod.' .. mod_name .. xy_name)
       local mod_path
       for _, paths in ipairs {
-        { 'young', 'mod', xy_name },
-        { 'young', 'mod', layer, xy_name },
+        { 'young', 'mod', plug_name },
+        { 'young', 'mod', mod_name, plug_name },
       } do
         local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
         if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
@@ -61,10 +61,10 @@ local function auto_require_mod(plugs, layer)
   return plugs
 end
 
--- for _, mod in pairs(M) do
+-- for _, mod in pairs(modules) do
 --   setmetatable(mod, { __call = to_plugs })
 -- end
-setmetatable(M, {
+setmetatable(modules, {
   __newindex = function(t, k, v)
     rawset(t, k, function(s)
       -- return to_plugs(v, s)
@@ -73,7 +73,7 @@ setmetatable(M, {
   end,
 })
 
-M.theme = {
+modules.theme = {
   -- { 'rktjmp/lush.nvim' },
   {
     'folke/styler.nvim',
@@ -161,7 +161,7 @@ M.theme = {
   },
 }
 
-M.appearance = {
+modules.appearance = {
   icon = {
     { 'kyazdani42/nvim-web-devicons' },
   },
@@ -213,7 +213,7 @@ M.appearance = {
   },
 }
 
-M.edit = {
+modules.edit = {
   motion = {
     {
       'haya14busa/vim-asterisk',
@@ -350,7 +350,7 @@ M.edit = {
   },
 }
 
-M.change = {
+modules.change = {
   core = {
     { 'tpope/vim-surround' },
     { 'tpope/vim-repeat' },
@@ -420,7 +420,7 @@ M.change = {
   },
 }
 
-M.neovim = {
+modules.neovim = {
   profile = {
     {
       'dstein64/vim-startuptime',
@@ -515,7 +515,7 @@ M.neovim = {
   },
 }
 
-M.BWT = {
+modules.BWT = {
   buffer = {
     {
       'ThePrimeagen/harpoon',
@@ -591,7 +591,7 @@ M.BWT = {
   },
 }
 
-M.file = {
+modules.file = {
   tree = {
     -- {
     --   'nvim-tree/nvim-tree.lua',
@@ -682,7 +682,7 @@ M.file = {
   },
 }
 
-M.find = {
+modules.find = {
   grep = {
     {
       'windwp/nvim-spectre',
@@ -719,7 +719,7 @@ M.find = {
   },
 }
 
-M.telescope = {
+modules.telescope = {
   core = {
     {
       'nvim-telescope/telescope.nvim',
@@ -829,7 +829,7 @@ M.telescope = {
   },
 }
 
-M.git = {
+modules.git = {
   {
     'tpope/vim-fugitive',
     cmd = { 'Git', 'G', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gdiff' },
@@ -904,7 +904,7 @@ M.git = {
   },
 }
 
-M.UI = {
+modules.UI = {
   core = {
     {
       'rcarriga/nvim-notify',
@@ -1093,7 +1093,7 @@ M.UI = {
   },
 }
 
-M.code = {
+modules.code = {
   jump = {
     {
       -- 'pechorin/any-jump.vim',
@@ -1264,7 +1264,7 @@ M.code = {
   },
 }
 
-M.LSP = {
+modules.LSP = {
   core = {
     { 'neovim/nvim-lspconfig' },
     -- { 'williamboman/nvim-lsp-installer' },
@@ -1383,7 +1383,7 @@ M.LSP = {
   },
 }
 
-M.lang = {
+modules.lang = {
   -- {
   --   'sheerun/vim-polyglot',
   --   lazy = true,
@@ -1452,7 +1452,7 @@ M.lang = {
   },
 }
 
-M.write = {
+modules.write = {
   todo = {
     {
       'folke/todo-comments.nvim',
@@ -1503,7 +1503,7 @@ M.write = {
   { 'jbyuki/nabla.nvim', lazy = true },
 }
 
-M.tool = {
+modules.tool = {
   open = {
     {
       'itchyny/vim-external', -- TODO:gx in WSL
@@ -1560,20 +1560,20 @@ M.tool = {
 }
 
 return {
-  M.BWT(),
-  M.LSP(),
-  M.UI(),
-  M.appearance(),
-  M.change(),
-  M.code(),
-  M.edit(),
-  M.file(),
-  M.find(),
-  M.git(),
-  M.lang { 'python', 'lisp', 'java' },
-  M.neovim(),
-  M.telescope(),
-  M.theme(),
-  M.tool(),
-  M.write(),
+  modules.BWT(),
+  modules.LSP(),
+  modules.UI(),
+  modules.appearance(),
+  modules.change(),
+  modules.code(),
+  modules.edit(),
+  modules.file(),
+  modules.find(),
+  modules.git(),
+  modules.lang { 'python', 'lisp', 'java' },
+  modules.neovim(),
+  modules.telescope(),
+  modules.theme(),
+  modules.tool(),
+  modules.write(),
 }
