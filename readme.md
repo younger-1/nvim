@@ -34,7 +34,7 @@ Feature-rich, beautiful and fast neovim config.
 | C/C++  |    clangd     |                    |            |       |       |
 |   Go   |     gopls     |                    |            |       |       |
 |  Java  |     jdtls     | google_java_format |            |       |       |
-|  Lua   |  sumneko_lua  |       stylua       |   selene   |       |       |
+|  Lua   |    lua_ls     |       stylua       |   selene   |       |       |
 | Python |    pyright    |       black        |   flake8   |       |       |
 |  Vim   |     vimls     |                    |            |       |       |
 |   Sh   |    bashls     |       shfmt        | shellcheck |       |       |

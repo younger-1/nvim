@@ -77,6 +77,9 @@
 - [ ] ts-hydra: use extmarks display jumpable location in screen
 - [ ] open hex file toooooooooooooooooooooo slow
 - [ ] autocmd: relative number only in visual mode
+- [ ] vim function: 1.telescope: <leader>svf, 2.get_def_locations
+- [ ] neotree: <leader>sg and <leadersf>
+- [ ] lazy.nvim: let `init` to execute after startup, otherwise `init` code would be overrided by `./plugin` code
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
