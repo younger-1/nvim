@@ -1,8 +1,57 @@
 local M = {}
 
+function M.once()
+  local cmd2 = require('young.key').cmd2
+  xy.map.register {
+    g = {
+      h = { cmd2 'Lspsaga lsp_finder' },
+      o = { cmd2 'Lspsaga peek_definition' },
+    },
+    ['<leader>'] = {
+      j = {
+        j = { cmd2 'Lspsaga lsp_finder' },
+        k = { cmd2 'Lspsaga hover_doc' },
+        d = { cmd2 'Lspsaga peek_definition' },
+        l = { cmd2 'Lspsaga show_line_diagnostics' },
+        L = { cmd2 'Lspsaga show_cursor_diagnostics' },
+        a = { cmd2 'Lspsaga code_action' },
+        A = { cmd2 'Lspsaga range_code_action' },
+        r = { cmd2 'Lspsaga rename' },
+        o = { cmd2 'Lspsaga outline' },
+      },
+    },
+  }
+  -- Lsp finder find the symbol definition implement reference
+  -- when you use action in finder like open vsplit then you can
+  -- use <C-t> to jump back
+  -- keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
+
+  -- Code action
+  -- keymap('x', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
+
+  -- Diagnsotic jump can use `<c-o>` to jump back
+  -- keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
+  -- keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
+
+  -- Only jump to error
+  -- keymap('n', '[E', function()
+  --   require('lspsaga.diagnostic').goto_prev { severity = vim.diagnostic.severity.ERROR }
+  -- end, { silent = true })
+  -- keymap('n', ']E', function()
+  --   require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }
+  -- end, { silent = true })
+
+  -- Float terminal
+  -- keymap('n', '<A-d>', cmd 'Lspsaga open_floaterm', { silent = true })
+  -- if you want pass some cli command into terminal you can do like this
+  -- open lazygit in lspsaga float terminal
+  -- keymap('n', '<A-g>', cmd 'Lspsaga open_floaterm lazygit', { silent = true })
+  -- close floaterm
+  -- keymap('t', '<A-d>', [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+end
+
 function M.done()
-  local saga = require 'lspsaga'
-  saga.init_lsp_saga {
+  require('lspsaga').setup {
     -- Options with default value
     -- "single" | "double" | "rounded" | "bold" | "plus"
     border_style = 'single',
@@ -99,59 +148,6 @@ function M.done()
     -- like server_filetype_map = { metals = { "sbt", "scala" } }
     server_filetype_map = {},
   }
-end
-
-function M.once()
-  local cmd2 = require('young.key').cmd2
-  -- Lsp finder find the symbol definition implmement reference
-  -- when you use action in finder like open vsplit then your can
-  -- use <C-t> to jump back
-  xy.map.register {
-    g = {
-      h = { cmd2 'Lspsaga lsp_finder' },
-      o = { cmd2 'Lspsaga peek_definition' },
-    },
-    ['<leader>'] = {
-      j = {
-        j = { cmd2 'Lspsaga lsp_finder' },
-        k = { cmd2 'Lspsaga hover_doc' },
-        d = { cmd2 'Lspsaga peek_definition' },
-        l = { cmd2 'Lspsaga show_line_diagnostics' },
-        L = { cmd2 'Lspsaga show_cursor_diagnostics' },
-        a = { cmd2 'Lspsaga code_action' },
-        A = { cmd2 'Lspsaga range_code_action' },
-        r = { cmd2 'Lspsaga rename' },
-        o = { cmd2 'Lspsaga outline' },
-      },
-    },
-  }
-  -- Lsp finder find the symbol definition implement reference
-  -- when you use action in finder like open vsplit then you can
-  -- use <C-t> to jump back
-  -- keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
-
-  -- Code action
-  -- keymap('x', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
-
-  -- Diagnsotic jump can use `<c-o>` to jump back
-  -- keymap('n', '[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { silent = true })
-  -- keymap('n', ']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', { silent = true })
-
-  -- Only jump to error
-  -- keymap('n', '[E', function()
-  --   require('lspsaga.diagnostic').goto_prev { severity = vim.diagnostic.severity.ERROR }
-  -- end, { silent = true })
-  -- keymap('n', ']E', function()
-  --   require('lspsaga.diagnostic').goto_next { severity = vim.diagnostic.severity.ERROR }
-  -- end, { silent = true })
-
-  -- Float terminal
-  -- keymap('n', '<A-d>', cmd 'Lspsaga open_floaterm', { silent = true })
-  -- if you want pass some cli command into terminal you can do like this
-  -- open lazygit in lspsaga float terminal
-  -- keymap('n', '<A-g>', cmd 'Lspsaga open_floaterm lazygit', { silent = true })
-  -- close floaterm
-  -- keymap('t', '<A-d>', [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 end
 
 return M

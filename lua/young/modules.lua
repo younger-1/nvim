@@ -163,7 +163,7 @@ modules.theme = {
 
 modules.appearance = {
   icon = {
-    { 'kyazdani42/nvim-web-devicons' },
+    { 'nvim-tree/nvim-web-devicons' },
   },
   color = {
     {
@@ -1316,6 +1316,11 @@ modules.LSP = {
       config = function()
         require('young.mod.lspsaga').done()
       end,
+      dependencies = {
+        { 'nvim-tree/nvim-web-devicons' },
+        --Please make sure you install markdown and markdown_inline parser
+        { 'nvim-treesitter/nvim-treesitter' },
+      },
     },
     -- {
     --   'rmagatti/goto-preview',
