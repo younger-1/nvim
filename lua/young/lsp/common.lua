@@ -92,7 +92,8 @@ local function add_lsp_buffer_keybindings(bufnr)
 
   for mode_name, mode_char in pairs(mappings) do
     for key, remap in pairs(lsp_cfg.buffer_mappings[mode_name]) do
-      vim.keymap.set(mode_char, key, remap[1], { buffer = true })
+      -- vim.keymap.set(mode_char, key, remap[1], { buffer = true })
+      xy.map[mode_char] { key, remap[1], remap[2], buffer = true }
     end
   end
 
