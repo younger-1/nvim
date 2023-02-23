@@ -49,7 +49,7 @@ local function auto_require_mod(plugs, mod_name)
               'VeryLazy',
               function()
                 local m = require(mod_path)
-                if m and m.once and type(m.once) == 'function' then
+                if type(m) == 'table' and m.once and type(m.once) == 'function' then
                   m.once()
                 end
               end,
@@ -58,7 +58,7 @@ local function auto_require_mod(plugs, mod_name)
         end
         plug.config = function()
           local m = require(mod_path)
-          if m and m.done and type(m.done) == 'function' then
+          if type(m) == 'table' and m.done and type(m.done) == 'function' then
             m.done()
           end
         end
@@ -266,9 +266,6 @@ modules.edit = {
     {
       'andymass/vim-matchup',
       event = 'BufRead',
-      init = function()
-        require 'young.mod.matchup'
-      end,
     },
     -- {
     --   'monkoose/matchparen.nvim',
@@ -397,9 +394,6 @@ modules.change = {
       'junegunn/vim-easy-align',
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
-      init = function()
-        require 'young.mod.easy-align'
-      end,
     },
     -- {
     --   'mg979/vim-visual-multi',
@@ -605,12 +599,6 @@ modules.file = {
     --   'nvim-tree/nvim-tree.lua',
     --   cmd = 'NvimTreeToggle',
     --   -- event = 'BufWinEnter',
-    --   init = function()
-    --     require('young.mod.nvim_tree').once()
-    --   end,
-    --   config = function()
-    --     require('young.mod.nvim_tree').done()
-    --   end,
     -- },
     {
       'nvim-neo-tree/neo-tree.nvim',
@@ -619,12 +607,6 @@ modules.file = {
         { 'nvim-lua/plenary.nvim' },
         { 'MunifTanjim/nui.nvim' },
       },
-      init = function()
-        require('young.mod.neo-tree').once()
-      end,
-      config = function()
-        require('young.mod.neo-tree').done()
-      end,
     },
     {
       'tamago324/lir.nvim',
@@ -897,9 +879,6 @@ modules.git = {
     {
       'mbbill/undotree',
       cmd = 'UndotreeToggle',
-      init = function()
-        require 'young.mod.undotree'
-      end,
     },
     {
       'kevinhwang91/nvim-fundo',
@@ -1108,9 +1087,6 @@ modules.code = {
       'younger-1/any-jump.vim',
       branch = 'remove-pics',
       cmd = { 'AnyJump', 'AnyJumpVisual', 'AnyJumpArg' },
-      init = function()
-        require 'young.mod.anyjump'
-      end,
     },
   },
   completion = {
@@ -1327,22 +1303,10 @@ modules.LSP = {
     -- {
     --   'rmagatti/goto-preview',
     --   lazy = true,
-    --   init = function()
-    --     require('young.mod.goto-preview').once()
-    --   end,
-    --   config = function()
-    --     require('young.mod.goto-preview').done()
-    --   end,
     -- },
     {
       'dnlhc/glance.nvim',
       cmd = 'Glance',
-      init = function()
-        require('young.mod.glance').once()
-      end,
-      config = function()
-        require('young.mod.glance').done()
-      end,
     },
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     -- {
@@ -1409,12 +1373,6 @@ modules.lang = {
       'luk400/vim-jukit',
       ft = 'ipynb',
       -- cmd = { 'JukitOut', 'JukitOutHist' },
-      init = function()
-        require('young.mod.jukit').once()
-      end,
-      config = function()
-        require('young.mod.jukit').done()
-      end,
     },
   },
   js = {
