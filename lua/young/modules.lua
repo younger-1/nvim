@@ -43,10 +43,18 @@ local function auto_require_mod(plugs, mod_name)
 
       if mod_path then
         plug.init = function()
-          local m = require(mod_path)
-          if m and m.once and type(m.once) == 'function' then
-            m.once()
-          end
+          xy.autogroup('_lazy_init_' .. plug_name, {
+            {
+              'User',
+              'VeryLazy',
+              function()
+                local m = require(mod_path)
+                if m and m.once and type(m.once) == 'function' then
+                  m.once()
+                end
+              end,
+            },
+          })
         end
         plug.config = function()
           local m = require(mod_path)
@@ -1310,12 +1318,6 @@ modules.LSP = {
       'glepnir/lspsaga.nvim',
       -- event = 'BufWinEnter',
       cmd = 'Lspsaga',
-      init = function()
-        require('young.mod.lspsaga').once()
-      end,
-      config = function()
-        require('young.mod.lspsaga').done()
-      end,
       dependencies = {
         { 'nvim-tree/nvim-web-devicons' },
         --Please make sure you install markdown and markdown_inline parser
