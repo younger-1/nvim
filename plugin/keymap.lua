@@ -94,7 +94,7 @@ local keys = {
 
     -- <https://github.com/yuki-yano/zero.nvim>
     -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },
-    ['0'] = ':call FirstCharOrFirstCol()<cr>', -- FIXME:not work in visual_mode
+    ['0'] = '<cmd>call FirstCharOrFirstCol()<cr>',
 
     ['+'] = { '<C-a>', remap = true },
     ['-'] = { '<C-x>', remap = true },
