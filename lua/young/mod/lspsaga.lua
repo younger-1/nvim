@@ -1,23 +1,22 @@
 local M = {}
 
 function M.once()
-  local cmd2 = require('young.key').cmd2
+  local cmd = require('young.key').cmd
   xy.map.register {
     g = {
-      h = { cmd2 'Lspsaga lsp_finder' },
-      o = { cmd2 'Lspsaga peek_definition' },
+      h = { cmd 'Lspsaga lsp_finder' },
     },
     ['<leader>'] = {
       j = {
-        j = { cmd2 'Lspsaga lsp_finder' },
-        k = { cmd2 'Lspsaga hover_doc' },
-        d = { cmd2 'Lspsaga peek_definition' },
-        l = { cmd2 'Lspsaga show_line_diagnostics' },
-        L = { cmd2 'Lspsaga show_cursor_diagnostics' },
-        a = { cmd2 'Lspsaga code_action' },
-        A = { cmd2 'Lspsaga range_code_action' },
-        r = { cmd2 'Lspsaga rename' },
-        o = { cmd2 'Lspsaga outline' },
+        j = { cmd 'Lspsaga lsp_finder' },
+        k = { cmd 'Lspsaga hover_doc' },
+        d = { cmd 'Lspsaga peek_definition' },
+        l = { cmd 'Lspsaga show_line_diagnostics' },
+        L = { cmd 'Lspsaga show_cursor_diagnostics' },
+        a = { cmd 'Lspsaga code_action' },
+        A = { cmd 'Lspsaga range_code_action' },
+        r = { cmd 'Lspsaga rename' },
+        o = { cmd 'Lspsaga outline' },
       },
     },
   }
