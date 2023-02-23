@@ -328,10 +328,6 @@ tool.toggle_tabline = function()
   bar_flag = not bar_flag
 end
 
-tool.toggle_indent_style = function()
-  require('young.mod.indent_blankline').hot()
-end
-
 tool.toggle_notify = function()
   require('young.mod.notify').toggle()
 end
