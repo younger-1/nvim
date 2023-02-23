@@ -654,8 +654,6 @@ return {
     b = 'Biscuits',
     m = { cmd 'MinimapToggle', 'Minimap' },
     l = { require('young.tool').toggle_tabline, 'Tabline' },
-    i = { require('young.tool').toggle_indent_style, 'Indentline style' },
-    I = { cmd 'IndentBlanklineToggle', 'Toggle indentline' },
     n = { require('young.tool').toggle_notify_style, 'Nofity style' },
     N = { require('young.tool').toggle_notify, 'Toggle nofity' },
     -- t = { cmd 'TransparentToggle', 'Transparent' },

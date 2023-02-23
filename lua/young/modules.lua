@@ -178,9 +178,6 @@ modules.appearance = {
       -- 'norcalli/nvim-colorizer.lua',
       'NvChad/nvim-colorizer.lua',
       event = 'BufRead',
-      config = function()
-        require 'young.mod.colorizer'
-      end,
     },
     {
       'xiyaowong/nvim-transparent',
@@ -191,9 +188,6 @@ modules.appearance = {
     {
       'lukas-reineke/indent-blankline.nvim',
       event = 'VeryLazy',
-      config = function()
-        require('young.mod.indent_blankline').done()
-      end,
     },
   },
   line = {

@@ -1,5 +1,3 @@
-local ibl = require 'indent_blankline'
-
 local M = {}
 
 local cfg = {
@@ -110,9 +108,17 @@ local function apply_style()
 end
 
 M.hot = function()
+  local ibl = require 'indent_blankline'
+
   apply_style()
   ibl.setup(cfg)
   ibl.refresh()
+end
+
+M.once = function()
+  local cmd = require('young.key').cmd
+  xy.map.n { '<leader>ti', M.hot, 'Indentline style' }
+  xy.map.n { '<leader>tI', cmd 'IndentBlanklineToggle', 'Toggle indentline' }
 end
 
 M.done = function()
