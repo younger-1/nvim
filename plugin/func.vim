@@ -101,7 +101,7 @@ function! WinZoomToggle() abort
  endif
 endfunction
 
-" [](https://vi.stackexchange.com/questions/3388/call-a-vim-function-silently)
+" <https://vi.stackexchange.com/questions/3388/call-a-vim-function-silently>
 function! FirstCharOrFirstCol()
   let current_col = virtcol('.')
   normal! ^
