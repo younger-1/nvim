@@ -738,13 +738,13 @@ modules.telescope = {
         require('telescope').load_extension 'smart_history'
       end,
     },
-  },
-  other = {
-    { 'nvim-telescope/telescope-symbols.nvim' },
     -- {
-    --   'nvim-telescope/telescope-packer.nvim',
+    --   'princejoogie/dir-telescope.nvim',
     --   config = function()
-    --     require('telescope').load_extension 'packer'
+    --     require('dir-telescope').setup {
+    --       hidden = true,
+    --       respect_gitignore = true,
+    --     }
     --   end,
     -- },
     {
@@ -757,6 +757,15 @@ modules.telescope = {
       'nvim-telescope/telescope-frecency.nvim',
       dependencies = { 'kkharji/sqlite.lua' },
     },
+  },
+  other = {
+    { 'nvim-telescope/telescope-symbols.nvim' },
+    -- {
+    --   'nvim-telescope/telescope-packer.nvim',
+    --   config = function()
+    --     require('telescope').load_extension 'packer'
+    --   end,
+    -- },
     {
       'AckslD/nvim-neoclip.lua',
       dependencies = { 'kkharji/sqlite.lua' },

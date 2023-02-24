@@ -78,7 +78,8 @@
 - [ ] open hex file toooooooooooooooooooooo slow
 - [ ] autocmd: relative number only in visual mode
 - [ ] vim function: 1.telescope: <leader>svf, 2.get_def_locations
-- [ ] neotree: <leader>sg and <leadersf>
+- [ ] neo-tree: 1.<leader>sg and <leader>sf and follow symlink's real path, 2.display symlink path, 3.show hidden files, 4.display icon for empty folders, 5.display long path
+- [ ] nvim-tree: 1.dim hidden files
 - [ ] lazy.nvim: let `init` to execute after startup, otherwise `init` code would be overrided by `./plugin` code
 
 ```
