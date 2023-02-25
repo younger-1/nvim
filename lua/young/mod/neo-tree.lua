@@ -53,8 +53,13 @@ local cfg = {
     group_empty_dirs = true,
     window = {
       mappings = {
+        -- ['<tab>'] = 'toggle_node',
+        -- ['<cr>'] = 'open',
+        -- ['P'] = { 'toggle_preview', config = { use_float = true } },
+        ['s'] = 'fuzzy_finder',
         ['<leader>sf'] = 'telescope_find',
         ['<leader>sg'] = 'telescope_grep',
+        ['O'] = 'system_open',
       },
     },
     commands = {
@@ -67,6 +72,15 @@ local cfg = {
         local node = state.tree:get_node()
         local path = node:get_id()
         require('telescope.builtin').live_grep(getTelescopeOpts(state, path))
+      end,
+      system_open = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        -- macOs: open file in default application in the background.
+        -- Probably you need to adapt the Linux recipe for manage path with spaces. I don't have a mac to try.
+        vim.api.nvim_command('silent !open -g ' .. path)
+        -- Linux: open file in default application
+        vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
       end,
     },
   },
@@ -95,11 +109,7 @@ local cfg = {
       ['<space>'] = 'nop',
       ['/'] = 'nop',
       ['w'] = 'nop',
-      ['s'] = 'fuzzy_finder',
-      -- ['<tab>'] = 'toggle_node',
-      ['<cr>'] = 'open',
       ['o'] = 'open_with_window_picker',
-      ['P'] = { 'toggle_preview', config = { use_float = true } },
       ['<C-s>'] = 'split_with_window_picker',
       ['<C-v>'] = 'vsplit_with_window_picker',
     },
