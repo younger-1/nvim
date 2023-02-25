@@ -16,6 +16,7 @@ noremap gl g_
 
 noremap <C-i> <C-i>
 map <Tab> %
+map <S-Tab> g%
 
 noremap g<Tab> <C-i>
 

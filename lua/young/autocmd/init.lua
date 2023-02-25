@@ -196,10 +196,10 @@ function M.done()
       { 'InsertEnter', '*', require('young.tool').no_rnu },
       { 'InsertLeave', '*', require('young.tool').rnu },
     },
-    _cursorline = {
-      { 'InsertEnter,WinLeave,FocusLost', '*', require('young.tool').no_cursorline },
-      { 'InsertLeave,WinEnter,FocusGained', '*', require('young.tool').cursorline },
-    },
+    -- _cursorline = {
+    --   { 'InsertEnter,WinLeave,FocusLost', '*', require('young.tool').no_cursorline },
+    --   { 'InsertLeave,WinEnter,FocusGained', '*', require('young.tool').cursorline },
+    -- },
     _cursor = {
       {
         'VimEnter,VimResume',
