@@ -35,6 +35,22 @@ local function getTelescopeOpts(state, path)
   }
 end
 
+local run_command = function(state)
+  local node = state.tree:get_node()
+  local path = node:get_id()
+  vim.api.nvim_input(': ' .. path .. '<Home>')
+end
+
+local system_open = function(state)
+  local node = state.tree:get_node()
+  local path = node:get_id()
+  -- macOs: open file in default application in the background.
+  -- vim.api.nvim_command('silent !open -g ' .. path)
+  -- Linux: open file in default application
+  -- vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
+  fn.jobstart({ xy.open_cmd, path }, { detach = true })
+end
+
 local cfg = {
   sources = {
     'filesystem',
@@ -59,7 +75,6 @@ local cfg = {
         ['s'] = 'fuzzy_finder',
         ['<leader>sf'] = 'telescope_find',
         ['<leader>sg'] = 'telescope_grep',
-        ['O'] = 'system_open',
       },
     },
     commands = {
@@ -72,15 +87,6 @@ local cfg = {
         local node = state.tree:get_node()
         local path = node:get_id()
         require('telescope.builtin').live_grep(getTelescopeOpts(state, path))
-      end,
-      system_open = function(state)
-        local node = state.tree:get_node()
-        local path = node:get_id()
-        -- macOs: open file in default application in the background.
-        -- Probably you need to adapt the Linux recipe for manage path with spaces. I don't have a mac to try.
-        vim.api.nvim_command('silent !open -g ' .. path)
-        -- Linux: open file in default application
-        vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
       end,
     },
   },
@@ -112,6 +118,8 @@ local cfg = {
       ['o'] = 'open_with_window_picker',
       ['<C-s>'] = 'split_with_window_picker',
       ['<C-v>'] = 'vsplit_with_window_picker',
+      ['i'] = run_command,
+      ['O'] = system_open,
     },
   },
 }
