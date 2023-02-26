@@ -622,6 +622,7 @@ modules.BWT = {
   },
   -- tab = {},
   quickfix = {
+    { 'weilbith/vim-qfloc-edit', ft = 'qf' },
     {
       'kevinhwang91/nvim-bqf',
       -- event = "BufRead",
@@ -629,6 +630,11 @@ modules.BWT = {
       config = function()
         require('young.mod.bqf').done()
       end,
+    },
+    {
+      'https://gitlab.com/yorickpeterse/nvim-pqf',
+      event = 'VeryLazy',
+      config = true,
     },
   },
 }
