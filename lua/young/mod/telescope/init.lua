@@ -372,6 +372,9 @@ M.cfg = {
     ['ui-select'] = {
       theme = 'get_dropdown',
     },
+    heading = {
+      treesitter = true,
+    },
   },
 }
 

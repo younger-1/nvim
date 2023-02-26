@@ -213,6 +213,8 @@ modules.theme = {
 modules.appearance = {
   icon = {
     { 'nvim-tree/nvim-web-devicons' },
+    { 'tpope/vim-characterize' },
+    -- { 'zsugabubus/vim-vnicode' },
   },
   color = {
     {
@@ -716,6 +718,11 @@ modules.file = {
         require 'young.mod.unception'
       end,
     },
+    -- {
+    --   'nyngwang/NeoTerm.lua',
+    --   cmd = 'NeoTermOpen',
+    --   auto = true,
+    -- },
   },
 }
 
@@ -866,12 +873,6 @@ modules.telescope = {
     --     require('telescope').load_extension 'gh'
     --   end,
     -- },
-    {
-      'crispgm/telescope-heading.nvim',
-      config = function()
-        require('telescope').load_extension 'heading'
-      end,
-    },
   },
 }
 
@@ -1519,6 +1520,19 @@ modules.write = {
     --     vim.g.glow_use_pager = true
     --   end,
     -- },
+    {
+      'crispgm/telescope-heading.nvim',
+      ft = { 'markdown', 'norg', 'org', 'rst', 'help', 'asciidoc', 'tex' },
+      config = function()
+        require('telescope').load_extension 'heading'
+      end,
+    },
+    {
+      'lukas-reineke/headlines.nvim',
+      ft = { 'markdown', 'norg', 'org', 'rmd' },
+      dependencies = 'TimUntersberger/neogit',
+      auto = 'config',
+    },
   },
   zen = {
     {

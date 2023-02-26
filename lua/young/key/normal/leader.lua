@@ -10,7 +10,7 @@ return {
   -- ['-'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['='] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['<BS>'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  ['<Tab>'] = { '<cmd>CellularAutomaton make_it_rain<cr>', 'Alpha' },
+  ['<Tab>'] = { '<cmd>CellularAutomaton make_it_rain<cr>', 'Rain' },
   ['<CR>'] = { '<cmd>mes<cr>', 'which_key_ignore' },
   -- ['['] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- [']'] = { '<cmd>Alpha<cr>', 'Alpha' },
