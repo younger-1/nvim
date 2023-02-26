@@ -17,53 +17,94 @@ local to_plugs = function(t, submods)
   return plugs
 end
 
+-- local function require_helper(plug, mod_name)
+--   if plug.config or plug.init then
+--     return
+--   end
+--   local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
+--   local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+--   -- gg(plug[1], short_name, plug_name)
+
+--   -- local ok, mod = pcall(require, 'young.mod.' .. mod_name .. xy_name)
+--   local mod_path
+--   for _, paths in ipairs {
+--     { 'young', 'mod', plug_name },
+--     { 'young', 'mod', mod_name, plug_name },
+--   } do
+--     local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
+--     if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
+--       mod_path = table.concat(paths, '.')
+--       gg(mod_path)
+--       break
+--     end
+--   end
+
+--   if mod_path then
+--     plug.init = function()
+--       xy.autogroup('_lazy_init_' .. plug_name, {
+--         {
+--           'User',
+--           'VeryLazy',
+--           function()
+--             local m = require(mod_path)
+--             if type(m) == 'table' and m.once and type(m.once) == 'function' then
+--               m.once()
+--             end
+--           end,
+--         },
+--       })
+--     end
+--     plug.config = function()
+--       local m = require(mod_path)
+--       if type(m) == 'table' and m.done and type(m.done) == 'function' then
+--         m.done()
+--       end
+--     end
+--   end
+-- end
+
+local function require_helper_semi(plug)
+  if not plug.auto then
+    return
+  end
+  local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
+  local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+  local mod_path = 'young.mod.' .. plug_name
+
+  if plug.auto == 'init' or plug.auto == true then
+    plug.init = function()
+      xy.autogroup('_lazy_init_' .. plug_name, {
+        {
+          'User',
+          'VeryLazy',
+          function()
+            local m = require(mod_path)
+            if type(m) == 'table' and m.once and type(m.once) == 'function' then
+              m.once()
+            end
+          end,
+        },
+      })
+    end
+  end
+
+  if plug.auto == 'config' or plug.auto == true then
+    plug.config = function()
+      local m = require(mod_path)
+      if type(m) == 'table' and m.done and type(m.done) == 'function' then
+        m.done()
+      end
+    end
+  end
+end
+
 local function auto_require_mod(plugs, mod_name)
   for i, plug in ipairs(plugs) do
     if type(plug) == 'string' then
       plug = { plug }
     end
-    if not plug.config and not plug.init then
-      local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
-      local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
-      -- gg(plug[1], short_name, plug_name)
-
-      -- local ok, mod = pcall(require, 'young.mod.' .. mod_name .. xy_name)
-      local mod_path
-      for _, paths in ipairs {
-        { 'young', 'mod', plug_name },
-        { 'young', 'mod', mod_name, plug_name },
-      } do
-        local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
-        if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
-          mod_path = table.concat(paths, '.')
-          break
-          -- gg(mod_path)
-        end
-      end
-
-      if mod_path then
-        plug.init = function()
-          xy.autogroup('_lazy_init_' .. plug_name, {
-            {
-              'User',
-              'VeryLazy',
-              function()
-                local m = require(mod_path)
-                if type(m) == 'table' and m.once and type(m.once) == 'function' then
-                  m.once()
-                end
-              end,
-            },
-          })
-        end
-        plug.config = function()
-          local m = require(mod_path)
-          if type(m) == 'table' and m.done and type(m.done) == 'function' then
-            m.done()
-          end
-        end
-      end
-    end
+    -- require_helper(plug, mod_name)
+    require_helper_semi(plug)
     plugs[i] = plug
   end
   return plugs
@@ -178,16 +219,19 @@ modules.appearance = {
       -- 'norcalli/nvim-colorizer.lua',
       'NvChad/nvim-colorizer.lua',
       event = 'BufRead',
+      auto = 'config',
     },
     {
       'xiyaowong/nvim-transparent',
       cmd = 'TransparentToggle',
+      auto = true,
     },
   },
   indent = {
     {
       'lukas-reineke/indent-blankline.nvim',
       event = 'VeryLazy',
+      auto = true,
     },
   },
   line = {
@@ -260,6 +304,7 @@ modules.edit = {
     {
       'andymass/vim-matchup',
       event = 'BufRead',
+      auto = 'init',
     },
     -- {
     --   'monkoose/matchparen.nvim',
@@ -388,6 +433,7 @@ modules.change = {
       'junegunn/vim-easy-align',
       cmd = { 'EasyAlign', 'LiveEasyAlign' },
       keys = { '<Plug>(EasyAlign)', '<Plug>(LiveEasyAlign)' },
+      auto = 'init',
     },
     -- {
     --   'mg979/vim-visual-multi',
@@ -601,6 +647,7 @@ modules.file = {
         { 'nvim-lua/plenary.nvim' },
         { 'MunifTanjim/nui.nvim' },
       },
+      auto = true,
     },
     {
       'tamago324/lir.nvim',
@@ -882,6 +929,7 @@ modules.git = {
     {
       'mbbill/undotree',
       cmd = 'UndotreeToggle',
+      auto = 'init',
     },
     {
       'kevinhwang91/nvim-fundo',
@@ -1090,6 +1138,7 @@ modules.code = {
       'younger-1/any-jump.vim',
       branch = 'remove-pics',
       cmd = { 'AnyJump', 'AnyJumpVisual', 'AnyJumpArg' },
+      auto = 'init',
     },
   },
   completion = {
@@ -1302,6 +1351,7 @@ modules.LSP = {
         --Please make sure you install markdown and markdown_inline parser
         { 'nvim-treesitter/nvim-treesitter' },
       },
+      auto = true,
     },
     -- {
     --   'rmagatti/goto-preview',
@@ -1310,6 +1360,7 @@ modules.LSP = {
     {
       'dnlhc/glance.nvim',
       cmd = 'Glance',
+      auto = true,
     },
     { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
     -- {
@@ -1376,6 +1427,7 @@ modules.lang = {
       'luk400/vim-jukit',
       ft = 'ipynb',
       -- cmd = { 'JukitOut', 'JukitOutHist' },
+      auto = true,
     },
   },
   js = {
@@ -1466,6 +1518,7 @@ modules.write = {
     {
       'folke/zen-mode.nvim',
       cmd = 'ZenMode',
+      auto = true,
     },
   },
   { 'jbyuki/venn.nvim', cmd = 'VBox' },
