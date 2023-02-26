@@ -340,15 +340,15 @@ function M.done()
       { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
     },
     _terminal = {
-      -- { -- https://github.com/andrewferrier/dotfiles/blob/main/common/.config/nvim/plugin/terminal.lua
-      --   'TermOpen',
-      --   '*',
-      --   function()
-      --     vim.opt_local.number = false
-      --     vim.opt_local.relativenumber = false
-      --     vim.cmd 'startinsert'
-      --   end,
-      -- },
+      { -- https://github.com/andrewferrier/dotfiles/blob/main/common/.config/nvim/plugin/terminal.lua
+        'TermOpen',
+        '*',
+        function()
+          vim.opt_local.number = false
+          vim.opt_local.relativenumber = false
+          vim.cmd 'startinsert'
+        end,
+      },
       -- { -- Auto close shell terminals (#15440)
       --   'TermClose',
       --   '*',
