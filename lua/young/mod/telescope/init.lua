@@ -153,6 +153,9 @@ M.cfg = {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
 
+        ['<C-s>'] = actions.select_horizontal,
+        ['<C-v>'] = actions.select_vertical,
+
         ['<A-n>'] = actions.cycle_history_next,
         ['<A-p>'] = actions.cycle_history_prev,
 
@@ -180,6 +183,9 @@ M.cfg = {
         ['<C-o>'] = require('young.mod.telescope.actions').open_def_locations,
       },
       n = {
+        ['<C-s>'] = actions.select_horizontal,
+        ['<C-v>'] = actions.select_vertical,
+
         ['<A-n>'] = actions.cycle_history_next,
         ['<A-p>'] = actions.cycle_history_prev,
 
@@ -200,10 +206,17 @@ M.cfg = {
     buffers = {
       theme = 'ivy',
       mappings = {
-        n = {
-          d = actions.delete_buffer,
+        i = {
+          ['<C-x>'] = actions.delete_buffer,
         },
       },
+      sorter = require('telescope.sorters').get_substr_matcher(),
+      selection_strategy = 'closest',
+      path_display = { 'shorten' },
+      --
+      only_cwd = vim.fn.haslocaldir() == 1,
+      ignore_current_buffer = true,
+      sort_mru = true,
     },
     colorscheme = view.h4,
     commands = { theme = 'ivy' },
