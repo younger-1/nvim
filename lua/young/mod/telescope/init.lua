@@ -287,15 +287,32 @@ M.cfg = {
     file_browser = {
       theme = 'ivy',
     },
-    -- map("i", "<C-o>", open_online)
-    -- map("i", "<C-f>", open_finder)
-    -- map("i", "<C-b>", open_browser)
-    -- map("i", "<C-g>", open_grep)
     packer = {
       theme = 'ivy',
       layout_config = {
         height = 0.75,
       },
+      -- map("i", "<C-o>", open_online)
+      -- map("i", "<C-f>", open_finder)
+      -- map("i", "<C-b>", open_browser)
+      -- map("i", "<C-g>", open_grep)
+    },
+    lazy = {
+      -- Optional theme (the extension doesn't set a default theme)
+      theme = 'ivy',
+      -- Whether or not to show the icon in the first column
+      show_icon = true,
+      -- Mappings for the actions
+      mappings = {
+        open_in_browser = '<C-o>',
+        open_in_file_browser = '<M-b>',
+        open_in_find_files = '<C-f>',
+        open_in_live_grep = '<C-g>',
+        open_plugins_picker = '<C-b>', -- Works only after having called first another action
+        open_lazy_root_find_files = '<C-r>f',
+        open_lazy_root_live_grep = '<C-r>g',
+      },
+      -- Other telescope configuration options
     },
     live_grep_args = {
       auto_quoting = true, -- enable/disable auto-quoting
@@ -377,6 +394,8 @@ M.cfg = {
     },
   },
 }
+
+M.once = function() end
 
 M.done = function()
   -- M.cfg = vim.tbl_deep_extend('force', M.cfg, {})

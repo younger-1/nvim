@@ -20,6 +20,12 @@ map <S-Tab> g%
 
 noremap g<Tab> <C-i>
 
+" https://stackoverflow.com/questions/15636173/what-do-and-do-in-vim
+" map [[ ?{<CR>w99[{
+" map ][ /}<CR>b99]}
+" map ]] j0[[%/{<CR>
+" map [] k$][%?}<CR>
+
 " normal mode
 " nnoremap / ms/
 " nnoremap ? ms?
@@ -92,10 +98,10 @@ vnoremap Y "+y
 
 " terminal mode
 tnoremap JK    <C-\><C-N>
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
+" tnoremap <C-h> <C-\><C-N><C-w>h
+" tnoremap <C-j> <C-\><C-N><C-w>j
+" tnoremap <C-k> <C-\><C-N><C-w>k
+" tnoremap <C-l> <C-\><C-N><C-w>l
 
 " insert-command mode(!)
 noremap! <C-a> <Home>

@@ -827,6 +827,12 @@ modules.telescope = {
     --   end,
     -- },
     {
+      'tsakirist/telescope-lazy.nvim',
+      config = function()
+        require('telescope').load_extension 'lazy'
+      end,
+    },
+    {
       'AckslD/nvim-neoclip.lua',
       dependencies = { 'kkharji/sqlite.lua' },
       config = function()
