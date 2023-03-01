@@ -45,3 +45,12 @@ vim.api.nvim_create_user_command('Capture', function(ctx)
   vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
   vim.o.modified = false
 end, { nargs = '+', complete = 'command' })
+
+-- vim.keymap.set('n', 'co<leader>', function()
+--   local date = os.date '%Y/%m/%d/'
+--   return ':Git checkout -b feat/' .. date
+-- end, { expr = true })
+
+-- vim.api.nvim_create_user_command('CreateFeatBranch', function()
+--   vim.api.nvim_feedkeys(':Git checkout -b feat/' .. os.date '%Y/%m/%d/', 'n', false)
+-- end, {})

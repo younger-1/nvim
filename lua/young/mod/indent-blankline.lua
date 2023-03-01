@@ -10,6 +10,7 @@ local cfg = {
   use_treesitter = true,
   show_end_of_line = true, -- use vim.o.listchars
   show_current_context = true,
+  -- show_current_context_start = true,
   -- show_first_indent_level = false,
   -- show_trailing_blankline_indent = false,
   -- space_char_blankline = ".", -- not useful
@@ -75,7 +76,10 @@ local styles = {
   },
   [3] = {
     char = '',
-    char_highlight_list = {},
+    char_highlight_list = {
+      'IBL_mono_1',
+      'IBL_mono_2',
+    },
     space_char_highlight_list = {
       'IBL_mono_1',
       'IBL_mono_2',
