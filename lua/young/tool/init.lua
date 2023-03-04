@@ -157,9 +157,9 @@ tool.toggle_mouse = function()
   if vim.o.mouse == '' then
     vim.o.mouse = 'nvi'
     print 'Mouse enabled'
-    vim.o.signcolumn = xy.o.signcolumn
-    vim.o.number = xy.o.number
-    vim.o.relativenumber = xy.o.relativenumber
+    vim.o.signcolumn = xy.opt.signcolumn
+    vim.o.number = xy.opt.number
+    vim.o.relativenumber = xy.opt.relativenumber
     vim.cmd 'silent! IndentBlanklineEnable'
   else
     vim.o.mouse = ''

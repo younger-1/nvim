@@ -1,8 +1,10 @@
 local M = {}
 
+local char = xy.icon.bar
+
 local cfg = {
   -- Dynamic keys
-  -- char = "▏", -- "│"
+  -- char = '▏', -- '│'
   -- char_highlight_list = {},
   -- space_char_highlight_list = {},
 
@@ -51,12 +53,12 @@ local cfg = {
 
 local styles = {
   [1] = {
-    char = '▏',
+    char = char,
     char_highlight_list = {},
     space_char_highlight_list = {},
   },
   [2] = {
-    char = '▏',
+    char = char,
     char_highlight_list = {
       'IBL_colo_1',
       'IBL_colo_2',
@@ -75,7 +77,7 @@ local styles = {
     end,
   },
   [3] = {
-    char = '',
+    char = char,
     char_highlight_list = {
       'IBL_mono_1',
       'IBL_mono_2',
@@ -90,7 +92,7 @@ local styles = {
     end,
   },
   [4] = {
-    char = '',
+    char = char,
     char_highlight_list = {},
     space_char_highlight_list = {
       'Normal',
