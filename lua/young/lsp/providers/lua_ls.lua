@@ -1,3 +1,4 @@
+-- https://github.com/LuaLS/lua-language-server/wiki/Settings
 -- @see <https://github.com/sumneko/lua-language-server/blob/master/locale/zh-cn/setting.lua>
 -- @see <https://github.com/sumneko/lua-language-server/blob/master/doc/zh-cn/config.lua>
 --
@@ -70,6 +71,11 @@ return {
         maxPreload = 5000,
         preloadFileSize = 10000,
         checkThirdParty = false,
+      },
+      completion = {
+        -- autoRequire = false,
+        -- postfix = '='
+        callSnippet = 'Replace',
       },
       diagnostics = {
         globals = {
