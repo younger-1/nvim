@@ -198,5 +198,5 @@ for _, k in ipairs {
   'relativenumber',
   'signcolumn',
 } do
-  xy.o[k] = vim.o[k]
+  xy.opt[k] = vim.o[k]
 end

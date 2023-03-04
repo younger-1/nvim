@@ -76,7 +76,7 @@ local function require_helper_semi(plug)
       xy.autogroup('_lazy_init_' .. plug_name, {
         {
           'User',
-          'VeryLazy',
+          'LazyDone',
           function()
             local m = require(mod_path)
             if type(m) == 'table' and m.once and type(m.once) == 'function' then
@@ -397,11 +397,9 @@ modules.edit = {
 }
 
 modules.change = {
-  core = {
-    { 'tpope/vim-surround' },
-    { 'tpope/vim-repeat' },
-    { 'tpope/vim-abolish' },
-  },
+  { 'tpope/vim-surround' },
+  { 'tpope/vim-repeat' },
+  { 'tpope/vim-abolish' },
   pair = {
     {
       'windwp/nvim-autopairs',
@@ -764,59 +762,57 @@ modules.find = {
 }
 
 modules.telescope = {
-  core = {
-    {
-      'nvim-telescope/telescope.nvim',
-      cmd = 'Telescope',
-      -- event = 'BufRead',
-      dependencies = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
-      config = function()
-        require('young.mod.telescope').done()
-      end,
-    },
-    -- {
-    --   'nvim-telescope/telescope-fzf-native.nvim',
-    --   build = 'make',
-    --   build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-    -- },
-    {
-      'natecraddock/telescope-zf-native.nvim',
-      config = function()
-        require('telescope').load_extension 'zf-native'
-      end,
-    },
-    {
-      'nvim-telescope/telescope-file-browser.nvim',
-      config = function()
-        require('telescope').load_extension 'file_browser'
-      end,
-    },
-    {
-      'nvim-telescope/telescope-smart-history.nvim',
-      dependencies = { 'kkharji/sqlite.lua' },
-      config = function()
-        require('telescope').load_extension 'smart_history'
-      end,
-    },
-    -- {
-    --   'princejoogie/dir-telescope.nvim',
-    --   config = function()
-    --     require('dir-telescope').setup {
-    --       hidden = true,
-    --       respect_gitignore = true,
-    --     }
-    --   end,
-    -- },
-    {
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      config = function()
-        require('telescope').load_extension 'live_grep_args'
-      end,
-    },
-    {
-      'nvim-telescope/telescope-frecency.nvim',
-      dependencies = { 'kkharji/sqlite.lua' },
-    },
+  {
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    -- event = 'BufRead',
+    dependencies = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
+    config = function()
+      require('young.mod.telescope').done()
+    end,
+  },
+  -- {
+  --   'nvim-telescope/telescope-fzf-native.nvim',
+  --   build = 'make',
+  --   build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+  -- },
+  {
+    'natecraddock/telescope-zf-native.nvim',
+    config = function()
+      require('telescope').load_extension 'zf-native'
+    end,
+  },
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    config = function()
+      require('telescope').load_extension 'file_browser'
+    end,
+  },
+  {
+    'nvim-telescope/telescope-smart-history.nvim',
+    dependencies = { 'kkharji/sqlite.lua' },
+    config = function()
+      require('telescope').load_extension 'smart_history'
+    end,
+  },
+  -- {
+  --   'princejoogie/dir-telescope.nvim',
+  --   config = function()
+  --     require('dir-telescope').setup {
+  --       hidden = true,
+  --       respect_gitignore = true,
+  --     }
+  --   end,
+  -- },
+  {
+    'nvim-telescope/telescope-live-grep-args.nvim',
+    config = function()
+      require('telescope').load_extension 'live_grep_args'
+    end,
+  },
+  {
+    'nvim-telescope/telescope-frecency.nvim',
+    dependencies = { 'kkharji/sqlite.lua' },
   },
   other = {
     { 'nvim-telescope/telescope-symbols.nvim' },
@@ -956,55 +952,53 @@ modules.git = {
 }
 
 modules.UI = {
-  core = {
-    {
-      'rcarriga/nvim-notify',
-      -- event = 'BufWinEnter',
-      event = 'VeryLazy',
-      config = function()
-        require('young.mod.notify').done()
-      end,
-    },
-    {
-      'folke/which-key.nvim',
-      event = 'VeryLazy',
-      config = function()
-        require('young.mod.which_key').done()
-      end,
-    },
-    {
-      'anuvyklack/hydra.nvim',
-      event = 'VeryLazy',
-      config = function()
-        require 'young.mod.hydra'
-      end,
-    },
-    {
-      'folke/trouble.nvim',
-      -- event = 'BufRead',
-      cmd = { 'Trouble', 'TroubleToggle' },
-      config = function()
-        require('young.mod.trouble').done()
-      end,
-    },
-    {
-      'stevearc/dressing.nvim',
-      event = 'BufWinEnter',
-    },
-    -- {
-    --   'nvim-telescope/telescope-ui-select.nvim',
-    --   config = function()
-    --     require("telescope").load_extension("ui-select")
-    --   end,
-    -- },
-    -- { 'sidebar-nvim/sidebar.nvim',
-    --   branch = 'dev',
-    --   config = function()
-    --     require("sidebar-nvim").setup {}
-    --   end,
-    -- },
-    -- { 'simnalamburt/vim-mundo', cmd = 'MundoToggle' },
+  {
+    'rcarriga/nvim-notify',
+    -- event = 'BufWinEnter',
+    event = 'VeryLazy',
+    config = function()
+      require('young.mod.notify').done()
+    end,
   },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('young.mod.which_key').done()
+    end,
+  },
+  {
+    'anuvyklack/hydra.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require 'young.mod.hydra'
+    end,
+  },
+  {
+    'folke/trouble.nvim',
+    -- event = 'BufRead',
+    cmd = { 'Trouble', 'TroubleToggle' },
+    config = function()
+      require('young.mod.trouble').done()
+    end,
+  },
+  {
+    'stevearc/dressing.nvim',
+    event = 'BufWinEnter',
+  },
+  -- {
+  --   'nvim-telescope/telescope-ui-select.nvim',
+  --   config = function()
+  --     require("telescope").load_extension("ui-select")
+  --   end,
+  -- },
+  -- { 'sidebar-nvim/sidebar.nvim',
+  --   branch = 'dev',
+  --   config = function()
+  --     require("sidebar-nvim").setup {}
+  --   end,
+  -- },
+  -- { 'simnalamburt/vim-mundo', cmd = 'MundoToggle' },
   bufferline = {
     {
       'romgrk/barbar.nvim',
@@ -1315,26 +1309,24 @@ modules.code = {
 }
 
 modules.LSP = {
-  core = {
-    { 'neovim/nvim-lspconfig' },
-    -- { 'williamboman/nvim-lsp-installer' },
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
-    {
-      'jose-elias-alvarez/null-ls.nvim',
-      config = function()
-        require('young.lsp.null_ls').done()
-      end,
-    },
-    { 'b0o/SchemaStore.nvim' },
-    -- {
-    --   'ray-x/lsp_signature.nvim',
-    --   event = 'InsertEnter',
-    --   config = function()
-    --     require 'young.mod.lsp_signature'
-    --   end,
-    -- },
+  { 'neovim/nvim-lspconfig' },
+  -- { 'williamboman/nvim-lsp-installer' },
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('young.lsp.null_ls').done()
+    end,
   },
+  { 'b0o/SchemaStore.nvim' },
+  -- {
+  --   'ray-x/lsp_signature.nvim',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require 'young.mod.lsp_signature'
+  --   end,
+  -- },
   lua = {
     { 'folke/neodev.nvim', lazy = true },
     -- { 'ii14/emmylua-nvim', lazy = true },
@@ -1604,6 +1596,11 @@ modules.tool = {
     init = function()
       -- vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o,*.jpg,*.png'
     end,
+  },
+  {
+    'echasnovski/mini.nvim',
+    version = false,
+    auto = true,
   },
 }
 

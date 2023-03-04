@@ -45,12 +45,17 @@ _G.is_linux = _G.is_unix and not (_G.is_wsl or _G.is_mac)
 
 _G.xy = {
   -- colorscheme = 'monokai',
+  transparent_mode = false,
   startup_time = {
     os_start = os.clock(),
     rel_start = vim.fn.reltime(),
     hr_start = uv.hrtime(),
   },
-  o = {},
+  opt = {},
+  icon = {
+    -- bar = '▏',
+    bar = '│',
+  },
 }
 
 if is_mac then
