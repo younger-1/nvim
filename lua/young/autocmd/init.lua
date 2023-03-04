@@ -249,13 +249,13 @@ function M.done()
       { 'ColorScheme', '*', require('young.tool').hi_lsp_ref },
       { 'ColorScheme', '*', 'hi MatchParen gui=bold,underline' },
     },
-    _formatoptions = {
-      {
-        { 'BufWinEnter', 'BufRead', 'BufNewFile' },
-        '*',
-        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
-      },
-    },
+    -- _formatoptions = {
+    --   {
+    --     { 'BufWinEnter', 'BufRead', 'BufNewFile' },
+    --     '*',
+    --     'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
+    --   },
+    -- },
     _auto_reload = { -- <https://github.com/jdhao/nvim-config/blob/2c7e4aa87aefcc32682d017eae9e3c1395ae8f2b/lua/custom-autocmd.lua#L52>
       {
         'FileChangedShellPost',
