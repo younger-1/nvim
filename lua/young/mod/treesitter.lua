@@ -141,6 +141,8 @@ M.cfg = {
       'help', -- TODO:remove until nvim's help parser fixed
     },
     -- additional_vim_regex_highlighting = true,
+    -- Required for spellcheck, some LaTex highlights and code block highlights that do not have ts grammar
+    additional_vim_regex_highlighting = { 'org' },
     -- custom_captures = {
     --   ['primitive.type'] = 'Keyword',
     --   ['escape.sequence'] = 'Function',
