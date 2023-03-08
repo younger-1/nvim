@@ -1492,6 +1492,16 @@ modules.write = {
   },
   org = {
     {
+      'nvim-orgmode/orgmode',
+      ft = { 'org' },
+      auto = 'config',
+    },
+    {
+      'akinsho/org-bullets.nvim',
+      ft = { 'org' },
+      auto = 'config',
+    },
+    {
       'nvim-neorg/neorg',
       ft = 'norg',
       config = function()
@@ -1528,7 +1538,6 @@ modules.write = {
     {
       'lukas-reineke/headlines.nvim',
       ft = { 'markdown', 'norg', 'org', 'rmd' },
-      dependencies = 'TimUntersberger/neogit',
       auto = 'config',
     },
   },

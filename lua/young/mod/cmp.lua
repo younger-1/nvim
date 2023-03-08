@@ -71,6 +71,7 @@ M.cfg = {
     -- { name = 'treesitter' },
     -- { name = 'cmp_tabnine' },
     -- { name = 'crates' },
+    { name = 'orgmode' },
   },
   snippet = {
     expand = function(args)
