@@ -89,3 +89,5 @@ command! -nargs=1 -complete=highlight HiName hi <args> | echo "-> " . hlID(<q-ar
 " From :h DiffOrig
 command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_
   \ | diffthis | wincmd p | diffthis
+
+command BufDeleteOther silent! exe "%bd|e#|bd#"

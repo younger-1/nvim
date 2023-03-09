@@ -13,7 +13,7 @@ return {
     signs = true,
     virtual_text = {
       spacing = 4,
-      prefix = '',
+      prefix = '●',
       severity = {
         min = vim.diagnostic.severity.WARN,
       },
@@ -29,6 +29,7 @@ return {
       focusable = true,
       style = 'minimal',
       border = 'rounded',
+      severity_sort = true,
       source = 'always',
       header = '',
       prefix = '',

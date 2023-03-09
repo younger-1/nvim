@@ -74,7 +74,7 @@
 - [ ] refine get_def_locations: 1.keymap: maparg with buffer, 2.autocmd: remove para, 3.autocmd: remove repeated entry
 - [ ] module: use tap instead of auto-pcall in config
 - [ ] hydra: global keymap e.g. <esc> to quit
-- [ ] ts-hydra: use extmarks display jumpable location in screen
+- [ ] ts-hydra: use extmarks display jumpable location in screen: <https://github.com/ziontee113/whistle-blower/blob/master/lua/whistle-blower/core/virt-jump.lua>
 - [ ] open hex file toooooooooooooooooooooo slow
 - [ ] autocmd: relative number only in visual mode
 - [ ] vim function: 1.telescope: <leader>svf, 2.get_def_locations

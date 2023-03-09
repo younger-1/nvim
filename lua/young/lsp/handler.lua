@@ -35,6 +35,9 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSig
 
 vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   -- virtual_text = false,
+  virtual_text = {
+    prefix = '',
+  },
   float = {
     -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
     -- border = { "/", "-", "\\", "|" },
