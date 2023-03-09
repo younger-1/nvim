@@ -1,3 +1,24 @@
+vim.on_key(function(char)
+  if vim.fn.mode() == 'n' then
+    local new_hlsearch = vim.tbl_contains({
+      'n',
+      'N',
+      '*',
+      '#',
+      -- '<CR>',
+      '?',
+      '/',
+    }, vim.fn.keytrans(char))
+    if vim.opt.hlsearch:get() ~= new_hlsearch then
+      vim.opt.hlsearch = new_hlsearch
+    end
+  end
+end, vim.api.nvim_create_namespace 'auto_hlsearch')
+
+if true then
+  return
+end
+
 -- automatically disable search highlight
 -- <https://github.com/glepnir/hlsearch.nvim>
 local function stop_hl()
@@ -27,10 +48,6 @@ xy.autogroup('_hls', {
     stop_hl,
   },
 })
-
-if true then
-  return
-end
 
 -- <https://github.com/rafamadriz/dotfiles/blob/2628301f9c8ee7397a796ec50c790e83cff1d57b/private_dot_config/nvim/plugin/autocommands.lua>
 ----------------------------------------------------------------------------------------------------
