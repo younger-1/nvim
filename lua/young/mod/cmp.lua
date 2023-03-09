@@ -10,7 +10,7 @@ local M = {}
 
 local pum_half = (vim.o.pumheight == 0 and 5) or vim.o.pumheight / 2
 
--- <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
+-- @see <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
 M.cfg = {
   -- enabled = function()
   --   -- disable completion if the cursor is `Comment` syntax group.
@@ -21,7 +21,19 @@ M.cfg = {
   --   return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or (cmp_dap and cmp_dap.is_dap_buffer())
   -- end,
   sources = {
-    { name = 'nvim_lsp' },
+    {
+      name = 'nvim_lsp',
+      entry_filter = function(entry, ctx)
+        local kind = require('cmp.types.lsp').CompletionItemKind[entry:get_kind()]
+        if kind == 'Snippet' and ctx.prev_context.filetype == 'java' then
+          return false
+        end
+        if kind == 'Text' then
+          return false
+        end
+        return true
+      end,
+    },
     -- { name = 'nvim_lua' },
     -- For vsnip users.
     -- { name = 'vsnip' },
@@ -105,8 +117,11 @@ M.cfg = {
   experimental = {
     ghost_text = true,
   },
-  preselect = cmp.PreselectMode.Item,
-  -- preselect = cmp.PreselectMode.None,
+  -- preselect = cmp.PreselectMode.Item,
+  preselect = cmp.PreselectMode.None,
+  -- completion = {
+  --   autocomplete = false,
+  -- },
   sorting = {
     comparators = {
       cmp.config.compare.offset,
@@ -168,18 +183,18 @@ M.cfg = {
     ['<C-f>'] = cmapping(
       cmapping.confirm {
         select = false, -- select = false is nice in cmdline
-        behavior = cmp.ConfirmBehavior.Insert,
+        behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
       },
       { 'i', 'c' }
     ),
-    ['<C-c>'] = {
+    ['<C-e>'] = {
       i = cmapping.abort(),
       c = cmapping.close(),
     },
     ['<CR>'] = cmapping(
       cmapping.confirm {
-        select = true,
-        behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
+        select = false,
+        behavior = cmp.ConfirmBehavior.Insert,
       },
       { 'i', 'c' }
     ),
@@ -192,22 +207,22 @@ M.cfg = {
       end
     end, { 'i', 'c' }),
     ['<Tab>'] = cmapping(function(fallback)
-      -- if cmp.visible() then
-      --   cmp.select_next_item()
-      -- elseif require('neogen').jumpable() then
-      --   require('neogen').jump_next()
-      if luasnip and luasnip.expand_or_locally_jumpable() then
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif require('neogen').jumpable() then
+        require('neogen').jump_next()
+      elseif luasnip and luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmapping(function(fallback)
-      -- if cmp.visible() then
-      --   cmp.select_prev_item()
-      -- elseif require('neogen').jumpable(true) then
-      --   require('neogen').jump_prev()
-      if luasnip and luasnip.jumpable(-1) then
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif require('neogen').jumpable(true) then
+        require('neogen').jump_prev()
+      elseif luasnip and luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
