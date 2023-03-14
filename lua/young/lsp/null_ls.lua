@@ -22,7 +22,7 @@ end
 -- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion>
 
 local config = {
-  formatters = {
+  formatting = {
     { command = 'black', extra_args = { '--fast' }, filetypes = { 'python' }, cwd = py_cwd },
     -- { command = 'isort', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
     { command = 'stylua' },
@@ -30,7 +30,7 @@ local config = {
     { command = 'google_java_format', extra_args = {}, filetypes = { 'java' } },
     -- { command = 'prettier', extra_filetypes = { 'toml' }, extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' } },
   },
-  linters = {
+  diagnostics = {
     -- {
     --   command = 'luacheck',
     --   cwd = function(params) -- force luacheck to find its '.luacheckrc' file
@@ -42,13 +42,16 @@ local config = {
     { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' }, filetypes = { 'sh' } },
   },
   code_actions = {
-    -- { command = "gitsigns", filetypes = {} },
+    { command = 'gitsigns' },
     { command = 'shellcheck', filetypes = { 'sh' } },
   },
   hover = {
     { command = 'dictionary' },
     { command = 'printenv' },
-  }
+  },
+  completion = {
+    { command = 'luasnip' },
+  },
 }
 
 function M.list_registered_providers_names(filetype)
@@ -80,21 +83,11 @@ end
 
 function M.done()
   local sources = {}
-  for _, provider in ipairs(config.formatters) do
-    local source = null_ls.builtins.formatting[provider.command].with(provider)
-    table.insert(sources, source)
-  end
-  for _, provider in ipairs(config.linters) do
-    local source = null_ls.builtins.diagnostics[provider.command].with(provider)
-    table.insert(sources, source)
-  end
-  for _, provider in ipairs(config.code_actions) do
-    local source = null_ls.builtins.code_actions[provider.command].with(provider)
-    table.insert(sources, source)
-  end
-  for _, provider in ipairs(config.hover) do
-    local source = null_ls.builtins.hover[provider.command].with(provider)
-    table.insert(sources, source)
+  for feature, providers in pairs(config) do
+    for _, provider in ipairs(providers) do
+      local source = null_ls.builtins[feature][provider.command].with(provider)
+      table.insert(sources, source)
+    end
   end
 
   local common_opts = require 'young.lsp.common'
