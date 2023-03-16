@@ -190,4 +190,3 @@ require('lazy').setup {
 }
 
 vim.keymap.set('n', '<leader>pp', '<Cmd>Lazy<CR>', { silent = true, desc = 'Plugin manager' })
-vim.keymap.set('n', '<leader>ps', '<Cmd>Telescope lazy<CR>', { silent = true, desc = 'Open plugins' })

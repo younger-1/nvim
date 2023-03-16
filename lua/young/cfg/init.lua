@@ -30,7 +30,6 @@ function M.done()
 end
 
 function M.reload()
-  -- Stop LSP
   -- vim.cmd.LspStop()
 
   unload_modules()
@@ -42,9 +41,12 @@ function M.reload()
     -- require 'young'
 
     M.done()
-    require('young.packer').done()
+
+    -- require('young.packer').done()
+    require 'young.lazy'
 
     -- require('young.lsp').done()
+
     require('young.gui').done()
 
     -- vim.notify 'Reloaded configuration'
