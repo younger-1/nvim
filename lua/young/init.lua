@@ -56,6 +56,8 @@ _G.xy = {
     -- bar = '▏',
     bar = '│',
   },
+  lsp = {},
+  coc = true,
 }
 
 if is_mac then

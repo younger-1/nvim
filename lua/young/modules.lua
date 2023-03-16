@@ -826,6 +826,7 @@ modules.telescope = {
       'tsakirist/telescope-lazy.nvim',
       config = function()
         require('telescope').load_extension 'lazy'
+        vim.keymap.set('n', '<leader>ps', '<Cmd>Telescope lazy<CR>', { silent = true, desc = 'Open plugins' })
       end,
     },
     {
@@ -1308,13 +1309,30 @@ modules.code = {
   },
 }
 
+-- https://github.com/neoclide/coc.nvim
+modules.coc = {
+  {
+    'neoclide/coc.nvim',
+    branch = 'release',
+  }
+}
+
 modules.LSP = {
-  { 'neovim/nvim-lspconfig' },
-  -- { 'williamboman/nvim-lsp-installer' },
-  { 'williamboman/mason.nvim' },
-  { 'williamboman/mason-lspconfig.nvim' },
+  {
+    'neovim/nvim-lspconfig',
+    enabled = not xy.coc,
+    config = function()
+      require('young.lsp').done()
+    end,
+    dependencies = {
+      -- { 'williamboman/nvim-lsp-installer' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+    },
+  },
   {
     'jose-elias-alvarez/null-ls.nvim',
+    enabled = not xy.coc,
     config = function()
       require('young.lsp.null_ls').done()
     end,
@@ -1619,6 +1637,7 @@ return {
   modules.UI(),
   modules.appearance(),
   modules.change(),
+  modules.coc(),
   modules.code(),
   modules.edit(),
   modules.file(),
