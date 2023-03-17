@@ -1,19 +1,9 @@
 {
     // [coc]
-    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.formatOnType": true,
-    "coc.preferences.formatOnSaveFiletypes": [
-        "go",
-        "rust",
-        "python",
-        "jsonc",
-        "svg", // coc-svg support svg format
-        "dart", // coc-flutter support dart format */
-        "elixir", // diagnostic-languageserver support elixir format
-        "eelixir", // diagnostic-languageserver support elixir format
-        "css",
-        "html"
-    ],
+    "coc.preferences.formatOnSave": true,
+    "coc.preferences.jumpCommand": "vsplit",
     // [list]
     "list.source.files.args": [
         // "--no-ignore",
@@ -88,5 +78,8 @@
     // [java]
     // "java.jdt.ls.home": ,
     // [rust]
-    "rust-analyzer.server.path": "rust-analyzer"
+    "rust-analyzer.server.path": "rust-analyzer",
+    "[lua]": {
+        "coc.preferences.formatOnSave": false
+    }
 }

@@ -92,6 +92,20 @@ return {
       --   end,
       --   'Peek definition',
       -- },
+      [']e'] = { vim.diagnostic.goto_next, 'Next diagnostic' },
+      [']E'] = {
+        function()
+          vim.diagnostic.goto_next { severity = 'Error' }
+        end,
+        'Next error',
+      },
+      [']e'] = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
+      [']E'] = {
+        function()
+          vim.diagnostic.goto_prev { severity = 'Error' }
+        end,
+        'Prev error',
+      },
     },
     insert_mode = {},
     visual_mode = {},
