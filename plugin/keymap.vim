@@ -115,7 +115,7 @@ noremap! <C-d> <Del>
 " insert mode
 inoremap <C-v> <C-G>u<C-R><C-O>+
 
-inoremap <C-Space> <C-X><C-O>
+" inoremap <C-Space> <C-X><C-O>
 
 " More molecular undo of text
 inoremap , ,<C-g>u

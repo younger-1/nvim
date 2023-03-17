@@ -403,6 +403,7 @@ modules.change = {
   pair = {
     {
       'windwp/nvim-autopairs',
+      enabled = not xy.coc,
       event = 'InsertEnter',
       config = function()
         require 'young.mod.autopairs'
@@ -1152,6 +1153,7 @@ modules.code = {
   completion = {
     {
       'hrsh7th/nvim-cmp',
+      enabled = not xy.coc,
       event = { 'InsertEnter', 'CmdlineEnter' },
       config = function()
         require('young.mod.cmp').done()
@@ -1313,6 +1315,7 @@ modules.code = {
 modules.coc = {
   {
     'neoclide/coc.nvim',
+    enabled = xy.coc,
     branch = 'release',
   }
 }
@@ -1412,7 +1415,7 @@ modules.LSP = {
   highlight = {
     { -- Highlighting the word under the cursor
       'RRethy/vim-illuminate',
-      enabled = not require('young.lsp.config').document_highlight,
+      enabled = not require('young.lsp.config').document_highlight and not xy.coc,
       -- event = 'BufWinEnter',
       event = 'VeryLazy',
       config = function()

@@ -21,8 +21,8 @@ vim.g.matchup_matchparen_deferred = 1
 vim.g.matchup_matchparen_hi_surround_always = 1
 
 vim.cmd [[
-nnoremap <CR>  <cmd>MatchupWhereAmI?<cr>
-inoremap <C-y> <cmd>MatchupWhereAmI?<cr>
+" nnoremap <CR>  <cmd>MatchupWhereAmI?<cr>
+" inoremap <C-y> <cmd>MatchupWhereAmI?<cr>
 ]]
 
 local map = vim.keymap.set

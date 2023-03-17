@@ -4,6 +4,7 @@
 
 local default_options = {
   backup = false,
+  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   clipboard = '',
   cmdheight = 1,
   completeopt = { 'menuone', 'noselect' },
@@ -39,7 +40,6 @@ local default_options = {
   -- undodir = join_paths(vim.fn.stdpath "cache", "undo"), -- set an undo directory
   undofile = true, -- enable persistent undo
   updatetime = 200, -- faster completion
-  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   tabstop = 8, -- insert 8 spaces for a tab
   expandtab = true, -- convert tabs to spaces
   softtabstop = -1,

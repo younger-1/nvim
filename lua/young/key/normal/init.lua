@@ -10,13 +10,6 @@ local normal = {
     -- [' '] = {},
     -- ['<Tab>'] = {},
     -- ['<CR>'] = {},
-    e = { vim.diagnostic.goto_next, 'Next diagnostic' },
-    E = {
-      function()
-        vim.diagnostic.goto_next { severity = 'Error' }
-      end,
-      'Next error',
-    },
     -- c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next hunk' },
     x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next trouble' },
     -- p = {
@@ -30,13 +23,6 @@ local normal = {
     -- [' '] = {},
     -- ['<Tab>'] = {},
     -- ['<CR>'] = {},
-    e = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
-    E = {
-      function()
-        vim.diagnostic.goto_prev { severity = 'Error' }
-      end,
-      'Prev error',
-    },
     -- c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev hunk' },
     x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev trouble' },
     -- p = {
