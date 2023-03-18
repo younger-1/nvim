@@ -45,22 +45,27 @@ endfunction
 
 " Use <c-space> to trigger completion
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+  inoremap <silent><expr> <c-space> coc#pum#visible() ? coc#pum#stop() : coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-@> coc#pum#visible() ? coc#pum#stop() : coc#refresh()
 endif
 
+inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<end>"
+
 " GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap gd <Plug>(coc-definition)
+nmap gy <Plug>(coc-type-definition)
+nmap gi <Plug>(coc-implementation)
+nmap gr <plug>(coc-references-used)
+nmap gR <plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
     call feedkeys('K', 'in')
@@ -69,19 +74,29 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
-nmap <silent> [w :CocCommand document.jumpToPrevSymbol<CR>
-nmap <silent> ]w :CocCommand document.jumpToNextSymbol<CR>
+nmap [w :CocCommand document.jumpToPrevSymbol<CR>
+nmap ]w :CocCommand document.jumpToNextSymbol<CR>
 
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [e <Plug>(coc-diagnostic-prev)
-nmap <silent> ]e <Plug>(coc-diagnostic-next)
+nmap [e <Plug>(coc-diagnostic-prev)
+nmap ]e <Plug>(coc-diagnostic-next)
+nmap [E <Plug>(coc-diagnostic-prev-error)
+nmap ]E <Plug>(coc-diagnostic-next-error)
 
-" " Symbol renaming
-" nmap <leader>rn <Plug>(coc-rename)
+" Symbol renaming
+nmap <leader>cr <Plug>(coc-rename)
 
-" " Formatting selected code
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>cf <Plug>(coc-format)
+xmap <leader>cf <Plug>(coc-format-selected)
+
+nmap <leader>cOl <cmd>CocOpenLog<cr>
+nmap <leader>cOc <cmd>CocConfig<cr>
+
+nmap <leader>co <cmd>CocOutline<cr>
+
+nmap <leader>cc <cmd>CocCommand<cr>
+
+nmap <leader>ll <cmd>CocList<cr>
 
 " augroup mygroup
 "   autocmd!

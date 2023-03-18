@@ -4,8 +4,6 @@ return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(fn.visualmode())<cr>', 'Comment' },
   l = {
     name = '+lsp',
-    a = { vim.lsp.buf.range_code_action, 'Code action' },
-    f = { vim.lsp.buf.range_formatting, 'Format' },
   },
   s = {
     name = '+search',
