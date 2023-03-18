@@ -111,6 +111,17 @@ function! FirstCharOrFirstCol()
   endif
 endfunction
 
+function! SmartHome()
+  let first_nonblank = match(getline('.'), '\S') + 1
+  if first_nonblank == 0
+    return col('.') + 1 >= col('$') ? '0' : '^'
+  endif
+  if col('.') == first_nonblank
+    return '0'  " if at first nonblank, go to start line
+  endif
+  return &wrap && wincol() > 1 ? 'g^' : '^'
+endfunction
+
 " <https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript>
 " <https://superuser.com/questions/41378/how-to-search-for-selected-text-in-vim>
 function! RawVirtualSelection()

@@ -4,6 +4,8 @@ noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " noremap ' `
 
+noremap <expr> 0 SmartHome()
+
 " can be overrided in normal mode
 noremap gh ^
 noremap gl g_

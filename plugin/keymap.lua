@@ -93,8 +93,11 @@ local keys = {
     -- ['g<Tab>'] = { '%', remap = true },
 
     -- <https://github.com/yuki-yano/zero.nvim>
-    -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true } },
-    ['0'] = '<cmd>call FirstCharOrFirstCol()<cr>',
+    -- ['0'] = { "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", expr = true },
+    -- ['0'] = '<cmd>call FirstCharOrFirstCol()<cr>',
+    -- <https://vim.fandom.com/wiki/Smart_home>
+    -- ['0'] = { "col('.') == match(getline('.'),'\\S')+1 ? '0' : '^'", expr = true },
+    -- ['0'] = { 'SmartHome()', expr = true },
 
     ['+'] = { '<C-a>', remap = true },
     ['-'] = { '<C-x>', remap = true },
