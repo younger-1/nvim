@@ -4,6 +4,8 @@
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnSave": true,
     "coc.preferences.jumpCommand": "vsplit",
+    // [outline]
+    "outline.autoPreview": true,
     // [list]
     "list.source.files.args": [
         // "--no-ignore",
@@ -55,6 +57,11 @@
     "coc.source.file.ignoreHidden": false,
     "coc.source.around.firstMatch": false,
     "coc.source.buffer.firstMatch": false,
+    // [language]
+    "[lua]": {
+        "coc.preferences.formatOnType": false,
+        "coc.preferences.formatOnSave": false
+    },
     // [coc-pairs]
     "pairs.enableBackspace": false,
     // [coc-explorer]
@@ -79,7 +86,10 @@
     // "java.jdt.ls.home": ,
     // [rust]
     "rust-analyzer.server.path": "rust-analyzer",
-    "[lua]": {
-        "coc.preferences.formatOnSave": false
+    // [lua]
+    "Lua.format.enable": true,
+    "Lua.format.defaultConfig": {
+        "indent_style": "space",
+        "indent_size": "4"
     }
 }

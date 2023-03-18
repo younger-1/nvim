@@ -407,26 +407,27 @@ xy.map = {
 
     local prefix = opts.prefix or ''
     local mode = opts.mode or 'n'
+    local buffer = opts.buffer or false
 
-    xy.map._nest(mappings, prefix, mode)
+    xy.map._nest(mappings, prefix, mode, buffer)
   end,
 
-  _nest = function(mappings, prefix, mode)
+  _nest = function(mappings, prefix, mode, buffer)
     for k, v in pairs(mappings) do
       if k == 'name' or type(v) == 'string' then
         -- NOTE: #v == 1 which-key will take it as description
         goto continue
       end
       if #v == 0 then
-        xy.map._nest(v, prefix .. k, mode)
+        xy.map._nest(v, prefix .. k, mode, buffer)
       else
         local desc = v[2] ~= 'which_key_ignore' and v[2] or nil
         if v[1] == nil then
           xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil', prefix, k) }
         elseif #v == vim.tbl_count(v) then
-          xy.map[mode] { prefix .. k, v[1], desc }
+          xy.map[mode] { prefix .. k, v[1], desc, buffer = buffer }
         else
-          local keymap = { prefix .. k, v[1], desc }
+          local keymap = { prefix .. k, v[1], desc, buffer = buffer }
           keymap = vim.tbl_extend('keep', keymap, v)
           xy.map[mode](keymap)
         end

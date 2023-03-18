@@ -7,6 +7,9 @@
 --   end
 -- end
 
+local cmd = require('young.key').cmd
+local lua = require('young.key').lua
+
 return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
@@ -99,16 +102,84 @@ return {
         end,
         'Next error',
       },
-      [']e'] = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
-      [']E'] = {
+      ['[e'] = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
+      ['[E'] = {
         function()
           vim.diagnostic.goto_prev { severity = 'Error' }
         end,
         'Prev error',
       },
+      ['<leader>l'] = {
+        -- lsp goto
+        -- d = { vim.lsp.buf.definition, 'Def' },
+        -- D = { vim.lsp.buf.declaration, 'Dec' },
+        -- r = { vim.lsp.buf.references, 'Ref' },
+        -- y = { vim.lsp.buf.type_definition, 'Type' },
+        -- i = { vim.lsp.buf.implementation, 'Impl' },
+        s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
+        S = { vim.lsp.buf.document_symbol, 'Document symbol' },
+        ['['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
+        [']'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
+        ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
+        ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
+        -- j = { vim.diagnostic.goto_next, 'Next diagnostic' },
+        -- k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
+        -- lsp action
+        a = { vim.lsp.buf.code_action, 'Code action' },
+        A = { vim.lsp.buf.range_code_action, 'Range action' },
+        f = {
+          function()
+            vim.lsp.buf.format()
+            vim.cmd 'write'
+          end,
+          'Format & Save',
+        },
+        F = {
+          function()
+            vim.lsp.buf.format { async = true }
+          end,
+          'Format',
+        },
+        l = { vim.lsp.codelens.run, 'CodeLens action' },
+        r = { vim.lsp.buf.rename, 'Rename' },
+        w = {
+          name = '+workspace',
+          w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
+          a = { lua 'pp(vim.lsp.buf.add_workspace_folder())', 'Add folder' },
+          r = { lua 'pp(vim.lsp.buf.remove_workspace_folder())', 'Remove folder' },
+        },
+      },
+      ['<leader>c'] = {
+        -- [' '] = {},
+        -- lsp goto
+        d = { cmd 'Telescope lsp_definitions', 'Def' },
+        r = { cmd 'Telescope lsp_references', 'Ref' },
+        y = { cmd 'Telescope lsp_type_definitions', 'Type' },
+        i = { cmd 'Telescope lsp_implementations', 'Impl' },
+        s = { cmd 'Telescope lsp_document_symbols', 'Document symbols' },
+        w = { cmd 'Telescope lsp_workspace_symbols', 'Workspace symbols' },
+        S = { cmd 'Telescope lsp_dynamic_workspace_symbols', 'Dynamic Workspace symbols' },
+        ['['] = { cmd 'Telescope lsp_incoming_calls', 'Incoming calls' },
+        [']'] = { cmd 'Telescope lsp_outgoing_calls', 'Outgoing calls' },
+        e = { cmd 'Telescope diagnostics bufnr=0', 'Diagnostics' },
+        E = { cmd 'Telescope diagnostics', 'Diagnostics(All)' },
+        -- lsp action
+        v = { cmd 'Vista!!', 'Vista' },
+        -- p = {
+        --   name = '+peek',
+        --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },
+        --   i = { "<cmd>lua require('young.lsp.misc').Peek('implementation')<cr>", 'Implementation' },
+        --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type definition' },
+        -- },
+      },
+    },
+    visual_mode = {
+      ['<leader>l'] = {
+        a = { vim.lsp.buf.range_code_action, 'Code action' },
+        f = { vim.lsp.buf.range_formatting, 'Format' },
+      },
     },
     insert_mode = {},
-    visual_mode = {},
   },
   null_ls = {
     setup = {},

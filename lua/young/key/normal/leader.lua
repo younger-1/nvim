@@ -354,73 +354,12 @@ return {
     n = { cmd 'NullLsInfo', 'Null LS' },
     c = { cmd 'CmpStatus', 'Cmp status' },
     C = { cmd 'Copilot status', 'Copilot status' },
-    -- lsp goto
-    -- d = { vim.lsp.buf.definition, 'Def' },
-    -- D = { vim.lsp.buf.declaration, 'Dec' },
-    -- r = { vim.lsp.buf.references, 'Ref' },
-    -- y = { vim.lsp.buf.type_definition, 'Type' },
-    -- i = { vim.lsp.buf.implementation, 'Impl' },
-    s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
-    S = { vim.lsp.buf.document_symbol, 'Document symbol' },
-    ['['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
-    [']'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
-    ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
-    ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
-    -- j = { vim.diagnostic.goto_next, 'Next diagnostic' },
-    -- k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
-    -- lsp action
-    a = { vim.lsp.buf.code_action, 'Code action' },
-    A = { vim.lsp.buf.range_code_action, 'Range action' },
-    f = {
-      function()
-        vim.lsp.buf.format()
-        vim.cmd 'write'
-      end,
-      'Format & Save',
-    },
-    F = {
-      function()
-        vim.lsp.buf.format { async = true }
-      end,
-      'Format',
-    },
-    l = { vim.lsp.codelens.run, 'CodeLens action' },
-    r = { vim.lsp.buf.rename, 'Rename' },
-    w = {
-      name = '+workspace',
-      w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
-      a = { lua 'pp(vim.lsp.buf.add_workspace_folder())', 'Add folder' },
-      r = { lua 'pp(vim.lsp.buf.remove_workspace_folder())', 'Remove folder' },
-    },
     --
     t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
     T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
   },
   c = {
     name = '+code',
-    -- [' '] = {},
-    -- lsp goto
-    d = { cmd 'Telescope lsp_definitions', 'Def' },
-    r = { cmd 'Telescope lsp_references', 'Ref' },
-    y = { cmd 'Telescope lsp_type_definitions', 'Type' },
-    i = { cmd 'Telescope lsp_implementations', 'Impl' },
-    s = { cmd 'Telescope lsp_document_symbols', 'Document symbols' },
-    w = { cmd 'Telescope lsp_workspace_symbols', 'Workspace symbols' },
-    S = { cmd 'Telescope lsp_dynamic_workspace_symbols', 'Dynamic Workspace symbols' },
-    ['['] = { cmd 'Telescope lsp_incoming_calls', 'Incoming calls' },
-    [']'] = { cmd 'Telescope lsp_outgoing_calls', 'Outgoing calls' },
-    e = { cmd 'Telescope diagnostics bufnr=0', 'Diagnostics' },
-    E = { cmd 'Telescope diagnostics', 'Diagnostics(All)' },
-    -- lsp action
-    a = { cmd 'CodeActionMenu', 'Code action' },
-    o = { cmd 'SymbolsOutline', 'Outline' },
-    v = { cmd 'Vista!!', 'Vista' },
-    -- p = {
-    --   name = '+peek',
-    --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },
-    --   i = { "<cmd>lua require('young.lsp.misc').Peek('implementation')<cr>", 'Implementation' },
-    --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type definition' },
-    -- },
   },
   L = {
     name = '+lua',
@@ -595,7 +534,7 @@ return {
         require('telescope.builtin').keymaps {
           modes = { 'n', 'i', 'c', 'x', 'o' },
           show_plug = vim.v.count ~= 0,
-          only_buf = vim.v.count ~= 0, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
+          only_buf = vim.v.count == 1, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
           lhs_filter = function(lhs)
             -- gg(lhs)
             return not string.find(lhs, 'Þ')
@@ -612,7 +551,7 @@ return {
     },
     M = { cmd 'Telescope man_pages', 'Man pages' },
     n = { cmd 'Telescope notify', 'Notify' },
-    o = { cmd 'Telescope heading', 'Heading' },
+    O = { cmd 'Telescope heading', 'Heading' },
     p = { cmd 'Telescope projects', 'Projects' },
     r = { cmd 'Telescope oldfiles only_cwd=true', 'Open recent file (cwd)' },
     R = { cmd 'Telescope oldfiles', 'Open recent file' },

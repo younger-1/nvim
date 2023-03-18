@@ -1,127 +1,5 @@
 local modules = {}
 
-local to_plugs = function(t, submods)
-  local plugs = {}
-  for key, item in pairs(t) do
-    if type(key) == 'number' then
-      plugs[#plugs + 1] = item
-    elseif submods and #submods > 0 then
-      if vim.tbl_contains(submods, key) then
-        vim.list_extend(plugs, item)
-      end
-    else
-      vim.list_extend(plugs, item)
-    end
-  end
-
-  return plugs
-end
-
--- local function require_helper(plug, mod_name)
---   if plug.config or plug.init then
---     return
---   end
---   local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
---   local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
---   -- gg(plug[1], short_name, plug_name)
-
---   -- local ok, mod = pcall(require, 'young.mod.' .. mod_name .. xy_name)
---   local mod_path
---   for _, paths in ipairs {
---     { 'young', 'mod', plug_name },
---     { 'young', 'mod', mod_name, plug_name },
---   } do
---     local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
---     if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
---       mod_path = table.concat(paths, '.')
---       gg(mod_path)
---       break
---     end
---   end
-
---   if mod_path then
---     plug.init = function()
---       xy.autogroup('_lazy_init_' .. plug_name, {
---         {
---           'User',
---           'VeryLazy',
---           function()
---             local m = require(mod_path)
---             if type(m) == 'table' and m.once and type(m.once) == 'function' then
---               m.once()
---             end
---           end,
---         },
---       })
---     end
---     plug.config = function()
---       local m = require(mod_path)
---       if type(m) == 'table' and m.done and type(m.done) == 'function' then
---         m.done()
---       end
---     end
---   end
--- end
-
-local function require_helper_semi(plug)
-  if not plug.auto then
-    return
-  end
-  local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
-  local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
-  local mod_path = 'young.mod.' .. plug_name
-
-  if plug.auto == 'init' or plug.auto == true then
-    plug.init = function()
-      xy.autogroup('_lazy_init_' .. plug_name, {
-        {
-          'User',
-          'LazyDone',
-          function()
-            local m = require(mod_path)
-            if type(m) == 'table' and m.once and type(m.once) == 'function' then
-              m.once()
-            end
-          end,
-        },
-      })
-    end
-  end
-
-  if plug.auto == 'config' or plug.auto == true then
-    plug.config = function()
-      local m = require(mod_path)
-      if type(m) == 'table' and m.done and type(m.done) == 'function' then
-        m.done()
-      end
-    end
-  end
-end
-
-local function auto_require_mod(plugs, mod_name)
-  for i, plug in ipairs(plugs) do
-    if type(plug) == 'string' then
-      plug = { plug }
-    end
-    -- require_helper(plug, mod_name)
-    require_helper_semi(plug)
-    plugs[i] = plug
-  end
-  return plugs
-end
-
--- for _, mod in pairs(modules) do
---   setmetatable(mod, { __call = to_plugs })
--- end
-setmetatable(modules, {
-  __newindex = function(t, k, v)
-    rawset(t, k, function(s)
-      -- return to_plugs(v, s)
-      return auto_require_mod(to_plugs(v, s), k)
-    end)
-  end,
-})
-
 modules.theme = {
   -- { 'rktjmp/lush.nvim' },
   {
@@ -1097,6 +975,9 @@ modules.UI = {
     {
       'simrat39/symbols-outline.nvim',
       cmd = 'SymbolsOutline',
+      init = function ()
+        xy.map.n { '<leader>so', '<cmd>SymbolsOutline<cr>' }
+      end,
       config = function()
         require 'young.mod.symbols_outline'
       end,
@@ -1311,19 +1192,9 @@ modules.code = {
   },
 }
 
--- https://github.com/neoclide/coc.nvim
-modules.coc = {
-  {
-    'neoclide/coc.nvim',
-    enabled = xy.coc,
-    branch = 'release',
-  }
-}
-
 modules.LSP = {
   {
     'neovim/nvim-lspconfig',
-    enabled = not xy.coc,
     config = function()
       require('young.lsp').done()
     end,
@@ -1335,7 +1206,6 @@ modules.LSP = {
   },
   {
     'jose-elias-alvarez/null-ls.nvim',
-    enabled = not xy.coc,
     config = function()
       require('young.lsp.null_ls').done()
     end,
@@ -1348,25 +1218,6 @@ modules.LSP = {
   --     require 'young.mod.lsp_signature'
   --   end,
   -- },
-  lua = {
-    { 'folke/neodev.nvim', lazy = true },
-    -- { 'ii14/emmylua-nvim', lazy = true },
-    {
-      'nanotee/luv-vimdocs',
-      enabled = not xy.has 'nvim-0.8',
-    },
-    {
-      'milisims/nvim-luaref',
-      enabled = not xy.has 'nvim-0.8',
-    },
-    -- {
-    --   'rafcamlet/nvim-luapad',
-    --   cmd = { 'Luapad', 'LuaRun', 'LuapadToggle' },
-    --   config = function()
-    --     require 'young.mod.luapad'
-    --   end,
-    -- },
-  },
   ui = {
     {
       'glepnir/lspsaga.nvim',
@@ -1388,7 +1239,13 @@ modules.LSP = {
       cmd = 'Glance',
       auto = true,
     },
-    { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
+    {
+      'weilbith/nvim-code-action-menu',
+      cmd = 'CodeActionMenu',
+      init = function()
+        xy.map { '<leader>ca', '<cmd>CodeActionMenu<cr>' }
+      end,
+    },
     -- {
     --   'kosayoda/nvim-lightbulb',
     --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
@@ -1415,7 +1272,7 @@ modules.LSP = {
   highlight = {
     { -- Highlighting the word under the cursor
       'RRethy/vim-illuminate',
-      enabled = not require('young.lsp.config').document_highlight and not xy.coc,
+      enabled = not require('young.lsp.config').document_highlight,
       -- event = 'BufWinEnter',
       event = 'VeryLazy',
       config = function()
@@ -1435,6 +1292,17 @@ modules.LSP = {
   },
 }
 
+if xy.coc then
+  -- https://github.com/neoclide/coc.nvim
+  modules.LSP = {
+    {
+      'neoclide/coc.nvim',
+      enabled = xy.coc,
+      branch = 'release',
+    },
+  }
+end
+
 modules.lang = {
   -- {
   --   'sheerun/vim-polyglot',
@@ -1443,6 +1311,25 @@ modules.lang = {
   --     vim.g.polyglot_disabled = { 'autoindent', 'ftdetect', 'markdown' }
   --   end,
   -- },
+  lua = {
+    { 'folke/neodev.nvim', lazy = true },
+    -- { 'ii14/emmylua-nvim', lazy = true },
+    {
+      'nanotee/luv-vimdocs',
+      enabled = not xy.has 'nvim-0.8',
+    },
+    {
+      'milisims/nvim-luaref',
+      enabled = not xy.has 'nvim-0.8',
+    },
+    -- {
+    --   'rafcamlet/nvim-luapad',
+    --   cmd = { 'Luapad', 'LuaRun', 'LuapadToggle' },
+    --   config = function()
+    --     require 'young.mod.luapad'
+    --   end,
+    -- },
+  },
   python = {
     -- {
     --   'dccsillag/magma-nvim',
@@ -1634,19 +1521,145 @@ modules.tool = {
   },
 }
 
+local to_plugs = function(t, submods)
+  local plugs = {}
+  for key, item in pairs(t) do
+    if type(key) == 'number' then
+      plugs[#plugs + 1] = item
+    elseif submods and #submods > 0 then
+      if vim.tbl_contains(submods, key) then
+        vim.list_extend(plugs, item)
+      end
+    else
+      vim.list_extend(plugs, item)
+    end
+  end
+
+  return plugs
+end
+
+-- local function require_helper(plug, mod_name)
+--   if plug.config or plug.init then
+--     return
+--   end
+--   local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
+--   local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+--   -- gg(plug[1], short_name, plug_name)
+
+--   -- local ok, mod = pcall(require, 'young.mod.' .. mod_name .. xy_name)
+--   local mod_path
+--   for _, paths in ipairs {
+--     { 'young', 'mod', plug_name },
+--     { 'young', 'mod', mod_name, plug_name },
+--   } do
+--     local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
+--     if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
+--       mod_path = table.concat(paths, '.')
+--       gg(mod_path)
+--       break
+--     end
+--   end
+
+--   if mod_path then
+--     plug.init = function()
+--       xy.autogroup('_lazy_init_' .. plug_name, {
+--         {
+--           'User',
+--           'VeryLazy',
+--           function()
+--             local m = require(mod_path)
+--             if type(m) == 'table' and m.once and type(m.once) == 'function' then
+--               m.once()
+--             end
+--           end,
+--         },
+--       })
+--     end
+--     plug.config = function()
+--       local m = require(mod_path)
+--       if type(m) == 'table' and m.done and type(m.done) == 'function' then
+--         m.done()
+--       end
+--     end
+--   end
+-- end
+
+local function require_helper_semi(plug)
+  if not plug.auto then
+    return
+  end
+  local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
+  local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
+  local mod_path = 'young.mod.' .. plug_name
+
+  if plug.auto == 'init' or plug.auto == true then
+    plug.init = function()
+      xy.autogroup('_lazy_init_' .. plug_name, {
+        {
+          'User',
+          'LazyDone',
+          function()
+            local m = require(mod_path)
+            if type(m) == 'table' and m.once and type(m.once) == 'function' then
+              m.once()
+            end
+          end,
+        },
+      })
+    end
+  end
+
+  if plug.auto == 'config' or plug.auto == true then
+    plug.config = function()
+      local m = require(mod_path)
+      if type(m) == 'table' and m.done and type(m.done) == 'function' then
+        m.done()
+      end
+    end
+  end
+end
+
+local function auto_require_mod(plugs, mod_name)
+  for i, plug in ipairs(plugs) do
+    if type(plug) == 'string' then
+      plug = { plug }
+    end
+    -- require_helper(plug, mod_name)
+    require_helper_semi(plug)
+    plugs[i] = plug
+  end
+  return plugs
+end
+
+for _, mod in pairs(modules) do
+  -- setmetatable(mod, { __call = to_plugs })
+  setmetatable(mod, {
+    __call = function(t, s)
+      return auto_require_mod(to_plugs(t, s), _)
+    end
+  })
+end
+-- setmetatable(modules, {
+--   __newindex = function(t, k, v)
+--     rawset(t, k, function(s)
+--       -- return to_plugs(v, s)
+--       return auto_require_mod(to_plugs(v, s), k)
+--     end)
+--   end,
+-- })
+
 return {
   modules.BWT(),
   modules.LSP(),
   modules.UI(),
   modules.appearance(),
   modules.change(),
-  modules.coc(),
   modules.code(),
   modules.edit(),
   modules.file(),
   modules.find(),
   modules.git(),
-  modules.lang { 'python', 'lisp', 'java' },
+  modules.lang { 'lua', 'python', 'lisp', 'java' },
   modules.neovim(),
   modules.telescope(),
   modules.theme(),
