@@ -3,28 +3,36 @@ if !exists('g:xy') || !g:xy.coc
 endif
 
 let g:coc_global_extensions = [
-      \  'coc-json',
-      \  'coc-yank',
-      \  'coc-lists',
-      \  'coc-pairs',
-      \  'coc-explorer',
-      \  'coc-snippets',
-      \  'coc-highlight',
-      \  'coc-marketplace',
-      \  'coc-tasks',
-      \  'coc-tabnine',
-      \  'coc-translator',
-      \  'coc-go',
-      \  'coc-sh',
-      \  'coc-lua',
-      \  'coc-css',
-      \  'coc-html',
-      \  'coc-clangd',
-      \  'coc-vimlsp',
-      \  'coc-pyright',
-      \  'coc-tsserver',
-      \  'coc-rust-analyzer',
-      \  ]
+    \ 'coc-json',
+    \ 'coc-yank',
+    \ 'coc-lists',
+    \ 'coc-pairs',
+    \ 'coc-snippets',
+    \ 'coc-highlight',
+    \ 'coc-marketplace',
+    \ ]
+
+call extend(g:coc_global_extensions, [
+    \ 'coc-explorer',
+    \ 'coc-tabnine',
+    \ 'coc-translator',
+    \ ])
+
+call extend(g:coc_global_extensions, [
+    \ 'coc-go',
+    \ 'coc-sh',
+    \ 'coc-lua',
+    \ 'coc-clangd',
+    \ 'coc-vimlsp',
+    \ 'coc-pyright',
+    \ 'coc-rust-analyzer',
+    \ ])
+
+call extend(g:coc_global_extensions, [
+    \ 'coc-css',
+    \ 'coc-html',
+    \ 'coc-tsserver',
+    \ ])
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
@@ -33,15 +41,19 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Used by snippet
+" inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+" inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use <c-space> to trigger completion
 if has('nvim')
@@ -51,6 +63,8 @@ else
 endif
 
 inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<end>"
+
+inoremap <C-l> <cmd>call CocActionAsync('showSignatureHelp')<cr>
 
 " GoTo code navigation
 nmap gd <Plug>(coc-definition)
@@ -89,8 +103,10 @@ nmap <leader>cr <Plug>(coc-rename)
 nmap <leader>cf <Plug>(coc-format)
 xmap <leader>cf <Plug>(coc-format-selected)
 
-nmap <leader>cOl <cmd>CocOpenLog<cr>
 nmap <leader>cOc <cmd>CocConfig<cr>
+nmap <leader>cOC <cmd>CocLocalConfig<cr>
+nmap <leader>cOl <cmd>CocOpenLog<cr>
+nmap <leader>cOi <cmd>CocInfo<cr>
 
 nmap <leader>co <cmd>CocOutline<cr>
 
@@ -98,13 +114,13 @@ nmap <leader>cc <cmd>CocCommand<cr>
 
 nmap <leader>ll <cmd>CocList<cr>
 
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s)
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
+augroup _coc
+  autocmd!
+  " Setup formatexpr specified filetype(s)
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 " " Applying code actions to the selected code block
 " " Example: `<leader>aap` for current paragraph

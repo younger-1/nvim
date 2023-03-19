@@ -32,9 +32,17 @@ function! s:Single_quote(str) abort
   return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
 endfunction
 
+" https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
+" function! SetupCommandAbbrs(from, to)
+"   exec 'cnoreabbrev <expr> '.a:from
+"         \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+"         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+" endfunction
+
 call Cabbrev('git', 'Git')
 call Cabbrev('man', 'Man')
 
 command! -bar -bang -nargs=+ -complete=file Edit call yo#MultiEdit([<f-args>])
 call Cabbrev('edit', 'Edit')
+
 
