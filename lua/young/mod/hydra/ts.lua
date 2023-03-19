@@ -86,10 +86,11 @@ local function ts_init_helper(tbl)
           end,
           { desc = 'prev end' },
         },
-        -- { '<Esc>', nil, { exit = true, desc = false } },
+        -- { '<esc>', nil, { exit = true, desc = false } },
         { 'q', nil, { exit = true, desc = false } },
+        { '<cr>', nil, { exit = true, desc = false } },
         {
-          '<BS>',
+          '<space>',
           function()
             xy.util.defer(function()
               M.ts_init_hydra:activate()
@@ -98,7 +99,7 @@ local function ts_init_helper(tbl)
           { exit = true, desc = 'select query' },
         },
         {
-          '<CR>',
+          '<tab>',
           function()
             xy.util.defer(function()
               ts_hydra_land[mark .. ({ ['.inner'] = '.outer', ['.outer'] = '.inner' })[io]]:activate()

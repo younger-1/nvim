@@ -9,5 +9,8 @@
         "lua/?.lua",
         "lua/?/init.lua",
     ],
+    "diagnostics.globals": [
+        "vim",
+    ],
     // "Lua.workspace.library": []
 }
