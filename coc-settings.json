@@ -4,6 +4,30 @@
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnSave": true,
     "coc.preferences.jumpCommand": "vsplit",
+    // "coc.preferences.jumpCommand": "rightbelow pedit",
+    // [suggest]
+    // "suggest.noselect": true,
+    "suggest.formatItems": [
+        "abbr",
+        "menu",
+        "kind",
+        "shortcut",
+    ],
+    "suggest.selection": "recentlyUsed",
+    "suggest.floatConfig": {
+        "border": true,
+        "rounded": true,
+    },
+    // [list]
+    // "list.source.files.args": [
+    //     "--hidden",
+    //     "--glob=!.git/*",
+    //     "--files"
+    // ],
+    "list.insertMappings": {},
+    "list.normalMappings": {
+        "q": "do:cancel",
+    },
     // [outline]
     "outline.autoPreview": true,
     "outline.switchSortKey": "<C-s>",
@@ -25,14 +49,9 @@
         "border": true,
         "rounded": true,
         "winblend": 10,
+        "title": "[xy]",
+        "close": true,
     },
-    // [list]
-    "list.source.files.args": [
-        // "--no-ignore",
-        "--hidden",
-        "--glob=!.git/*",
-        "--files"
-    ],
     // [diagnostic]
     "diagnostic.infoSign": "🍳",
     "diagnostic.hintSign": "🎅",
@@ -154,9 +173,12 @@
     "go.goplsOptions": {
         "semanticTokens": true,
         "usePlaceholders": true,
+        "experimentalPostfixCompletions": true,
         "analyses": {
             "unusedparams": true,
+            "shadow": true,
         },
+        "staticcheck": true,
         "hints": {
             // "assignVariableTypes": true,
             // "compositeLiteralFields": true,

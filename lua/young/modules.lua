@@ -1,3 +1,5 @@
+local cmd = require('young.key').cmd
+
 local modules = {}
 
 modules.theme = {
@@ -1195,6 +1197,21 @@ modules.code = {
 modules.LSP = {
   {
     'neovim/nvim-lspconfig',
+    init = function()
+      xy.map.register {
+        ['<leader>l'] = {
+          i = { cmd 'LspInfo' },
+          I = { cmd 'LspInstall' },
+          m = { cmd 'Mason' },
+          n = { cmd 'NullLsInfo' },
+          c = { cmd 'CmpStatus' },
+          C = { cmd 'Copilot status' },
+          --
+          -- t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
+          -- T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
+        },
+      }
+    end,
     config = function()
       require('young.lsp').done()
     end,

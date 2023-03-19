@@ -69,10 +69,10 @@ local cfg = {
   -- hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ', '<Plug>' },
   hidden = {
     '<silent>',
-    '<cmd>',
     '<Cmd>',
     '<CR>',
     'lua',
+    '<C-U>',
     '^:',
     '^ ',
     '<Plug>',

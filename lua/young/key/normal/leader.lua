@@ -348,15 +348,6 @@ return {
   },
   l = {
     name = '+lsp',
-    i = { cmd 'LspInfo', 'Info' },
-    I = { cmd 'LspInstall', 'Install' },
-    m = { cmd 'Mason', 'Mason' },
-    n = { cmd 'NullLsInfo', 'Null LS' },
-    c = { cmd 'CmpStatus', 'Cmp status' },
-    C = { cmd 'Copilot status', 'Copilot status' },
-    --
-    t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
-    T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
   },
   c = {
     name = '+code',
