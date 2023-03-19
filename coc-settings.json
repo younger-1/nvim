@@ -6,6 +6,26 @@
     "coc.preferences.jumpCommand": "vsplit",
     // [outline]
     "outline.autoPreview": true,
+    "outline.switchSortKey": "<C-s>",
+    "outline.togglePreviewKey": "p",
+    // [tree]
+    "tree.key.close": "q",
+    "tree.key.actions": "<tab>",
+    "tree.key.invoke": "<cr>",
+    "tree.key.toggle": "o",
+    "tree.key.toggleSelection": "t",
+    "tree.key.selectNext": "<C-j>",
+    "tree.key.selectPrevious": "<C-k>",
+    "tree.key.activeFilter": "f",
+    "tree.key.collapseAll": "M",
+    // [signature]
+    // "signature.target": "echo",
+    "signature.preferShownAbove": true,
+    "signature.floatConfig": {
+        "border": true,
+        "rounded": true,
+        "winblend": 10,
+    },
     // [list]
     "list.source.files.args": [
         // "--no-ignore",
@@ -62,15 +82,41 @@
         "coc.preferences.formatOnType": false,
         "coc.preferences.formatOnSave": false
     },
+    // [lsp]
+    // https://github.com/neoclide/coc.nvim/wiki/Language-servers
+    "languageserver": {
+        // "golang": {
+        //     "command": "gopls",
+        //     "args": [],
+        //     "filetypes": [
+        //         "go"
+        //     ],
+        //     "rootPatterns": [
+        //         "go.work",
+        //         "go.mod",
+        //     ],
+        //     "initializationOptions": {},
+        //     "settings": {
+        //         "gopls": {
+        //             "semanticTokens": true,
+        //             "usePlaceholders": true,
+        //             "analyses": {
+        //                 "unusedparams": true,
+        //             },
+        //         }
+        //     },
+        // },
+    },
     // [coc-pairs]
-    "pairs.enableBackspace": false,
+    // "pairs.enableBackspace": false,
     // [coc-explorer]
     "explorer.git.showIgnored": true,
     "explorer.icon.enableNerdfont": true,
     // "explorer.icon.enableVimDevicons": true,
     "explorer.filename.colored.enable": true,
     "explorer.file.showHiddenFiles": true,
-    // [vimlsp]
+    // [coc language specific plugins]
+    // [vim]
     "vimlsp.indexes.runtimepath": true,
     "vimlsp.indexes.gap": 10,
     "vimlsp.indexes.count": 3,
@@ -88,8 +134,33 @@
     "rust-analyzer.server.path": "rust-analyzer",
     // [lua]
     "Lua.format.enable": true,
-    "Lua.format.defaultConfig": {
-        "indent_style": "space",
-        "indent_size": "4"
-    }
+    // "Lua.format.defaultConfig": {
+    //     // follow 'expandtab'
+    //     "indent_style": "space",
+    //     // follow 'shiftwidth'
+    //     "indent_size": "4"
+    // },
+    "Lua.completion.callSnippet": "Replace",
+    "Lua.completion.postfix": "@",
+    "Lua.completion.displayContext": 2,
+    "Lua.diagnostics.globals": [
+        "vim",
+    ],
+    "Lua.runtime.special": {
+        "rc": "require",
+        "rr": "require"
+    },
+    // [go]
+    "go.goplsOptions": {
+        "semanticTokens": true,
+        "usePlaceholders": true,
+        "analyses": {
+            "unusedparams": true,
+        },
+        "hints": {
+            // "assignVariableTypes": true,
+            // "compositeLiteralFields": true,
+            "parameterNames": true,
+        }
+    },
 }
