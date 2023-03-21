@@ -76,6 +76,7 @@ inoremap <expr> <C-l> coc#pum#visible() ? coc#pum#one_more() : CocActionAsync('s
 
 " GoTo code navigation
 nmap gd <Plug>(coc-definition)
+nmap gD <Plug>(coc-declaration)
 nmap gy <Plug>(coc-type-definition)
 nmap gi <Plug>(coc-implementation)
 nmap gr <plug>(coc-references-used)
@@ -88,14 +89,17 @@ function! ShowDocumentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   elseif CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
+    if coc#float#has_float()
+      call coc#float#jump()
+      nnoremap <buffer> q <Cmd>close<CR>
+    else
+      call CocActionAsync('doHover')
+    endif
   else
     call feedkeys('K', 'in')
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap [w :CocCommand document.jumpToPrevSymbol<CR>
 nmap ]w :CocCommand document.jumpToNextSymbol<CR>
 
@@ -116,6 +120,8 @@ xmap <leader>cf <Plug>(coc-format-selected)
 
 augroup _coc
   autocmd!
+  " Highlight the symbol and its references when holding the cursor
+  autocmd CursorHold * silent call CocActionAsync('highlight')
   " Setup formatexpr specified filetype(s)
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
@@ -224,3 +230,55 @@ nmap <leader>lL <Cmd>CocList lines<CR>
 
 nmap <leader>lg <Cmd>CocList -I grep<CR>
 nmap <leader>lG <Cmd>CocList -I grep -regex <CR>
+
+" coc-explorer
+" https://github.com/weirongxu/dotvim/blob/master/plugins-conf/coc.vim
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\      'root-uri': $MY_VIMFILES,
+\      'reveal': $MY_PLUGINS,
+\   },
+\   'cocConfig': {
+\      'root-uri': '~/.config/coc',
+\   },
+\   'tab': {
+\      'position': 'tab',
+\      'quit-on-open': v:true,
+\   },
+\   'floating': {
+\      'position': 'floating',
+\      'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\      'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\      'position': 'floating',
+\      'floating-position': 'right-center',
+\      'floating-width': 50,
+\      'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\   'git': {
+\     'sources': [{'name': 'git', 'expand': v:true}]
+\   },
+\ }
+nmap <Leader>ee <Cmd>CocCommand explorer<CR>
+nmap <Leader>ef <Cmd>CocCommand explorer --preset floating<CR>
+nmap <Leader>et <Cmd>CocCommand explorer --preset tab<CR>
+nmap <Leader>eh <Cmd>CocCommand explorer --preset floatingLeftside<CR>
+nmap <Leader>el <Cmd>CocCommand explorer --preset floatingRightside<CR>
+nmap <Leader>ev <Cmd>CocCommand explorer --preset .vim<CR>
+nmap <Leader>ec <Cmd>CocCommand explorer --preset cocConfig<CR>
+nmap <Leader>eb <Cmd>CocCommand explorer --preset buffer<CR>
+nmap <Leader>eg <Cmd>CocCommand explorer --preset git<CR>
+nmap <Leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+
