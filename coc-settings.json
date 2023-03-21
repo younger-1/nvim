@@ -3,7 +3,7 @@
     "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnSave": true,
-    "coc.preferences.jumpCommand": "vsplit",
+    "coc.preferences.jumpCommand": "drop",
     // "coc.preferences.jumpCommand": "rightbelow pedit",
     // [suggest]
     // "suggest.noselect": true,
