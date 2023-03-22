@@ -3,10 +3,15 @@
     "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnSave": true,
-    "coc.preferences.jumpCommand": "drop",
-    // "coc.preferences.jumpCommand": "rightbelow pedit",
+    "coc.preferences.enableMessageDialog": true,
+    // "coc.preferences.useQuickfixForLocations": true,
+    // "coc.preferences.jumpCommand": "drop",
+    "coc.preferences.jumpCommand": "rightbelow pedit",
     // [suggest]
     // "suggest.noselect": true,
+    // "suggest.enablePreselect": false,
+    // "suggest.insertMode": "insert",
+    "suggest.virtualText": true,
     "suggest.formatItems": [
         "abbr",
         "menu",
@@ -19,14 +24,21 @@
         "rounded": true,
     },
     // [list]
+    // https://zhuanlan.zhihu.com/p/71846145
+    "list.source.files.defaultOptions": [
+        "--number-select", // 可在插入模式在直接输入 1 ~ 9 快速跳转到对应行并执行默认操作
+    ],
     // "list.source.files.args": [
     //     "--hidden",
     //     "--glob=!.git/*",
     //     "--files"
     // ],
-    "list.insertMappings": {},
+    "list.insertMappings": {
+        "<C-q>": "do:exit",
+        "<C-h>": "do:help",
+    },
     "list.normalMappings": {
-        "q": "do:cancel",
+        "q": "do:exit",
     },
     // [outline]
     "outline.autoPreview": true,
@@ -52,16 +64,32 @@
         "title": "[xy]",
         "close": true,
     },
+    // [hover]
+    "hover.floatConfig": {
+        "border": true,
+    },
     // [diagnostic]
-    "diagnostic.infoSign": "🍳",
-    "diagnostic.hintSign": "🎅",
-    // "diagnostic.warningSign": "»",
-    // "diagnostic.errorSign": "×",
-    "diagnostic.warningSign": "🚸",
-    "diagnostic.errorSign": "⛔",
+    "diagnostic.floatConfig": {
+        "border": true,
+    },
+    "diagnostic.errorSign": " ",
+    "diagnostic.warningSign": " ",
+    "diagnostic.infoSign": " ",
+    "diagnostic.hintSign": " ",
+    //
+    // "diagnostic.errorSign": "✗",
+    // "diagnostic.warningSign": "∆",
+    // "diagnostic.infoSign": "▸",
+    // "diagnostic.hintSign": "▪︎",
+    //
+    // "diagnostic.errorSign": "⛔",
+    // "diagnostic.warningSign": "🚸",
+    // "diagnostic.infoSign": "🍳",
+    // "diagnostic.hintSign": "🎅",
+    //
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextPrefix": "☵ ",
-    // "diagnostic.virtualTextCurrentLineOnly": false,
+    "diagnostic.virtualTextCurrentLineOnly": true,
     // "diagnostic.displayByAle": true,
     // [suggest]
     "suggest.completionItemKindLabels": {
@@ -96,6 +124,11 @@
     "coc.source.file.ignoreHidden": false,
     "coc.source.around.firstMatch": false,
     "coc.source.buffer.firstMatch": false,
+    // [snippet]
+    "snippet.highlight": true,
+    // [dialog]
+    // "dialog.floatHighlight": "CocDialogFloat",
+    // "dialog.floatBorderHighlight": "CocDialogFloatBorder",
     // [language]
     "[lua]": {
         "coc.preferences.formatOnType": false,

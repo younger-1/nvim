@@ -2,6 +2,7 @@ if !exists('g:xy') || !g:xy.coc
   finish
 endif
 
+" coc.nvim 插件体系 https://zhuanlan.zhihu.com/p/65524706
 let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-yank',
@@ -13,12 +14,12 @@ let g:coc_global_extensions = [
     \ ]
 
 call extend(g:coc_global_extensions, [
+    \ 'coc-git',
     \ 'coc-explorer',
     \ 'coc-translator',
     \ ])
 if 0
 call extend(g:coc_global_extensions, [
-    \ 'coc-git',
     \ 'coc-yaml',
     \ 'coc-tabnine',
     \ 'coc-symbol-line',
@@ -127,7 +128,18 @@ augroup _coc
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+  let g:coc_enable_locationlist = 0
+  " autocmd User CocLocationsChange CocList --normal -A location
+  autocmd User CocLocationsChange call SetAndJumpToLoclist()
 augroup end
+
+function! SetAndJumpToLoclist() abort
+  call setloclist(0, [], ' ', {"title": "[coc loclist]: ".expand('<cword>'), "items": g:coc_jump_locations})
+  " lw
+  lclose
+  lopen
+endfunction
 
 xmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
 " Remap keys for applying code actions at the cursor position
