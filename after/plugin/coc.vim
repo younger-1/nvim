@@ -14,9 +14,16 @@ let g:coc_global_extensions = [
 
 call extend(g:coc_global_extensions, [
     \ 'coc-explorer',
-    \ 'coc-tabnine',
     \ 'coc-translator',
     \ ])
+if 0
+call extend(g:coc_global_extensions, [
+    \ 'coc-git',
+    \ 'coc-yaml',
+    \ 'coc-tabnine',
+    \ 'coc-symbol-line',
+    \ ])
+endif
 
 call extend(g:coc_global_extensions, [
     \ 'coc-go',
@@ -27,19 +34,13 @@ call extend(g:coc_global_extensions, [
     \ 'coc-pyright',
     \ 'coc-rust-analyzer',
     \ ])
-
+if 0
 call extend(g:coc_global_extensions, [
     \ 'coc-css',
     \ 'coc-html',
     \ 'coc-tsserver',
     \ ])
-
-if 0
-  call extend(g:coc_global_extensions, [
-      \ 'coc-git',
-      \ 'coc-yaml',
-      \ ])
-end
+endif
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
@@ -155,14 +156,13 @@ nmap <silent> <leader>cl  <Plug>(coc-codelens-action)
 " xmap ac <Plug>(coc-classobj-a)
 " omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-f> and <C-b> to scroll float windows/popups
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  nnoremap <silent><nowait><expr> <Down> coc#float#has_scroll() ? coc#float#scroll(1) : "\<Down>"
+  nnoremap <silent><nowait><expr> <Up> coc#float#has_scroll() ? coc#float#scroll(0) : "\<Up>"
+  inoremap <silent><nowait><expr> <Down> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Down>"
+  inoremap <silent><nowait><expr> <Up> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Up>"
+  vnoremap <silent><nowait><expr> <Down> coc#float#has_scroll() ? coc#float#scroll(1) : "\<Down>"
+  vnoremap <silent><nowait><expr> <Up> coc#float#has_scroll() ? coc#float#scroll(0) : "\<Up>"
 endif
 
 nmap <leader>cp <Cmd>call CocAction("pickColor")<CR>
@@ -216,13 +216,13 @@ nnoremap <silent><nowait> <leader>cJ :CocLast<CR>
 nnoremap <silent><nowait> <leader>cK :CocFirst<CR>
 
 " https://github.com/neoclide/coc-lists
-nmap <Leader>lC <Cmd>CocList vimcommands<CR>
-nmap <Leader>l: <Cmd>CocList cmdhistory<CR>
-nmap <Leader>l/ <Cmd>CocList searchhistory<CR>
-nmap <Leader>l' <Cmd>CocList marks<CR>
-nmap <Leader>l. <Cmd>CocList changes<CR>
+nmap <leader>lC <Cmd>CocList vimcommands<CR>
+nmap <leader>l: <Cmd>CocList cmdhistory<CR>
+nmap <leader>l/ <Cmd>CocList searchhistory<CR>
+nmap <leader>l' <Cmd>CocList marks<CR>
+nmap <leader>l. <Cmd>CocList changes<CR>
 
-nmap <Leader>lw <Cmd>CocList folders<CR>
+nmap <leader>lw <Cmd>CocList folders<CR>
 nmap <leader>lf <Cmd>CocList files<CR>
 nmap <leader>lr <Cmd>CocList mru<CR>
 nmap <leader>lb <Cmd>CocList buffers<CR>
@@ -231,7 +231,7 @@ nmap <leader>lL <Cmd>CocList lines<CR>
 nmap <leader>lg <Cmd>CocList -I grep<CR>
 nmap <leader>lG <Cmd>CocList -I grep -regex <CR>
 
-" coc-explorer
+" [coc-explorer]
 " https://github.com/weirongxu/dotvim/blob/master/plugins-conf/coc.vim
 let g:coc_explorer_global_presets = {
 \   '.vim': {
@@ -271,14 +271,16 @@ let g:coc_explorer_global_presets = {
 \     'sources': [{'name': 'git', 'expand': v:true}]
 \   },
 \ }
-nmap <Leader>ee <Cmd>CocCommand explorer<CR>
-nmap <Leader>ef <Cmd>CocCommand explorer --preset floating<CR>
-nmap <Leader>et <Cmd>CocCommand explorer --preset tab<CR>
-nmap <Leader>eh <Cmd>CocCommand explorer --preset floatingLeftside<CR>
-nmap <Leader>el <Cmd>CocCommand explorer --preset floatingRightside<CR>
-nmap <Leader>ev <Cmd>CocCommand explorer --preset .vim<CR>
-nmap <Leader>ec <Cmd>CocCommand explorer --preset cocConfig<CR>
-nmap <Leader>eb <Cmd>CocCommand explorer --preset buffer<CR>
-nmap <Leader>eg <Cmd>CocCommand explorer --preset git<CR>
-nmap <Leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+nmap <leader>ee <Cmd>CocCommand explorer<CR>
+nmap <leader>ef <Cmd>CocCommand explorer --preset floating<CR>
+nmap <leader>et <Cmd>CocCommand explorer --preset tab<CR>
+nmap <leader>eh <Cmd>CocCommand explorer --preset floatingLeftside<CR>
+nmap <leader>el <Cmd>CocCommand explorer --preset floatingRightside<CR>
+nmap <leader>ev <Cmd>CocCommand explorer --preset .vim<CR>
+nmap <leader>ec <Cmd>CocCommand explorer --preset cocConfig<CR>
+nmap <leader>eb <Cmd>CocCommand explorer --preset buffer<CR>
+nmap <leader>eg <Cmd>CocCommand explorer --preset git<CR>
+nmap <leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+
+" [coc-symbol-line]
 
