@@ -102,7 +102,7 @@ local set_winbar = function()
   local filetype = vim.fn.getbufvar(bufnum, '&filetype')
 
   if filetype ~= 'lir' then
-    vim.opt_local.winbar = nil
+    vim.opt_local.winbar = ''
   else
     local folder_name =
       vim.fn.expand('%:p'):gsub(vim.pesc(vim.loop.cwd() .. '/'), ''):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
