@@ -68,6 +68,7 @@ vim.filetype.add {
       end
       return 'c'
     end,
+    -- thrift = 'thrift'
   },
   filename = {
     conf = 'config',
