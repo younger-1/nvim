@@ -548,14 +548,17 @@ modules.file = {
   },
   project = {
     {
-      -- 'ahmedkhalf/project.nvim',
-      'younger-1/project.nvim',
+      'ahmedkhalf/project.nvim',
+      -- 'younger-1/project.nvim',
+      -- branch = 'mydev',
       event = 'VeryLazy',
-      branch = 'mydev',
       config = function()
         require 'young.mod.project'
       end,
     },
+    -- {
+    --   'gpanders/vim-oldfiles',
+    -- },
   },
   session = {
     {
@@ -1395,6 +1398,7 @@ modules.lang = {
   java = {
     {
       'mfussenegger/nvim-jdtls',
+      enabled = not xy.coc,
       ft = 'java',
       init = function()
         vim.g.young_jdtls = true

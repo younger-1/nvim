@@ -108,6 +108,7 @@ local default_options = {
     horizup = '⯊',
     horizdown = '⯋',
     vert = '│',
+    -- vert = 'ඞ',
     vertleft = '◖',
     vertright = '◗',
     verthoriz = '●',
