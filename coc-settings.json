@@ -5,8 +5,8 @@
     "coc.preferences.formatOnSave": true,
     "coc.preferences.enableMessageDialog": true,
     // "coc.preferences.useQuickfixForLocations": true,
-    // "coc.preferences.jumpCommand": "drop",
-    "coc.preferences.jumpCommand": "rightbelow pedit",
+    "coc.preferences.jumpCommand": "drop",
+    // "coc.preferences.jumpCommand": "rightbelow pedit",
     // [suggest]
     // "suggest.noselect": true,
     // "suggest.enablePreselect": false,

@@ -1,3 +1,4 @@
+" let g:xy = get(g:, 'xy', {})
 if !exists('g:xy') || !g:xy.coc
   finish
 endif
@@ -11,6 +12,7 @@ let g:coc_global_extensions = [
     \ 'coc-snippets',
     \ 'coc-highlight',
     \ 'coc-marketplace',
+    \ 'coc-symbol-line',
     \ ]
 
 call extend(g:coc_global_extensions, [
@@ -20,9 +22,7 @@ call extend(g:coc_global_extensions, [
     \ ])
 if 0
 call extend(g:coc_global_extensions, [
-    \ 'coc-yaml',
     \ 'coc-tabnine',
-    \ 'coc-symbol-line',
     \ ])
 endif
 
@@ -39,6 +39,7 @@ if 0
 call extend(g:coc_global_extensions, [
     \ 'coc-css',
     \ 'coc-html',
+    \ 'coc-yaml',
     \ 'coc-tsserver',
     \ ])
 endif
@@ -85,7 +86,7 @@ nmap gr <plug>(coc-references-used)
 nmap gR <plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> K <cmd>call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -102,10 +103,10 @@ function! ShowDocumentation()
   endif
 endfunction
 
-nmap [w :CocCommand document.jumpToPrevSymbol<CR>
-nmap ]w :CocCommand document.jumpToNextSymbol<CR>
+nmap [w <cmd>CocCommand document.jumpToPrevSymbol<CR>
+nmap ]w <cmd>CocCommand document.jumpToNextSymbol<CR>
 
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+" Use `CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap [e <Plug>(coc-diagnostic-prev)
 nmap ]e <Plug>(coc-diagnostic-next)
 nmap [E <Plug>(coc-diagnostic-prev-error)
@@ -213,19 +214,19 @@ nmap <leader>cci <cmd>CocInfo<cr>
 nmap <leader>cco <Plug>(coc-openlink)
 
 " Show all diagnostics
-nnoremap <silent><nowait> <leader>ce :CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ce <cmd>CocList diagnostics<cr>
 " Search workspace symbols
-nnoremap <silent><nowait> <leader>cs :CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>cs <cmd>CocList -I symbols<cr>
 
-nmap <leader>co <cmd>CocOutline<cr>
+nnoremap <silent><nowait> <leader>co <cmd>CocOutline<cr>
 " Find symbol of current document
-nnoremap <silent><nowait> <leader>lo :CocList outline<cr>
+nnoremap <silent><nowait> <leader>lo <cmd>CocList outline<cr>
 
 " Do default action for next/prev item
-nnoremap <silent><nowait> <leader>cj :CocNext<CR>
-nnoremap <silent><nowait> <leader>ck :CocPrev<CR>
-nnoremap <silent><nowait> <leader>cJ :CocLast<CR>
-nnoremap <silent><nowait> <leader>cK :CocFirst<CR>
+nnoremap <silent><nowait> <leader>cj <cmd>CocNext<CR>
+nnoremap <silent><nowait> <leader>ck <cmd>CocPrev<CR>
+nnoremap <silent><nowait> <leader>cJ <cmd>CocLast<CR>
+nnoremap <silent><nowait> <leader>cK <cmd>CocFirst<CR>
 
 " https://github.com/neoclide/coc-lists
 nmap <leader>lC <Cmd>CocList vimcommands<CR>
@@ -295,4 +296,6 @@ nmap <leader>eg <Cmd>CocCommand explorer --preset git<CR>
 nmap <leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 
 " [coc-symbol-line]
-
+if has('nvim')
+  set winbar=%{%get(b:,'coc_symbol_line','')%}
+endif
