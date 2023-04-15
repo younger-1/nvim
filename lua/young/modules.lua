@@ -72,6 +72,8 @@ modules.theme = {
         require 'young.theme.onedarker'
       end,
     },
+    { 'rose-pine/neovim', name = 'rose-pine' },
+    { 'catppuccin/nvim', name = 'catppuccin' },
   },
   helper = {
     -- {
@@ -662,18 +664,21 @@ modules.telescope = {
   -- },
   {
     'natecraddock/telescope-zf-native.nvim',
+    event = 'VeryLazy',
     config = function()
       require('telescope').load_extension 'zf-native'
     end,
   },
   {
     'nvim-telescope/telescope-file-browser.nvim',
+    event = 'VeryLazy',
     config = function()
       require('telescope').load_extension 'file_browser'
     end,
   },
   {
     'nvim-telescope/telescope-smart-history.nvim',
+    event = 'VeryLazy',
     dependencies = { 'kkharji/sqlite.lua' },
     config = function()
       require('telescope').load_extension 'smart_history'
@@ -681,6 +686,7 @@ modules.telescope = {
   },
   -- {
   --   'princejoogie/dir-telescope.nvim',
+  --   event = 'VeryLazy',
   --   config = function()
   --     require('dir-telescope').setup {
   --       hidden = true,
@@ -690,12 +696,14 @@ modules.telescope = {
   -- },
   {
     'nvim-telescope/telescope-live-grep-args.nvim',
+    event = 'VeryLazy',
     config = function()
       require('telescope').load_extension 'live_grep_args'
     end,
   },
   {
     'nvim-telescope/telescope-frecency.nvim',
+    event = 'VeryLazy',
     dependencies = { 'kkharji/sqlite.lua' },
   },
   other = {
@@ -708,6 +716,7 @@ modules.telescope = {
     -- },
     {
       'tsakirist/telescope-lazy.nvim',
+      event = 'VeryLazy',
       config = function()
         require('telescope').load_extension 'lazy'
         vim.keymap.set('n', '<leader>ps', '<Cmd>Telescope lazy<CR>', { silent = true, desc = 'Open plugins' })
@@ -715,6 +724,7 @@ modules.telescope = {
     },
     {
       'AckslD/nvim-neoclip.lua',
+      event = 'VeryLazy',
       dependencies = { 'kkharji/sqlite.lua' },
       config = function()
         require 'young.mod.neoclip'
@@ -722,12 +732,14 @@ modules.telescope = {
     },
     {
       'LinArcX/telescope-env.nvim',
+      event = 'VeryLazy',
       config = function()
         require('telescope').load_extension 'env'
       end,
     },
     {
       'jvgrootveld/telescope-zoxide',
+      event = 'VeryLazy',
       config = function()
         require('telescope').load_extension 'zoxide'
         require('telescope._extensions.zoxide.config').setup {
@@ -869,7 +881,8 @@ modules.UI = {
   },
   {
     'stevearc/dressing.nvim',
-    event = 'BufWinEnter',
+    -- event = 'BufWinEnter',
+    event = 'VeryLazy',
   },
   -- {
   --   'nvim-telescope/telescope-ui-select.nvim',
@@ -1320,6 +1333,14 @@ if xy.coc then
       enabled = xy.coc,
       branch = 'release',
     },
+    {
+      'fannheyward/telescope-coc.nvim',
+      event = 'VeryLazy',
+      config = function()
+        require('telescope').load_extension('coc')
+        xy.map.n { '<leader>l<space>', '<cmd>Telescope coc<cr>' }
+      end,
+    }
   }
 end
 

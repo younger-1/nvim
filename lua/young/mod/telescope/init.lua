@@ -392,6 +392,10 @@ M.cfg = {
     heading = {
       treesitter = true,
     },
+    coc = {
+      theme = 'ivy',
+      prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+    },
   },
 }
 
