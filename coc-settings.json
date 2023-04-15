@@ -28,6 +28,7 @@
     "list.source.files.defaultOptions": [
         "--number-select", // 可在插入模式在直接输入 1 ~ 9 快速跳转到对应行并执行默认操作
     ],
+    // "list.alignColumns": true,
     // "list.source.files.args": [
     //     "--hidden",
     //     "--glob=!.git/*",
@@ -134,6 +135,9 @@
         "coc.preferences.formatOnType": false,
         "coc.preferences.formatOnSave": false
     },
+    "[cpp][java]": {
+        "coc.preferences.formatOnSave": false
+    },
     // [lsp]
     // https://github.com/neoclide/coc.nvim/wiki/Language-servers
     "languageserver": {
@@ -182,6 +186,7 @@
     ],
     // [java]
     // "java.jdt.ls.home": ,
+    "java.import.maven.enabled": true,
     // [rust]
     "rust-analyzer.server.path": "rust-analyzer",
     // [lua]
@@ -218,4 +223,6 @@
             "parameterNames": true,
         }
     },
+    // [zig]
+    "zig.path": "zls",
 }

@@ -55,13 +55,15 @@ require('diffview').setup {
   },
   file_history_panel = {
     log_options = { -- See |diffview-config-log_options|
-      single_file = {
-        -- follow = true,
-        diff_merges = 'combined',
-      },
-      multi_file = {
-        -- follow = true,
-        diff_merges = 'first-parent',
+      git = {
+        single_file = {
+          -- follow = true,
+          diff_merges = 'combined',
+        },
+        multi_file = {
+          -- follow = true,
+          diff_merges = 'first-parent',
+        },
       },
     },
     -- win_config = { -- See |diffview-config-win_config|
