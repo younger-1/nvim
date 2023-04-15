@@ -61,6 +61,7 @@ return {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
       -- ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
       --
+      ['<C-]>'] = { cmd 'Telescope lsp_definitions', 'Def' },
       ['gd'] = {
         -- function()
         --   vim.lsp.buf.definition { on_list = on_list }

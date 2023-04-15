@@ -1609,6 +1609,7 @@ local function require_helper_semi(plug)
   if not plug.auto then
     return
   end
+  -- require('lazy.core.config').plugins
   local short_name = require('lazy.core.plugin').Spec.get_name(plug[1])
   local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
   local mod_path = 'young.mod.' .. plug_name
