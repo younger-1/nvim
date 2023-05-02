@@ -7,15 +7,18 @@
     // "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.jumpCommand": "drop",
     // "coc.preferences.jumpCommand": "rightbelow pedit",
+    // [source]
+    "coc.source.file.priority": 90,
+    "coc.source.file.ignoreHidden": false,
     // [suggest]
     // "suggest.noselect": true,
     // "suggest.enablePreselect": false,
     // "suggest.insertMode": "insert",
     "suggest.virtualText": true,
     "suggest.formatItems": [
+        "kind",
         "abbr",
         "menu",
-        "kind",
         "shortcut",
     ],
     "suggest.selection": "recentlyUsed",
@@ -23,17 +26,70 @@
         "border": true,
         "rounded": true,
     },
+    "suggest.completionItemKindLabels": {
+        "keyword": "\uf1de",
+        "variable": "\ue79b",
+        "value": "\uf89f",
+        "operator": "\u03a8",
+        "function": "\u0192",
+        "reference": "\ufa46",
+        "constant": "\uf8fe",
+        "method": "\uf09a",
+        "struct": "\ufb44",
+        "class": "\uf0e8",
+        "interface": "\uf417",
+        "text": "\ue612",
+        "enum": "\uf435",
+        "enumMember": "\uf02b",
+        "module": "\uf40d",
+        "color": "\ue22b",
+        "property": "\ue624",
+        "field": "\uf9be",
+        "unit": "\uf475",
+        "event": "\ufacd",
+        "file": "\uf723",
+        "folder": "\uf114",
+        "snippet": "\ue60b",
+        "typeParameter": "\uf728",
+        "default": "\uf29c"
+    },
+    // [snippet]
+    "snippet.highlight": true,
+    // "snippets.extends": {
+    //     "cpp": [
+    //         "c"
+    //     ],
+    //     "javascriptreact": [
+    //         "javascript"
+    //     ],
+    //     "typescript": [
+    //         "javascript"
+    //     ]
+    // },
+    // "snippets.trace": "verbose",
+    // [dialog]
+    // "dialog.floatHighlight": "CocDialogFloat",
+    // "dialog.floatBorderHighlight": "CocDialogFloatBorder",
     // [list]
     // https://zhuanlan.zhihu.com/p/71846145
     "list.source.files.defaultOptions": [
         "--number-select", // 可在插入模式在直接输入 1 ~ 9 快速跳转到对应行并执行默认操作
     ],
-    // "list.alignColumns": true,
     // "list.source.files.args": [
     //     "--hidden",
     //     "--glob=!.git/*",
     //     "--files"
     // ],
+    // "list.source.grep.defaultArgs": [
+    //     "-smartcase",
+    //     "-regex"
+    // ],
+    // "list.source.grep.defaultOptions": [
+    //     "--interactive",
+    //     "--no-sort",
+    //     "--regex"
+    // ],
+    "list.alignColumns": true,
     "list.insertMappings": {
         "<C-q>": "do:exit",
         "<C-h>": "do:help",
@@ -92,50 +148,15 @@
     "diagnostic.virtualTextPrefix": "☵ ",
     "diagnostic.virtualTextCurrentLineOnly": true,
     // "diagnostic.displayByAle": true,
-    // [suggest]
-    "suggest.completionItemKindLabels": {
-        "keyword": "\uf1de",
-        "variable": "\ue79b",
-        "value": "\uf89f",
-        "operator": "\u03a8",
-        "function": "\u0192",
-        "reference": "\ufa46",
-        "constant": "\uf8fe",
-        "method": "\uf09a",
-        "struct": "\ufb44",
-        "class": "\uf0e8",
-        "interface": "\uf417",
-        "text": "\ue612",
-        "enum": "\uf435",
-        "enumMember": "\uf02b",
-        "module": "\uf40d",
-        "color": "\ue22b",
-        "property": "\ue624",
-        "field": "\uf9be",
-        "unit": "\uf475",
-        "event": "\ufacd",
-        "file": "\uf723",
-        "folder": "\uf114",
-        "snippet": "\ue60b",
-        "typeParameter": "\uf728",
-        "default": "\uf29c"
-    },
-    // [source]
-    "coc.source.file.priority": 90,
-    "coc.source.file.ignoreHidden": false,
-    "coc.source.around.firstMatch": false,
-    "coc.source.buffer.firstMatch": false,
-    // [snippet]
-    "snippet.highlight": true,
-    // [dialog]
-    // "dialog.floatHighlight": "CocDialogFloat",
-    // "dialog.floatBorderHighlight": "CocDialogFloatBorder",
+    // [inlay hint]
+    "inlayHint.enable": false,
+    "inlayHint.parameterSeparator": "| ",
     // [language]
     "[lua]": {
         "coc.preferences.formatOnType": false,
         "coc.preferences.formatOnSave": false
     },
-    "[cpp][java]": {
+    "[c][h][cpp][java]": {
         "coc.preferences.formatOnSave": false
     },
     // [lsp]
@@ -207,6 +228,9 @@
         "rc": "require",
         "rr": "require"
     },
+    // [c/c++]
+    // "clangd.arguments": [],
+    // "clangd.fallbackFlags": [],
     // [go]
     "go.goplsOptions": {
         "semanticTokens": true,

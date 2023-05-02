@@ -209,9 +209,12 @@ nmap <leader>lc <cmd>CocList commands<cr>
 " nmap <leader>lc <cmd>CocCommand<cr>
 nmap <leader>ccc <cmd>CocConfig<cr>
 nmap <leader>ccC <cmd>CocLocalConfig<cr>
-nmap <leader>ccl <cmd>CocOpenLog<cr>
+nmap <leader>ccL <cmd>CocOpenLog<cr>
 nmap <leader>cci <cmd>CocInfo<cr>
 nmap <leader>cco <Plug>(coc-openlink)
+
+nmap <leader>ccl <cmd>CocCommand workspace.showOutput<cr>
+nmap <leader>ccs <cmd>CocCommand clangd.switchSourceHeader<cr>
 
 " Show all diagnostics
 nnoremap <silent><nowait> <leader>ce <cmd>CocList diagnostics<cr>
@@ -298,4 +301,9 @@ nmap <leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest'
 " [coc-symbol-line]
 if has('nvim')
   set winbar=%{%get(b:,'coc_symbol_line','')%}
+  " FIXME:
+  func MyHandler(timer) abort
+    set cmdheight=1
+  endfunc
+  let timer = timer_start(500, 'MyHandler', {'repeat': -1})
 endif
