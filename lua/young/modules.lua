@@ -94,7 +94,7 @@ modules.theme = {
 
 modules.appearance = {
   icon = {
-    { 'nvim-tree/nvim-web-devicons' },
+    { 'nvim-tree/nvim-web-devicons', auto = 'config' },
     { 'tpope/vim-characterize' },
     -- { 'zsugabubus/vim-vnicode' },
   },
