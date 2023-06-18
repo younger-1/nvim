@@ -86,11 +86,17 @@ nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
 nnoremap <expr> g<c-v> '`[' . getregtype()[0] . '`]'
 
 " visual mode
-vnoremap < <gv
-vnoremap > >gv
-vnoremap d "_d
-vnoremap X "+x
-vnoremap Y "+y
+xnoremap < <gv
+xnoremap > >gv
+xnoremap d "_d
+xnoremap X "+x
+xnoremap Y "+y
+" Runs macro on every line in selection
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 " Swap p and P in visual mode
 " vnoremap p P
