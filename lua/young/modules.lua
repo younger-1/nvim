@@ -366,13 +366,13 @@ modules.neovim = {
     },
   },
   { 'gpanders/editorconfig.nvim' },
-  -- {
-  --   'nacro90/numb.nvim',
-  --   event = 'CmdlineEnter',
-  --   config = function()
-  --     require('numb').setup()
-  --   end,
-  -- },
+  {
+    'nacro90/numb.nvim',
+    event = 'CmdlineEnter',
+    config = function()
+      require('numb').setup()
+    end,
+  },
   -- {
   --   'winston0410/range-highlight.nvim',
   --   event = 'CmdlineEnter',
