@@ -172,9 +172,9 @@ xy.map.register {
       'Move next',
     },
     --
-    c = { cmd 'BufferClose', 'Close' },
+    c = { cmd 'BufferClose!', 'Close' },
     C = { cmd 'BufferRestore', 'Restore' },
-    d = { cmd 'BufferWipeout', 'Wipeout' },
+    d = { cmd 'BufferWipeout!', 'Delete' },
     --
     h = { cmd 'BufferCloseBuffersLeft', 'Close left' },
     l = { cmd 'BufferCloseBuffersRight', 'Close right' },

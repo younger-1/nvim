@@ -71,14 +71,18 @@ return {
   N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   T = {
     name = '+treesitter',
-    I = { cmd 'TSModuleInfo', 'Telescope' },
-    T = { cmd 'TSHighlightCapturesUnderCursor', 'Highlight' },
-    c = { cmd 'TSContextToggle', 'Toggle context' },
-    h = { cmd 'TSBufToggle highlight', 'Toggle highlight(Buffer)' },
-    i = { cmd 'TSConfigInfo', 'Info' },
-    p = { cmd 'TSPlaygroundToggle', 'Playground' },
-    r = { cmd 'TSBufToggle rainbow', 'Toggle rainbow' },
     t = { cmd 'Telescope treesitter', 'Telescope' },
+    i = { cmd 'TSConfigInfo', 'Info' },
+    I = { cmd 'TSModuleInfo', 'Telescope' },
+    --
+    h = { cmd 'TSBufToggle highlight', 'Toggle highlight(Buffer)' },
+    r = { cmd 'TSBufToggle rainbow', 'Toggle rainbow' },
+    -- Playground
+    c = { cmd 'TSCaptureUnderCursor', 'Highlight' },
+    n = { cmd 'TSNodeUnderCursor', 'Node' },
+    p = { cmd 'TSPlaygroundToggle', 'Playground' },
+    -- Context
+    C = { cmd 'TSContextToggle', 'Toggle context' },
   },
   a = {
     name = '+apps',

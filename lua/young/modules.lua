@@ -185,11 +185,11 @@ modules.edit = {
         require('flit').setup {}
       end,
     },
-    -- {
-    --   'andymass/vim-matchup',
-    --   event = 'BufRead',
-    --   auto = 'init',
-    -- },
+    {
+      'andymass/vim-matchup',
+      event = 'BufRead',
+      auto = 'init',
+    },
     -- {
     --   'monkoose/matchparen.nvim',
     --   config = function()
@@ -336,11 +336,13 @@ modules.change = {
       end,
     },
     {
-      'glepnir/mutchar.nvim',
+      'nvimdev/dyninput.nvim',
+      enabled = xy.has 'nvim-0.10',
       event = 'InsertEnter',
       config = function()
         require 'young.mod.mcc'
       end,
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
     },
   },
 }
@@ -1229,9 +1231,6 @@ modules.LSP = {
           n = { cmd 'NullLsInfo' },
           c = { cmd 'CmpStatus' },
           C = { cmd 'Copilot status' },
-          --
-          -- t = { require('young.mod.lsp_lines').toggle, 'Toggle virtual text' },
-          -- T = { cmd 'IlluminateToggle', 'Toggle highlight cursor word' },
         },
       }
     end,
@@ -1299,6 +1298,7 @@ modules.LSP = {
       config = function()
         require('young.mod.fidget').done()
       end,
+      tag = 'legacy',
     },
     {
       'Maan2003/lsp_lines.nvim',
