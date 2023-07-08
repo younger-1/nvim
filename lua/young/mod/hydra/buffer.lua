@@ -70,6 +70,11 @@ local buffer_hydra = Hydra {
       cmd 'BufferClose',
       { desc = 'close' },
     },
+    {
+      'r',
+      cmd 'BufferRestore',
+      { desc = 'restore' },
+    },
 
     {
       'ob',
@@ -101,5 +106,6 @@ local function choose_buffer()
 end
 
 xy.map.n { '<leader>b<space>', choose_buffer, '[Hydra] Choose buffer' }
+xy.map.n { '<leader>B', choose_buffer, '[Hydra] Choose buffer' }
 
 return choose_buffer
