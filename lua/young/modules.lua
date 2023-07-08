@@ -185,11 +185,11 @@ modules.edit = {
         require('flit').setup {}
       end,
     },
-    {
-      'andymass/vim-matchup',
-      event = 'BufRead',
-      auto = 'init',
-    },
+    -- {
+    --   'andymass/vim-matchup',
+    --   event = 'BufRead',
+    --   auto = 'init',
+    -- },
     -- {
     --   'monkoose/matchparen.nvim',
     --   config = function()
@@ -1330,7 +1330,6 @@ if xy.coc then
   modules.LSP = {
     {
       'neoclide/coc.nvim',
-      enabled = xy.coc,
       branch = 'release',
     },
     {

@@ -127,7 +127,6 @@ return {
         -- k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
         -- lsp action
         a = { vim.lsp.buf.code_action, 'Code action' },
-        A = { vim.lsp.buf.range_code_action, 'Range action' },
         f = {
           function()
             vim.lsp.buf.format()
@@ -176,8 +175,8 @@ return {
     },
     visual_mode = {
       ['<leader>l'] = {
-        a = { vim.lsp.buf.range_code_action, 'Code action' },
-        f = { vim.lsp.buf.range_formatting, 'Format' },
+        a = { vim.lsp.buf.code_action, 'Code action' },
+        f = { vim.lsp.buf.format, 'Format' },
       },
     },
     insert_mode = {},

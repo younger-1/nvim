@@ -5,7 +5,7 @@ require('pantran').setup {
     yandex = {
       -- Default languages can be defined on a per engine basis. In this case
       -- `:lua require("pantran.async").run(function()
-      -- vim.pretty_print(require("pantran.engines").yandex:languages()) end)`
+      -- vim.print(require("pantran.engines").yandex:languages()) end)`
       -- can be used to list available language identifiers.
       default_source = 'auto',
       default_target = 'en',
