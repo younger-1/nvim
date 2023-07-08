@@ -901,6 +901,13 @@ modules.UI = {
     {
       'romgrk/barbar.nvim',
       event = 'BufRead',
+      dependencies = {
+        'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+        'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      },
+      init = function()
+        vim.g.barbar_auto_setup = false
+      end,
       config = function()
         require 'young.mod.barbar'
       end,
@@ -993,7 +1000,7 @@ modules.UI = {
     {
       'simrat39/symbols-outline.nvim',
       cmd = 'SymbolsOutline',
-      init = function ()
+      init = function()
         xy.map.n { '<leader>so', '<cmd>SymbolsOutline<cr>' }
       end,
       config = function()
@@ -1336,10 +1343,10 @@ if xy.coc then
       'fannheyward/telescope-coc.nvim',
       event = 'VeryLazy',
       config = function()
-        require('telescope').load_extension('coc')
+        require('telescope').load_extension 'coc'
         xy.map.n { '<leader>l<space>', '<cmd>Telescope coc<cr>' }
       end,
-    }
+    },
   }
 end
 
@@ -1678,7 +1685,7 @@ for _, mod in pairs(modules) do
   setmetatable(mod, {
     __call = function(t, s)
       return auto_require_mod(to_plugs(t, s), _)
-    end
+    end,
   })
 end
 -- setmetatable(modules, {

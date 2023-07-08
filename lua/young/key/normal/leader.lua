@@ -114,55 +114,6 @@ return {
   },
   b = {
     name = '+buffers',
-    b = {
-      function()
-        if vim.v.count >= 1 then
-          vim.cmd('BufferGoto ' .. vim.v.count)
-        else
-          vim.cmd 'b#'
-        end
-      end,
-      'Goto',
-    },
-    ['1'] = { cmd 'BufferGoto 1', 'Goto 1' },
-    ['2'] = { cmd 'BufferGoto 2', 'Goto 2' },
-    ['3'] = { cmd 'BufferGoto 3', 'Goto 3' },
-    ['4'] = { cmd 'BufferGoto 4', 'Goto 4' },
-    ['5'] = { cmd 'BufferGoto 5', 'Goto 5' },
-    ['6'] = { cmd 'BufferGoto 6', 'Goto 6' },
-    ['7'] = { cmd 'BufferGoto 7', 'Goto 7' },
-    ['8'] = { cmd 'BufferGoto 8', 'Goto 8' },
-    ['9'] = { cmd 'BufferGoto 9', 'Goto 9' },
-    ['0'] = { cmd 'BufferLast', 'Goto last' },
-    --
-    ['<'] = {
-      function()
-        vim.cmd('BufferMovePrevious' .. vim.v.count1)
-      end,
-      'Move previous',
-    },
-    ['>'] = {
-      function()
-        vim.cmd('BufferMoveNext' .. vim.v.count1)
-      end,
-      'Move next',
-    },
-    --
-    c = { cmd 'BufferClose', 'Close' },
-    d = { cmd 'BufferWipeout', 'Wipeout' },
-    h = { cmd 'BufferCloseBuffersLeft', 'Close left' },
-    l = { cmd 'BufferCloseBuffersRight', 'Close right' },
-    o = { cmd 'BufferCloseAllButCurrentOrPinned', 'Close all but current/pinned buffer' },
-    O = { cmd 'BufferCloseAllButCurrent', 'Close all but current buffer' },
-    --
-    j = { cmd 'BufferPick', 'Pick buffer' },
-    p = { cmd 'BufferPin', 'Pin' },
-    --
-    B = { cmd 'BufferOrderByBufferNumber', 'Sort by bufNr' },
-    W = { cmd 'BufferOrderByWindowNumber', 'Sort by windowNr' },
-    D = { cmd 'BufferOrderByDirectory', 'Sort by directory' },
-    L = { cmd 'BufferOrderByLanguage', 'Sort by language' },
-    --
     s = {
       f = { cmd 'Telescope find_files cwd=%:p:h', 'Find files' },
       g = { cmd 'Telescope live_grep cwd=%:p:h', 'Grep' },
