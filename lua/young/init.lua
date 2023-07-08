@@ -57,7 +57,7 @@ _G.xy = {
     bar = '│',
   },
   lsp = {},
-  coc = true,
+  coc = false,
 }
 
 if is_mac then
@@ -84,7 +84,7 @@ function _G.join_paths(...)
   return result
 end
 
-_G.pp = vim.pretty_print
+_G.pp = vim.print
 
 -- 1. fancy print 2. return parameters
 function _G.ppp(...)
@@ -423,7 +423,7 @@ xy.map = {
       else
         local desc = v[2] ~= 'which_key_ignore' and v[2] or nil
         if v[1] == nil then
-          xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil', prefix, k) }
+          xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil, with v = ', prefix, k), vim.inspect(v) }
         elseif #v == vim.tbl_count(v) then
           xy.map[mode] { prefix .. k, v[1], desc, buffer = buffer }
         else
