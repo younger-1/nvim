@@ -22,5 +22,6 @@ M.toggle = function(cur)
 end
 
 M.toggle()
+xy.map.n { '<leader>lt', M.toggle, 'Toggle virtual text' }
 
 return M

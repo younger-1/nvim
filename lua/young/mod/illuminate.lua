@@ -52,3 +52,5 @@ vim.keymap.set('n', ']w', require('illuminate').goto_next_reference, { desc = 'M
 vim.keymap.set('n', '[w', require('illuminate').goto_prev_reference, { desc = 'Move to previous reference' })
 -- vim.keymap.set('o', '<a-i>', require('illuminate').textobj_select)
 -- vim.keymap.set('x', '<a-i>', require('illuminate').textobj_select)
+--
+xy.map.n { '<leader>lT', '<cmd>IlluminateToggle<cr>', 'Toggle highlight cursor word' }
