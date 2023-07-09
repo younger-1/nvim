@@ -134,6 +134,9 @@ modules.appearance = {
     --     }
     --   end,
     -- },
+    {
+      'yaocccc/nvim-hlchunk',
+    },
   },
   line = {
     -- { -- Show where your cursor moves when jumping large distances
@@ -169,6 +172,18 @@ modules.appearance = {
     },
     {
       'Bekaboo/deadcolumn.nvim',
+    },
+  },
+  mark = {
+    -- {
+    --   'chentoast/marks.nvim',
+    --   event = 'BufReadPost',
+    --   config = function()
+    --     require 'young.mod.marks'
+    --   end,
+    -- },
+    {
+      'yaocccc/vim-showmarks',
     },
   },
 }
@@ -498,13 +513,6 @@ modules.BWT = {
       event = 'BufRead',
       config = function()
         require 'young.mod.harpoon'
-      end,
-    },
-    {
-      'chentoast/marks.nvim',
-      event = 'BufReadPost',
-      config = function()
-        require 'young.mod.marks'
       end,
     },
     -- {
