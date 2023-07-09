@@ -38,36 +38,8 @@ navbuddy.setup {
       branch = ' ',
     },
   },
-  -- icons = {
-  --   File = '󰈙 ',
-  --   Module = ' ',
-  --   Namespace = '󰌗 ',
-  --   Package = ' ',
-  --   Class = '󰌗 ',
-  --   Method = '󰆧 ',
-  --   Property = ' ',
-  --   Field = ' ',
-  --   Constructor = ' ',
-  --   Enum = '󰕘',
-  --   Interface = '󰕘',
-  --   Function = '󰊕 ',
-  --   Variable = '󰆧 ',
-  --   Constant = '󰏿 ',
-  --   String = ' ',
-  --   Number = '󰎠 ',
-  --   Boolean = '◩ ',
-  --   Array = '󰅪 ',
-  --   Object = '󰅩 ',
-  --   Key = '󰌋 ',
-  --   Null = '󰟢 ',
-  --   EnumMember = ' ',
-  --   Struct = '󰌗 ',
-  --   Event = ' ',
-  --   Operator = '󰆕 ',
-  --   TypeParameter = '󰊄 ',
-  -- },
   lsp = {
-    auto_attach = true, -- If set to true, you don't need to manually use attach function
+    auto_attach = false, -- If set to true, you don't need to manually use attach function
     preference = nil, -- list of lsp server names in order of preference
   },
   source_buffer = {
@@ -76,4 +48,46 @@ navbuddy.setup {
     reorient = 'smart', -- "smart", "top", "mid" or "none"
     scrolloff = nil, -- scrolloff value when navbuddy is open
   },
+  -- icons = {
+  --   File          = "󰈙 ",
+  --   Module        = " ",
+  --   Namespace     = "󰌗 ",
+  --   Package       = " ",
+  --   Class         = "󰌗 ",
+  --   Method        = "󰆧 ",
+  --   Property      = " ",
+  --   Field         = " ",
+  --   Constructor   = " ",
+  --   Enum          = "󰕘",
+  --   Interface     = "󰕘",
+  --   Function      = "󰊕 ",
+  --   Variable      = "󰆧 ",
+  --   Constant      = "󰏿 ",
+  --   String        = " ",
+  --   Number        = "󰎠 ",
+  --   Boolean       = "◩ ",
+  --   Array         = "󰅪 ",
+  --   Object        = "󰅩 ",
+  --   Key           = "󰌋 ",
+  --   Null          = "󰟢 ",
+  --   EnumMember    = " ",
+  --   Struct        = "󰌗 ",
+  --   Event         = " ",
+  --   Operator      = "󰆕 ",
+  --   TypeParameter = "󰊄 ",
+  -- },
 }
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('_nabuddy', {}),
+  callback = function(ctx)
+    if not ctx.data then
+      return
+    end
+    local client = vim.lsp.get_client_by_id(ctx.data.client_id)
+    local bufnr = ctx.buf
+    if client.server_capabilities.documentSymbolProvider then
+      navbuddy.attach(client, bufnr)
+    end
+  end,
+})
