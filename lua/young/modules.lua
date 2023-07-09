@@ -1037,7 +1037,7 @@ modules.UI = {
     --   end,
     -- },
   },
-  other = {
+  scrollbar = {
     -- {
     --   'wfxr/minimap.vim',
     --   cmd = { 'MinimapToggle' },
@@ -1057,14 +1057,14 @@ modules.UI = {
       'petertriho/nvim-scrollbar',
       -- after = 'nvim-hlslens',
       event = 'VeryLazy',
-      config = function()
-        require('scrollbar').setup {
-          handlers = {
-            search = true, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
-          },
-        }
-      end,
+      auto = 'config',
     },
+    -- {
+    --   'lewis6991/satellite.nvim',
+    --   enabled = xy.has 'nvim-0.10',
+    --   event = 'VeryLazy',
+    --   auto = 'config',
+    -- },
   },
 }
 
