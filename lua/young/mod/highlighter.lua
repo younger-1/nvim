@@ -7,16 +7,16 @@ vim.cmd [[
 " let HiSetSL = 't<CR>'
 
 " jump key mappings
-nn <CR>     <Cmd>Hi><CR>
-nn g<CR>    <Cmd>Hi<<CR>
-nn [<CR>    <Cmd>Hi{<CR>
-nn ]<CR>    <Cmd>Hi}<CR>
+nn f<Left>     <Cmd>Hi><CR>
+nn f<Right>    <Cmd>Hi<<CR>
+nn f<Down>     <Cmd>Hi}<CR>
+nn f<Up>       <Cmd>Hi{<CR>
 
 " find key mappings
-" nn -        <Cmd>Hi/next<CR>
-" nn _        <Cmd>Hi/previous<CR>
-" nn f<Left>  <Cmd>Hi/older<CR>
-" nn f<Right> <Cmd>Hi/newer<CR>
+nn t<Left>     <Cmd>Hi/next<CR>
+nn t<Right>    <Cmd>Hi/previous<CR>
+nn t<Down>     <Cmd>Hi/older<CR>
+nn t<Up>       <Cmd>Hi/newer<CR>
 
 " command abbreviations
 ca HL Hi:load

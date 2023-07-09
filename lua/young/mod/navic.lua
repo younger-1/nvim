@@ -71,15 +71,18 @@ navic.setup {
 -- stylua: ignore end
 
 local function setup_winbar(client, bufnr)
-  -- local symbols_supported = client.supports_method 'textDocument/documentSymbol'
-  local status_ok, method_supported = pcall(function()
-    return client.supports_method 'textDocument/documentSymbol'
-  end)
+  -- local status_ok, method_supported = pcall(function()
+  --   return client.supports_method 'textDocument/documentSymbol'
+  -- end)
 
-  if not status_ok or not method_supported then
-    return
+  -- if not status_ok or not method_supported then
+  --   return
+  -- end
+  -- navic.attach(client, bufnr)
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
   end
-  navic.attach(client, bufnr)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
