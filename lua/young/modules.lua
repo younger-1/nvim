@@ -290,8 +290,8 @@ modules.edit = {
     event = 'BufWinEnter',
     -- cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
     init = function()
-      vim.g.splitjoin_join_mapping = 'gsj'
-      vim.g.splitjoin_split_mapping = 'gss'
+      vim.g.splitjoin_join_mapping = 'gmj'
+      vim.g.splitjoin_split_mapping = 'gms'
     end,
   },
 }
@@ -1327,6 +1327,15 @@ modules.LSP = {
       config = function()
         require('young.mod.lsp_lines').done()
       end,
+    },
+    {
+      'SmiteshP/nvim-navbuddy',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+      dependencies = {
+        'SmiteshP/nvim-navic',
+        'MunifTanjim/nui.nvim',
+      },
+      auto = 'config',
     },
   },
   highlight = {
