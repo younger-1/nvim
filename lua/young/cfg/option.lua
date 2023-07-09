@@ -129,6 +129,9 @@ end
 
 vim.opt.shortmess:append 'c'
 
+-- disable saving current directory with views
+vim.opt.viewoptions:remove "curdir"
+
 vim.opt.diffopt:append 'vertical'
 if xy.has '0.9' then
   vim.opt.diffopt:append 'linematch:60'

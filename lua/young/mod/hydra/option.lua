@@ -25,7 +25,7 @@ Hydra {
     },
   },
   mode = { 'n', 'x' },
-  body = '<leader>vv',
+  body = '<leader>vo',
   heads = {
     {
       'n',
