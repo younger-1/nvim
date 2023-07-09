@@ -1631,13 +1631,24 @@ modules.write = {
         vim.g.mkdp_open_to_the_world = 0
       end,
     },
-    -- {
-    --   'ellisonleao/glow.nvim',
-    --   config = function()
-    --     vim.g.glow_border = "rounded"
-    --     vim.g.glow_use_pager = true
-    --   end,
-    -- },
+    {
+      'ellisonleao/glow.nvim',
+      keys = {
+        -- Call :FeMaco or require('femaco.edit').edit_code_block() with your cursor on a code-block
+        { '<leader>ro', cmd 'Glow' },
+      },
+      config = function()
+        require('glow').setup {
+          glow_path = 'glow', -- will be filled automatically with your glow bin in $PATH, if any
+          border = 'shadow', -- floating window border config
+          pager = false,
+          -- width = 80,
+          -- height = 100,
+          width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+          height_ratio = 0.7,
+        }
+      end,
+    },
     {
       'crispgm/telescope-heading.nvim',
       ft = { 'markdown', 'norg', 'org', 'rst', 'help', 'asciidoc', 'tex' },
