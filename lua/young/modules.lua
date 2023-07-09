@@ -140,7 +140,7 @@ modules.appearance = {
     -- },
     {
       'gen740/SmoothCursor.nvim',
-      event = 'BufWinEnter',
+      event = 'VeryLazy',
       config = function()
         require 'young.mod.smooth_cursor'
       end,

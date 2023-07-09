@@ -115,6 +115,9 @@ require('scrollbar').setup {
     'noice',
     'prompt',
     'TelescopePrompt',
+    '', -- empty ft
+    'Navbuddy',
+    'neo-tree'
   },
   autocmd = {
     render = {
