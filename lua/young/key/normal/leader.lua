@@ -72,8 +72,8 @@ return {
   T = {
     name = '+treesitter',
     t = { cmd 'Telescope treesitter', 'Telescope' },
-    i = { cmd 'TSConfigInfo', 'Info' },
-    I = { cmd 'TSModuleInfo', 'Telescope' },
+    i = { cmd 'TSConfigInfo', 'Config' },
+    I = { cmd 'TSModuleInfo', 'Module' },
     --
     h = { cmd 'TSBufToggle highlight', 'Toggle highlight(Buffer)' },
     r = { cmd 'TSBufToggle rainbow', 'Toggle rainbow' },
@@ -364,7 +364,7 @@ return {
   q = { '<cmd>q!<cr>', 'Quit' },
   r = {
     name = '+replace',
-    f = { lua "require('spectre').open_file_search()", 'Replace buffer' },
+    b = { lua "require('spectre').open_file_search()", 'Replace buffer' },
     r = { lua "require('spectre').open()", 'Replace' },
     w = { lua "require('spectre').open_visual({select_word=true})", 'Replace word' },
   },
@@ -547,6 +547,10 @@ return {
     -- t = { cmd 'TransparentToggle', 'Transparent' },
     x = { cmd 'Hexmode', 'Hex mode' },
     u = { cmd 'UndotreeToggle', 'Undotree' },
+  },
+  v = {
+    name = '+vim',
+    v = { cmd 'Inspect', 'Inspect' },
   },
   -- w = { '<cmd>w!<cr>', 'Save' },
   w = { cmd 'update', 'Save' },

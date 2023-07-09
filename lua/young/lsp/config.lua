@@ -110,6 +110,9 @@ return {
         end,
         'Prev error',
       },
+      ['<leader>r'] = {
+        n = { vim.lsp.buf.rename, 'Rename' },
+      },
       ['<leader>l'] = {
         -- lsp goto
         -- d = { vim.lsp.buf.definition, 'Def' },
@@ -140,8 +143,8 @@ return {
           end,
           'Format',
         },
-        l = { vim.lsp.codelens.run, 'CodeLens action' },
-        r = { vim.lsp.buf.rename, 'Rename' },
+        r = { vim.lsp.codelens.run, 'Run CodeLens' },
+        v = { cmd 'Vista!!', 'Vista' },
         w = {
           name = '+workspace',
           w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
@@ -163,8 +166,6 @@ return {
         [']'] = { cmd 'Telescope lsp_outgoing_calls', 'Outgoing calls' },
         e = { cmd 'Telescope diagnostics bufnr=0', 'Diagnostics' },
         E = { cmd 'Telescope diagnostics', 'Diagnostics(All)' },
-        -- lsp action
-        v = { cmd 'Vista!!', 'Vista' },
         -- p = {
         --   name = '+peek',
         --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },

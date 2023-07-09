@@ -586,6 +586,20 @@ modules.file = {
         require 'young.mod.lir'
       end,
     },
+    {
+      'kelly-lin/ranger.nvim',
+      keys = {
+        {
+          '<leader>ef',
+          function()
+            require('ranger-nvim').open(true)
+          end,
+        },
+      },
+      config = function()
+        require('ranger-nvim').setup { replace_netrw = true }
+      end,
+    },
   },
   project = {
     {
@@ -657,6 +671,14 @@ modules.find = {
       config = function()
         require('young.mod.spectre').done()
       end,
+    },
+    {
+      'AckslD/muren.nvim',
+      keys = {
+        { '<leader>rm', cmd 'MurenToggle' },
+        { '<leader>rM', cmd 'MurenUnique' },
+      },
+      auto = 'config',
     },
   },
   fzf = {
@@ -857,9 +879,10 @@ modules.git = {
   -- },
   {
     -- 'ruifm/gitlinker.nvim',
-    'younger-1/gitlinker.nvim',
+    -- 'younger-1/gitlinker.nvim',
+    -- branch = 'up-to-0.8',
+    'linrongbin16/gitlinker.nvim',
     lazy = true,
-    branch = 'up-to-0.8',
     config = function()
       require('young.mod.gitlinker').done()
     end,
