@@ -110,6 +110,11 @@ modules.appearance = {
       cmd = 'TransparentToggle',
       auto = true,
     },
+    {
+      'azabiong/vim-highlighter',
+      event = 'VeryLazy',
+      auto = 'config',
+    }
   },
   indent = {
     {
@@ -362,9 +367,7 @@ modules.neovim = {
       'kevinhwang91/nvim-ufo',
       event = 'VeryLazy',
       dependencies = { 'kevinhwang91/promise-async' },
-      config = function()
-        require('young.mod.ufo').done()
-      end,
+      auto = true,
     },
   },
   { 'gpanders/editorconfig.nvim' },

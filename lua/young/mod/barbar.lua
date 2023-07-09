@@ -110,8 +110,6 @@ map { '<A-7>', '<Cmd>BufferGoto 7<CR>' }
 map { '<A-8>', '<Cmd>BufferGoto 8<CR>' }
 map { '<A-9>', '<Cmd>BufferGoto 9<CR>' }
 map { '<A-0>', '<Cmd>BufferLast<CR>' }
--- Pin/unpin buffer
-map { '<A-p>', '<Cmd>BufferPin<CR>' }
 -- Close buffer
 map { '<A-c>', '<Cmd>BufferClose<CR>' }
 map { '<A-s-c>', '<Cmd>BufferRestore<CR>' }
