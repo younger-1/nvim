@@ -204,6 +204,27 @@ modules.edit = {
       end,
     },
     {
+      'folke/flash.nvim',
+      keys = {
+        {
+          'gs',
+          function()
+            require('flash').jump()
+          end,
+          mode = { 'n', 'x', 'o' },
+          desc = 'Jump forwards',
+        },
+        {
+          'gS',
+          function()
+            require('flash').jump { search = { forward = false } }
+          end,
+          mode = { 'n', 'x', 'o' },
+          desc = 'Jump backwards',
+        },
+      },
+    },
+    {
       'andymass/vim-matchup',
       event = 'BufRead',
       auto = 'init',
@@ -866,15 +887,7 @@ modules.git = {
   },
 }
 
-modules.UI = {
-  {
-    'rcarriga/nvim-notify',
-    -- event = 'BufWinEnter',
-    event = 'VeryLazy',
-    config = function()
-      require('young.mod.notify').done()
-    end,
-  },
+modules.keymap = {
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -887,6 +900,52 @@ modules.UI = {
     event = 'VeryLazy',
     config = function()
       require 'young.mod.hydra'
+    end,
+  },
+  -- {
+  --   'yagiziskirik/AirSupport.nvim',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     xy.map.n { '<leader>tk', '<cmd>AirSupport<cr>' }
+  --   end,
+  --   dependencies = {
+  --     { 'nvim-telescope/telescope.nvim' },
+  --     { 'nvim-lua/plenary.nvim' },
+  --   },
+  -- },
+  -- {
+  --   'linty-org/key-menu.nvim',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require 'young.mod.key-menu'
+  --   end,
+  -- },
+  {
+    'mrjones2014/legendary.nvim',
+    -- version = 'v2.1.0',
+    -- legendary.nvim handles all your keymaps/commands, its recommended to load legendary.nvim before other plugins
+    priority = 10000,
+    lazy = false,
+    -- sqlite is only needed if you want to use frecency sorting
+    dependencies = { 'kkharji/sqlite.lua' },
+    keys = {
+      {
+        '<leader>/',
+        cmd 'Legendary',
+        mode = { 'n', 'x', 'o' },
+      },
+    },
+    auto = 'config',
+  },
+}
+
+modules.UI = {
+  {
+    'rcarriga/nvim-notify',
+    -- event = 'BufWinEnter',
+    event = 'VeryLazy',
+    config = function()
+      require('young.mod.notify').done()
     end,
   },
   {
@@ -1012,7 +1071,10 @@ modules.UI = {
     -- },
     {
       'eandrju/cellular-automaton.nvim',
-      cmd = 'CellularAutomaton',
+      -- cmd = 'CellularAutomaton',
+      keys = {
+        { '<leader><tab>', cmd 'CellularAutomaton make_it_rain', desc = 'Rain' },
+      },
       config = function()
         require 'young.mod.cellular'
       end,
@@ -1744,6 +1806,7 @@ return {
   modules.file(),
   modules.find(),
   modules.git(),
+  modules.keymap(),
   modules.lang { 'lua', 'python', 'lisp', 'java' },
   modules.neovim(),
   modules.telescope(),

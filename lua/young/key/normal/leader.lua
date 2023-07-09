@@ -10,7 +10,7 @@ return {
   -- ['-'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['='] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['<BS>'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  ['<Tab>'] = { '<cmd>CellularAutomaton make_it_rain<cr>', 'Rain' },
+  -- ['<Tab>'] = { '<cmd>CellularAutomaton make_it_rain<cr>', 'Rain' },
   ['<CR>'] = { '<cmd>mes<cr>', 'which_key_ignore' },
   -- ['['] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- [']'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -26,7 +26,7 @@ return {
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [','] = { cmd 'Telescope buffers', 'Buffers' },
   -- ['.'] = { cmd 'Telescope find_files layout_strategy=horizontal', 'Files' },
-  ['/'] = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
+  -- ['/'] = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
   ['?'] = {
     name = '+help',
     [' '] = { ':h api<cr>', 'Api' },
