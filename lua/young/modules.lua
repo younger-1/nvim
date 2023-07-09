@@ -122,6 +122,18 @@ modules.appearance = {
       event = 'VeryLazy',
       auto = true,
     },
+    -- {
+    --   'nvimdev/indentmini.nvim',
+    --   event = 'BufEnter',
+    --   config = function()
+    --     require('indentmini').setup {
+    --       char = '│',
+    --       exclude = {
+    --         'markdown',
+    --       },
+    --     }
+    --   end,
+    -- },
   },
   line = {
     -- { -- Show where your cursor moves when jumping large distances
@@ -1615,7 +1627,7 @@ modules.write = {
       ft = { 'markdown', 'norg', 'org' },
       keys = {
         -- Call :FeMaco or require('femaco.edit').edit_code_block() with your cursor on a code-block
-        { '<leader>re', cmd 'FeMaco' }
+        { '<leader>re', cmd 'FeMaco' },
       },
       auto = 'config',
     },
