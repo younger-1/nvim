@@ -7,8 +7,12 @@ end
 local Hydra = require 'hydra'
 -- rr('nvim-treesitter.configs').get_module('textobjects.move')
 local ts_move_cfg = require('young.mod.treesitter').cfg.textobjects.move
-local fts = require('young.mod.treesitter').cfg.ensure_installed
-local map = vim.keymap.set
+local fts = { 'c', 'lua', 'vim', 'vimdoc', 'query' }
+for _, ft in ipairs(require('young.mod.treesitter').cfg.ensure_installed) do
+  if not vim.tbl_contains(fts, ft) then
+    table.insert(fts, ft)
+  end
+end
 
 local key_prefix = 'g'
 
@@ -145,7 +149,7 @@ M.ts_init_hydra = Hydra {
 
 function M.setup_hydra(key, fn, query)
   local ts_hydra = ts_hydra_land[query]
-  map({ 'n', 'x' }, key, function()
+  vim.keymap.set({ 'n', 'x' }, key, function()
     ts_move[fn](query)
     ts_hydra:activate()
   end, { buffer = 0, desc = query })
@@ -166,9 +170,7 @@ local function setup(ctx)
   for goto_, keymaps in pairs(ts_move_cfg) do
     if vim.startswith(goto_, 'goto_') then
       for key, query in
-        pairs(
-          keymaps --[[@as table]]
-        )
+        pairs(keymaps --[[@as table]])
       do
         if fn.maparg(key) ~= '' then -- only set keymap when we have original mappings
           M.setup_hydra(key, goto_, query)

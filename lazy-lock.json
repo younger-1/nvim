@@ -155,6 +155,7 @@
   "vim-external": { "branch": "master", "commit": "acdf5df827c61311c8306649e595c02785a031f1" },
   "vim-flog": { "branch": "master", "commit": "72f80973021957741ceca35e488fce5b430faeea" },
   "vim-fugitive": { "branch": "master", "commit": "43f18ab9155c853a84ded560c6104e6300ad41da" },
+  "vim-highlighter": { "branch": "main", "commit": "756c0248d635f0d0bdfcbd2cb4585dfab434b24c" },
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
   "vim-jukit": { "branch": "master", "commit": "ae1629464f84f32a589467f9d1e3c9bc4b3bc90c" },
   "vim-matchup": { "branch": "master", "commit": "61cef7921ecbb412f341a6d1a7f9ad1ca55243de" },

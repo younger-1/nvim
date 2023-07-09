@@ -162,3 +162,8 @@ vim.keymap.set('x', '<A-k>', '<cmd>STSSwapPrevVisual<cr>', opts)
 --     'else_statement',
 --   }, true, { destination = 'children' })
 -- end, opts)
+
+-- Holds a node, or swaps the held node
+vim.keymap.set('n', 'gmh', '<cmd>STSSwapOrHold<cr>', opts)
+-- Same for visual
+vim.keymap.set('x', 'gmh', '<cmd>STSSwapOrHoldVisual<cr>', opts)
