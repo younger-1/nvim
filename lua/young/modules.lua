@@ -1610,6 +1610,15 @@ modules.write = {
       ft = { 'markdown', 'norg', 'org', 'rmd' },
       auto = 'config',
     },
+    {
+      'AckslD/nvim-FeMaco.lua',
+      ft = { 'markdown', 'norg', 'org' },
+      keys = {
+        -- Call :FeMaco or require('femaco.edit').edit_code_block() with your cursor on a code-block
+        { '<leader>re', cmd 'FeMaco' }
+      },
+      auto = 'config',
+    },
   },
   zen = {
     {
