@@ -146,6 +146,19 @@ modules.appearance = {
       end,
     },
   },
+  column = {
+    {
+      'lukas-reineke/virt-column.nvim',
+      config = function()
+        require('virt-column').setup {
+          char = '║',
+        }
+      end,
+    },
+    {
+      'Bekaboo/deadcolumn.nvim',
+    },
+  },
 }
 
 modules.edit = {
@@ -940,6 +953,10 @@ modules.UI = {
         require 'young.mod.navic'
       end,
     },
+    -- {
+    --   'Bekaboo/dropbar.nvim',
+    --   enabled = xy.has 'nvim-0.10',
+    -- },
   },
   statusline = {
     -- { 'glepnir/galaxyline.nvim', config = require('young.mod.galaxyline')}
