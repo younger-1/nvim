@@ -26,6 +26,7 @@ local cfg = {
     'neogitstatus',
     'NvimTree',
     'Trouble',
+    'markdown',
   },
   context_patterns = {
     'class',
