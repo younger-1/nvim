@@ -23,7 +23,7 @@ function M.done()
 
   tt()
   require('young.autocmd').done()
-  -- require('young.key').done()
+  require('young.key').done()
 
   -- local supported_languages = require "lvim.config.supported_languages"
   -- require("lvim.lsp.manager").init_defaults(supported_languages)
