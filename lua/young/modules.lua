@@ -114,7 +114,7 @@ modules.appearance = {
       'azabiong/vim-highlighter',
       event = 'VeryLazy',
       auto = 'config',
-    }
+    },
   },
   indent = {
     {
@@ -1509,6 +1509,13 @@ modules.write = {
   },
   { 'jbyuki/venn.nvim', cmd = 'VBox' },
   { 'jbyuki/nabla.nvim', lazy = true },
+  {
+    '3rd/image.nvim',
+    event = 'VeryLazy',
+    -- ft = { 'markdown', 'norg', 'org', 'rst', 'asciidoc', 'tex' },
+    auto = 'config',
+    -- enable = require
+  },
 }
 
 modules.tool = {
