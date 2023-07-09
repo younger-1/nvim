@@ -1396,6 +1396,15 @@ modules.LSP = {
       auto = true,
     },
     {
+      'SmiteshP/nvim-navbuddy',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+      dependencies = {
+        'SmiteshP/nvim-navic',
+        'MunifTanjim/nui.nvim',
+      },
+      auto = 'config',
+    },
+    {
       'weilbith/nvim-code-action-menu',
       cmd = 'CodeActionMenu',
       init = function()
@@ -1426,13 +1435,24 @@ modules.LSP = {
       end,
     },
     {
-      'SmiteshP/nvim-navbuddy',
+      'VidocqH/lsp-lens.nvim',
       event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
-      dependencies = {
-        'SmiteshP/nvim-navic',
-        'MunifTanjim/nui.nvim',
+      keys = {
+        { '<leader>tL', cmd 'LspLensToggle' },
       },
-      auto = 'config',
+      config = function()
+        require('lsp-lens').setup {
+          include_declaration = false, -- Reference include declaration
+          sections = { -- Enable / Disable specific request
+            definition = false,
+            references = true,
+            implementation = true,
+          },
+          ignore_filetype = {
+            'prisma',
+          },
+        }
+      end,
     },
   },
   highlight = {
