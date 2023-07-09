@@ -46,6 +46,7 @@ local default_options = {
   shiftwidth = 2, -- the number of spaces inserted for each indentation
   smarttab = true,
   cursorline = true, -- highlight the current line
+  colorcolumn = { 80 },
   number = true, -- set numbered lines
   relativenumber = false, -- set relative numbered lines
   numberwidth = 4, -- set number column width to 2 {default 4}
