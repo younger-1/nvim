@@ -1,3 +1,4 @@
+local vim = vim
 local cmd = require('young.key').cmd
 local lua = require('young.key').lua
 
@@ -551,6 +552,7 @@ return {
   v = {
     name = '+vim',
     v = { cmd 'Inspect', 'Inspect' },
+    t = { cmd 'InspectTree', 'Inspect tree' },
   },
   -- w = { '<cmd>w!<cr>', 'Save' },
   w = { cmd 'update', 'Save' },

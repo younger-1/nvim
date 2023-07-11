@@ -173,10 +173,12 @@ M.cfg = {
   },
   -- mapping = cmapping.preset.insert {
   mapping = {
-    ['<C-j>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
-    ['<C-k>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i', 'c' }),
-    ['<C-n>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
-    ['<C-p>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+    ['<C-j>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+    ['<C-k>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+    ['<C-n>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+    ['<C-p>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+    ['<Down>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+    ['<Up>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
     --
     ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
     ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
