@@ -233,11 +233,15 @@ M.cfg = {
         return true
       end
 
-      local max_filesize = 100 * 1024 -- 100 KB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
+      -- local max_filesize = 800 * 1024 -- 800 KB
+      -- local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+      -- if ok and stats and stats.size > max_filesize then
+      --   return true
+      -- end
+
+      -- bigfile.nvim
+      -- local status_ok, big_file_detected = pcall(vim.api.nvim_buf_get_var, buf, 'bigfile_disable_treesitter')
+      -- return status_ok and big_file_detected
     end,
     -- Required for spellcheck, some LaTex highlights and code block highlights that do not have ts grammar
     additional_vim_regex_highlighting = { 'org' },
