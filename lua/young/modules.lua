@@ -1,3 +1,4 @@
+local vim = vim
 local cmd = require('young.key').cmd
 
 local modules = {}
@@ -517,6 +518,15 @@ modules.neovim = {
       }
     end,
   },
+  {
+    'ecthelionvi/NeoComposer.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'kkharji/sqlite.lua' },
+    keys = {
+      xy.map.n { '<leader>s2', '<cmd>Telescope macros<cr>' },
+    },
+    auto = 'config',
+  },
 }
 
 modules.BWT = {
@@ -539,6 +549,7 @@ modules.BWT = {
   window = {
     {
       'luukvbaal/stabilize.nvim',
+      enabled = not xy.has 'nvim-0.9',
       config = function()
         require('stabilize').setup {}
       end,
@@ -755,6 +766,9 @@ modules.telescope = {
   --   'nvim-telescope/telescope-fzf-native.nvim',
   --   build = 'make',
   --   build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+  --   config = function()
+  --     require('telescope').load_extension 'fzf'
+  --   end,
   -- },
   {
     'natecraddock/telescope-zf-native.nvim',
@@ -1698,7 +1712,6 @@ modules.write = {
     event = 'VeryLazy',
     -- ft = { 'markdown', 'norg', 'org', 'rst', 'asciidoc', 'tex' },
     auto = 'config',
-    -- enable = require
   },
 }
 
