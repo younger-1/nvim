@@ -135,17 +135,17 @@ map { '<A-s-c>', '<Cmd>BufferRestore<CR>' }
 
 local cmd = require('young.key').cmd
 xy.map.register {
+  ['<BS>'] = {
+    function()
+      if vim.v.count >= 1 then
+        vim.cmd('BufferGoto ' .. vim.v.count)
+      else
+        vim.cmd 'b#'
+      end
+    end,
+    'Buffer Goto',
+  },
   ['<leader>b'] = {
-    b = {
-      function()
-        if vim.v.count >= 1 then
-          vim.cmd('BufferGoto ' .. vim.v.count)
-        else
-          vim.cmd 'b#'
-        end
-      end,
-      'Goto',
-    },
     ['1'] = { cmd 'BufferGoto 1', 'Goto 1' },
     ['2'] = { cmd 'BufferGoto 2', 'Goto 2' },
     ['3'] = { cmd 'BufferGoto 3', 'Goto 3' },
@@ -183,9 +183,12 @@ xy.map.register {
     q = { cmd 'BufferPickDelete', 'Pick delete' },
     p = { cmd 'BufferPin', 'Pin' },
     --
-    B = { cmd 'BufferOrderByBufferNumber', 'Sort by bufNr' },
-    W = { cmd 'BufferOrderByWindowNumber', 'Sort by windowNr' },
-    D = { cmd 'BufferOrderByDirectory', 'Sort by directory' },
-    L = { cmd 'BufferOrderByLanguage', 'Sort by language' },
+    s = {
+      name = '+sort',
+      b = { cmd 'BufferOrderByBufferNumber', 'Sort by bufNr' },
+      w = { cmd 'BufferOrderByWindowNumber', 'Sort by windowNr' },
+      d = { cmd 'BufferOrderByDirectory', 'Sort by directory' },
+      l = { cmd 'BufferOrderByLanguage', 'Sort by language' },
+    },
   },
 }
