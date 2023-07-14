@@ -365,7 +365,7 @@ modules.change = {
       -- event = 'BufRead',
       -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
       keys = {
-        { 'gc', mode = { 'n', 'x' } },
+        { 'gc', mode = { 'n', 'x' }, desc = 'Comment' },
       },
       config = function()
         require 'young.mod.comment'
@@ -518,15 +518,12 @@ modules.neovim = {
       }
     end,
   },
-  {
-    'ecthelionvi/NeoComposer.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'kkharji/sqlite.lua' },
-    keys = {
-      xy.map.n { '<leader>s2', '<cmd>Telescope macros<cr>' },
-    },
-    auto = 'config',
-  },
+  -- {
+  --   'ecthelionvi/NeoComposer.nvim',
+  --   event = 'VeryLazy',
+  --   dependencies = { 'kkharji/sqlite.lua' },
+  --   auto = 'config',
+  -- },
 }
 
 modules.BWT = {
@@ -638,6 +635,7 @@ modules.file = {
           function()
             require('ranger-nvim').open(true)
           end,
+          desc = 'Ranger',
         },
       },
       config = function()
@@ -852,6 +850,19 @@ modules.telescope = {
         require('telescope').load_extension 'zoxide'
         require('telescope._extensions.zoxide.config').setup {
           prompt_title = '[ Z⏫ ]',
+        }
+      end,
+    },
+    {
+      'LukasPietzschmann/telescope-tabs',
+      keys = {
+        { '<leader>sw', cmd 'Telescope telescope-tabs list_tabs', desc = 'Tabs' },
+        { 'g<BS>', cmd 'lua require("telescope-tabs").go_to_previous()', desc = 'Tab Goto' },
+      },
+      config = function()
+        require('telescope-tabs').setup {
+          close_tab_shortcut_i = '<C-d>', -- if you're in insert mode
+          close_tab_shortcut_n = 'D', -- if you're in normal mode
         }
       end,
     },

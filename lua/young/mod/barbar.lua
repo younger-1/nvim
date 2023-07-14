@@ -88,8 +88,8 @@ require('barbar').setup {
 }
 
 local map = xy.map.n
-map { '<S-l>', '<cmd>BufferNext<CR>' }
-map { '<S-h>', '<cmd>BufferPrevious<CR>' }
+-- map { '<S-l>', '<cmd>BufferNext<CR>' }
+-- map { '<S-h>', '<cmd>BufferPrevious<CR>' }
 -- vim.api.nvim_set_keymap('n', '<TAB>', ':BufferNext<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferPrevious<CR>', { noremap = true, silent = true })
 

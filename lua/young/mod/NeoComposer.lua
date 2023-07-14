@@ -1,3 +1,5 @@
+xy.map.n { '<leader>s2', '<cmd>Telescope macros<cr>' }
+
 require('telescope').load_extension 'macros'
 require('NeoComposer').setup {
   -- notify = true,
