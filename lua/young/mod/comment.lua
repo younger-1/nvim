@@ -10,20 +10,12 @@ if loaded and ts_comment then
 end
 
 require('Comment').setup {
-  ---Add a space b/w comment and the line
-  ---@type boolean
-  padding = true,
-
-  ---Whether cursor should stay at the
-  ---same position. Only works in NORMAL
-  ---mode mappings
-  sticky = true,
-
   ---Lines to be ignored while comment/uncomment.
   ---Could be a regex string or a function that returns a regex string.
   ---Example: Use '^$' to ignore empty lines
   ---@type string|function
-  ignore = '^$',
+  ignore = nil,
+  -- ignore = '^$',
 
   ---Whether to create basic (operator-pending) and extra mappings for NORMAL/VISUAL mode
   ---@type table
@@ -37,24 +29,22 @@ require('Comment').setup {
     extra = true,
   },
 
-  ---LHS of line and block comment toggle mapping in NORMAL/VISUAL mode
+  ---LHS of toggle mappings in NORMAL mode
   ---@type table
   toggler = {
     ---line-comment toggle
     line = 'gcc',
     ---block-comment toggle
-    block = 'gbc',
-    -- block = 'gCC',
+    block = 'gcl',
   },
 
-  ---LHS of line and block comment operator-mode mapping in NORMAL/VISUAL mode
+  ---LHS of operator-pending mappings in NORMAL and VISUAL mode
   ---@type table
   opleader = {
     ---line-comment opfunc mapping
     line = 'gc',
     ---block-comment opfunc mapping
-    block = 'gb',
-    -- block = 'gC',
+    block = 'gcm',
   },
 
   ---LHS of extra mappings
