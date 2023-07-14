@@ -118,13 +118,6 @@ return {
     v = { cmd 'OpenInVSCode', 'Open in vscode' },
   },
   b = {
-    name = '+buffers',
-    s = {
-      f = { cmd 'Telescope find_files cwd=%:p:h', 'Find files' },
-      g = { cmd 'Telescope live_grep cwd=%:p:h', 'Grep' },
-      t = { cmd 'Telescope grep_string cwd=%:p:h', 'Text under cursor' },
-    },
-    --
     T = { ':TablineCustom ', 'Tabline++' },
     a = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
     u = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
@@ -135,6 +128,14 @@ return {
   -- c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
   d = {
     name = '+debug',
+    s = {
+      name = '+telescope',
+      [' '] = { cmd 'Telescope dap configurations', 'Dap configurations' },
+      c = { cmd 'Telescope dap commands', 'Dap commands' },
+      l = { cmd 'Telescope dap list_breakpoints', 'Dap list_breakpoints' },
+      v = { cmd 'Telescope dap variables', 'Dap variables' },
+      f = { cmd 'Telescope dap frames', 'Dap frames' },
+    },
     [' '] = { lua "require'dapui'.toggle()", ' UI' },
     ['<tab>'] = '+lang',
     f = {
@@ -151,7 +152,7 @@ return {
 
     L = { cmd 'DapShowLog', 'Show log' },
 
-    s = { lua "require'dap'.continue()", ' Start' },
+    -- s = { lua "require'dap'.continue()", ' Start' },
     c = { lua "require'dap'.continue()", ' Continue' },
     a = { lua "require'dap'.run_to_cursor()", '省 Run to cursor' },
     x = { lua "require'dap'.run_last()", ' Run last' },
@@ -444,12 +445,10 @@ return {
     },
     C = { cmd 'Telescope commands', 'Commands' },
     d = {
-      name = '+dap',
-      [' '] = { cmd 'Telescope dap configurations', 'Dap configurations' },
-      c = { cmd 'Telescope dap commands', 'Dap commands' },
-      l = { cmd 'Telescope dap list_breakpoints', 'Dap list_breakpoints' },
-      v = { cmd 'Telescope dap variables', 'Dap variables' },
-      f = { cmd 'Telescope dap frames', 'Dap frames' },
+      name = '+dir',
+      f = { cmd 'Telescope find_files cwd=%:p:h', 'Find files' },
+      g = { cmd 'Telescope live_grep cwd=%:p:h', 'Grep' },
+      t = { cmd 'Telescope grep_string cwd=%:p:h', 'Text under cursor' },
     },
     e = { cmd 'Telescope env', 'Env' },
     f = { cmd 'Telescope find_files', 'Find files' },
