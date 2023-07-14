@@ -20,7 +20,7 @@ noremap <C-i> <C-i>
 map <Tab> %
 map <S-Tab> g%
 
-noremap g<Tab> <C-i>
+noremap <localleader><Tab> <C-i>
 
 " https://stackoverflow.com/questions/15636173/what-do-and-do-in-vim
 " map [[ ?{<CR>w99[{
