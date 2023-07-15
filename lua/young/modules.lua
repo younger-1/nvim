@@ -1666,6 +1666,51 @@ modules.lang = {
       end,
     },
   },
+  sql = {
+    {
+      'tpope/vim-dadbod',
+      cmd = { 'DB', 'DBUI' },
+      keys = {
+        { '<leader>td', cmd 'DBUI' },
+      },
+      dependencies = {
+        {
+          'kristijanhusak/vim-dadbod-ui',
+          init = function()
+            vim.cmd [[
+            let g:db_ui_show_database_icon = 1
+            let g:db_ui_use_nerd_fonts = 1
+            " let g:db_ui_debug = 1
+            " let g:db_ui_force_echo_notifications = 1
+            ]]
+          end,
+          config = function()
+            -- Just make sure to NOT COMMIT these. I suggest using project local vim config (:help exrc)
+            vim.g.dbs = {
+              local_mysql = 'mysql://root@localhost/',
+              -- local_postgres = 'postgres://' .. vim.env.USER .. '@localhost',
+              local_postgres = 'postgres:postgres',
+              local_postgres_template1 = 'postgres:template1',
+              local_postgres_user = 'postgres:' .. vim.env.USER,
+              -- dev = 'postgres://postgres:mypassword@localhost:5432/my-dev-db',
+            }
+          end,
+        },
+        {
+          'kristijanhusak/vim-dadbod-completion',
+          config = function()
+            -- Currently works for PostgreSQL, MySQL, Oracle, SQLite and SQLserver/MSSQL
+            vim.cmd [[
+            " For built in omnifunc
+            " autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+            " For hrsh7th/nvim-cmp
+            autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+            ]]
+          end,
+        },
+      },
+    },
+  },
 }
 
 modules.write = {
@@ -1969,7 +2014,7 @@ return {
   modules.find(),
   modules.git(),
   modules.keymap(),
-  modules.lang { 'lua', 'python', 'lisp', 'java' },
+  modules.lang { 'lua', 'python', 'lisp', 'java', 'sql' },
   modules.neovim(),
   modules.telescope(),
   modules.theme(),
