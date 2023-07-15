@@ -1,4 +1,5 @@
 local vim = vim
+local xy = xy
 local cmd = require('young.key').cmd
 
 local modules = {}
@@ -336,8 +337,12 @@ modules.edit = {
   },
   {
     'AndrewRadev/splitjoin.vim',
-    event = 'BufWinEnter',
-    -- cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
+    -- event = 'BufWinEnter',
+    cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
+    keys = {
+      { 'gmj', desc = 'Join expr' },
+      { 'gms', desc = 'Split expr' },
+    },
     init = function()
       vim.g.splitjoin_join_mapping = 'gmj'
       vim.g.splitjoin_split_mapping = 'gms'
@@ -651,6 +656,8 @@ modules.file = {
       event = 'VeryLazy',
       config = function()
         require 'young.mod.project'
+        xy.map.n { '<leader>sp',cmd 'Telescope projects', 'Projects' }
+        -- xy.map.n { '<leader>pp',cmd 'Telescope projects', 'Projects' }
       end,
     },
     -- {
@@ -825,7 +832,7 @@ modules.telescope = {
       event = 'VeryLazy',
       config = function()
         require('telescope').load_extension 'lazy'
-        vim.keymap.set('n', '<leader>ps', '<Cmd>Telescope lazy<CR>', { silent = true, desc = 'Open plugins' })
+        vim.keymap.set('n', '<leader>sl', '<Cmd>Telescope lazy<CR>', { silent = true, desc = 'Open plugins' })
       end,
     },
     {
@@ -1007,8 +1014,6 @@ modules.keymap = {
     -- legendary.nvim handles all your keymaps/commands, its recommended to load legendary.nvim before other plugins
     priority = 10000,
     lazy = false,
-    -- sqlite is only needed if you want to use frecency sorting
-    dependencies = { 'kkharji/sqlite.lua' },
     keys = {
       {
         '<leader>/',
@@ -1154,7 +1159,7 @@ modules.UI = {
       'eandrju/cellular-automaton.nvim',
       -- cmd = 'CellularAutomaton',
       keys = {
-        { '<leader><tab>', cmd 'CellularAutomaton make_it_rain', desc = 'Rain' },
+        { '<leader>t<tab>', cmd 'CellularAutomaton make_it_rain', desc = 'Rain' },
       },
       config = function()
         require 'young.mod.cellular'
@@ -1165,8 +1170,10 @@ modules.UI = {
     {
       'simrat39/symbols-outline.nvim',
       cmd = 'SymbolsOutline',
+      -- keys = { { '<leader>to', cmd 'SymbolsOutline' } },
       init = function()
-        xy.map.n { '<leader>so', '<cmd>SymbolsOutline<cr>' }
+        -- xy.map.n { '<leader>to', '<cmd>SymbolsOutline<cr>' }
+        xy.map.n { '<leader><tab>', '<cmd>SymbolsOutline<cr>' }
       end,
       config = function()
         require 'young.mod.symbols_outline'
@@ -1214,9 +1221,9 @@ modules.UI = {
 modules.code = {
   jump = {
     {
-      -- 'pechorin/any-jump.vim',
-      'younger-1/any-jump.vim',
-      branch = 'remove-pics',
+      'pechorin/any-jump.vim',
+      -- 'younger-1/any-jump.vim',
+      -- branch = 'remove-pics',
       cmd = { 'AnyJump', 'AnyJumpVisual', 'AnyJumpArg' },
       auto = 'init',
     },
