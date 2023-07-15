@@ -353,7 +353,17 @@ modules.edit = {
 modules.change = {
   { 'tpope/vim-surround' },
   { 'tpope/vim-repeat' },
-  { 'tpope/vim-abolish' },
+  {
+    'tpope/vim-abolish',
+    keys = {
+      { 'crs', desc = 'snake_case' },
+      { 'crm', desc = 'MixedCase' },
+      { 'crc', desc = 'camelCase' },
+      { 'cru', desc = 'UPPER_CASE' },
+      { 'cr-', desc = 'dash-case' },
+      { 'cr.', desc = 'dot.case' },
+    },
+  },
   pair = {
     {
       'windwp/nvim-autopairs',
@@ -656,7 +666,7 @@ modules.file = {
       event = 'VeryLazy',
       config = function()
         require 'young.mod.project'
-        xy.map.n { '<leader>sp',cmd 'Telescope projects', 'Projects' }
+        xy.map.n { '<leader>sp', cmd 'Telescope projects', 'Projects' }
         -- xy.map.n { '<leader>pp',cmd 'Telescope projects', 'Projects' }
       end,
     },
@@ -1355,7 +1365,32 @@ modules.code = {
     },
   },
   task = {
-    -- { 'tpope/vim-dispatch' },
+    {
+      'tpope/vim-dispatch',
+      -- :h dispatch-maps
+      -- These can be disabled with: let g:dispatch_no_maps = 1
+      keys = {
+        { 'm<CR>', desc = 'Make' },
+        { 'm<Space>', desc = 'Make...' },
+        { 'm!', desc = 'Make!' },
+        { 'm?', desc = 'Show makeprg' },
+        --
+        { '`<CR>', desc = 'Dispatch' },
+        { '`<Space>', desc = 'Dispatch...' },
+        { '`!', desc = 'Dispatch!' },
+        { '`?', desc = 'Show Dispatch' },
+        --
+        { "'<CR>", desc = 'Start' },
+        { "'<Space>", desc = 'Start...' },
+        { "'!", desc = 'Start!' },
+        { "'?", desc = 'Show b:start' },
+        --
+        { "g'<CR>", desc = 'Spawn' },
+        { "g'<Space>", desc = 'Spawn...' },
+        { "g'!", desc = 'Spawn!' },
+        { "g'?", desc = 'Show shell' },
+      },
+    },
     -- { 'pianocomposer321/yabs.nvim', config = require 'young.mod.yabs' },
     -- {
     --   'skywind3000/asynctasks.vim',
