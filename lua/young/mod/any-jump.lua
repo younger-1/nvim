@@ -74,5 +74,5 @@
 -- nnoremap <leader>al :AnyJumpLastResults<CR>
 vim.g.any_jump_disable_default_keybindings = 1
 
-xy.map.n { 'go', ':AnyJump<cr>' }
+xy.map.n { 'go', '<cmd>AnyJump<cr>' }
 xy.map.x { 'go', ':AnyJumpVisual<cr>' }

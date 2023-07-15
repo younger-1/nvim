@@ -140,7 +140,7 @@ xy.map.register {
       if vim.v.count >= 1 then
         vim.cmd('BufferGoto ' .. vim.v.count)
       else
-        vim.cmd 'b#'
+        vim.cmd 'silent! b#'
       end
     end,
     'Buffer Goto',
@@ -170,6 +170,8 @@ xy.map.register {
       'Move next',
     },
     --
+    f = { cmd 'Telescope buffers', 'Buffers' },
+    --
     c = { cmd 'BufferClose!', 'Close' },
     C = { cmd 'BufferRestore', 'Restore' },
     d = { cmd 'BufferWipeout!', 'Delete' },
@@ -184,7 +186,6 @@ xy.map.register {
     p = { cmd 'BufferPin', 'Pin' },
     --
     s = {
-      name = '+sort',
       b = { cmd 'BufferOrderByBufferNumber', 'Sort by bufNr' },
       w = { cmd 'BufferOrderByWindowNumber', 'Sort by windowNr' },
       d = { cmd 'BufferOrderByDirectory', 'Sort by directory' },
