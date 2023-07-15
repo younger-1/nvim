@@ -181,6 +181,24 @@ modules.appearance = {
     {
       'chentoast/marks.nvim',
       event = 'BufReadPost',
+      -- :MarksToggleSigns[ buffer] Toggle signs globally. Also accepts an optional buffer number to toggle signs for that buffer only.
+      -- :MarksListBuf Fill the location list with all marks in the current buffer.
+      -- :MarksListGlobal Fill the location list with all global marks in open buffers.
+      -- :MarksListAll Fill the location list with all marks in all open buffers.
+      -- :BookmarksList group_number Fill the location list with all bookmarks of group "group_number".
+      -- :BookmarksListAll Fill the location list with all bookmarks, across all groups.
+      keys = {
+        { '<leader>mn', '<Plug>(Marks-next-bookmark)' },
+        { '<leader>mp', '<Plug>(Marks-prev-bookmark)' },
+        --
+        { '<leader>mt', cmd 'MarksToggleSigns' },
+        { '<leader>mb', cmd 'MarksListBuf' },
+        { '<leader>mg', cmd 'MarksListGlobal' },
+        { '<leader>ma', cmd 'MarksListAll' },
+        --
+        { '<leader>mL', ':BookmarksList ' },
+        { '<leader>ml', cmd 'BookmarksListAll' },
+      },
       config = function()
         require 'young.mod.marks'
       end,
