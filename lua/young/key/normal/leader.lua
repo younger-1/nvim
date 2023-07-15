@@ -121,12 +121,12 @@ return {
     s = {
       name = '+sort',
     },
+    A = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
+    U = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
+    B = { ':TablineBuffersBind ', 'Tabline bound' },
+    R = { ':TablineTabRename ', 'Tabline rename' },
+    N = { ':TablineTabNew ', 'Tabline new' },
     T = { ':TablineCustom ', 'Tabline++' },
-    a = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
-    u = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
-    m = { ':TablineBuffersBind ', 'Tabline bound' },
-    r = { ':TablineTabRename ', 'Tabline rename' },
-    t = { ':TablineTabNew ', 'Tabline new' },
   },
   -- c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
   d = {
@@ -348,6 +348,9 @@ return {
     F = { cmd 'Neogen file', 'File' },
     c = { cmd 'Neogen class', 'Class' },
     t = { cmd 'Neogen type', 'Type' },
+  },
+  m = {
+    name = '+mark',
   },
   o = {
     name = '+open',
