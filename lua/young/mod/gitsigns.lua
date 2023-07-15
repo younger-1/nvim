@@ -94,7 +94,6 @@ M.cfg = {
   --   internal = true,
   -- },
   watch_gitdir = {
-    interval = 1000,
     follow_files = true,
   },
   attach_to_untracked = true,

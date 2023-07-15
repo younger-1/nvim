@@ -138,6 +138,7 @@ modules.appearance = {
     -- },
     {
       'yaocccc/nvim-hlchunk',
+      event = 'VeryLazy',
     },
   },
   line = {
@@ -177,16 +178,17 @@ modules.appearance = {
     },
   },
   mark = {
-    -- {
-    --   'chentoast/marks.nvim',
-    --   event = 'BufReadPost',
-    --   config = function()
-    --     require 'young.mod.marks'
-    --   end,
-    -- },
     {
-      'yaocccc/vim-showmarks',
+      'chentoast/marks.nvim',
+      event = 'BufReadPost',
+      config = function()
+        require 'young.mod.marks'
+      end,
     },
+    -- {
+    --   'yaocccc/vim-showmarks',
+    --    event = 'VeryLazy',
+    -- },
   },
 }
 
@@ -1693,6 +1695,9 @@ modules.lang = {
               local_postgres_template1 = 'postgres:template1',
               local_postgres_user = 'postgres:' .. vim.env.USER,
               -- dev = 'postgres://postgres:mypassword@localhost:5432/my-dev-db',
+              local_clickhouse = 'clickhouse:',
+              -- local_clickhouse_default = 'clickhouse:default',
+              local_clickhouse_system = 'clickhouse:system',
             }
           end,
         },
