@@ -3,6 +3,7 @@ local cmd = require('young.key').cmd
 local normal = {
   ['\\'] = {
     -- c = { cmd 'BufferClose!', 'Close buffer' },
+    w = { cmd 'w', 'Write' },
     s = { cmd '.so', 'Source line' },
     d = { cmd 'DiffOrig', 'Show unsaved' },
   },
