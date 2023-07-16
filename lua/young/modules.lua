@@ -463,7 +463,8 @@ modules.neovim = {
   },
   mark = {
     -- {
-    --   'MattesGroeger/vim-bookmarks',
+    --   'yaocccc/vim-showmarks',
+    --    event = 'VeryLazy',
     -- },
     { -- FEAT: save bookmarks
       'chentoast/marks.nvim',
@@ -491,14 +492,12 @@ modules.neovim = {
       end,
     },
     -- {
-    --   'yaocccc/vim-showmarks',
-    --    event = 'VeryLazy',
-    -- },
-    -- {
-    --   'dhruvmanila/telescope-bookmarks.nvim',
-    --   dependencies = { 'kkharji/sqlite.lua' },
+    --   'tomasky/bookmarks.nvim',
+    --   event = 'BufReadPost',
     --   config = function()
+    --     xy.map.n { '<leader>bm', cmd 'Telescope bookmarks list' }
     --     require('telescope').load_extension 'bookmarks'
+    --     require('bookmarks').setup()
     --   end,
     -- },
   },
@@ -1865,6 +1864,29 @@ modules.tool = {
     {
       'axieax/urlview.nvim',
       lazy = true,
+    },
+    {
+      'dhruvmanila/browser-bookmarks.nvim',
+      -- event = 'VeryLazy',
+      cmd = 'BrowserBookmarks',
+      dependencies = {
+        -- Only if your selected browser is Firefox, Waterfox or buku
+        'kkharji/sqlite.lua',
+        -- Only if you're using the Telescope extension
+        'nvim-telescope/telescope.nvim',
+      },
+      init = function()
+        xy.map.n { '<leader>ab', cmd 'BrowserBookmarks' }
+        xy.map.n { '<leader>aB', ':BrowserBookmarks ' }
+      end,
+      config = function()
+        -- require('telescope').load_extension 'bookmarks'
+        require('browser_bookmarks').setup {
+          selected_browser = 'chrome',
+          url_open_command = xy.open_cmd,
+          -- url_open_plugin = 'external_browser',
+        }
+      end,
     },
   },
   website = {
