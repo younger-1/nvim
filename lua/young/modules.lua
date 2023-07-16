@@ -177,37 +177,6 @@ modules.appearance = {
       'Bekaboo/deadcolumn.nvim',
     },
   },
-  mark = {
-    {
-      'chentoast/marks.nvim',
-      event = 'BufReadPost',
-      -- :MarksToggleSigns[ buffer] Toggle signs globally. Also accepts an optional buffer number to toggle signs for that buffer only.
-      -- :MarksListBuf Fill the location list with all marks in the current buffer.
-      -- :MarksListGlobal Fill the location list with all global marks in open buffers.
-      -- :MarksListAll Fill the location list with all marks in all open buffers.
-      -- :BookmarksList group_number Fill the location list with all bookmarks of group "group_number".
-      -- :BookmarksListAll Fill the location list with all bookmarks, across all groups.
-      keys = {
-        { '<leader>mn', '<Plug>(Marks-next-bookmark)' },
-        { '<leader>mp', '<Plug>(Marks-prev-bookmark)' },
-        --
-        { '<leader>mt', cmd 'MarksToggleSigns' },
-        { '<leader>mb', cmd 'MarksListBuf' },
-        { '<leader>mg', cmd 'MarksListGlobal' },
-        { '<leader>ma', cmd 'MarksListAll' },
-        --
-        { '<leader>mL', ':BookmarksList ' },
-        { '<leader>ml', cmd 'BookmarksListAll' },
-      },
-      config = function()
-        require 'young.mod.marks'
-      end,
-    },
-    -- {
-    --   'yaocccc/vim-showmarks',
-    --    event = 'VeryLazy',
-    -- },
-  },
 }
 
 modules.edit = {
@@ -467,7 +436,76 @@ modules.neovim = {
       auto = true,
     },
   },
-  { 'gpanders/editorconfig.nvim' },
+  register = {
+    {
+      'gbprod/yanky.nvim',
+      dependencies = { 'kkharji/sqlite.lua' },
+      event = 'BufRead',
+      config = function()
+        require 'young.mod.yanky'
+      end,
+    },
+    {
+      'AckslD/nvim-neoclip.lua',
+      event = 'BufRead',
+      dependencies = { 'kkharji/sqlite.lua' },
+      config = function()
+        require 'young.mod.neoclip'
+      end,
+    },
+    {
+      'ojroques/nvim-osc52',
+      event = 'BufRead',
+      config = function()
+        require 'young.mod.osc52'
+      end,
+    },
+  },
+  mark = {
+    -- {
+    --   'MattesGroeger/vim-bookmarks',
+    -- },
+    { -- FEAT: save bookmarks
+      'chentoast/marks.nvim',
+      event = 'BufReadPost',
+      -- :MarksToggleSigns[ buffer] Toggle signs globally. Also accepts an optional buffer number to toggle signs for that buffer only.
+      -- :MarksListBuf Fill the location list with all marks in the current buffer.
+      -- :MarksListGlobal Fill the location list with all global marks in open buffers.
+      -- :MarksListAll Fill the location list with all marks in all open buffers.
+      -- :BookmarksList group_number Fill the location list with all bookmarks of group "group_number".
+      -- :BookmarksListAll Fill the location list with all bookmarks, across all groups.
+      keys = {
+        { '<leader>mn', '<Plug>(Marks-next-bookmark)' },
+        { '<leader>mp', '<Plug>(Marks-prev-bookmark)' },
+        --
+        { '<leader>mt', cmd 'MarksToggleSigns' },
+        { '<leader>mb', cmd 'MarksListBuf' },
+        { '<leader>mg', cmd 'MarksListGlobal' },
+        { '<leader>ma', cmd 'MarksListAll' },
+        --
+        { '<leader>mL', ':BookmarksList ' },
+        { '<leader>ml', cmd 'BookmarksListAll' },
+      },
+      config = function()
+        require 'young.mod.marks'
+      end,
+    },
+    -- {
+    --   'yaocccc/vim-showmarks',
+    --    event = 'VeryLazy',
+    -- },
+    -- {
+    --   'dhruvmanila/telescope-bookmarks.nvim',
+    --   dependencies = { 'kkharji/sqlite.lua' },
+    --   config = function()
+    --     require('telescope').load_extension 'bookmarks'
+    --   end,
+    -- },
+  },
+  {
+    'gpanders/editorconfig.nvim',
+    enabled = not xy.has 'nvim-0.9',
+  },
   {
     'nacro90/numb.nvim',
     event = 'CmdlineEnter',
@@ -490,20 +528,6 @@ modules.neovim = {
   --     vim.g['suda#prompt'] = '🔑: '
   --   end,
   -- },
-  -- {
-  --   'jdhao/better-escape.vim',
-  --   event = 'InsertEnter',
-  --   init = function()
-  --     vim.g.better_escape_shortcut = 'jk'
-  --   end
-  -- }
-  { -- Escape from insert, terminal & command mode without delay
-    'TheBlob42/houdini.nvim',
-    event = 'BufRead',
-    config = function()
-      require('houdini').setup()
-    end,
-  },
   {
     'nmac427/guess-indent.nvim',
     event = 'BufRead',
@@ -518,21 +542,6 @@ modules.neovim = {
   --     require('indent-o-matic').setup {}
   --   end,
   -- },
-  {
-    'gbprod/yanky.nvim',
-    dependencies = { 'kkharji/sqlite.lua' },
-    event = 'BufRead',
-    config = function()
-      require 'young.mod.yanky'
-    end,
-  },
-  {
-    'ojroques/nvim-osc52',
-    event = 'BufRead',
-    config = function()
-      require 'young.mod.osc52'
-    end,
-  },
   {
     'lunarvim/bigfile.nvim',
     event = { 'FileReadPre', 'BufReadPre', 'User FileOpened' },
@@ -553,7 +562,7 @@ modules.neovim = {
       }
     end,
   },
-  -- {
+  -- { -- BUG: key
   --   'ecthelionvi/NeoComposer.nvim',
   --   event = 'VeryLazy',
   --   dependencies = { 'kkharji/sqlite.lua' },
@@ -754,8 +763,8 @@ modules.find = {
     {
       'AckslD/muren.nvim',
       keys = {
-        { '<leader>rm', cmd 'MurenToggle' },
-        { '<leader>rM', cmd 'MurenUnique' },
+        { '<leader>rm', cmd 'MurenToggle', desc = 'Multi replace' },
+        { '<leader>rM', cmd 'MurenUnique', desc = 'Multi replace(unique matches of the last search)' },
       },
       auto = 'config',
     },
@@ -866,14 +875,6 @@ modules.telescope = {
       end,
     },
     {
-      'AckslD/nvim-neoclip.lua',
-      event = 'VeryLazy',
-      dependencies = { 'kkharji/sqlite.lua' },
-      config = function()
-        require 'young.mod.neoclip'
-      end,
-    },
-    {
       'LinArcX/telescope-env.nvim',
       event = 'VeryLazy',
       config = function()
@@ -903,31 +904,6 @@ modules.telescope = {
         }
       end,
     },
-    -- {
-    --   'dhruvmanila/telescope-bookmarks.nvim',
-    --   dependencies = { 'kkharji/sqlite.lua' },
-    --   config = function()
-    --     require('telescope').load_extension 'bookmarks'
-    --   end,
-    -- },
-    -- {
-    --   'LinArcX/telescope-command-palette.nvim',
-    --   config = function()
-    --     require('telescope').load_extension 'command_palette'
-    --   end,
-    -- },
-    -- {
-    --   'cljoly/telescope-repo.nvim',
-    --   config = function()
-    --     require('telescope').load_extension 'repo'
-    --   end,
-    -- },
-    -- {
-    --   'nvim-telescope/telescope-github.nvim',
-    --   config = function()
-    --     require('telescope').load_extension 'gh'
-    --   end,
-    -- },
   },
 }
 
@@ -982,11 +958,25 @@ modules.git = {
       require('young.mod.gitlinker').done()
     end,
   },
-  -- { -- Perf: bad for windows when trigger `DirChanged`
+  -- { -- PERF: bad for windows when trigger `DirChanged`
   --   'akinsho/git-conflict.nvim',
   --   event = 'BufRead',
   --   enabled = not is_windows,
   --   config = [[require('young.mod.git_conflict')]],
+  -- },
+  -- github = {
+  --   {
+  --     'cljoly/telescope-repo.nvim',
+  --     config = function()
+  --       require('telescope').load_extension 'repo'
+  --     end,
+  --   },
+  --   {
+  --     'nvim-telescope/telescope-github.nvim',
+  --     config = function()
+  --       require('telescope').load_extension 'gh'
+  --     end,
+  --   },
   -- },
   undo = {
     {
@@ -1006,52 +996,79 @@ modules.git = {
 }
 
 modules.keymap = {
-  {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('young.mod.which_key').done()
-    end,
-  },
-  {
-    'anuvyklack/hydra.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require 'young.mod.hydra'
-    end,
-  },
-  -- {
-  --   'yagiziskirik/AirSupport.nvim',
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     xy.map.n { '<leader>tk', '<cmd>AirSupport<cr>' }
-  --   end,
-  --   dependencies = {
-  --     { 'nvim-telescope/telescope.nvim' },
-  --     { 'nvim-lua/plenary.nvim' },
-  --   },
-  -- },
-  -- {
-  --   'linty-org/key-menu.nvim',
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     require 'young.mod.key-menu'
-  --   end,
-  -- },
-  {
-    'mrjones2014/legendary.nvim',
-    -- version = 'v2.1.0',
-    -- legendary.nvim handles all your keymaps/commands, its recommended to load legendary.nvim before other plugins
-    priority = 10000,
-    lazy = false,
-    keys = {
-      {
-        '<leader>/',
-        cmd 'Legendary',
-        mode = { 'n', 'x', 'o' },
-      },
+  menu = {
+
+    {
+      'folke/which-key.nvim',
+      event = 'VeryLazy',
+      config = function()
+        require('young.mod.which_key').done()
+      end,
     },
-    auto = 'config',
+    {
+      'anuvyklack/hydra.nvim',
+      event = 'VeryLazy',
+      config = function()
+        require 'young.mod.hydra'
+      end,
+    },
+    -- {
+    --   'linty-org/key-menu.nvim',
+    --   event = 'VeryLazy',
+    --   config = function()
+    --     require 'young.mod.key-menu'
+    --   end,
+    -- },
+  },
+  panel = {
+    -- {
+    --   'LinArcX/telescope-command-palette.nvim',
+    --   config = function()
+    --     require('telescope').load_extension 'command_palette'
+    --   end,
+    -- },
+    {
+      'mrjones2014/legendary.nvim',
+      -- version = 'v2.1.0',
+      -- legendary.nvim handles all your keymaps/commands, its recommended to load legendary.nvim before other plugins
+      priority = 10000,
+      lazy = false,
+      keys = {
+        {
+          '<leader>/',
+          cmd 'Legendary',
+          mode = { 'n', 'x', 'o' },
+        },
+      },
+      auto = 'config',
+    },
+    -- {
+    --   'yagiziskirik/AirSupport.nvim',
+    --   event = 'VeryLazy',
+    --   config = function()
+    --     xy.map.n { '<leader>tk', '<cmd>AirSupport<cr>' }
+    --   end,
+    --   dependencies = {
+    --     { 'nvim-telescope/telescope.nvim' },
+    --     { 'nvim-lua/plenary.nvim' },
+    --   },
+    -- },
+  },
+  insert = {
+    -- {
+    --   'jdhao/better-escape.vim',
+    --   event = 'InsertEnter',
+    --   init = function()
+    --     vim.g.better_escape_shortcut = 'jk'
+    --   end
+    -- }
+    { -- Escape from insert, terminal & command mode without delay
+      'TheBlob42/houdini.nvim',
+      event = 'BufRead',
+      config = function()
+        require('houdini').setup()
+      end,
+    },
   },
 }
 
@@ -1782,8 +1799,7 @@ modules.write = {
     {
       'ellisonleao/glow.nvim',
       keys = {
-        -- Call :FeMaco or require('femaco.edit').edit_code_block() with your cursor on a code-block
-        { '<leader>ro', cmd 'Glow' },
+        { '<leader>ro', cmd 'Glow', desc = 'Glow' },
       },
       config = function()
         require('glow').setup {
@@ -1814,7 +1830,7 @@ modules.write = {
       ft = { 'markdown', 'norg', 'org' },
       keys = {
         -- Call :FeMaco or require('femaco.edit').edit_code_block() with your cursor on a code-block
-        { '<leader>re', cmd 'FeMaco' },
+        { '<leader>re', cmd 'FeMaco', desc = 'Edit Fenced Markdown Code-block' },
       },
       auto = 'config',
     },
