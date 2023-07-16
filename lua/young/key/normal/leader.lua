@@ -445,7 +445,6 @@ return {
     -- ['Q'] = { cmd 'Telescope loclisthistory', 'LocList' },
     a = { cmd 'Telescope autocommands', 'Autocommands' },
     b = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
-    B = { cmd 'Telescope bookmarks', 'Bookmarks' },
     -- c = { cmd 'Telescope colorscheme', 'Colorscheme' },
     -- c = { cmd "lua require('telescope.builtin').colorscheme({enable_preview = true})", 'Colorscheme' },
     -- c = { cu('Telescope colorscheme enable_preview=' .. '<C-R>=v:count==0 ? "false" : "true"<CR>'), 'Colorscheme' },
