@@ -132,6 +132,7 @@ return {
   -- capabilities = { offsetEncoding = { "utf-16" } },
   cmd = {
     'clangd',
+    "--offset-encoding=utf-16", -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
     '--log=error',
     '--all-scopes-completion',
     '--background-index',
