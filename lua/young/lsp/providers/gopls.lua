@@ -44,6 +44,8 @@ return {
     },
   },
   on_attach = function(client, bufnr)
+    require('young.lsp.common').on_attach(client, bufnr)
+
     -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
     -- workaround for gopls not supporting semanticTokensProvider
     if not client.server_capabilities.semanticTokensProvider then
@@ -57,6 +59,5 @@ return {
         range = true,
       }
     end
-    require('young.lsp.common').on_attach(client, bufnr)
   end,
 }
