@@ -23,27 +23,32 @@ end
 
 local config = {
   formatting = {
-    { command = 'black', extra_args = { '--fast' }, filetypes = { 'python' }, cwd = py_cwd },
-    -- { command = 'isort', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
+    { command = 'black', extra_args = { '--fast' }, cwd = py_cwd },
+    -- { command = 'isort', extra_args = {}, cwd = py_cwd },
     { command = 'stylua' },
-    -- { command = 'shfmt', extra_args = { '-i', '2', '-ci', '-bn' }, filetypes = { 'sh' } },
-    { command = 'google_java_format', extra_args = {}, filetypes = { 'java' } },
-    -- { command = 'prettier', extra_filetypes = { 'toml' }, extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' } },
+    { command = 'shfmt', extra_args = { '-i', '2', '-ci', '-bn' } },
+    { command = 'google-java-format' },
+    {
+      command = 'prettier',
+      extra_filetypes = { 'toml' },
+      extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
+    },
+    { command = 'sql-formatter' },
   },
   diagnostics = {
-    -- {
-    --   command = 'luacheck',
-    --   cwd = function(params) -- force luacheck to find its '.luacheckrc' file
-    --     return u.root_pattern '.luacheckrc'(params.bufname)
-    --   end,
-    -- },
-    -- { command = 'flake8', extra_args = {}, filetypes = { 'python' }, cwd = py_cwd },
-    -- { command = "mypy", extra_args = {}, filetypes = { "python" }, cwd = py_cwd },
-    { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' }, filetypes = { 'sh' } },
+    {
+      command = 'luacheck',
+      cwd = function(params) -- force luacheck to find its '.luacheckrc' file
+        return u.root_pattern '.luacheckrc'(params.bufname)
+      end,
+    },
+    -- { command = 'flake8', cwd = py_cwd },
+    { command = 'mypy', cwd = py_cwd },
+    { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' } },
   },
   code_actions = {
     -- { command = 'gitsigns' },
-    { command = 'shellcheck', filetypes = { 'sh' } },
+    { command = 'shellcheck' },
   },
   hover = {
     { command = 'dictionary' },
@@ -85,7 +90,10 @@ function M.done()
   local sources = {}
   for feature, providers in pairs(config) do
     for _, provider in ipairs(providers) do
-      local source = null_ls.builtins[feature][provider.command].with(provider)
+      provider.condition = function()
+        return vim.fn.executable(provider.command) > 0
+      end
+      local source = null_ls.builtins[feature][provider.command:gsub('-', '_')].with(provider)
       table.insert(sources, source)
     end
   end
