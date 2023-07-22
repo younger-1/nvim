@@ -747,6 +747,10 @@ modules.file = {
     --   cmd = 'NeoTermOpen',
     --   auto = true,
     -- },
+    -- {
+    --   'nikvdp/neomux',
+    --   cmd = 'Neomux',
+    -- },
   },
 }
 
@@ -1723,6 +1727,7 @@ modules.lang = {
           config = function()
             -- Just make sure to NOT COMMIT these. I suggest using project local vim config (:help exrc)
             vim.g.dbs = {
+              -- mysql://user:secret@host:port/database
               local_mysql = 'mysql://root@localhost/',
               -- local_postgres = 'postgres://' .. vim.env.USER .. '@localhost',
               local_postgres = 'postgres:postgres',
@@ -1749,6 +1754,10 @@ modules.lang = {
         },
       },
     },
+    -- {
+    --   'nanotee/sqls.nvim',
+    --   lazy = true,
+    -- },
   },
 }
 
