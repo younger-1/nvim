@@ -78,22 +78,17 @@ require('lir').setup {
 }
 
 -- TODO:fix for nvim-web-devicons: it always change icon set on background change
-vim.api.nvim_create_autocmd('OptionSet', {
-  pattern = 'background',
+vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    -- refresh_icons()
-    -- set_up_highlights(true) -- Force update highlights
-    xy.util.defer(function()
-      -- Custom folder icon
-      -- require('nvim-web-devicons').get_icon('lir_folder_icon')
-      require('nvim-web-devicons').set_icon {
-        lir_folder_icon = {
-          icon = '',
-          color = '#caa4ec',
-          name = 'LirFolderNode',
-        },
-      }
-    end)
+    -- Custom folder icon
+    -- require('nvim-web-devicons').get_icon('lir_folder_icon')
+    require('nvim-web-devicons').set_icon {
+      lir_folder_icon = {
+        icon = '',
+        color = '#caa4ec',
+        name = 'LirFolderNode',
+      },
+    }
   end,
 })
 
