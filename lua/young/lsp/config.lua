@@ -32,15 +32,20 @@ return {
       focusable = true,
       style = 'minimal',
       border = 'rounded',
+      -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
+      -- border = { "/", "-", "\\", "|" },
       severity_sort = true,
-      source = 'always',
+      source = false,
+      -- source = 'always',
       header = '',
       prefix = '',
+      suffix = '',
       format = function(d)
         local t = vim.deepcopy(d)
         local code = d.code or (d.user_data and d.user_data.lsp.code)
         if code then
-          t.message = fmt('%s [%s]', t.message, code):gsub('1. ', '')
+          -- t.message = fmt('%s [%s]', t.message, code):gsub('1. ', '')
+          t.message = fmt(' %s ▌%s▐', t.message, code):gsub('1. ', '')
         end
         return t.message
       end,
@@ -61,17 +66,7 @@ return {
     normal_mode = {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
       ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
-      ['gl'] = {
-        function()
-          vim.diagnostic.open_float { scope = 'line', source = 'always' }
-        end,
-        'Show diagnostics',
-      },
       --
-      -- ['<C-]>'] = { cmd 'Telescope lsp_definitions', 'Def' },
-      -- ['g<C-]>'] = { cmd 'Telescope lsp_references', 'Ref' },
-      -- ['g<C-[>'] = { cmd 'Telescope lsp_implementations', 'Impl' },
-      ---
       ['gd'] = {
         -- function()
         --   vim.lsp.buf.definition { on_list = on_list }
@@ -100,6 +95,16 @@ return {
       --   end,
       --   'Peek definition',
       -- },
+      --
+      ['gl'] = {
+        function()
+          local _, fwin = vim.diagnostic.open_float { scope = 'line', source = 'always' }
+          if fwin then
+            vim.wo[fwin].signcolumn = 'no'
+          end
+        end,
+        'Show diagnostics',
+      },
       [']e'] = { vim.diagnostic.goto_next, 'Next diagnostic' },
       [']E'] = {
         function()
@@ -114,6 +119,10 @@ return {
         end,
         'Prev error',
       },
+      --
+      -- ['<C-]>'] = { cmd 'Telescope lsp_definitions', 'Def' },
+      -- ['g<C-]>'] = { cmd 'Telescope lsp_references', 'Ref' },
+      -- ['g<C-[>'] = { cmd 'Telescope lsp_implementations', 'Impl' },
       ['<leader>l'] = {
         -- lsp goto
         -- d = { vim.lsp.buf.definition, 'Def' },
