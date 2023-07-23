@@ -42,8 +42,13 @@ require('lir').setup {
       mark_actions.toggle_mark()
       vim.cmd 'normal! k'
     end,
+
+    -- ['B'] = require('lir.bookmark.actions').list,
+    -- ['ba'] = require('lir.bookmark.actions').add,
   },
+
   hide_cursor = false,
+
   float = {
     winblend = 20,
 
@@ -69,12 +74,13 @@ require('lir').setup {
   },
 }
 
--- custom folder icon
-require("nvim-web-devicons").set_icon {
+-- Custom folder icon
+-- require('nvim-web-devicons').get_icon('lir_folder_icon')
+require('nvim-web-devicons').set_icon {
   lir_folder_icon = {
-    icon = "",
-    color = "#caa4ec",
-    name = "LirFolderNode",
+    icon = '',
+    color = '#caa4ec',
+    name = 'LirFolderNode',
   },
 }
 
@@ -87,23 +93,25 @@ function _G.LirSettings()
     ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
     { noremap = true, silent = true }
   )
-
   -- echo cwd
   -- xy.util.echo { vim.fn.expand '%:p' }
 end
-
 vim.cmd [[augroup lir-settings]]
 vim.cmd [[  autocmd!]]
 vim.cmd [[  autocmd Filetype lir :lua LirSettings()]]
 vim.cmd [[augroup END]]
 
-local set_winbar = function()
-  local bufnum = vim.fn.winbufnr(vim.fn.winnr())
-  local filetype = vim.fn.getbufvar(bufnum, '&filetype')
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
+  group = vim.api.nvim_create_augroup('_winbar', {}),
+  callback = function()
+    local bufnum = vim.fn.winbufnr(vim.fn.winnr())
+    local filetype = vim.fn.getbufvar(bufnum, '&filetype')
 
-  if filetype ~= 'lir' then
-    vim.opt_local.winbar = ''
-  else
+    if filetype ~= 'lir' then
+      vim.opt_local.winbar = ''
+      return
+    end
+
     local folder_name =
       vim.fn.expand('%:p'):gsub(vim.pesc(vim.loop.cwd() .. '/'), ''):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
 
@@ -112,10 +120,5 @@ local set_winbar = function()
     else
       vim.opt_local.winbar = vim.fn.expand('%:p'):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
     end
-  end
-end
-
-vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
-  group = vim.api.nvim_create_augroup('_winbar', {}),
-  callback = set_winbar,
+  end,
 })

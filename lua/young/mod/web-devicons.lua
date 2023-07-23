@@ -1,11 +1,11 @@
 local default_icon = {
-  icon = "",
-  color = "#6d8086",
-  cterm_color = "66",
-  name = "Default",
+  icon = '',
+  color = '#6d8086',
+  cterm_color = '66',
+  name = 'Default',
 }
 
-require("nvim-web-devicons").setup({
+require('nvim-web-devicons').setup {
   -- globally enable different highlight colors per icon (default to true)
   -- if set to false all icons will have the default icon's color
   color_icons = true,
@@ -40,16 +40,16 @@ require("nvim-web-devicons").setup({
     --   color = "#81e043",
     --   name = "Log"
     -- }
-    ["norg"] = {
-      icon = "",
-      color = "#3f8cd0",
-      name = "Neorg",
+    ['norg'] = {
+      icon = '',
+      color = '#3f8cd0',
+      name = 'Neorg',
     },
     -- https://github.com/ryanoasis/nerd-fonts/pull/833
-    ["el"] = {
-      icon = "",
-      color = "#7f5ab6",
-      name = "Elisp",
+    ['el'] = {
+      icon = '',
+      color = '#7f5ab6',
+      name = 'Elisp',
     },
   },
-})
+}
