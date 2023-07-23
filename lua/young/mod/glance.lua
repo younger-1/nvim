@@ -1,10 +1,10 @@
 local M = {}
 
 function M.once()
-  vim.keymap.set('n', 'gpd', '<CMD>Glance definitions<CR>')
-  vim.keymap.set('n', 'gpr', '<CMD>Glance references<CR>')
-  vim.keymap.set('n', 'gpy', '<CMD>Glance type_definitions<CR>')
-  vim.keymap.set('n', 'gpi', '<CMD>Glance implementations<CR>')
+  vim.keymap.set('n', 'gkd', '<CMD>Glance definitions<CR>')
+  vim.keymap.set('n', 'gkr', '<CMD>Glance references<CR>')
+  vim.keymap.set('n', 'gky', '<CMD>Glance type_definitions<CR>')
+  vim.keymap.set('n', 'gki', '<CMD>Glance implementations<CR>')
 end
 
 function M.done()

@@ -76,11 +76,19 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
 --     return vim.lsp.handlers.hover(_, result, ctx, config)
 --   end
 -- end
-
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(hover, lsp_cfg.float)
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
 
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, lsp_cfg.float)
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, lsp_cfg.float)
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(function(_, result, ctx, config)
+  local _, fwin = vim.lsp.handlers.hover(_, result, ctx, config)
+  vim.wo[fwin].signcolumn = 'no'
+end, lsp_cfg.float)
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(function(_, result, ctx, config)
+  local _, fwin = vim.lsp.handlers.signature_help(_, result, ctx, config)
+  vim.wo[fwin].signcolumn = 'no'
+end, lsp_cfg.float)
 
 -- Jump directly to the first available definition every time.
 -- vim.lsp.handlers['textDocument/definition'] = function(_, result)

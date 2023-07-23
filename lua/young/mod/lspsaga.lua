@@ -4,9 +4,6 @@ function M.once()
   local cmd = require('young.key').cmd
   xy.map.register {
     g = {
-      h = { cmd 'Lspsaga lsp_finder' },
-    },
-    ['<leader>'] = {
       j = {
         j = { cmd 'Lspsaga lsp_finder' },
         k = { cmd 'Lspsaga hover_doc' },

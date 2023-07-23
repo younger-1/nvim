@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   callback = function()
     local opts = { buffer = true }
     if langs[vim.bo.filetype] then
-      vim.keymap.set('n', '<leader>tj', '<cmd>TSJToggle<cr>', opts)
+      vim.keymap.set('n', 'gmm', '<cmd>TSJToggle<cr>', opts)
 
       -- vim.keymap.set('n', 'gss', '<Cmd>TSJSplit<CR>', opts)
       -- vim.keymap.set('n', 'gsj', '<Cmd>TSJJoin<CR>', opts)

@@ -52,6 +52,7 @@ return {
     focusable = true,
     style = 'minimal',
     border = 'rounded',
+    -- wrap = false,
   },
   on_attach_callback = nil,
   on_init_callback = nil,
@@ -59,9 +60,18 @@ return {
   buffer_mappings = {
     normal_mode = {
       ['K'] = { vim.lsp.buf.hover, 'Show hover' },
-      -- ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      ['gl'] = {
+        function()
+          vim.diagnostic.open_float { scope = 'line', source = 'always' }
+        end,
+        'Show diagnostics',
+      },
       --
-      ['<C-]>'] = { cmd 'Telescope lsp_definitions', 'Def' },
+      -- ['<C-]>'] = { cmd 'Telescope lsp_definitions', 'Def' },
+      -- ['g<C-]>'] = { cmd 'Telescope lsp_references', 'Ref' },
+      -- ['g<C-[>'] = { cmd 'Telescope lsp_implementations', 'Impl' },
+      ---
       ['gd'] = {
         -- function()
         --   vim.lsp.buf.definition { on_list = on_list }
@@ -71,16 +81,10 @@ return {
       },
       ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
       ['gy'] = { vim.lsp.buf.type_definition, 'Goto type definition' },
-      ['gi'] = { vim.lsp.buf.implementation, 'Goto implementation' },
+      ['gI'] = { vim.lsp.buf.implementation, 'Goto implementation' },
       ['gr'] = { vim.lsp.buf.references, 'Goto references' },
       ['g['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
       ['g]'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
-      ['gl'] = {
-        function()
-          vim.diagnostic.open_float { scope = 'line', source = 'always' }
-        end,
-        'Show diagnostics',
-      },
       -- ['gw'] = {
       --   function()
       --     require('telescope.builtin').lsp_workspace_symbols {
@@ -110,9 +114,6 @@ return {
         end,
         'Prev error',
       },
-      ['<leader>r'] = {
-        n = { vim.lsp.buf.rename, 'Rename' },
-      },
       ['<leader>l'] = {
         -- lsp goto
         -- d = { vim.lsp.buf.definition, 'Def' },
@@ -122,14 +123,13 @@ return {
         -- i = { vim.lsp.buf.implementation, 'Impl' },
         s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
         S = { vim.lsp.buf.document_symbol, 'Document symbol' },
-        ['['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
-        [']'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
         ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
         ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
         -- j = { vim.diagnostic.goto_next, 'Next diagnostic' },
         -- k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
         -- lsp action
         a = { vim.lsp.buf.code_action, 'Code action' },
+        r = { vim.lsp.buf.rename, 'Rename' },
         f = {
           function()
             vim.lsp.buf.format()
@@ -143,7 +143,7 @@ return {
           end,
           'Format',
         },
-        r = { vim.lsp.codelens.run, 'Run CodeLens' },
+        l = { vim.lsp.codelens.run, 'Run CodeLens' },
         v = { cmd 'Vista!!', 'Vista' },
         w = {
           name = '+workspace',
