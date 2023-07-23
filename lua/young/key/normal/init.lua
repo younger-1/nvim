@@ -6,6 +6,7 @@ local normal = {
     w = { cmd 'w', 'Write' },
     s = { cmd '.so', 'Source line' },
     d = { cmd 'DiffOrig', 'Show unsaved' },
+    m = { cmd 'echo mode()', 'Show mode' },
   },
   [']'] = {
     -- [' '] = {},

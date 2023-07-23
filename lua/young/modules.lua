@@ -953,13 +953,11 @@ modules.git = {
   -- },
   {
     -- 'ruifm/gitlinker.nvim',
-    -- 'younger-1/gitlinker.nvim',
-    -- branch = 'up-to-0.8',
-    'linrongbin16/gitlinker.nvim',
+    'younger-1/gitlinker.nvim',
+    branch = 'up-to-0.8',
+    -- 'linrongbin16/gitlinker.nvim',
     lazy = true,
-    config = function()
-      require('young.mod.gitlinker').done()
-    end,
+    auto = true,
   },
   -- { -- PERF: bad for windows when trigger `DirChanged`
   --   'akinsho/git-conflict.nvim',

@@ -469,6 +469,8 @@ setmetatable(xy.map, {
       -- if nil == tbl['silent'] then
       --   tbl['silent'] = silent
       -- end
+
+      -- let mode has higher priority
       tbl['mode'] = tbl['mode'] or key
       mapper(tbl)
     end
