@@ -666,6 +666,16 @@ modules.file = {
       event = 'BufRead',
       -- event = 'User DirOpened',
       dependencies = { 'nvim-lua/plenary.nvim' },
+      init = function()
+        xy.map.n {
+          '<leader>f',
+          function()
+            require('lir.float').toggle()
+            require('lir.actions').reload()
+          end,
+          'Files',
+        }
+      end,
       config = function()
         require 'young.mod.lir'
       end,
