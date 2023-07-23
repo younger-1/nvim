@@ -10,7 +10,6 @@ if not ok or not jdtls_server:is_installed() then
 end
 
 local common_opts = require 'young.lsp.common'
-local config
 
 local M = {}
 
@@ -109,7 +108,7 @@ M.setup = function()
   -- lspconfig_jdtls.root_dir = nil
   -- config = vim.tbl_deep_extend('force', lspconfig_jdtls, common_opts)
 
-  config = vim.tbl_deep_extend('force', common_opts, require 'young.lsp.providers.jdtls')
+  local config = vim.tbl_deep_extend('force', common_opts, require 'young.lsp.providers.jdtls')
   config = vim.tbl_deep_extend('force', config, {
     cmd = jdtls_server._default_options.cmd,
     root_dir = root_dir,

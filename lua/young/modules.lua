@@ -1702,7 +1702,9 @@ modules.lang = {
       enabled = not xy.coc,
       ft = 'java',
       init = function()
-        vim.g.young_jdtls = true
+        xy.autogroup('_jdtls_lsp', {
+          { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
+        })
       end,
     },
   },
