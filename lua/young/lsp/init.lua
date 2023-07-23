@@ -48,6 +48,14 @@ local get_opts = function(server_name)
     return common_opts
   end
 
+  -- if server_opts.on_attach then
+  --   local on_attach = server_opts.on_attach
+  --   server_opts.on_attach = function(client, bufnr)
+  --     common_opts.on_attach(client, bufnr)
+  --     on_attach(client, bufnr)
+  --   end
+  -- end
+
   return vim.tbl_deep_extend('force', common_opts, server_opts)
 end
 
@@ -161,10 +169,7 @@ M.done = function()
       end
     end
 
-    if server_name == 'jdtls' and vim.g.young_jdtls then
-      xy.autogroup('_jdtls_lsp', {
-        { 'FileType', 'java', "lua require'young.lang.java'.setup()" },
-      })
+    if server_name == 'jdtls' then
       goto continue
     end
 
