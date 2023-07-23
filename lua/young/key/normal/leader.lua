@@ -192,7 +192,6 @@ return {
     J = { lua "require('dap.ext.vscode').load_launchjs()", 'Load launch JSON' },
   },
   e = { name = 'explorer' },
-  f = { lua "require('lir.float').toggle()", 'Files' },
   g = {
     name = '+git',
     [' '] = { cmd 'tab Git', 'Git' },
