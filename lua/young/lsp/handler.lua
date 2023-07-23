@@ -39,19 +39,7 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
     prefix = '',
   },
   float = {
-    -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
-    -- border = { "/", "-", "\\", "|" },
-    -- border = 'rounded',
     border = 'single',
-    source = false,
-    format = function(d)
-      local t = vim.deepcopy(d)
-      local code = d.code or (d.user_data and d.user_data.lsp.code)
-      if code then
-        t.message = fmt(' %s ▌%s▐', t.message, code):gsub('1. ', '')
-      end
-      return t.message
-    end,
   },
 }))
 
@@ -82,12 +70,16 @@ vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(function(_, result, ctx, config)
   local _, fwin = vim.lsp.handlers.hover(_, result, ctx, config)
-  vim.wo[fwin].signcolumn = 'no'
+  if fwin then
+    vim.wo[fwin].signcolumn = 'no'
+  end
 end, lsp_cfg.float)
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(function(_, result, ctx, config)
   local _, fwin = vim.lsp.handlers.signature_help(_, result, ctx, config)
-  vim.wo[fwin].signcolumn = 'no'
+  if fwin then
+    vim.wo[fwin].signcolumn = 'no'
+  end
 end, lsp_cfg.float)
 
 -- Jump directly to the first available definition every time.
