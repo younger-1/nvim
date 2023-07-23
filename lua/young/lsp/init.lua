@@ -136,18 +136,11 @@ end
 M.done = function()
   M.once()
 
-  local installer_ok, mason_lsp = pcall(require, 'mason-lspconfig')
-  if not installer_ok then
-    return
-  end
-
-  -- require 'young.lsp.installer'
   require 'young.lsp.mason'
 
+  local mason_lsp = require 'mason-lspconfig'
+
   -- mason_lsp.setup_handlers {
-  --   -- The first entry (without a key) will be the default handler
-  --   -- and will be called for each installed server that doesn't have
-  --   -- a dedicated handler.
   --   function(server_name) -- default handler (optional)
   --     setup_server(server_name)
   --   end,
@@ -155,7 +148,6 @@ M.done = function()
   --   ['rust_analyzer'] = function()
   --     require('rust-tools').setup {}
   --   end,
-  --   ['jdtls'] = function() end,
   -- }
 
   for _, server_name in ipairs(mason_lsp.get_installed_servers()) do
