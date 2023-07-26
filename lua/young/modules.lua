@@ -684,7 +684,7 @@ modules.file = {
       'kelly-lin/ranger.nvim',
       keys = {
         {
-          '<leader>ef',
+          '<leader>er',
           function()
             require('ranger-nvim').open(true)
           end,
@@ -1088,6 +1088,15 @@ modules.UI = {
     'rcarriga/nvim-notify',
     -- event = 'BufWinEnter',
     event = 'VeryLazy',
+    keys = {
+      {
+        '<leader>un',
+        function()
+          require('notify').dismiss { silent = true, pending = true }
+        end,
+        desc = 'Dismiss all Notifications',
+      },
+    },
     config = function()
       require('young.mod.notify').done()
     end,
