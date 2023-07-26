@@ -8,8 +8,8 @@ function M.once()
   nnoremap <silent> <C-p> <cmd>Neotree toggle reveal top<cr>
   nnoremap <silent> <C-e> <cmd>Neotree toggle reveal left<cr>
   nnoremap <silent> <C-n> <cmd>Neotree toggle reveal right<cr>
-  nnoremap <silent> <C-b> <cmd>Neotree toggle reveal float buffers<cr>
-  nnoremap <silent> <C-f> <cmd>Neotree toggle reveal float git_status<cr>
+  nnoremap <silent> <Leader>eb <cmd>Neotree toggle reveal float buffers<cr>
+  nnoremap <silent> <Leader>ef <cmd>Neotree toggle reveal float git_status<cr>
   ]]
 end
 

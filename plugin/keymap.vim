@@ -2,6 +2,11 @@
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" https://www.reddit.com/r/vim/comments/72n3nt/understanding_vims_jump_list/
+" make 4j or 6k line motions append to jumplist
+" noremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
+" noremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'
+
 " noremap ' `
 
 noremap <expr> 0 SmartHome()
@@ -32,6 +37,9 @@ noremap <localleader><Tab> <C-i>
 " nnoremap / ms/
 " nnoremap ? ms?
 nnoremap <BS> <C-^>
+
+nnoremap zz zz<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+nnoremap \\ <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 
 nnoremap `<BS> :delmarks
 nnoremap `<Tab> :marks<cr>

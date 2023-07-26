@@ -100,9 +100,9 @@ local buffer_hydra = Hydra {
 }
 
 local function choose_buffer()
-  if #vim.fn.getbufinfo { buflisted = true } > 1 then
-    buffer_hydra:activate()
-  end
+  -- if #vim.fn.getbufinfo { buflisted = true } > 1 then
+  buffer_hydra:activate()
+  -- end
 end
 
 xy.map.n { 'gb', choose_buffer, '[Hydra] Choose buffer' }
