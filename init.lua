@@ -14,10 +14,6 @@
 -- tt()
 tt = tt or function() end
 
--- pcall(function()
---   require('impatient').enable_profile()
--- end)
-
 tt()
 require 'young'
 

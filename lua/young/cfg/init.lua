@@ -1,12 +1,13 @@
 local M = {}
 
----Reset any startup cache files used by Packer and Impatient
+-- Reset any startup cache files
 local function unload_modules()
   -- local impatient = _G.__luacache
   -- if impatient then
   --   impatient.clear_cache()
   -- end
-  vim.cmd ':LuaCacheClear'
+
+  -- vim.cmd ':LuaCacheClear'
 
   for module, _ in pairs(package.loaded) do
     if vim.startswith(module, 'young') then
