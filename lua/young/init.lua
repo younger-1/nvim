@@ -499,3 +499,7 @@ xy.log = {
     vim.notify(msg, vim.log.levels.ERROR)
   end,
 }
+
+xy.lazy_has = function(plugin)
+  return require('lazy.core.config').spec.plugins[plugin] ~= nil
+end

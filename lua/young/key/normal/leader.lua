@@ -322,11 +322,7 @@ return {
     },
   },
   n = {
-    name = '+neogen',
-    f = { cmd 'Neogen func', 'Function' },
-    F = { cmd 'Neogen file', 'File' },
-    c = { cmd 'Neogen class', 'Class' },
-    t = { cmd 'Neogen type', 'Type' },
+    name = '+new',
   },
   m = {
     name = '+mark',
@@ -536,6 +532,9 @@ return {
     -- t = { cmd 'TransparentToggle', 'Transparent' },
     x = { cmd 'Hexmode', 'Hex mode' },
     u = { cmd 'UndotreeToggle', 'Undotree' },
+  },
+  u = {
+    name = '+ui',
   },
   v = {
     name = '+vim',

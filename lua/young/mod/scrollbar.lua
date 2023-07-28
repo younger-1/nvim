@@ -117,7 +117,7 @@ require('scrollbar').setup {
     'TelescopePrompt',
     '', -- empty ft
     'Navbuddy',
-    'neo-tree'
+    'neo-tree',
   },
   autocmd = {
     render = {
@@ -142,7 +142,11 @@ require('scrollbar').setup {
     diagnostic = true,
     gitsigns = false, -- Requires gitsigns
     handle = true,
-    search = true, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
+    search = false, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
     ale = false, -- Requires ALE
   },
 }
+
+if xy.lazy_has 'nvim-hlslens' then
+  require('scrollbar.handlers.search').setup()
+end
