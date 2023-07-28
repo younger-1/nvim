@@ -296,9 +296,10 @@ return {
   },
   L = {
     name = '+lua',
-    c = { '<cmd>LuaCacheClear<cr>', 'LuaCache clear' },
-    l = { '<cmd>LuaCacheLog<cr>', 'LuaCache log' },
-    p = { '<cmd>LuaCacheProfile<cr>', 'LuaCache profile' },
+    -- impatient.nvim
+    -- c = { '<cmd>LuaCacheClear<cr>', 'LuaCache clear' },
+    -- l = { '<cmd>LuaCacheLog<cr>', 'LuaCache log' },
+    -- p = { '<cmd>LuaCacheProfile<cr>', 'LuaCache profile' },
     L = {
       name = '+logs',
       d = {

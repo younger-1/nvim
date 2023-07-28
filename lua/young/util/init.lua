@@ -373,4 +373,14 @@ function util.dd(...)
   util.dump(util.get_value(...))
 end
 
+---@param fn fun()
+function util.on_very_lazy(fn)
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'VeryLazy',
+    callback = function()
+      fn()
+    end,
+  })
+end
+
 return util
