@@ -37,8 +37,7 @@ require('noice').setup {
   --   kind_icons = {}, -- set to `false` to disable icons
   -- },
   lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    -- override = {
+    -- override = { -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     --   ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
     --   ['vim.lsp.util.stylize_markdown'] = true,
     --   ['cmp.entry.get_documentation'] = true,
@@ -49,19 +48,22 @@ require('noice').setup {
   },
   -- TODO:
   views = {
-    -- split = {
-    --   enter = true,
-    -- },
-    -- Clean cmdline_popup
-    -- cmdline_popup = {
+    split = {
+      enter = true,
+      close = { keys = { 'q', '<CR>', '<Esc>' } },
+      win_options = { wrap = false },
+    },
+    popup = {
+      win_options = { wrap = false },
+    },
+    -- cmdline_popup = { -- Clean cmdline_popup
     --   border = { style = 'none', padding = { 2, 3 } },
     --   filter_options = {},
     --   win_options = { winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder' },
     -- },
   },
   routes = {
-    -- Route some undo messages to the mini view
-    {
+    { -- Route some undo messages to the mini view
       filter = {
         event = 'msg_show',
         any = {
@@ -72,28 +74,46 @@ require('noice').setup {
       },
       view = 'mini',
     },
-    -- Route messages to the split view
-    {
-      filter = { event = 'msg_show', min_height = 20 },
+    { -- Route messages to the split view
+      filter = { event = 'msg_show', min_height = 3 },
       view = 'split',
     },
-    -- Route notifications to the split view
-    {
+    -- { -- Route long messages to split
+    --   filter = {
+    --     event = 'msg_show',
+    --     any = { { min_height = 5 }, { min_width = 200 } },
+    --     ['not'] = {
+    --       kind = { 'confirm', 'confirm_sub', 'return_prompt', 'quickfix', 'search_count' },
+    --     },
+    --     blocking = false,
+    --   },
+    --   view = 'messages',
+    --   opts = { stop = true },
+    -- },
+    -- { -- Route long messages to split
+    --   filter = {
+    --     event = 'msg_show',
+    --     any = { { min_height = 5 }, { min_width = 200 } },
+    --     ['not'] = {
+    --       kind = { 'confirm', 'confirm_sub', 'return_prompt', 'quickfix', 'search_count' },
+    --     },
+    --     blocking = true,
+    --   },
+    --   view = 'mini',
+    -- },
+    { -- Route notifications to the split view
       filter = { event = 'notify', min_height = 15 },
       view = 'split',
     },
-    -- Show @recording and vim's `showmode` messages
-    {
+    { -- Show @recording and vim's `showmode` messages
       filter = { event = 'msg_showmode' },
       view = 'notify',
     },
-    -- Hide search_count messages instead of showing them as virtual text
-    -- {
+    -- { -- Hide search_count messages instead of showing them as virtual text
     --   filter = { event = 'msg_show', kind = 'search_count' },
     --   opts = { skip = true },
     -- },
-    -- Hide written messages
-    -- {
+    -- { -- Hide written messages
     --   filter = { event = 'msg_show', kind = '', find = 'written' },
     --   opts = { skip = true },
     -- },

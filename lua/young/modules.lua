@@ -781,6 +781,19 @@ modules.find = {
       },
       auto = 'config',
     },
+    {
+      'gabrielpoca/replacer.nvim',
+      -- opts = { rename_files = false },
+      keys = {
+        {
+          '<leader>rn',
+          function()
+            require('replacer').run()
+          end,
+          desc = 'Replacer',
+        },
+      },
+    },
   },
   fzf = {
     {
