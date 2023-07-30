@@ -767,11 +767,9 @@ modules.file = {
 modules.find = {
   grep = {
     {
-      'windwp/nvim-spectre',
+      'nvim-pack/nvim-spectre',
       event = 'VeryLazy',
-      config = function()
-        require('young.mod.spectre').done()
-      end,
+      auto = true,
     },
     {
       'AckslD/muren.nvim',
@@ -783,14 +781,24 @@ modules.find = {
     },
     {
       'gabrielpoca/replacer.nvim',
-      -- opts = { rename_files = false },
+      opts = {
+        save_on_write = false,
+        rename_files = false,
+      },
       keys = {
         {
           '<leader>rn',
           function()
             require('replacer').run()
           end,
-          desc = 'Replacer',
+          desc = 'Replacer run',
+        },
+        {
+          '<leader>rN',
+          function()
+            require('replacer').save()
+          end,
+          desc = 'Replacer save',
         },
       },
     },
@@ -1217,11 +1225,23 @@ modules.UI = {
           mode = 'c',
           desc = 'Redirect Cmdline',
         },
-        { '<leader>nl', cmd 'Noice last', desc = 'Last Message' },
-        { '<leader>nh', cmd 'Noice history', desc = 'Noice History' },
-        { '<leader>nd', cmd 'Noice dismiss', desc = 'Dismiss All' },
+        { '<leader>nl', cmd 'Noice last', desc = 'Last' },
+        { '<leader>nh', cmd 'Noice history', desc = 'History' },
+        { '<leader>nd', cmd 'Noice dismiss', desc = 'Dismiss' },
         { '<leader>ni', cmd 'Noice stats', desc = 'Stats' },
         { '<leader>ns', cmd 'Noice telescope', desc = 'Search' },
+        {
+          '<leader>nt',
+          function()
+            if vim.o.cmdheight == 0 then
+              vim.cmd [[Noice disable]]
+              vim.o.cmdheight = 1
+            else
+              vim.cmd [[Noice enable]]
+            end
+          end,
+          desc = 'Toggle',
+        },
         -- { '<c-f>', function() if not require('noice.lsp').scroll(4) then return '<c-f>' end end, silent = true, expr = true, desc = 'Scroll forward', mode = { 'i', 'n', 's' } },
         -- { '<c-b>', function() if not require('noice.lsp').scroll(-4) then return '<c-b>' end end, silent = true, expr = true, desc = 'Scroll backward', mode = { 'i', 'n', 's' } },
       },
@@ -1513,8 +1533,7 @@ modules.code = {
       -- after = 'nvim-treesitter',
       init = function()
         xy.map.register {
-          ['<leader>nn'] = {
-            name = '+neogen',
+          ['<leader>cn'] = {
             f = { cmd 'Neogen func', 'Function' },
             F = { cmd 'Neogen file', 'File' },
             c = { cmd 'Neogen class', 'Class' },

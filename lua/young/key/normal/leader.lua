@@ -293,6 +293,9 @@ return {
   },
   c = {
     name = '+code',
+    n = {
+      name = '+neogen',
+    },
   },
   L = {
     name = '+lua',
@@ -353,9 +356,6 @@ return {
   q = { '<cmd>q!<cr>', 'which_key_ignore' },
   r = {
     name = '+replace',
-    b = { lua "require('spectre').open_file_search()", 'Replace buffer' },
-    r = { lua "require('spectre').open()", 'Replace' },
-    w = { lua "require('spectre').open_visual({select_word=true})", 'Replace word' },
   },
   s = {
     name = '+search',
