@@ -3,6 +3,10 @@ local Hydra = require 'hydra'
 Hydra {
   name = 'Side scroll',
   mode = 'n',
+  config = {
+    -- invoke_on_body = true,
+    hint = { type = 'statusline' },
+  },
   body = 'z',
   heads = {
     { 'h', '5zh' },

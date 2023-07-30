@@ -3,9 +3,13 @@ local Hydra = require 'hydra'
 local yanky_hydra = Hydra {
   name = 'Yank ring',
   mode = 'n',
-  -- config = {
-  --   invoke_on_body = true,
-  -- },
+  config = {
+    -- invoke_on_body = true,
+    hint = {
+      type = 'window',
+      border = 'rounded',
+    },
+  },
   -- body = 'p',
   heads = {
     { 'p', '<Plug>(YankyPutAfter)', { desc = 'After' } },

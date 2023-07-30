@@ -2,8 +2,12 @@ local Hydra = require 'hydra'
 local cmd = require('young.key').cmd
 
 local buffer_hydra = Hydra {
-  name = 'Barbar',
+  -- name = 'barbar',
   config = {
+    hint = {
+      type = 'window',
+      border = 'rounded',
+    },
     on_key = function()
       -- Preserve animation
       vim.wait(200, function()
@@ -12,6 +16,21 @@ local buffer_hydra = Hydra {
     end,
   },
   heads = {
+    {
+      '[',
+      function()
+        vim.cmd 'BufferPrevious'
+      end,
+      { desc = false },
+    },
+    {
+      ']',
+      function()
+        vim.cmd 'BufferNext'
+      end,
+      { desc = false },
+    },
+
     {
       'h',
       function()
@@ -94,6 +113,13 @@ local buffer_hydra = Hydra {
       cmd 'BufferOrderByLanguage',
       { desc = 'by directory/language' },
     },
+
+    {
+      'f',
+      cmd 'Telescope buffers',
+      { desc = 'find' },
+    },
+
     -- { '<Esc>', nil, { exit = true, desc = false } },
     { 'q', nil, { exit = true, desc = false } },
   },

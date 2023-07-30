@@ -43,6 +43,7 @@ local ts_hydra_meta = {
   config = {
     timeout = 4000,
     hint = {
+      type = 'window',
       border = 'rounded',
     },
   },
