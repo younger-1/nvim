@@ -630,18 +630,32 @@ modules.BWT = {
   quickfix = {
     { 'weilbith/vim-qfloc-edit', ft = 'qf' },
     {
-      'kevinhwang91/nvim-bqf',
-      -- event = "BufRead",
-      ft = 'qf',
-      config = function()
-        require('young.mod.bqf').done()
-      end,
-    },
-    {
       'https://gitlab.com/yorickpeterse/nvim-pqf',
       event = 'VeryLazy',
       config = true,
     },
+    -- {
+    --   'ten3roberts/qf.nvim',
+    --   ft = 'qf',
+    --   config = function()
+    --     require('qf').setup {}
+    --   end,
+    -- },
+    {
+      'kevinhwang91/nvim-bqf',
+      -- event = "BufRead",
+      ft = 'qf',
+      auto = 'config',
+    },
+    -- {
+    --   'arsham/listish.nvim',
+    --   dependencies = {
+    --     'arsham/arshlib.nvim',
+    --     'nvim-treesitter/nvim-treesitter-textobjects',
+    --   },
+    --   ft = 'qf',
+    --   auto = 'config',
+    -- },
   },
 }
 
