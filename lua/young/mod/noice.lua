@@ -46,7 +46,6 @@ require('noice').setup {
     hover = { enabled = false },
     signature = { enabled = false },
   },
-  -- TODO:
   views = {
     split = {
       enter = true,
@@ -104,6 +103,10 @@ require('noice').setup {
     -- { -- TODO:switch quickfix list
     --   filter = { event = 'msg_show', kind = 'quickfix' },
     --   view = 'cmdline',
+    -- },
+    -- { -- TODO:vim-matchup
+    --   filter = { kind = 'echo' },
+    --   view = 'messages',
     -- },
     { -- Route notifications to the split view
       filter = { event = 'notify', min_height = 15 },

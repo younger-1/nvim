@@ -7,10 +7,11 @@ end
 local Hydra = require 'hydra'
 -- rr('nvim-treesitter.configs').get_module('textobjects.move')
 local ts_move_cfg = require('young.mod.treesitter').cfg.textobjects.move
-local fts = { 'c', 'lua', 'vim', 'vimdoc', 'query' }
+
+local ts_ft = { 'c', 'lua', 'vim', 'vimdoc', 'query' }
 for _, ft in ipairs(require('young.mod.treesitter').cfg.ensure_installed) do
-  if not vim.tbl_contains(fts, ft) then
-    table.insert(fts, ft)
+  if not vim.tbl_contains(ts_ft, ft) then
+    table.insert(ts_ft, ft)
   end
 end
 
@@ -52,13 +53,14 @@ local ts_hydra_meta = {
 }
 
 local ts_hydra_land = {}
+local ts_init_heads
 
-local function ts_init_helper(tbl)
-  local heads = {
+do
+  ts_init_heads = {
     -- { '<Esc>', nil, { exit = true, desc = false } },
     { 'q', nil, { exit = true, desc = false } },
   }
-  for head, mark in pairs(tbl) do
+  for head, mark in pairs(key2mark) do
     for _, io in ipairs { '.inner', '.outer' } do
       local query = mark .. io
       ts_hydra_meta.name = query
@@ -95,6 +97,15 @@ local function ts_init_helper(tbl)
         { 'q', nil, { exit = true, desc = false } },
         { '<cr>', nil, { exit = true, desc = false } },
         {
+          '<bs>',
+          function()
+            xy.util.defer(function()
+              M.ts_init_hydra:activate()
+            end, 100)
+          end,
+          { exit = true },
+        },
+        {
           '<space>',
           function()
             xy.util.defer(function()
@@ -117,7 +128,7 @@ local function ts_init_helper(tbl)
       ts_hydra_land[query] = Hydra(ts_hydra_meta)
     end
 
-    table.insert(heads, {
+    table.insert(ts_init_heads, {
       head,
       function()
         ts_hydra_land[mark .. '.outer']:activate()
@@ -125,7 +136,6 @@ local function ts_init_helper(tbl)
       { exit = true, desc = mark },
     })
   end
-  return heads
 end
 
 -- local hint = [[
@@ -145,7 +155,7 @@ M.ts_init_hydra = Hydra {
   },
   mode = { 'n', 'x' },
   body = 'g<space>',
-  heads = ts_init_helper(key2mark),
+  heads = ts_init_heads,
 }
 
 function M.setup_hydra(key, fn, query)
@@ -184,7 +194,7 @@ end
 xy.autogroup('_hydra_ts', {
   {
     'FileType',
-    fts,
+    ts_ft,
     function(ctx)
       -- defer to make sure we first have original mappings of nvim-treesitter.textobjects.move
       xy.util.defer(setup, ctx)
