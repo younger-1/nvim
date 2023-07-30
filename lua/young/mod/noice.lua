@@ -101,6 +101,10 @@ require('noice').setup {
     --   },
     --   view = 'mini',
     -- },
+    -- { -- TODO:switch quickfix list
+    --   filter = { event = 'msg_show', kind = 'quickfix' },
+    --   view = 'cmdline',
+    -- },
     { -- Route notifications to the split view
       filter = { event = 'notify', min_height = 15 },
       view = 'split',
