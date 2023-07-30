@@ -14,6 +14,7 @@ Hydra {
     color = 'pink',
     invoke_on_body = true,
     hint = {
+      type = 'window',
       border = 'rounded',
     },
     on_enter = function()

@@ -1009,8 +1009,9 @@ modules.git = {
 }
 
 modules.keymap = {
-  menu = {
+  { 'anuvyklack/keymap-amend.nvim', lazy = true },
 
+  menu = {
     {
       'folke/which-key.nvim',
       event = 'VeryLazy',
