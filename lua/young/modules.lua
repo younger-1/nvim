@@ -1604,12 +1604,12 @@ modules.LSP = {
   -- },
   ui = {
     {
-      'glepnir/lspsaga.nvim',
+      'nvimdev/lspsaga.nvim',
       -- event = 'BufWinEnter',
       cmd = 'Lspsaga',
       dependencies = {
         { 'nvim-tree/nvim-web-devicons' },
-        --Please make sure you install markdown and markdown_inline parser
+        -- Please make sure you install markdown and markdown_inline parser
         { 'nvim-treesitter/nvim-treesitter' },
       },
       auto = true,

@@ -39,7 +39,6 @@ noremap <localleader><Tab> <C-i>
 nnoremap <BS> <C-^>
 
 nnoremap zz zz<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
-nnoremap \\ <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 
 nnoremap `<BS> :delmarks
 nnoremap `<Tab> :marks<cr>
