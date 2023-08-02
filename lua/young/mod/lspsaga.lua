@@ -5,7 +5,7 @@ function M.once()
   xy.map.register {
     g = {
       j = {
-        j = { cmd 'Lspsaga lsp_finder' },
+        j = { cmd 'Lspsaga finder' },
         k = { cmd 'Lspsaga hover_doc' },
         d = { cmd 'Lspsaga peek_definition' },
         l = { cmd 'Lspsaga show_line_diagnostics' },
@@ -14,6 +14,10 @@ function M.once()
         A = { cmd 'Lspsaga range_code_action' },
         r = { cmd 'Lspsaga rename' },
         o = { cmd 'Lspsaga outline' },
+        i = { cmd 'Lspsaga open_log' },
+        t = { cmd 'Lspsaga term_toggle' },
+        ['['] = { cmd 'Lspsaga incoming_calls' },
+        [']'] = { cmd 'Lspsaga outgoing_calls' },
       },
     },
   }

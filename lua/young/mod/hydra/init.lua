@@ -60,7 +60,7 @@ local Hydra = require 'hydra'
 
 local ab_hydra_meta = {
   config = {
-    timeout = 4000,
+    -- timeout = 4000,
     hint = {
       type = 'window',
       border = 'rounded',
@@ -157,7 +157,7 @@ M.ab_init_hydra = Hydra {
     },
   },
   mode = { 'n' },
-  body = '\\<space>',
+  body = '\\\\',
   heads = ab_init_heads,
 }
 
