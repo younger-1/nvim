@@ -266,13 +266,13 @@ modules.edit = {
     --     require 'young.mod.neoscroll'
     --   end,
     -- },
-    -- { -- Smooth scrolling for ANY movement command
-    --   'declancm/cinnamon.nvim',
-    --   event = 'BufWinEnter',
-    --   config = function()
-    --     require 'young.mod.cinnamon'
-    --   end,
-    -- },
+    { -- Smooth scrolling for ANY movement command
+      'declancm/cinnamon.nvim',
+      event = 'BufWinEnter',
+      config = function()
+        require 'young.mod.cinnamon'
+      end,
+    },
   },
   -- textobject = {
   -- },
@@ -1101,6 +1101,17 @@ modules.keymap = {
     --     { 'nvim-telescope/telescope.nvim' },
     --     { 'nvim-lua/plenary.nvim' },
     --   },
+    -- },
+    -- {
+    --   'LintaoAmons/easy-commands.nvim',
+    --   keys = {
+    --     {
+    --       '<leader>;',
+    --       cmd 'InspectCommand',
+    --       mode = { 'n', 'x', 'o' },
+    --     },
+    --   },
+    --   opts = {},
     -- },
   },
   insert = {
