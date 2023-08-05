@@ -23,6 +23,7 @@ M.once = function()
   -- ]]
 
   local n = xy.map.n
+  n { '<C-w>r', '<cmd>SmartResizeMode<cr>', 'Smart resize mode' }
 
   -- resizing splits
   -- n { '<A-h>', require('smart-splits').resize_left }
