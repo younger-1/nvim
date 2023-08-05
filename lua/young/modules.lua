@@ -599,9 +599,7 @@ modules.BWT = {
       'mrjones2014/smart-splits.nvim',
       -- event = 'CursorMoved',
       cmd = 'SmartResizeMode',
-      config = function()
-        require 'young.mod.smart_splits'
-      end,
+      auto = true,
     },
     {
       's1n7ax/nvim-window-picker',
@@ -613,17 +611,13 @@ modules.BWT = {
     {
       'sindrets/winshift.nvim',
       cmd = 'WinShift',
-      config = function()
-        require 'young.mod.winshift'
-      end,
+      auto = true,
     },
     {
-      'beauwilliams/focus.nvim',
+      'nvim-focus/focus.nvim',
       -- event = "BufRead",
       cmd = 'FocusToggle',
-      config = function()
-        require('young.mod.focus').done()
-      end,
+      auto = true,
     },
   },
   -- tab = {},

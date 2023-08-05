@@ -51,13 +51,11 @@ local normal = {
   ['<C-w>'] = {
     z = { require('young.tool').toggle_zoom, 'Zoom' },
     w = { require('young.tool').set_cursor_floating_win, 'Goto float' },
-    r = { '<cmd>SmartResizeMode<cr>', 'SmartResize mode' },
-    -- ['<C-m>'] = { '<Cmd>WinShift<CR>', 'WinShift mode' },
-    -- ['<C-x>'] = { '<Cmd>WinShift swap<CR>', 'Swap windows' },
-    ['<CR>'] = { '<Cmd>WinShift<CR>', 'WinShift mode' },
-    ['\\'] = { '<Cmd>WinShift swap<CR>', 'Swap windows mode' },
-    -- [' '] = { "<cmd>FocusToggle<cr>", 'FocusToggle' },
-    f = { cmd 'FocusToggle', 'FocusToggle' },
+    -- ['<C-m>']
+    -- ['<C-x>']
+    -- ['<CR>']
+    -- ['\\']
+    -- [' ']
 
     -- e = "",
     -- t = "",
