@@ -6,6 +6,11 @@ vim.opt.conceallevel = 2
 package.path = package.path .. ';' .. vim.fn.expand '~' .. '/.luarocks/share/lua/5.1/?/init.lua'
 package.path = package.path .. ';' .. vim.fn.expand '~' .. '/.luarocks/share/lua/5.1/?.lua'
 
+-- local ok, _ = pcall(require, 'image')
+-- if not ok then
+--   return
+-- end
+
 require('image').setup {
   backend = 'kitty',
   integrations = {

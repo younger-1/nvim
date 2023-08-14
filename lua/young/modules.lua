@@ -124,6 +124,10 @@ modules.appearance = {
       event = 'VeryLazy',
       auto = true,
     },
+    {
+      'yaocccc/nvim-hlchunk',
+      event = 'VeryLazy',
+    },
     -- {
     --   'nvimdev/indentmini.nvim',
     --   event = 'BufEnter',
@@ -136,10 +140,26 @@ modules.appearance = {
     --     }
     --   end,
     -- },
-    {
-      'yaocccc/nvim-hlchunk',
-      event = 'VeryLazy',
-    },
+    -- {
+    --   'shellRaining/hlchunk.nvim',
+    --   event = { 'UIEnter' },
+    --   config = function()
+    --     require('hlchunk').setup {
+    --       chunk = {
+    --         chars = {
+    --           horizontal_line = '━',
+    --           vertical_line = '┃',
+    --           left_top = '┏',
+    --           left_bottom = '┗',
+    --           right_arrow = '━',
+    --         },
+    --       },
+    --       blank = {
+    --         enable = false,
+    --       },
+    --     }
+    --   end,
+    -- },
   },
   line = {
     -- { -- Show where your cursor moves when jumping large distances
@@ -619,6 +639,15 @@ modules.BWT = {
       cmd = 'FocusToggle',
       auto = true,
     },
+    -- { -- Smooth focus/split
+    --   'anuvyklack/windows.nvim',
+    --   event = "BufRead",
+    --   dependencies = {
+    --     'anuvyklack/middleclass',
+    --     'anuvyklack/animation.nvim',
+    --   },
+    --   auto = true,
+    -- },
   },
   -- tab = {},
   quickfix = {
@@ -1959,12 +1988,12 @@ modules.write = {
   },
   { 'jbyuki/venn.nvim', cmd = 'VBox' },
   { 'jbyuki/nabla.nvim', lazy = true },
-  {
-    '3rd/image.nvim',
-    event = 'VeryLazy',
-    -- ft = { 'markdown', 'norg', 'org', 'rst', 'asciidoc', 'tex' },
-    auto = 'config',
-  },
+  -- {
+  --   '3rd/image.nvim',
+  --   event = 'VeryLazy',
+  --   -- ft = { 'markdown', 'norg', 'org', 'rst', 'asciidoc', 'tex' },
+  --   auto = 'config',
+  -- },
 }
 
 modules.tool = {
