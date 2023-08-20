@@ -67,6 +67,8 @@ M.done = function()
       -- ['git.savannah.gnu.org'] = require('gitlinker.hosts').get_cgit_type_url,
       ['code.byted.org'] = function(url_data)
         local url = require('gitlinker.hosts').get_base_https_url(url_data)
+        url = url:gsub("code", "dev", 1)
+
         if not url_data.file or not url_data.rev then
           return url
         end

@@ -9,7 +9,7 @@ return {
     gopls = {
       -- allExperiments = true,
       usePlaceholders = true,
-      semanticTokens = true,
+      semanticTokens = false,
       experimentalPostfixCompletions = true,
       -- gofumpt = true,
       directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
