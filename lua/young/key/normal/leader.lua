@@ -200,7 +200,7 @@ return {
     ["'"] = { cmd 'Gitsigns toggle_linehl', 'Line highlight' },
     ['`'] = { cmd 'Gitsigns toggle_numhl', 'Number highlight' },
     [';'] = { cmd 'Gitsigns toggle_deleted', 'Deleted lines' },
-    [','] = { cmd 'Gitsigns toggle_signs', 'Deleted lines' },
+    [','] = { cmd 'Gitsigns toggle_signs', 'Sign highlight' },
     ['<C-q>'] = {
       name = '+quickfix',
       a = { "<cmd>lua require 'gitsigns'.setqflist('all')<cr>", 'All git' },
