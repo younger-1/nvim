@@ -132,22 +132,23 @@ return {
   -- capabilities = { offsetEncoding = { "utf-16" } },
   cmd = {
     'clangd',
-    "--offset-encoding=utf-16", -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
-    '--log=error',
-    '--all-scopes-completion',
-    '--background-index',
+    '--offset-encoding=utf-16', -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
+    -- '--all-scopes-completion',
+    -- '--background-index',
     '--clang-tidy',
     '--enable-config', -- clangd 11+ supports reading from .clangd configuration file
     '--fallback-style=google',
-    '--pch-storage=disk',
-    '-j=12',
-    '-include-ineligible-results',
+    -- '-j=12',
+    -- '--log=error',
+    -- '--pch-storage=disk',
+    -- '-include-ineligible-results',
     -- '--compile-commands-dir=build',
     -- '--std=c++20',
     -- '--header-insertion=iwyu',
     -- '--header-insertion-decorators',
     -- '--completion-style=bundled',
     -- '--ranking-model=heuristics',
+    --
     -- Not use
     -- '--cross-file-rename',
     -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
