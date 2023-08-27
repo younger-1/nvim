@@ -138,7 +138,7 @@ return {
   -- capabilities = { offsetEncoding = { "utf-16" } },
   cmd = {
     'clangd',
-    -- '--offset-encoding=utf-16', -- https://www.reddit.com/r/neovim/comments/12qbcua/multiple_different_client_offset_encodings/
+    '--offset-encoding=utf-16', -- temporary fix for null-ls
     -- '--all-scopes-completion',
     -- '--background-index',
     '--clang-tidy',
@@ -148,11 +148,10 @@ return {
     -- '--pretty',
     -- '--log=error',
     -- '--pch-storage=disk',
-    -- '-include-ineligible-results',
+    -- '--include-ineligible-results',
     -- '--compile-commands-dir=build',
     -- '--std=c++20',
     -- '--header-insertion=iwyu',
-    -- '--header-insertion-decorators',
     -- '--completion-style=bundled',
     -- '--ranking-model=heuristics',
     --
@@ -192,16 +191,16 @@ return {
     -- client.server_capabilities.documentFormattingProvider = false
 
     local cmd = require('young.key').cmd
-    xy.map.register {
+    xy.map.register({
       ['<leader>cc'] = {
-        s = { cmd 'ClangdSwitchSourceHeader', '[C++] Switch source/header', buffer = bufnr },
-        m = { cmd 'ClangdMemoryUsage', '[C++] Memory Usage', buffer = bufnr },
-        a = { cmd 'ClangdAST', '[C++] AST', buffer = bufnr },
-        i = { cmd 'ClangdSymbolInfo', '[C++] Symbol info', buffer = bufnr },
-        h = { cmd 'ClangdTypeHierarchy', '[C++] Type hierarchy', buffer = bufnr },
-        t = { cmd 'ClangdToggleInlayHints', '[C++] Toggle inlay hints', buffer = bufnr },
+        s = { cmd 'ClangdSwitchSourceHeader', '[C++] Switch source/header' },
+        m = { cmd 'ClangdMemoryUsage', '[C++] Memory Usage' },
+        a = { cmd 'ClangdAST', '[C++] AST' },
+        i = { cmd 'ClangdSymbolInfo', '[C++] Symbol info' },
+        h = { cmd 'ClangdTypeHierarchy', '[C++] Type hierarchy' },
+        t = { cmd 'ClangdToggleInlayHints', '[C++] Toggle inlay hints' },
       },
-    }
+    }, { buffer = bufnr })
   end,
   -- @see <https://github.com/clangd/clangd/issues/1013>
   -- semanticHighlighting = true,

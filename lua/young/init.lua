@@ -428,7 +428,12 @@ xy.map = {
           xy.map[mode] { prefix .. k, v[1], desc, buffer = buffer }
         else
           local keymap = { prefix .. k, v[1], desc, buffer = buffer }
-          keymap = vim.tbl_extend('keep', keymap, v)
+          -- allow |mappings|'s buffer override |opts|'s buffer
+          for kk, vv in pairs(v) do
+            if tonumber(kk) == nil then
+              keymap[kk] = vv
+            end
+          end
           xy.map[mode](keymap)
         end
       end
