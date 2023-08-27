@@ -164,13 +164,13 @@ function M.setup_python()
       'FileType',
       'python',
       function()
-        xy.map.register {
+        xy.map.register({
           ['<leader>d<tab>'] = {
-            m = { require('dap-python').test_method, '[py] Test method', buffer = true },
-            c = { require('dap-python').test_class, '[py] Test class', buffer = true },
-            s = { require('dap-python').debug_selection, '[py] Debug selection', buffer = true },
+            m = { require('dap-python').test_method, '[py] Test method' },
+            c = { require('dap-python').test_class, '[py] Test class' },
+            s = { require('dap-python').debug_selection, '[py] Debug selection' },
           },
-        }
+        }, { buffer = 0 })
       end,
     },
   })
@@ -227,7 +227,7 @@ function M.setup_go()
       function()
         xy.map.register {
           ['<leader>d<tab>'] = {
-            m = { require('dap-go').debug_test, '[go] Test method', buffer = true },
+            m = { require('dap-go').debug_test, '[go] Test method', buffer = 0 },
           },
         }
       end,

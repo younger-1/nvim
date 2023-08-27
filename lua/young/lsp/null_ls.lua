@@ -46,6 +46,7 @@ local config = {
     { command = 'mypy', cwd = py_cwd },
     { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' } },
     -- { command = 'cspell' },
+    -- { command = 'cpplint' },
   },
   code_actions = {
     -- { command = 'gitsigns' },
