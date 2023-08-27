@@ -293,6 +293,9 @@ return {
   },
   c = {
     name = '+code',
+    c = {
+      name = '+lsp-extension',
+    },
     n = {
       name = '+neogen',
     },

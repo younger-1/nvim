@@ -1766,6 +1766,13 @@ modules.lang = {
   --     vim.g.polyglot_disabled = { 'autoindent', 'ftdetect', 'markdown' }
   --   end,
   -- },
+  cpp = {
+    {
+      'p00f/clangd_extensions.nvim',
+      ft = 'cpp',
+      auto = 'config',
+    },
+  },
   lua = {
     { 'folke/neodev.nvim', lazy = true },
     -- { 'ii14/emmylua-nvim', lazy = true },
@@ -2078,6 +2085,10 @@ modules.tool = {
     version = false,
     auto = true,
   },
+  {
+    'mattn/calendar-vim',
+    cmd = 'Calendar',
+  },
 }
 
 local to_plugs = function(t, submods)
@@ -2220,7 +2231,7 @@ return {
   modules.find(),
   modules.git(),
   modules.keymap(),
-  modules.lang { 'lua', 'python', 'lisp', 'java', 'sql' },
+  modules.lang { 'cpp', 'lua', 'python', 'lisp', 'java', 'sql' },
   modules.neovim(),
   modules.telescope(),
   modules.theme(),
