@@ -130,7 +130,7 @@ end
 vim.opt.shortmess:append 'c'
 
 -- disable saving current directory with views
-vim.opt.viewoptions:remove "curdir"
+vim.opt.viewoptions:remove 'curdir'
 
 vim.opt.diffopt:append 'vertical'
 if xy.has '0.9' then
@@ -197,6 +197,26 @@ vim.cmd [[command! TagsUpdate !ctags -R .]]
 --   vim.o.grepprg = 'grep --line-number --recursive -I $*'
 --   vim.o.grepformat = '%f:%l:%m'
 -- end
+
+for _, path in ipairs {
+  '..',
+  'src',
+} do
+  vim.opt.path:append(path)
+end
+
+for _, path in ipairs {
+  '/usr/include',
+  '/usr/local/include',
+  '/opt/homebrew/include',
+  '/usr/local/opt/llvm/include/c++/v1',
+  '/Library/Developer/CommandLineTools/usr/include/c++/v1',
+  '~/cc',
+} do
+  if xy.util.is_dir(path) then
+    vim.opt.path:append(path)
+  end
+end
 
 for _, k in ipairs {
   'number',

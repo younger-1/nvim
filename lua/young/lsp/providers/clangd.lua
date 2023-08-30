@@ -160,6 +160,8 @@ return {
     -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
     -- '--suggest-missing-includes',
     -- '--inlay-hints'
+    --
+    -- '--compile-commands-dir='
   },
   -- init_options = {
   --   clangdFileStatus = true,

@@ -56,7 +56,7 @@ end
 --@param path (string) path to check
 --@returns (bool)
 function util.is_dir(path)
-  local stat = uv.fs_stat(path)
+  local stat = uv.fs_stat(vim.fs.normalize(path))
   return stat and stat.type == 'directory' or false
 end
 
