@@ -4,7 +4,7 @@ local lua = require('young.key').lua
 
 -- TODO:add function instead of <cmd><cr>
 return {
-  [' '] = { ':', 'which_key_ignore', mode = { 'n', 'x' } },
+  -- [' '] = { ':', 'which_key_ignore', mode = { 'n', 'x' } },
   ['`'] = { '<cmd>intro<cr>', 'Intro' },
   -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['0'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -68,28 +68,17 @@ return {
     y = { ':h [<cr>', '[ ] index' },
     z = { ':h z<cr>', 'z-index' },
   },
-  C = { ':call OpenLastClosed()<cr>', 'which_key_ignore' },
-  Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
-  N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
-  T = {
-    name = '+treesitter',
-    t = { cmd 'Telescope treesitter', 'Telescope' },
-    i = { cmd 'TSConfigInfo', 'Config' },
-    I = { cmd 'TSModuleInfo', 'Module' },
-    --
-    h = { cmd 'TSBufToggle highlight', 'Toggle highlight(Buffer)' },
-    r = { cmd 'TSBufToggle rainbow', 'Toggle rainbow' },
-    -- Playground
-    c = { cmd 'TSCaptureUnderCursor', 'Highlight' },
-    n = { cmd 'TSNodeUnderCursor', 'Node' },
-    p = { cmd 'TSPlaygroundToggle', 'Playground' },
-    -- Context
-    C = { cmd 'TSContextToggle', 'Toggle context' },
-  },
   a = {
     name = '+apps',
     [' '] = { cmd 'Telescope command_palette', 'Command palette' },
     e = { '+external' },
+    g = {
+      name = '+github',
+      g = { 'Telescope gh gist', 'Gist' },
+      i = { 'Telescope gh issues', 'Issues' },
+      p = { 'Telescope gh pull_request', 'Pull_request' },
+      r = { 'Telescope gh run', 'Run' },
+    },
     m = { cmd 'MarkdownPreviewToggle', 'Markdown' },
     n = {
       name = '+nabla',
@@ -98,20 +87,6 @@ return {
       a = { lua "require('nabla').replace_all()", 'Replace current LaTeX equations' },
       d = { lua "require('nabla').draw_overlay()", 'Draw overlay' },
       t = { lua "require('nabla').toggle_virt()", 'Toggle ASCII LaTeX' },
-    },
-    s = {
-      name = '+sessions',
-      l = { lua 'require("persistence").load()', 'Current session' },
-      L = { lua 'require("persistence").load({ last = true })', 'Last session' },
-      s = { lua 'require("persistence").stop()', 'Stop session' },
-    },
-    S = {
-      name = '+session-man',
-      l = { cmd 'SessionManager load_current_dir_session', 'Current session' },
-      L = { cmd 'SessionManager load_last_session', 'Last session' },
-      a = { cmd 'SessionManager load_session', 'All sessions' },
-      d = { cmd 'SessionManager delete_session', 'Delete session' },
-      S = { cmd 'SessionManager save_current_session', 'Save session' },
     },
     u = { xy.tool.open_url, 'Open github url' },
     v = { cmd 'OpenInVSCode', 'Open in vscode' },
@@ -129,6 +104,16 @@ return {
     T = { ':TablineCustom ', 'Tabline++' },
   },
   -- c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
+  c = {
+    name = '+code',
+    c = {
+      name = '+lsp-extension',
+    },
+    n = {
+      name = '+neogen',
+    },
+  },
+  C = { ':call OpenLastClosed()<cr>', 'which_key_ignore' },
   d = {
     name = '+debug',
     s = {
@@ -213,11 +198,13 @@ return {
       b = { lua "require 'gitsigns'.setloclist(0, 'attached')", 'Buffers' },
       c = { cmd 'Gitsigns setloclist', 'Current' },
     },
-    b = { cmd 'Telescope git_branches', 'Checkout branch' },
-    c = { cmd 'Telescope git_commits', 'Checkout commit' },
-    C = { cmd 'Telescope git_bcommits', 'Checkout commit(for current file)' },
+    b = { cmd 'Telescope git_branches', 'Branches' },
+    c = { cmd 'Telescope git_commits', 'Commits' },
+    C = { cmd 'Telescope git_bcommits', 'Commits(current file)' },
     e = { cmd 'Telescope git_stash', 'Stash' },
     f = { cmd 'Telescope git_files', 'Files' },
+    o = { cmd 'Telescope git_status', 'Open changed file' },
+    h = { cmd 'Telescope git_bcommits_range', 'Commits(current line)' },
     -- d = { cmd 'Gitsigns diffthis ~1', 'Diff this' },
     d = {
       name = '+diff',
@@ -243,14 +230,7 @@ return {
       R = { ':DiffviewFileHistory -L,:<Left><Left>', 'File commits (range)' },
       F = { ':DiffviewFileHistory -L::<Left>', 'File commits (func)' },
     },
-    h = {
-      name = '+github',
-      g = { 'Telescope gh gist', 'Gist' },
-      i = { 'Telescope gh issues', 'Issues' },
-      p = { 'Telescope gh pull_request', 'Pull_request' },
-      r = { 'Telescope gh run', 'Run' },
-    },
-    t = {
+    i = {
       name = '+gist',
       a = { '<cmd>Gist -b -a<cr>', 'Create anon' },
       d = { '<cmd>Gist -d<cr>', 'Delete' },
@@ -270,9 +250,8 @@ return {
       s = { "<cmd>lua require('neogit').open({ kind = 'split' })<cr>", 'Commit' },
       v = { "<cmd>lua require('neogit').open({ kind = 'vsplit' })<cr>", 'Commit' },
     },
-    o = { cmd 'Telescope git_status', 'Open changed file' },
-    p = { cmd 'Gitsigns preview_hunk', 'Preview hunk' },
-    i = { cmd 'Gitsigns preview_hunk_inline', 'Preview hunk inline' },
+    p = { cmd 'Gitsigns preview_hunk_inline', 'Preview hunk inline' },
+    P = { cmd 'Gitsigns preview_hunk', 'Preview hunk' },
     r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk', mode = { 'n', 'x' } },
     R = { cmd 'Gitsigns reset_buffer', 'Reset buffer' },
     s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk', mode = { 'n', 'x' } },
@@ -290,15 +269,6 @@ return {
   },
   l = {
     name = '+lsp',
-  },
-  c = {
-    name = '+code',
-    c = {
-      name = '+lsp-extension',
-    },
-    n = {
-      name = '+neogen',
-    },
   },
   L = {
     name = '+lua',
@@ -327,12 +297,13 @@ return {
       P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", 'Open the Packer logfile' },
     },
   },
-  n = {
-    name = '+new',
-  },
   m = {
     name = '+mark',
   },
+  n = {
+    name = '+new',
+  },
+  N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   o = {
     name = '+open',
     t = { cmd 'TodoQuickFix', 'Todo qf' },
@@ -340,6 +311,20 @@ return {
   },
   p = {
     name = '+project',
+    s = {
+      name = '+sessions',
+      l = { lua 'require("persistence").load()', 'Current session' },
+      L = { lua 'require("persistence").load({ last = true })', 'Last session' },
+      s = { lua 'require("persistence").stop()', 'Stop session' },
+    },
+    S = {
+      name = '+session-man',
+      l = { cmd 'SessionManager load_current_dir_session', 'Current session' },
+      L = { cmd 'SessionManager load_last_session', 'Last session' },
+      a = { cmd 'SessionManager load_session', 'All sessions' },
+      d = { cmd 'SessionManager delete_session', 'Delete session' },
+      S = { cmd 'SessionManager save_current_session', 'Save session' },
+    },
     -- C = { cmd 'PackerCompile profile=true', 'Compile++' },
     -- P = { cmd 'PackerProfile', 'Profile' },
     -- S = { cmd 'PackerSync', 'Sync' },
@@ -356,7 +341,9 @@ return {
     -- m = { require('young.packer').snapshot_hook, 'Snapshot sort' },
     -- v = { require('young.packer').loaded, 'Loaded' },
   },
-  q = { '<cmd>q!<cr>', 'which_key_ignore' },
+  q = { '<cmd>QuitWindow<cr>', 'which_key_ignore' },
+  Q = { '<cmd>q!<cr>', 'which_key_ignore' },
+  -- Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
   r = {
     name = '+replace',
   },
@@ -535,6 +522,21 @@ return {
     -- t = { cmd 'TransparentToggle', 'Transparent' },
     x = { cmd 'Hexmode', 'Hex mode' },
     u = { cmd 'UndotreeToggle', 'Undotree' },
+  },
+  T = {
+    name = '+treesitter',
+    t = { cmd 'Telescope treesitter', 'Telescope' },
+    i = { cmd 'TSConfigInfo', 'Config' },
+    I = { cmd 'TSModuleInfo', 'Module' },
+    --
+    h = { cmd 'TSBufToggle highlight', 'Toggle highlight(Buffer)' },
+    r = { cmd 'TSBufToggle rainbow', 'Toggle rainbow' },
+    -- Playground
+    c = { cmd 'TSCaptureUnderCursor', 'Highlight' },
+    n = { cmd 'TSNodeUnderCursor', 'Node' },
+    p = { cmd 'TSPlaygroundToggle', 'Playground' },
+    -- Context
+    C = { cmd 'TSContextToggle', 'Toggle context' },
   },
   u = {
     name = '+ui',
