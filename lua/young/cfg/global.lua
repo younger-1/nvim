@@ -83,6 +83,7 @@ vim.filetype.add {
     ['.clang-format'] = 'yaml',
     ['BUILD_cn'] = 'bzl',
     ['BUILD_i18n'] = 'bzl',
+    ['pixi.lock'] = 'yaml',
   },
   pattern = {
     ['.*%.gitignore.*'] = 'gitignore',

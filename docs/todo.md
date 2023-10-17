@@ -81,6 +81,10 @@
 - [ ] neo-tree: 1.<leader>sg and <leader>sf and follow symlink's real path, 2.display symlink path, 3.show hidden files, 4.display icon for empty folders, 5.display long path
 - [ ] nvim-tree: 1.dim hidden files
 - [ ] lazy.nvim: let `init` to execute after startup, otherwise `init` code would be overrided by `./plugin` code
+- [ ] project specific `oldfiles` (default files that Vim remembers is 100)
+- [ ] improve workflow: latest line commit, file commit
+- [ ] Telescope git_commits: show time in result panel
+- [ ] put all hunks of current commit to quickfix
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

@@ -154,8 +154,6 @@ nmap('<leader>ll', ':exe "e " .. v:lua.vim.lsp.get_log_path()<CR>')
 --   },
 -- }
 
-tt = function()
-end
 require 'young'
 require('young.cfg').done()
 
@@ -184,7 +182,7 @@ require('lazy').setup({
       vim.cmd [[
       silent! colorscheme kanagawa
       ]]
-    end
+    end,
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -222,7 +220,6 @@ require('lazy').setup({
       ['<localleader>d'] = function(plugin)
         require('young.util').dd(plugin)
       end,
-    }
-  }
+    },
+  },
 })
-

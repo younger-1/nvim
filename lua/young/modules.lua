@@ -1058,6 +1058,9 @@ modules.git = {
     {
       'kevinhwang91/nvim-fundo',
       lazy = true,
+      build = function()
+        require('fundo').install()
+      end,
       dependencies = { 'kevinhwang91/promise-async' },
       config = function()
         require('fundo').setup()
@@ -1099,6 +1102,18 @@ modules.keymap = {
     --     require('telescope').load_extension 'command_palette'
     --   end,
     -- },
+    {
+      'FeiyouG/commander.nvim',
+      event = 'VeryLazy',
+      auto = 'config',
+      -- commander = {
+      --   {
+      --     -- keys = { 'n', '<Leader><Leader>' },
+      --     cmd = cmd 'Telescope commander',
+      --     desc = 'Open commander 2',
+      --   },
+      -- },
+    },
     {
       'mrjones2014/legendary.nvim',
       -- version = 'v2.1.0',
@@ -1696,26 +1711,26 @@ modules.LSP = {
         require('young.mod.lsp_lines').done()
       end,
     },
-    {
-      'VidocqH/lsp-lens.nvim',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
-      keys = {
-        { '<leader>tL', cmd 'LspLensToggle' },
-      },
-      config = function()
-        require('lsp-lens').setup {
-          include_declaration = false, -- Reference include declaration
-          sections = { -- Enable / Disable specific request
-            definition = false,
-            references = true,
-            implementation = true,
-          },
-          ignore_filetype = {
-            'prisma',
-          },
-        }
-      end,
-    },
+    -- {
+    --   'VidocqH/lsp-lens.nvim',
+    --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+    --   keys = {
+    --     { '<leader>tL', cmd 'LspLensToggle' },
+    --   },
+    --   config = function()
+    --     require('lsp-lens').setup {
+    --       include_declaration = false, -- Reference include declaration
+    --       sections = { -- Enable / Disable specific request
+    --         definition = false,
+    --         references = true,
+    --         implementation = true,
+    --       },
+    --       ignore_filetype = {
+    --         'prisma',
+    --       },
+    --     }
+    --   end,
+    -- },
   },
   highlight = {
     { -- Highlighting the word under the cursor
