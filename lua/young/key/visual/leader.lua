@@ -2,6 +2,19 @@ local cmd = require('young.key').cmd
 
 return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(fn.visualmode())<cr>', 'Comment' },
+  g = {
+    name = '+git',
+    h = {
+      function()
+        vim.cmd [[exe "normal! \<ESC>"]]
+        require('telescope.builtin').git_bcommits_range {
+          from = vim.fn.line "'<",
+          to = vim.fn.line "'>",
+        }
+      end,
+      'Commits(current range)',
+    },
+  },
   l = {
     name = '+lsp',
   },
@@ -65,5 +78,5 @@ return {
       end,
       'Grep',
     },
-  }
+  },
 }
