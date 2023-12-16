@@ -122,7 +122,7 @@ modules.appearance = {
   indent = {
     {
       'lukas-reineke/indent-blankline.nvim',
-      main = "ibl",
+      main = 'ibl',
       event = 'VeryLazy',
       auto = true,
     },
@@ -1358,17 +1358,27 @@ modules.UI = {
     },
   },
   outline = {
+    -- {
+    --   'simrat39/symbols-outline.nvim',
+    --   cmd = 'SymbolsOutline',
+    --   -- keys = { { '<leader>to', cmd 'SymbolsOutline' } },
+    --   init = function()
+    --     -- xy.map.n { '<leader>to', '<cmd>SymbolsOutline<cr>' }
+    --     xy.map.n { '<leader><tab>', '<cmd>SymbolsOutline<cr>' }
+    --   end,
+    --   config = function()
+    --     require 'young.mod.symbols_outline'
+    --   end,
+    -- },
     {
-      'simrat39/symbols-outline.nvim',
-      cmd = 'SymbolsOutline',
-      -- keys = { { '<leader>to', cmd 'SymbolsOutline' } },
-      init = function()
-        -- xy.map.n { '<leader>to', '<cmd>SymbolsOutline<cr>' }
-        xy.map.n { '<leader><tab>', '<cmd>SymbolsOutline<cr>' }
-      end,
-      config = function()
-        require 'young.mod.symbols_outline'
-      end,
+      'hedyhli/outline.nvim',
+      cmd = { 'Outline', 'OutlineOpen' },
+      keys = { -- Example mapping to toggle outline
+        { '<leader><tab>', '<cmd>Outline<CR>', desc = 'Toggle outline' },
+      },
+      opts = {
+        -- Your setup opts here
+      },
     },
     -- {
     --   'stevearc/aerial.nvim',
