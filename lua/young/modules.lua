@@ -27,6 +27,7 @@ modules.theme = {
     'sainnhe/gruvbox-material',
   },
   lua = {
+    { 'folke/tokyonight.nvim' },
     {
       'Mofiqul/dracula.nvim',
       config = function()
@@ -121,6 +122,7 @@ modules.appearance = {
   indent = {
     {
       'lukas-reineke/indent-blankline.nvim',
+      main = "ibl",
       event = 'VeryLazy',
       auto = true,
     },
@@ -426,15 +428,15 @@ modules.change = {
         require('young.mod.dial').done()
       end,
     },
-    {
-      'nvimdev/dyninput.nvim',
-      enabled = xy.has 'nvim-0.10',
-      event = 'InsertEnter',
-      config = function()
-        require 'young.mod.mcc'
-      end,
-      dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    },
+    -- {
+    --   'nvimdev/dyninput.nvim',
+    --   enabled = xy.has 'nvim-0.10',
+    --   event = 'InsertEnter',
+    --   config = function()
+    --     require 'young.mod.mcc'
+    --   end,
+    --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    -- },
   },
 }
 
