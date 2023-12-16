@@ -142,7 +142,8 @@ M.done = function()
   -- highlight of current indent char, default is Label
   vim.cmd [[highlight! link IndentBlanklineContextChar Normal]]
 
-  M.hot()
+  -- M.hot()
+  require('ibl').setup()
 end
 
 return M

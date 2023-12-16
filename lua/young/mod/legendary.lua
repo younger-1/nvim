@@ -1,19 +1,6 @@
 -- For a detailed explanation of the structure for keymap, command, and augroup/autocmd tables, see:
 -- https://github.com/mrjones2014/legendary.nvim/blob/master/doc/table_structures/README.md
 require('legendary').setup {
-  lazy_nvim = {
-    -- Automatically register keymaps that are defined on lazy.nvim plugin specs using the `keys = {}` property.
-    auto_register = true,
-  },
-  which_key = {
-    -- Automatically add which-key tables to legendary
-    auto_register = true,
-    -- You can put which-key.nvim tables here, or alternatively have them auto-register,
-    -- mappings = {},
-    -- opts = {},
-    -- Controls whether legendary.nvim actually binds they keymaps,
-    do_binding = false,
-  },
   -- Customize the prompt that appears on your vim.ui.select() handler
   -- Can be a string or a function that returns a string.
   select_prompt = ' legendary.nvim ',
@@ -102,6 +89,19 @@ require('legendary').setup {
   },
   -- load extensions
   extensions = {
+    lazy_nvim = {
+      -- Automatically register keymaps that are defined on lazy.nvim plugin specs using the `keys = {}` property.
+      auto_register = true,
+    },
+    which_key = {
+      -- Automatically add which-key tables to legendary
+      auto_register = true,
+      -- You can put which-key.nvim tables here, or alternatively have them auto-register,
+      -- mappings = {},
+      -- opts = {},
+      -- Controls whether legendary.nvim actually binds they keymaps,
+      do_binding = false,
+    },
     -- load keymaps and commands from nvim-tree.lua
     -- nvim_tree = true,
     -- load commands from smart-splits.nvim and create keymaps, see :h legendary-extensions-smart-splits.nvim
