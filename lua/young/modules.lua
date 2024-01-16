@@ -178,7 +178,7 @@ modules.appearance = {
     --     require('young.mod.modes')
     --   end,
     -- },
-    {
+    { -- Fancy cursorline & mode indicator in signcolumn
       'gen740/SmoothCursor.nvim',
       event = 'VeryLazy',
       config = function()
@@ -288,13 +288,13 @@ modules.edit = {
     --     require 'young.mod.neoscroll'
     --   end,
     -- },
-    { -- Smooth scrolling for ANY movement command
-      'declancm/cinnamon.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.cinnamon'
-      end,
-    },
+    -- { -- Smooth scrolling for ANY movement command
+    --   'declancm/cinnamon.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.cinnamon'
+    --   end,
+    -- },
   },
   -- textobject = {
   -- },
@@ -1231,6 +1231,14 @@ modules.UI = {
         require 'young.mod.barbar'
       end,
     },
+  },
+  tabline = {
+    -- {
+    --   'nanozuki/tabby.nvim',
+    --   event = 'VimEnter',
+    --   dependencies = 'nvim-tree/nvim-web-devicons',
+    --   auto = 'config',
+    -- },
   },
   winbar = {
     -- {
