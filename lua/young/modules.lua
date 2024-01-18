@@ -1284,6 +1284,12 @@ modules.UI = {
     --   end,
     -- },
   },
+  statuscolumn = {
+    {
+      'luukvbaal/statuscol.nvim',
+      auto = 'config',
+    },
+  },
   cmdline = {
     {
       'folke/noice.nvim',
