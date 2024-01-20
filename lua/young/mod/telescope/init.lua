@@ -172,11 +172,11 @@ M.cfg = {
         -- ['<C-g>']
         -- ['<C-]>']
         -- ['<C-\\>']
-        ['<C-n>'] = action_layout.cycle_layout_next,
-        ['<C-p>'] = action_layout.cycle_layout_prev,
+        ['<A-j>'] = action_layout.cycle_layout_next,
+        ['<A-k>'] = action_layout.cycle_layout_prev,
 
         ['<A-m>'] = action_layout.toggle_mirror,
-        ['<A-k>'] = action_layout.toggle_preview,
+        ['<A-z>'] = action_layout.toggle_preview,
         ['<A-;>'] = action_layout.toggle_prompt_position,
 
         ['<C-y>'] = require('young.mod.telescope.actions').print_entry,

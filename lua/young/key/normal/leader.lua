@@ -301,7 +301,7 @@ return {
     name = '+mark',
   },
   n = {
-    name = '+new',
+    name = '+noice',
   },
   N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   o = {
