@@ -31,11 +31,12 @@ require 'young.lazy'
 tt()
 vim.cmd [[
 " silent! colorscheme dracula
+" silent! colorscheme dracula-soft
 " silent! colorscheme tokyonight
 " silent! colorscheme nightfox
-" silent! colorscheme kanagawa
+silent! colorscheme kanagawa
 " silent! colorscheme github_dark
-silent! colorscheme github_dark_dimmed
+" silent! colorscheme github_dark_dimmed
 " silent! colorscheme github_dark_colorblind
 " silent! colorscheme github_dark_high_contrast
 ]]

@@ -32,19 +32,25 @@ M.done = function()
       },
       {
         text = { builtin.lnumfunc },
-        condition = { true, builtin.not_empty },
         click = 'v:lua.ScLa',
       },
       {
         sign = {
           namespace = { 'gitsigns' },
           wrap = true,
-          -- colwidth = 1,
+          -- auto = true,
+          colwidth = 1,
         },
         click = 'v:lua.ScSa',
       },
       {
-        text = { builtin.foldfunc }, -- table of strings or functions returning a string
+        text = { builtin.foldfunc, ' ' },
+        condition = {
+          true,
+          function(args)
+            return args.fold.width > 0
+          end,
+        },
         click = 'v:lua.ScFa', -- %@ click function label, applies to each text element
         hl = 'FoldColumn', -- %# highlight group label, applies to each text element
       },

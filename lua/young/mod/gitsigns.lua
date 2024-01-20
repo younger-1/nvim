@@ -32,7 +32,7 @@ hi def link GitSignsDeleteInline GitSignsDeleteLn
 hi def link GitSignsChangeInline GitSignsChangeLn
   ]]
 
-local show_count = true
+local show_count = false
 
 M.cfg = {
   signs = {
