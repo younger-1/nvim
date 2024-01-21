@@ -84,3 +84,7 @@ vim.api.nvim_create_autocmd({ 'ModeChanged' }, {
     end
   end,
 })
+
+-- vim.keymap.set('n', 'n', function()
+--   require('smoothcursor.utils').with_smoothcursor(pcall, vim.cmd, 'normal! n')
+-- end, { noremap = true, silent = true })
