@@ -1305,18 +1305,25 @@ modules.UI = {
   },
   statusline = {
     -- { 'glepnir/galaxyline.nvim', config = require('young.mod.galaxyline')}
+    -- {
+    --   'nvim-lualine/lualine.nvim',
+    --   event = 'BufRead',
+    --   config = function()
+    --     require 'young.mod.lualine'
+    --   end,
+    -- },
     {
-      'nvim-lualine/lualine.nvim',
+      'freddiehaddad/feline.nvim',
       event = 'BufRead',
-      config = function()
-        require 'young.mod.lualine'
+      opts = {},
+      config = function(_, opts)
+        require 'young.mod.feline'
       end,
     },
     -- {
-    --   'feline-nvim/feline.nvim',
-    --   event = 'BufRead',
+    --   'rebelot/heirline.nvim',
     --   config = function()
-    --     require 'young.mod.feline'
+    --     require('heirline').setup {}
     --   end,
     -- },
   },
