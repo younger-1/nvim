@@ -21,6 +21,7 @@ function M.done()
   tt()
   require 'young.cfg.global'
   require 'young.cfg.option'
+  require 'young.cfg.stl'
 
   tt()
   require('young.autocmd').done()
