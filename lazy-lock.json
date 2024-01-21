@@ -122,6 +122,7 @@
   "nvim-unception": { "branch": "main", "commit": "23085504347a710e43d7921ccb839fda8f1a70c1" },
   "nvim-web-devicons": { "branch": "master", "commit": "140edfcf25093e8b321d13e154cbce89ee868ca0" },
   "nvim-window-picker": { "branch": "main", "commit": "41cfaa428577c53552200a404ae9b3a0b5719706" },
+  "oil.nvim": { "branch": "master", "commit": "dd432e76d01eda08b8658415588d011009478469" },
   "onedark.nvim": { "branch": "master", "commit": "dc3bad0121298f89b50aaff8599d1946e07eb4c2" },
   "onenord.nvim": { "branch": "main", "commit": "c2219394f20ab4d256d7cf78d6c82dea75491a2a" },
   "org-bullets.nvim": { "branch": "main", "commit": "6e0d60e901bb939eb526139cb1f8d59065132fd9" },

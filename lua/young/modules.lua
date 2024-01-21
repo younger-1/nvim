@@ -705,25 +705,8 @@ modules.file = {
       },
       auto = true,
     },
-    {
-      'tamago324/lir.nvim',
-      event = 'BufRead',
-      -- event = 'User DirOpened',
-      dependencies = { 'nvim-lua/plenary.nvim' },
-      init = function()
-        xy.map.n {
-          '<leader>f',
-          function()
-            require('lir.float').toggle()
-            require('lir.actions').reload()
-          end,
-          'Files',
-        }
-      end,
-      config = function()
-        require 'young.mod.lir'
-      end,
-    },
+  },
+  ranger = {
     {
       'kelly-lin/ranger.nvim',
       keys = {
@@ -752,6 +735,43 @@ modules.file = {
           desc = 'Directory browser',
         },
       },
+      auto = 'config',
+    },
+  },
+  dir = {
+    -- {
+    --   'ZSaberLv0/ZFVimDirDiff',
+    --   cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
+    --   init = function()
+    --     vim.g.ZFDirDiffUI_dirExpandable = '+'
+    --   end,
+    -- },
+    -- {
+    --   'tamago324/lir.nvim',
+    --   -- event = 'BufRead',
+    --   -- event = 'User DirOpened',
+    --   dependencies = { 'nvim-lua/plenary.nvim' },
+    --   init = function()
+    --     xy.map.n {
+    --       '<leader>f',
+    --       function()
+    --         require('lir.float').toggle()
+    --         require('lir.actions').reload()
+    --       end,
+    --       'Files',
+    --     }
+    --   end,
+    --   auto = 'config',
+    -- },
+    {
+      'stevearc/oil.nvim',
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      init = function()
+        xy.map.n {
+          '<leader>f',
+          cmd 'Oil',
+        }
+      end,
       auto = 'config',
     },
   },
@@ -791,15 +811,6 @@ modules.file = {
         require 'young.mod.exrc'
       end,
     },
-  },
-  dir = {
-    -- {
-    --   'ZSaberLv0/ZFVimDirDiff',
-    --   cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
-    --   init = function()
-    --     vim.g.ZFDirDiffUI_dirExpandable = '+'
-    --   end,
-    -- },
   },
   terminal = {
     {
