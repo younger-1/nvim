@@ -161,6 +161,7 @@
   "toggleterm.nvim": { "branch": "main", "commit": "e3805fed94d487b81e9c21548535cc820f62f840" },
   "tokyonight.nvim": { "branch": "main", "commit": "5c74eb7ab33f4e5bc62198a8296fddb60595898c" },
   "treesj": { "branch": "main", "commit": "14808da3cddd62fc86ede53a5ea1fd1635897e75" },
+  "triptych.nvim": { "branch": "main", "commit": "7e82c239ba3fa82df9d02f5ed37695eef72d1d9a" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "undotree": { "branch": "master", "commit": "36ff7abb6b60980338344982ad4cdf03f7961ecd" },
   "urlview.nvim": { "branch": "main", "commit": "7d622e11adbc2cac5bba62345ade9b6672d564a4" },

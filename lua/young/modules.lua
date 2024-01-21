@@ -739,6 +739,21 @@ modules.file = {
         require('ranger-nvim').setup { replace_netrw = true }
       end,
     },
+    {
+      'simonmclean/triptych.nvim',
+      dependencies = {
+        'nvim-lua/plenary.nvim', -- required
+        'nvim-tree/nvim-web-devicons', -- optional
+      },
+      keys = {
+        {
+          '<leader>ef',
+          cmd 'Triptych',
+          desc = 'Directory browser',
+        },
+      },
+      auto = 'config',
+    },
   },
   project = {
     {
@@ -754,6 +769,11 @@ modules.file = {
     },
     -- {
     --   'gpanders/vim-oldfiles',
+    -- },
+    -- {
+    --   'CWood-sdf/spaceport.nvim',
+    --   opts = {},
+    --   lazy = false, -- load spaceport immediately
     -- },
   },
   session = {
