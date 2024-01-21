@@ -25,13 +25,15 @@ require('headlines').setup {
     --                 (atx_h5_marker)
     --                 (atx_h6_marker)
     --             ] @headline)
-
+    --
     --             (thematic_break) @dash
-
+    --
     --             (fenced_code_block) @codeblock
-
+    --
     --             (block_quote_marker) @quote
     --             (block_quote (paragraph (inline (block_continuation) @quote)))
+    --             (block_quote (paragraph (block_continuation) @quote))
+    --             (block_quote (block_continuation) @quote)
     --         ]]
     -- ),
     headline_highlights = { 'Headline' },
@@ -57,13 +59,15 @@ require('headlines').setup {
     --                 (atx_h5_marker)
     --                 (atx_h6_marker)
     --             ] @headline)
-
+    --
     --             (thematic_break) @dash
-
+    --
     --             (fenced_code_block) @codeblock
-
+    --
     --             (block_quote_marker) @quote
     --             (block_quote (paragraph (inline (block_continuation) @quote)))
+    --             (block_quote (paragraph (block_continuation) @quote))
+    --             (block_quote (block_continuation) @quote)
     --         ]]
     -- ),
     treesitter_language = 'markdown',
@@ -89,15 +93,19 @@ require('headlines').setup {
     --                 (heading5_prefix)
     --                 (heading6_prefix)
     --             ] @headline
-
+    --
     --             (weak_paragraph_delimiter) @dash
     --             (strong_paragraph_delimiter) @doubledash
-
-    --             ((ranged_tag
+    --
+    --             ([(ranged_tag
     --                 name: (tag_name) @_name
     --                 (#eq? @_name "code")
-    --             ) @codeblock (#offset! @codeblock 0 0 1 0))
-
+    --             )
+    --             (ranged_verbatim_tag
+    --                 name: (tag_name) @_name
+    --                 (#eq? @_name "code")
+    --             )] @codeblock (#offset! @codeblock 0 0 1 0))
+    --
     --             (quote1_prefix) @quote
     --         ]]
     -- ),
@@ -118,17 +126,17 @@ require('headlines').setup {
     --   'org',
     --   [[
     --             (headline (stars) @headline)
-
+    --
     --             (
     --                 (expr) @dash
     --                 (#match? @dash "^-----+$")
     --             )
-
+    --
     --             (block
     --                 name: (expr) @_name
     --                 (#eq? @_name "SRC")
     --             ) @codeblock
-
+    --
     --             (paragraph . (expr) @quote
     --                 (#eq? @quote ">")
     --             )
