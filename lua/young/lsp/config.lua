@@ -13,7 +13,14 @@ local lua = require('young.key').lua
 return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '✘',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '󰌶',
+      },
+    },
     virtual_text = {
       spacing = 4,
       prefix = '●',

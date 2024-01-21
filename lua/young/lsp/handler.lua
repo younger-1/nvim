@@ -28,6 +28,7 @@ local lsp_cfg = require 'young.lsp.config'
 --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 -- end
 
+-- TODO: https://github.com/wookayin/dotfiles/commit/a5336885b515b4849f843c87832628271aad264b
 vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError' })
 vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn' })
 vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo' })
