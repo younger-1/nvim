@@ -101,6 +101,13 @@ local normal = {
       [[:<C-U><C-R><C-R>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-F><left>]],
       'Edit or select [R/r]egister',
     },
+    p = {
+      -- "p" makes sense, gv selects the last Visual selection, so this one selects the last pasted text.
+      function()
+        vim.api.nvim_feedkeys('`[' .. vim.fn.strpart(vim.fn.getregtype(), 0, 1) .. '`]', 'n', false)
+      end,
+      'Switch to VISUAL using last paste/change',
+    },
   },
   y = {
     c = {

@@ -364,16 +364,21 @@ modules.edit = {
 modules.change = {
   { 'tpope/vim-surround' },
   { 'tpope/vim-repeat' },
+  -- {
+  --   'tpope/vim-abolish',
+  --   keys = {
+  --     { 'crs', desc = 'snake_case' },
+  --     { 'crm', desc = 'MixedCase' },
+  --     { 'crc', desc = 'camelCase' },
+  --     { 'cru', desc = 'UPPER_CASE' },
+  --     { 'cr-', desc = 'dash-case' },
+  --     { 'cr.', desc = 'dot.case' },
+  --   },
+  -- },
   {
-    'tpope/vim-abolish',
-    keys = {
-      { 'crs', desc = 'snake_case' },
-      { 'crm', desc = 'MixedCase' },
-      { 'crc', desc = 'camelCase' },
-      { 'cru', desc = 'UPPER_CASE' },
-      { 'cr-', desc = 'dash-case' },
-      { 'cr.', desc = 'dot.case' },
-    },
+    'gregorias/coerce.nvim',
+    tag = 'v0.2',
+    config = true,
   },
   pair = {
     {
