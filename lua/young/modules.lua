@@ -621,6 +621,10 @@ modules.BWT = {
         require('stabilize').setup {}
       end,
     },
+    {
+      'stevearc/stickybuf.nvim',
+      opts = {},
+    },
     -- { 'dhruvasagar/vim-zoom' },
     {
       'mrjones2014/smart-splits.nvim',
@@ -770,6 +774,9 @@ modules.file = {
         xy.map.n {
           '<leader>f',
           cmd 'Oil',
+          -- function()
+          --   require('oil').toggle_float()
+          -- end,
         }
       end,
       auto = 'config',

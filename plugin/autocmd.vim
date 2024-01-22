@@ -5,6 +5,8 @@ augroup init
   autocmd BufWinEnter * if &previewwindow | nnoremap <buffer> q <Cmd>close<CR> | endif
   autocmd CmdWinEnter * nnoremap <buffer> q <Cmd>close<CR>
 
+  " autocmd WinEnter * if &buftype == 'nofile' | nnoremap <buffer> q <Cmd>close<CR> | endif
+
   " For nvim: Auto close shell terminals (#15440)
   " autocmd TermClose *
   "       \ if !v:event.status |
