@@ -7,8 +7,8 @@ require('oil').setup {
   columns = {
     'icon',
     -- "permissions",
-    -- "size",
-    -- "mtime",
+    'size',
+    'mtime',
   },
   -- Buffer-local options to use for oil buffers
   buf_options = {
@@ -27,7 +27,7 @@ require('oil').setup {
     concealcursor = 'nvic',
   },
   -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
-  delete_to_trash = false,
+  delete_to_trash = true,
   -- Skip the confirmation popup for simple operations
   skip_confirm_for_simple_edits = false,
   -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
@@ -56,6 +56,7 @@ require('oil').setup {
     ['<C-t>'] = 'actions.select_tab',
     ['<C-p>'] = 'actions.preview',
     ['<C-c>'] = 'actions.close',
+    ['q'] = 'actions.close',
     ['<C-l>'] = 'actions.refresh',
     ['-'] = 'actions.parent',
     ['_'] = 'actions.open_cwd',
@@ -64,6 +65,7 @@ require('oil').setup {
     ['gs'] = 'actions.change_sort',
     ['gx'] = 'actions.open_external',
     ['g.'] = 'actions.toggle_hidden',
+    ['H'] = 'actions.toggle_hidden',
     ['g\\'] = 'actions.toggle_trash',
   },
   -- Set to false to disable all of the above keymaps
@@ -142,3 +144,26 @@ require('oil').setup {
     },
   },
 }
+
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
+  group = vim.api.nvim_create_augroup('_winbar', {}),
+  callback = function()
+    local bufnum = vim.fn.winbufnr(vim.fn.winnr())
+    local filetype = vim.fn.getbufvar(bufnum, '&filetype')
+
+    if filetype ~= 'oil' then
+      return
+    end
+
+    local path = vim.fn.expand('%:p'):gsub('oil://', '')
+    local path_to_cwd = path:gsub(vim.pesc(vim.loop.cwd() .. '/'), '')
+    local cwd = vim.loop.cwd():gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
+
+    -- if #path_to_cwd > 0 then
+    --   vim.opt_local.winbar = path_to_cwd
+    -- else
+    --   vim.opt_local.winbar = cwd
+    -- end
+    vim.opt_local.winbar = ('[%s] %s'):format(cwd, path_to_cwd)
+  end,
+})

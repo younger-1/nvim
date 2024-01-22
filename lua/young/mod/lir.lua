@@ -116,17 +116,17 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
     local filetype = vim.fn.getbufvar(bufnum, '&filetype')
 
     if filetype ~= 'lir' then
-      vim.opt_local.winbar = ''
       return
     end
 
-    local folder_name =
-      vim.fn.expand('%:p'):gsub(vim.pesc(vim.loop.cwd() .. '/'), ''):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
+    local path = vim.fn.expand('%:p')
+    local path_to_cwd = path:gsub(vim.pesc(vim.loop.cwd() .. '/'), '')
+    local cwd = vim.loop.cwd():gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
 
-    if #folder_name > 0 then
-      vim.opt_local.winbar = folder_name
+    if #path_to_cwd > 0 then
+      vim.opt_local.winbar = path_to_cwd
     else
-      vim.opt_local.winbar = vim.fn.expand('%:p'):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
+      vim.opt_local.winbar = cwd
     end
   end,
 })
