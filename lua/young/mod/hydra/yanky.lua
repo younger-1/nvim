@@ -7,7 +7,9 @@ local yanky_hydra = Hydra {
     -- invoke_on_body = true,
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
   },
   -- body = 'p',

@@ -45,7 +45,9 @@ local ts_hydra_meta = {
     -- timeout = 4000,
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
   },
   mode = { 'n', 'x' },
@@ -150,7 +152,9 @@ M.ts_init_hydra = Hydra {
     invoke_on_body = true,
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
   },
   mode = { 'n', 'x' },

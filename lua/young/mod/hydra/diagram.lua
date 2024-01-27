@@ -15,7 +15,9 @@ Hydra {
     invoke_on_body = true,
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
     on_enter = function()
       vim.o.virtualedit = 'all'

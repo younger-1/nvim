@@ -63,7 +63,9 @@ local ab_hydra_meta = {
     -- timeout = 4000,
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
     -- on_key = function()
     --   -- Preserve animation
@@ -153,7 +155,9 @@ M.ab_init_hydra = Hydra {
     invoke_on_body = true,
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
   },
   mode = { 'n' },

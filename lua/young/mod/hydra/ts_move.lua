@@ -16,7 +16,9 @@ local curr = Hydra {
   config = {
     timeout = 4000,
     hint = {
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
   },
   mode = { 'n', 'x' },

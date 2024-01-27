@@ -1,6 +1,3 @@
--- (Optional) easy way to get Neovim current size.
--- local ui = vim.api.nvim_list_uis()[1]
-
 require('jabs').setup {
   position = 'center', -- center, corner
   width = 50,
