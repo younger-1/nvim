@@ -6,7 +6,9 @@ local buffer_hydra = Hydra {
   config = {
     hint = {
       type = 'window',
-      border = 'rounded',
+      float_opts = {
+        border = 'rounded',
+      },
     },
     on_key = function()
       -- Preserve animation

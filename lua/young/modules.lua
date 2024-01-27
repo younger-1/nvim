@@ -77,6 +77,13 @@ modules.theme = {
     },
     { 'rose-pine/neovim', name = 'rose-pine' },
     { 'catppuccin/nvim', name = 'catppuccin' },
+    {
+      'oxfist/night-owl.nvim',
+      enabled = xy.colorscheme == 'night-owl',
+      -- config = function()
+      --   vim.cmd.colorscheme 'night-owl'
+      -- end,
+    },
   },
   helper = {
     -- {
@@ -612,6 +619,13 @@ modules.BWT = {
     --     require 'young.mod.three'
     --   end,
     -- },
+    -- { -- Just Another Buffer Switcher
+    --   'matbme/JABS.nvim',
+    --   keys = {
+    --     { '<cr>', cmd 'JABSOpen', desc = 'Jump to buffers' },
+    --   },
+    --   auto = 'config',
+    -- },
   },
   window = {
     {
@@ -1126,7 +1140,7 @@ modules.keymap = {
       end,
     },
     {
-      'anuvyklack/hydra.nvim',
+      'nvimtools/hydra.nvim',
       event = 'VeryLazy',
       config = function()
         require 'young.mod.hydra'
@@ -1553,6 +1567,8 @@ modules.code = {
     -- [luasnip]
     {
       'L3MON4D3/LuaSnip',
+      version = 'v2.*',
+      build = 'make install_jsregexp', -- install jsregexp (optional!).
       -- event = 'InsertEnter',
       lazy = true,
       config = function()
@@ -1714,7 +1730,7 @@ modules.LSP = {
     },
   },
   {
-    'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
     config = function()
       require('young.lsp.null_ls').done()
     end,

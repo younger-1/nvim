@@ -20,7 +20,9 @@ Hydra {
   config = {
     invoke_on_body = true,
     hint = {
-      border = 'rounded',
+      float_opts = {
+        border = 'double',
+      },
       offset = -1,
     },
   },

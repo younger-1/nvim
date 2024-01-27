@@ -18,7 +18,9 @@ require 'hydra' {
     color = 'pink',
     invoke_on_body = true,
     hint = {
-      border = 'single',
+      float_opts = {
+        border = 'single',
+      },
     },
   },
   mode = { 'n' },
