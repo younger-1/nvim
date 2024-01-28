@@ -96,12 +96,12 @@ return {
     s = {
       name = '+sort',
     },
-    A = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
-    U = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
-    B = { ':TablineBuffersBind ', 'Tabline bound' },
-    R = { ':TablineTabRename ', 'Tabline rename' },
-    N = { ':TablineTabNew ', 'Tabline new' },
-    T = { ':TablineCustom ', 'Tabline++' },
+    -- A = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
+    -- U = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
+    -- B = { ':TablineBuffersBind ', 'Tabline bound' },
+    -- R = { ':TablineTabRename ', 'Tabline rename' },
+    -- N = { ':TablineTabNew ', 'Tabline new' },
+    -- T = { ':TablineCustom ', 'Tabline++' },
   },
   -- c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
   c = {
@@ -342,7 +342,7 @@ return {
     -- v = { require('young.packer').loaded, 'Loaded' },
   },
   q = { '<cmd>QuitWindow<cr>', 'which_key_ignore' },
-  Q = { '<cmd>q!<cr>', 'which_key_ignore' },
+  Q = { '<cmd>q<cr>', 'which_key_ignore' },
   -- Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
   r = {
     name = '+replace',
