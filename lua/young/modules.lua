@@ -13,7 +13,7 @@ modules.theme = {
       require('styler').setup {
         themes = {
           markdown = { colorscheme = 'nightfox' },
-          help = { colorscheme = 'kanagawa' },
+          help = { colorscheme = 'carbonfox' },
           -- noice = { colorscheme = "gruvbox", background = "dark" },
         },
       }
@@ -608,17 +608,8 @@ modules.BWT = {
     {
       'ThePrimeagen/harpoon',
       event = 'BufRead',
-      config = function()
-        require 'young.mod.harpoon'
-      end,
+      auto = 'config',
     },
-    -- {
-    --   'stevearc/three.nvim',
-    --   event = 'BufRead',
-    --   config = function()
-    --     require 'young.mod.three'
-    --   end,
-    -- },
     -- { -- Just Another Buffer Switcher
     --   'matbme/JABS.nvim',
     --   keys = {
@@ -1288,6 +1279,11 @@ modules.UI = {
         require 'young.mod.barbar'
       end,
     },
+    -- {
+    --   'stevearc/three.nvim',
+    --   event = 'BufRead',
+    --   auto = 'config',
+    -- },
   },
   tabline = {
     -- {
@@ -1296,6 +1292,14 @@ modules.UI = {
     --   dependencies = 'nvim-tree/nvim-web-devicons',
     --   auto = 'config',
     -- },
+    {
+      'backdround/tabscope.nvim',
+      event = 'VeryLazy',
+      config = function()
+        require('tabscope').setup {}
+        vim.keymap.set('n', '<leader>bc', require('tabscope').remove_tab_buffer)
+      end,
+    },
   },
   winbar = {
     -- {
@@ -1355,41 +1359,41 @@ modules.UI = {
     },
   },
   cmdline = {
-    {
-      'folke/noice.nvim',
-      event = 'VeryLazy',
-      dependencies = { 'MunifTanjim/nui.nvim' },
-      keys = {
-        {
-          '<S-Enter>',
-          function()
-            require('noice').redirect(vim.fn.getcmdline())
-          end,
-          mode = 'c',
-          desc = 'Redirect Cmdline',
-        },
-        { '<leader>nl', cmd 'Noice last', desc = 'Last' },
-        { '<leader>nh', cmd 'Noice history', desc = 'History' },
-        { '<leader>nd', cmd 'Noice dismiss', desc = 'Dismiss' },
-        { '<leader>ni', cmd 'Noice stats', desc = 'Stats' },
-        { '<leader>ns', cmd 'Noice telescope', desc = 'Search' },
-        {
-          '<leader>nt',
-          function()
-            if vim.o.cmdheight == 0 then
-              vim.cmd [[Noice disable]]
-              vim.o.cmdheight = 1
-            else
-              vim.cmd [[Noice enable]]
-            end
-          end,
-          desc = 'Toggle',
-        },
-        -- { '<c-f>', function() if not require('noice.lsp').scroll(4) then return '<c-f>' end end, silent = true, expr = true, desc = 'Scroll forward', mode = { 'i', 'n', 's' } },
-        -- { '<c-b>', function() if not require('noice.lsp').scroll(-4) then return '<c-b>' end end, silent = true, expr = true, desc = 'Scroll backward', mode = { 'i', 'n', 's' } },
-      },
-      auto = 'config',
-    },
+    -- {
+    --   'folke/noice.nvim',
+    --   event = 'VeryLazy',
+    --   dependencies = { 'MunifTanjim/nui.nvim' },
+    --   keys = {
+    --     {
+    --       '<S-Enter>',
+    --       function()
+    --         require('noice').redirect(vim.fn.getcmdline())
+    --       end,
+    --       mode = 'c',
+    --       desc = 'Redirect Cmdline',
+    --     },
+    --     { '<leader>nl', cmd 'Noice last', desc = 'Last' },
+    --     { '<leader>nh', cmd 'Noice history', desc = 'History' },
+    --     { '<leader>nd', cmd 'Noice dismiss', desc = 'Dismiss' },
+    --     { '<leader>ni', cmd 'Noice stats', desc = 'Stats' },
+    --     { '<leader>ns', cmd 'Noice telescope', desc = 'Search' },
+    --     {
+    --       '<leader>nt',
+    --       function()
+    --         if vim.o.cmdheight == 0 then
+    --           vim.cmd [[Noice disable]]
+    --           vim.o.cmdheight = 1
+    --         else
+    --           vim.cmd [[Noice enable]]
+    --         end
+    --       end,
+    --       desc = 'Toggle',
+    --     },
+    --     -- { '<c-f>', function() if not require('noice.lsp').scroll(4) then return '<c-f>' end end, silent = true, expr = true, desc = 'Scroll forward', mode = { 'i', 'n', 's' } },
+    --     -- { '<c-b>', function() if not require('noice.lsp').scroll(-4) then return '<c-b>' end end, silent = true, expr = true, desc = 'Scroll backward', mode = { 'i', 'n', 's' } },
+    --   },
+    --   auto = 'config',
+    -- },
     -- {
     --   'VonHeikemen/fine-cmdline.nvim',
     --   dependencies = { 'MunifTanjim/nui.nvim' },
