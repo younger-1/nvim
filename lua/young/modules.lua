@@ -605,11 +605,11 @@ modules.neovim = {
 
 modules.BWT = {
   buffer = {
-    {
-      'ThePrimeagen/harpoon',
-      event = 'BufRead',
-      auto = 'config',
-    },
+    -- {
+    --   'ThePrimeagen/harpoon',
+    --   event = 'BufRead',
+    --   auto = 'config',
+    -- },
     -- { -- Just Another Buffer Switcher
     --   'matbme/JABS.nvim',
     --   keys = {
@@ -1212,7 +1212,7 @@ modules.keymap = {
     -- }
     { -- Escape from insert, terminal & command mode without delay
       'TheBlob42/houdini.nvim',
-      event = 'BufRead',
+      event = 'VeryLazy',
       config = function()
         require('houdini').setup()
       end,
@@ -1288,7 +1288,7 @@ modules.UI = {
   tabline = {
     -- {
     --   'nanozuki/tabby.nvim',
-    --   event = 'VimEnter',
+    --   event = 'VeryLazy',
     --   dependencies = 'nvim-tree/nvim-web-devicons',
     --   auto = 'config',
     -- },
@@ -1297,7 +1297,12 @@ modules.UI = {
       event = 'VeryLazy',
       config = function()
         require('tabscope').setup {}
-        vim.keymap.set('n', '<leader>bc', require('tabscope').remove_tab_buffer)
+        vim.keymap.set(
+          'n',
+          '<leader>bc',
+          require('tabscope').remove_tab_buffer,
+          { desc = 'Close buffer in current tab' }
+        )
       end,
     },
   },
@@ -1309,13 +1314,13 @@ modules.UI = {
     --     require 'young.mod.gps'
     --   end,
     -- },
-    { -- @see https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/incline.lua
-      'b0o/incline.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.incline'
-      end,
-    },
+    -- { -- @see https://github.com/b0o/nvim-conf/blob/main/lua/user/plugin/incline.lua
+    --   'b0o/incline.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.incline'
+    --   end,
+    -- },
     { -- breadcrumbs
       'SmiteshP/nvim-navic',
       event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',

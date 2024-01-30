@@ -1,6 +1,3 @@
--- https://www.reddit.com/r/neovim/comments/wzbkw6/looking_for_inspiration_for_custom_status_line_if/
--- https://github.com/cseickel/dotfiles/blob/main/config/nvim/lua/myline.lua
-
 local M = {}
 
 local isempty = function(s)
@@ -40,7 +37,7 @@ vim.cmd [[
 ]]
 
 local winbar_filetype_exclude = {
-  [''] = true,
+  -- [''] = true,
   ['NvimTree'] = true,
   ['Outline'] = true,
   ['Trouble'] = true,
@@ -55,23 +52,6 @@ local winbar_filetype_exclude = {
   ['toggleterm'] = true,
 }
 
-M.get_neo_tree_context = function()
-  local context = require('neo-tree.ui.selector').get_scrolled_off_node_text()
-  if isempty(context) then
-    return M.active_indicator()
-  else
-    return context
-  end
-  --local source = vim.b.neo_tree_source
-  --if not isempty(source) then
-  --  local label = require("neo-tree").config.source_selector.tab_labels[source]
-  --  if not isempty(label) then
-  --    return label
-  --  end
-  --end
-  --return ""
-end
-
 M.get_winbar = function()
   -- floating window
   local cfg = vim.api.nvim_win_get_config(0)
@@ -79,9 +59,9 @@ M.get_winbar = function()
     return ''
   end
 
-  if vim.bo.filetype == 'neo-tree' then
-    return '%{%v:lua.myline.get_neo_tree_context()%}'
-  end
+  -- if vim.bo.filetype == 'neo-tree' then
+  --   return '%{%v:lua.myline.get_neo_tree_context()%}'
+  -- end
 
   if winbar_filetype_exclude[vim.bo.filetype] then
     return '%{%v:lua.myline.active_indicator()%}'
@@ -94,39 +74,19 @@ M.get_winbar = function()
     -- real files do not have buftypes
     if isempty(buftype) then
       return table.concat {
-        '%{%v:lua.myline.get_mode()%}',
-        '%{%v:lua.myline.get_filename()%}',
-        '%<',
-        '%{%v:lua.myline.get_location()%}',
-        '%=',
-        '%{%v:lua.myline.get_diag()%}',
-        '%{%v:lua.myline.get_git_dirty()%}',
+        -- '%{%v:lua.myline.get_mode()%}',
+        '%{%v:lua.myline.get_filename()%} ',
+        -- '%<',
+        -- '%{%v:lua.myline.get_location()%}',
+        -- '%=',
+        -- '%{%v:lua.myline.get_diag()%}',
+        -- '%{%v:lua.myline.get_git_dirty()%}',
       }
     else
       -- Meant for quickfix, help, etc
       return '%{%v:lua.myline.get_mode()%}%( %h%) %f'
     end
   end
-end
-
-M.get_statusline = function()
-  local parts = {
-    --"%{%v:lua.myline.get_mode()%}",
-    '%#StatusLineCwd#  %{fnamemodify(getcwd(), ":~")}/%*',
-    '%#StatusLineTransition2#▕%*',
-    '%#StatusLineTransition1#▏%*',
-    '%<',
-    '%#StatusLineFile#%f %*',
-    '%#StatusLineMod#%{IsBuffersModified()}%*',
-    '%=',
-    '%{%v:lua.myline.get_diag_counts()%}',
-    '%{%v:lua.myline.get_git_changes()%}',
-    '%#StatusLineTransition1#▕%*',
-    '%#StatusLineTransition2#▏%*',
-    '%{%v:lua.myline.get_git_branch()%}',
-    '%#StatusLineOutside# %3l/%L󰮾 %3c %*',
-  }
-  return table.concat(parts)
 end
 
 -- mode_map copied from:
@@ -405,6 +365,5 @@ vim.cmd [[
 
 _G.myline = M
 vim.o.winbar = '%{%v:lua.myline.get_winbar()%}'
-vim.o.statusline = '%{%v:lua.myline.get_statusline()%}'
 
 return M
