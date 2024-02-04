@@ -156,9 +156,9 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
       return
     end
 
-    local path = vim.fn.expand('%:p'):gsub('oil://', '')
-    local path_to_cwd = path:gsub(vim.pesc(vim.loop.cwd() .. '/'), '')
     local cwd = vim.loop.cwd():gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
+    local path = vim.fn.expand('%:p'):gsub('oil://', ''):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
+    local path_to_cwd = path:gsub(cwd .. '/', '')
 
     -- if #path_to_cwd > 0 then
     --   vim.opt_local.winbar = path_to_cwd
