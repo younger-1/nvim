@@ -748,6 +748,13 @@ modules.file = {
     },
   },
   dir = {
+    {
+      'nvim-telescope/telescope-file-browser.nvim',
+      event = 'VeryLazy',
+      config = function()
+        require('telescope').load_extension 'file_browser'
+      end,
+    },
     -- {
     --   'ZSaberLv0/ZFVimDirDiff',
     --   cmd = { 'ZFDirDiff', 'ZFDirDiffMark' },
@@ -789,16 +796,24 @@ modules.file = {
   },
   project = {
     {
-      'ahmedkhalf/project.nvim',
-      -- 'younger-1/project.nvim',
-      -- branch = 'mydev',
+      'nvim-telescope/telescope-project.nvim',
       event = 'VeryLazy',
       config = function()
-        require 'young.mod.project'
-        xy.map.n { '<leader>sp', cmd 'Telescope projects', 'Projects' }
-        -- xy.map.n { '<leader>pp',cmd 'Telescope projects', 'Projects' }
+        require('telescope').load_extension 'project'
+        xy.map.n { '<leader>sp', cmd 'Telescope project', 'Projects' }
       end,
     },
+    -- {
+    --   'ahmedkhalf/project.nvim',
+    --   -- 'younger-1/project.nvim',
+    --   -- branch = 'mydev',
+    --   event = 'VeryLazy',
+    --   config = function()
+    --     require 'young.mod.project'
+    --     xy.map.n { '<leader>sp', cmd 'Telescope projects', 'Projects' }
+    --     -- xy.map.n { '<leader>pp',cmd 'Telescope projects', 'Projects' }
+    --   end,
+    -- },
     -- {
     --   'gpanders/vim-oldfiles',
     -- },
@@ -942,13 +957,6 @@ modules.telescope = {
     event = 'VeryLazy',
     config = function()
       require('telescope').load_extension 'zf-native'
-    end,
-  },
-  {
-    'nvim-telescope/telescope-file-browser.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('telescope').load_extension 'file_browser'
     end,
   },
   {
