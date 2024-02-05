@@ -800,7 +800,7 @@ modules.file = {
       event = 'VeryLazy',
       config = function()
         require('telescope').load_extension 'project'
-        xy.map.n { '<leader>sp', cmd 'Telescope project', 'Projects' }
+        xy.map.n { '<leader>sp', cmd 'Telescope project display_type=full layout_config={width=0.7}', 'Projects' }
       end,
     },
     -- {
