@@ -311,6 +311,25 @@ M.cfg = {
     file_browser = {
       theme = 'ivy',
     },
+    project = {
+      theme = 'dropdown',
+      base_dirs = { -- check .git dir for project
+        { vim.fn.stdpath 'data' .. '/lazy' },
+        -- { '~/work' },
+        -- { '~/source' },
+        -- { '~/projects' },
+        { '~', max_depth = 3 },
+      },
+      hidden_files = true, -- default: false
+      -- order_by = 'recent',
+      search_by = { 'title', 'path' }, -- default: 'title'
+      -- on_project_selected = function(prompt_bufnr)
+      --   -- Do anything you want in here. For example:
+      --   local project_actions = require 'telescope._extensions.project.actions'
+      --   project_actions.change_working_directory(prompt_bufnr, false)
+      --   require('harpoon.ui').nav_file(1)
+      -- end,
+    },
     packer = {
       theme = 'ivy',
       layout_config = {
