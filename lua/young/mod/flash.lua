@@ -42,6 +42,20 @@ local keys = {
   {
     'gs',
     function()
+      require('flash').jump { continue = true }
+    end,
+    desc = 'Flash resume jump',
+  },
+  -- {
+  --   'g/',
+  --   function()
+  --     require('flash').search { continue = true }
+  --   end,
+  --   desc = 'Flash resume search',
+  -- },
+  {
+    'gL',
+    function()
       -- require('flash').jump {
       --   action = function(match, state)
       --     vim.api.nvim_win_call(match.win, function()
