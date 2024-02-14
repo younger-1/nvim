@@ -550,18 +550,6 @@ return {
   w = { cmd 'update', 'which_key_ignore' },
   x = {
     name = '+trouble',
-    x = { cmd 'TroubleToggle', 'Open' },
-    t = { cmd 'TodoTrouble', 'Todo' },
-    ['.'] = { cmd 'Trouble telescope', 'Telescope' },
-    ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
-    ['<C-a>'] = { cmd 'TroubleToggle loclist', 'LocList' },
-    --
-    d = { cmd 'TroubleToggle lsp_definitions', 'Def' },
-    r = { cmd 'TroubleToggle lsp_references', 'Ref' },
-    y = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
-    i = { cmd 'TroubleToggle lsp_implementations', 'Impl' },
-    e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
-    E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
   },
   y = {
     name = '+young',

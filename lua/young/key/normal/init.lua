@@ -13,7 +13,7 @@ local normal = {
     -- ['<Tab>'] = {},
     -- ['<CR>'] = {},
     -- c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next hunk' },
-    x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next trouble' },
+    -- x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<cr>]], 'Next trouble' },
     -- p = {
     --   function()
     --     require('young.tool').putline ']p'
@@ -26,7 +26,7 @@ local normal = {
     -- ['<Tab>'] = {},
     -- ['<CR>'] = {},
     -- c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev hunk' },
-    x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev trouble' },
+    -- x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<cr>]], 'Prev trouble' },
     -- p = {
     --   function()
     --     require('young.tool').putline '[p'
