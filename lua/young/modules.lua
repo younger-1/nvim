@@ -229,47 +229,37 @@ modules.edit = {
       event = 'CursorMoved',
     },
     -- {
+    --   'unblevable/quick-scope',
+    --   init = function()
+    --     vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+    --   end,
+    -- },
+    -- {
     --   'ggandor/lightspeed.nvim',
     --   event = 'BufWinEnter',
     --   config = function()
     --     require 'young.mod.lightspeed'
     --   end,
     -- },
-    {
-      'ggandor/leap.nvim',
-      event = 'BufWinEnter',
-      config = function()
-        require 'young.mod.leap'
-      end,
-    },
-    {
-      'ggandor/flit.nvim',
-      event = 'VeryLazy',
-      dependencies = { 'ggandor/leap.nvim' },
-      config = function()
-        require('flit').setup {}
-      end,
-    },
+    -- {
+    --   'ggandor/leap.nvim',
+    --   event = 'BufWinEnter',
+    --   config = function()
+    --     require 'young.mod.leap'
+    --   end,
+    -- },
+    -- {
+    --   'ggandor/flit.nvim',
+    --   event = 'VeryLazy',
+    --   dependencies = { 'ggandor/leap.nvim' },
+    --   config = function()
+    --     require('flit').setup {}
+    --   end,
+    -- },
     {
       'folke/flash.nvim',
-      keys = {
-        {
-          'gs',
-          function()
-            require('flash').jump()
-          end,
-          mode = { 'n', 'x', 'o' },
-          desc = 'Jump forwards',
-        },
-        {
-          'gS',
-          function()
-            require('flash').jump { search = { forward = false } }
-          end,
-          mode = { 'n', 'x', 'o' },
-          desc = 'Jump backwards',
-        },
-      },
+      event = 'VeryLazy',
+      auto = 'config',
     },
     {
       'andymass/vim-matchup',
@@ -867,6 +857,21 @@ modules.file = {
 }
 
 modules.find = {
+  search = {
+    -- {
+    --   'hrsh7th/vim-seak',
+    --   config = function()
+    --     vim.cmd [[
+    --       let g:seak_enabled = v:true
+    --       cnoremap <C-o> <Cmd>call seak#select({ 'nohlsearch': v:true })<CR>
+    --     ]]
+    --   end,
+    -- },
+    -- {
+    --   'hrsh7th/vim-searchx',
+    --   auto = 'config',
+    -- },
+  },
   grep = {
     {
       'nvim-pack/nvim-spectre',

@@ -153,9 +153,6 @@ M.cfg = {
         ['<C-j>'] = actions.move_selection_next,
         ['<C-k>'] = actions.move_selection_previous,
 
-        ['<C-s>'] = actions.select_horizontal,
-        ['<C-v>'] = actions.select_vertical,
-
         ['<A-n>'] = actions.cycle_history_next,
         ['<A-p>'] = actions.cycle_history_prev,
 
@@ -186,9 +183,6 @@ M.cfg = {
         ['<CR>'] = require('young.mod.telescope.actions').open_multi_files,
       },
       n = {
-        ['<C-s>'] = actions.select_horizontal,
-        ['<C-v>'] = actions.select_vertical,
-
         ['<A-n>'] = actions.cycle_history_next,
         ['<A-p>'] = actions.cycle_history_prev,
 
