@@ -1,9 +1,48 @@
 local M = {}
 
-local trouble = require 'trouble.providers.telescope'
-local tele = require('young.mod.telescope').cfg
-tele.defaults.mappings.i['<c-t>'] = trouble.open_with_trouble
-tele.defaults.mappings.n['<c-t>'] = trouble.open_with_trouble
+M.once = function()
+  local t = require('young.mod.telescope').cfg
+  t.defaults.mappings.i['<c-t>'] = function(prompt_bufnr)
+    require('trouble.providers.telescope').smart_open_with_trouble(prompt_bufnr)
+  end
+  t.defaults.mappings.n['t'] = function(prompt_bufnr)
+    require('trouble.providers.telescope').smart_open_with_trouble(prompt_bufnr)
+  end
+
+  local cmd = require('young.key').cmd
+  xy.map.register {
+    ['<leader>x'] = {
+      x = { cmd 'TroubleToggle', 'Open' },
+      t = { cmd 'TodoTrouble', 'Todo' },
+      ['.'] = { cmd 'Trouble telescope', 'Telescope' },
+      ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
+      ['<C-a>'] = { cmd 'TroubleToggle loclist', 'LocList' },
+      --
+      d = { cmd 'TroubleToggle lsp_definitions', 'Def' },
+      r = { cmd 'TroubleToggle lsp_references', 'Ref' },
+      y = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
+      i = { cmd 'TroubleToggle lsp_implementations', 'Impl' },
+      e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
+      E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
+    },
+    [']x'] = {
+      function()
+        if require('trouble').is_open() then
+          require('trouble').next { skip_groups = true, jump = true }
+        end
+      end,
+      'Next trouble item',
+    },
+    ['[x'] = {
+      function()
+        if require('trouble').is_open() then
+          require('trouble').previous { skip_groups = true, jump = true }
+        end
+      end,
+      'Prev trouble item',
+    },
+  }
+end
 
 M.done = function()
   require('trouble').setup {

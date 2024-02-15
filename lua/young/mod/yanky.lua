@@ -49,7 +49,6 @@ require('yanky').setup {
 -- xy.map { 'p', require('young.mod.hydra.yanky').put_after, '[Hydra] Yanky paste' }
 -- xy.map { 'P', require('young.mod.hydra.yanky').put_before, '[Hydra] Yanky paste' }
 
--- require('telescope').load_extension 'yank_history'
 
 -- xy.map.n { '<C-n>', '<Plug>(YankyCycleForward)' }
 -- xy.map.n { '<C-p>', '<Plug>(YankyCycleBackward)' }

@@ -66,7 +66,6 @@ return {
       end,
       'Search fixed string',
     },
-    y = { 'dh<cmd>Telescope neoclip<cr>', 'Clipboard' },
   },
   y = {
     name = '+young',
