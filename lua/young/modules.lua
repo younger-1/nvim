@@ -258,8 +258,8 @@ modules.edit = {
     -- },
     {
       'folke/flash.nvim',
-      event = 'VeryLazy',
-      auto = 'config',
+      lazy = true,
+      auto = true,
     },
     {
       'andymass/vim-matchup',
@@ -463,17 +463,25 @@ modules.neovim = {
   register = {
     {
       'gbprod/yanky.nvim',
+      event = 'VeryLazy',
       dependencies = { 'kkharji/sqlite.lua' },
-      event = 'BufRead',
+      keys = {
+        { '<leader>sY', cmd 'YankyRingHistory', desc = 'Yanky Ring' },
+      },
       config = function()
+        -- require('telescope').load_extension 'yank_history'
         require 'young.mod.yanky'
       end,
     },
     {
       'AckslD/nvim-neoclip.lua',
-      event = 'BufRead',
+      event = 'VeryLazy',
       dependencies = { 'kkharji/sqlite.lua' },
+      keys = {
+        { '<leader>sy', cmd 'Telescope neoclip', desc = 'Clipboard' },
+      },
       config = function()
+        -- require('telescope').load_extension 'neoclip'
         require 'young.mod.neoclip'
       end,
     },
@@ -740,7 +748,13 @@ modules.file = {
   dir = {
     {
       'nvim-telescope/telescope-file-browser.nvim',
-      event = 'VeryLazy',
+      keys = {
+        {
+          '<leader>s.',
+          cmd 'Telescope file_browser hidden=true',
+          desc = 'File browser',
+        },
+      },
       config = function()
         require('telescope').load_extension 'file_browser'
       end,
@@ -759,7 +773,7 @@ modules.file = {
     --   dependencies = { 'nvim-lua/plenary.nvim' },
     --   init = function()
     --     xy.map.n {
-    --       '<leader>f',
+    --       '<leader>-',
     --       function()
     --         require('lir.float').toggle()
     --         require('lir.actions').reload()
@@ -773,12 +787,13 @@ modules.file = {
       'stevearc/oil.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       init = function()
+        xy.map.n { '<leader>-', cmd 'Oil' }
         xy.map.n {
-          '<leader>f',
-          cmd 'Oil',
-          -- function()
-          --   require('oil').toggle_float()
-          -- end,
+          '<leader>e<leader>',
+          function()
+            require('oil').toggle_float()
+          end,
+          'Oil float',
         }
       end,
       auto = 'config',
@@ -787,11 +802,16 @@ modules.file = {
   project = {
     {
       'nvim-telescope/telescope-project.nvim',
-      event = 'VeryLazy',
-      config = function()
-        require('telescope').load_extension 'project'
-        xy.map.n { '<leader>sp', cmd 'Telescope project display_type=full layout_config={width=0.7}', 'Projects' }
-      end,
+      keys = {
+        {
+          '<leader>sp',
+          cmd 'Telescope project display_type=full layout_config={width=0.7}',
+          desc = 'Projects',
+        },
+      },
+      -- config = function()
+      --   require('telescope').load_extension 'project'
+      -- end,
     },
     -- {
     --   'ahmedkhalf/project.nvim',
@@ -944,33 +964,42 @@ modules.telescope = {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
     -- event = 'BufRead',
-    dependencies = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
-    config = function()
-      require('young.mod.telescope').done()
-    end,
-  },
-  -- {
-  --   'nvim-telescope/telescope-fzf-native.nvim',
-  --   build = 'make',
-  --   build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-  --   config = function()
-  --     require('telescope').load_extension 'fzf'
-  --   end,
-  -- },
-  {
-    'natecraddock/telescope-zf-native.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('telescope').load_extension 'zf-native'
-    end,
-  },
-  {
-    'nvim-telescope/telescope-smart-history.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'kkharji/sqlite.lua' },
-    config = function()
-      require('telescope').load_extension 'smart_history'
-    end,
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      -- {
+      --   'nvim-telescope/telescope-fzf-native.nvim',
+      --   build = 'make',
+      --   -- build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      --   config = function()
+      --     require('telescope').load_extension 'fzf'
+      --   end,
+      -- },
+      {
+        'natecraddock/telescope-zf-native.nvim',
+        config = function()
+          require('telescope').load_extension 'zf-native'
+        end,
+      },
+      {
+        'nvim-telescope/telescope-smart-history.nvim',
+        dependencies = { 'kkharji/sqlite.lua' },
+        config = function()
+          require('telescope').load_extension 'smart_history'
+        end,
+      },
+      {
+        'nvim-telescope/telescope-frecency.nvim',
+        dependencies = { 'kkharji/sqlite.lua' },
+        init = function()
+          xy.map.n { '<leader>sM', cmd 'Telescope frecency', 'Frecency' }
+          xy.map.n { '<leader>sm', cmd 'Telescope frecency default_text=:CWD:', 'Frecency' }
+        end,
+        config = function()
+          require('telescope').load_extension 'frecency'
+        end,
+      },
+    },
+    auto = true,
   },
   -- {
   --   'princejoogie/dir-telescope.nvim',
@@ -984,15 +1013,31 @@ modules.telescope = {
   -- },
   {
     'nvim-telescope/telescope-live-grep-args.nvim',
-    event = 'VeryLazy',
+    keys = {
+      {
+        "<leader>'",
+        cmd 'Telescope live_grep_args',
+        desc = 'Grep',
+      },
+      {
+        "<leader>'",
+        function()
+          require('telescope-live-grep-args.shortcuts').grep_visual_selection()
+        end,
+        mode = 'x',
+        desc = 'Grep',
+      },
+      {
+        '<leader>"',
+        function()
+          require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()
+        end,
+        desc = 'Grep cursor word',
+      },
+    },
     config = function()
       require('telescope').load_extension 'live_grep_args'
     end,
-  },
-  {
-    'nvim-telescope/telescope-frecency.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'kkharji/sqlite.lua' },
   },
   other = {
     { 'nvim-telescope/telescope-symbols.nvim' },
@@ -1004,27 +1049,23 @@ modules.telescope = {
     -- },
     {
       'tsakirist/telescope-lazy.nvim',
-      event = 'VeryLazy',
+      keys = { { '<leader>sl', cmd 'Telescope lazy', desc = 'Lazy plugins' } },
       config = function()
         require('telescope').load_extension 'lazy'
-        vim.keymap.set('n', '<leader>sl', '<Cmd>Telescope lazy<CR>', { silent = true, desc = 'Open plugins' })
       end,
     },
     {
       'LinArcX/telescope-env.nvim',
-      event = 'VeryLazy',
+      keys = { { '<leader>se', cmd 'Telescope env', desc = 'Env variables' } },
       config = function()
         require('telescope').load_extension 'env'
       end,
     },
     {
       'jvgrootveld/telescope-zoxide',
-      event = 'VeryLazy',
+      keys = { { '<leader>sz', cmd 'Telescope zoxide list', desc = 'Zoxide' } },
       config = function()
         require('telescope').load_extension 'zoxide'
-        require('telescope._extensions.zoxide.config').setup {
-          prompt_title = '[ Z⏫ ]',
-        }
       end,
     },
     {
@@ -1167,7 +1208,7 @@ modules.keymap = {
     -- },
     {
       'FeiyouG/commander.nvim',
-      event = 'VeryLazy',
+      lazy = true,
       auto = 'config',
       -- commander = {
       --   {
@@ -1255,43 +1296,7 @@ modules.UI = {
     'folke/trouble.nvim',
     -- event = 'BufRead',
     cmd = { 'Trouble', 'TroubleToggle' },
-    init = function()
-      xy.map.register {
-        ['<leader>x'] = {
-          x = { cmd 'TroubleToggle', 'Open' },
-          t = { cmd 'TodoTrouble', 'Todo' },
-          ['.'] = { cmd 'Trouble telescope', 'Telescope' },
-          ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
-          ['<C-a>'] = { cmd 'TroubleToggle loclist', 'LocList' },
-          --
-          d = { cmd 'TroubleToggle lsp_definitions', 'Def' },
-          r = { cmd 'TroubleToggle lsp_references', 'Ref' },
-          y = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
-          i = { cmd 'TroubleToggle lsp_implementations', 'Impl' },
-          e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
-          E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
-        },
-        [']x'] = {
-          function()
-            if require('trouble').is_open() then
-              require('trouble').next { skip_groups = true, jump = true }
-            end
-          end,
-          'Next trouble item',
-        },
-        ['[x'] = {
-          function()
-            if require('trouble').is_open() then
-              require('trouble').previous { skip_groups = true, jump = true }
-            end
-          end,
-          'Prev trouble item',
-        },
-      }
-    end,
-    config = function()
-      require('young.mod.trouble').done()
-    end,
+    auto = true,
   },
   {
     'stevearc/dressing.nvim',
@@ -1917,10 +1922,9 @@ if xy.coc then
     },
     {
       'fannheyward/telescope-coc.nvim',
-      event = 'VeryLazy',
+      keys = { { '<leader>l<space>', cmd 'Telescope coc', desc = 'Coc' } },
       config = function()
         require('telescope').load_extension 'coc'
-        xy.map.n { '<leader>l<space>', '<cmd>Telescope coc<cr>' }
       end,
     },
   }
