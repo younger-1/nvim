@@ -77,6 +77,25 @@ end
 -- end
 -- xy.open_cmd = open_cmd
 
+-- stylua: ignore start
+_G.tt = tt or function()
+  local depth = 0
+  while debug.getinfo(depth + 2, 'n').name do
+    depth = depth + 1
+  end
+  table.insert(xy.startup_time, {
+    os_time = os.clock() - xy.startup_time.os_start,
+    rel_time = vim.fn.reltimefloat(vim.fn.reltime(xy.startup_time.rel_start)),
+    hr_time = (uv.hrtime() - xy.startup_time.hr_start) / 1e9,
+    file_name = debug.getinfo(2, 'S').source:sub(2),
+    func_name = debug.getinfo(2, 'n').name,
+    func_scope = debug.getinfo(2, 'n').namewhat,
+    currentline = debug.getinfo(2, 'l').currentline,
+    depth = depth,
+  })
+end
+-- stylua: ignore end
+
 function _G.join_paths(...)
   local path_sep = is_windows and '\\' or '/'
   local result = table.concat({ ... }, path_sep)
@@ -246,25 +265,6 @@ end
 --   })
 -- end
 -- xy.lazy = lazy
-
--- stylua: ignore start
-_G.tt = tt or function()
-  local depth = 0
-  while debug.getinfo(depth + 2, 'n').name do
-    depth = depth + 1
-  end
-  table.insert(xy.startup_time, {
-    os_time = os.clock() - xy.startup_time.os_start,
-    rel_time = vim.fn.reltimefloat(vim.fn.reltime(xy.startup_time.rel_start)),
-    hr_time = (uv.hrtime() - xy.startup_time.hr_start) / 1e9,
-    file_name = debug.getinfo(2, 'S').source:sub(2),
-    func_name = debug.getinfo(2, 'n').name,
-    func_scope = debug.getinfo(2, 'n').namewhat,
-    currentline = debug.getinfo(2, 'l').currentline,
-    depth = depth,
-  })
-end
--- stylua: ignore end
 
 --[[
 xy.a -> require('xy').a -> require('xy.a')
@@ -446,7 +446,7 @@ xy.map = {
 local function mapper(tbl)
   local opts = { nowait = true }
 
-  local mode = tbl['mode'] or ''
+  local mode = tbl['mode'] or { 'n', 'x', 'o' }
   tbl['mode'] = nil
 
   for k, v in pairs(tbl) do

@@ -68,7 +68,7 @@ vim.filetype.add {
     --   end
     --   return 'c'
     -- end,
-    thrift = 'thrift'
+    thrift = 'thrift',
   },
   filename = {
     conf = 'config',
@@ -132,4 +132,4 @@ end
 -- 1. most linux require `python3`; 2. windows's scoop will generete `python3` shim to avoid using conda env
 vim.g.python3_host_prog = vim.fn.exepath 'python3'
 
-vim.g.xy = xy
+vim.g.xy = { coc = xy.coc }
