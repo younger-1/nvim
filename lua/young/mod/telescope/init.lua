@@ -37,6 +37,13 @@ M.once = function()
   local cmd = require('young.key').cmd
   local lua = require('young.key').lua
   xy.map.register {
+    ['<leader>f'] = {
+      b = { cmd 'Telescope buffers', 'Buffers' },
+      f = { cmd 'Telescope find_files', 'Find files' },
+      F = { cmd 'Telescope find_files no_ignore=true', 'Find files (more)' },
+      r = { cmd 'Telescope oldfiles only_cwd=true', 'Open recent file (cwd)' },
+      R = { cmd 'Telescope oldfiles', 'Open recent file' },
+    },
     ['<leader>s'] = {
       -- ['`'] = { 'TODO', 'Terminal' },
       -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -89,7 +96,6 @@ M.once = function()
       },
       ["'"] = { cmd 'Telescope marks', 'Marks' },
       ['"'] = { cmd 'Telescope registers', 'Registers' },
-      [','] = { cmd 'Telescope buffers', 'Find' },
       ['/'] = { cmd 'Telescope search_history', 'Search history' },
       ['?'] = { cmd 'Telescope help_tags', 'Help' },
       ['<C-q>'] = { cmd 'Telescope quickfix', 'QuickList' },
@@ -114,8 +120,6 @@ M.once = function()
         g = { cmd 'Telescope live_grep cwd=%:p:h', 'Grep' },
         t = { cmd 'Telescope grep_string cwd=%:p:h', 'Text under cursor' },
       },
-      f = { cmd 'Telescope find_files', 'Find files' },
-      F = { cmd 'Telescope find_files no_ignore=true', 'Find files (more)' },
       g = {
         function()
           require('telescope.builtin').live_grep {
@@ -155,11 +159,7 @@ M.once = function()
         end,
         'Keymaps',
       },
-      M = { cmd 'Telescope man_pages', 'Man pages' },
-      n = { cmd 'Telescope notify', 'Notify' },
-      o = { cmd 'Telescope heading', 'Heading' },
-      r = { cmd 'Telescope oldfiles only_cwd=true', 'Open recent file (cwd)' },
-      R = { cmd 'Telescope oldfiles', 'Open recent file' },
+      m = { cmd 'Telescope man_pages', 'Man pages' },
       s = {
         name = '+symbol',
         e = { lua "require'telescope.builtin'.symbols{ sources = {'emoji'} }", 'Emoji' },

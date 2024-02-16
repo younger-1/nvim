@@ -809,9 +809,9 @@ modules.file = {
           desc = 'Projects',
         },
       },
-      -- config = function()
-      --   require('telescope').load_extension 'project'
-      -- end,
+      config = function()
+        require('telescope').load_extension 'project'
+      end,
     },
     -- {
     --   'ahmedkhalf/project.nvim',
@@ -819,6 +819,7 @@ modules.file = {
     --   -- branch = 'mydev',
     --   event = 'VeryLazy',
     --   config = function()
+    --     require('telescope').load_extension 'projects'
     --     require 'young.mod.project'
     --     xy.map.n { '<leader>sp', cmd 'Telescope projects', 'Projects' }
     --     -- xy.map.n { '<leader>pp',cmd 'Telescope projects', 'Projects' }
@@ -991,8 +992,8 @@ modules.telescope = {
         'nvim-telescope/telescope-frecency.nvim',
         dependencies = { 'kkharji/sqlite.lua' },
         init = function()
-          xy.map.n { '<leader>sM', cmd 'Telescope frecency', 'Frecency' }
-          xy.map.n { '<leader>sm', cmd 'Telescope frecency default_text=:CWD:', 'Frecency' }
+          xy.map.n { '<leader>fM', cmd 'Telescope frecency', 'Frecency' }
+          xy.map.n { '<leader>fm', cmd 'Telescope frecency default_text=:CWD:', 'Frecency' }
         end,
         config = function()
           require('telescope').load_extension 'frecency'
@@ -1280,6 +1281,7 @@ modules.UI = {
     -- event = 'BufWinEnter',
     event = 'VeryLazy',
     keys = {
+      { '<leader>sn', cmd 'Telescope notify', desc = 'Notify' },
       {
         '<leader>un',
         function()
@@ -1289,6 +1291,7 @@ modules.UI = {
       },
     },
     config = function()
+      require('telescope').load_extension 'notify'
       require('young.mod.notify').done()
     end,
   },
@@ -2139,6 +2142,7 @@ modules.write = {
     {
       'crispgm/telescope-heading.nvim',
       ft = { 'markdown', 'norg', 'org', 'rst', 'help', 'asciidoc', 'tex' },
+      keys = { { '<leader>so', cmd 'Telescope heading', desc = 'Heading' } },
       config = function()
         require('telescope').load_extension 'heading'
       end,
