@@ -25,13 +25,13 @@ return {
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [','] = { cmd 'Telescope buffers', 'Buffers' },
-  -- ['.'] = { cmd 'Telescope find_files layout_strategy=horizontal', 'Files' },
-  -- ['/'] = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
+  ['.'] = { cmd 'Telescope find_files layout_strategy=horizontal', 'Files' },
+  ['/'] = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
   ['?'] = {
     name = '+help',
     ['?'] = { ':h reference_toc<cr>', '❓' },
     [' '] = { ':h api<cr>', 'Api' },
-    ['<tab>'] = { ':h news<cr>', 'Api' },
+    ['<tab>'] = { ':h news<cr>', 'News' },
     A = { ':h vim-additions<cr>', 'Vim additions' },
     C = { ':h cterm-colors<cr>', 'Vim colors' },
     E = { ':h ex-edit-index<cr>', 'Ex-edit index' },
@@ -406,7 +406,13 @@ return {
       end,
       'Git commit',
     },
-    c = { cmd('edit ' .. join_paths(vim.fn.stdpath 'config', 'init.lua')), 'Edit init.lua' },
+    c = {
+      function()
+        local file = join_paths(vim.fn.stdpath 'config', 'init.lua')
+        xy.util.open_file(file)
+      end,
+      'Open init.lua',
+    },
     f = {
       function()
         require('young.mod.telescope.finder').find_config()
@@ -425,7 +431,13 @@ return {
     --   "View LunarVim's changelog",
     -- },
     -- k = { "<cmd>lua require('lvim.keymappings').print()<cr>", "View LunarVim's default keymappings" },
-    l = { require('young.cfg').open_local_config, 'Edit local config' },
+    l = {
+      function()
+        local file = require('young.cfg').create_local_config()
+        xy.util.open_file(file)
+      end,
+      'Edit local config',
+    },
     o = {
       function()
         require('young.mod.telescope.finder').open_changed_config()
@@ -433,7 +445,13 @@ return {
       'Open changed Config files',
     },
     r = { require('young.cfg').reload, 'Reload configuration' },
-    y = { cmd('edit ' .. require('young.cfg').lazy_path), 'Edit plugins' },
+    y = {
+      function()
+        local file = require('young.cfg').lazy_path
+        xy.util.open_file(file)
+      end,
+      'Open plugins',
+    },
     -- y = { cmd('edit ' .. require('young.cfg').reload_path), 'Edit plugins' },
     -- y = { "<cmd>lua vim.fn.execute('edit ' .. require('young.cfg').reload_path)<cr>", 'Edit plugins' },
   },

@@ -383,4 +383,12 @@ function util.on_very_lazy(fn)
   })
 end
 
+function util.open_file(file)
+  if vim.fn.bufexists(file) == 1 then
+    vim.cmd.buffer(file)
+  else
+    vim.cmd.edit(file)
+  end
+end
+
 return util
