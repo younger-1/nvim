@@ -66,13 +66,13 @@ M.lazy_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'modules.lua')
 
 M.local_config_path = join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
 
-function M.open_local_config()
+function M.create_local_config()
   if not xy.util.is_file(M.local_config_path) then
     local template = join_paths(vim.fn.stdpath 'config', 'utils', 'local.template.lua')
     fn.mkdir(fn.fnamemodify(M.local_config_path, ':p:h'), 'p')
     uv.fs_copyfile(template, M.local_config_path)
   end
-  vim.cmd(':edit ' .. M.local_config_path)
+  return M.local_config_path
 end
 
 return M
