@@ -360,13 +360,9 @@ return {
       -- c = { require('young.autocmd').toggle_auto_cursorline, 'Cursorline' },
     },
     b = 'Biscuits',
-    m = { cmd 'MinimapToggle', 'Minimap' },
     l = { require('young.tool').toggle_tabline, 'Tabline' },
     n = { require('young.tool').toggle_notify_style, 'Nofity style' },
     N = { require('young.tool').toggle_notify, 'Toggle nofity' },
-    -- t = { cmd 'TransparentToggle', 'Transparent' },
-    x = { cmd 'Hexmode', 'Hex mode' },
-    u = { cmd 'UndotreeToggle', 'Undotree' },
   },
   T = {
     name = '+treesitter',

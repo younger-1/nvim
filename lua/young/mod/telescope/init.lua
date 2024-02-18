@@ -427,10 +427,9 @@ M.done = function()
       --   },
       -- },
       frecency = {
-        -- db_root = "home/my_username/path/to/db_root",
         show_scores = true,
         show_unindexed = true,
-        ignore_patterns = { '*.git/*', '*/tmp/*' },
+        show_filter_column = false,
         workspaces = {
           -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
           ['conf'] = vim.fn.expand '~/.config',
