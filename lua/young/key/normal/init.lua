@@ -90,9 +90,8 @@ local normal = {
     },
   },
   c = {
-    o = {
-      name = '+quickcmd',
-      r = { '<cmd>ProjectRoot<cr>', 'Project root' },
+    d = {
+      name = '+cmd',
     },
   },
   g = {
