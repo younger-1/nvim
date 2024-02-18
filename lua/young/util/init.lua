@@ -226,8 +226,8 @@ function util.get_def_locations(tbl)
   local str = tbl.type
   if tbl.type == 'map' then
     str = tbl.mode .. str
-    -- tbl.name = tbl.name:gsub('<Leader>', '<Space>')
-    tbl.name = tbl.name:gsub('<[Ll]eader>', fn.keytrans(vim.g.mapleader))
+    -- tbl.name = tbl.name:gsub('<[Ll]eader>', fn.keytrans(vim.g.mapleader))
+    tbl.name = tbl.name:gsub('<[Ll]eader>', '<Space>')
   elseif tbl.type == 'autocmd' then
     str = str .. ' ' .. tbl.group
   end
@@ -253,6 +253,13 @@ function util.get_def_locations(tbl)
     output = fn.execute(str)
     for path, line in output:gmatch 'Last set from (%S+) line (%d+)' do
       table.insert(ret, { path, line })
+    end
+  end
+
+  if next(ret) == nil and tbl.type == 'map' then
+    if xy.map.info[tbl.mode] and xy.map.info[tbl.mode][tbl.name] then
+      local info = xy.map.info[tbl.mode][tbl.name]
+      table.insert(ret, { info.file_name, info.currentline })
     end
   end
   return ret
