@@ -59,7 +59,7 @@ require('oil').setup {
     ['q'] = 'actions.close',
     ['<C-l>'] = 'actions.refresh',
     ['-'] = 'actions.parent',
-    ['<BS>'] = 'actions.parent',
+    -- ['<BS>'] = 'actions.parent',
     ['_'] = 'actions.open_cwd',
     ['`'] = 'actions.cd',
     ['~'] = 'actions.tcd',
@@ -158,7 +158,7 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
 
     local cwd = vim.loop.cwd():gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
     local path = vim.fn.expand('%:p'):gsub('oil://', ''):gsub(vim.pesc(vim.fn.expand '$HOME'), '~')
-    local path_to_cwd = path:gsub(cwd .. '/', '')
+    local path_to_cwd = path:gsub(vim.pesc(cwd) .. '/', '')
 
     -- if #path_to_cwd > 0 then
     --   vim.opt_local.winbar = path_to_cwd
