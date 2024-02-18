@@ -1,6 +1,8 @@
 " map mode
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
+sunmap j
+sunmap k
 
 " https://www.reddit.com/r/vim/comments/72n3nt/understanding_vims_jump_list/
 " make 4j or 6k line motions append to jumplist
@@ -14,6 +16,8 @@ noremap <expr> 0 SmartHome()
 " can be overrided in normal mode
 noremap gh ^
 noremap gl g_
+sunmap gh
+sunmap gl
 
 " noremap H  0
 " noremap L  $

@@ -1,3 +1,5 @@
+xy.map.n { '<leader>tu', '<cmd>UndotreeToggle<cr>' }
+
 local g = vim.g
 
 -- g.undotree_WindowLayout = 2

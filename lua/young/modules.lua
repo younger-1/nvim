@@ -737,7 +737,7 @@ modules.file = {
       },
       keys = {
         {
-          '<leader>ef',
+          '<leader>ed',
           cmd 'Triptych',
           desc = 'Directory browser',
         },
@@ -789,7 +789,7 @@ modules.file = {
       init = function()
         xy.map.n { '<leader>-', cmd 'Oil' }
         xy.map.n {
-          '<leader>e<leader>',
+          '<leader>ef',
           function()
             require('oil').toggle_float()
           end,
@@ -1535,9 +1535,7 @@ modules.UI = {
     --   'wfxr/minimap.vim',
     --   cmd = { 'MinimapToggle' },
     --   -- event = 'BufWinEnter',
-    --   config = function()
-    --     require 'young.mod.minimap'
-    --   end,
+    --   auto = 'init',
     -- },
     -- {
     --   'dstein64/nvim-scrollview',
@@ -2253,6 +2251,7 @@ modules.tool = {
     'fidian/hexmode',
     cmd = 'Hexmode',
     init = function()
+      xy.map.n { '<leader>tx', cmd 'Hexmode' }
       -- vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o,*.jpg,*.png'
     end,
   },
