@@ -1,4 +1,6 @@
-" map mode
+""""""""""""""""""""""""""""""""
+"        1. map mode
+""""""""""""""""""""""""""""""""
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 sunmap j
@@ -37,7 +39,9 @@ noremap <localleader><Tab> <C-i>
 " map ]] j0[[%/{<CR>
 " map [] k$][%?}<CR>
 
-" normal mode
+""""""""""""""""""""""""""""""""
+"        2. normal mode
+""""""""""""""""""""""""""""""""
 " nnoremap / ms/
 " nnoremap ? ms?
 nnoremap <BS> <C-^>
@@ -47,11 +51,15 @@ nnoremap zz zz<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
 nnoremap `<BS> :delmarks
 nnoremap `<Tab> :marks<cr>
 
+" `g` {{{
 " Format whole buffer with formatprg without changing cursor position
 nnoremap gq<CR> mzgggqG`z
 nnoremap gq? <Cmd>set formatprg?<CR>
-
-" Unimpaired style mappings
+" @see <https://vim.fandom.com/wiki/Selecting_your_pasted_text>
+"      <https://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text>
+nnoremap <expr> g<c-v> '`[' . getregtype()[0] . '`]'
+" }}}
+" `[]` {{{
 nnoremap <C-q> <Cmd>call QuickFixToggle()<CR>
 nnoremap <expr> [q '<Cmd>' . v:count1 . 'cprev<CR>'
 nnoremap <expr> ]q '<Cmd>' . v:count1 . 'cnext<CR>'
@@ -80,7 +88,8 @@ xnoremap <expr> [l ':move --' . v:count1 . '<CR>gv'
 xnoremap <expr> ]l ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>gv'
 nnoremap [<Space> <Cmd>put! =repeat(nr2char(10), v:count1)<CR><CR>:']+1<CR>
 nnoremap ]<Space> <Cmd>put =repeat(nr2char(10), v:count1)<CR><CR>:'[-1<CR>
-
+" }}}
+" `yo` {{{
 nnoremap yo-  <Cmd>set cul!<Bar>set cul?<CR>
 nnoremap yo\| <Cmd>set cuc!<Bar>set cuc?<CR>
 nnoremap yon <Cmd>set nu! \|set nu?<CR>
@@ -91,15 +100,22 @@ nnoremap yow <Cmd>set wrap! \|set wrap?<CR>
 nnoremap yob :set bg=<C-R>=&bg == "dark" ? "light" : "dark"<cr> \|set bg?<cr>
 nnoremap yom :set mouse=<C-R>=&mouse == "" ? "nvi" : ""<cr> \|set mouse?<cr>
 nnoremap yoc :set cc=<C-R>=&cc == "" ? "81,121" : ""<cr> \|set cc?<cr>
-
 nnoremap yoh <Cmd>set hls! \|set hls?<CR>
 nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
+" }}}
+" `cd` {{{
+nnoremap cdi <Cmd>lcd %:p:h<CR>
+nnoremap cdo <Cmd>FindBufGitRoot<CR>
+nnoremap cdO <Cmd>FindBufGitRoot!<CR>
+" }}}
+" `C-z` {{{
+nnoremap <C-z> <Nop>
+nnoremap <C-z><C-z> <cmd>stop<cr>
+" }}}
 
-" @see <https://vim.fandom.com/wiki/Selecting_your_pasted_text>
-"      <https://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text>
-nnoremap <expr> g<c-v> '`[' . getregtype()[0] . '`]'
-
-" visual mode
+""""""""""""""""""""""""""""""""
+"        3. visual mode
+""""""""""""""""""""""""""""""""
 xnoremap < <gv
 xnoremap > >gv
 xnoremap d "_d
@@ -116,16 +132,18 @@ endfunction
 " vnoremap p P
 " vnoremap P p
 
-" operator mode
-
-" terminal mode
+""""""""""""""""""""""""""""""""
+"        4. terminal mode
+""""""""""""""""""""""""""""""""
 tnoremap JK    <C-\><C-N>
 " tnoremap <C-h> <C-\><C-N><C-w>h
 " tnoremap <C-j> <C-\><C-N><C-w>j
 " tnoremap <C-k> <C-\><C-N><C-w>k
 " tnoremap <C-l> <C-\><C-N><C-w>l
 
-" insert-command mode(!)
+""""""""""""""""""""""""""""""""
+"        5. insert-command mode
+""""""""""""""""""""""""""""""""
 noremap! <C-a> <Home>
 noremap! <C-e> <End>
 noremap! <C-f> <Right>
@@ -134,7 +152,9 @@ noremap! <M-f> <S-Right>
 noremap! <M-b> <S-Left>
 noremap! <C-d> <Del>
 
-" insert mode
+""""""""""""""""""""""""""""""""
+"        6. insert mode
+""""""""""""""""""""""""""""""""
 inoremap <C-v> <C-G>u<C-R><C-O>+
 
 " inoremap <C-Space> <C-X><C-O>
@@ -147,7 +167,9 @@ inoremap ? ?<C-g>u
 inoremap ; ;<C-g>u
 inoremap : :<C-g>u
 
-" command mode
+""""""""""""""""""""""""""""""""
+"        7. command mode
+""""""""""""""""""""""""""""""""
 cnoremap <C-v> <C-R>+
 
 " cnoremap <expr> <C-j> pumvisible() ? "<C-n>" : "<C-j>"

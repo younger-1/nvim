@@ -54,3 +54,18 @@ end, { nargs = '+', complete = 'command' })
 -- vim.api.nvim_create_user_command('CreateFeatBranch', function()
 --   vim.api.nvim_feedkeys(':Git checkout -b feat/' .. os.date '%Y/%m/%d/', 'n', false)
 -- end, {})
+
+vim.api.nvim_create_user_command('FindBufGitRoot', function(ctx)
+  local cd = 'lcd'
+  if ctx.bang then
+    cd = 'tcd'
+  end
+
+  local dir = xy.util.git_root()
+  if dir then
+    vim.cmd[cd](dir)
+    xy.util.echomsg { fmt('[young]: %s %s', cd, dir:gsub(vim.pesc(vim.fn.expand '$HOME'), '~')) }
+  else
+    xy.util.echomsg { fmt '[young]: not found git root' }
+  end
+end, { bang = true })

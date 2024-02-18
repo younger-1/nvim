@@ -391,4 +391,13 @@ function util.open_file(file)
   end
 end
 
+function util.git_root()
+  local res = vim.fs.find({ '.git' }, {
+    upward = true,
+    stop = vim.loop.os_homedir(),
+    path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+  })[1]
+  return res and vim.fs.dirname(res)
+end
+
 return util
