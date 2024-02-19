@@ -205,8 +205,8 @@ function _G.rl(mod)
   lazy_mods[mod] = {}
   return setmetatable(lazy_mods[mod], {
     __index = function(_, func)
-      return function(para)
-        require(mod)[func](para)
+      return function(...)
+        require(mod)[func](...)
       end
     end,
   })
@@ -401,29 +401,7 @@ end
 -- mappings
 ----------------------------------------------------------------------------------------------------
 
-local vim_keymap_set = vim.keymap.set
-vim.keymap.set = function(modes, key, value, opts)
-  local depth = opts and opts.xy_info or 2
-  if opts and opts.xy_info then
-    depth = opts.xy_info
-    opts.xy_info = nil
-  end
-  key = key:gsub('<[Ll]eader>', '<Space>')
-  for _, mode in ipairs(type(modes) == 'string' and { modes } or modes) do
-    xy.map.info[mode] = xy.map.info[mode] or {}
-    xy.map.info[mode][key] = {
-      file_name = debug.getinfo(depth, 'S').source:sub(2),
-      -- func_name = debug.getinfo(depth, 'n').name,
-      -- func_scope = debug.getinfo(depth, 'n').namewhat,
-      currentline = debug.getinfo(depth, 'l').currentline,
-    }
-  end
-
-  vim_keymap_set(modes, key, value, opts)
-end
-
 xy.map = {
-  info = {},
   register = function(mappings, opts)
     opts = opts or {}
 
@@ -477,7 +455,6 @@ local function mapper(tbl)
     end
   end
   opts.desc = tbl[3] or opts.desc
-  opts.xy_info = 4
 
   vim.keymap.set(mode, tbl[1], tbl[2], opts)
 end

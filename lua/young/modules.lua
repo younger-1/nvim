@@ -1352,12 +1352,9 @@ modules.UI = {
       event = 'VeryLazy',
       config = function()
         require('tabscope').setup {}
-        vim.keymap.set(
-          'n',
-          '<leader>bc',
-          require('tabscope').remove_tab_buffer,
-          { desc = 'Close buffer in current tab' }
-        )
+        vim.keymap.set('n', '<leader>bc', function()
+          require('tabscope').remove_tab_buffer()
+        end, { desc = 'Close buffer in current tab' })
       end,
     },
   },
