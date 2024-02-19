@@ -192,15 +192,44 @@ return {
     -- Disable `clangd`'s format
     -- client.server_capabilities.documentFormattingProvider = false
 
-    local cmd = require('young.key').cmd
     xy.map.register({
       ['<leader>cc'] = {
-        s = { cmd 'ClangdSwitchSourceHeader', '[C++] Switch source/header' },
-        m = { cmd 'ClangdMemoryUsage', '[C++] Memory Usage' },
-        a = { cmd 'ClangdAST', '[C++] AST' },
-        i = { cmd 'ClangdSymbolInfo', '[C++] Symbol info' },
-        h = { cmd 'ClangdTypeHierarchy', '[C++] Type hierarchy' },
-        t = { cmd 'ClangdToggleInlayHints', '[C++] Toggle inlay hints' },
+        s = {
+          function()
+            vim.cmd 'ClangdSwitchSourceHeader'
+          end,
+          '[C++] Switch source/header',
+        },
+        m = {
+          function()
+            vim.cmd 'ClangdMemoryUsage'
+          end,
+          '[C++] Memory Usage',
+        },
+        a = {
+          function()
+            vim.cmd 'ClangdAST'
+          end,
+          '[C++] AST',
+        },
+        i = {
+          function()
+            vim.cmd 'ClangdSymbolInfo'
+          end,
+          '[C++] Symbol info',
+        },
+        h = {
+          function()
+            vim.cmd 'ClangdTypeHierarchy'
+          end,
+          '[C++] Type hierarchy',
+        },
+        t = {
+          function()
+            vim.cmd 'ClangdToggleInlayHints'
+          end,
+          '[C++] Toggle inlay hints',
+        },
       },
     }, { buffer = bufnr })
   end,

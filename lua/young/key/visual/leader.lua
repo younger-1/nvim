@@ -1,5 +1,3 @@
-local cmd = require('young.key').cmd
-
 return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(fn.visualmode())<cr>', 'Comment' },
   g = {

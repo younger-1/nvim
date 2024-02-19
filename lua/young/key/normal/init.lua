@@ -1,12 +1,30 @@
-local cmd = require('young.key').cmd
-
 local normal = {
   ['\\'] = {
-    -- c = { cmd 'BufferClose!', 'Close buffer' },
-    w = { cmd 'w', 'Write' },
-    s = { cmd '.so', 'Source line' },
-    d = { cmd 'DiffOrig', 'Show unsaved' },
-    m = { cmd 'echo mode()', 'Show mode' },
+    -- c = { function() vim.cmd 'BufferClose!' end, 'Close buffer' },
+    w = {
+      function()
+        vim.cmd 'w'
+      end,
+      'Write',
+    },
+    s = {
+      function()
+        vim.cmd '.so'
+      end,
+      'Source line',
+    },
+    d = {
+      function()
+        vim.cmd 'DiffOrig'
+      end,
+      'Show unsaved',
+    },
+    m = {
+      function()
+        vim.cmd 'echo mode()'
+      end,
+      'Show mode',
+    },
   },
   [']'] = {
     -- [' '] = {},
@@ -45,12 +63,32 @@ local normal = {
   -- ["<C-f>"] = {},
   -- ["<C-b>"] = {},
   -- TODO: display buf&&git info
-  ['<C-g>'] = { require('young.tool.file_info').setup, 'Info' },
-  ['<C-_>'] = { '<Cmd>tab Man<cr>', 'Man' },
-  -- ['<C-x>'] = { cmd 'TroubleToggle', 'Open' },
+  ['<C-g>'] = {
+    function()
+      require('young.tool.file_info').setup()
+    end,
+    'Info',
+  },
+  ['<C-_>'] = {
+    function()
+      vim.cmd 'tab Man'
+    end,
+    'Man',
+  },
+  -- ['<C-x>'] = { function() vim.cmd 'TroubleToggle' end, 'Open' },
   ['<C-w>'] = {
-    z = { require('young.tool').toggle_zoom, 'Zoom' },
-    w = { require('young.tool').set_cursor_floating_win, 'Goto float' },
+    z = {
+      function()
+        require('young.tool').toggle_zoom()
+      end,
+      'Zoom',
+    },
+    w = {
+      function()
+        require('young.tool').set_cursor_floating_win()
+      end,
+      'Goto float',
+    },
     -- ['<C-m>']
     -- ['<C-x>']
     -- ['<CR>']
@@ -66,27 +104,111 @@ local normal = {
   [','] = {
     f = {
       name = '+fzf',
-      [' '] = { "<cmd>lua require('fzf-lua').live_grep_resume()<cr>", 'Grep' },
-      ['<C-q>'] = { "<cmd>lua require('fzf-lua').quickfix()<cr>", 'Quickfix' },
-      ['<C-a>'] = { "<cmd>lua require('fzf-lua').loclist()<cr>", 'Loclist' },
-      f = { "<cmd>lua require('fzf-lua').files()<cr>", 'Files' },
-      b = { "<cmd>lua require('fzf-lua').buffers()<cr>", 'Buffers' },
-      r = { "<cmd>lua require('fzf-lua').files_resume()<cr>", 'Resume' },
-      m = { "<cmd>lua require('fzf-lua').oldfiles()<cr>", 'MRU' },
-      l = { "<cmd>lua require('fzf-lua').blines()<cr>", 'Lines' },
-      L = { "<cmd>lua require('fzf-lua').lines()<cr>", 'Lines' },
-      T = { "<cmd>lua require('fzf-lua').tab()<cr>", 'Tab' },
-      g = { "<cmd>lua require('fzf-lua').live_grep()<cr>", 'Grep' },
-      s = { "<cmd>lua require('fzf-lua').grep()<cr>", 'Grep' },
-      o = { "<cmd>lua require('fzf-lua').git_status()<cr>", 'Git status' },
-      c = { "<cmd>lua require('fzf-lua').git_commits()<cr>", 'Commits' },
-      p = { "<cmd>lua require('fzf-lua').colorschemes()<cr>", 'Colorschemes' },
+      [' '] = {
+        function()
+          require('fzf-lua').live_grep_resume()
+        end,
+        'Grep',
+      },
+      ['<C-q>'] = {
+        function()
+          require('fzf-lua').quickfix()
+        end,
+        'Quickfix',
+      },
+      ['<C-a>'] = {
+        function()
+          require('fzf-lua').loclist()
+        end,
+        'Loclist',
+      },
+      f = {
+        function()
+          require('fzf-lua').files()
+        end,
+        'Files',
+      },
+      b = {
+        function()
+          require('fzf-lua').buffers()
+        end,
+        'Buffers',
+      },
+      r = {
+        function()
+          require('fzf-lua').files_resume()
+        end,
+        'Resume',
+      },
+      m = {
+        function()
+          require('fzf-lua').oldfiles()
+        end,
+        'MRU',
+      },
+      l = {
+        function()
+          require('fzf-lua').blines()
+        end,
+        'Lines',
+      },
+      L = {
+        function()
+          require('fzf-lua').lines()
+        end,
+        'Lines',
+      },
+      T = {
+        function()
+          require('fzf-lua').tab()
+        end,
+        'Tab',
+      },
+      g = {
+        function()
+          require('fzf-lua').live_grep()
+        end,
+        'Grep',
+      },
+      s = {
+        function()
+          require('fzf-lua').grep()
+        end,
+        'Grep',
+      },
+      o = {
+        function()
+          require('fzf-lua').git_status()
+        end,
+        'Git status',
+      },
+      c = {
+        function()
+          require('fzf-lua').git_commits()
+        end,
+        'Commits',
+      },
+      p = {
+        function()
+          require('fzf-lua').colorschemes()
+        end,
+        'Colorschemes',
+      },
     },
     s = {
       name = '+seek',
-      c = { '<cmd>Telescope cheat fd<cr>', 'Cheatsheet' },
-      s = { '<cmd>Telescope fd<cr>', 'Why can not see , ' },
-      v = { '<cmd>Cheatsheet<cr>', 'Vim cheatsheet' },
+      c = {
+        function()
+          vim.cmd 'Telescope cheat fd'
+        end,
+        'Cheatsheet',
+      },
+      v = {
+        function()
+          vim.cmd 'Cheatsheet'
+        end,
+        'Vim cheatsheet',
+      },
     },
   },
   c = {
@@ -111,8 +233,18 @@ local normal = {
   y = {
     c = {
       name = '+colorscheme',
-      c = { "<cmd>lua require('young.theme').toggle_style()<cr>", 'Style' },
-      m = { "<cmd>lua require('material.functions').toggle_style()<cr>", 'Material' },
+      c = {
+        function()
+          require('young.theme').toggle_style()
+        end,
+        'Style',
+      },
+      m = {
+        function()
+          require('material.functions').toggle_style()
+        end,
+        'Material',
+      },
     },
     o = {
       name = '+options',
@@ -131,11 +263,31 @@ local normal = {
       ['<Left>'] = { ':call ArrowKeyToggle()<cr>', '👈' },
       ['<Right>'] = { ':call ArrowKeyToggle()<cr>', '👉' },
       ['<Tab>'] = { ':call TabToggle()<cr>', '🦊' },
-      f = { require('young.tool').toggle_foldcolumn, 'foldcolumn' },
+      f = {
+        function()
+          require('young.tool').toggle_foldcolumn()
+        end,
+        'foldcolumn',
+      },
       F = { ':call FoldTextToggle()<cr>', 'Fold text' },
-      M = { require('young.tool').toggle_mouse, 'mouse++' },
-      S = { require('young.tool').toggle_signcolumn, 'signcolumn' },
-      v = { require('young.tool').visualedit, 'virtualedit' },
+      M = {
+        function()
+          require('young.tool').toggle_mouse()
+        end,
+        'mouse++',
+      },
+      S = {
+        function()
+          require('young.tool').toggle_signcolumn()
+        end,
+        'signcolumn',
+      },
+      v = {
+        function()
+          require('young.tool').visualedit()
+        end,
+        'virtualedit',
+      },
       -- v = { [[:set ve=<C-R>=&ve == "" ? "all" : ""<cr><cr>]], 'virtualedit' },
     },
   },
@@ -148,9 +300,16 @@ local normal = {
   --   },
   -- },
   z = {
-    ['<CR>'] = { cmd 'TSContextToggle', 'Toggle context' },
+    ['<CR>'] = {
+      function()
+        vim.cmd 'TSContextToggle'
+      end,
+      'Toggle context',
+    },
     [' '] = {
-      require('young.tool').blink_cursor,
+      function()
+        require('young.tool').blink_cursor()
+      end,
       'Blink cursor',
     },
   },

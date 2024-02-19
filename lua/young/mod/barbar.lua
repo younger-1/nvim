@@ -133,7 +133,6 @@ map { '<A-s-c>', '<Cmd>BufferRestore<CR>' }
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
-local cmd = require('young.key').cmd
 xy.map.register {
   ['<BS>'] = {
     function()
@@ -146,16 +145,66 @@ xy.map.register {
     'Buffer Goto',
   },
   ['<leader>b'] = {
-    ['1'] = { cmd 'BufferGoto 1', 'Goto 1' },
-    ['2'] = { cmd 'BufferGoto 2', 'Goto 2' },
-    ['3'] = { cmd 'BufferGoto 3', 'Goto 3' },
-    ['4'] = { cmd 'BufferGoto 4', 'Goto 4' },
-    ['5'] = { cmd 'BufferGoto 5', 'Goto 5' },
-    ['6'] = { cmd 'BufferGoto 6', 'Goto 6' },
-    ['7'] = { cmd 'BufferGoto 7', 'Goto 7' },
-    ['8'] = { cmd 'BufferGoto 8', 'Goto 8' },
-    ['9'] = { cmd 'BufferGoto 9', 'Goto 9' },
-    ['0'] = { cmd 'BufferLast', 'Goto last' },
+    ['1'] = {
+      function()
+        vim.cmd 'BufferGoto 1'
+      end,
+      'Goto 1',
+    },
+    ['2'] = {
+      function()
+        vim.cmd 'BufferGoto 2'
+      end,
+      'Goto 2',
+    },
+    ['3'] = {
+      function()
+        vim.cmd 'BufferGoto 3'
+      end,
+      'Goto 3',
+    },
+    ['4'] = {
+      function()
+        vim.cmd 'BufferGoto 4'
+      end,
+      'Goto 4',
+    },
+    ['5'] = {
+      function()
+        vim.cmd 'BufferGoto 5'
+      end,
+      'Goto 5',
+    },
+    ['6'] = {
+      function()
+        vim.cmd 'BufferGoto 6'
+      end,
+      'Goto 6',
+    },
+    ['7'] = {
+      function()
+        vim.cmd 'BufferGoto 7'
+      end,
+      'Goto 7',
+    },
+    ['8'] = {
+      function()
+        vim.cmd 'BufferGoto 8'
+      end,
+      'Goto 8',
+    },
+    ['9'] = {
+      function()
+        vim.cmd 'BufferGoto 9'
+      end,
+      'Goto 9',
+    },
+    ['0'] = {
+      function()
+        vim.cmd 'BufferLast'
+      end,
+      'Goto last',
+    },
     --
     ['<'] = {
       function()
@@ -170,26 +219,101 @@ xy.map.register {
       'Move next',
     },
     --
-    f = { cmd 'Telescope buffers', 'Buffers' },
+    f = {
+      function()
+        vim.cmd 'Telescope buffers'
+      end,
+      'Buffers',
+    },
     --
-    c = { cmd 'BufferClose!', 'Close' },
-    C = { cmd 'BufferRestore', 'Restore' },
-    d = { cmd 'BufferWipeout!', 'Delete' },
+    c = {
+      function()
+        vim.cmd 'BufferClose!'
+      end,
+      'Close',
+    },
+    C = {
+      function()
+        vim.cmd 'BufferRestore'
+      end,
+      'Restore',
+    },
+    d = {
+      function()
+        vim.cmd 'BufferWipeout!'
+      end,
+      'Delete',
+    },
     --
-    h = { cmd 'BufferCloseBuffersLeft', 'Close left' },
-    l = { cmd 'BufferCloseBuffersRight', 'Close right' },
-    o = { cmd 'BufferCloseAllButCurrentOrPinned', 'Close all but current/pinned buffer' },
-    O = { cmd 'BufferCloseAllButCurrent', 'Close all but current buffer' },
+    h = {
+      function()
+        vim.cmd 'BufferCloseBuffersLeft'
+      end,
+      'Close left',
+    },
+    l = {
+      function()
+        vim.cmd 'BufferCloseBuffersRight'
+      end,
+      'Close right',
+    },
+    o = {
+      function()
+        vim.cmd 'BufferCloseAllButCurrentOrPinned'
+      end,
+      'Close all but current/pinned buffer',
+    },
+    O = {
+      function()
+        vim.cmd 'BufferCloseAllButCurrent'
+      end,
+      'Close all but current buffer',
+    },
     --
-    j = { cmd 'BufferPick', 'Pick buffer' },
-    q = { cmd 'BufferPickDelete', 'Pick delete' },
-    p = { cmd 'BufferPin', 'Pin' },
+    j = {
+      function()
+        vim.cmd 'BufferPick'
+      end,
+      'Pick buffer',
+    },
+    q = {
+      function()
+        vim.cmd 'BufferPickDelete'
+      end,
+      'Pick delete',
+    },
+    p = {
+      function()
+        vim.cmd 'BufferPin'
+      end,
+      'Pin',
+    },
     --
     s = {
-      b = { cmd 'BufferOrderByBufferNumber', 'Sort by bufNr' },
-      w = { cmd 'BufferOrderByWindowNumber', 'Sort by windowNr' },
-      d = { cmd 'BufferOrderByDirectory', 'Sort by directory' },
-      l = { cmd 'BufferOrderByLanguage', 'Sort by language' },
+      b = {
+        function()
+          vim.cmd 'BufferOrderByBufferNumber'
+        end,
+        'Sort by bufNr',
+      },
+      w = {
+        function()
+          vim.cmd 'BufferOrderByWindowNumber'
+        end,
+        'Sort by windowNr',
+      },
+      d = {
+        function()
+          vim.cmd 'BufferOrderByDirectory'
+        end,
+        'Sort by directory',
+      },
+      l = {
+        function()
+          vim.cmd 'BufferOrderByLanguage'
+        end,
+        'Sort by language',
+      },
     },
   },
 }

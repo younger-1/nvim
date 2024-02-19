@@ -150,8 +150,13 @@ local function setup_barbar()
 end
 
 M.once = function()
-  local cmd = require('young.key').cmd
-  xy.map.n { '<leader>e', cmd 'NvimTreeToggle', 'Explorer' }
+  xy.map.n {
+    '<leader>e',
+    function()
+      vim.cmd 'NvimTreeToggle'
+    end,
+    'Explorer',
+  }
 end
 
 M.done = function()

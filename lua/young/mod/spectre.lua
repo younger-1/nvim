@@ -1,12 +1,26 @@
 local M = {}
 
 M.once = function()
-  local lua = require('young.key').lua
   xy.map.register {
     ['<leader>r'] = {
-      r = { lua "require('spectre').toggle()", 'Replace' },
-      w = { lua "require('spectre').open_visual({select_word=true})", 'Replace word' },
-      b = { lua "require('spectre').open_file_search({select_word=true})", 'Replace buffer' },
+      r = {
+        function()
+          require('spectre').toggle()
+        end,
+        'Replace',
+      },
+      w = {
+        function()
+          require('spectre').open_visual { select_word = true }
+        end,
+        'Replace word',
+      },
+      b = {
+        function()
+          require('spectre').open_file_search { select_word = true }
+        end,
+        'Replace buffer',
+      },
     },
   }
 end

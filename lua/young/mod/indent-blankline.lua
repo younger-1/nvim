@@ -123,9 +123,14 @@ M.hot = function()
 end
 
 M.once = function()
-  local cmd = require('young.key').cmd
   xy.map.n { '<leader>ti', M.hot, 'Indentline style' }
-  xy.map.n { '<leader>tI', cmd 'IndentBlanklineToggle', 'Toggle indentline' }
+  xy.map.n {
+    '<leader>tI',
+    function()
+      vim.cmd 'IndentBlanklineToggle'
+    end,
+    'Toggle indentline',
+  }
 end
 
 M.done = function()

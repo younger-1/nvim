@@ -47,7 +47,13 @@ local cfg = {
 
 return {
   once = function()
-    xy.map.n { '<leader>z', '<cmd>ZenMode<cr>' }
+    xy.map.n {
+      '<leader>z',
+      function()
+        vim.cmd 'ZenMode'
+      end,
+      'Zen',
+    }
   end,
   done = function()
     require('zen-mode').setup(cfg)

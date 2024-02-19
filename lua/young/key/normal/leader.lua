@@ -1,6 +1,4 @@
 local vim = vim
-local cmd = require('young.key').cmd
-local lua = require('young.key').lua
 
 -- TODO:add function instead of <cmd><cr>
 return {
@@ -21,88 +19,352 @@ return {
   -- ['>'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  -- [';'] = { cmd 'Alpha', 'Dashboard' },
+  -- [';'] = { function() vim.cmd 'Alpha' end, 'Dashboard' },
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  [','] = { cmd 'Telescope buffers', 'Buffers' },
-  ['.'] = { cmd 'Telescope find_files layout_strategy=horizontal', 'Files' },
-  ['/'] = { cmd 'Telescope current_buffer_fuzzy_find', 'Buffer string' },
+  [','] = {
+    function()
+      vim.cmd 'Telescope buffers'
+    end,
+    'Buffers',
+  },
+  ['.'] = {
+    function()
+      vim.cmd 'Telescope find_files layout_strategy=horizontal'
+    end,
+    'Files',
+  },
+  ['/'] = {
+    function()
+      vim.cmd 'Telescope current_buffer_fuzzy_find'
+    end,
+    'Buffer string',
+  },
   ['?'] = {
     name = '+help',
-    ['?'] = { ':h reference_toc<cr>', '❓' },
-    [' '] = { ':h api<cr>', 'Api' },
-    ['<tab>'] = { ':h news<cr>', 'News' },
-    A = { ':h vim-additions<cr>', 'Vim additions' },
-    C = { ':h cterm-colors<cr>', 'Vim colors' },
-    E = { ':h ex-edit-index<cr>', 'Ex-edit index' },
-    F = { ':h function-list<cr>', 'Function list' },
-    H = { ':h help-summary<cr>', 'Help' },
-    I = { ':h insert-index<cr>', 'Insert index' },
-    L = { ':h lsp<cr>', 'LSP' },
-    M = { ':h map-modes<cr>', 'Map modes' },
-    N = { ':h notation<cr>', 'Notation' },
-    O = { ':h option-list<cr>', 'Option list' },
-    T = { ':h tips<cr>', 'Tips' },
-    a = { ':h vim-arguments<cr>', 'Vim arguments' },
-    c = { ':h gui-colors<cr>', 'Vim colors' },
-    d = { ':h nvim-defaults<cr>', 'Defaults' },
-    e = { ':exu<cr>', 'Ex-cmd index' },
-    f = { ':h vim-function<cr>', 'Functions' },
-    g = { ':h g<cr>', 'g-index' },
-    h = { ':h help-tags<cr>', 'Help tags' },
-    i = { ':h index<cr>', 'Index' },
-    k = { ':h key-codes<cr>', 'Key codes' },
-    l = { ':h lua<cr>', 'Lua' },
-    m = { ':h vim-modes<cr>', 'Modes' },
-    n = { ':viu<cr>', 'Normal index' },
-    o = { ':options<cr>', 'Options' },
-    p = { ':h local-additions<cr>', 'Plugin' },
-    q = { ':h quickref<cr>', 'Quick reference' },
-    s = { ':h startup<cr>', 'Startup' },
-    t = { ':h objects<cr>', 'Text objects' },
-    u = { ':h user-manual<cr>', 'User manual' },
-    v = { ':h vim-variable<cr>', 'Vim variable' },
-    w = { ':h ctrl-w<cr>', 'Windows index' },
-    x = { ':h visual-index<cr>', 'Visual index' },
-    y = { ':h [<cr>', '[ ] index' },
-    z = { ':h z<cr>', 'z-index' },
+    ['?'] = {
+      function()
+        vim.cmd 'h reference_toc'
+      end,
+      '❓',
+    },
+    [' '] = {
+      function()
+        vim.cmd 'h api'
+      end,
+      'Api',
+    },
+    ['<tab>'] = {
+      function()
+        vim.cmd 'h news'
+      end,
+      'News',
+    },
+    A = {
+      function()
+        vim.cmd 'h vim-additions'
+      end,
+      'Vim additions',
+    },
+    C = {
+      function()
+        vim.cmd 'h cterm-colors'
+      end,
+      'Vim colors',
+    },
+    E = {
+      function()
+        vim.cmd 'h ex-edit-index'
+      end,
+      'Ex-edit index',
+    },
+    F = {
+      function()
+        vim.cmd 'h function-list'
+      end,
+      'Function list',
+    },
+    H = {
+      function()
+        vim.cmd 'h help-summary'
+      end,
+      'Help',
+    },
+    I = {
+      function()
+        vim.cmd 'h insert-index'
+      end,
+      'Insert index',
+    },
+    L = {
+      function()
+        vim.cmd 'h lsp'
+      end,
+      'LSP',
+    },
+    M = {
+      function()
+        vim.cmd 'h map-modes'
+      end,
+      'Map modes',
+    },
+    N = {
+      function()
+        vim.cmd 'h notation'
+      end,
+      'Notation',
+    },
+    O = {
+      function()
+        vim.cmd 'h option-list'
+      end,
+      'Option list',
+    },
+    T = {
+      function()
+        vim.cmd 'h tips'
+      end,
+      'Tips',
+    },
+    a = {
+      function()
+        vim.cmd 'h vim-arguments'
+      end,
+      'Vim arguments',
+    },
+    c = {
+      function()
+        vim.cmd 'h gui-colors'
+      end,
+      'Vim colors',
+    },
+    d = {
+      function()
+        vim.cmd 'h nvim-defaults'
+      end,
+      'Defaults',
+    },
+    e = {
+      function()
+        vim.cmd 'exu'
+      end,
+      'Ex-cmd index',
+    },
+    f = {
+      function()
+        vim.cmd 'h vim-function'
+      end,
+      'Functions',
+    },
+    g = {
+      function()
+        vim.cmd 'h g'
+      end,
+      'g-index',
+    },
+    h = {
+      function()
+        vim.cmd 'h help-tags'
+      end,
+      'Help tags',
+    },
+    i = {
+      function()
+        vim.cmd 'h index'
+      end,
+      'Index',
+    },
+    k = {
+      function()
+        vim.cmd 'h key-codes'
+      end,
+      'Key codes',
+    },
+    l = {
+      function()
+        vim.cmd 'h lua'
+      end,
+      'Lua',
+    },
+    m = {
+      function()
+        vim.cmd 'h vim-modes'
+      end,
+      'Modes',
+    },
+    n = {
+      function()
+        vim.cmd 'viu'
+      end,
+      'Normal index',
+    },
+    o = {
+      function()
+        vim.cmd 'options'
+      end,
+      'Options',
+    },
+    p = {
+      function()
+        vim.cmd 'h local-additions'
+      end,
+      'Plugin',
+    },
+    q = {
+      function()
+        vim.cmd 'h quickref'
+      end,
+      'Quick reference',
+    },
+    s = {
+      function()
+        vim.cmd 'h startup'
+      end,
+      'Startup',
+    },
+    t = {
+      function()
+        vim.cmd 'h objects'
+      end,
+      'Text objects',
+    },
+    u = {
+      function()
+        vim.cmd 'h user-manual'
+      end,
+      'User manual',
+    },
+    v = {
+      function()
+        vim.cmd 'h vim-variable'
+      end,
+      'Vim variable',
+    },
+    w = {
+      function()
+        vim.cmd 'h ctrl-w'
+      end,
+      'Windows index',
+    },
+    x = {
+      function()
+        vim.cmd 'h visual-index'
+      end,
+      'Visual index',
+    },
+    y = {
+      function()
+        vim.cmd 'h ['
+      end,
+      '[ ] index',
+    },
+    z = {
+      function()
+        vim.cmd 'h z'
+      end,
+      'z-index',
+    },
   },
   a = {
     name = '+apps',
-    [' '] = { cmd 'Telescope command_palette', 'Command palette' },
+    [' '] = {
+      function()
+        vim.cmd 'Telescope command_palette'
+      end,
+      'Command palette',
+    },
     e = { '+external' },
     g = {
       name = '+github',
-      g = { 'Telescope gh gist', 'Gist' },
-      i = { 'Telescope gh issues', 'Issues' },
-      p = { 'Telescope gh pull_request', 'Pull_request' },
-      r = { 'Telescope gh run', 'Run' },
+      g = {
+        function()
+          vim.cmd 'Telescope gh gist'
+        end,
+        'Gist',
+      },
+      i = {
+        function()
+          vim.cmd 'Telescope gh issues'
+        end,
+        'Issues',
+      },
+      p = {
+        function()
+          vim.cmd 'Telescope gh pull_request'
+        end,
+        'Pull_request',
+      },
+      r = {
+        function()
+          vim.cmd 'Telescope gh run'
+        end,
+        'Run',
+      },
     },
-    m = { cmd 'MarkdownPreviewToggle', 'Markdown' },
+    m = {
+      function()
+        vim.cmd 'MarkdownPreviewToggle'
+      end,
+      'Markdown',
+    },
     n = {
       name = '+nabla',
-      n = { lua "require('nabla').popup { border = 'rounded' }", 'ASCII LaTeX equations' },
-      r = { lua "require('nabla').replace_current()", 'Replace current LaTeX equations' },
-      a = { lua "require('nabla').replace_all()", 'Replace current LaTeX equations' },
-      d = { lua "require('nabla').draw_overlay()", 'Draw overlay' },
-      t = { lua "require('nabla').toggle_virt()", 'Toggle ASCII LaTeX' },
+      n = {
+        function()
+          require('nabla').popup { border = 'rounded' }
+        end,
+        'ASCII LaTeX equations',
+      },
+      r = {
+        function()
+          require('nabla').replace_current()
+        end,
+        'Replace current LaTeX equations',
+      },
+      a = {
+        function()
+          require('nabla').replace_all()
+        end,
+        'Replace current LaTeX equations',
+      },
+      d = {
+        function()
+          require('nabla').draw_overlay()
+        end,
+        'Draw overlay',
+      },
+      t = {
+        function()
+          require('nabla').toggle_virt()
+        end,
+        'Toggle ASCII LaTeX',
+      },
     },
-    u = { xy.tool.open_url, 'Open github url' },
-    v = { cmd 'OpenInVSCode', 'Open in vscode' },
+    u = {
+      function()
+        xy.tool.open_url()
+      end,
+      'Open github url',
+    },
+    v = {
+      function()
+        vim.cmd 'OpenInVSCode'
+      end,
+      'Open in vscode',
+    },
   },
   b = {
     name = '+buffer',
     s = {
       name = '+sort',
     },
-    -- A = { cmd 'TablineToggleShowAllBuffers', 'Tabline toggle all' },
-    -- U = { cmd 'TablineBuffersClearBind', 'Tabline unbound' },
+    -- A = { function() vim.cmd 'TablineToggleShowAllBuffers' end, 'Tabline toggle all' },
+    -- U = { function() vim.cmd 'TablineBuffersClearBind' end, 'Tabline unbound' },
     -- B = { ':TablineBuffersBind ', 'Tabline bound' },
     -- R = { ':TablineTabRename ', 'Tabline rename' },
     -- N = { ':TablineTabNew ', 'Tabline new' },
     -- T = { ':TablineCustom ', 'Tabline++' },
   },
-  -- c = { '<cmd>BufferClose!<cr>', 'Close buffer' },
   c = {
     name = '+code',
     c = {
@@ -117,147 +379,597 @@ return {
     name = '+debug',
     s = {
       name = '+telescope',
-      [' '] = { cmd 'Telescope dap configurations', 'Dap configurations' },
-      c = { cmd 'Telescope dap commands', 'Dap commands' },
-      l = { cmd 'Telescope dap list_breakpoints', 'Dap list_breakpoints' },
-      v = { cmd 'Telescope dap variables', 'Dap variables' },
-      f = { cmd 'Telescope dap frames', 'Dap frames' },
+      [' '] = {
+        function()
+          vim.cmd 'Telescope dap configurations'
+        end,
+        'Dap configurations',
+      },
+      c = {
+        function()
+          vim.cmd 'Telescope dap commands'
+        end,
+        'Dap commands',
+      },
+      l = {
+        function()
+          vim.cmd 'Telescope dap list_breakpoints'
+        end,
+        'Dap list_breakpoints',
+      },
+      v = {
+        function()
+          vim.cmd 'Telescope dap variables'
+        end,
+        'Dap variables',
+      },
+      f = {
+        function()
+          vim.cmd 'Telescope dap frames'
+        end,
+        'Dap frames',
+      },
     },
-    [' '] = { lua "require'dapui'.toggle()", ' UI' },
+    [' '] = {
+      function()
+        require('dapui').toggle()
+      end,
+      ' UI',
+    },
     ['<tab>'] = '+lang',
     f = {
-      s = { cmd 'DapScopesFloat', 'Scopes float' },
-      f = { cmd 'DapFramesFloat', 'Frames Float' },
-      e = { cmd 'DapExpressionFloat', 'Expression float' },
-      t = { cmd 'DapThreadsFloat', 'Threads float' },
+      s = {
+        function()
+          vim.cmd 'DapScopesFloat'
+        end,
+        'Scopes float',
+      },
+      f = {
+        function()
+          vim.cmd 'DapFramesFloat'
+        end,
+        'Frames Float',
+      },
+      e = {
+        function()
+          vim.cmd 'DapExpressionFloat'
+        end,
+        'Expression float',
+      },
+      t = {
+        function()
+          vim.cmd 'DapThreadsFloat'
+        end,
+        'Threads float',
+      },
     },
-    -- h = { lua "require'dap.ui.widgets'.hover()", 'Hover' },
-    h = { lua "require'dapui'.eval(nil, { enter = true })", 'Hover' },
-    t = { cmd 'DapVirtualTextToggle', 'Virtual text' },
-    ['['] = { lua "require('persistent-breakpoints.api').load_breakpoints()", 'Load breakpoints' },
-    [']'] = { lua "require('persistent-breakpoints.api').store_breakpoints()", 'Store breakpoints' },
+    -- h = { function() require'dap.ui.widgets'.hover() end, 'Hover' },
+    h = {
+      function()
+        require('dapui').eval(nil, { enter = true })
+      end,
+      'Hover',
+    },
+    t = {
+      function()
+        vim.cmd 'DapVirtualTextToggle'
+      end,
+      'Virtual text',
+    },
+    ['['] = {
+      function()
+        require('persistent-breakpoints.api').load_breakpoints()
+      end,
+      'Load breakpoints',
+    },
+    [']'] = {
+      function()
+        require('persistent-breakpoints.api').store_breakpoints()
+      end,
+      'Store breakpoints',
+    },
 
-    L = { cmd 'DapShowLog', 'Show log' },
+    L = {
+      function()
+        vim.cmd 'DapShowLog'
+      end,
+      'Show log',
+    },
 
-    -- s = { lua "require'dap'.continue()", ' Start' },
-    c = { lua "require'dap'.continue()", ' Continue' },
-    a = { lua "require'dap'.run_to_cursor()", '省 Run to cursor' },
-    x = { lua "require'dap'.run_last()", ' Run last' },
-    v = { lua "require'dap'.goto_()", 'Jump/Skip to line' },
-    z = { lua "require'dap'.pause()", '懶 Pause' },
+    -- s = { function() require'dap'.continue() end, ' Start' },
+    c = {
+      function()
+        require('dap').continue()
+      end,
+      ' Continue',
+    },
+    a = {
+      function()
+        require('dap').run_to_cursor()
+      end,
+      '省 Run to cursor',
+    },
+    x = {
+      function()
+        require('dap').run_last()
+      end,
+      ' Run last',
+    },
+    v = {
+      function()
+        require('dap').goto_()
+      end,
+      'Jump/Skip to line',
+    },
+    z = {
+      function()
+        require('dap').pause()
+      end,
+      '懶 Pause',
+    },
 
-    d = { lua "require'dap'.toggle_breakpoint()", 'ﴫ Toggle breakpoint' },
-    E = { lua "require'dap'.set_breakpoint(vim.fn.input('Condition: '))", ' Condition breakpoint' },
-    F = { lua "require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))", ' Log breakpoint' },
-    H = { lua "require'dap'.set_breakpoint(nil, vim.fn.input('Hit times: '))", ' Hit breakpoint' },
+    d = {
+      function()
+        require('dap').toggle_breakpoint()
+      end,
+      'ﴫ Toggle breakpoint',
+    },
+    E = {
+      function()
+        require('dap').set_breakpoint(vim.fn.input 'Condition: ')
+      end,
+      ' Condition breakpoint',
+    },
+    F = {
+      function()
+        require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ')
+      end,
+      ' Log breakpoint',
+    },
+    H = {
+      function()
+        require('dap').set_breakpoint(nil, vim.fn.input 'Hit times: ')
+      end,
+      ' Hit breakpoint',
+    },
 
-    g = { lua "require'dap'.set_exception_breakpoints()", 'Ask exception breakpoints' },
-    G = { lua "require'dap'.set_exception_breakpoints('default')", 'Default exception breakpoints' },
-    l = { lua "require'dap'.list_breakpoints(true)", 'List breakpoints' },
-    C = { lua "require'dap'.clear_breakpoints()", 'Clear breakpoints' },
+    g = {
+      function()
+        require('dap').set_exception_breakpoints()
+      end,
+      'Ask exception breakpoints',
+    },
+    G = {
+      function()
+        require('dap').set_exception_breakpoints 'default'
+      end,
+      'Default exception breakpoints',
+    },
+    l = {
+      function()
+        require('dap').list_breakpoints(true)
+      end,
+      'List breakpoints',
+    },
+    C = {
+      function()
+        require('dap').clear_breakpoints()
+      end,
+      'Clear breakpoints',
+    },
 
-    r = { lua "require'dap'.repl.toggle()", ' Toggle repl' },
-    R = { lua "require'dap'.toggle()", 'Toggle Repl' },
+    r = {
+      function()
+        require('dap').repl.toggle()
+      end,
+      ' Toggle repl',
+    },
+    R = {
+      function()
+        require('dap').toggle()
+      end,
+      'Toggle Repl',
+    },
 
-    o = { lua "require'dap'.step_over()", ' Step over' },
-    i = { lua "require'dap'.step_into()", ' Step into' },
-    I = { lua "require'dap'.step_into { askForTargets = true }", ' Step into' },
-    u = { lua "require'dap'.step_out()", ' Step out' },
-    b = { lua "require'dap'.step_back()", 'Step back' },
-    B = { lua "require'dap'.reverse_continue()", 'Reverse Continue' },
-    j = { lua "require'dap'.down()", 'Stacktrace down' },
-    k = { lua "require'dap'.up()", 'Stacktrace up' },
+    o = {
+      function()
+        require('dap').step_over()
+      end,
+      ' Step over',
+    },
+    i = {
+      function()
+        require('dap').step_into()
+      end,
+      ' Step into',
+    },
+    I = {
+      function()
+        require('dap').step_into { askForTargets = true }
+      end,
+      ' Step into',
+    },
+    u = {
+      function()
+        require('dap').step_out()
+      end,
+      ' Step out',
+    },
+    b = {
+      function()
+        require('dap').step_back()
+      end,
+      'Step back',
+    },
+    B = {
+      function()
+        require('dap').reverse_continue()
+      end,
+      'Reverse Continue',
+    },
+    j = {
+      function()
+        require('dap').down()
+      end,
+      'Stacktrace down',
+    },
+    k = {
+      function()
+        require('dap').up()
+      end,
+      'Stacktrace up',
+    },
 
-    q = { lua "require'dap'.terminate()", 'Terminate' },
-    Q = { lua "require'dap'.disconnect()", 'Disconnect' },
-    -- q = { lua "require'dap'.close()", 'Quit' },
+    q = {
+      function()
+        require('dap').terminate()
+      end,
+      'Terminate',
+    },
+    Q = {
+      function()
+        require('dap').disconnect()
+      end,
+      'Disconnect',
+    },
+    -- q = { function() require'dap'.close() end, 'Quit' },
 
-    m = { lua "pp(require'dap'.status(), require'dap'.session())", 'Print session' },
-    J = { lua "require('dap.ext.vscode').load_launchjs()", 'Load launch JSON' },
+    m = {
+      function()
+        pp(require('dap').status(), require('dap').session())
+      end,
+      'Print session',
+    },
+    J = {
+      function()
+        require('dap.ext.vscode').load_launchjs()
+      end,
+      'Load launch JSON',
+    },
   },
   e = { name = 'explorer' },
   g = {
     name = '+git',
-    [' '] = { cmd 'tab Git', 'Git' },
-    m = { cmd 'Flog', 'Flog' },
-    ['"'] = { cmd 'Gitsigns toggle_current_line_blame', 'Blames' },
-    ["'"] = { cmd 'Gitsigns toggle_linehl', 'Line highlight' },
-    ['`'] = { cmd 'Gitsigns toggle_numhl', 'Number highlight' },
-    [';'] = { cmd 'Gitsigns toggle_deleted', 'Deleted lines' },
-    [','] = { cmd 'Gitsigns toggle_signs', 'Sign highlight' },
+    [' '] = {
+      function()
+        vim.cmd 'tab Git'
+      end,
+      'Git',
+    },
+    m = {
+      function()
+        vim.cmd 'Flog'
+      end,
+      'Flog',
+    },
+    ['"'] = {
+      function()
+        vim.cmd 'Gitsigns toggle_current_line_blame'
+      end,
+      'Blames',
+    },
+    ["'"] = {
+      function()
+        vim.cmd 'Gitsigns toggle_linehl'
+      end,
+      'Line highlight',
+    },
+    ['`'] = {
+      function()
+        vim.cmd 'Gitsigns toggle_numhl'
+      end,
+      'Number highlight',
+    },
+    [';'] = {
+      function()
+        vim.cmd 'Gitsigns toggle_deleted'
+      end,
+      'Deleted lines',
+    },
+    [','] = {
+      function()
+        vim.cmd 'Gitsigns toggle_signs'
+      end,
+      'Sign highlight',
+    },
     ['<C-q>'] = {
       name = '+quickfix',
-      a = { "<cmd>lua require 'gitsigns'.setqflist('all')<cr>", 'All git' },
-      b = { "<cmd>lua require 'gitsigns'.setqflist('attached')<cr>", 'Buffers' },
-      c = { cmd 'Gitsigns setqflist', 'Current' },
+      a = {
+        function()
+          require('gitsigns').setqflist 'all'
+        end,
+        'All git',
+      },
+      b = {
+        function()
+          require('gitsigns').setqflist 'attached'
+        end,
+        'Buffers',
+      },
+      c = {
+        function()
+          vim.cmd 'Gitsigns setqflist'
+        end,
+        'Current',
+      },
     },
     ['<C-a>'] = {
       name = '+loclist',
-      a = { lua "require 'gitsigns'.setloclist(0, 'all')", 'All git' },
-      b = { lua "require 'gitsigns'.setloclist(0, 'attached')", 'Buffers' },
-      c = { cmd 'Gitsigns setloclist', 'Current' },
+      a = {
+        function()
+          require('gitsigns').setloclist(0, 'all')
+        end,
+        'All git',
+      },
+      b = {
+        function()
+          require('gitsigns').setloclist(0, 'attached')
+        end,
+        'Buffers',
+      },
+      c = {
+        function()
+          vim.cmd 'Gitsigns setloclist'
+        end,
+        'Current',
+      },
     },
-    b = { cmd 'Telescope git_branches', 'Branches' },
-    c = { cmd 'Telescope git_commits', 'Commits' },
-    C = { cmd 'Telescope git_bcommits', 'Commits(current file)' },
-    e = { cmd 'Telescope git_stash', 'Stash' },
-    f = { cmd 'Telescope git_files', 'Files' },
-    o = { cmd 'Telescope git_status', 'Open changed file' },
-    h = { cmd 'Telescope git_bcommits_range', 'Commits(current line)' },
-    -- d = { cmd 'Gitsigns diffthis ~1', 'Diff this' },
+    b = {
+      function()
+        vim.cmd 'Telescope git_branches'
+      end,
+      'Branches',
+    },
+    c = {
+      function()
+        vim.cmd 'Telescope git_commits'
+      end,
+      'Commits',
+    },
+    C = {
+      function()
+        vim.cmd 'Telescope git_bcommits'
+      end,
+      'Commits(current file)',
+    },
+    e = {
+      function()
+        vim.cmd 'Telescope git_stash'
+      end,
+      'Stash',
+    },
+    f = {
+      function()
+        vim.cmd 'Telescope git_files'
+      end,
+      'Files',
+    },
+    o = {
+      function()
+        vim.cmd 'Telescope git_status'
+      end,
+      'Open changed file',
+    },
+    h = {
+      function()
+        vim.cmd 'Telescope git_bcommits_range'
+      end,
+      'Commits(current line)',
+    },
+    -- d = { function() vim.cmd 'Gitsigns diffthis ~1' end, 'Diff this' },
     d = {
       name = '+diff',
       [' '] = { ':DiffviewOpen ', 'Diffview open' },
       ['<tab>'] = { ':DiffviewFileHistory ', 'Diffview commits' },
-      -- s = { cmd 'DiffviewOpen --staged', 'Open staged' },
-      -- c = { cmd 'DiffviewClose', 'Close diff' },
-      -- t = { cmd 'DiffviewToggleFiles', 'Toggle files' },
-      d = { cmd 'DiffviewOpen', 'Open diff' },
-      h = { cmd 'DiffviewFileHistory', 'All commits' },
-      f = { cmd 'DiffviewFileHistory %', 'File commits' },
-      p = { cmd 'DiffviewLog', 'Log' },
+      -- s = { function() vim.cmd 'DiffviewOpen --staged' end, 'Open staged' },
+      -- c = { function() vim.cmd 'DiffviewClose' end, 'Close diff' },
+      -- t = { function() vim.cmd 'DiffviewToggleFiles' end, 'Toggle files' },
+      d = {
+        function()
+          vim.cmd 'DiffviewOpen'
+        end,
+        'Open diff',
+      },
+      h = {
+        function()
+          vim.cmd 'DiffviewFileHistory'
+        end,
+        'All commits',
+      },
+      f = {
+        function()
+          vim.cmd 'DiffviewFileHistory %'
+        end,
+        'File commits',
+      },
+      p = {
+        function()
+          vim.cmd 'DiffviewLog'
+        end,
+        'Log',
+      },
       --
       a = { ':DiffviewFileHistory --author=', 'All commits (author)' },
       m = { ':DiffviewFileHistory --grep=', 'All commits (log message)' },
-      l = { cmd 'DiffviewFileHistory --base=LOCAL', 'All commits (compare to local)' },
-      y = { cmd 'DiffviewFileHistory --merges', 'All commits (merge)' },
-      Y = { cmd 'DiffviewFileHistory --no-merges', 'All commits (no merge)' },
+      l = {
+        function()
+          vim.cmd 'DiffviewFileHistory --base=LOCAL'
+        end,
+        'All commits (compare to local)',
+      },
+      y = {
+        function()
+          vim.cmd 'DiffviewFileHistory --merges'
+        end,
+        'All commits (merge)',
+      },
+      Y = {
+        function()
+          vim.cmd 'DiffviewFileHistory --no-merges'
+        end,
+        'All commits (no merge)',
+      },
       --
       A = { ':DiffviewFileHistory % --author=', 'File commits (author)' },
       M = { ':DiffviewFileHistory % --grep=', 'File commits (log message)' },
-      L = { cmd 'DiffviewFileHistory % --base=LOCAL', 'File commits (compare to local)' },
+      L = {
+        function()
+          vim.cmd 'DiffviewFileHistory % --base=LOCAL'
+        end,
+        'File commits (compare to local)',
+      },
       R = { ':DiffviewFileHistory -L,:<Left><Left>', 'File commits (range)' },
       F = { ':DiffviewFileHistory -L::<Left>', 'File commits (func)' },
     },
     i = {
       name = '+gist',
-      a = { '<cmd>Gist -b -a<cr>', 'Create anon' },
-      d = { '<cmd>Gist -d<cr>', 'Delete' },
-      f = { '<cmd>Gist -f<cr>', 'Fork' },
-      g = { '<cmd>Gist -b<cr>', 'Create' },
-      l = { '<cmd>Gist -l<cr>', 'List' },
-      p = { '<cmd>Gist -b -p<cr>', 'Create private' },
+      a = {
+        function()
+          vim.cmd 'Gist -b -a'
+        end,
+        'Create anon',
+      },
+      d = {
+        function()
+          vim.cmd 'Gist -d'
+        end,
+        'Delete',
+      },
+      f = {
+        function()
+          vim.cmd 'Gist -f'
+        end,
+        'Fork',
+      },
+      g = {
+        function()
+          vim.cmd 'Gist -b'
+        end,
+        'Create',
+      },
+      l = {
+        function()
+          vim.cmd 'Gist -l'
+        end,
+        'List',
+      },
+      p = {
+        function()
+          vim.cmd 'Gist -b -p'
+        end,
+        'Create private',
+      },
     },
-    j = { cmd 'Gitsigns next_hunk', 'Next hunk' },
-    k = { cmd 'Gitsigns prev_hunk', 'Prev hunk' },
-    l = { cmd 'Gitsigns blame_line', 'Blame' },
-    L = { "<cmd>lua require 'gitsigns'.blame_line { full=true }<cr>", 'Blame' },
+    j = {
+      function()
+        vim.cmd 'Gitsigns next_hunk'
+      end,
+      'Next hunk',
+    },
+    k = {
+      function()
+        vim.cmd 'Gitsigns prev_hunk'
+      end,
+      'Prev hunk',
+    },
+    l = {
+      function()
+        vim.cmd 'Gitsigns blame_line'
+      end,
+      'Blame',
+    },
+    L = {
+      function()
+        require('gitsigns').blame_line { full = true }
+      end,
+      'Blame',
+    },
     n = {
       name = '+neogit',
-      c = { "<cmd>lua require('neogit').open({ 'commit' })<cr>", 'Commit' },
-      n = { '<cmd>Neogit<cr>', '♐' },
-      s = { "<cmd>lua require('neogit').open({ kind = 'split' })<cr>", 'Commit' },
-      v = { "<cmd>lua require('neogit').open({ kind = 'vsplit' })<cr>", 'Commit' },
+      c = {
+        function()
+          require('neogit').open { 'commit' }
+        end,
+        'Commit',
+      },
+      n = {
+        function()
+          vim.cmd 'Neogit'
+        end,
+        '♐',
+      },
+      s = {
+        function()
+          require('neogit').open { kind = 'split' }
+        end,
+        'Commit',
+      },
+      v = {
+        function()
+          require('neogit').open { kind = 'vsplit' }
+        end,
+        'Commit',
+      },
     },
-    p = { cmd 'Gitsigns preview_hunk_inline', 'Preview hunk inline' },
-    P = { cmd 'Gitsigns preview_hunk', 'Preview hunk' },
+    p = {
+      function()
+        vim.cmd 'Gitsigns preview_hunk_inline'
+      end,
+      'Preview hunk inline',
+    },
+    P = {
+      function()
+        vim.cmd 'Gitsigns preview_hunk'
+      end,
+      'Preview hunk',
+    },
     r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk', mode = { 'n', 'x' } },
-    R = { cmd 'Gitsigns reset_buffer', 'Reset buffer' },
+    R = {
+      function()
+        vim.cmd 'Gitsigns reset_buffer'
+      end,
+      'Reset buffer',
+    },
     s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk', mode = { 'n', 'x' } },
-    S = { cmd 'Gitsigns stage_buffer', 'Stage buffer' },
+    S = {
+      function()
+        vim.cmd 'Gitsigns stage_buffer'
+      end,
+      'Stage buffer',
+    },
     u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk', mode = { 'n', 'x' } },
-    U = { cmd 'Gitsigns reset_buffer_index', 'Reset buffer index' },
-    w = { cmd 'Gitsigns toggle_word_diff', 'Word diff' },
+    U = {
+      function()
+        vim.cmd 'Gitsigns reset_buffer_index'
+      end,
+      'Reset buffer index',
+    },
+    w = {
+      function()
+        vim.cmd 'Gitsigns toggle_word_diff'
+      end,
+      'Word diff',
+    },
   },
   h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },
   j = {
@@ -278,21 +990,42 @@ return {
     L = {
       name = '+logs',
       d = {
-        "<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",
+        function()
+          require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())
+        end,
         'view default log',
       },
       D = {
-        "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>",
+        function()
+          vim.fn.execute('edit ' .. require('lvim.core.log').get_path())
+        end,
         'Open the default logfile',
       },
-      l = { "<cmd>lua require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>", 'view lsp log' },
-      L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", 'Open the LSP logfile' },
+      l = {
+        function()
+          require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())
+        end,
+        'view lsp log',
+      },
+      L = {
+        function()
+          vim.fn.execute('edit ' .. vim.lsp.get_log_path())
+        end,
+        'Open the LSP logfile',
+      },
       n = {
-        "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
+        function()
+          require('lvim.core.terminal').toggle_log_view(os.getenv 'NVIM_LOG_FILE')
+        end,
         'view neovim log',
       },
       N = { '<cmd>edit $NVIM_LOG_FILE<cr>', 'Open the Neovim logfile' },
-      p = { "<cmd>lua require('lvim.core.terminal').toggle_log_view('packer.nvim')<cr>", 'view packer log' },
+      p = {
+        function()
+          require('lvim.core.terminal').toggle_log_view 'packer.nvim'
+        end,
+        'view packer log',
+      },
       P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", 'Open the Packer logfile' },
     },
   },
@@ -305,36 +1038,86 @@ return {
   N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   o = {
     name = '+open',
-    t = { cmd 'TodoQuickFix', 'Todo qf' },
-    T = { cmd 'TodoTelescope', 'Todo telescope' },
+    t = {
+      function()
+        vim.cmd 'TodoQuickFix'
+      end,
+      'Todo qf',
+    },
+    T = {
+      function()
+        vim.cmd 'TodoTelescope'
+      end,
+      'Todo telescope',
+    },
   },
   p = {
     name = '+project',
     s = {
       name = '+sessions',
-      l = { lua 'require("persistence").load()', 'Current session' },
-      L = { lua 'require("persistence").load({ last = true })', 'Last session' },
-      s = { lua 'require("persistence").stop()', 'Stop session' },
+      l = {
+        function()
+          require('persistence').load()
+        end,
+        'Current session',
+      },
+      L = {
+        function()
+          require('persistence').load { last = true }
+        end,
+        'Last session',
+      },
+      s = {
+        function()
+          require('persistence').stop()
+        end,
+        'Stop session',
+      },
     },
     S = {
       name = '+session-man',
-      l = { cmd 'SessionManager load_current_dir_session', 'Current session' },
-      L = { cmd 'SessionManager load_last_session', 'Last session' },
-      a = { cmd 'SessionManager load_session', 'All sessions' },
-      d = { cmd 'SessionManager delete_session', 'Delete session' },
-      S = { cmd 'SessionManager save_current_session', 'Save session' },
+      l = {
+        function()
+          vim.cmd 'SessionManager load_current_dir_session'
+        end,
+        'Current session',
+      },
+      L = {
+        function()
+          vim.cmd 'SessionManager load_last_session'
+        end,
+        'Last session',
+      },
+      a = {
+        function()
+          vim.cmd 'SessionManager load_session'
+        end,
+        'All sessions',
+      },
+      d = {
+        function()
+          vim.cmd 'SessionManager delete_session'
+        end,
+        'Delete session',
+      },
+      S = {
+        function()
+          vim.cmd 'SessionManager save_current_session'
+        end,
+        'Save session',
+      },
     },
-    -- C = { cmd 'PackerCompile profile=true', 'Compile++' },
-    -- P = { cmd 'PackerProfile', 'Profile' },
-    -- S = { cmd 'PackerSync', 'Sync' },
-    -- c = { cmd 'PackerCompile', 'Compile' },
-    -- i = { cmd 'PackerInstall', 'Install' },
-    -- k = { cmd 'PackerClean', 'Clean' },
-    -- p = { cmd 'Telescope packer', 'Telescope Packer' },
+    -- C = { function() vim.cmd 'PackerCompile profile=true' end, 'Compile++' },
+    -- P = { function() vim.cmd 'PackerProfile' end, 'Profile' },
+    -- S = { function() vim.cmd 'PackerSync' end, 'Sync' },
+    -- c = { function() vim.cmd 'PackerCompile' end, 'Compile' },
+    -- i = { function() vim.cmd 'PackerInstall' end, 'Install' },
+    -- k = { function() vim.cmd 'PackerClean' end, 'Clean' },
+    -- p = { function() vim.cmd 'Telescope packer' end, 'Telescope Packer' },
     -- r = { require('young.packer').recompile, 'Re-compile' },
-    -- s = { cmd 'PackerStatus', 'Status' },
-    -- u = { cmd 'PackerUpdate', 'Update' },
-    -- U = { cmd 'PackerUpdate --preview', 'Update (preview)' },
+    -- s = { function() vim.cmd 'PackerStatus' end, 'Status' },
+    -- u = { function() vim.cmd 'PackerUpdate' end, 'Update' },
+    -- U = { function() vim.cmd 'PackerUpdate --preview' end, 'Update (preview)' },
     -- b = { require('young.packer').rollback, 'Rollback' },
     -- n = { require('young.packer').snapshot, 'Snapshot' },
     -- m = { require('young.packer').snapshot_hook, 'Snapshot sort' },
@@ -354,41 +1137,126 @@ return {
     [':'] = { ':call wilder#toggle()<cr>', 'Wilder' },
     a = {
       name = '+autocmd',
-      f = { require('young.autocmd').toggle_format_on_save, 'Format on save' },
-      p = { require('young.autocmd').toggle_print_ascii, 'Print ASCII' },
+      f = {
+        function()
+          require('young.autocmd').toggle_format_on_save()
+        end,
+        'Format on save',
+      },
+      p = {
+        function()
+          require('young.autocmd').toggle_print_ascii()
+        end,
+        'Print ASCII',
+      },
       -- r = { require('young.autocmd').toggle_auto_chdir, 'Auto chdir' },
       -- c = { require('young.autocmd').toggle_auto_cursorline, 'Cursorline' },
     },
     b = 'Biscuits',
-    l = { require('young.tool').toggle_tabline, 'Tabline' },
-    n = { require('young.tool').toggle_notify_style, 'Nofity style' },
-    N = { require('young.tool').toggle_notify, 'Toggle nofity' },
+    l = {
+      function()
+        require('young.tool').toggle_tabline()
+      end,
+      'Tabline',
+    },
+    n = {
+      function()
+        require('young.tool').toggle_notify_style()
+      end,
+      'Nofity style',
+    },
+    N = {
+      function()
+        require('young.tool').toggle_notify()
+      end,
+      'Toggle nofity',
+    },
   },
   T = {
     name = '+treesitter',
-    t = { cmd 'Telescope treesitter', 'Telescope' },
-    i = { cmd 'TSConfigInfo', 'Config' },
-    I = { cmd 'TSModuleInfo', 'Module' },
+    t = {
+      function()
+        vim.cmd 'Telescope treesitter'
+      end,
+      'Telescope',
+    },
+    i = {
+      function()
+        vim.cmd 'TSConfigInfo'
+      end,
+      'Config',
+    },
+    I = {
+      function()
+        vim.cmd 'TSModuleInfo'
+      end,
+      'Module',
+    },
     --
-    h = { cmd 'TSBufToggle highlight', 'Toggle highlight(Buffer)' },
-    r = { cmd 'TSBufToggle rainbow', 'Toggle rainbow' },
+    h = {
+      function()
+        vim.cmd 'TSBufToggle highlight'
+      end,
+      'Toggle highlight(Buffer)',
+    },
+    r = {
+      function()
+        vim.cmd 'TSBufToggle rainbow'
+      end,
+      'Toggle rainbow',
+    },
     -- Playground
-    c = { cmd 'TSCaptureUnderCursor', 'Highlight' },
-    n = { cmd 'TSNodeUnderCursor', 'Node' },
-    p = { cmd 'TSPlaygroundToggle', 'Playground' },
+    c = {
+      function()
+        vim.cmd 'TSCaptureUnderCursor'
+      end,
+      'Highlight',
+    },
+    n = {
+      function()
+        vim.cmd 'TSNodeUnderCursor'
+      end,
+      'Node',
+    },
+    p = {
+      function()
+        vim.cmd 'TSPlaygroundToggle'
+      end,
+      'Playground',
+    },
     -- Context
-    C = { cmd 'TSContextToggle', 'Toggle context' },
+    C = {
+      function()
+        vim.cmd 'TSContextToggle'
+      end,
+      'Toggle context',
+    },
   },
   u = {
     name = '+ui',
   },
   v = {
     name = '+vim',
-    v = { cmd 'Inspect', 'Inspect' },
-    t = { cmd 'InspectTree', 'Inspect tree' },
+    v = {
+      function()
+        vim.cmd 'Inspect'
+      end,
+      'Inspect',
+    },
+    t = {
+      function()
+        vim.cmd 'InspectTree'
+      end,
+      'Inspect tree',
+    },
   },
   -- w = { '<cmd>w!<cr>', 'Save' },
-  w = { cmd 'update', 'which_key_ignore' },
+  w = {
+    function()
+      vim.cmd 'update'
+    end,
+    'which_key_ignore',
+  },
   x = {
     name = '+trouble',
   },
@@ -440,7 +1308,12 @@ return {
       end,
       'Open changed Config files',
     },
-    r = { require('young.cfg').reload, 'Reload configuration' },
+    r = {
+      function()
+        require('young.cfg').reload()
+      end,
+      'Reload configuration',
+    },
     y = {
       function()
         local file = require('young.cfg').lazy_path
@@ -451,5 +1324,4 @@ return {
     -- y = { cmd('edit ' .. require('young.cfg').reload_path), 'Edit plugins' },
     -- y = { "<cmd>lua vim.fn.execute('edit ' .. require('young.cfg').reload_path)<cr>", 'Edit plugins' },
   },
-  -- z = { cmd 'ZenMode', 'Zen' },
 }

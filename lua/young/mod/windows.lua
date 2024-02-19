@@ -1,10 +1,10 @@
 local M = {}
 
 M.once = function()
-  -- vim.keymap.set('n', '<C-w>z', cmd 'WindowsMaximize')
-  -- vim.keymap.set('n', '<C-w>_', cmd 'WindowsMaximizeVertically')
-  -- vim.keymap.set('n', '<C-w>|', cmd 'WindowsMaximizeHorizontally')
-  -- vim.keymap.set('n', '<C-w>=', cmd 'WindowsEqualize')
+  -- vim.keymap.set('n', '<C-w>z', function() vim.cmd 'WindowsMaximize' end)
+  -- vim.keymap.set('n', '<C-w>_', function() vim.cmd 'WindowsMaximizeVertically' end)
+  -- vim.keymap.set('n', '<C-w>|', function() vim.cmd 'WindowsMaximizeHorizontally' end)
+  -- vim.keymap.set('n', '<C-w>=', function() vim.cmd 'WindowsEqualize' end)
 end
 
 M.done = function()
