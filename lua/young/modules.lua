@@ -1,6 +1,5 @@
 local vim = vim
 local xy = xy
-local cmd = require('young.key').cmd
 
 local modules = {}
 
@@ -466,7 +465,13 @@ modules.neovim = {
       event = 'VeryLazy',
       dependencies = { 'kkharji/sqlite.lua' },
       keys = {
-        { '<leader>sY', cmd 'YankyRingHistory', desc = 'Yanky Ring' },
+        {
+          '<leader>sY',
+          function()
+            vim.cmd 'YankyRingHistory'
+          end,
+          desc = 'Yanky Ring',
+        },
       },
       config = function()
         -- require('telescope').load_extension 'yank_history'
@@ -478,7 +483,13 @@ modules.neovim = {
       event = 'VeryLazy',
       dependencies = { 'kkharji/sqlite.lua' },
       keys = {
-        { '<leader>sy', cmd 'Telescope neoclip', desc = 'Clipboard' },
+        {
+          '<leader>sy',
+          function()
+            vim.cmd 'Telescope neoclip'
+          end,
+          desc = 'Clipboard',
+        },
       },
       config = function()
         -- require('telescope').load_extension 'neoclip'
@@ -511,13 +522,38 @@ modules.neovim = {
         { '<leader>mn', '<Plug>(Marks-next-bookmark)' },
         { '<leader>mp', '<Plug>(Marks-prev-bookmark)' },
         --
-        { '<leader>mt', cmd 'MarksToggleSigns' },
-        { '<leader>mb', cmd 'MarksListBuf' },
-        { '<leader>mg', cmd 'MarksListGlobal' },
-        { '<leader>ma', cmd 'MarksListAll' },
+        {
+          '<leader>mt',
+          function()
+            vim.cmd 'MarksToggleSigns'
+          end,
+        },
+        {
+          '<leader>mb',
+          function()
+            vim.cmd 'MarksListBuf'
+          end,
+        },
+        {
+          '<leader>mg',
+          function()
+            vim.cmd 'MarksListGlobal'
+          end,
+        },
+        {
+          '<leader>ma',
+          function()
+            vim.cmd 'MarksListAll'
+          end,
+        },
         --
         { '<leader>mL', ':BookmarksList ' },
-        { '<leader>ml', cmd 'BookmarksListAll' },
+        {
+          '<leader>ml',
+          function()
+            vim.cmd 'BookmarksListAll'
+          end,
+        },
       },
       config = function()
         require 'young.mod.marks'
@@ -527,7 +563,7 @@ modules.neovim = {
     --   'tomasky/bookmarks.nvim',
     --   event = 'BufReadPost',
     --   config = function()
-    --     xy.map.n { '<leader>bm', cmd 'Telescope bookmarks list' }
+    --     xy.map.n { '<leader>bm', function() vim.cmd 'Telescope bookmarks list' end }
     --     require('telescope').load_extension 'bookmarks'
     --     require('bookmarks').setup()
     --   end,
@@ -611,7 +647,7 @@ modules.BWT = {
     -- { -- Just Another Buffer Switcher
     --   'matbme/JABS.nvim',
     --   keys = {
-    --     { '<cr>', cmd 'JABSOpen', desc = 'Jump to buffers' },
+    --     { '<cr>', function() vim.cmd 'JABSOpen' end, desc = 'Jump to buffers' },
     --   },
     --   auto = 'config',
     -- },
@@ -738,7 +774,9 @@ modules.file = {
       keys = {
         {
           '<leader>ed',
-          cmd 'Triptych',
+          function()
+            vim.cmd 'Triptych'
+          end,
           desc = 'Directory browser',
         },
       },
@@ -751,7 +789,9 @@ modules.file = {
       keys = {
         {
           '<leader>s.',
-          cmd 'Telescope file_browser hidden=true',
+          function()
+            vim.cmd 'Telescope file_browser hidden=true'
+          end,
           desc = 'File browser',
         },
       },
@@ -787,7 +827,12 @@ modules.file = {
       'stevearc/oil.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       init = function()
-        xy.map.n { '<leader>-', cmd 'Oil' }
+        xy.map.n {
+          '<leader>-',
+          function()
+            vim.cmd 'Oil'
+          end,
+        }
         xy.map.n {
           '<leader>ef',
           function()
@@ -805,7 +850,9 @@ modules.file = {
       keys = {
         {
           '<leader>sp',
-          cmd 'Telescope project display_type=full layout_config={width=0.7}',
+          function()
+            vim.cmd 'Telescope project display_type=full layout_config={width=0.7}'
+          end,
           desc = 'Projects',
         },
       },
@@ -821,7 +868,7 @@ modules.file = {
     --   config = function()
     --     require('telescope').load_extension 'projects'
     --     require 'young.mod.project'
-    --     xy.map.n { '<leader>sp', cmd 'Telescope projects', 'Projects' }
+    --     xy.map.n { '<leader>sp', function() vim.cmd 'Telescope projects' end, 'Projects' }
     --     -- xy.map.n { '<leader>pp',cmd 'Telescope projects', 'Projects' }
     --   end,
     -- },
@@ -902,8 +949,20 @@ modules.find = {
     {
       'AckslD/muren.nvim',
       keys = {
-        { '<leader>rm', cmd 'MurenToggle', desc = 'Multi replace' },
-        { '<leader>rM', cmd 'MurenUnique', desc = 'Multi replace(unique matches of the last search)' },
+        {
+          '<leader>rm',
+          function()
+            vim.cmd 'MurenToggle'
+          end,
+          desc = 'Multi replace',
+        },
+        {
+          '<leader>rM',
+          function()
+            vim.cmd 'MurenUnique'
+          end,
+          desc = 'Multi replace(unique matches of the last search)',
+        },
       },
       auto = 'config',
     },
@@ -992,8 +1051,20 @@ modules.telescope = {
         'nvim-telescope/telescope-frecency.nvim',
         dependencies = { 'kkharji/sqlite.lua' },
         init = function()
-          xy.map.n { '<leader>fM', cmd 'Telescope frecency', 'Frecency' }
-          xy.map.n { '<leader>fm', cmd 'Telescope frecency default_text=:CWD:', 'Frecency' }
+          xy.map.n {
+            '<leader>fM',
+            function()
+              vim.cmd 'Telescope frecency'
+            end,
+            'Frecency',
+          }
+          xy.map.n {
+            '<leader>fm',
+            function()
+              vim.cmd 'Telescope frecency default_text=:CWD:'
+            end,
+            'Frecency',
+          }
         end,
         config = function()
           require('telescope').load_extension 'frecency'
@@ -1017,7 +1088,9 @@ modules.telescope = {
     keys = {
       {
         "<leader>'",
-        cmd 'Telescope live_grep_args',
+        function()
+          vim.cmd 'Telescope live_grep_args'
+        end,
         desc = 'Grep',
       },
       {
@@ -1050,21 +1123,45 @@ modules.telescope = {
     -- },
     {
       'tsakirist/telescope-lazy.nvim',
-      keys = { { '<leader>sl', cmd 'Telescope lazy', desc = 'Lazy plugins' } },
+      keys = {
+        {
+          '<leader>sl',
+          function()
+            vim.cmd 'Telescope lazy'
+          end,
+          desc = 'Lazy plugins',
+        },
+      },
       config = function()
         require('telescope').load_extension 'lazy'
       end,
     },
     {
       'LinArcX/telescope-env.nvim',
-      keys = { { '<leader>se', cmd 'Telescope env', desc = 'Env variables' } },
+      keys = {
+        {
+          '<leader>se',
+          function()
+            vim.cmd 'Telescope env'
+          end,
+          desc = 'Env variables',
+        },
+      },
       config = function()
         require('telescope').load_extension 'env'
       end,
     },
     {
       'jvgrootveld/telescope-zoxide',
-      keys = { { '<leader>sz', cmd 'Telescope zoxide list', desc = 'Zoxide' } },
+      keys = {
+        {
+          '<leader>sz',
+          function()
+            vim.cmd 'Telescope zoxide list'
+          end,
+          desc = 'Zoxide',
+        },
+      },
       config = function()
         require('telescope').load_extension 'zoxide'
       end,
@@ -1072,8 +1169,20 @@ modules.telescope = {
     {
       'LukasPietzschmann/telescope-tabs',
       keys = {
-        { '<leader>sw', cmd 'Telescope telescope-tabs list_tabs', desc = 'Tabs' },
-        { 'g<BS>', cmd 'lua require("telescope-tabs").go_to_previous()', desc = 'Tab Goto' },
+        {
+          '<leader>sw',
+          function()
+            vim.cmd 'Telescope telescope-tabs list_tabs'
+          end,
+          desc = 'Tabs',
+        },
+        {
+          'g<BS>',
+          function()
+            vim.cmd 'lua require("telescope-tabs").go_to_previous()'
+          end,
+          desc = 'Tab Goto',
+        },
       },
       config = function()
         require('telescope-tabs').setup {
@@ -1214,7 +1323,7 @@ modules.keymap = {
       -- commander = {
       --   {
       --     -- keys = { 'n', '<Leader><Leader>' },
-      --     cmd = cmd 'Telescope commander',
+      --     cmd = function() vim.cmd 'Telescope commander' end,
       --     desc = 'Open commander 2',
       --   },
       -- },
@@ -1228,7 +1337,9 @@ modules.keymap = {
       keys = {
         {
           '<leader>/',
-          cmd 'Legendary',
+          function()
+            vim.cmd 'Legendary'
+          end,
           mode = { 'n', 'x', 'o' },
         },
       },
@@ -1250,7 +1361,7 @@ modules.keymap = {
     --   keys = {
     --     {
     --       '<leader>;',
-    --       cmd 'InspectCommand',
+    --       function() vim.cmd 'InspectCommand' end,
     --       mode = { 'n', 'x', 'o' },
     --     },
     --   },
@@ -1281,7 +1392,13 @@ modules.UI = {
     -- event = 'BufWinEnter',
     event = 'VeryLazy',
     keys = {
-      { '<leader>sn', cmd 'Telescope notify', desc = 'Notify' },
+      {
+        '<leader>sn',
+        function()
+          vim.cmd 'Telescope notify'
+        end,
+        desc = 'Notify',
+      },
       {
         '<leader>un',
         function()
@@ -1429,11 +1546,11 @@ modules.UI = {
     --       mode = 'c',
     --       desc = 'Redirect Cmdline',
     --     },
-    --     { '<leader>nl', cmd 'Noice last', desc = 'Last' },
-    --     { '<leader>nh', cmd 'Noice history', desc = 'History' },
-    --     { '<leader>nd', cmd 'Noice dismiss', desc = 'Dismiss' },
-    --     { '<leader>ni', cmd 'Noice stats', desc = 'Stats' },
-    --     { '<leader>ns', cmd 'Noice telescope', desc = 'Search' },
+    --     { '<leader>nl', function() vim.cmd 'Noice last' end, desc = 'Last' },
+    --     { '<leader>nh', function() vim.cmd 'Noice history' end, desc = 'History' },
+    --     { '<leader>nd', function() vim.cmd 'Noice dismiss' end, desc = 'Dismiss' },
+    --     { '<leader>ni', function() vim.cmd 'Noice stats' end, desc = 'Stats' },
+    --     { '<leader>ns', function() vim.cmd 'Noice telescope' end, desc = 'Search' },
     --     {
     --       '<leader>nt',
     --       function()
@@ -1489,7 +1606,13 @@ modules.UI = {
       'eandrju/cellular-automaton.nvim',
       -- cmd = 'CellularAutomaton',
       keys = {
-        { '<leader>t<tab>', cmd 'CellularAutomaton make_it_rain', desc = 'Rain' },
+        {
+          '<leader>t<tab>',
+          function()
+            vim.cmd 'CellularAutomaton make_it_rain'
+          end,
+          desc = 'Rain',
+        },
       },
       config = function()
         require 'young.mod.cellular'
@@ -1500,7 +1623,7 @@ modules.UI = {
     -- {
     --   'simrat39/symbols-outline.nvim',
     --   cmd = 'SymbolsOutline',
-    --   -- keys = { { '<leader>to', cmd 'SymbolsOutline' } },
+    --   -- keys = { { '<leader>to', function() vim.cmd 'SymbolsOutline' end } },
     --   init = function()
     --     -- xy.map.n { '<leader>to', '<cmd>SymbolsOutline<cr>' }
     --     xy.map.n { '<leader><tab>', '<cmd>SymbolsOutline<cr>' }
@@ -1748,10 +1871,30 @@ modules.code = {
       init = function()
         xy.map.register {
           ['<leader>cn'] = {
-            f = { cmd 'Neogen func', 'Function' },
-            F = { cmd 'Neogen file', 'File' },
-            c = { cmd 'Neogen class', 'Class' },
-            t = { cmd 'Neogen type', 'Type' },
+            f = {
+              function()
+                vim.cmd 'Neogen func'
+              end,
+              'Function',
+            },
+            F = {
+              function()
+                vim.cmd 'Neogen file'
+              end,
+              'File',
+            },
+            c = {
+              function()
+                vim.cmd 'Neogen class'
+              end,
+              'Class',
+            },
+            t = {
+              function()
+                vim.cmd 'Neogen type'
+              end,
+              'Type',
+            },
           },
         }
       end,
@@ -1770,12 +1913,42 @@ modules.LSP = {
     init = function()
       xy.map.register {
         ['<leader>l'] = {
-          i = { cmd 'LspInfo' },
-          I = { cmd 'LspInstall' },
-          m = { cmd 'Mason' },
-          n = { cmd 'NullLsInfo' },
-          c = { cmd 'CmpStatus' },
-          C = { cmd 'Copilot status' },
+          i = {
+            function()
+              vim.cmd 'LspInfo'
+            end,
+            'LspInfo',
+          },
+          I = {
+            function()
+              vim.cmd 'LspInstall'
+            end,
+            'LspInstall',
+          },
+          m = {
+            function()
+              vim.cmd 'Mason'
+            end,
+            'Mason',
+          },
+          n = {
+            function()
+              vim.cmd 'NullLsInfo'
+            end,
+            'Null-ls info',
+          },
+          c = {
+            function()
+              vim.cmd 'CmpStatus'
+            end,
+            'Cmp status',
+          },
+          C = {
+            function()
+              vim.cmd 'Copilot status'
+            end,
+            'Copilot status',
+          },
         },
       }
     end,
@@ -1866,7 +2039,7 @@ modules.LSP = {
     --   'VidocqH/lsp-lens.nvim',
     --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
     --   keys = {
-    --     { '<leader>tL', cmd 'LspLensToggle' },
+    --     { '<leader>tL', function() vim.cmd 'LspLensToggle' end },
     --   },
     --   config = function()
     --     require('lsp-lens').setup {
@@ -1920,7 +2093,15 @@ if xy.coc then
     },
     {
       'fannheyward/telescope-coc.nvim',
-      keys = { { '<leader>l<space>', cmd 'Telescope coc', desc = 'Coc' } },
+      keys = {
+        {
+          '<leader>l<space>',
+          function()
+            vim.cmd 'Telescope coc'
+          end,
+          desc = 'Coc',
+        },
+      },
       config = function()
         require('telescope').load_extension 'coc'
       end,
@@ -2024,7 +2205,12 @@ modules.lang = {
       'tpope/vim-dadbod',
       cmd = { 'DB', 'DBUI' },
       keys = {
-        { '<leader>td', cmd 'DBUI' },
+        {
+          '<leader>td',
+          function()
+            vim.cmd 'DBUI'
+          end,
+        },
       },
       dependencies = {
         {
@@ -2120,7 +2306,13 @@ modules.write = {
     {
       'ellisonleao/glow.nvim',
       keys = {
-        { '<leader>ro', cmd 'Glow', desc = 'Glow' },
+        {
+          '<leader>ro',
+          function()
+            vim.cmd 'Glow'
+          end,
+          desc = 'Glow',
+        },
       },
       config = function()
         require('glow').setup {
@@ -2137,7 +2329,15 @@ modules.write = {
     {
       'crispgm/telescope-heading.nvim',
       ft = { 'markdown', 'norg', 'org', 'rst', 'help', 'asciidoc', 'tex' },
-      keys = { { '<leader>so', cmd 'Telescope heading', desc = 'Heading' } },
+      keys = {
+        {
+          '<leader>so',
+          function()
+            vim.cmd 'Telescope heading'
+          end,
+          desc = 'Heading',
+        },
+      },
       config = function()
         require('telescope').load_extension 'heading'
       end,
@@ -2152,7 +2352,13 @@ modules.write = {
       ft = { 'markdown', 'norg', 'org' },
       keys = {
         -- Call :FeMaco or require('femaco.edit').edit_code_block() with your cursor on a code-block
-        { '<leader>re', cmd 'FeMaco', desc = 'Edit Fenced Markdown Code-block' },
+        {
+          '<leader>re',
+          function()
+            vim.cmd 'FeMaco'
+          end,
+          desc = 'Edit Fenced Markdown Code-block',
+        },
       },
       auto = 'config',
     },
@@ -2199,7 +2405,12 @@ modules.tool = {
         'nvim-telescope/telescope.nvim',
       },
       init = function()
-        xy.map.n { '<leader>ab', cmd 'BrowserBookmarks' }
+        xy.map.n {
+          '<leader>ab',
+          function()
+            vim.cmd 'BrowserBookmarks'
+          end,
+        }
         xy.map.n { '<leader>aB', ':BrowserBookmarks ' }
       end,
       config = function()
@@ -2248,7 +2459,12 @@ modules.tool = {
     'fidian/hexmode',
     cmd = 'Hexmode',
     init = function()
-      xy.map.n { '<leader>tx', cmd 'Hexmode' }
+      xy.map.n {
+        '<leader>tx',
+        function()
+          vim.cmd 'Hexmode'
+        end,
+      }
       -- vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o,*.jpg,*.png'
     end,
   },

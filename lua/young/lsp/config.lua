@@ -7,9 +7,6 @@
 --   end
 -- end
 
-local cmd = require('young.key').cmd
-local lua = require('young.key').lua
-
 return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
@@ -71,8 +68,18 @@ return {
   automatic_servers_installation = true,
   buffer_mappings = {
     normal_mode = {
-      ['K'] = { vim.lsp.buf.hover, 'Show hover' },
-      ['gh'] = { vim.lsp.buf.signature_help, 'Signature help' },
+      ['K'] = {
+        function()
+          vim.lsp.buf.hover()
+        end,
+        'Show hover',
+      },
+      ['gh'] = {
+        function()
+          vim.lsp.buf.signature_help()
+        end,
+        'Signature help',
+      },
       --
       ['gd'] = {
         -- function()
@@ -81,12 +88,42 @@ return {
         vim.lsp.buf.definition,
         'Goto definition',
       },
-      ['gD'] = { vim.lsp.buf.declaration, 'Goto declaration' },
-      ['gy'] = { vim.lsp.buf.type_definition, 'Goto type definition' },
-      ['gI'] = { vim.lsp.buf.implementation, 'Goto implementation' },
-      ['gr'] = { vim.lsp.buf.references, 'Goto references' },
-      ['g['] = { vim.lsp.buf.incoming_calls, 'Incoming calls' },
-      ['g]'] = { vim.lsp.buf.outgoing_calls, 'Outgoing calls' },
+      ['gD'] = {
+        function()
+          vim.lsp.buf.declaration()
+        end,
+        'Goto declaration',
+      },
+      ['gy'] = {
+        function()
+          vim.lsp.buf.type_definition()
+        end,
+        'Goto type definition',
+      },
+      ['gI'] = {
+        function()
+          vim.lsp.buf.implementation()
+        end,
+        'Goto implementation',
+      },
+      ['gr'] = {
+        function()
+          vim.lsp.buf.references()
+        end,
+        'Goto references',
+      },
+      ['g['] = {
+        function()
+          vim.lsp.buf.incoming_calls()
+        end,
+        'Incoming calls',
+      },
+      ['g]'] = {
+        function()
+          vim.lsp.buf.outgoing_calls()
+        end,
+        'Outgoing calls',
+      },
       -- ['gw'] = {
       --   function()
       --     require('telescope.builtin').lsp_workspace_symbols {
@@ -112,14 +149,24 @@ return {
         end,
         'Show diagnostics',
       },
-      [']e'] = { vim.diagnostic.goto_next, 'Next diagnostic' },
+      [']e'] = {
+        function()
+          vim.diagnostic.goto_next()
+        end,
+        'Next diagnostic',
+      },
       [']E'] = {
         function()
           vim.diagnostic.goto_next { severity = 'Error' }
         end,
         'Next error',
       },
-      ['[e'] = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
+      ['[e'] = {
+        function()
+          vim.diagnostic.goto_prev()
+        end,
+        'Prev diagnostic',
+      },
       ['[E'] = {
         function()
           vim.diagnostic.goto_prev { severity = 'Error' }
@@ -127,25 +174,55 @@ return {
         'Prev error',
       },
       --
-      -- ['<C-]>'] = { cmd 'Telescope lsp_definitions', 'Def' },
-      -- ['g<C-]>'] = { cmd 'Telescope lsp_references', 'Ref' },
-      -- ['g<C-[>'] = { cmd 'Telescope lsp_implementations', 'Impl' },
+      -- ['<C-]>'] = { function() vim.cmd 'Telescope lsp_definitions' end, 'Def' },
+      -- ['g<C-]>'] = { function() vim.cmd 'Telescope lsp_references' end, 'Ref' },
+      -- ['g<C-[>'] = { function() vim.cmd 'Telescope lsp_implementations' end, 'Impl' },
       ['<leader>l'] = {
         -- lsp goto
-        -- d = { vim.lsp.buf.definition, 'Def' },
-        -- D = { vim.lsp.buf.declaration, 'Dec' },
-        -- r = { vim.lsp.buf.references, 'Ref' },
-        -- y = { vim.lsp.buf.type_definition, 'Type' },
-        -- i = { vim.lsp.buf.implementation, 'Impl' },
-        s = { vim.lsp.buf.workspace_symbol, 'Workspace symbol' },
-        S = { vim.lsp.buf.document_symbol, 'Document symbol' },
-        ['<C-q>'] = { vim.diagnostic.setqflist, 'Diagnostics quickfix' },
-        ['<C-a>'] = { vim.diagnostic.setloclist, 'Diagnostics locList' },
-        -- j = { vim.diagnostic.goto_next, 'Next diagnostic' },
-        -- k = { vim.diagnostic.goto_prev, 'Prev diagnostic' },
+        -- d = { function() vim.lsp.buf.definition() end, 'Def' },
+        -- D = { function() vim.lsp.buf.declaration() end, 'Dec' },
+        -- r = { function() vim.lsp.buf.references() end, 'Ref' },
+        -- y = { function() vim.lsp.buf.type_definition() end, 'Type' },
+        -- i = { function() vim.lsp.buf.implementation() end, 'Impl' },
+        s = {
+          function()
+            vim.lsp.buf.workspace_symbol()
+          end,
+          'Workspace symbol',
+        },
+        S = {
+          function()
+            vim.lsp.buf.document_symbol()
+          end,
+          'Document symbol',
+        },
+        ['<C-q>'] = {
+          function()
+            vim.diagnostic.setqflist()
+          end,
+          'Diagnostics quickfix',
+        },
+        ['<C-a>'] = {
+          function()
+            vim.diagnostic.setloclist()
+          end,
+          'Diagnostics locList',
+        },
+        -- j = { function() vim.diagnostic.goto_next() end, 'Next diagnostic' },
+        -- k = { function() vim.diagnostic.goto_prev() end, 'Prev diagnostic' },
         -- lsp action
-        a = { vim.lsp.buf.code_action, 'Code action' },
-        r = { vim.lsp.buf.rename, 'Rename' },
+        a = {
+          function()
+            vim.lsp.buf.code_action()
+          end,
+          'Code action',
+        },
+        r = {
+          function()
+            vim.lsp.buf.rename()
+          end,
+          'Rename',
+        },
         f = {
           function()
             vim.lsp.buf.format()
@@ -159,29 +236,109 @@ return {
           end,
           'Format',
         },
-        l = { vim.lsp.codelens.run, 'Run CodeLens' },
-        v = { cmd 'Vista!!', 'Vista' },
+        l = {
+          function()
+            vim.lsp.codelens.run()
+          end,
+          'Run CodeLens',
+        },
+        v = {
+          function()
+            vim.cmd 'Vista!!'
+          end,
+          'Vista',
+        },
         w = {
           name = '+workspace',
-          w = { lua 'pp(vim.lsp.buf.list_workspace_folders())', 'Workspace folders' },
-          a = { lua 'pp(vim.lsp.buf.add_workspace_folder())', 'Add folder' },
-          r = { lua 'pp(vim.lsp.buf.remove_workspace_folder())', 'Remove folder' },
+          w = {
+            function()
+              pp(vim.lsp.buf.list_workspace_folders())
+            end,
+            'Workspace folders',
+          },
+          a = {
+            function()
+              pp(vim.lsp.buf.add_workspace_folder())
+            end,
+            'Add folder',
+          },
+          r = {
+            function()
+              pp(vim.lsp.buf.remove_workspace_folder())
+            end,
+            'Remove folder',
+          },
         },
       },
       ['<leader>c'] = {
         -- [' '] = {},
         -- lsp goto
-        d = { cmd 'Telescope lsp_definitions', 'Def' },
-        r = { cmd 'Telescope lsp_references', 'Ref' },
-        y = { cmd 'Telescope lsp_type_definitions', 'Type' },
-        i = { cmd 'Telescope lsp_implementations', 'Impl' },
-        s = { cmd 'Telescope lsp_document_symbols', 'Document symbols' },
-        w = { cmd 'Telescope lsp_workspace_symbols', 'Workspace symbols' },
-        S = { cmd 'Telescope lsp_dynamic_workspace_symbols', 'Dynamic Workspace symbols' },
-        ['['] = { cmd 'Telescope lsp_incoming_calls', 'Incoming calls' },
-        [']'] = { cmd 'Telescope lsp_outgoing_calls', 'Outgoing calls' },
-        e = { cmd 'Telescope diagnostics bufnr=0', 'Diagnostics' },
-        E = { cmd 'Telescope diagnostics', 'Diagnostics(All)' },
+        d = {
+          function()
+            vim.cmd 'Telescope lsp_definitions'
+          end,
+          'Def',
+        },
+        r = {
+          function()
+            vim.cmd 'Telescope lsp_references'
+          end,
+          'Ref',
+        },
+        y = {
+          function()
+            vim.cmd 'Telescope lsp_type_definitions'
+          end,
+          'Type',
+        },
+        i = {
+          function()
+            vim.cmd 'Telescope lsp_implementations'
+          end,
+          'Impl',
+        },
+        s = {
+          function()
+            vim.cmd 'Telescope lsp_document_symbols'
+          end,
+          'Document symbols',
+        },
+        w = {
+          function()
+            vim.cmd 'Telescope lsp_workspace_symbols'
+          end,
+          'Workspace symbols',
+        },
+        S = {
+          function()
+            vim.cmd 'Telescope lsp_dynamic_workspace_symbols'
+          end,
+          'Dynamic Workspace symbols',
+        },
+        ['['] = {
+          function()
+            vim.cmd 'Telescope lsp_incoming_calls'
+          end,
+          'Incoming calls',
+        },
+        [']'] = {
+          function()
+            vim.cmd 'Telescope lsp_outgoing_calls'
+          end,
+          'Outgoing calls',
+        },
+        e = {
+          function()
+            vim.cmd 'Telescope diagnostics bufnr=0'
+          end,
+          'Diagnostics',
+        },
+        E = {
+          function()
+            vim.cmd 'Telescope diagnostics'
+          end,
+          'Diagnostics(All)',
+        },
         -- p = {
         --   name = '+peek',
         --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },
@@ -192,8 +349,18 @@ return {
     },
     visual_mode = {
       ['<leader>l'] = {
-        a = { vim.lsp.buf.code_action, 'Code action' },
-        f = { vim.lsp.buf.format, 'Format' },
+        a = {
+          function()
+            vim.lsp.buf.code_action()
+          end,
+          'Code action',
+        },
+        f = {
+          function()
+            vim.lsp.buf.format()
+          end,
+          'Format',
+        },
       },
     },
     insert_mode = {},

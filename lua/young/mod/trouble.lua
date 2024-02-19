@@ -9,21 +9,75 @@ M.once = function()
     require('trouble.providers.telescope').smart_open_with_trouble(prompt_bufnr)
   end
 
-  local cmd = require('young.key').cmd
   xy.map.register {
     ['<leader>x'] = {
-      x = { cmd 'TroubleToggle', 'Open' },
-      t = { cmd 'TodoTrouble', 'Todo' },
-      ['.'] = { cmd 'Trouble telescope', 'Telescope' },
-      ['<C-q>'] = { cmd 'TroubleToggle quickfix', 'QuickFix' },
-      ['<C-a>'] = { cmd 'TroubleToggle loclist', 'LocList' },
+      x = {
+        function()
+          vim.cmd 'TroubleToggle'
+        end,
+        'Open',
+      },
+      t = {
+        function()
+          vim.cmd 'TodoTrouble'
+        end,
+        'Todo',
+      },
+      ['.'] = {
+        function()
+          vim.cmd 'Trouble telescope'
+        end,
+        'Telescope',
+      },
+      ['<C-q>'] = {
+        function()
+          vim.cmd 'TroubleToggle quickfix'
+        end,
+        'QuickFix',
+      },
+      ['<C-a>'] = {
+        function()
+          vim.cmd 'TroubleToggle loclist'
+        end,
+        'LocList',
+      },
       --
-      d = { cmd 'TroubleToggle lsp_definitions', 'Def' },
-      r = { cmd 'TroubleToggle lsp_references', 'Ref' },
-      y = { cmd 'TroubleToggle lsp_type_definitions', 'Type' },
-      i = { cmd 'TroubleToggle lsp_implementations', 'Impl' },
-      e = { cmd 'TroubleToggle document_diagnostics', 'Diagnostics' },
-      E = { cmd 'TroubleToggle workspace_diagnostics', 'Diagnostics(All)' },
+      d = {
+        function()
+          vim.cmd 'TroubleToggle lsp_definitions'
+        end,
+        'Def',
+      },
+      r = {
+        function()
+          vim.cmd 'TroubleToggle lsp_references'
+        end,
+        'Ref',
+      },
+      y = {
+        function()
+          vim.cmd 'TroubleToggle lsp_type_definitions'
+        end,
+        'Type',
+      },
+      i = {
+        function()
+          vim.cmd 'TroubleToggle lsp_implementations'
+        end,
+        'Impl',
+      },
+      e = {
+        function()
+          vim.cmd 'TroubleToggle document_diagnostics'
+        end,
+        'Diagnostics',
+      },
+      E = {
+        function()
+          vim.cmd 'TroubleToggle workspace_diagnostics'
+        end,
+        'Diagnostics(All)',
+      },
     },
     [']x'] = {
       function()

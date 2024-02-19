@@ -1,8 +1,13 @@
 local M = {}
 
 function M.once()
-  local cmd = require('young.key').cmd
-  xy.map.n { '<leader>ee', cmd 'Neotree toggle reveal', 'Explorer' }
+  xy.map.n {
+    '<leader>ee',
+    function()
+      vim.cmd 'Neotree toggle reveal'
+    end,
+    'Explorer',
+  }
 
   vim.cmd [[
   nnoremap <silent> <Leader>ek <cmd>Neotree toggle reveal top<cr>

@@ -1,30 +1,81 @@
 local M = {}
 
 function M.once()
-  local cmd = require('young.key').cmd
   xy.map.register {
     g = {
       j = {
-        j = { cmd 'Lspsaga finder' },
-        k = { cmd 'Lspsaga hover_doc' },
-        d = { cmd 'Lspsaga peek_definition' },
-        l = { cmd 'Lspsaga show_line_diagnostics' },
-        L = { cmd 'Lspsaga show_cursor_diagnostics' },
-        a = { cmd 'Lspsaga code_action' },
-        A = { cmd 'Lspsaga range_code_action' },
-        r = { cmd 'Lspsaga rename' },
-        o = { cmd 'Lspsaga outline' },
-        i = { cmd 'Lspsaga open_log' },
-        t = { cmd 'Lspsaga term_toggle' },
-        ['['] = { cmd 'Lspsaga incoming_calls' },
-        [']'] = { cmd 'Lspsaga outgoing_calls' },
+        j = {
+          function()
+            vim.cmd 'Lspsaga finder'
+          end,
+        },
+        k = {
+          function()
+            vim.cmd 'Lspsaga hover_doc'
+          end,
+        },
+        d = {
+          function()
+            vim.cmd 'Lspsaga peek_definition'
+          end,
+        },
+        l = {
+          function()
+            vim.cmd 'Lspsaga show_line_diagnostics'
+          end,
+        },
+        L = {
+          function()
+            vim.cmd 'Lspsaga show_cursor_diagnostics'
+          end,
+        },
+        a = {
+          function()
+            vim.cmd 'Lspsaga code_action'
+          end,
+        },
+        A = {
+          function()
+            vim.cmd 'Lspsaga range_code_action'
+          end,
+        },
+        r = {
+          function()
+            vim.cmd 'Lspsaga rename'
+          end,
+        },
+        o = {
+          function()
+            vim.cmd 'Lspsaga outline'
+          end,
+        },
+        i = {
+          function()
+            vim.cmd 'Lspsaga open_log'
+          end,
+        },
+        t = {
+          function()
+            vim.cmd 'Lspsaga term_toggle'
+          end,
+        },
+        ['['] = {
+          function()
+            vim.cmd 'Lspsaga incoming_calls'
+          end,
+        },
+        [']'] = {
+          function()
+            vim.cmd 'Lspsaga outgoing_calls'
+          end,
+        },
       },
     },
   }
   -- Lsp finder find the symbol definition implement reference
   -- when you use action in finder like open vsplit then you can
   -- use <C-t> to jump back
-  -- keymap('n', 'gh', cmd 'Lspsaga lsp_finder', { silent = true })
+  -- keymap('n', 'gh', function() vim.cmd 'Lspsaga lsp_finder' end, { silent = true })
 
   -- Code action
   -- keymap('x', '<leader>la', '<cmd><C-U>Lspsaga range_code_action<CR>', { silent = true })
@@ -42,10 +93,10 @@ function M.once()
   -- end, { silent = true })
 
   -- Float terminal
-  -- keymap('n', '<A-d>', cmd 'Lspsaga open_floaterm', { silent = true })
+  -- keymap('n', '<A-d>', function() vim.cmd 'Lspsaga open_floaterm' end, { silent = true })
   -- if you want pass some cli command into terminal you can do like this
   -- open lazygit in lspsaga float terminal
-  -- keymap('n', '<A-g>', cmd 'Lspsaga open_floaterm lazygit', { silent = true })
+  -- keymap('n', '<A-g>', function() vim.cmd 'Lspsaga open_floaterm lazygit' end, { silent = true })
   -- close floaterm
   -- keymap('t', '<A-d>', [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
 end

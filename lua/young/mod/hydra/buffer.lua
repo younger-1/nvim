@@ -1,5 +1,4 @@
 local Hydra = require 'hydra'
-local cmd = require('young.key').cmd
 
 local buffer_hydra = Hydra {
   -- name = 'barbar',
@@ -78,47 +77,65 @@ local buffer_hydra = Hydra {
 
     {
       'p',
-      cmd 'BufferPin',
+      function()
+        vim.cmd 'BufferPin'
+      end,
       { desc = 'pin' },
     },
 
     {
       'd',
-      cmd 'BufferWipeout',
+      function()
+        vim.cmd 'BufferWipeout'
+      end,
     },
     {
       'c',
-      cmd 'BufferClose',
+      function()
+        vim.cmd 'BufferClose'
+      end,
       { desc = 'close' },
     },
     {
       'r',
-      cmd 'BufferRestore',
+      function()
+        vim.cmd 'BufferRestore'
+      end,
       { desc = 'restore' },
     },
 
     {
       'ob',
-      cmd 'BufferOrderByBufferNumber',
+      function()
+        vim.cmd 'BufferOrderByBufferNumber'
+      end,
     },
     {
       'ow',
-      cmd 'BufferOrderByWindowNumber',
+      function()
+        vim.cmd 'BufferOrderByWindowNumber'
+      end,
       { desc = 'by bufferNum/windowNum' },
     },
     {
       'od',
-      cmd 'BufferOrderByDirectory',
+      function()
+        vim.cmd 'BufferOrderByDirectory'
+      end,
     },
     {
       'ol',
-      cmd 'BufferOrderByLanguage',
+      function()
+        vim.cmd 'BufferOrderByLanguage'
+      end,
       { desc = 'by directory/language' },
     },
 
     {
       'f',
-      cmd 'Telescope buffers',
+      function()
+        vim.cmd 'Telescope buffers'
+      end,
       { desc = 'find' },
     },
 

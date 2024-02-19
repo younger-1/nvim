@@ -34,10 +34,30 @@ Hydra {
     { 'k', pcmd('wincmd k', 'E11', 'close') },
     { 'l', '<C-w>l' },
 
-    { 'H', cmd 'WinShift left' },
-    { 'J', cmd 'WinShift down' },
-    { 'K', cmd 'WinShift up' },
-    { 'L', cmd 'WinShift right' },
+    {
+      'H',
+      function()
+        vim.cmd 'WinShift left'
+      end,
+    },
+    {
+      'J',
+      function()
+        vim.cmd 'WinShift down'
+      end,
+    },
+    {
+      'K',
+      function()
+        vim.cmd 'WinShift up'
+      end,
+    },
+    {
+      'L',
+      function()
+        vim.cmd 'WinShift right'
+      end,
+    },
 
     {
       '<C-h>',
@@ -75,8 +95,8 @@ Hydra {
 
     { 'z', '<C-w>z', { desc = 'maximize', remap = true } },
     { '<C-z>', 'C-w>z', { exit = true, desc = false, remap = true } },
-    -- { 'z', cmd 'MaximizerToggle!', { desc = 'maximize' } },
-    -- { '<C-z>', cmd 'MaximizerToggle!', { exit = true, desc = false } },
+    -- { 'z', function() vim.cmd 'MaximizerToggle!' end, { desc = 'maximize' } },
+    -- { '<C-z>', function() vim.cmd 'MaximizerToggle!' end, { exit = true, desc = false } },
     -- { 'z', '<Plug>(zoom-toggle)', { desc = 'maximize' } },
     -- { '<C-z>', '<Plug>(zoom-toggle)', { exit = true, desc = false } },
 

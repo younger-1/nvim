@@ -155,7 +155,9 @@ local keys = {
     Q = '@q', -- qq to record, Q to replay
     -- n = 'nzz',
     -- N = 'Nzz',
-    ZA = '<cmd>wqa<CR>',
+    ZA = function()
+      vim.cmd 'wqa'
+    end,
 
     -- ['<BS>'] = '<C-^>',
     ['<ESC>'] = '<cmd>nohl<CR>',

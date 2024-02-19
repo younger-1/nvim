@@ -14,9 +14,20 @@ M.once = function()
     require('focus').split_command 'l'
   end, { silent = true })
 
-  local cmd = require('young.key').cmd
-  xy.map.n { '<C-w>f', cmd 'FocusToggle', 'Focus Toggle' }
-  xy.map.n { '<C-w>=', cmd 'FocusMaxOrEqual', 'Focus max/equal' }
+  xy.map.n {
+    '<C-w>f',
+    function()
+      vim.cmd 'FocusToggle'
+    end,
+    'Focus Toggle',
+  }
+  xy.map.n {
+    '<C-w>=',
+    function()
+      vim.cmd 'FocusMaxOrEqual'
+    end,
+    'Focus max/equal',
+  }
 end
 
 M.done = function()
