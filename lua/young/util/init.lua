@@ -255,13 +255,6 @@ function util.get_def_locations(tbl)
       table.insert(ret, { path, line })
     end
   end
-
-  if next(ret) == nil and tbl.type == 'map' then
-    if xy.map.info[tbl.mode] and xy.map.info[tbl.mode][tbl.name] then
-      local info = xy.map.info[tbl.mode][tbl.name]
-      table.insert(ret, { info.file_name, info.currentline })
-    end
-  end
   return ret
 end
 
