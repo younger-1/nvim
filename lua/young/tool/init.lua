@@ -465,4 +465,97 @@ function tool.blink_cursor()
   )
 end
 
+function tool.open_file(file)
+  if vim.fn.bufexists(file) == 1 then
+    vim.cmd.buffer(file)
+  else
+    vim.cmd.edit(file)
+  end
+end
+
+-- TODO: vim.keymap.set (or xy.{map,command}) loction by using debug
+-- TODO: {keymap,command,autocmd,option,function,abbr,highlight,colorscheme,ftplugin}
+function tool.get_def_locations(tbl)
+  local str = tbl.type
+  if tbl.type == 'map' then
+    str = tbl.mode .. str
+    -- tbl.name = tbl.name:gsub('<[Ll]eader>', fn.keytrans(vim.g.mapleader))
+    tbl.name = tbl.name:gsub('<[Ll]eader>', '<Space>')
+  elseif tbl.type == 'autocmd' then
+    str = str .. ' ' .. tbl.group
+  end
+
+  str = str .. ' ' .. tbl.name
+  if tbl.type == 'set' then
+    str = str .. '?'
+  end
+
+  local output = fn.execute(str)
+  -- pp(str)
+  -- pp(output)
+
+  local ret = {}
+  -- local idx = output:find(vim.pesc(tbl.name))
+  -- local start = output:find(tbl.name, 1, true)
+  for path, line in output:gmatch '<Lua %d+: (%S+):(%d+)>' do
+    table.insert(ret, { path, line })
+  end
+
+  if next(ret) == nil then
+    str = 'verbose ' .. str
+    output = fn.execute(str)
+    for path, line in output:gmatch 'Last set from (%S+) line (%d+)' do
+      table.insert(ret, { path, line })
+    end
+  end
+  return ret
+end
+
+-- xy.util.get_def_locations { type = 'map', para = 'v', name = '<Leader>sg' }
+-- xy.util.get_def_locations { type = 'command', name = 'RegDiff' }
+-- xy.util.get_def_locations { type = 'autocmd', para = '_number' }
+-- xy.util.get_def_locations { type = 'autocmd', name = 'BufDelete' }
+-- xy.util.get_def_locations { type = 'map', name = 'j' }
+-- xy.util.get_def_locations { type = 'command', name = 'RR' }
+-- xy.util.get_def_locations { type = 'autocmd', para = 'init' }
+-- xy.util.get_def_locations { type = 'set', name = 'grepprg' }
+-- xy.util.get_def_locations { type = 'set', name = 'scrolloff' }
+-- xy.util.get_def_locations { type = 'function', name = 'QuickFixToggle' }
+-- xy.util.get_def_locations { type = 'highlight', name = 'helpURL' }
+
+--[[
+:vmap <leader>sg
+x  <Space>     * <Cmd>lua require("which-key").show(" ", {mode = "v", auto = true})<CR>
+x  <Space>sg   * <Lua 825: ~/.config/nvim/lua/young/key/visual/leader.lua:36>
+                 Grep
+
+:command RegDiff
+    Name              Args Address Complete    Definition
+|   RegDiff           *                        <Lua 54: ~/.config/nvim/plugin/command.lua:3>
+
+:autocmd _number
+--- Autocommands ---
+_number  InsertEnter
+    *         <Lua 24: ~/.config/nvim/lua/young/tool/init.lua:124>
+_number  InsertLeave
+    *         <Lua 25: ~/.config/nvim/lua/young/tool/init.lua:129>
+
+:verb map j
+   j           * (v:count == 0 ? 'gj' : 'j')
+        Last set from ~/.config/nvim/plugin/keymap.vim line 2
+
+:verb set grepprg
+  grepprg=rg --vimgrep --smart-case
+        Last set from ~/.config/nvim/plugin/option.vim line 6
+
+:verb hi helpURL
+helpURL        xxx links to String
+        Last set from /usr/share/nvim/runtime/syntax/help.vim line 209
+
+:verb hi IlluminatedWordRead
+IlluminatedWordRead xxx gui=underline
+                   links to LspReferenceRead
+        Last set from Lua
+]]
+
 return tool
