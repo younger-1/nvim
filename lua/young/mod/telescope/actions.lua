@@ -33,7 +33,7 @@ local function get_locs(title, entry)
     return
   end
   -- pp(def)
-  local locs = xy.util.get_def_locations(def)
+  local locs = xy.tool.get_def_locations(def)
   if #locs == 0 then
     return
   end

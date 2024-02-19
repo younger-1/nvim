@@ -1273,7 +1273,7 @@ return {
     c = {
       function()
         local file = join_paths(vim.fn.stdpath 'config', 'init.lua')
-        xy.util.open_file(file)
+        xy.tool.open_file(file)
       end,
       'Open init.lua',
     },
@@ -1298,7 +1298,7 @@ return {
     l = {
       function()
         local file = require('young.cfg').create_local_config()
-        xy.util.open_file(file)
+        xy.tool.open_file(file)
       end,
       'Edit local config',
     },
@@ -1317,7 +1317,7 @@ return {
     y = {
       function()
         local file = require('young.cfg').lazy_path
-        xy.util.open_file(file)
+        xy.tool.open_file(file)
       end,
       'Open plugins',
     },
