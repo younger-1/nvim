@@ -56,9 +56,9 @@ end, { nargs = '+', complete = 'command' })
 -- end, {})
 
 vim.api.nvim_create_user_command('FindBufGitRoot', function(ctx)
-  local cd = 'lcd'
+  local cd = 'tcd'
   if ctx.bang then
-    cd = 'tcd'
+    cd = 'cd'
   end
 
   local dir = xy.util.git_root()

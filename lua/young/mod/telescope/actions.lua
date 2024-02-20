@@ -63,7 +63,7 @@ local M = action_mt.transform_mod {
       if vim.fn.bufexists(prompt_bufnr) == 1 then
         actions.close(prompt_bufnr)
       end
-      vim.cmd('e ' .. path)
+      xy.tool.open_file(path)
       -- vim.cmd(':' .. line)
       vim.fn.setpos('.', { 0, line, 1 })
     end
@@ -74,9 +74,9 @@ local M = action_mt.transform_mod {
       format_item = function(item)
         return ('%s: %s'):format(item[1], item[2])
       end,
-    }, function(choice)
-      if choice then
-        open_file(choice[1], choice[2])
+    }, function(item)
+      if item then
+        open_file(item[1], item[2])
       end
     end)
   end,
