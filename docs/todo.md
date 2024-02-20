@@ -85,6 +85,7 @@
 - [ ] improve workflow: latest line commit, file commit
 - [ ] Telescope git_commits: show time in result panel
 - [ ] put all hunks of current commit to quickfix
+- [ ] Telescope project: remove <C-w> mapping
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

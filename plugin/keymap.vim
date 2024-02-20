@@ -104,7 +104,7 @@ nnoremap yoh <Cmd>set hls! \|set hls?<CR>
 nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
 " }}}
 " `cd` {{{
-nnoremap cdi <Cmd>lcd %:p:h<CR>
+nnoremap cdi <Cmd>tcd %:h<CR>
 nnoremap cdo <Cmd>FindBufGitRoot<CR>
 nnoremap cdO <Cmd>FindBufGitRoot!<CR>
 " }}}
