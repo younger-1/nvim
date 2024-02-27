@@ -328,18 +328,6 @@ tool.toggle_tabline = function()
   bar_flag = not bar_flag
 end
 
-tool.toggle_notify = function()
-  require('young.mod.notify').toggle()
-end
-
-tool.toggle_notify_style = function()
-  require('young.mod.notify').hot()
-end
-
-tool.toggle_zoom = function()
-  vim.cmd 'call WinZoomToggle()'
-end
-
 tool.set_cursor_floating_win = function()
   local winids = vim.api.nvim_tabpage_list_wins(0)
   winids = vim.tbl_filter(function(winid)
@@ -557,5 +545,17 @@ IlluminatedWordRead xxx gui=underline
                    links to LspReferenceRead
         Last set from Lua
 ]]
+
+ function tool.buf_git_root(cd)
+  cd = cd or 'tcd'
+
+  local dir = xy.util.git_root()
+  if dir then
+    vim.cmd[cd](dir)
+    xy.util.echomsg { fmt('[young]: %s %s', cd, dir:gsub(vim.pesc(vim.fn.expand '$HOME'), '~')) }
+  else
+    xy.util.echomsg { fmt '[young]: not found git root' }
+  end
+end
 
 return tool

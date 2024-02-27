@@ -832,6 +832,7 @@ modules.file = {
           function()
             vim.cmd 'Oil'
           end,
+          'Oil',
         }
         xy.map.n {
           '<leader>ef',

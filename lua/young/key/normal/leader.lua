@@ -1,5 +1,3 @@
-local vim = vim
-
 -- TODO:add function instead of <cmd><cr>
 return {
   -- [' '] = { ':', 'which_key_ignore', mode = { 'n', 'x' } },
@@ -34,12 +32,12 @@ return {
     end,
     'Files',
   },
-  ['/'] = {
-    function()
-      vim.cmd 'Telescope current_buffer_fuzzy_find'
-    end,
-    'Buffer string',
-  },
+  -- ['/'] = {
+  --   function()
+  --     vim.cmd 'Telescope current_buffer_fuzzy_find'
+  --   end,
+  --   'Buffer string',
+  -- },
   ['?'] = {
     name = '+help',
     ['?'] = {
@@ -374,7 +372,6 @@ return {
       name = '+neogen',
     },
   },
-  C = { ':call OpenLastClosed()<cr>', 'which_key_ignore' },
   d = {
     name = '+debug',
     s = {
@@ -1161,13 +1158,13 @@ return {
     },
     n = {
       function()
-        require('young.tool').toggle_notify_style()
+        require('young.mod.notify').hot()
       end,
       'Nofity style',
     },
     N = {
       function()
-        require('young.tool').toggle_notify()
+        require('young.mod.notify').toggle()
       end,
       'Toggle nofity',
     },

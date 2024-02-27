@@ -1,4 +1,6 @@
-local visual = {
+return {
+  ['<leader>'] = require 'young.key.visual.leader',
+
   ['\\'] = {
     s = { ':so<cr>', ':source' },
     -- I = { 'y:lua pp(<C-r>")', 'Inspect' },
@@ -16,7 +18,3 @@ local visual = {
     -- s = { ':<C-u>call SubstituteVirtualSelection()<cr>', 'Substitute selection' },
   },
 }
-
-visual['<leader>'] = require 'young.key.visual.leader'
-
-return visual

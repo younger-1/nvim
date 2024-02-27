@@ -1,4 +1,11 @@
-local normal = {
+return {
+  ['<leader>'] = require 'young.key.normal.leader',
+
+  -- ['<C-c>'] = function()
+  --   vim.cmd 'nohl'
+  --   vim.fn.feedkeys(xy.util.t '<C-c>', 'n')
+  -- end,
+
   ['\\'] = {
     -- c = { function() vim.cmd 'BufferClose!' end, 'Close buffer' },
     w = {
@@ -59,7 +66,6 @@ local normal = {
   -- ['<C-p>'] = {},
   -- ["<C-n>"] = {},
   -- ["<C-a>"] = {},
-  -- ["<C-x>"] = {},
   -- ["<C-f>"] = {},
   -- ["<C-b>"] = {},
   -- TODO: display buf&&git info
@@ -75,14 +81,7 @@ local normal = {
     end,
     'Man',
   },
-  -- ['<C-x>'] = { function() vim.cmd 'TroubleToggle' end, 'Open' },
   ['<C-w>'] = {
-    z = {
-      function()
-        require('young.tool').toggle_zoom()
-      end,
-      'Zoom',
-    },
     w = {
       function()
         require('young.tool').set_cursor_floating_win()
@@ -214,6 +213,18 @@ local normal = {
   c = {
     d = {
       name = '+cmd',
+      o = {
+        function()
+          xy.tool.buf_git_root 'tcd'
+        end,
+        'Buf git root (tab)',
+      },
+      O = {
+        function()
+          xy.tool.buf_git_root 'cd'
+        end,
+        'Buf git root',
+      },
     },
   },
   g = {
@@ -260,16 +271,12 @@ local normal = {
       h = 'hls',
       d = 'diff',
 
-      ['<Left>'] = { ':call ArrowKeyToggle()<cr>', '👈' },
-      ['<Right>'] = { ':call ArrowKeyToggle()<cr>', '👉' },
-      ['<Tab>'] = { ':call TabToggle()<cr>', '🦊' },
       f = {
         function()
           require('young.tool').toggle_foldcolumn()
         end,
         'foldcolumn',
       },
-      F = { ':call FoldTextToggle()<cr>', 'Fold text' },
       M = {
         function()
           require('young.tool').toggle_mouse()
@@ -314,7 +321,3 @@ local normal = {
     },
   },
 }
-
-normal['<leader>'] = require 'young.key.normal.leader'
-
-return normal

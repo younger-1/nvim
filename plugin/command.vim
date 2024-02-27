@@ -48,13 +48,6 @@ command! -nargs=0 Scratch4Scriptnames <mods> Scratch4 scriptnames
 " Count for char in current buffer.
 command! -nargs=0 Wc %s/.//nge
 
-" <https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db>
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
-endfunction
-
 function! EchoPathHelper(path, ...)
   let sep = get(a:000, 0, ',')
   echo join(split(a:path, sep), "\n")
