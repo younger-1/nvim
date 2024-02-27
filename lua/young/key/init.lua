@@ -37,10 +37,44 @@ function M.call(str)
 end
 
 M.done = function()
+  tt()
+
   local n = require 'young.key.normal'
   local v = require 'young.key.visual'
   xy.map.register(n, { mode = 'n' })
   xy.map.register(v, { mode = 'x' })
+
+  -- local mode_adapters = {
+  --   insert_command_mode = '!',
+  --   insert_mode = 'i',
+  --   command_mode = 'c',
+  --   map_mode = '',
+  --   normal_mode = 'n',
+  --   visual_mode = 'x',
+  --   operator_mode = 'o',
+  --   term_mode = 't',
+  -- }
+  -- local keys = {
+  --   insert_command_mode = {},
+  --   insert_mode = {},
+  --   command_mode = {},
+  --   map_mode = {},
+  --   normal_mode = {},
+  --   visual_mode = {},
+  --   operator_mode = {},
+  --   term_mode = {},
+  -- }
+  -- for mode_name, mappings in pairs(keys) do
+  --   local mode = mode_adapters[mode_name]
+  --   for k, v in pairs(mappings) do
+  --     if type(v) ~= 'table' then
+  --       v = { v }
+  --     end
+  --     table.insert(v, 1, k)
+  --     xy.map[mode](v)
+  --   end
+  -- end
+
 end
 
 return M

@@ -1,6 +1,9 @@
 """"""""""""""""""""""""""""""""
 "        1. map mode
 """"""""""""""""""""""""""""""""
+noremap ' `
+
+" Remap for dealing with word wrap
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <expr> k (v:count == 0 ? 'gk' : 'k')
 sunmap j
@@ -11,11 +14,14 @@ sunmap k
 " noremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
 " noremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'
 
-" noremap ' `
+" <https://github.com/yuki-yano/zero.nvim>
+" noremap <expr> 0 getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'
+" noremap <expr> 0 yo#FirstCharOrFirstCol()
+" <https://vim.fandom.com/wiki/Smart_home>
+" noremap <expr> 0 col('.') == match(getline('.'),'\\S')+1 ? '0' : '^'
+noremap <expr> 0 yo#SmartHome()
 
-noremap <expr> 0 SmartHome()
-
-" can be overrided in normal mode
+" Jump/Select to start and end quickly, can be overrided in normal mode
 noremap gh ^
 noremap gl g_
 sunmap gh
@@ -26,9 +32,13 @@ sunmap gl
 
 " noremap gH H
 " noremap gL L
+" noremap gK H
+" noremap gJ L
 
-noremap <C-i> <C-i>
+" @see https://github.com/neovim/neovim/issues/14090#issuecomment-1113090354
+" Windows Terminal: https://github.com/microsoft/terminal/issues/13792
 map <Tab> %
+noremap <C-i> <C-i>
 map <S-Tab> g%
 
 noremap <localleader><Tab> <C-i>
@@ -42,15 +52,42 @@ noremap <localleader><Tab> <C-i>
 """"""""""""""""""""""""""""""""
 "        2. normal mode
 """"""""""""""""""""""""""""""""
+" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" Resize with arrows
+nnoremap <C-Up>    <cmd>resize -5<CR>
+nnoremap <C-Down>  <cmd>resize +5<CR>
+nnoremap <C-Left>  <cmd>vertical resize -8<CR>
+nnoremap <C-Right> <cmd>vertical resize +8<CR>
+nnoremap <S-Up>    <cmd>resize -1<CR>
+nnoremap <S-Down>  <cmd>resize +1<CR>
+nnoremap <S-Left>  <cmd>vertical resize -1<CR>
+nnoremap <S-Right> <cmd>vertical resize +1<CR>
+" Vertical/Horizontal Scrolling
+" nnoremap <A-h> zh
+" nnoremap <A-l> zl
+" nnoremap <A-j> <C-e>
+" nnoremap <A-k> <C-y>
+
 " nnoremap / ms/
 " nnoremap ? ms?
+nnoremap / /\v
+
 nnoremap <BS> <C-^>
+nnoremap <ESC> <cmd>nohl<cr>
 
+" zz + <C-l>
 nnoremap zz zz<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+nnoremap ZA <cmd>wqa<cr>
 
+
+" ` {{{
 nnoremap `<BS> :delmarks
 nnoremap `<Tab> :marks<cr>
-
+" }}}
 " `g` {{{
 " Format whole buffer with formatprg without changing cursor position
 nnoremap gq<CR> mzgggqG`z
@@ -60,13 +97,13 @@ nnoremap gq? <Cmd>set formatprg?<CR>
 nnoremap <expr> g<c-v> '`[' . getregtype()[0] . '`]'
 " }}}
 " `[]` {{{
-nnoremap <C-q> <Cmd>call QuickFixToggle()<CR>
+nnoremap <C-q> <Cmd>call yo#QuickFixToggle()<CR>
 nnoremap <expr> [q '<Cmd>' . v:count1 . 'cprev<CR>'
 nnoremap <expr> ]q '<Cmd>' . v:count1 . 'cnext<CR>'
 nnoremap [Q <Cmd>cfirst<CR>
 nnoremap ]Q <Cmd>clast<CR>
 
-nnoremap <C-a> <Cmd>call LocListToggle()<CR>
+nnoremap <C-a> <Cmd>call yo#LocListToggle()<CR>
 nnoremap <expr> [a '<Cmd>' . v:count1 . 'lprev<CR>'
 nnoremap <expr> ]a '<Cmd>' . v:count1 . 'lnext<CR>'
 nnoremap [A <Cmd>lfirst<CR>
@@ -102,11 +139,18 @@ nnoremap yom :set mouse=<C-R>=&mouse == "" ? "nvi" : ""<cr> \|set mouse?<cr>
 nnoremap yoc :set cc=<C-R>=&cc == "" ? "81,121" : ""<cr> \|set cc?<cr>
 nnoremap yoh <Cmd>set hls! \|set hls?<CR>
 nnoremap <expr> yod '<Cmd>' . (&diff ? 'diffoff' : 'diffthis') . '<CR>'
+nnoremap yoF <cmd>call yo#FoldTextToggle()<cr>
+nnoremap yo<tab> <cmd>call yo#TabToggle()<cr>
+nnoremap yo<left> <cmd>call yo#ArrowKeyToggle()<cr>
+" }}}
+" `co` {{{
+nnoremap coo <cmd>call yo#OpenLastClosedBuf()<cr>
 " }}}
 " `cd` {{{
 nnoremap cdi <Cmd>tcd %:h<CR>
-nnoremap cdo <Cmd>FindBufGitRoot<CR>
-nnoremap cdO <Cmd>FindBufGitRoot!<CR>
+" }}}
+" `C-w` {{{
+nnoremap <C-w>z <cmd>call yo#WinZoomToggle()<cr>
 " }}}
 " `C-z` {{{
 nnoremap <C-z> <Nop>
@@ -116,13 +160,24 @@ nnoremap <C-z><C-z> <cmd>stop<cr>
 """"""""""""""""""""""""""""""""
 "        3. visual mode
 """"""""""""""""""""""""""""""""
-xnoremap < <gv
-xnoremap > >gv
-xnoremap d "_d
+" Easily play with system clipboard
 xnoremap X "+x
 xnoremap Y "+y
+xnoremap d "_d
+
+" Better indenting
+xnoremap < <gv
+xnoremap > >gv
+
+" /\%>'<\%<'>
+" /\%>2c\%<7c
+" /\%>2l\%<7l
+" /\%>2l\%>4c\%<5l\%<7c
+" xnoremap / <ESC>/\%V
+xnoremap ? <ESC>/\%V
+
 " Runs macro on every line in selection
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+xnoremap @ :<C-u>call yo#ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
@@ -135,7 +190,9 @@ endfunction
 """"""""""""""""""""""""""""""""
 "        4. terminal mode
 """"""""""""""""""""""""""""""""
-tnoremap JK    <C-\><C-N>
+" tnoremap <ESC><ESC> <C-\><C-N>
+tnoremap JK <C-\><C-N>
+" Better window navigation
 " tnoremap <C-h> <C-\><C-N><C-w>h
 " tnoremap <C-j> <C-\><C-N><C-w>j
 " tnoremap <C-k> <C-\><C-N><C-w>k
@@ -144,21 +201,31 @@ tnoremap JK    <C-\><C-N>
 """"""""""""""""""""""""""""""""
 "        5. insert-command mode
 """"""""""""""""""""""""""""""""
+" :h emacs-keys
 noremap! <C-a> <Home>
 noremap! <C-e> <End>
 noremap! <C-f> <Right>
 noremap! <C-b> <Left>
-noremap! <M-f> <S-Right>
-noremap! <M-b> <S-Left>
+noremap! <A-f> <S-Right>
+noremap! <A-b> <S-Left>
 noremap! <C-d> <Del>
 
 """"""""""""""""""""""""""""""""
 "        6. insert mode
 """"""""""""""""""""""""""""""""
 inoremap <C-v> <C-G>u<C-R><C-O>+
+" Move current line / block, like in vscode
+inoremap <A-k> <C-o>:move .-2<CR>
+inoremap <A-j> <C-o>:move .+1<CR>
+" Move selected line / block
+" xnoremap <A-k> :move '<-2<CR>gv-gv
+" xnoremap <A-j> :move '>+1<CR>gv-gv
 
 " inoremap <C-Space> <C-X><C-O>
 
+" :h default-mappings (nvim-default) Break undo sequence, start new change
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
 " More molecular undo of text
 inoremap , ,<C-g>u
 inoremap . .<C-g>u
@@ -176,6 +243,18 @@ cnoremap <C-v> <C-R>+
 " cnoremap <expr> <C-k> pumvisible() ? "<C-p>" : "<C-k>"
 cnoremap <expr> <C-j> pumvisible() ? "<C-n>" : "<Down>"
 cnoremap <expr> <C-k> pumvisible() ? "<C-p>" : "<Up>"
-cnoremap <M-n> <Down>
-cnoremap <M-p> <Up>
+
+" search older command-line from history
+" cnoremap <expr> <A-n> pumvisible() ? "<C-n>" : "<Down>"
+" cnoremap <expr> <A-p> pumvisible() ? "<C-p>" : "<Up>"
+cnoremap <A-n> <Down>
+cnoremap <A-p> <Up>
+" recall older command-line from history
+" cnoremap <A-n> <S-Down>
+" cnoremap <A-p> <S-Up>
+
+" cnoremap ( ()<Left>
+" cnoremap [ []<Left>
+" cnoremap { {}<Left>
+
 cnoremap <C-l> <C-d>

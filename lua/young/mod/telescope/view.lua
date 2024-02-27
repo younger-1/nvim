@@ -72,7 +72,7 @@ M.h4 = {
 -- └──────────────────────────────────────────────────┘
 M.v1 = {
   layout_strategy = 'vertical',
-  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.5 },
+  -- layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.5 },
 }
 
 M.v2 = {
