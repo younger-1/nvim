@@ -35,353 +35,353 @@ M.cfg = {
 
 M.once = function()
   xy.map.register {
-    ['<leader>f'] = {
-      b = {
-        function()
-          vim.cmd 'Telescope buffers'
-        end,
-        'Buffers',
-      },
-      f = {
-        function()
-          vim.cmd 'Telescope find_files'
-        end,
-        'Find files',
-      },
-      F = {
-        function()
-          vim.cmd 'Telescope find_files no_ignore=true'
-        end,
-        'Find files (more)',
-      },
-      r = {
-        function()
-          vim.cmd 'Telescope oldfiles only_cwd=true'
-        end,
-        'Open recent file (cwd)',
-      },
-      R = {
-        function()
-          vim.cmd 'Telescope oldfiles'
-        end,
-        'Open recent file',
-      },
-    },
-    ['<leader>s'] = {
-      -- ['`'] = { 'TODO', 'Terminal' },
-      -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['0'] = { function() vim.cmd 'Telescope pickers' end, 'Resume pickers' },
-      u = {
-        function()
-          vim.cmd 'Telescope pickers'
-        end,
-        'Resume pickers',
-      },
-      [' '] = {
-        function()
-          require('telescope.builtin').resume { cache_index = vim.v.count1 }
-        end,
-        '',
-      },
-      -- ['1'] = { function() vim.cmd 'Telescope resume cache_index=1' end, 'Resume 1' },
-      -- ['2'] = { function() vim.cmd 'Telescope resume cache_index=2' end, 'Resume 2' },
-      -- ['3'] = { function() vim.cmd 'Telescope resume cache_index=3' end, 'Resume 3' },
-      -- ['4'] = { function() vim.cmd 'Telescope resume cache_index=4' end, 'Resume 4' },
-      -- ['5'] = { function() vim.cmd 'Telescope resume cache_index=5' end, 'Resume 5' },
-      -- ['6'] = { function() vim.cmd 'Telescope resume cache_index=6' end, 'Resume 6' },
-      -- ['7'] = { function() vim.cmd 'Telescope resume cache_index=7' end, 'Resume 7' },
-      -- ['8'] = { function() vim.cmd 'Telescope resume cache_index=8' end, 'Resume 8' },
-      -- ['9'] = { function() vim.cmd 'Telescope resume cache_index=9' end, 'Resume 9' },
-      ['-'] = {
-        function()
-          vim.cmd 'Telescope reloader'
-        end,
-        'Reload module',
-      },
-      ['='] = {
-        function()
-          vim.cmd 'Telescope spell_suggest'
-        end,
-        'Spell',
-      },
-      -- ['<BS>'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      ['<TAB>'] = {
-        function()
-          vim.cmd 'Telescope builtin'
-        end,
-        '',
-      },
-      ['<CR>'] = {
-        function()
-          vim.cmd 'Telescope builtin include_extensions=true'
-        end,
-        '',
-      },
-      -- ['['] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- [']'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['{'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['}'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['<'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['>'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      -- [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
-      [':'] = {
-        function()
-          local command_history_ignore = vim.regex 'edit\\|write\\|lua\\s='
-          require('telescope.builtin').command_history {
-            prompt_prefix = '$ ',
-            filter_fn = function(item)
-              if #item < 3 then
-                return false
-              else
-                return not command_history_ignore:match_str(item)
-              end
+    ['<leader>'] = {
+      s = {
+        -- ['`'] = { 'TODO', 'Terminal' },
+        -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['0'] = { function() vim.cmd 'Telescope pickers' end, 'Resume pickers' },
+        u = {
+          function()
+            vim.cmd 'Telescope pickers'
+          end,
+          'Resume pickers',
+        },
+        [' '] = {
+          function()
+            require('telescope.builtin').resume { cache_index = vim.v.count1 }
+          end,
+          '',
+        },
+        -- ['1'] = { function() vim.cmd 'Telescope resume cache_index=1' end, 'Resume 1' },
+        -- ['2'] = { function() vim.cmd 'Telescope resume cache_index=2' end, 'Resume 2' },
+        -- ['3'] = { function() vim.cmd 'Telescope resume cache_index=3' end, 'Resume 3' },
+        -- ['4'] = { function() vim.cmd 'Telescope resume cache_index=4' end, 'Resume 4' },
+        -- ['5'] = { function() vim.cmd 'Telescope resume cache_index=5' end, 'Resume 5' },
+        -- ['6'] = { function() vim.cmd 'Telescope resume cache_index=6' end, 'Resume 6' },
+        -- ['7'] = { function() vim.cmd 'Telescope resume cache_index=7' end, 'Resume 7' },
+        -- ['8'] = { function() vim.cmd 'Telescope resume cache_index=8' end, 'Resume 8' },
+        -- ['9'] = { function() vim.cmd 'Telescope resume cache_index=9' end, 'Resume 9' },
+        ['-'] = {
+          function()
+            vim.cmd 'Telescope reloader'
+          end,
+          'Reload module',
+        },
+        ['='] = {
+          function()
+            vim.cmd 'Telescope spell_suggest'
+          end,
+          'Spell',
+        },
+        -- ['<BS>'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        ['<TAB>'] = {
+          function()
+            vim.cmd 'Telescope builtin'
+          end,
+          '',
+        },
+        ['<CR>'] = {
+          function()
+            vim.cmd 'Telescope builtin include_extensions=true'
+          end,
+          '',
+        },
+        -- ['['] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- [']'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['{'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['}'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['<'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['>'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        -- [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
+        [':'] = {
+          function()
+            local command_history_ignore = vim.regex 'edit\\|write\\|lua\\s='
+            require('telescope.builtin').command_history {
+              prompt_prefix = '$ ',
+              filter_fn = function(item)
+                if #item < 3 then
+                  return false
+                else
+                  return not command_history_ignore:match_str(item)
+                end
+              end,
+            }
+          end,
+          'Command history',
+        },
+        ["'"] = {
+          function()
+            vim.cmd 'Telescope marks'
+          end,
+          'Marks',
+        },
+        ['"'] = {
+          function()
+            vim.cmd 'Telescope registers'
+          end,
+          'Registers',
+        },
+        ['/'] = {
+          function()
+            vim.cmd 'Telescope search_history'
+          end,
+          'Search history',
+        },
+        ['?'] = {
+          function()
+            vim.cmd 'Telescope help_tags'
+          end,
+          'Help',
+        },
+        ['<C-q>'] = {
+          function()
+            vim.cmd 'Telescope quickfix'
+          end,
+          'QuickList',
+        },
+        ['<C-a>'] = {
+          function()
+            vim.cmd 'Telescope loclist'
+          end,
+          'LocList',
+        },
+        ['q'] = {
+          function()
+            vim.cmd 'Telescope quickfixhistory'
+          end,
+          'QuickList history',
+        },
+        -- ['Q'] = { function() vim.cmd 'Telescope loclisthistory' end, 'LocList' },
+        a = {
+          function()
+            vim.cmd 'Telescope autocommands'
+          end,
+          'Autocommands',
+        },
+        -- c = { function() vim.cmd 'Telescope colorscheme' end, 'Colorscheme' },
+        -- c = { cmd "lua require('telescope.builtin').colorscheme({enable_preview = true})", 'Colorscheme' },
+        -- c = { cu('Telescope colorscheme enable_preview=' .. '<C-R>=v:count==0 ? "false" : "true"<CR>'), 'Colorscheme' },
+        c = {
+          function()
+            require('telescope.builtin').colorscheme { enable_preview = vim.v.count ~= 0 }
+          end,
+          'Colorscheme',
+        },
+        C = {
+          function()
+            vim.cmd 'Telescope commands'
+          end,
+          'Commands',
+        },
+        d = {
+          name = '+dir',
+          f = {
+            function()
+              vim.cmd 'Telescope find_files cwd=%:p:h'
             end,
-          }
-        end,
-        'Command history',
-      },
-      ["'"] = {
-        function()
-          vim.cmd 'Telescope marks'
-        end,
-        'Marks',
-      },
-      ['"'] = {
-        function()
-          vim.cmd 'Telescope registers'
-        end,
-        'Registers',
-      },
-      ['/'] = {
-        function()
-          vim.cmd 'Telescope search_history'
-        end,
-        'Search history',
-      },
-      ['?'] = {
-        function()
-          vim.cmd 'Telescope help_tags'
-        end,
-        'Help',
-      },
-      ['<C-q>'] = {
-        function()
-          vim.cmd 'Telescope quickfix'
-        end,
-        'QuickList',
-      },
-      ['<C-a>'] = {
-        function()
-          vim.cmd 'Telescope loclist'
-        end,
-        'LocList',
-      },
-      ['q'] = {
-        function()
-          vim.cmd 'Telescope quickfixhistory'
-        end,
-        'QuickList history',
-      },
-      -- ['Q'] = { function() vim.cmd 'Telescope loclisthistory' end, 'LocList' },
-      a = {
-        function()
-          vim.cmd 'Telescope autocommands'
-        end,
-        'Autocommands',
-      },
-      b = {
-        function()
-          vim.cmd 'Telescope current_buffer_fuzzy_find'
-        end,
-        'Buffer string',
-      },
-      -- c = { function() vim.cmd 'Telescope colorscheme' end, 'Colorscheme' },
-      -- c = { cmd "lua require('telescope.builtin').colorscheme({enable_preview = true})", 'Colorscheme' },
-      -- c = { cu('Telescope colorscheme enable_preview=' .. '<C-R>=v:count==0 ? "false" : "true"<CR>'), 'Colorscheme' },
-      c = {
-        function()
-          require('telescope.builtin').colorscheme { enable_preview = vim.v.count ~= 0 }
-        end,
-        'Colorscheme',
-      },
-      C = {
-        function()
-          vim.cmd 'Telescope commands'
-        end,
-        'Commands',
-      },
-      d = {
-        name = '+dir',
+            'Find files',
+          },
+          g = {
+            function()
+              vim.cmd 'Telescope live_grep cwd=%:p:h'
+            end,
+            'Grep',
+          },
+          t = {
+            function()
+              vim.cmd 'Telescope grep_string cwd=%:p:h'
+            end,
+            'Text under cursor',
+          },
+        },
+        b = {
+          function()
+            vim.cmd 'Telescope buffers'
+          end,
+          'Buffers',
+        },
         f = {
           function()
-            vim.cmd 'Telescope find_files cwd=%:p:h'
+            vim.cmd 'Telescope find_files'
           end,
           'Find files',
         },
+        F = {
+          function()
+            vim.cmd 'Telescope find_files no_ignore=true'
+          end,
+          'Find files (with ignored)',
+        },
+        r = {
+          function()
+            vim.cmd 'Telescope oldfiles only_cwd=true'
+          end,
+          'Open recent file (cwd)',
+        },
+        R = {
+          function()
+            vim.cmd 'Telescope oldfiles'
+          end,
+          'Open recent file',
+        },
         g = {
           function()
-            vim.cmd 'Telescope live_grep cwd=%:p:h'
+            require('telescope.builtin').live_grep {
+              -- grep_open_files = vim.v.count ~= 0,
+              -- Like how fzf handles spaces with wildcards in rg
+              on_input_filter_cb = vim.v.count ~= 0 and function(prompt)
+                return { prompt = prompt:gsub('%s', '.*') }
+              end,
+            }
           end,
           'Grep',
         },
-        t = {
+        G = {
           function()
-            vim.cmd 'Telescope grep_string cwd=%:p:h'
+            require('telescope.builtin').live_grep {
+              additional_args = function()
+                return { '-F' } --fixed-string
+              end,
+            }
           end,
-          'Text under cursor',
+          'Grep fixed string',
         },
-      },
-      g = {
-        function()
-          require('telescope.builtin').live_grep {
-            -- grep_open_files = vim.v.count ~= 0,
-            -- Like how fzf handles spaces with wildcards in rg
-            on_input_filter_cb = vim.v.count ~= 0 and function(prompt)
-              return { prompt = prompt:gsub('%s', '.*') }
-            end,
-          }
-        end,
-        'Grep',
-      },
-      G = {
-        function()
-          require('telescope.builtin').live_grep {
-            additional_args = function()
-              return { '-F' } --fixed-string
-            end,
-          }
-        end,
-        'Grep fixed string',
-      },
-      h = {
-        function()
-          vim.cmd 'Telescope help_tags'
-        end,
-        'Find help',
-      },
-      H = {
-        function()
-          vim.cmd 'Telescope highlights'
-        end,
-        'Highlights',
-      },
-      j = {
-        function()
-          vim.cmd 'Telescope jumplist'
-        end,
-        'Gump list',
-      },
-      k = {
-        function()
-          require('telescope.builtin').keymaps {
-            modes = { 'n', 'i', 'c', 'x', 'o' },
-            show_plug = vim.v.count ~= 0,
-            only_buf = vim.v.count == 1, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
-            lhs_filter = function(lhs)
-              -- gg(lhs)
-              return not string.find(lhs, 'Þ')
-            end,
-          }
-        end,
-        'Keymaps',
-      },
-      m = {
-        function()
-          vim.cmd 'Telescope man_pages'
-        end,
-        'Man pages',
-      },
-      s = {
-        name = '+symbol',
-        e = {
+        h = {
           function()
-            require('telescope.builtin').symbols { sources = { 'emoji' } }
+            vim.cmd 'Telescope help_tags'
           end,
-          'Emoji',
+          'Find help',
         },
-        g = {
+        H = {
           function()
-            require('telescope.builtin').symbols { sources = { 'gitmoji' } }
+            vim.cmd 'Telescope highlights'
           end,
-          'Git',
+          'Highlights',
         },
         j = {
           function()
-            require('telescope.builtin').symbols { sources = { 'julia' } }
+            vim.cmd 'Telescope jumplist'
           end,
-          'Julia',
+          'Gump list',
         },
         k = {
           function()
-            require('telescope.builtin').symbols { sources = { 'kaomoji' } }
+            require('telescope.builtin').keymaps {
+              modes = { 'n', 'i', 'c', 'x', 'o' },
+              show_plug = vim.v.count ~= 0,
+              only_buf = vim.v.count == 1, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
+              lhs_filter = function(lhs)
+                -- gg(lhs)
+                return not string.find(lhs, 'Þ')
+              end,
+            }
           end,
-          'Kaomoji',
+          'Keymaps',
         },
         l = {
           function()
-            require('telescope.builtin').symbols { sources = { 'latex' } }
+            vim.cmd 'Telescope current_buffer_fuzzy_find'
           end,
-          'LaTeX',
+          'Lines (buffer string)',
         },
         m = {
           function()
-            require('telescope.builtin').symbols { sources = { 'math' } }
+            vim.cmd 'Telescope man_pages'
           end,
-          'Math',
-        },
-        n = {
-          function()
-            require('telescope.builtin').symbols { sources = { 'nerd' } }
-          end,
-          'Nerd',
+          'Man pages',
         },
         s = {
-          function()
-            vim.cmd 'Telescope symbols'
-          end,
-          'Symbols',
-        },
-      },
-      t = {
-        function()
-          vim.cmd 'Telescope grep_string'
-        end,
-        'Text under cursor',
-      },
-      T = {
-        function()
-          vim.cmd 'Telescope tagstack'
-        end,
-        'Tag stack',
-      },
-      -- u = { function() vim.cmd 'Telescope repo list' end, 'Repository' },
-      v = {
-        name = '+vim',
-        f = {
-          function()
-            vim.cmd 'Telescope filetypes'
-          end,
-          'FileTypes',
-        },
-        o = {
-          function()
-            vim.cmd 'Telescope vim_options'
-          end,
-          'Options',
+          name = '+symbol',
+          e = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'emoji' } }
+            end,
+            'Emoji',
+          },
+          g = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'gitmoji' } }
+            end,
+            'Git',
+          },
+          j = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'julia' } }
+            end,
+            'Julia',
+          },
+          k = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'kaomoji' } }
+            end,
+            'Kaomoji',
+          },
+          l = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'latex' } }
+            end,
+            'LaTeX',
+          },
+          m = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'math' } }
+            end,
+            'Math',
+          },
+          n = {
+            function()
+              require('telescope.builtin').symbols { sources = { 'nerd' } }
+            end,
+            'Nerd',
+          },
+          s = {
+            function()
+              vim.cmd 'Telescope symbols'
+            end,
+            'Symbols',
+          },
         },
         t = {
           function()
-            vim.cmd 'Telescope current_buffer_tags'
+            vim.cmd 'Telescope grep_string'
           end,
-          'Tags',
+          'Text under cursor',
         },
         T = {
           function()
-            vim.cmd 'Telescope tag'
+            vim.cmd 'Telescope tagstack'
           end,
-          'All tags',
+          'Tag stack',
+        },
+        -- u = { function() vim.cmd 'Telescope repo list' end, 'Repository' },
+        v = {
+          name = '+vim',
+          f = {
+            function()
+              vim.cmd 'Telescope filetypes'
+            end,
+            'FileTypes',
+          },
+          o = {
+            function()
+              vim.cmd 'Telescope vim_options'
+            end,
+            'Options',
+          },
+          t = {
+            function()
+              vim.cmd 'Telescope current_buffer_tags'
+            end,
+            'Tags',
+          },
+          T = {
+            function()
+              vim.cmd 'Telescope tag'
+            end,
+            'All tags',
+          },
         },
       },
     },

@@ -995,10 +995,7 @@ modules.find = {
     {
       'ibhagwan/fzf-lua',
       cmd = 'FzfLua',
-      config = function()
-        require 'young.mod.fzf'
-      end,
-      enabled = not is_windows,
+      auto = true,
     },
   },
   -- {
@@ -1053,14 +1050,14 @@ modules.telescope = {
         dependencies = { 'kkharji/sqlite.lua' },
         init = function()
           xy.map.n {
-            '<leader>fM',
+            '<leader>:',
             function()
               vim.cmd 'Telescope frecency'
             end,
             'Frecency',
           }
           xy.map.n {
-            '<leader>fm',
+            '<leader>;',
             function()
               vim.cmd 'Telescope frecency default_text=:CWD:'
             end,
@@ -1126,7 +1123,7 @@ modules.telescope = {
       'tsakirist/telescope-lazy.nvim',
       keys = {
         {
-          '<leader>sl',
+          '<leader>sx',
           function()
             vim.cmd 'Telescope lazy'
           end,
@@ -1295,6 +1292,12 @@ modules.keymap = {
         require('young.mod.which_key').done()
       end,
     },
+    -- {
+    --   'Cassin01/wf.nvim',
+    --   -- version = '*', -- stable version
+    --   event = 'VeryLazy',
+    --   auto = 'config',
+    -- },
     {
       'nvimtools/hydra.nvim',
       event = 'VeryLazy',
@@ -1317,35 +1320,35 @@ modules.keymap = {
     --     require('telescope').load_extension 'command_palette'
     --   end,
     -- },
-    {
-      'FeiyouG/commander.nvim',
-      lazy = true,
-      auto = 'config',
-      -- commander = {
-      --   {
-      --     -- keys = { 'n', '<Leader><Leader>' },
-      --     cmd = function() vim.cmd 'Telescope commander' end,
-      --     desc = 'Open commander 2',
-      --   },
-      -- },
-    },
-    {
-      'mrjones2014/legendary.nvim',
-      -- version = 'v2.1.0',
-      -- legendary.nvim handles all your keymaps/commands, its recommended to load legendary.nvim before other plugins
-      priority = 10000,
-      lazy = false,
-      keys = {
-        {
-          '<leader>/',
-          function()
-            vim.cmd 'Legendary'
-          end,
-          mode = { 'n', 'x', 'o' },
-        },
-      },
-      auto = 'config',
-    },
+    -- {
+    --   'FeiyouG/commander.nvim',
+    --   lazy = true,
+    --   auto = 'config',
+    --   -- commander = {
+    --   --   {
+    --   --     -- keys = { 'n', '<Leader><Leader>' },
+    --   --     cmd = function() vim.cmd 'Telescope commander' end,
+    --   --     desc = 'Open commander 2',
+    --   --   },
+    --   -- },
+    -- },
+    -- {
+    --   'mrjones2014/legendary.nvim',
+    --   -- version = 'v2.1.0',
+    --   -- legendary.nvim handles all your keymaps/commands, its recommended to load legendary.nvim before other plugins
+    --   priority = 10000,
+    --   lazy = false,
+    --   keys = {
+    --     {
+    --       '<leader>/',
+    --       function()
+    --         vim.cmd 'Legendary'
+    --       end,
+    --       mode = { 'n', 'x', 'o' },
+    --     },
+    --   },
+    --   auto = 'config',
+    -- },
     -- {
     --   'yagiziskirik/AirSupport.nvim',
     --   event = 'VeryLazy',
