@@ -17,7 +17,7 @@ return {
   -- ['>'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  -- [';'] = { function() vim.cmd 'Alpha' end, 'Dashboard' },
+  -- [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- [':'] = { '<cmd>Alpha<cr>', 'Alpha' },
   -- ['"'] = { '<cmd>Alpha<cr>', 'Alpha' },
   [','] = {
@@ -644,7 +644,8 @@ return {
       'Load launch JSON',
     },
   },
-  e = { name = 'explorer' },
+  e = { name = '+explorer' },
+  f = { name = '+file' },
   g = {
     name = '+git',
     [' '] = {

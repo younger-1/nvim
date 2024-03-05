@@ -16,6 +16,9 @@ return {
   l = {
     name = '+lsp',
   },
+  f = {
+    name = '+fzf',
+  },
   s = {
     name = '+search',
     f = {
@@ -32,7 +35,7 @@ return {
         require('telescope.builtin').find_files { no_ignore = true }
         fn.feedkeys(text)
       end,
-      'Find files',
+      'Find files (with ignored)',
     },
     g = {
       function()

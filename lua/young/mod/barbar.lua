@@ -219,13 +219,6 @@ xy.map.register {
       'Move next',
     },
     --
-    f = {
-      function()
-        vim.cmd 'Telescope buffers'
-      end,
-      'Buffers',
-    },
-    --
     c = {
       function()
         vim.cmd 'BufferClose!'
