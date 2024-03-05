@@ -2387,6 +2387,11 @@ modules.write = {
 modules.tool = {
   open = {
     {
+      'rmagatti/gx-extended.nvim',
+      keys = { 'gx' },
+      auto = 'config',
+    },
+    {
       'itchyny/vim-external', -- TODO:gx in WSL
       event = 'BufWinEnter',
       keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },

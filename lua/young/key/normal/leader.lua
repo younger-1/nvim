@@ -340,7 +340,7 @@ return {
     },
     u = {
       function()
-        xy.tool.open_url()
+        xy.tool.open_github_url()
       end,
       'Open github url',
     },
