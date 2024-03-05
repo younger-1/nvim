@@ -398,7 +398,8 @@ tool.profile = function(filename)
   end
 end
 
-tool.open_url = function()
+-- @see require'lazy.util'.open
+tool.open_github_url = function()
   ---@type string
   local line = fn.getline '.'
   -- local names = fn.matchlist(line, '[A-Za-z0-9-_.]+/[A-Za-z0-9-_.]+')

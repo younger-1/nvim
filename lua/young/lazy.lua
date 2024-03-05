@@ -191,5 +191,6 @@ require('lazy').setup {
   state = vim.fn.stdpath 'state' .. '/lazy/state.json', -- state info for checker and other things
 }
 
-vim.keymap.set('n', '<leader>pp', '<Cmd>Lazy<CR>', { silent = true, desc = 'Plugin manager' })
--- vim.keymap.set('n', '<leader>ol', '<Cmd>Lazy<CR>', { silent = true, desc = 'Lazy' })
+vim.keymap.set('n', '<leader>pp', function()
+  vim.cmd 'Lazy'
+end, { silent = true, desc = 'Plugin manager' })
