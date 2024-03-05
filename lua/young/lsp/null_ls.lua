@@ -22,7 +22,7 @@ end
 -- <https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion>
 
 local config = {
-  formatting = {
+  formatting = { -- lua/null-ls/builtins/_meta/formatting.lua
     { command = 'black', extra_args = { '--fast' }, cwd = py_cwd },
     -- { command = 'isort', extra_args = {}, cwd = py_cwd },
     { command = 'stylua' },
@@ -35,22 +35,22 @@ local config = {
     },
     { command = 'sql-formatter' },
   },
-  diagnostics = {
-    {
-      command = 'luacheck',
-      cwd = function(params) -- force luacheck to find its '.luacheckrc' file
-        return u.root_pattern '.luacheckrc'(params.bufname)
-      end,
-    },
+  diagnostics = { -- lua/null-ls/builtins/_meta/diagnostics.lua
+    -- { -- @deprecated
+    --   command = 'luacheck',
+    --   cwd = function(params) -- force luacheck to find its '.luacheckrc' file
+    --     return u.root_pattern '.luacheckrc'(params.bufname)
+    --   end,
+    -- },
     -- { command = 'flake8', cwd = py_cwd },
     { command = 'mypy', cwd = py_cwd },
-    { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' } },
+    -- { command = 'shellcheck', extra_args = { '--exclude=SC1090,SC1091' } }, -- @deprecated
     -- { command = 'cspell' },
     -- { command = 'cpplint' },
   },
-  code_actions = {
+  code_actions = { -- lua/null-ls/builtins/_meta/code_actions.lua
     -- { command = 'gitsigns' },
-    { command = 'shellcheck' },
+    -- { command = 'shellcheck' }, -- @deprecated
     -- { command = 'cspell' },
   },
   hover = {
