@@ -8,66 +8,79 @@ function M.once()
           function()
             vim.cmd 'Lspsaga finder'
           end,
+          'Lspsaga finder',
         },
         k = {
           function()
             vim.cmd 'Lspsaga hover_doc'
           end,
+          'Lspsaga hover_doc',
         },
         d = {
           function()
             vim.cmd 'Lspsaga peek_definition'
           end,
+          'Lspsaga peek_definition',
         },
         l = {
           function()
             vim.cmd 'Lspsaga show_line_diagnostics'
           end,
+          'Lspsaga show_line_diagnostics',
         },
         L = {
           function()
             vim.cmd 'Lspsaga show_cursor_diagnostics'
           end,
+          'Lspsaga show_cursor_diagnostics',
         },
         a = {
           function()
             vim.cmd 'Lspsaga code_action'
           end,
+          'Lspsaga code_action',
         },
         A = {
           function()
             vim.cmd 'Lspsaga range_code_action'
           end,
+          'Lspsaga range_code_action',
         },
         r = {
           function()
             vim.cmd 'Lspsaga rename'
           end,
+          'Lspsaga rename',
         },
         o = {
           function()
             vim.cmd 'Lspsaga outline'
           end,
+          'Lspsaga outline',
         },
         i = {
           function()
             vim.cmd 'Lspsaga open_log'
           end,
+          'Lspsaga open_log',
         },
         t = {
           function()
             vim.cmd 'Lspsaga term_toggle'
           end,
+          'Lspsaga term_toggle',
         },
         ['['] = {
           function()
             vim.cmd 'Lspsaga incoming_calls'
           end,
+          'Lspsaga incoming_calls',
         },
         [']'] = {
           function()
             vim.cmd 'Lspsaga outgoing_calls'
           end,
+          'Lspsaga outgoing_calls',
         },
       },
     },

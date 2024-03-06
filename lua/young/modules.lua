@@ -257,6 +257,7 @@ modules.edit = {
     -- },
     {
       'folke/flash.nvim',
+      keys = { 'f', 'F', 't', 'T' },
       lazy = true,
       auto = true,
     },
@@ -527,24 +528,28 @@ modules.neovim = {
           function()
             vim.cmd 'MarksToggleSigns'
           end,
+          desc = 'MarksToggleSigns',
         },
         {
           '<leader>mb',
           function()
             vim.cmd 'MarksListBuf'
           end,
+          desc = 'MarksListBuf',
         },
         {
           '<leader>mg',
           function()
             vim.cmd 'MarksListGlobal'
           end,
+          desc = 'MarksListGlobal',
         },
         {
           '<leader>ma',
           function()
             vim.cmd 'MarksListAll'
           end,
+          desc = 'MarksListAll',
         },
         --
         { '<leader>mL', ':BookmarksList ' },
@@ -553,6 +558,7 @@ modules.neovim = {
           function()
             vim.cmd 'BookmarksListAll'
           end,
+          desc = 'BookmarksListAll',
         },
       },
       config = function()
@@ -2214,6 +2220,7 @@ modules.lang = {
           function()
             vim.cmd 'DBUI'
           end,
+          desc = 'Database UI',
         },
       },
       dependencies = {
@@ -2388,7 +2395,7 @@ modules.tool = {
   open = {
     {
       'rmagatti/gx-extended.nvim',
-      keys = { 'gx' },
+      keys = { { 'gx', desc = '[gx] extended' } },
       auto = 'config',
     },
     {
@@ -2419,6 +2426,7 @@ modules.tool = {
           function()
             vim.cmd 'BrowserBookmarks'
           end,
+          'BrowserBookmarks',
         }
         xy.map.n { '<leader>aB', ':BrowserBookmarks ' }
       end,
@@ -2473,6 +2481,7 @@ modules.tool = {
         function()
           vim.cmd 'Hexmode'
         end,
+        'Hexmode',
       }
       -- vim.g.hexmode_patterns = '*.bin,*.exe,*.dat,*.o,*.jpg,*.png'
     end,

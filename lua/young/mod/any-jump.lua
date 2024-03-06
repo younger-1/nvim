@@ -79,5 +79,6 @@ xy.map.n {
   function()
     vim.cmd 'AnyJump'
   end,
+  'Any Jump'
 }
 xy.map.x { 'go', ':AnyJumpVisual<cr>' }

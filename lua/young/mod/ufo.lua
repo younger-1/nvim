@@ -54,34 +54,46 @@ local handler = function(virtText, lnum, endLnum, width, truncate, ctx)
   return newVirtText
 end
 
--- return a string type use internal providers
--- return a string in a table like a string type
--- return empty string '' will disable any providers
--- return `nil` will use default value {'lsp', 'indent'}
-local ftMap = {
-  vim = 'indent',
-  python = { 'indent' },
-  git = '',
-}
+M.once = function()
+  -- stylua: ignore start
+  xy.map.n { 'zR', function() require('ufo').openAllFolds() end, 'Ufo open all folds' }
+  xy.map.n { 'zM', function() require('ufo').closeAllFolds() end, 'Ufo close all folds' }
 
--- lsp->treesitter->indent
-local function customizeSelector(bufnr)
-  local function handleFallbackException(err, providerName)
-    if type(err) == 'string' and err:match 'UfoFallbackException' then
-      return require('ufo').getFolds(providerName, bufnr)
-    else
-      return require('promise').reject(err)
-    end
-  end
+  xy.map.n { 'zr', function() require('ufo').openFoldsExceptKinds() end, 'Ufo open folds except kinds' }
+  xy.map.n { 'zm', function() require('ufo').closeFoldsWith() end, 'Ufo close folds with [N]' } -- closeAllFolds == closeFoldsWith(0)
 
-  return require('ufo')
-    .getFolds('lsp', bufnr)
-    :catch(function(err)
-      return handleFallbackException(err, 'treesitter')
-    end)
-    :catch(function(err)
-      return handleFallbackException(err, 'indent')
-    end)
+  xy.map.n { 'zk', function() require('ufo').goPreviousStartFold() end, 'Ufo go previous start fold' }
+  -- stylua: ignore end
+
+  xy.map.n {
+    'z[',
+    function()
+      require('ufo').goPreviousClosedFold()
+      require('ufo').peekFoldedLinesUnderCursor()
+    end,
+    'Ufo peek prev fold',
+  }
+  xy.map.n {
+    'z]',
+    function()
+      require('ufo').goNextClosedFold()
+      require('ufo').peekFoldedLinesUnderCursor()
+    end,
+    'Ufo peek next fold',
+  }
+
+  -- local preview_key = '<tab>' -- TODO:register buffer-map or on_key for <tab>
+  local preview_key = 'J'
+  xy.map.n {
+    preview_key,
+    function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.fn.feedkeys(xy.util.t(preview_key), 'n')
+      end
+    end,
+    'Ufo peek current fold',
+  }
 end
 
 M.done = function()
@@ -89,8 +101,28 @@ M.done = function()
   vim.o.foldlevelstart = 99
   vim.opt.fillchars:append [[fold: ,foldopen:,foldsep: ,foldclose:]]
 
+  -- lsp->treesitter->indent
+  local function customizeSelector(bufnr)
+    local function handleFallbackException(err, providerName)
+      if type(err) == 'string' and err:match 'UfoFallbackException' then
+        return require('ufo').getFolds(providerName, bufnr)
+      else
+        return require('promise').reject(err)
+      end
+    end
+
+    return require('ufo')
+      .getFolds('lsp', bufnr)
+      :catch(function(err)
+        return handleFallbackException(err, 'treesitter')
+      end)
+      :catch(function(err)
+        return handleFallbackException(err, 'indent')
+      end)
+  end
+
   require('ufo').setup {
-    open_fold_hl_timeout = 600,
+    open_fold_hl_timeout = 800,
     enable_get_fold_virt_text = true,
     fold_virt_text_handler = handler,
     provider_selector = function(bufnr, filetype, buftype)
@@ -101,10 +133,26 @@ M.done = function()
       --   end
       -- end
 
+      -- -- return a string type use internal providers
+      -- -- return a string in a table like a string type
+      -- -- return empty string '' will disable any providers
+      -- -- return `nil` will use default value {'lsp', 'indent'}
+      -- local ftMap = {
+      --   vim = 'indent',
+      --   python = { 'indent' },
+      --   git = '',
+      -- }
+      -- return ftMap[filetype] or customizeSelector
+
+      -- local lspWithOutFolding = { 'markdown', 'sh', 'css', 'html', 'python' }
+      -- if vim.tbl_contains(lspWithOutFolding, ft) then
+      --   return { 'treesitter', 'indent' }
+      -- end
+      -- return { 'lsp', 'indent' }
+
       -- default:
       -- return { 'lsp', 'indent' }
       return { 'treesitter', 'indent' }
-      -- return ftMap[filetype] or customizeSelector
     end,
     -- For now, only 'lsp' provider contain 'comment', 'imports' and 'region'.
     close_fold_kinds = { 'imports', 'comment' },
@@ -121,47 +169,6 @@ M.done = function()
       },
     },
   }
-
-  xy.map.n { 'zR', require('ufo').openAllFolds, 'Ufo open all folds' }
-  xy.map.n { 'zM', require('ufo').closeAllFolds, 'Ufo close all folds' }
-  xy.map.n { 'zr', require('ufo').openFoldsExceptKinds, 'Ufo open folds except kinds' }
-  xy.map.n { 'zm', require('ufo').closeFoldsWith, 'Ufo close folds with [N]' } -- closeAllFolds == closeFoldsWith(0)
-end
-
-M.once = function()
-  -- local preview_key = '<tab>' -- TODO:register buffer-map or on_key for <tab>
-  local preview_key = 'J'
-  xy.map.n {
-    preview_key,
-    function()
-      local winid = require('ufo').peekFoldedLinesUnderCursor()
-      if not winid then
-        vim.fn.feedkeys(xy.util.t(preview_key), 'n')
-      end
-    end,
-    'Ufo peek current fold',
-  }
-
-  xy.map.n {
-    'zk',
-    function()
-      require('ufo').goPreviousStartFold()
-    end,
-    'Ufo go previous start fold',
-  }
-
-  local function peek_prev_fold()
-    require('ufo').goPreviousClosedFold()
-    require('ufo').peekFoldedLinesUnderCursor()
-  end
-
-  local function peek_next_fold()
-    require('ufo').goNextClosedFold()
-    require('ufo').peekFoldedLinesUnderCursor()
-  end
-
-  xy.map.n { 'z[', peek_prev_fold, 'Ufo peek prev fold' }
-  xy.map.n { 'z]', peek_next_fold, 'Ufo peek next fold' }
 end
 
 return M
