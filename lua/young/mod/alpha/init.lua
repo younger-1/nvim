@@ -373,9 +373,13 @@ M.done = function()
   dashboard.section.buttons.val = {
     dashboard.button('r', '  Recent files', '<Cmd>Telescope oldfiles<CR>'),
     dashboard.button('f', '󰈞  Find files', '<Cmd>Telescope find_files<CR>'),
-    dashboard.button('p', '  Projects', '<Cmd>Telescope projects<CR>'),
-    dashboard.button('l', '󰁯  Current session', "<Cmd>lua require('persistence').load()<CR>"),
-    dashboard.button('L', '󰦛  Last session', "<Cmd>lua require('persistence').load({last = true})<CR>"),
+    dashboard.button('g', '󰈞  Grep', '<Cmd>Telescope live_grep<CR>'),
+
+    dashboard.button('p', '  Projects', '<Cmd>Telescope project<CR>'),
+
+    dashboard.button('c', '󰁯  Current session', "<Cmd>lua require('persistence').load()<CR>"),
+    dashboard.button('l', '󰦛  Last session', "<Cmd>lua require('persistence').load({last = true})<CR>"),
+
     dashboard.button('q', '󰅗  Quit', '<Cmd>qa<CR>'),
   }
 

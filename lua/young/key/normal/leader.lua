@@ -1053,24 +1053,6 @@ return {
     name = '+project',
     s = {
       name = '+sessions',
-      l = {
-        function()
-          require('persistence').load()
-        end,
-        'Current session',
-      },
-      L = {
-        function()
-          require('persistence').load { last = true }
-        end,
-        'Last session',
-      },
-      s = {
-        function()
-          require('persistence').stop()
-        end,
-        'Stop session',
-      },
     },
     S = {
       name = '+session-man',

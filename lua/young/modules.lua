@@ -892,9 +892,7 @@ modules.file = {
     {
       'folke/persistence.nvim',
       event = 'BufRead',
-      config = function()
-        require 'young.mod.persistence'
-      end,
+      auto = true,
     },
     {
       'MunifTanjim/exrc.nvim',
