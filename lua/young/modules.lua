@@ -345,6 +345,7 @@ modules.edit = {
   },
   {
     'AndrewRadev/splitjoin.vim',
+    submodules = false,
     -- event = 'BufWinEnter',
     cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
     keys = {
@@ -691,6 +692,7 @@ modules.BWT = {
     },
     {
       'nvim-focus/focus.nvim',
+      submodules = false,
       -- event = "BufRead",
       cmd = 'FocusToggle',
       auto = true,
@@ -773,6 +775,7 @@ modules.file = {
     },
     {
       'simonmclean/triptych.nvim',
+      submodules = false,
       dependencies = {
         'nvim-lua/plenary.nvim', -- required
         'nvim-tree/nvim-web-devicons', -- optional
@@ -1038,6 +1041,7 @@ modules.telescope = {
       -- },
       {
         'natecraddock/telescope-zf-native.nvim',
+        submodules = false,
         config = function()
           require('telescope').load_extension 'zf-native'
         end,
@@ -1758,7 +1762,8 @@ modules.code = {
     {
       'L3MON4D3/LuaSnip',
       version = 'v2.*',
-      build = 'make install_jsregexp', -- install jsregexp (optional!).
+      -- build = 'make install_jsregexp', -- install jsregexp (optional!).
+      submodules = false,
       -- event = 'InsertEnter',
       lazy = true,
       config = function()
