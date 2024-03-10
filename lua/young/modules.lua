@@ -1476,16 +1476,16 @@ modules.UI = {
     --   dependencies = 'nvim-tree/nvim-web-devicons',
     --   auto = 'config',
     -- },
-    {
-      'backdround/tabscope.nvim',
-      event = 'VeryLazy',
-      config = function()
-        require('tabscope').setup {}
-        vim.keymap.set('n', '<leader>bc', function()
-          require('tabscope').remove_tab_buffer()
-        end, { desc = 'Close buffer in current tab' })
-      end,
-    },
+    -- { -- NOTE: Session limitation: all hidden buffers are dropped after session loaded
+    --   'backdround/tabscope.nvim',
+    --   event = 'VeryLazy',
+    --   config = function()
+    --     require('tabscope').setup {}
+    --     vim.keymap.set('n', '<leader>bc', function()
+    --       require('tabscope').remove_tab_buffer()
+    --     end, { desc = 'Close buffer in current tab' })
+    --   end,
+    -- },
   },
   winbar = {
     -- {
