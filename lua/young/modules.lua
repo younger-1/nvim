@@ -258,7 +258,6 @@ modules.edit = {
     {
       'folke/flash.nvim',
       keys = { 'f', 'F', 't', 'T' },
-      lazy = true,
       auto = true,
     },
     {
@@ -890,6 +889,12 @@ modules.file = {
     --   opts = {},
     --   lazy = false, -- load spaceport immediately
     -- },
+    {
+      'backdround/global-note.nvim',
+      -- cmd = { 'GlobalNote', 'ProjectNote', 'GitBranchNote' },
+      lazy = true,
+      auto = true,
+    },
   },
   session = {
     {
