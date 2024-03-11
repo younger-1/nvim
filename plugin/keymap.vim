@@ -2,6 +2,7 @@
 "        1. map mode
 """"""""""""""""""""""""""""""""
 noremap ' `
+sunmap '
 
 " Remap for dealing with word wrap
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -20,6 +21,7 @@ sunmap k
 " <https://vim.fandom.com/wiki/Smart_home>
 " noremap <expr> 0 col('.') == match(getline('.'),'\\S')+1 ? '0' : '^'
 noremap <expr> 0 yo#SmartHome()
+sunmap 0
 
 " Jump/Select to start and end quickly, can be overrided in normal mode
 noremap gh ^
@@ -74,7 +76,7 @@ nnoremap <S-Right> <cmd>vertical resize +1<CR>
 
 " nnoremap / ms/
 " nnoremap ? ms?
-nnoremap / /\v
+" nnoremap / /\v
 
 nnoremap <BS> <C-^>
 nnoremap <ESC> <cmd>nohl<cr>

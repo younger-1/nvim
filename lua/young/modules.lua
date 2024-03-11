@@ -258,6 +258,7 @@ modules.edit = {
     {
       'folke/flash.nvim',
       keys = { 'f', 'F', 't', 'T' },
+      event = 'CmdlineEnter',
       auto = true,
     },
     {
@@ -657,6 +658,11 @@ modules.BWT = {
     --   },
     --   auto = 'config',
     -- },
+    { -- Bookmark your files, separated by project
+      'otavioschwanck/arrow.nvim',
+      event = 'VeryLazy',
+      auto = true,
+    },
   },
   window = {
     {
