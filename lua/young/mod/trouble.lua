@@ -2,13 +2,11 @@ local M = {}
 
 M.once = function()
   local t = require('young.mod.telescope').cfg
-  t.defaults.mappings.i['<c-t>'] = function(prompt_bufnr)
+  local function xy_send_to_trouble(prompt_bufnr)
     require('trouble.providers.telescope').smart_open_with_trouble(prompt_bufnr)
   end
-  t.defaults.mappings.n['t'] = function(prompt_bufnr)
-    require('trouble.providers.telescope').smart_open_with_trouble(prompt_bufnr)
-  end
-
+  t.defaults.mappings.i['<c-t>'] = xy_send_to_trouble
+  t.defaults.mappings.n['t'] = xy_send_to_trouble
   xy.map.register {
     ['<leader>x'] = {
       x = {

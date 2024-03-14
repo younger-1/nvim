@@ -549,11 +549,11 @@ M.done = function()
           ['<A-m>'] = action_layout.toggle_mirror,
           ['<A-;>'] = action_layout.toggle_prompt_position,
 
-          ['<C-y>'] = require('young.mod.telescope.actions').print_entry,
-          ['<A-y>'] = require('young.mod.telescope.actions').open_def_locations,
+          ['<C-y>'] = require('young.mod.telescope.actions').xy_print_entry,
+          ['<A-y>'] = require('young.mod.telescope.actions').xy_open_def_locations,
 
-          ['<C-o>'] = require('young.mod.telescope.actions').open_and_resume,
-          ['<CR>'] = require('young.mod.telescope.actions').open_multi_files,
+          ['<C-o>'] = require('young.mod.telescope.actions').xy_open_and_resume,
+          ['<CR>'] = require('young.mod.telescope.actions').xy_open_multi_files,
         },
         n = {
           ['<A-n>'] = actions.cycle_history_next,

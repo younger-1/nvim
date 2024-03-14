@@ -42,7 +42,7 @@ local function get_locs(title, entry)
 end
 
 local M = action_mt.transform_mod {
-  print_entry = function(prompt_bufnr)
+  xy_print_entry = function(prompt_bufnr)
     local title = action_state.get_current_picker(prompt_bufnr).prompt_title
     local entry = action_state.get_selected_entry()
     local locs = get_locs(title, entry)
@@ -51,7 +51,7 @@ local M = action_mt.transform_mod {
     print('Def: ' .. vim.inspect(locs))
   end,
 
-  open_def_locations = function(prompt_bufnr)
+  xy_open_def_locations = function(prompt_bufnr)
     local title = action_state.get_current_picker(prompt_bufnr).prompt_title
     local entry = action_state.get_selected_entry()
     local locs = get_locs(title, entry)
@@ -82,13 +82,13 @@ local M = action_mt.transform_mod {
   end,
 
   -- https://github.com/nvim-telescope/telescope.nvim/issues/814#issuecomment-1238510694
-  open_and_resume = function(prompt_bufnr)
+  xy_open_and_resume = function(prompt_bufnr)
     actions.select_default(prompt_bufnr)
     require('telescope.builtin').resume()
   end,
 
   -- https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-1407046929
-  open_multi_files = function(pb)
+  xy_open_multi_files = function(pb)
     local picker = action_state.get_current_picker(pb)
     local multi = picker:get_multi_selection()
 

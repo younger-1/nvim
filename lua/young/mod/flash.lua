@@ -1,7 +1,7 @@
 local M = {}
 
 M.once = function()
-  local function flash(prompt_bufnr)
+  local function xy_flash(prompt_bufnr)
     require('flash').jump {
       pattern = '^',
       label = { after = { 0, 0 } },
@@ -20,8 +20,8 @@ M.once = function()
     }
   end
   local t = require('young.mod.telescope').cfg
-  t.defaults.mappings.i['<c-s>'] = flash
-  t.defaults.mappings.n['s'] = flash
+  t.defaults.mappings.i['<c-s>'] = xy_flash
+  t.defaults.mappings.n['s'] = xy_flash
 
   local keys = {
     {
