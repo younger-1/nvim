@@ -500,24 +500,53 @@ M.done = function()
           ['<A-n>'] = actions.cycle_history_next,
           ['<A-p>'] = actions.cycle_history_prev,
 
-          ['<C-b>'] = actions.results_scrolling_up,
-          ['<C-f>'] = actions.results_scrolling_down,
+          ['<A-j>'] = actions.results_scrolling_down,
+          ['<A-k>'] = actions.results_scrolling_up,
+          ['<A-h>'] = actions.results_scrolling_left,
+          ['<A-l>'] = actions.results_scrolling_right,
+
+          ['<A-S-j>'] = actions.preview_scrolling_down,
+          ['<A-S-k>'] = actions.preview_scrolling_up,
+          ['<A-S-h>'] = actions.preview_scrolling_left,
+          ['<A-S-l>'] = actions.preview_scrolling_right,
+
+          ['<down>'] = actions.preview_scrolling_down,
+          ['<up>'] = actions.preview_scrolling_up,
+          ['<left>'] = actions.preview_scrolling_left,
+          ['<right>'] = actions.preview_scrolling_right,
+
+          ['<C-n>'] = false,
+          ['<C-p>'] = false,
+          ['<C-f>'] = false,
+          ['<A-f>'] = false,
+
+          ['<A-t>'] = actions.toggle_all,
+          ['<A-u>'] = actions.drop_all,
 
           ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
           ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
 
           ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-          ['<A-a>'] = actions.smart_add_to_loclist + actions.open_loclist,
+          ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
-          -- ['<C-c>']
+          --- NOTE: free key
+          -- ['<C-n>']
+          -- ['<C-p>']
+          -- ['<C-i>']
+          -- ['<C-o>']
+          -- ['<C-y>']
           -- ['<C-g>']
+          -- ['<C-s>']
+          -- ['<C-t>']
+          -- ['<C-l>']
+          -- ['<C-c>']
           -- ['<C-]>']
           -- ['<C-\\>']
-          ['<A-j>'] = action_layout.cycle_layout_next,
-          ['<A-k>'] = action_layout.cycle_layout_prev,
+          ['<A-]>'] = action_layout.cycle_layout_next,
+          ['<A-[>'] = action_layout.cycle_layout_prev,
 
+          ['<A-/>'] = action_layout.toggle_preview,
           ['<A-m>'] = action_layout.toggle_mirror,
-          ['<A-z>'] = action_layout.toggle_preview,
           ['<A-;>'] = action_layout.toggle_prompt_position,
 
           ['<C-y>'] = require('young.mod.telescope.actions').print_entry,
@@ -529,9 +558,6 @@ M.done = function()
         n = {
           ['<A-n>'] = actions.cycle_history_next,
           ['<A-p>'] = actions.cycle_history_prev,
-
-          ['<C-b>'] = actions.results_scrolling_up,
-          ['<C-f>'] = actions.results_scrolling_down,
 
           -- J = actions.cycle_previewers_next,
           -- K = actions.cycle_previewers_prev,
@@ -685,10 +711,10 @@ M.done = function()
         -- Mappings for the actions
         mappings = {
           open_in_browser = '<C-o>',
-          open_in_file_browser = '<M-b>',
           open_in_find_files = '<C-f>',
           open_in_live_grep = '<C-g>',
-          open_plugins_picker = '<C-b>', -- Works only after having called first another action
+          open_in_file_browser = '<C-b>',
+          open_plugins_picker = '<C-p>', -- Works only after having called first another action
           open_lazy_root_find_files = '<C-r>f',
           open_lazy_root_live_grep = '<C-r>g',
         },
@@ -698,10 +724,10 @@ M.done = function()
         auto_quoting = true, -- enable/disable auto-quoting
         mappings = {
           i = {
-            ['<C-e>'] = function(prompt_bufnr)
+            ['<C-l>'] = function(prompt_bufnr)
               require('telescope-live-grep-args.actions').quote_prompt()(prompt_bufnr)
             end,
-            ['<A-e>'] = function(prompt_bufnr)
+            ['<A-l>'] = function(prompt_bufnr)
               require('telescope-live-grep-args.actions').quote_prompt { postfix = ' --iglob ' }(prompt_bufnr)
             end,
           },
