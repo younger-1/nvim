@@ -542,11 +542,15 @@ M.done = function()
           -- ['<C-c>']
           -- ['<C-]>']
           -- ['<C-\\>']
+
           ['<A-]>'] = action_layout.cycle_layout_next,
           ['<A-[>'] = action_layout.cycle_layout_prev,
+          ['<A-\\>'] = action_layout.toggle_mirror,
 
+          ['<A-.>'] = actions.cycle_previewers_next,
+          ['<A-,>'] = actions.cycle_previewers_prev,
           ['<A-/>'] = action_layout.toggle_preview,
-          ['<A-m>'] = action_layout.toggle_mirror,
+
           ['<A-;>'] = action_layout.toggle_prompt_position,
 
           ['<C-y>'] = require('young.mod.telescope.actions').xy_print_entry,
@@ -587,11 +591,27 @@ M.done = function()
       },
       colorscheme = view.h4,
       commands = { theme = 'ivy' },
+      command_history = {
+        mappings = {
+          i = {
+            ['<C-e>'] = false, -- TODO:can't disable <C-e>
+            ['<C-l>'] = actions.edit_command_line,
+          },
+        },
+      },
       current_buffer_fuzzy_find = view.v2,
       find_files = vim.tbl_extend('force', view.v1, {
         -- find_command = { 'fd', '--type=file', '--hidden', '--smart-case' },
         -- hidden = true, -- TODO:why show hidden without this
       }),
+      live_grep = vim.tbl_extend('force', view.h1, {
+        -- disable_coordinates = true,
+      }),
+      grep_string = { theme = 'ivy' },
+      marks = view.h1,
+      oldfiles = view.v3,
+      man_pages = view.h1,
+      --
       git_bcommits = view.h3,
       git_commits = view.h3,
       git_files = view.h3,
@@ -606,25 +626,6 @@ M.done = function()
           untracked = '',
         },
       }),
-      grep_string = { theme = 'ivy' },
-      live_grep = vim.tbl_extend('force', view.h1, {
-        -- disable_coordinates = true,
-      }),
-      man_pages = view.h1,
-      marks = view.h1,
-      oldfiles = view.v3,
-      git_branches = {
-        mappings = {
-          i = {
-            ['<C-b>'] = actions.preview_scrolling_up,
-            ['<C-f>'] = actions.preview_scrolling_down,
-          },
-          n = {
-            ['<C-b>'] = actions.preview_scrolling_up,
-            ['<C-f>'] = actions.preview_scrolling_down,
-          },
-        },
-      },
     },
     extensions = {
       -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
