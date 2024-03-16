@@ -515,11 +515,6 @@ M.done = function()
           ['<left>'] = actions.preview_scrolling_left,
           ['<right>'] = actions.preview_scrolling_right,
 
-          ['<C-n>'] = false,
-          ['<C-p>'] = false,
-          ['<C-f>'] = false,
-          ['<A-f>'] = false,
-
           ['<A-t>'] = actions.toggle_all,
           ['<A-u>'] = actions.drop_all,
 
@@ -529,9 +524,12 @@ M.done = function()
           ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
           ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
-          --- NOTE: free key
-          -- ['<C-n>']
-          -- ['<C-p>']
+          --  NOTE: disabled key
+          -- ['<C-n>'] = false,
+          -- ['<C-p>'] = false,
+          ['<C-f>'] = false,
+          ['<A-f>'] = false,
+          --  NOTE: free key
           -- ['<C-i>']
           -- ['<C-o>']
           -- ['<C-y>']
@@ -556,7 +554,8 @@ M.done = function()
           ['<C-y>'] = require('young.mod.telescope.actions').xy_print_entry,
           ['<A-y>'] = require('young.mod.telescope.actions').xy_open_def_locations,
 
-          ['<C-o>'] = require('young.mod.telescope.actions').xy_open_and_resume,
+          ['<C-o>'] = require('young.mod.telescope.actions').xy_resume,
+          ['<A-o>'] = require('young.mod.telescope.actions').xy_open_and_resume,
           ['<CR>'] = require('young.mod.telescope.actions').xy_open_multi_files,
         },
         n = {
@@ -715,9 +714,11 @@ M.done = function()
           open_in_find_files = '<C-f>',
           open_in_live_grep = '<C-g>',
           open_in_file_browser = '<C-b>',
-          open_plugins_picker = '<C-p>', -- Works only after having called first another action
+          open_in_terminal = '<C-t>',
+          open_plugins_picker = '<C-o>', -- Works only after having called first another action
           open_lazy_root_find_files = '<C-r>f',
           open_lazy_root_live_grep = '<C-r>g',
+          change_cwd_to_plugin = '<C-r>d',
         },
         -- Other telescope configuration options
       },
@@ -810,6 +811,18 @@ M.done = function()
   telescope.setup(M.cfg)
 
   vim.cmd [[cmap <C-R><C-t> <Plug>(TelescopeFuzzyCommandSearch)]]
+
+  -- configure the `vim_buffer_*` previewer
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'TelescopePreviewerLoaded',
+    callback = function(args)
+      if args.data.filetype ~= 'help' then
+        vim.wo.number = true
+      elseif args.data.bufname:match '*.csv' then
+        vim.wo.wrap = false
+      end
+    end,
+  })
 end
 
 return M

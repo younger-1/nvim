@@ -81,6 +81,10 @@ local M = action_mt.transform_mod {
     end)
   end,
 
+  xy_resume = function(prompt_bufnr)
+    require('telescope.builtin').resume()
+  end,
+
   -- https://github.com/nvim-telescope/telescope.nvim/issues/814#issuecomment-1238510694
   xy_open_and_resume = function(prompt_bufnr)
     actions.select_default(prompt_bufnr)
