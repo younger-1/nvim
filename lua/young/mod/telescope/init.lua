@@ -95,22 +95,6 @@ M.once = function()
         -- ['\'] = { '<cmd>Alpha<cr>', 'Alpha' },
         -- ['|'] = { '<cmd>Alpha<cr>', 'Alpha' },
         -- [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
-        [':'] = {
-          function()
-            local command_history_ignore = vim.regex 'edit\\|write\\|lua\\s='
-            require('telescope.builtin').command_history {
-              prompt_prefix = '$ ',
-              filter_fn = function(item)
-                if #item < 3 then
-                  return false
-                else
-                  return not command_history_ignore:match_str(item)
-                end
-              end,
-            }
-          end,
-          'Command history',
-        },
         ["'"] = {
           function()
             vim.cmd 'Telescope marks'
@@ -123,9 +107,45 @@ M.once = function()
           end,
           'Registers',
         },
+        [':'] = {
+          function()
+            require('telescope.builtin').command_history {
+              prompt_prefix = '$ ',
+              filter_fn = function(item)
+                local ignored_pattern = vim.regex 'edit\\|write\\|lua\\s='
+                if #item < 3 then
+                  return false
+                else
+                  return not ignored_pattern:match_str(item)
+                end
+              end,
+              attach_mappings = function(_, map)
+                -- map('i', '<C-e>', false)
+                map('i', '<C-e>', { '<end>', type = 'command' })
+                return true
+              end,
+            }
+          end,
+          'Command history',
+        },
         ['/'] = {
           function()
-            vim.cmd 'Telescope search_history'
+            require('telescope.builtin').search_history {
+              prompt_prefix = '$ ',
+              filter_fn = function(item)
+                local ignored_pattern = vim.regex 'edit\\|write\\|lua\\s='
+                if #item < 3 then
+                  return false
+                else
+                  return not ignored_pattern:match_str(item)
+                end
+              end,
+              attach_mappings = function(_, map)
+                -- map('i', '<C-e>', false)
+                map('i', '<C-e>', { '<end>', type = 'command' })
+                return true
+              end,
+            }
           end,
           'Search history',
         },
@@ -593,7 +613,15 @@ M.done = function()
       command_history = {
         mappings = {
           i = {
-            ['<C-e>'] = false, -- TODO:can't disable <C-e>
+            -- ['<C-e>'] = false, -- TODO:can't disable <C-e>
+            ['<C-l>'] = actions.edit_command_line,
+          },
+        },
+      },
+      search_history = {
+        mappings = {
+          i = {
+            -- ['<C-e>'] = false, -- TODO:can't disable <C-e>
             ['<C-l>'] = actions.edit_command_line,
           },
         },
