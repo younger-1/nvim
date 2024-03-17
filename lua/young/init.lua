@@ -505,10 +505,6 @@ xy.log = {
   end,
 }
 
-xy.lazy_has = function(plugin)
-  return require('lazy.core.config').spec.plugins[plugin] ~= nil
-end
-
 xy.globals = function()
   local no = {
     '_',

@@ -31,6 +31,7 @@ M.cfg = {
       n = {},
     },
   },
+  extensions = {},
 }
 
 M.once = function()
@@ -662,42 +663,6 @@ M.done = function()
       --   override_file_sorter = true, -- override the file sorter
       --   case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
       -- },
-      -- https://github.com/natecraddock/telescope-zf-native.nvim
-      -- ['zf-native'] = {
-      --   -- options for sorting file-like items
-      --   file = {
-      --     -- override default telescope file sorter
-      --     enable = true,
-      --     -- highlight matching text in results
-      --     highlight_results = true,
-      --     -- enable zf filename match priority
-      --     match_filename = true,
-      --   },
-      --   -- options for sorting all other items
-      --   generic = {
-      --     -- override default telescope generic item sorter
-      --     enable = true,
-      --     -- highlight matching text in results
-      --     highlight_results = true,
-      --     -- disable zf filename match priority
-      --     match_filename = false,
-      --   },
-      -- },
-      frecency = {
-        show_scores = true,
-        show_unindexed = true,
-        show_filter_column = false,
-        workspaces = {
-          -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
-          ['conf'] = vim.fn.expand '~/.config',
-          ['share'] = vim.fn.expand '~/.local/share',
-          ['dot'] = vim.fn.expand '~/dotter',
-          ['beauty'] = vim.fn.expand '~/Beauty',
-          ['project'] = vim.fn.expand '~/projects',
-          ['source'] = vim.fn.expand '~/source',
-          ['wiki'] = vim.fn.expand '~/wiki',
-        },
-      },
       -- file_browser = view.h2,
       file_browser = {
         theme = 'ivy',
@@ -705,7 +670,7 @@ M.done = function()
       project = {
         theme = 'dropdown',
         base_dirs = { -- check .git dir for project
-          { vim.fn.stdpath 'data' .. '/lazy' },
+          -- { vim.fn.stdpath 'data' .. '/lazy' }, -- Too slow
           -- { '~/work' },
           -- { '~/source' },
           -- { '~/projects' },
@@ -835,8 +800,7 @@ M.done = function()
     },
   })
 
-  local telescope = require 'telescope'
-  telescope.setup(M.cfg)
+  require('telescope').setup(M.cfg)
 
   vim.cmd [[cmap <C-R><C-t> <Plug>(TelescopeFuzzyCommandSearch)]]
 

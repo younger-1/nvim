@@ -1,6 +1,32 @@
 local vim = vim
 local xy = xy
 
+---@param name string
+---@param fn fun(name:string)
+local function lazy_on_load(name, fn)
+  -- local Config = require 'lazy.core.config'
+  -- if Config.plugins[name] and Config.plugins[name]._.loaded then
+  --   fn(name)
+  --   return
+  -- end
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'LazyLoad',
+    callback = function(event)
+      if event.data == name then
+        fn(name)
+        return true
+      end
+    end,
+  })
+end
+
+local function lazy_has(plugin)
+  return require('lazy.core.config').spec.plugins[plugin] ~= nil
+end
+
+xy.lazy_on_load = lazy_on_load
+xy.lazy_has = lazy_has
+
 local modules = {}
 
 modules.theme = {
@@ -1026,9 +1052,9 @@ modules.find = {
   -- },
   -- {
   --   'kevinhwang91/nvim-hlslens',
-  --   -- enabled = not xy.lazy_has 'noice.nvim',
+  --   -- enabled = not lazy_has 'noice.nvim',
   --   cond = function()
-  --     return not xy.lazy_has 'noice.nvim'
+  --     return not lazy_has 'noice.nvim'
   --   end,
   --   event = 'CursorMoved',
   --   auto = true,
@@ -1040,6 +1066,7 @@ modules.telescope = {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
     -- event = 'BufRead',
+    auto = true,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       -- {
@@ -1054,14 +1081,38 @@ modules.telescope = {
         'natecraddock/telescope-zf-native.nvim',
         submodules = false,
         config = function()
-          require('telescope').load_extension 'zf-native'
+          require('young.mod.telescope').cfg.extensions['zf-native'] = {
+            -- options for sorting file-like items
+            file = {
+              -- override default telescope file sorter
+              enable = true,
+              -- highlight matching text in results
+              highlight_results = true,
+              -- enable zf filename match priority
+              match_filename = true,
+            },
+            -- options for sorting all other items
+            generic = {
+              -- override default telescope generic item sorter
+              enable = true,
+              -- highlight matching text in results
+              highlight_results = true,
+              -- disable zf filename match priority
+              match_filename = false,
+            },
+          }
+          lazy_on_load('telescope.nvim', function()
+            require('telescope').load_extension 'zf-native'
+          end)
         end,
       },
       {
         'nvim-telescope/telescope-smart-history.nvim',
         dependencies = { 'kkharji/sqlite.lua' },
         config = function()
-          require('telescope').load_extension 'smart_history'
+          lazy_on_load('telescope.nvim', function()
+            require('telescope').load_extension 'smart_history'
+          end)
         end,
       },
       {
@@ -1084,11 +1135,27 @@ modules.telescope = {
           }
         end,
         config = function()
-          require('telescope').load_extension 'frecency'
+          require('young.mod.telescope').cfg.extensions.frecency = {
+            show_scores = true,
+            show_unindexed = true,
+            show_filter_column = false,
+            workspaces = {
+              -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
+              ['conf'] = vim.fn.expand '~/.config',
+              ['share'] = vim.fn.expand '~/.local/share',
+              ['dot'] = vim.fn.expand '~/dotter',
+              ['beauty'] = vim.fn.expand '~/Beauty',
+              ['project'] = vim.fn.expand '~/projects',
+              ['source'] = vim.fn.expand '~/source',
+              ['wiki'] = vim.fn.expand '~/wiki',
+            },
+          }
+          lazy_on_load('telescope.nvim', function()
+            require('telescope').load_extension 'frecency'
+          end)
         end,
       },
     },
-    auto = true,
   },
   -- {
   --   'princejoogie/dir-telescope.nvim',
@@ -1431,7 +1498,7 @@ modules.UI = {
       },
     },
     config = function()
-      require('telescope').load_extension 'notify'
+      -- require('telescope').load_extension 'notify'
       require('young.mod.notify').done()
     end,
   },
