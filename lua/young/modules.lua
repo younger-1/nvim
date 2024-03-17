@@ -2585,18 +2585,18 @@ local function require_helper_semi(plug)
 
   if plug.auto == 'init' or plug.auto == true then
     plug.init = function()
-      xy.autogroup('_lazy_init_' .. plug_name, {
-        {
-          'User',
-          'LazyDone',
-          function()
-            local m = require(mod_path)
-            if type(m) == 'table' and m.once and type(m.once) == 'function' then
-              m.once()
-            end
-          end,
-        },
-      })
+      -- xy.autogroup('_lazy_init_' .. plug_name, {
+      --   {
+      --     'User',
+      --     'LazyDone',
+      --     function()
+      --     end,
+      --   },
+      -- })
+      local m = require(mod_path)
+      if type(m) == 'table' and m.once and type(m.once) == 'function' then
+        m.once()
+      end
     end
   end
 
