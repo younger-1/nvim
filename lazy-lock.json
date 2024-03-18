@@ -131,6 +131,7 @@
   "ranger.nvim": { "branch": "main", "commit": "d3b032feee6b3b0cf923222f260523e2bd7f3ad3" },
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "rose-pine": { "branch": "main", "commit": "a29b09d15a9ef5cd575fbe5ae2a3cfb854876caf" },
+  "smart-open.nvim": { "branch": "main", "commit": "3cff486c7074a23c92339a8916ebe42bb0ffd2bf" },
   "smart-splits.nvim": { "branch": "master", "commit": "78f0c74ea1d5aa1725ab63b25761886245622904" },
   "sonokai": { "branch": "master", "commit": "a62656a798043f3c6b603efa98d4de2da89c72b2" },
   "splitjoin.vim": { "branch": "main", "commit": "1aa617d15a9904107a68f95ebf5036b7d4abf64d" },
