@@ -4,11 +4,11 @@ local xy = xy
 ---@param name string
 ---@param fn fun(name:string)
 local function lazy_on_load(name, fn)
-  -- local Config = require 'lazy.core.config'
-  -- if Config.plugins[name] and Config.plugins[name]._.loaded then
-  --   fn(name)
-  --   return
-  -- end
+  local Config = require 'lazy.core.config'
+  if Config.plugins[name] and Config.plugins[name]._.loaded then
+    fn(name)
+    return
+  end
   vim.api.nvim_create_autocmd('User', {
     pattern = 'LazyLoad',
     callback = function(event)
@@ -836,6 +836,9 @@ modules.file = {
         },
       },
       config = function()
+        require('young.mod.telescope').cfg.extensions.file_browser = {
+          theme = 'ivy',
+        }
         require('telescope').load_extension 'file_browser'
       end,
     },
@@ -898,6 +901,25 @@ modules.file = {
         },
       },
       config = function()
+        require('young.mod.telescope').cfg.extensions.project = {
+          theme = 'dropdown',
+          base_dirs = { -- check .git dir for project
+            -- { vim.fn.stdpath 'data' .. '/lazy' }, -- Too slow
+            -- { '~/work' },
+            -- { '~/source' },
+            -- { '~/projects' },
+            { '~', max_depth = 3 },
+          },
+          hidden_files = true, -- default: false
+          -- order_by = 'recent',
+          search_by = { 'title', 'path' }, -- default: 'title'
+          -- on_project_selected = function(prompt_bufnr)
+          --   -- Do anything you want in here. For example:
+          --   local project_actions = require 'telescope._extensions.project.actions'
+          --   project_actions.change_working_directory(prompt_bufnr, false)
+          --   require('harpoon.ui').nav_file(1)
+          -- end,
+        }
         require('telescope').load_extension 'project'
       end,
     },
@@ -1080,28 +1102,28 @@ modules.telescope = {
       {
         'natecraddock/telescope-zf-native.nvim',
         submodules = false,
-        config = function()
-          require('young.mod.telescope').cfg.extensions['zf-native'] = {
-            -- options for sorting file-like items
-            file = {
-              -- override default telescope file sorter
-              enable = true,
-              -- highlight matching text in results
-              highlight_results = true,
-              -- enable zf filename match priority
-              match_filename = true,
-            },
-            -- options for sorting all other items
-            generic = {
-              -- override default telescope generic item sorter
-              enable = true,
-              -- highlight matching text in results
-              highlight_results = true,
-              -- disable zf filename match priority
-              match_filename = false,
-            },
-          }
+        init = function()
           lazy_on_load('telescope.nvim', function()
+            require('young.mod.telescope').cfg.extensions['zf-native'] = {
+              -- options for sorting file-like items
+              file = {
+                -- override default telescope file sorter
+                enable = true,
+                -- highlight matching text in results
+                highlight_results = true,
+                -- enable zf filename match priority
+                match_filename = true,
+              },
+              -- options for sorting all other items
+              generic = {
+                -- override default telescope generic item sorter
+                enable = true,
+                -- highlight matching text in results
+                highlight_results = true,
+                -- disable zf filename match priority
+                match_filename = false,
+              },
+            }
             require('telescope').load_extension 'zf-native'
           end)
         end,
@@ -1109,74 +1131,80 @@ modules.telescope = {
       {
         'nvim-telescope/telescope-smart-history.nvim',
         dependencies = { 'kkharji/sqlite.lua' },
-        config = function()
+        init = function()
           lazy_on_load('telescope.nvim', function()
             require('telescope').load_extension 'smart_history'
           end)
         end,
       },
-      {
-        'nvim-telescope/telescope-frecency.nvim',
-        dependencies = { 'kkharji/sqlite.lua' },
-        init = function()
-          xy.map.n {
-            '<leader>:',
-            function()
-              vim.cmd 'Telescope frecency'
-            end,
-            'Frecency',
-          }
-          xy.map.n {
-            '<leader>;',
-            function()
-              vim.cmd 'Telescope frecency default_text=:CWD:'
-            end,
-            'Frecency',
-          }
-        end,
-        config = function()
-          require('young.mod.telescope').cfg.extensions.frecency = {
-            show_scores = true,
-            show_unindexed = true,
-            show_filter_column = false,
-            workspaces = {
-              -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
-              ['conf'] = vim.fn.expand '~/.config',
-              ['share'] = vim.fn.expand '~/.local/share',
-              ['dot'] = vim.fn.expand '~/dotter',
-              ['beauty'] = vim.fn.expand '~/Beauty',
-              ['project'] = vim.fn.expand '~/projects',
-              ['source'] = vim.fn.expand '~/source',
-              ['wiki'] = vim.fn.expand '~/wiki',
-            },
-          }
-          lazy_on_load('telescope.nvim', function()
-            require('telescope').load_extension 'frecency'
-          end)
-        end,
-      },
-      {
-        'danielfalk/smart-open.nvim',
-        dependencies = { 'kkharji/sqlite.lua' },
-        init = function()
-          vim.keymap.set('n', '<leader><leader>', function()
-            require('telescope').extensions.smart_open.smart_open {}
-          end, { desc = 'Smart frecency', noremap = true })
-        end,
-        config = function()
-          require('young.mod.telescope').cfg.extensions.smart_open = {
-            show_scores = true,
-            ignore_patterns = { '*.git/*', '*/tmp/*' },
-            match_algorithm = 'fzy',
-            open_buffer_indicators = { previous = '👀', others = '🙈' },
-            buffer_indicators = { previous = '#', others = '*' },
-          }
-          lazy_on_load('telescope.nvim', function()
-            require('telescope').load_extension 'smart_open'
-          end)
-        end,
-      },
     },
+  },
+  {
+    'nvim-telescope/telescope-frecency.nvim',
+    dependencies = { 'kkharji/sqlite.lua' },
+    lazy = true,
+    init = function()
+      xy.map.n {
+        '<leader>:',
+        function()
+          vim.cmd 'Telescope frecency'
+        end,
+        'Frecency',
+      }
+      xy.map.n {
+        '<leader>;',
+        function()
+          vim.cmd 'Telescope frecency default_text=:CWD:'
+        end,
+        'Frecency',
+      }
+
+      lazy_on_load('telescope.nvim', function()
+        vim.cmd 'Lazy load telescope-frecency.nvim'
+      end)
+    end,
+    config = function()
+      require('young.mod.telescope').cfg.extensions.frecency = {
+        show_scores = true,
+        show_unindexed = true,
+        show_filter_column = false,
+        workspaces = {
+          -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
+          ['conf'] = vim.fn.expand '~/.config',
+          ['share'] = vim.fn.expand '~/.local/share',
+          ['dot'] = vim.fn.expand '~/dotter',
+          ['beauty'] = vim.fn.expand '~/Beauty',
+          ['project'] = vim.fn.expand '~/projects',
+          ['source'] = vim.fn.expand '~/source',
+          ['wiki'] = vim.fn.expand '~/wiki',
+        },
+      }
+      require('telescope').load_extension 'frecency'
+    end,
+  },
+  {
+    'danielfalk/smart-open.nvim',
+    dependencies = { 'kkharji/sqlite.lua' },
+    lazy = true,
+    init = function()
+      vim.keymap.set('n', '<leader><leader>', function()
+        require('telescope').extensions.smart_open.smart_open {}
+      end, { desc = 'Smart frecency', noremap = true })
+
+      lazy_on_load('telescope.nvim', function()
+        vim.cmd 'Lazy load smart-open.nvim'
+      end)
+    end,
+    config = function()
+      require('young.mod.telescope').cfg.extensions.smart_open = {
+        show_scores = true,
+        ignore_patterns = { '*.git/*', '*/tmp/*' },
+        match_algorithm = 'fzy',
+        open_buffer_indicators = { previous = '👀', others = '🙈' },
+        buffer_indicators = { previous = '#', others = '*' },
+      }
+      require('telescope').load_extension 'smart_open'
+    end,
   },
   -- {
   --   'princejoogie/dir-telescope.nvim',
@@ -1215,6 +1243,19 @@ modules.telescope = {
       },
     },
     config = function()
+      require('young.mod.telescope').cfg.extensions.live_grep_args = {
+        auto_quoting = true, -- enable/disable auto-quoting
+        mappings = {
+          i = {
+            ['<C-l>'] = function(prompt_bufnr)
+              require('telescope-live-grep-args.actions').quote_prompt()(prompt_bufnr)
+            end,
+            ['<A-l>'] = function(prompt_bufnr)
+              require('telescope-live-grep-args.actions').quote_prompt { postfix = ' --iglob ' }(prompt_bufnr)
+            end,
+          },
+        },
+      }
       require('telescope').load_extension 'live_grep_args'
     end,
   },
@@ -1238,6 +1279,21 @@ modules.telescope = {
         },
       },
       config = function()
+        require('young.mod.telescope').cfg.extensions.lazy = {
+          theme = 'ivy',
+          show_icon = true,
+          mappings = {
+            open_in_browser = '<C-o>',
+            open_in_find_files = '<C-f>',
+            open_in_live_grep = '<C-g>',
+            open_in_file_browser = '<C-b>',
+            open_in_terminal = '<C-t>',
+            open_plugins_picker = '<C-o>', -- Works only after having called first another action
+            open_lazy_root_find_files = '<C-r>f',
+            open_lazy_root_live_grep = '<C-r>g',
+            change_cwd_to_plugin = '<C-r>d',
+          },
+        }
         require('telescope').load_extension 'lazy'
       end,
     },
@@ -2215,6 +2271,10 @@ if xy.coc then
         },
       },
       config = function()
+        require('young.mod.telescope').cfg.extensions.coc = {
+          theme = 'ivy',
+          prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+        }
         require('telescope').load_extension 'coc'
       end,
     },
@@ -2452,6 +2512,9 @@ modules.write = {
         },
       },
       config = function()
+        require('young.mod.telescope').cfg.extensions.heading = {
+          treesitter = true,
+        }
         require('telescope').load_extension 'heading'
       end,
     },
@@ -2533,11 +2596,13 @@ modules.tool = {
         xy.map.n { '<leader>aB', ':BrowserBookmarks ' }
       end,
       config = function()
-        -- require('telescope').load_extension 'bookmarks'
         require('browser_bookmarks').setup {
-          selected_browser = 'chrome',
-          url_open_command = xy.open_cmd,
-          -- url_open_plugin = 'external_browser',
+          selected_browser = 'chrome', -- Available: 'brave', 'google_chrome', 'safari', 'firefox',
+          url_open_command = xy.open_cmd, -- url_open_plugin = 'external_browser',
+          -- Show the full path to the bookmark instead of just the bookmark name
+          full_path = true,
+          -- Provide a custom profile name for Firefox
+          firefox_profile_name = nil,
         }
       end,
     },
