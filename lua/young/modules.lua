@@ -1331,7 +1331,7 @@ modules.telescope = {
       'LukasPietzschmann/telescope-tabs',
       keys = {
         {
-          '<leader>sw',
+          '<leader>s<tab>',
           function()
             vim.cmd 'Telescope telescope-tabs list_tabs'
           end,
@@ -1342,7 +1342,7 @@ modules.telescope = {
           function()
             vim.cmd 'lua require("telescope-tabs").go_to_previous()'
           end,
-          desc = 'Tab Goto',
+          desc = 'Tab prev',
         },
       },
       config = function()
@@ -2438,8 +2438,38 @@ modules.write = {
     {
       'folke/todo-comments.nvim',
       event = 'BufRead',
-      -- cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
+      cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       dependencies = 'nvim-lua/plenary.nvim',
+      init = function()
+        xy.map.n {
+          '<leader>st',
+          function()
+            vim.cmd 'TodoTelescope'
+          end,
+          'Todo telescope',
+        }
+        xy.map.n {
+          '<leader>xt',
+          function()
+            vim.cmd 'TodoTrouble'
+          end,
+          'Todo trouble',
+        }
+        xy.map.n {
+          '<leader>ot',
+          function()
+            vim.cmd 'TodoQuickFix'
+          end,
+          'Todo qf',
+        }
+        xy.map.n {
+          '<leader>oT',
+          function()
+            vim.cmd 'TodoLocList'
+          end,
+          'Todo locList',
+        }
+      end,
       config = function()
         require 'young.mod.todo_comments'
       end,

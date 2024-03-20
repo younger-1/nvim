@@ -150,12 +150,6 @@ M.once = function()
           end,
           'Search history',
         },
-        ['?'] = {
-          function()
-            vim.cmd 'Telescope help_tags'
-          end,
-          'Help',
-        },
         ['<C-q>'] = {
           function()
             vim.cmd 'Telescope quickfix'
@@ -210,11 +204,11 @@ M.once = function()
             end,
             'Grep',
           },
-          t = {
+          w = {
             function()
               vim.cmd 'Telescope grep_string cwd=%:p:h'
             end,
-            'Text under cursor',
+            'Word under cursor',
           },
         },
         b = {
@@ -364,11 +358,11 @@ M.once = function()
             'Symbols',
           },
         },
-        t = {
+        w = {
           function()
             vim.cmd 'Telescope grep_string'
           end,
-          'Text under cursor',
+          'Word under cursor',
         },
         T = {
           function()

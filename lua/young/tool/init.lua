@@ -457,6 +457,7 @@ end
 function tool.open_file(file)
   if vim.fn.bufexists(file) == 1 then
     vim.cmd.buffer(file)
+    vim.o.buflisted = true
   else
     vim.cmd.edit(file)
   end

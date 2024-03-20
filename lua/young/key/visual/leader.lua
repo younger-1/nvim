@@ -59,13 +59,13 @@ return {
       end,
       'Grep fixed string',
     },
-    t = {
+    w = {
       function()
         require('telescope.builtin').grep_string {
           search = xy.util.get_visual_selection_by_reg(),
         }
       end,
-      'Search fixed string',
+      'Word under cursor',
     },
   },
   y = {

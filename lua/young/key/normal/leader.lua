@@ -1036,18 +1036,6 @@ return {
   N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   o = {
     name = '+open',
-    t = {
-      function()
-        vim.cmd 'TodoQuickFix'
-      end,
-      'Todo qf',
-    },
-    T = {
-      function()
-        vim.cmd 'TodoTelescope'
-      end,
-      'Todo telescope',
-    },
   },
   p = {
     name = '+project',

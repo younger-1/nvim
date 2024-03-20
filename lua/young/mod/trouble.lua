@@ -15,12 +15,6 @@ M.once = function()
         end,
         'Open',
       },
-      t = {
-        function()
-          vim.cmd 'TodoTrouble'
-        end,
-        'Todo',
-      },
       ['.'] = {
         function()
           vim.cmd 'Trouble telescope'

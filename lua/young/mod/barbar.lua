@@ -231,6 +231,12 @@ xy.map.register {
       end,
       'Restore',
     },
+    r = {
+      function()
+        vim.cmd 'BufferRestore'
+      end,
+      'Restore',
+    },
     d = {
       function()
         vim.cmd 'BufferWipeout!'
@@ -258,7 +264,8 @@ xy.map.register {
     },
     O = {
       function()
-        vim.cmd 'BufferCloseAllButCurrent'
+        -- vim.cmd 'BufferCloseAllButCurrent'
+        vim.cmd 'BufferCloseAllButVisible'
       end,
       'Close all but current buffer',
     },
