@@ -30,87 +30,87 @@ xy.lazy_has = lazy_has
 local modules = {}
 
 modules.theme = {
-  -- { 'rktjmp/lush.nvim' },
-  {
-    'folke/styler.nvim',
-    event = 'BufWinEnter',
-    config = function()
-      require('styler').setup {
-        themes = {
-          markdown = { colorscheme = 'nightfox' },
-          help = { colorscheme = 'carbonfox' },
-          -- noice = { colorscheme = "gruvbox", background = "dark" },
-        },
-      }
-    end,
-  },
   vim = {
     -- 'joshdick/onedark.vim',
     'sainnhe/sonokai',
-    'sainnhe/edge',
-    'sainnhe/everforest',
-    'sainnhe/gruvbox-material',
+    -- 'sainnhe/edge',
+    -- 'sainnhe/everforest',
+    -- 'sainnhe/gruvbox-material',
   },
   lua = {
-    { 'folke/tokyonight.nvim' },
-    {
-      'Mofiqul/dracula.nvim',
-      config = function()
-        require 'young.theme.dracula'
-      end,
-    },
-    {
-      'tanvirtin/monokai.nvim',
-      config = function()
-        require 'young.theme.monokai'
-      end,
-    },
-    {
-      'navarasu/onedark.nvim',
-      config = function()
-        require 'young.theme.onedark'
-      end,
-    },
     'rebelot/kanagawa.nvim',
-    'ellisonleao/gruvbox.nvim',
-    'daschw/leaf.nvim',
-    'projekt0n/github-nvim-theme',
-    'mvpopuk/inspired-github.vim',
-    'LunarVim/darkplus.nvim',
-    'Mofiqul/vscode.nvim',
     'EdenEast/nightfox.nvim',
-    'rmehri01/onenord.nvim',
-    {
-      'shaunsingh/nord.nvim',
-      init = function()
-        vim.g.nord_borders = true
-      end,
-    },
-    {
-      'marko-cerovac/material.nvim',
-      init = function()
-        vim.g.material_style = 'palenight'
-      end,
-    },
-    {
-      'lunarvim/onedarker.nvim',
-      enabled = xy.colorscheme == 'onedarker',
-      branch = 'freeze',
-      config = function()
-        require 'young.theme.onedarker'
-      end,
-    },
-    { 'rose-pine/neovim', name = 'rose-pine' },
-    { 'catppuccin/nvim', name = 'catppuccin' },
-    {
-      'oxfist/night-owl.nvim',
-      enabled = xy.colorscheme == 'night-owl',
-      -- config = function()
-      --   vim.cmd.colorscheme 'night-owl'
-      -- end,
-    },
+    -- { 'folke/tokyonight.nvim' },
+    -- {
+    --   'Mofiqul/dracula.nvim',
+    --   config = function()
+    --     require 'young.theme.dracula'
+    --   end,
+    -- },
+    -- {
+    --   'tanvirtin/monokai.nvim',
+    --   config = function()
+    --     require 'young.theme.monokai'
+    --   end,
+    -- },
+    -- {
+    --   'navarasu/onedark.nvim',
+    --   config = function()
+    --     require 'young.theme.onedark'
+    --   end,
+    -- },
+    -- 'ellisonleao/gruvbox.nvim',
+    -- 'daschw/leaf.nvim',
+    -- 'projekt0n/github-nvim-theme',
+    -- 'mvpopuk/inspired-github.vim',
+    -- 'LunarVim/darkplus.nvim',
+    -- 'Mofiqul/vscode.nvim',
+    -- 'rmehri01/onenord.nvim',
+    -- {
+    --   'shaunsingh/nord.nvim',
+    --   init = function()
+    --     vim.g.nord_borders = true
+    --   end,
+    -- },
+    -- {
+    --   'marko-cerovac/material.nvim',
+    --   init = function()
+    --     vim.g.material_style = 'palenight'
+    --   end,
+    -- },
+    -- {
+    --   'lunarvim/onedarker.nvim',
+    --   enabled = xy.colorscheme == 'onedarker',
+    --   branch = 'freeze',
+    --   config = function()
+    --     require 'young.theme.onedarker'
+    --   end,
+    -- },
+    -- { 'rose-pine/neovim', name = 'rose-pine' },
+    -- { 'catppuccin/nvim', name = 'catppuccin' },
+    -- {
+    --   'oxfist/night-owl.nvim',
+    --   enabled = xy.colorscheme == 'night-owl',
+    --   -- config = function()
+    --   --   vim.cmd.colorscheme 'night-owl'
+    --   -- end,
+    -- },
   },
   helper = {
+    {
+      'folke/styler.nvim',
+      event = { 'BufReadPost', 'BufNewFile' },
+      config = function()
+        require('styler').setup {
+          themes = {
+            markdown = { colorscheme = 'nightfox' },
+            help = { colorscheme = 'carbonfox' },
+            -- noice = { colorscheme = "gruvbox", background = "dark" },
+          },
+        }
+      end,
+    },
+    -- { 'rktjmp/lush.nvim' },
     -- {
     --   'tjdevries/colorbuddy.nvim',
     --   lazy = true,
@@ -137,7 +137,7 @@ modules.appearance = {
     {
       -- 'norcalli/nvim-colorizer.lua',
       'NvChad/nvim-colorizer.lua',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = 'config',
     },
     {
@@ -147,7 +147,7 @@ modules.appearance = {
     },
     {
       'azabiong/vim-highlighter',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = 'config',
     },
   },
@@ -155,16 +155,16 @@ modules.appearance = {
     {
       'lukas-reineke/indent-blankline.nvim',
       main = 'ibl',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = true,
     },
     {
       'yaocccc/nvim-hlchunk',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
     },
     -- {
     --   'nvimdev/indentmini.nvim',
-    --   event = 'BufReadPost',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   config = function()
     --     require('indentmini').setup {
     --       char = '│',
@@ -212,7 +212,7 @@ modules.appearance = {
     -- },
     { -- Fancy cursorline & mode indicator in signcolumn
       'gen740/SmoothCursor.nvim',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require 'young.mod.smooth_cursor'
       end,
@@ -221,6 +221,7 @@ modules.appearance = {
   column = {
     {
       'lukas-reineke/virt-column.nvim',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require('virt-column').setup {
           char = '║',
@@ -229,6 +230,7 @@ modules.appearance = {
     },
     {
       'Bekaboo/deadcolumn.nvim',
+      event = { 'BufReadPost', 'BufNewFile' },
     },
   },
 }
@@ -237,21 +239,21 @@ modules.edit = {
   motion = {
     {
       'haya14busa/vim-asterisk',
-      event = 'BufWinEnter',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require 'young.mod.asterisk'
       end,
     },
     {
       'chaoren/vim-wordmotion',
-      event = 'CursorMoved',
+      event = { 'BufReadPost', 'BufNewFile' },
       init = function()
         vim.g.wordmotion_prefix = ','
       end,
     },
     {
       'anuvyklack/vim-smartword',
-      event = 'CursorMoved',
+      event = { 'BufReadPost', 'BufNewFile' },
     },
     -- {
     --   'unblevable/quick-scope',
@@ -289,7 +291,7 @@ modules.edit = {
     },
     {
       'andymass/vim-matchup',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = 'init',
     },
     -- {
@@ -363,7 +365,7 @@ modules.edit = {
   -- },
   {
     'Wansmer/treesj',
-    event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require 'young.mod.treesj'
@@ -386,8 +388,8 @@ modules.edit = {
 }
 
 modules.change = {
-  { 'tpope/vim-surround' },
-  { 'tpope/vim-repeat' },
+  { 'tpope/vim-surround', event = { 'BufReadPost', 'BufNewFile' } },
+  { 'tpope/vim-repeat', event = { 'BufReadPost', 'BufNewFile' } },
   -- {
   --   'tpope/vim-abolish',
   --   keys = {
@@ -401,7 +403,8 @@ modules.change = {
   -- },
   {
     'gregorias/coerce.nvim',
-    tag = 'v0.2',
+    tag = 'v1.0',
+    event = { 'BufReadPost', 'BufNewFile' },
     config = true,
   },
   pair = {
@@ -417,7 +420,7 @@ modules.change = {
   comment = {
     {
       'numToStr/Comment.nvim',
-      -- event = 'BufReadPost',
+      -- event = { 'BufReadPost', 'BufNewFile' },
       -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
       keys = {
         { 'gc', mode = { 'n', 'x' }, desc = 'Comment' },
@@ -450,7 +453,7 @@ modules.change = {
     -- },
     {
       'monaqa/dial.nvim',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       -- FIXME:
       commit = '3b70b2a',
       config = function()
@@ -482,33 +485,15 @@ modules.neovim = {
   fold = {
     {
       'kevinhwang91/nvim-ufo',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       dependencies = { 'kevinhwang91/promise-async' },
       auto = true,
     },
   },
   register = {
     {
-      'gbprod/yanky.nvim',
-      event = 'VeryLazy',
-      dependencies = { 'kkharji/sqlite.lua' },
-      keys = {
-        {
-          '<leader>sY',
-          function()
-            vim.cmd 'YankyRingHistory'
-          end,
-          desc = 'Yanky Ring',
-        },
-      },
-      config = function()
-        -- require('telescope').load_extension 'yank_history'
-        require 'young.mod.yanky'
-      end,
-    },
-    {
       'AckslD/nvim-neoclip.lua',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       dependencies = { 'kkharji/sqlite.lua' },
       keys = {
         {
@@ -525,8 +510,26 @@ modules.neovim = {
       end,
     },
     {
+      'gbprod/yanky.nvim',
+      event = { 'BufReadPost', 'BufNewFile' },
+      dependencies = { 'kkharji/sqlite.lua' },
+      keys = {
+        {
+          '<leader>sY',
+          function()
+            vim.cmd 'YankyRingHistory'
+          end,
+          desc = 'Yanky Ring',
+        },
+      },
+      config = function()
+        -- require('telescope').load_extension 'yank_history'
+        require 'young.mod.yanky'
+      end,
+    },
+    {
       'ojroques/nvim-osc52',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require 'young.mod.osc52'
       end,
@@ -539,7 +542,7 @@ modules.neovim = {
     -- },
     { -- FEAT: save bookmarks
       'chentoast/marks.nvim',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       -- :MarksToggleSigns[ buffer] Toggle signs globally. Also accepts an optional buffer number to toggle signs for that buffer only.
       -- :MarksListBuf Fill the location list with all marks in the current buffer.
       -- :MarksListGlobal Fill the location list with all global marks in open buffers.
@@ -630,7 +633,7 @@ modules.neovim = {
   -- },
   {
     'nmac427/guess-indent.nvim',
-    event = 'BufReadPost',
+    event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       require('guess-indent').setup {}
     end,
@@ -674,7 +677,7 @@ modules.BWT = {
   buffer = {
     -- {
     --   'ThePrimeagen/harpoon',
-    --   event = 'BufReadPost',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   auto = 'config',
     -- },
     -- { -- Just Another Buffer Switcher
@@ -686,20 +689,22 @@ modules.BWT = {
     -- },
     { -- Bookmark your files, separated by project
       'otavioschwanck/arrow.nvim',
-      event = 'VeryLazy',
+      lazy = true,
       auto = true,
     },
   },
   window = {
     {
       'luukvbaal/stabilize.nvim',
-      enabled = not xy.has 'nvim-0.9',
+      enabled = not xy.has 'nvim-0.9', -- use 'splitkeep' instead
       config = function()
         require('stabilize').setup {}
       end,
     },
     {
       'stevearc/stickybuf.nvim',
+      enabled = not xy.has 'nvim-0.10',
+      event = { 'BufReadPost', 'BufNewFile' },
       opts = {},
     },
     -- { 'dhruvasagar/vim-zoom' },
@@ -743,7 +748,8 @@ modules.BWT = {
     { 'weilbith/vim-qfloc-edit', ft = 'qf' },
     {
       'https://gitlab.com/yorickpeterse/nvim-pqf',
-      event = 'VeryLazy',
+      -- ft = 'qf', -- not working for first time open qf
+      event = { 'BufReadPost', 'BufNewFile' },
       config = true,
     },
     -- {
@@ -851,7 +857,7 @@ modules.file = {
     -- },
     -- {
     --   'tamago324/lir.nvim',
-    --   -- event = 'BufReadPost',
+    --   -- event = { 'BufReadPost', 'BufNewFile' },
     --   -- event = 'User DirOpened',
     --   dependencies = { 'nvim-lua/plenary.nvim' },
     --   init = function()
@@ -869,6 +875,7 @@ modules.file = {
     {
       'stevearc/oil.nvim',
       -- event = 'BufWinEnter',
+      -- event = { 'BufReadPost', 'BufNewFile' },
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       init = function()
         xy.map.n {
@@ -954,12 +961,12 @@ modules.file = {
   session = {
     {
       'folke/persistence.nvim',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = true,
     },
     {
       'MunifTanjim/exrc.nvim',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require 'young.mod.exrc'
       end,
@@ -1011,7 +1018,7 @@ modules.find = {
   grep = {
     {
       'nvim-pack/nvim-spectre',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = true,
     },
     {
@@ -1088,7 +1095,7 @@ modules.telescope = {
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
-    -- event = 'BufReadPost',
+    -- event = { 'BufReadPost', 'BufNewFile' },
     auto = true,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
@@ -1368,8 +1375,8 @@ modules.git = {
   },
   {
     'lewis6991/gitsigns.nvim',
-    -- event = 'BufReadPost',
-    event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
+    -- event = 'VeryLazy',
     config = function()
       require('young.mod.gitsigns').done()
     end,
@@ -1452,6 +1459,7 @@ modules.keymap = {
     {
       'folke/which-key.nvim',
       event = 'VeryLazy',
+      -- event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require('young.mod.which_key').done()
       end,
@@ -1464,7 +1472,8 @@ modules.keymap = {
     -- },
     {
       'nvimtools/hydra.nvim',
-      event = 'VeryLazy',
+      -- event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require 'young.mod.hydra'
       end,
@@ -1588,8 +1597,7 @@ modules.UI = {
   },
   {
     'stevearc/dressing.nvim',
-    -- event = 'BufWinEnter',
-    event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
   },
   -- {
   --   'nvim-telescope/telescope-ui-select.nvim',
@@ -1607,7 +1615,7 @@ modules.UI = {
   bufferline = {
     {
       'romgrk/barbar.nvim',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       dependencies = {
         'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
         'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
@@ -1621,7 +1629,7 @@ modules.UI = {
     },
     -- {
     --   'stevearc/three.nvim',
-    --   event = 'BufReadPost',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   auto = 'config',
     -- },
   },
@@ -1674,14 +1682,14 @@ modules.UI = {
     -- { 'glepnir/galaxyline.nvim', config = require('young.mod.galaxyline')}
     -- {
     --   'nvim-lualine/lualine.nvim',
-    --   event = 'BufReadPost',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   config = function()
     --     require 'young.mod.lualine'
     --   end,
     -- },
     {
       'freddiehaddad/feline.nvim',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
       opts = {},
       config = function(_, opts)
         require 'young.mod.feline'
@@ -1689,6 +1697,7 @@ modules.UI = {
     },
     -- {
     --   'rebelot/heirline.nvim',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   config = function()
     --     require('heirline').setup {}
     --   end,
@@ -1697,6 +1706,8 @@ modules.UI = {
   statuscolumn = {
     {
       'luukvbaal/statuscol.nvim',
+      enabled = xy.has 'nvim-0.9',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = 'config',
     },
   },
@@ -1827,7 +1838,7 @@ modules.UI = {
     -- },
     -- {
     --   'dstein64/nvim-scrollview',
-    --   event = 'BufWinEnter',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   config = function()
     --     require 'young.mod.scrollview'
     --   end,
@@ -1835,13 +1846,13 @@ modules.UI = {
     {
       'petertriho/nvim-scrollbar',
       -- after = 'nvim-hlslens',
-      event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       auto = 'config',
     },
     -- {
     --   'lewis6991/satellite.nvim',
     --   enabled = xy.has 'nvim-0.10',
-    --   event = 'VeryLazy',
+    --   event = { 'BufReadPost', 'BufNewFile' },
     --   auto = 'config',
     -- },
   },
@@ -1894,9 +1905,6 @@ modules.code = {
             require('cmp_git').setup()
           end,
         },
-        {
-          'rcarriga/cmp-dap',
-        },
       },
     },
     -- {
@@ -1942,6 +1950,18 @@ modules.code = {
       config = function()
         require 'young.mod.dap'
       end,
+      dependencies = {
+        {
+          'rcarriga/cmp-dap',
+          config = function()
+            require('cmp').setup.filetype({ 'dap-repl', 'dapui_watches' }, {
+              sources = {
+                { name = 'dap' },
+              },
+            })
+          end,
+        },
+      },
     },
     {
       'rcarriga/nvim-dap-ui',
@@ -2079,6 +2099,8 @@ modules.code = {
 modules.LSP = {
   {
     'neovim/nvim-lspconfig',
+    -- event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
     init = function()
       xy.map.register {
         ['<leader>l'] = {
@@ -2128,15 +2150,15 @@ modules.LSP = {
       -- { 'williamboman/nvim-lsp-installer' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
+      {
+        'nvimtools/none-ls.nvim',
+        config = function()
+          require('young.lsp.null_ls').done()
+        end,
+      },
+      { 'b0o/SchemaStore.nvim' },
     },
   },
-  {
-    'nvimtools/none-ls.nvim',
-    config = function()
-      require('young.lsp.null_ls').done()
-    end,
-  },
-  { 'b0o/SchemaStore.nvim' },
   -- {
   --   'ray-x/lsp_signature.nvim',
   --   event = 'InsertEnter',
@@ -2235,15 +2257,15 @@ modules.LSP = {
       'RRethy/vim-illuminate',
       enabled = not require('young.lsp.config').document_highlight,
       -- event = 'BufWinEnter',
-      event = 'VeryLazy',
+      -- event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require 'young.mod.illuminate'
       end,
     },
     {
       'm-demare/hlargs.nvim',
-      event = 'VeryLazy',
-      -- after = 'nvim-treesitter',
+      event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require('hlargs').setup {
           -- color = '#ef9062',
@@ -2438,7 +2460,7 @@ modules.write = {
   todo = {
     {
       'folke/todo-comments.nvim',
-      event = 'BufReadPost',
+      -- event = { 'BufReadPost', 'BufNewFile' },
       cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       dependencies = 'nvim-lua/plenary.nvim',
       init = function()
@@ -2596,7 +2618,7 @@ modules.tool = {
     },
     {
       'itchyny/vim-external', -- TODO:gx in WSL
-      event = 'BufWinEnter',
+      event = { 'BufReadPost', 'BufNewFile' },
       keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
       config = function()
         require 'young.mod.external'
@@ -2641,7 +2663,7 @@ modules.tool = {
   website = {
     {
       'wakatime/vim-wakatime',
-      event = 'BufReadPost',
+      event = { 'BufReadPost', 'BufNewFile' },
     },
     {
       'glacambre/firenvim',

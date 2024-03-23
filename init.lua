@@ -30,6 +30,7 @@ require 'young.lazy'
 
 tt()
 vim.cmd [[
+" colorscheme habamax
 " silent! colorscheme dracula
 " silent! colorscheme dracula-soft
 " silent! colorscheme tokyonight

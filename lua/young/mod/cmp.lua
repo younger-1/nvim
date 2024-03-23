@@ -3,8 +3,6 @@
 
 local cmp = require 'cmp'
 local cmapping = cmp.mapping
-local luasnip = rr 'luasnip' or nil
-local lspkind = rr 'lspkind' or nil
 
 local M = {}
 
@@ -97,9 +95,7 @@ M.cfg = {
       -- require('snippy').expand_snippet(args.body)
 
       -- For `luasnip` users.
-      if luasnip then
-        luasnip.lsp_expand(args.body)
-      end
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   window = {
@@ -158,7 +154,7 @@ M.cfg = {
 
     -- format = lspkind.cmp_format(),
 
-    format = lspkind and lspkind.cmp_format {
+    format = require('lspkind').cmp_format {
       with_text = true,
       maxwidth = 50,
       menu = {
@@ -213,8 +209,8 @@ M.cfg = {
         cmp.select_next_item()
       elseif require('neogen').jumpable() then
         require('neogen').jump_next()
-      elseif luasnip and luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+      elseif require('luasnip').expand_or_locally_jumpable() then
+        require('luasnip').expand_or_jump()
       else
         fallback()
       end
@@ -224,8 +220,8 @@ M.cfg = {
         cmp.select_prev_item()
       elseif require('neogen').jumpable(true) then
         require('neogen').jump_prev()
-      elseif luasnip and luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      elseif require('luasnip').jumpable(-1) then
+        require('luasnip').jump(-1)
       else
         fallback()
       end
@@ -291,12 +287,6 @@ M.done = function()
       { name = 'path' },
       { name = 'buffer' },
       { name = 'emoji' },
-    },
-  })
-
-  cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, {
-    sources = {
-      { name = 'dap' },
     },
   })
 

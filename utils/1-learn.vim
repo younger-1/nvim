@@ -64,6 +64,8 @@ augroup _event
   autocmd BufReadPost * echomsg reltimestr(reltime()) . ' : BufReadPost -> ' . expand('<afile>')
   autocmd BufEnter    * echomsg reltimestr(reltime()) . ' : BufEnter    -> ' . expand('<afile>')
   autocmd BufWinEnter * echomsg reltimestr(reltime()) . ' : BufWinEnter -> ' . expand('<afile>')
+  autocmd BufNew      * echomsg reltimestr(reltime()) . ' : BufNew      -> ' . expand('<afile>')
+  autocmd BufNewFile  * echomsg reltimestr(reltime()) . ' : BufNewFile  -> ' . expand('<afile>')
   autocmd FileType    * echomsg reltimestr(reltime()) . ' : FileType    -> ' . expand('<afile>') expand('<amatch>')
 augroup END
 

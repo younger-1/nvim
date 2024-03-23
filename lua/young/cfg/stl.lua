@@ -41,7 +41,8 @@ function M.statusline()
     '%*',
 
     -- See if there is an active debug session
-    [[%{luaeval("require'dap'.status()")} %=]],
+    -- TODO:not require dap here
+    -- [[%{luaeval("require'dap'.status()")} %=]],
 
     [[%{luaeval("require'demo_stl'.diagnostic_status()")}]],
   }

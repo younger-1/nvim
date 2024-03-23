@@ -7,13 +7,27 @@ require 'young.mod.hydra.w_window'
 
 -- with plugin
 -- require 'young.mod.hydra.git'
--- require 'young.mod.hydra.dap'
-require 'young.mod.hydra.buffer'
+xy.lazy_on_load('nvim-dap', function()
+  require 'young.mod.hydra.dap'
+end)
+xy.lazy_on_load('nvim-treesitter', function()
+  require 'young.mod.hydra.ts'
+end)
+xy.lazy_on_load('barbar.nvim', function()
+  require 'young.mod.hydra.buffer'
+end)
+xy.lazy_on_load('vim-smartword', function()
+  require 'young.mod.hydra.word'
+end)
+xy.lazy_on_load('yanky.nvim', function()
+  require 'young.mod.hydra.yanky'
+end)
+-- xy.lazy_on_load('winshift.nvim', function()
 require 'young.mod.hydra.window'
-require 'young.mod.hydra.word'
+-- end)
+-- xy.lazy_on_load('venn.nvim', function()
 require 'young.mod.hydra.diagram'
-require 'young.mod.hydra.ts'
-require 'young.mod.hydra.yanky'
+-- end)
 
 -- for [ and ]
 local amend = function(lhs, rhs, opts)
