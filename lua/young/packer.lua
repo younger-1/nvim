@@ -135,7 +135,7 @@ end
 
 M.source_compiled = function()
   -- doautocmd BufWinEnter will load "which-key" at least
-  vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter | doautocmd BufRead]]
+  vim.cmd [[autocmd User PackerCompileDone ++once doautocmd BufWinEnter | doautocmd BufReadPost]]
 
   if first_time then
     vim.notify('[young]: Installing plugins...', vim.log.levels.WARN)

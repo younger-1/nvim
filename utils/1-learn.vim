@@ -60,11 +60,11 @@ echom localtime() - b_time
 
 augroup _event
   autocmd!
-  autocmd BufEnter    * echomsg 'BufEnter'    . ' -> ' . expand('<afile>')
-  autocmd BufWinEnter * echomsg 'BufWinEnter' . ' -> ' . expand('<afile>')
-  autocmd BufRead     * echomsg 'BufRead'     . ' -> ' . expand('<afile>')
-  autocmd BufReadPost * echomsg 'BufReadPost' . ' -> ' . expand('<afile>')
-  autocmd FileType    * echomsg 'FileType'    . ' -> ' . expand('<afile>') expand('<amatch>')
+  autocmd BufReadPre  * echomsg reltimestr(reltime()) . ' : BufReadPre  -> ' . expand('<afile>')
+  autocmd BufReadPost * echomsg reltimestr(reltime()) . ' : BufReadPost -> ' . expand('<afile>')
+  autocmd BufEnter    * echomsg reltimestr(reltime()) . ' : BufEnter    -> ' . expand('<afile>')
+  autocmd BufWinEnter * echomsg reltimestr(reltime()) . ' : BufWinEnter -> ' . expand('<afile>')
+  autocmd FileType    * echomsg reltimestr(reltime()) . ' : FileType    -> ' . expand('<afile>') expand('<amatch>')
 augroup END
 
 

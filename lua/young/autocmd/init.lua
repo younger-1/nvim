@@ -147,32 +147,40 @@ function M.done()
       },
       -- { 'FocusLost', '*', 'silent! wa' },
     },
-    _dir_opened = { -- taken from AstroNvim
+    _dir_opened = {
       {
-        'BufEnter',
+        'DirChanged',
         '*',
-        function(args)
-          local bufname = vim.api.nvim_buf_get_name(args.buf)
-          if xy.util.is_dir(bufname) then
-            vim.api.nvim_del_augroup_by_name '_dir_opened'
-            vim.cmd 'do User DirOpened'
-            vim.api.nvim_exec_autocmds('BufEnter', {})
-          end
+        -- [[verb pwd]],
+        function()
+          vim.cmd [[verb pwd]]
         end,
       },
+      -- { -- taken from AstroNvim
+      --   'BufEnter',
+      --   '*',
+      --   function(args)
+      --     local bufname = vim.api.nvim_buf_get_name(args.buf)
+      --     if xy.util.is_dir(bufname) then
+      --       vim.api.nvim_del_augroup_by_name '_dir_opened'
+      --       vim.cmd 'do User DirOpened'
+      --       vim.api.nvim_exec_autocmds('BufEnter', {})
+      --     end
+      --   end,
+      -- },
     },
-    _file_opened = { -- taken from AstroNvim
-      {
-        { 'BufRead', 'BufWinEnter', 'BufNewFile' },
-        '*',
-        function(args)
-          local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
-          if not (vim.fn.expand '%' == '' or buftype == 'nofile') then
-            vim.cmd 'do User FileOpened'
-            -- require('young.lsp').done()
-          end
-        end,
-      },
+    _file_opened = {
+      -- { -- taken from AstroNvim
+      --   { 'BufReadPost', 'BufWinEnter', 'BufNewFile' },
+      --   '*',
+      --   function(args)
+      --     local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
+      --     if not (vim.fn.expand '%' == '' or buftype == 'nofile') then
+      --       vim.cmd 'do User FileOpened'
+      --       -- require('young.lsp').done()
+      --     end
+      --   end,
+      -- },
     },
     -- _goto_last_position = {
     --   {
@@ -251,7 +259,7 @@ function M.done()
     },
     -- _formatoptions = {
     --   {
-    --     { 'BufWinEnter', 'BufRead', 'BufNewFile' },
+    --     { 'BufWinEnter', 'BufReadPost', 'BufNewFile' },
     --     '*',
     --     'setlocal formatoptions-=c formatoptions-=r formatoptions-=o',
     --   },
@@ -319,7 +327,6 @@ function M.done()
       --
       -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")' },
       -- { 'BufReadPre', '*', 'lua require("young.tool").startup_event("BufReadPre")' },
-      -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")' },
       -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")' },
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")' },
       -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")' },
@@ -327,18 +334,17 @@ function M.done()
       --
       -- { 'VimEnter', '*', 'lua require("young.tool").startup_event("VimEnter")', once = true },
       -- { 'BufReadPre', '*', 'lua require("young.tool").startup_event("BufReadPre")', once = true },
-      -- { 'BufRead', '*', 'lua require("young.tool").startup_event("BufRead")', once = true },
       -- { 'BufReadPost', '*', 'lua require("young.tool").startup_event("BufReadPost")', once = true },
       -- { 'BufEnter', '*', 'lua require("young.tool").startup_event("BufEnter")', once = true },
       -- { 'BufWinEnter', '*', 'lua require("young.tool").startup_event("BufWinEnter")', once = true },
       -- { 'CmdlineEnter', '*', 'lua require("young.tool").startup_event("CmdlineEnter")', once = true },
     },
-    _packer = {
-      -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
-      { 'BufWritePost', plugins_path, require('young.packer').recompile },
-      { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
-      { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
-    },
+    -- _packer = {
+    --   -- { "BufWritePost", plugins_path, 'source <afile> | PackerCompile' },
+    --   { 'BufWritePost', plugins_path, require('young.packer').recompile },
+    --   { 'User', 'PackerCompileDone', "lua require('young.mod.notify').yntf('😆 PackerCompile done')" },
+    --   { 'User', 'PackerComplete', 'doautocmd ColorScheme' },
+    -- },
     _terminal = {
       { -- https://github.com/andrewferrier/dotfiles/blob/main/common/.config/nvim/plugin/terminal.lua
         'TermOpen',

@@ -86,6 +86,7 @@
 - [ ] Telescope git_commits: show time in result panel
 - [ ] put all hunks of current commit to quickfix
 - [ ] Telescope project: remove <C-w> mapping
+- [ ] cfg: move autocmd and key to plugin/, record startup time, and think how to reload them
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

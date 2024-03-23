@@ -137,7 +137,7 @@ modules.appearance = {
     {
       -- 'norcalli/nvim-colorizer.lua',
       'NvChad/nvim-colorizer.lua',
-      event = 'BufRead',
+      event = 'BufReadPost',
       auto = 'config',
     },
     {
@@ -164,7 +164,7 @@ modules.appearance = {
     },
     -- {
     --   'nvimdev/indentmini.nvim',
-    --   event = 'BufEnter',
+    --   event = 'BufReadPost',
     --   config = function()
     --     require('indentmini').setup {
     --       char = '│',
@@ -198,7 +198,7 @@ modules.appearance = {
   line = {
     -- { -- Show where your cursor moves when jumping large distances
     --   'edluffy/specs.nvim',
-    --   event = 'BufRead',
+    --   event = 'BufReadPost',
     --   config = function()
     --     require('young.mod.specs').done()
     --   end,
@@ -289,7 +289,7 @@ modules.edit = {
     },
     {
       'andymass/vim-matchup',
-      event = 'BufRead',
+      event = 'BufReadPost',
       auto = 'init',
     },
     -- {
@@ -324,7 +324,7 @@ modules.edit = {
   treesitter = {
     {
       'nvim-treesitter/nvim-treesitter',
-      event = { 'BufRead', 'BufNewFile' },
+      event = { 'BufReadPost', 'BufNewFile' },
       build = ':TSUpdate',
       config = function()
         require('young.mod.treesitter').done()
@@ -417,7 +417,7 @@ modules.change = {
   comment = {
     {
       'numToStr/Comment.nvim',
-      -- event = 'BufRead',
+      -- event = 'BufReadPost',
       -- keys = { { 'n', 'gc' }, { 'x', 'gc' }, { 'n', '<C-_>' }, { 'x', '<C-_>' } },
       keys = {
         { 'gc', mode = { 'n', 'x' }, desc = 'Comment' },
@@ -450,7 +450,7 @@ modules.change = {
     -- },
     {
       'monaqa/dial.nvim',
-      event = 'BufRead',
+      event = 'BufReadPost',
       -- FIXME:
       commit = '3b70b2a',
       config = function()
@@ -526,7 +526,7 @@ modules.neovim = {
     },
     {
       'ojroques/nvim-osc52',
-      event = 'BufRead',
+      event = 'BufReadPost',
       config = function()
         require 'young.mod.osc52'
       end,
@@ -630,14 +630,14 @@ modules.neovim = {
   -- },
   {
     'nmac427/guess-indent.nvim',
-    event = 'BufRead',
+    event = 'BufReadPost',
     config = function()
       require('guess-indent').setup {}
     end,
   },
   -- {
   --   'Darazaki/indent-o-matic',
-  --   event = 'BufRead',
+  --   event = 'BufReadPost',
   --   config = function()
   --     require('indent-o-matic').setup {}
   --   end,
@@ -674,7 +674,7 @@ modules.BWT = {
   buffer = {
     -- {
     --   'ThePrimeagen/harpoon',
-    --   event = 'BufRead',
+    --   event = 'BufReadPost',
     --   auto = 'config',
     -- },
     -- { -- Just Another Buffer Switcher
@@ -724,13 +724,13 @@ modules.BWT = {
     {
       'nvim-focus/focus.nvim',
       submodules = false,
-      -- event = "BufRead",
+      -- event = "BufReadPost",
       cmd = 'FocusToggle',
       auto = true,
     },
     -- { -- Smooth focus/split
     --   'anuvyklack/windows.nvim',
-    --   event = "BufRead",
+    --   event = "BufReadPost",
     --   dependencies = {
     --     'anuvyklack/middleclass',
     --     'anuvyklack/animation.nvim',
@@ -755,7 +755,7 @@ modules.BWT = {
     -- },
     {
       'kevinhwang91/nvim-bqf',
-      -- event = "BufRead",
+      -- event = "BufReadPost",
       ft = 'qf',
       auto = 'config',
     },
@@ -851,7 +851,7 @@ modules.file = {
     -- },
     -- {
     --   'tamago324/lir.nvim',
-    --   -- event = 'BufRead',
+    --   -- event = 'BufReadPost',
     --   -- event = 'User DirOpened',
     --   dependencies = { 'nvim-lua/plenary.nvim' },
     --   init = function()
@@ -868,6 +868,7 @@ modules.file = {
     -- },
     {
       'stevearc/oil.nvim',
+      -- event = 'BufWinEnter',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       init = function()
         xy.map.n {
@@ -953,12 +954,12 @@ modules.file = {
   session = {
     {
       'folke/persistence.nvim',
-      event = 'BufRead',
+      event = 'BufReadPost',
       auto = true,
     },
     {
       'MunifTanjim/exrc.nvim',
-      event = 'BufRead',
+      event = 'BufReadPost',
       config = function()
         require 'young.mod.exrc'
       end,
@@ -1067,7 +1068,7 @@ modules.find = {
   -- {
   --   'VonHeikemen/searchbox.nvim',
   --   dependencies = { 'MunifTanjim/nui.nvim' },
-  --   event = 'BufRead',
+  --   event = 'BufReadPost',
   --   config = function()
   --     require 'young.mod.searchbox'
   --   end,
@@ -1087,7 +1088,7 @@ modules.telescope = {
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
-    -- event = 'BufRead',
+    -- event = 'BufReadPost',
     auto = true,
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
@@ -1367,7 +1368,7 @@ modules.git = {
   },
   {
     'lewis6991/gitsigns.nvim',
-    -- event = 'BufRead',
+    -- event = 'BufReadPost',
     event = 'VeryLazy',
     config = function()
       require('young.mod.gitsigns').done()
@@ -1406,7 +1407,7 @@ modules.git = {
   },
   -- { -- PERF: bad for windows when trigger `DirChanged`
   --   'akinsho/git-conflict.nvim',
-  --   event = 'BufRead',
+  --   event = 'BufReadPost',
   --   enabled = not is_windows,
   --   config = [[require('young.mod.git_conflict')]],
   -- },
@@ -1581,7 +1582,7 @@ modules.UI = {
   },
   {
     'folke/trouble.nvim',
-    -- event = 'BufRead',
+    -- event = 'BufReadPost',
     cmd = { 'Trouble', 'TroubleToggle' },
     auto = true,
   },
@@ -1606,7 +1607,7 @@ modules.UI = {
   bufferline = {
     {
       'romgrk/barbar.nvim',
-      event = 'BufRead',
+      event = 'BufReadPost',
       dependencies = {
         'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
         'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
@@ -1620,7 +1621,7 @@ modules.UI = {
     },
     -- {
     --   'stevearc/three.nvim',
-    --   event = 'BufRead',
+    --   event = 'BufReadPost',
     --   auto = 'config',
     -- },
   },
@@ -1659,7 +1660,7 @@ modules.UI = {
     -- },
     { -- breadcrumbs
       'SmiteshP/nvim-navic',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()
         require 'young.mod.navic'
       end,
@@ -1673,14 +1674,14 @@ modules.UI = {
     -- { 'glepnir/galaxyline.nvim', config = require('young.mod.galaxyline')}
     -- {
     --   'nvim-lualine/lualine.nvim',
-    --   event = 'BufRead',
+    --   event = 'BufReadPost',
     --   config = function()
     --     require 'young.mod.lualine'
     --   end,
     -- },
     {
       'freddiehaddad/feline.nvim',
-      event = 'BufRead',
+      event = 'BufReadPost',
       opts = {},
       config = function(_, opts)
         require 'young.mod.feline'
@@ -1738,7 +1739,7 @@ modules.UI = {
     -- {
     --   'VonHeikemen/fine-cmdline.nvim',
     --   dependencies = { 'MunifTanjim/nui.nvim' },
-    --   event = 'BufRead',
+    --   event = 'BufReadPost',
     --   config = function()
     --     require 'young.mod.fine_cmd'
     --   end,
@@ -1759,7 +1760,7 @@ modules.UI = {
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
-        -- vim.cmd[[doautocmd BufRead]]
+        -- vim.cmd[[doautocmd BufReadPost]]
       end,
     },
     -- {
@@ -2166,7 +2167,7 @@ modules.LSP = {
     },
     {
       'SmiteshP/nvim-navbuddy',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       dependencies = {
         'SmiteshP/nvim-navic',
         'MunifTanjim/nui.nvim',
@@ -2182,14 +2183,14 @@ modules.LSP = {
     },
     -- {
     --   'kosayoda/nvim-lightbulb',
-    --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+    --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
     --   config = function()
     --     require 'young.mod.lightbulb'
     --   end,
     -- },
     {
       'j-hui/fidget.nvim',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()
         require('young.mod.fidget').done()
       end,
@@ -2198,14 +2199,14 @@ modules.LSP = {
     {
       'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()
         require('young.mod.lsp_lines').done()
       end,
     },
     -- {
     --   'VidocqH/lsp-lens.nvim',
-    --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufRead',
+    --   event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
     --   keys = {
     --     { '<leader>tL', function() vim.cmd 'LspLensToggle' end },
     --   },
@@ -2437,7 +2438,7 @@ modules.write = {
   todo = {
     {
       'folke/todo-comments.nvim',
-      event = 'BufRead',
+      event = 'BufReadPost',
       cmd = { 'TodoQuickFix', 'TodoLocList', 'TodoTelescope', 'TodoTrouble' },
       dependencies = 'nvim-lua/plenary.nvim',
       init = function()
@@ -2640,7 +2641,7 @@ modules.tool = {
   website = {
     {
       'wakatime/vim-wakatime',
-      event = 'BufRead',
+      event = 'BufReadPost',
     },
     {
       'glacambre/firenvim',
@@ -2651,7 +2652,7 @@ modules.tool = {
     },
     -- { -- Use your favorite machine translation engines
     --   'potamides/pantran.nvim',
-    --   event = 'BufRead',
+    --   event = 'BufReadPost',
     --   config = function()
     --     require 'young.mod.pantran'
     --   end,

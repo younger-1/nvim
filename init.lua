@@ -24,7 +24,7 @@ tt()
 -- xy.util.defer(function()
 --   require('young.packer').done()
 --   require('young.lsp').done()
---   vim.cmd [[doautocmd BufWinEnter | doautocmd BufRead | doautocmd FileType]]
+--   vim.cmd [[doautocmd BufWinEnter | doautocmd BufReadPost | doautocmd FileType]]
 -- end)
 require 'young.lazy'
 

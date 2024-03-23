@@ -20,7 +20,7 @@ augroup init
   autocmd BufNewFile * autocmd BufWritePre <buffer> ++once call mkdir(expand('%:h'), 'p')
 
   " Restore cursor position (except for git commits and rebases)
-  autocmd BufRead * if &ft !~# 'commit\|rebase' | exec 'silent! normal! g`"' | endif
+  autocmd BufReadPost * if &ft !~# 'commit\|rebase' | exec 'silent! normal! g`"' | endif
 augroup END
 
 " augroup fast_escape
