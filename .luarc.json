@@ -1,5 +1,5 @@
 {
-    // example: https://github.com/sumneko/lua-language-server/blob/master/.luarc.json
+    // example: https://github.com/LuaLS/lua-language-server/blob/master/.luarc.json
     // "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema-zh-cn.json",
     // "Lua.diagnostics.globals": [

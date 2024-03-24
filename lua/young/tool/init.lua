@@ -411,7 +411,16 @@ tool.open_github_url = function()
   end
   local url = 'https://github.com/' .. name
   -- fn.system { xy.open_cmd, url }
-  fn.jobstart({ xy.open_cmd, url }, { detach = true })
+  local ret = vim.fn.jobstart({ xy.open_cmd, url }, { detach = true })
+  if ret <= 0 then
+    local msg = {
+      'Failed to open github url',
+      ret,
+      xy.open_cmd,
+      url,
+    }
+    vim.notify(table.concat(msg, '\n'), vim.log.levels.ERROR)
+  end
 end
 
 -- <https://superuser.com/questions/1267574/reload-file-in-vim-without-scrolling>
@@ -548,7 +557,7 @@ IlluminatedWordRead xxx gui=underline
         Last set from Lua
 ]]
 
- function tool.buf_git_root(cd)
+function tool.buf_git_root(cd)
   cd = cd or 'tcd'
 
   local dir = xy.util.git_root()

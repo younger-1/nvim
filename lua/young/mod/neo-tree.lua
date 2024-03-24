@@ -69,7 +69,16 @@ local system_open = function(state)
   -- vim.api.nvim_command('silent !open -g ' .. path)
   -- Linux: open file in default application
   -- vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
-  fn.jobstart({ xy.open_cmd, path }, { detach = true })
+  local ret = vim.fn.jobstart({ xy.open_cmd, path }, { detach = true })
+  if ret <= 0 then
+    local msg = {
+      'Failed to open code href',
+      ret,
+      xy.open_cmd,
+      path,
+    }
+    vim.notify(table.concat(msg, '\n'), vim.log.levels.ERROR)
+  end
 end
 
 local cfg = {

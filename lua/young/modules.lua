@@ -741,7 +741,7 @@ modules.BWT = {
       'nvim-focus/focus.nvim',
       submodules = false,
       -- event = "BufReadPost",
-      cmd = 'FocusToggle',
+      cmd = { 'FocusToggle', 'FocusMaxOrEqual' },
       auto = true,
     },
     -- { -- Smooth focus/split
