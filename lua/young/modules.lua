@@ -336,7 +336,8 @@ modules.edit = {
   treesitter = {
     {
       'nvim-treesitter/nvim-treesitter',
-      event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
+      event = 'VimEnter',
+      -- event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
       build = ':TSUpdate',
       config = function()
         require('young.mod.treesitter').done()
@@ -2109,7 +2110,7 @@ modules.code = {
 modules.LSP = {
   {
     'neovim/nvim-lspconfig',
-    -- event = 'VeryLazy',
+    -- event = 'VimEnter',
     event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
     init = function()
       xy.map.register {
