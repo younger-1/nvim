@@ -2348,6 +2348,11 @@ modules.lang = {
     --     require 'young.mod.luapad'
     --   end,
     -- },
+    {
+      'ii14/neorepl.nvim',
+      cmd = 'Repl', -- :Repl {lang} Starts a new REPL instance. Optional {lang} can be "lua" or "vim".
+      auto = true,
+    },
   },
   python = {
     -- {
