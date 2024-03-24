@@ -336,7 +336,7 @@ modules.edit = {
   treesitter = {
     {
       'nvim-treesitter/nvim-treesitter',
-      event = { 'BufReadPost', 'BufNewFile' },
+      event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
       build = ':TSUpdate',
       config = function()
         require('young.mod.treesitter').done()
@@ -985,7 +985,7 @@ modules.file = {
   terminal = {
     {
       'akinsho/toggleterm.nvim',
-      event = 'BufWinEnter',
+      event = 'VeryLazy',
       config = function()
         require('young.mod.toggleterm').done()
       end,
@@ -2110,7 +2110,7 @@ modules.LSP = {
   {
     'neovim/nvim-lspconfig',
     -- event = 'VeryLazy',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
     init = function()
       xy.map.register {
         ['<leader>l'] = {
