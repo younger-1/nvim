@@ -154,8 +154,12 @@ M.done = function()
       -- return { 'lsp', 'indent' }
       return { 'treesitter', 'indent' }
     end,
-    -- For now, only 'lsp' provider contain 'comment', 'imports' and 'region'.
-    close_fold_kinds = { 'imports', 'comment' },
+    -- For now, 'lsp' provider's standardized kinds are 'comment', 'imports' and 'region'.
+    -- close_fold_kinds_for_ft = {
+    --   default = { 'imports', 'comment' },
+    --   json = { 'array' },
+    --   c = { 'comment', 'region' },
+    -- },
     preview = {
       -- win_config = {
       --   border = { '', '─', '', '', '', '─', '', '' },
@@ -165,7 +169,7 @@ M.done = function()
       mappings = {
         -- scrollU = '<C-u>',
         -- scrollD = '<C-d>',
-        switch = preview_key,
+        -- switch = preview_key,
       },
     },
   }

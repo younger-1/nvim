@@ -689,7 +689,7 @@ modules.BWT = {
     -- },
     { -- Bookmark your files, separated by project
       'otavioschwanck/arrow.nvim',
-      lazy = true,
+      cmd = 'Arrow',
       auto = true,
     },
   },
@@ -2714,6 +2714,15 @@ modules.tool = {
   {
     'mattn/calendar-vim',
     cmd = 'Calendar',
+    init = function()
+      xy.map.n {
+        '<leader>tc',
+        function()
+          vim.cmd 'Calendar'
+        end,
+        'Calendar',
+      }
+    end,
   },
 }
 

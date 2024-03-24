@@ -9,14 +9,16 @@ local cfg = {
   -- full_path_list = { 'update_stuff' }, -- filenames on this list will ALWAYS show the file path too.
   -- leader_key = ';',
   mappings = {
-    edit = 'e',
-    delete_mode = 'd',
-    clear_all_items = 'C',
-    toggle = 's', -- used as save if separate_save_and_remove is true
+    -- toggle = 's', -- used as save if separate_save_and_remove is true
+    -- remove = 'x', -- only used if separate_save_and_remove is true
+    -- edit = 'e',
+    -- delete_mode = 'd',
+    -- clear_all_items = 'C',
     open_vertical = 'v',
     open_horizontal = 'x',
-    quit = 'q',
-    remove = 'x', -- only used if separate_save_and_remove is true
+    -- next_item = ']',
+    -- prev_item = '[',
+    -- quit = 'q',
   },
   -- save_path = function()
   --   return vim.fn.stdpath 'cache' .. '/arrow'
@@ -38,6 +40,9 @@ local cfg = {
 
 return {
   once = function()
+    vim.keymap.set('n', ';', function()
+      vim.cmd 'Arrow open'
+    end, { desc = 'Arrow prev file' })
     vim.keymap.set('n', 'H', function()
       require('arrow.persist').previous()
     end, { desc = 'Arrow prev file' })

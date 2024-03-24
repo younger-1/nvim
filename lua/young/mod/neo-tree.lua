@@ -8,16 +8,29 @@ function M.once()
     end,
     'Explorer',
   }
+  xy.map.n {
+    '<leader>eb',
+    function()
+      vim.cmd 'Neotree toggle reveal float buffers'
+    end,
+    'Buffers',
+  }
+  xy.map.n {
+    '<leader>eg',
+    function()
+      vim.cmd 'Neotree toggle reveal float git_status'
+    end,
+    'Git status',
+  }
 
   vim.cmd [[
   nnoremap <silent> <Leader>ek <cmd>Neotree toggle reveal top<cr>
   nnoremap <silent> <Leader>ej <cmd>Neotree toggle reveal bottom<cr>
   nnoremap <silent> <Leader>eh <cmd>Neotree toggle reveal left<cr>
   nnoremap <silent> <Leader>el <cmd>Neotree toggle reveal right<cr>
-  nnoremap <silent> <C-p> <cmd>Neotree toggle reveal top<cr>
+  nnoremap <silent> <C-e> <cmd>Neotree toggle reveal left<cr>
   nnoremap <silent> <C-n> <cmd>Neotree toggle reveal right<cr>
-  nnoremap <silent> <Leader>eb <cmd>Neotree toggle reveal float buffers<cr>
-  nnoremap <silent> <Leader>eg <cmd>Neotree toggle reveal float git_status<cr>
+  nnoremap <silent> <C-p> <cmd>Neotree toggle reveal top<cr>
   ]]
 end
 

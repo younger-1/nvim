@@ -1,4 +1,4 @@
--- " Show line numbers in search rusults
+-- " Show line numbers in search results
 -- let g:any_jump_list_numbers = 0
 
 -- " Auto search references
@@ -13,7 +13,7 @@
 -- " Max search results, other results can be opened via [a]
 -- let g:any_jump_max_search_results = 10
 
--- " Prefered search engine: rg or ag
+-- " Preferred search engine: rg or ag
 -- let g:any_jump_search_prefered_engine = 'rg'
 
 -- " Search results list styles:
@@ -25,6 +25,9 @@
 -- let g:any_jump_window_width_ratio  = 0.6
 -- let g:any_jump_window_height_ratio = 0.6
 -- let g:any_jump_window_top_offset   = 4
+
+-- " Show / hide Help section
+-- let g:any_jump_show_help_section = 1
 
 -- " Customize any-jump colors with extending default color scheme:
 -- " let g:any_jump_colors = { "help": "Comment" }
@@ -63,6 +66,14 @@
 -- " Disable search engine ignore vcs untracked files
 -- " (default: false, search engine will ignore vcs untracked files)
 -- let g:any_jump_disable_vcs_ignore = 0
+
+-- " Custom ignore files
+-- " default is: ['*.tmp', '*.temp']
+-- let g:any_jump_ignored_files' = ['*.tmp', '*.temp']
+
+-- " Vertically center the screen after jumping
+-- " (default: false)
+-- let g:any_jump_center_screen_after_jump = v:false
 
 -- " Normal mode: Jump to definition under cursor
 -- nnoremap <leader>j :AnyJump<CR>
