@@ -350,9 +350,9 @@ end
 -- end
 
 ---@class Autocmd
----@field desc     string
----@field once     boolean
----@field nested   boolean
+---@field desc?     string
+---@field once?     boolean
+---@field nested?   boolean
 
 ---@param group     string
 ---@param autocmds  Autocmd[]

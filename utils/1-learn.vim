@@ -67,6 +67,9 @@ augroup _event
   autocmd BufNew      * echomsg reltimestr(reltime()) . ' : BufNew      -> ' . expand('<afile>')
   autocmd BufNewFile  * echomsg reltimestr(reltime()) . ' : BufNewFile  -> ' . expand('<afile>')
   autocmd FileType    * echomsg reltimestr(reltime()) . ' : FileType    -> ' . expand('<afile>') expand('<amatch>')
+  autocmd VimEnter    * echomsg reltimestr(reltime()) . ' : VimEnter    -> ' . expand('<afile>')
+  autocmd UIEnter     * echomsg reltimestr(reltime()) . ' : UIEnter     -> ' . expand('<afile>')
+  autocmd User VeryLazy echomsg reltimestr(reltime()) . ' : VeryLazy    -> ' . expand('<afile>')
 augroup END
 
 

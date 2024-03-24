@@ -1,6 +1,16 @@
 local vim = vim
 local xy = xy
 
+xy.lazy_loaded = {}
+vim.api.nvim_create_autocmd('User', {
+  group = vim.api.nvim_create_augroup('_lazy_loaded', { clear = true }),
+  pattern = 'LazyLoad',
+  callback = function(event)
+    local plugin_name = event.data
+    xy.lazy_loaded[plugin_name] = (uv.hrtime() - xy.startup_time.hr_start) / 1e9
+  end,
+})
+
 ---@param name string
 ---@param fn fun(name:string)
 local function lazy_on_load(name, fn)
@@ -1458,7 +1468,7 @@ modules.keymap = {
   menu = {
     {
       'folke/which-key.nvim',
-      event = 'VeryLazy',
+      event = 'VimEnter', -- not VeryLazy
       -- event = { 'BufReadPost', 'BufNewFile' },
       config = function()
         require('young.mod.which_key').done()
@@ -1566,8 +1576,7 @@ modules.keymap = {
 modules.UI = {
   {
     'rcarriga/nvim-notify',
-    -- event = 'BufWinEnter',
-    event = 'VeryLazy',
+    event = 'VimEnter', -- not VeryLazy
     keys = {
       {
         '<leader>sn',
@@ -1597,7 +1606,8 @@ modules.UI = {
   },
   {
     'stevearc/dressing.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = 'VimEnter', -- not VeryLazy
+    -- event = { 'BufReadPost', 'BufNewFile' },
   },
   -- {
   --   'nvim-telescope/telescope-ui-select.nvim',
@@ -1767,7 +1777,7 @@ modules.UI = {
     {
       'goolord/alpha-nvim',
       cmd = 'Alpha',
-      event = 'VimEnter',
+      -- event = 'VimEnter',
       config = function()
         -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
