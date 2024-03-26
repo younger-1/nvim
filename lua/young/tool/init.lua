@@ -569,4 +569,52 @@ function tool.buf_git_root(cd)
   end
 end
 
+function tool.goto_lua_module()
+  ---@type string
+  local modname
+
+  local line = api.nvim_get_current_line()
+  -- ("local foo, bar = require('abc'), require('efg')"):find 'require%([\'"](.-)[\'"]%)'
+  -- for x in ("local abc_var, efg_var = require('abc'), require('efg')"):gmatch 'require%([\'"](.-)[\'"]%)' do
+  --   print(x)
+  -- end
+  local pat = 'require%([\'"](.-)[\'"]%)'
+  local start = 1
+  for name in line:gmatch(pat) do
+    start = line:find(pat, start)
+    local last
+    start, last = line:find(name, start)
+    local col = fn.getpos('.')[3]
+    if start <= col and col <= last then
+      modname = name
+    end
+  end
+
+  if not modname then
+    gg(1)
+    return false
+  end
+
+  local ret = vim.loader.find(modname)
+  if vim.tbl_isempty(ret) then
+    gg(2)
+    return false
+  end
+  local location = ret[1]
+
+  vim.lsp.util.make_position_params()
+  vim.lsp.util.jump_to_location({
+    uri = vim.uri_from_fname(location.modpath),
+    -- range = {
+    --   start = { character = 0, line = 0 },
+    --   -- ['end'] = { character = 0, line = 0 },
+    -- },
+  }, 'utf-8', true)
+
+  gg(3)
+  return true
+end
+
+function tool.goto_lua_function() end
+
 return tool

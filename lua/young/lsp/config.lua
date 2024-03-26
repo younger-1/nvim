@@ -72,45 +72,51 @@ return {
         function()
           vim.lsp.buf.hover()
         end,
-        'Show hover',
+        'Hover',
       },
       ['gh'] = {
         function()
+          if vim.bo.filetype == 'lua' and xy.tool.goto_lua_module() then
+            return
+          end
+
           vim.lsp.buf.signature_help()
+          -- vim.lsp.handlers['textDocument/signatureHelp']()
         end,
         'Signature help',
       },
       --
       ['gd'] = {
-        -- function()
-        --   vim.lsp.buf.definition { on_list = on_list }
-        -- end,
-        vim.lsp.buf.definition,
-        'Goto definition',
+        function()
+          vim.lsp.buf.definition()
+          -- vim.lsp.buf.definition { on_list = on_list }
+          -- vim.lsp.handlers['textDocument/definition']()
+        end,
+        'Definition',
       },
       ['gD'] = {
         function()
           vim.lsp.buf.declaration()
         end,
-        'Goto declaration',
+        'Declaration',
       },
       ['gy'] = {
         function()
           vim.lsp.buf.type_definition()
         end,
-        'Goto type definition',
+        'Type definition',
       },
       ['gI'] = {
         function()
           vim.lsp.buf.implementation()
         end,
-        'Goto implementation',
+        'Implementation',
       },
       ['gr'] = {
         function()
           vim.lsp.buf.references()
         end,
-        'Goto references',
+        'References',
       },
       ['g['] = {
         function()
