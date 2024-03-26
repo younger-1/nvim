@@ -591,6 +591,20 @@ function tool.goto_lua_module()
   end
 
   if not modname then
+    pat = [[()(vim[%.%w_]+)()%.()([%w_]+)()]]
+    for mod_start, mod, mod_end, fun_start, fun, fun_end in line:gmatch(pat) do
+      local col = fn.getpos('.')[3]
+      if mod_start <= col and col < mod_end then
+        modname = mod
+      end
+      if fun_start <= col and col < fun_end then
+        modname = mod
+        funname = fun
+      end
+    end
+  end
+
+  if not modname then
     xy.util.echo { '[young] goto_lua_module: not mod/fun under cursor' }
     return false
   end
@@ -612,9 +626,12 @@ function tool.goto_lua_module()
     line = debug.getinfo(require(modname)[funname], 'S').linedefined
   end
 
+  -- gg(1, modname, path)
+  -- gg(2, funname, line)
+
   vim.lsp.util.jump_to_location({
     uri = vim.uri_from_fname(path),
-    range = line and {
+    range = line and line >= 1 and {
       start = { character = 0, line = line - 1 },
       -- ['end'] = { character = 0, line = 0 },
     },
