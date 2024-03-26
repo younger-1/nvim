@@ -578,12 +578,8 @@ function tool.goto_lua_module()
   -- for x in ("local abc_var, efg_var = require('abc'), require('efg')"):gmatch 'require%([\'"](.-)[\'"]%)' do
   --   print(x)
   -- end
-  local pat = [[require[%s(]?['"](.-)['"][%s)]?]]
-  local start = 1
-  for name in line:gmatch(pat) do
-    start = line:find(pat, start)
-    local last
-    start, last = line:find(name, start, true)
+  local pat = [[require[%s(]?['"]()(.-)()['"][%s)]?]]
+  for start, name, last in line:gmatch(pat) do
     local col = fn.getpos('.')[3]
     if start <= col and col <= last then
       modname = name
