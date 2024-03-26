@@ -277,7 +277,7 @@ M.once = function()
         },
         j = {
           function()
-            vim.cmd 'Telescope jumplist'
+            vim.cmd 'Telescope jumplist trim_text=true'
           end,
           'Gump list',
         },
@@ -286,7 +286,6 @@ M.once = function()
             require('telescope.builtin').keymaps {
               modes = { 'n', 'i', 'c', 'x', 'o' },
               show_plug = vim.v.count ~= 0,
-              only_buf = vim.v.count == 1, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
               lhs_filter = function(lhs)
                 -- gg(lhs)
                 return not string.find(lhs, 'Þ')
@@ -294,6 +293,20 @@ M.once = function()
             }
           end,
           'Keymaps',
+        },
+        K = {
+          function()
+            require('telescope.builtin').keymaps {
+              only_buf = 1, -- @see https://github.com/nvim-telescope/telescope.nvim/pull/2246
+              modes = { 'n', 'i', 'c', 'x', 'o' },
+              show_plug = vim.v.count ~= 0,
+              lhs_filter = function(lhs)
+                -- gg(lhs)
+                return not string.find(lhs, 'Þ')
+              end,
+            }
+          end,
+          'Keymaps (buf)',
         },
         l = {
           function()
@@ -397,6 +410,36 @@ M.once = function()
             end,
             'All tags',
           },
+        },
+        X = {
+          function()
+            require('telescope.builtin').find_files {
+              cwd = require('lazy.core.config').options.root,
+            }
+          end,
+          'Lazy plugin files',
+        },
+        P = {
+          -- @see https://github.com/folke/dot/blob/37edad31f8765b67fe4e6c251300b2a665e058ce/nvim/lua/plugins/telescope.lua#L25
+          function()
+            local files = {} ---@type table<string, string>
+            for _, plugin in pairs(require('lazy.core.config').plugins) do
+              repeat
+                if plugin._.module then
+                  local info = vim.loader.find(plugin._.module)[1]
+                  if info then
+                    files[info.modpath] = info.modpath
+                  end
+                end
+                plugin = plugin._.super
+              until not plugin
+            end
+            require('telescope.builtin').live_grep {
+              default_text = '/',
+              search_dirs = vim.tbl_values(files),
+            }
+          end,
+          'Lazy plugin spec',
         },
       },
     },

@@ -259,6 +259,8 @@ modules.edit = {
       event = { 'BufReadPost', 'BufNewFile' },
       init = function()
         vim.g.wordmotion_prefix = ','
+        -- disable cmdline short word
+        vim.g.wordmotion_mappings = { ['<C-R><C-W>'] = '' }
       end,
     },
     {
