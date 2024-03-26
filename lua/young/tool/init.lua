@@ -570,50 +570,57 @@ function tool.buf_git_root(cd)
 end
 
 function tool.goto_lua_module()
-  ---@type string
-  local modname
+  ---@type string, string
+  local modname, funname
 
   local line = api.nvim_get_current_line()
   -- ("local foo, bar = require('abc'), require('efg')"):find 'require%([\'"](.-)[\'"]%)'
   -- for x in ("local abc_var, efg_var = require('abc'), require('efg')"):gmatch 'require%([\'"](.-)[\'"]%)' do
   --   print(x)
   -- end
-  local pat = [[require[%s(]?['"]()(.-)()['"][%s)]?]]
-  for start, name, last in line:gmatch(pat) do
+  local pat = [[require[%s(]?['"]()(.-)()['"][%s)]?%.?()([%w_]*)()]]
+  for mod_start, mod, mod_end, fun_start, fun, fun_end in line:gmatch(pat) do
     local col = fn.getpos('.')[3]
-    if start <= col and col <= last then
-      modname = name
+    if mod_start <= col and col < mod_end then
+      modname = mod
+    end
+    if fun_start <= col and col < fun_end then
+      modname = mod
+      funname = fun
     end
   end
 
   if not modname then
-    xy.util.echo { '[young] goto_lua_module 1: not mod under cursor' }
+    xy.util.echo { '[young] goto_lua_module: not mod/fun under cursor' }
     return false
   end
 
   local ret = vim.loader.find(modname)
   if vim.tbl_isempty(ret) then
-    -- xy.util.echomsg { '[young] goto_lua_module 2: [' .. modname .. '] not loaded yet' }
+    -- xy.util.echomsg { '[young] goto_lua_module: [' .. modname .. '] not loaded yet' }
     local ok, err = pcall(require, modname)
     if not ok then
-      xy.util.echo { '[young] goto_lua_module 3: ' .. vim.split(err, '\n')[1] }
+      xy.util.echo { '[young] goto_lua_module: ' .. vim.split(err, '\n')[1] }
       return false
     end
     ret = vim.loader.find(modname)
   end
-  local location = ret[1]
+  local path = ret[1].modpath
+
+  local line
+  if funname then
+    line = debug.getinfo(require(modname)[funname], 'S').linedefined
+  end
 
   vim.lsp.util.jump_to_location({
-    uri = vim.uri_from_fname(location.modpath),
-    -- range = {
-    --   start = { character = 0, line = 0 },
-    --   -- ['end'] = { character = 0, line = 0 },
-    -- },
+    uri = vim.uri_from_fname(path),
+    range = line and {
+      start = { character = 0, line = line - 1 },
+      -- ['end'] = { character = 0, line = 0 },
+    },
   }, 'utf-8', true)
 
   return true
 end
-
-function tool.goto_lua_function() end
 
 return tool
