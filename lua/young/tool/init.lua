@@ -578,12 +578,12 @@ function tool.goto_lua_module()
   -- for x in ("local abc_var, efg_var = require('abc'), require('efg')"):gmatch 'require%([\'"](.-)[\'"]%)' do
   --   print(x)
   -- end
-  local pat = 'require%([\'"](.-)[\'"]%)'
+  local pat = [[require[%s(]?['"](.-)['"][%s)]?]]
   local start = 1
   for name in line:gmatch(pat) do
     start = line:find(pat, start)
     local last
-    start, last = line:find(name, start)
+    start, last = line:find(name, start, true)
     local col = fn.getpos('.')[3]
     if start <= col and col <= last then
       modname = name
@@ -591,18 +591,22 @@ function tool.goto_lua_module()
   end
 
   if not modname then
-    gg(1)
+    xy.util.echo { '[young] goto_lua_module 1: not mod under cursor' }
     return false
   end
 
   local ret = vim.loader.find(modname)
   if vim.tbl_isempty(ret) then
-    gg(2)
-    return false
+    -- xy.util.echomsg { '[young] goto_lua_module 2: [' .. modname .. '] not loaded yet' }
+    local ok, err = pcall(require, modname)
+    if not ok then
+      xy.util.echo { '[young] goto_lua_module 3: ' .. vim.split(err, '\n')[1] }
+      return false
+    end
+    ret = vim.loader.find(modname)
   end
   local location = ret[1]
 
-  vim.lsp.util.make_position_params()
   vim.lsp.util.jump_to_location({
     uri = vim.uri_from_fname(location.modpath),
     -- range = {
@@ -611,7 +615,6 @@ function tool.goto_lua_module()
     -- },
   }, 'utf-8', true)
 
-  gg(3)
   return true
 end
 

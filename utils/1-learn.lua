@@ -192,6 +192,24 @@ Captures:
   A pattern cannot contain embedded zeros. Use %z instead.
 ]]
 
+-- @see https://stackoverflow.com/questions/3462370/logical-or-in-lua-patterns
+-- @see https://stackoverflow.com/questions/2693334/lua-pattern-matching-vs-regular-expressions
+-- For example, if you wanted to remove "abc" or "efg" from the end of a string
+-- (similar to "(abc|efg)$" regular expression) the following code would work well:
+local inputstring = '123efgabc'
+local s, n = inputstring:gsub('abc$', '')
+if n == 0 then
+  s, n = inputstring:gsub('efg$', '')
+end
+print(s) --> 123efg
+
+-- @see https://www.lua.org/pil/20.2.html
+-- @see http://lua-users.org/wiki/PatternsTutorial
+-- @see https://stackoverflow.com/questions/32884090/amount-of-repetitions-of-symbols-in-lua-pattern-setup
+local s = 'Deadline is 30/05/1999, firm'
+local date = '%d%d/%d%d/%d%d%d%d'
+print(string.sub(s, string.find(s, date))) --> 30/05/1999
+
 -- [[string]]
 -- <https://somedudesays.com/2019/12/lua-string-operations/>
 
@@ -211,7 +229,7 @@ local y = string.gsub('cat eat mouse. a lots of', '(%a+)( %a+ )(%a+)', function(
 end)
 pp(y)
 
-for a1, a2 in string.gmatch('hello world from Lua', '(%a*) (%a*)') do
+for a1, a2 in string.gmatch('hello world from Lua', '(%a+) (%a+)') do
   print(a1, a2)
 end
 
