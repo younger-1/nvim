@@ -1,8 +1,8 @@
 """"""""""""""""""""""""""""""""
 "        1. map mode
 """"""""""""""""""""""""""""""""
-noremap ' `
-sunmap '
+" noremap ' `
+" sunmap '
 
 " Remap for dealing with word wrap
 noremap <expr> j (v:count == 0 ? 'gj' : 'j')

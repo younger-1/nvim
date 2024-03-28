@@ -150,7 +150,6 @@ local function choose_buffer()
   -- end
 end
 
-xy.map.n { 'gb', choose_buffer, '[Hydra] Choose buffer' }
 xy.map.n { '<leader>bb', choose_buffer, '[Hydra] Choose buffer' }
 
 return choose_buffer

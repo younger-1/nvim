@@ -705,6 +705,12 @@ modules.BWT = {
       cmd = 'Arrow',
       auto = true,
     },
+    {
+      '0x7a7a/bufpin.nvim',
+      -- event = 'VeryLazy',
+      event = { 'BufReadPost', 'BufNewFile' },
+      auto = true,
+    },
   },
   window = {
     {
@@ -2295,11 +2301,12 @@ modules.LSP = {
     --     }
     --   end,
     -- },
-    {
-      'Wansmer/symbol-usage.nvim',
-      event = 'BufReadPre', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-      auto = 'config',
-    },
+    -- {
+    --   'Wansmer/symbol-usage.nvim',
+    --   -- event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
+    --   event = 'BufReadPre', -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    --   auto = 'config',
+    -- },
   },
   highlight = {
     { -- Highlighting the word under the cursor
