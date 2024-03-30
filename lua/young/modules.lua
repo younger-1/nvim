@@ -1983,13 +1983,15 @@ modules.code = {
       version = 'v2.*',
       -- build = 'make install_jsregexp', -- install jsregexp (optional!).
       submodules = false,
-      -- event = 'InsertEnter',
-      lazy = true,
+      event = 'InsertEnter',
+      -- lazy = true,
       config = function()
         require 'young.mod.luasnip'
       end,
+      dependencies = {
+        { 'saadparwaiz1/cmp_luasnip' },
+      },
     },
-    { 'saadparwaiz1/cmp_luasnip', lazy = true },
     -- [vsnip]
     -- 'hrsh7th/cmp-vsnip',
     -- 'hrsh7th/vim-vsnip',
@@ -2111,42 +2113,7 @@ modules.code = {
     {
       'danymat/neogen',
       cmd = 'Neogen',
-      -- after = 'nvim-treesitter',
-      init = function()
-        xy.map.register {
-          ['<leader>cn'] = {
-            f = {
-              function()
-                vim.cmd 'Neogen func'
-              end,
-              'Function',
-            },
-            F = {
-              function()
-                vim.cmd 'Neogen file'
-              end,
-              'File',
-            },
-            c = {
-              function()
-                vim.cmd 'Neogen class'
-              end,
-              'Class',
-            },
-            t = {
-              function()
-                vim.cmd 'Neogen type'
-              end,
-              'Type',
-            },
-          },
-        }
-      end,
-      config = function()
-        require('neogen').setup {
-          snippet_engine = 'luasnip',
-        }
-      end,
+      auto = true,
     },
   },
 }

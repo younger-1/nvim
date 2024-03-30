@@ -95,7 +95,9 @@ M.cfg = {
       -- require('snippy').expand_snippet(args.body)
 
       -- For `luasnip` users.
-      require('luasnip').lsp_expand(args.body)
+      if rr 'luasnip' then
+        require('luasnip').lsp_expand(args.body)
+      end
     end,
   },
   window = {
@@ -207,9 +209,9 @@ M.cfg = {
     ['<Tab>'] = cmapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif require('neogen').jumpable() then
+      elseif rr 'neogen' and require('neogen').jumpable() then
         require('neogen').jump_next()
-      elseif require('luasnip').expand_or_locally_jumpable() then
+      elseif rr 'luasnip' and require('luasnip').expand_or_locally_jumpable() then
         require('luasnip').expand_or_jump()
       else
         fallback()
@@ -218,9 +220,9 @@ M.cfg = {
     ['<S-Tab>'] = cmapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif require('neogen').jumpable(true) then
+      elseif rr 'neogen' and require('neogen').jumpable(true) then
         require('neogen').jump_prev()
-      elseif require('luasnip').jumpable(-1) then
+      elseif rr 'luasnip' and require('luasnip').jumpable(-1) then
         require('luasnip').jump(-1)
       else
         fallback()

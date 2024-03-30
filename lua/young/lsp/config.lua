@@ -67,6 +67,14 @@ return {
   on_init_callback = nil,
   automatic_servers_installation = true,
   buffer_mappings = {
+    insert_mode = {
+      ['<C-s>'] = {
+        function()
+          vim.lsp.buf.signature_help()
+        end,
+        'Signature help',
+      },
+    },
     normal_mode = {
       ['K'] = {
         function()
@@ -369,7 +377,6 @@ return {
         },
       },
     },
-    insert_mode = {},
   },
   null_ls = {
     setup = {},
