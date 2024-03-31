@@ -56,25 +56,45 @@ require('oil').setup {
   -- Set to `false` to remove a keymap
   -- See :help oil-actions for a list of all available actions
   keymaps = {
-    ['g?'] = 'actions.show_help',
-    ['<CR>'] = 'actions.select',
-    ['<C-s>'] = 'actions.select_vsplit',
-    ['<C-h>'] = 'actions.select_split',
-    ['<C-t>'] = 'actions.select_tab',
-    ['<C-p>'] = 'actions.preview',
-    ['<C-c>'] = 'actions.close',
+    -- ['g?'] = 'actions.show_help',
+    ['g/'] = 'actions.show_help',
+    ['gh'] = 'actions.show_help',
+    ['K'] = 'actions.show_help', -- TODO: show info/preview
+    -- ['<CR>'] = 'actions.select',
+    -- ['<C-s>'] = 'actions.select_vsplit',
+    -- ['<C-h>'] = 'actions.select_split',
+    -- ['<C-t>'] = 'actions.select_tab',
+    -- ['<C-p>'] = 'actions.preview',
+    -- ['<C-c>'] = 'actions.close',
     ['q'] = 'actions.close',
-    ['<C-l>'] = 'actions.refresh',
-    ['-'] = 'actions.parent',
-    ['<BS>'] = 'actions.parent',
-    ['_'] = 'actions.open_cwd',
-    ['`'] = 'actions.cd',
-    ['~'] = 'actions.tcd',
-    ['gs'] = 'actions.change_sort',
-    ['gx'] = 'actions.open_external',
-    ['g.'] = 'actions.toggle_hidden',
-    ['H'] = 'actions.toggle_hidden',
-    ['g\\'] = 'actions.toggle_trash',
+    -- ['<C-l>'] = 'actions.refresh',
+    -- ['-'] = 'actions.parent',
+    -- ['_'] = 'actions.open_cwd',
+    ['gd'] = 'actions.open_cwd', -- TODO: open git_root
+    -- ['`'] = 'actions.cd',
+    ['gJ'] = 'actions.cd',
+    -- ['~'] = 'actions.tcd',
+    ['gj'] = 'actions.tcd',
+    -- ['gs'] = 'actions.change_sort',
+    -- ['gx'] = 'actions.open_external',
+    -- ['g.'] = 'actions.toggle_hidden',
+    -- ['g\\'] = 'actions.toggle_trash',
+
+    ['g<C-q>'] = 'actions.send_to_qflist',
+    ['g<C-l>'] = 'actions.send_to_loclist',
+    ['g<A-q>'] = 'actions.add_to_qflist',
+    ['g<A-l>'] = 'actions.add_to_loclist',
+    ['gt'] = 'actions.open_terminal',
+    ['gl'] = 'actions.open_cmdline',
+    ['gL'] = 'actions.open_cmdline_dir',
+    ['<C-c>'] = 'actions.copy_entry_path',
+
+    ['<BS>'] = {
+      desc = '[young] open init location',
+      callback = function()
+        require('oil').open(vim.fn.expand '#:p:h')
+      end,
+    },
   },
   -- Configuration for the floating keymaps help window
   keymaps_help = {

@@ -2737,7 +2737,8 @@ modules.tool = {
   {
     'echasnovski/mini.nvim',
     version = false,
-    auto = true,
+    -- event = 'VimEnter',
+    auto = 'config',
   },
   {
     'mattn/calendar-vim',
