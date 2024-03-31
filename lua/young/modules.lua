@@ -2219,11 +2219,9 @@ modules.LSP = {
       auto = 'config',
     },
     {
-      'weilbith/nvim-code-action-menu',
-      cmd = 'CodeActionMenu',
-      init = function()
-        xy.map { '<leader>ca', '<cmd>CodeActionMenu<cr>' }
-      end,
+      'aznhe21/actions-preview.nvim',
+      lazy = true,
+      auto = true,
     },
     -- {
     --   'kosayoda/nvim-lightbulb',
