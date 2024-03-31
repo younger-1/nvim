@@ -83,19 +83,28 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(function(_, result
   end
 end, lsp_cfg.float)
 
--- Jump directly to the first available definition every time.
--- vim.lsp.handlers['textDocument/definition'] = function(_, result)
---   if not result or vim.tbl_isempty(result) then
---     print '[LSP] Could not find definition'
---     return
---   end
-
---   if vim.tbl_islist(result) then
---     vim.lsp.util.jump_to_location(result[1], 'utf-8')
---   else
---     vim.lsp.util.jump_to_location(result, 'utf-8')
---   end
--- end
+-- Jump directly to the first available definition every time
+-- Thanks to https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/tj/lsp/handlers.lua
+local org_definition_handler = vim.lsp.handlers['textDocument/definition']
+vim.lsp.handlers['textDocument/definition'] = function(_, result, ctx, config)
+  if not result or vim.tbl_isempty(result) then
+    return vim.notify 'Lsp: Could not find definition'
+  end
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  config = config or {}
+  if vim.tbl_islist(result) then
+    local results = vim.lsp.util.locations_to_items(result, client.offset_encoding)
+    local lnum, filename = results[1].lnum, results[1].filename
+    for i, val in pairs(results) do
+      if val.lnum ~= lnum or val.filename ~= filename then
+        org_definition_handler(_, result, ctx, config)
+      end
+    end
+    vim.lsp.util.jump_to_location(result[1], client.offset_encoding, config.reuse_win)
+  else
+    vim.lsp.util.jump_to_location(result, client.offset_encoding, config.reuse_win)
+  end
+end
 
 -- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 --   signs = false,
