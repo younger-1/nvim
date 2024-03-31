@@ -1,33 +1,25 @@
 local M = {}
 
 M.once = function()
-  vim.keymap.set('n', '<C-w>h', function()
+  xy.map2.n('<C-w>h', function()
     require('focus').split_command 'h'
-  end, { silent = true })
-  vim.keymap.set('n', '<C-w>j', function()
+  end, { desc = 'Focus left' })
+  xy.map2.n('<C-w>j', function()
     require('focus').split_command 'j'
-  end, { silent = true })
-  vim.keymap.set('n', '<C-w>k', function()
+  end, { desc = 'Focus down' })
+  xy.map2.n('<C-w>k', function()
     require('focus').split_command 'k'
-  end, { silent = true })
-  vim.keymap.set('n', '<C-w>l', function()
+  end, { desc = 'Focus up' })
+  xy.map2.n('<C-w>l', function()
     require('focus').split_command 'l'
-  end, { silent = true })
+  end, { desc = 'Focus right' })
 
-  xy.map.n {
-    '<C-w>f',
-    function()
-      vim.cmd 'FocusToggle'
-    end,
-    'Focus Toggle',
-  }
-  xy.map.n {
-    '<C-w>=',
-    function()
-      vim.cmd 'FocusMaxOrEqual'
-    end,
-    'Focus max/equal',
-  }
+  xy.map2.n('<C-w>f', function()
+    vim.cmd 'FocusToggle'
+  end, { desc = 'Focus Toggle' })
+  xy.map2.n('<C-w>=', function()
+    vim.cmd 'FocusMaxOrEqual'
+  end, { desc = 'Focus max/equal' })
 end
 
 M.done = function()

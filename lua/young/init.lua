@@ -483,6 +483,50 @@ setmetatable(xy.map, {
   end,
 })
 
+---@param tbl table: { lhs, rhs, desc, ... }
+local function mapper2(tbl)
+  local opts = { nowait = true }
+
+  local mode = tbl['mode'] or { 'n', 'x', 'o' }
+  tbl['mode'] = nil
+
+  for k, v in pairs(tbl) do
+    if tonumber(k) == nil then
+      opts[k] = v
+    end
+  end
+  opts.desc = tbl[3] or opts.desc
+
+  vim.keymap.set(mode, tbl[1], tbl[2], opts)
+end
+
+xy.map2 = {}
+setmetatable(xy.map2, {
+  -- default to 'map', not 'nmap'
+  __call = function(t, lhs, rhs, opts)
+    local mode = opts['mode'] or { 'n', 'x', 'o' }
+    opts['mode'] = nil
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end,
+  __index = function(t, key)
+    -- local silent
+    -- if key ~= '!' and key ~= 'c' then
+    --   silent = true
+    -- end
+
+    t[key] = function(lhs, rhs, opts)
+      -- if nil == tbl['silent'] then
+      --   tbl['silent'] = silent
+      -- end
+
+      -- let mode has higher priority
+      opts['mode'] = opts['mode'] or key
+      xy.map2(lhs, rhs, opts)
+    end
+    return t[key]
+  end,
+})
+
 ----------------------------------------------------------------------------------------------------
 -- Others
 ----------------------------------------------------------------------------------------------------

@@ -711,7 +711,7 @@ return {
         'Current',
       },
     },
-    ['<C-a>'] = {
+    ['<C-l>'] = {
       name = '+loclist',
       a = {
         function()

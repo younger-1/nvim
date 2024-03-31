@@ -16,7 +16,7 @@ return {
             end,
             'Quickfix',
           },
-          ['<C-a>'] = {
+          ['<C-l>'] = {
             function()
               require('fzf-lua').loclist()
             end,

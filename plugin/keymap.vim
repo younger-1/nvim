@@ -55,10 +55,10 @@ noremap <localleader><Tab> <C-i>
 "        2. normal mode
 """"""""""""""""""""""""""""""""
 " Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 " Resize with arrows
 nnoremap <C-Up>    <cmd>resize -5<CR>
 nnoremap <C-Down>  <cmd>resize +5<CR>
@@ -105,11 +105,11 @@ nnoremap <expr> ]q '<Cmd>' . v:count1 . 'cnext<CR>'
 nnoremap [Q <Cmd>cfirst<CR>
 nnoremap ]Q <Cmd>clast<CR>
 
-nnoremap <C-a> <Cmd>call yo#LocListToggle()<CR>
-nnoremap <expr> [a '<Cmd>' . v:count1 . 'lprev<CR>'
-nnoremap <expr> ]a '<Cmd>' . v:count1 . 'lnext<CR>'
-nnoremap [A <Cmd>lfirst<CR>
-nnoremap ]A <Cmd>llast<CR>
+nnoremap <C-l> <Cmd>call yo#LocListToggle()<CR>
+nnoremap <expr> [l '<Cmd>' . v:count1 . 'lprev<CR>'
+nnoremap <expr> ]l '<Cmd>' . v:count1 . 'lnext<CR>'
+nnoremap [L <Cmd>lfirst<CR>
+nnoremap ]L <Cmd>llast<CR>
 
 nnoremap <expr> [t '<Cmd>' . v:count1 . 'tprev<CR>'
 nnoremap <expr> ]t '<Cmd>' . v:count1 . 'tnext<CR>'
@@ -121,10 +121,10 @@ nnoremap <expr> ]b '<Cmd>' . v:count1 . 'bnext<CR>'
 nnoremap [B <Cmd>bfirst<CR>
 nnoremap ]B <Cmd>blast<CR>
 
-nnoremap <expr> [l '<Cmd>.move --' . v:count1 . '<CR>'
-nnoremap <expr> ]l '<Cmd>.move +' . v:count1 . '<CR>'
-xnoremap <expr> [l ':move --' . v:count1 . '<CR>gv'
-xnoremap <expr> ]l ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>gv'
+nnoremap <expr> [a '<Cmd>.move --' . v:count1 . '<CR>'
+nnoremap <expr> ]a '<Cmd>.move +' . v:count1 . '<CR>'
+xnoremap <expr> [a ':move --' . v:count1 . '<CR>'
+xnoremap <expr> ]a ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>'
 nnoremap [<Space> <Cmd>put! =repeat(nr2char(10), v:count1)<CR><CR>:']+1<CR>
 nnoremap ]<Space> <Cmd>put =repeat(nr2char(10), v:count1)<CR><CR>:'[-1<CR>
 " }}}

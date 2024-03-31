@@ -94,7 +94,7 @@ nmap(']q', ':cprev<CR>')
 nmap('<C-q>', ':call QuickFixToggle()<CR>')
 nmap(']a', ':cnext<CR>')
 nmap(']a', ':cprev<CR>')
-nmap('<C-a>', ':call LocListToggle()<CR>')
+nmap('<C-l>', ':call LocListToggle()<CR>')
 
 nmap('<leader>pp', ':Lazy<CR>')
 -- nmap('<leader>pc', ':PackerCompile<CR>')

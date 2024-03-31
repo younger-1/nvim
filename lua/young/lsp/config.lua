@@ -216,7 +216,7 @@ return {
           end,
           'Diagnostics quickfix',
         },
-        ['<C-a>'] = {
+        ['<C-l>'] = {
           function()
             vim.diagnostic.setloclist()
           end,

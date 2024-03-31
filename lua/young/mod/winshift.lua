@@ -3,9 +3,9 @@ local M = {}
 M.once = function()
   vim.cmd [[
 " Start Win-Move mode:
-nnoremap <C-W><C-M> <Cmd>WinShift<CR>
+nnoremap <C-W>m <Cmd>WinShift<CR>
 " Swap two windows:
-nnoremap <C-W><C-X> <Cmd>WinShift swap<CR>
+nnoremap <C-W>x <Cmd>WinShift swap<CR>
 
 nnoremap <C-M-H> <Cmd>WinShift left<CR>
 nnoremap <C-M-J> <Cmd>WinShift down<CR>

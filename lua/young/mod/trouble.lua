@@ -27,7 +27,7 @@ M.once = function()
         end,
         'QuickFix',
       },
-      ['<C-a>'] = {
+      ['<C-l>'] = {
         function()
           vim.cmd 'TroubleToggle loclist'
         end,
