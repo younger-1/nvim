@@ -49,9 +49,9 @@ return {
     vim.keymap.set('n', 'L', function()
       require('arrow.persist').next()
     end, { desc = 'Arrow next file' })
-    vim.keymap.set('n', '<C-s>', function()
-      require('arrow.persist').toggle()
-    end, { desc = 'Arrow toggle current file' })
+    -- vim.keymap.set('n', '<C-s>', function()
+    --   require('arrow.persist').toggle()
+    -- end, { desc = 'Arrow toggle current file' })
   end,
   done = function()
     require('arrow').setup(cfg)

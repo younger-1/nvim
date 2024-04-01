@@ -590,6 +590,9 @@ M.done = function()
           -- ['<C-p>'] = false,
           ['<C-f>'] = false,
           ['<A-f>'] = false,
+          ['<C-v>'] = false,
+          ['<C-h>'] = actions.select_vertical,
+          ['<C-x>'] = actions.select_horizontal,
           --  NOTE: free key
           -- ['<C-i>']
           -- ['<C-o>']
@@ -627,6 +630,10 @@ M.done = function()
           -- K = actions.cycle_previewers_prev,
           T = actions.toggle_all,
           U = actions.drop_all,
+
+          ['<C-v>'] = false,
+          ['<C-h>'] = actions.select_vertical,
+          ['<C-x>'] = actions.select_horizontal,
         },
       },
     },
