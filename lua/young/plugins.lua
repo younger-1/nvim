@@ -509,7 +509,7 @@ mods.BWT = {
       event = 'CursorMoved',
       -- module = 'window-picker',
       config = function()
-        require('young.mod.window_picker').done()
+        require('young.mod.window-picker').done()
       end,
     },
     {

@@ -735,10 +735,8 @@ modules.BWT = {
     },
     {
       's1n7ax/nvim-window-picker',
-      event = 'CursorMoved',
-      config = function()
-        require('young.mod.window_picker').done()
-      end,
+      lazy = true,
+      auto = true,
     },
     {
       'sindrets/winshift.nvim',

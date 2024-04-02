@@ -59,6 +59,13 @@ noremap <localleader><Tab> <C-i>
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
+
+nnoremap <CR> <C-w>p
+" nnoremap <Up>    <C-w>k
+" nnoremap <Down>  <C-w>j
+" nnoremap <Left>  <C-w>h
+" nnoremap <Right> <C-w>l
+
 " Resize with arrows
 nnoremap <C-Up>    <cmd>resize -5<CR>
 nnoremap <C-Down>  <cmd>resize +5<CR>

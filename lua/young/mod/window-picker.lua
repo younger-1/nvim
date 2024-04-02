@@ -1,5 +1,3 @@
-local M = {}
-
 local cfg = {
   -- when there is only one window available to pick from, use that window
   -- without prompting the user to select
@@ -11,7 +9,8 @@ local cfg = {
 
   -- when you go to window selection mode, status bar will show one of
   -- following letters on them so you can use that letter to select the window
-  selection_chars = 'FJDKSLA;CMRUEIWOQP',
+  -- selection_chars = 'FJDKSLA;CMRUEIWOQP',
+  selection_chars = '1234567890',
 
   -- if you want to manually filter out the windows, pass in a function that
   -- takes two parameters. you should return window ids that should be
@@ -60,20 +59,17 @@ local cfg = {
   other_win_hl_color = '#e35e4f',
 }
 
-M.done = function()
-  require('window-picker').setup(cfg)
-
-  xy.map.n {
-    '<C-w>p',
-    function()
+return {
+  once = function()
+    xy.map2.n('<CR>', function()
       local wid = require('window-picker').pick_window()
       if wid then
         vim.api.nvim_set_current_win(wid)
         return wid
       end
-    end,
-    'Pick window',
-  }
-end
-
-return M
+    end, { desc = 'Pick window' })
+  end,
+  done = function()
+    require('window-picker').setup(cfg)
+  end,
+}
