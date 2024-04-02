@@ -623,6 +623,7 @@ function tool.goto_lua_module()
 
   local line
   if funname then
+    path = debug.getinfo(require(modname)[funname], 'S').source:sub(2)
     line = debug.getinfo(require(modname)[funname], 'S').linedefined
   end
 

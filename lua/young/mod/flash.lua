@@ -64,19 +64,12 @@ M.once = function()
       mode = { 'c' },
       desc = 'Toggle Flash Search',
     },
-    {
-      'gs',
-      function()
-        require('flash').jump { continue = true }
-      end,
-      desc = 'Flash resume jump',
-    },
     -- {
-    --   'g/',
+    --   'gs',
     --   function()
-    --     require('flash').search { continue = true }
+    --     require('flash').jump { continue = true }
     --   end,
-    --   desc = 'Flash resume search',
+    --   desc = 'Flash resume jump',
     -- },
     {
       'gL',

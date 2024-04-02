@@ -76,13 +76,13 @@ return {
       },
     },
     normal_mode = {
-      ['K'] = {
+      ['gh'] = {
         function()
           vim.lsp.buf.hover()
         end,
         'Hover',
       },
-      ['gh'] = {
+      ['gs'] = {
         function()
           if vim.bo.filetype == 'lua' and xy.tool.goto_lua_module() then
             return

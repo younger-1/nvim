@@ -39,7 +39,7 @@ require('mini.files').setup {
     -- reveal_cwd  = '@',
     reveal_cwd = 'gf',
     -- show_help   = 'g?',
-    show_help = 'g/',
+    show_help = 'gh',
     -- synchronize = '=',
     -- trim_left   = '<',
     -- trim_right  = '>',

@@ -1,7 +1,7 @@
 require('triptych').setup {
   mappings = {
     -- Everything below is buffer-local, meaning it will only apply to Triptych windows
-    show_help = { 'g?', '<C-h>' },
+    show_help = { 'gh' },
     jump_to_cwd = '.', -- Pressing again will toggle back
     nav_left = 'h',
     nav_right = { 'l', '<CR>' },
