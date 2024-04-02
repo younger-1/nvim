@@ -112,11 +112,11 @@ nnoremap <expr> ]q '<Cmd>' . v:count1 . 'cnext<CR>'
 nnoremap [Q <Cmd>cfirst<CR>
 nnoremap ]Q <Cmd>clast<CR>
 
-nnoremap <C-l> <Cmd>call yo#LocListToggle()<CR>
-nnoremap <expr> [l '<Cmd>' . v:count1 . 'lprev<CR>'
-nnoremap <expr> ]l '<Cmd>' . v:count1 . 'lnext<CR>'
-nnoremap [L <Cmd>lfirst<CR>
-nnoremap ]L <Cmd>llast<CR>
+nnoremap <C-z> <Cmd>call yo#LocListToggle()<CR>
+nnoremap <expr> [a '<Cmd>' . v:count1 . 'lprev<CR>'
+nnoremap <expr> ]a '<Cmd>' . v:count1 . 'lnext<CR>'
+nnoremap [A <Cmd>lfirst<CR>
+nnoremap ]A <Cmd>llast<CR>
 
 nnoremap <expr> [t '<Cmd>' . v:count1 . 'tprev<CR>'
 nnoremap <expr> ]t '<Cmd>' . v:count1 . 'tnext<CR>'
@@ -128,10 +128,10 @@ nnoremap <expr> ]b '<Cmd>' . v:count1 . 'bnext<CR>'
 nnoremap [B <Cmd>bfirst<CR>
 nnoremap ]B <Cmd>blast<CR>
 
-nnoremap <expr> [a '<Cmd>.move --' . v:count1 . '<CR>'
-nnoremap <expr> ]a '<Cmd>.move +' . v:count1 . '<CR>'
-xnoremap <expr> [a ':move --' . v:count1 . '<CR>'
-xnoremap <expr> ]a ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>'
+nnoremap <expr> [l '<Cmd>.move --' . v:count1 . '<CR>'
+nnoremap <expr> ]l '<Cmd>.move +' . v:count1 . '<CR>'
+xnoremap <expr> [l ':move --' . v:count1 . '<CR>'
+xnoremap <expr> ]l ':move +' . (v:count1 + line('''>') - line('''<')) . '<CR>'
 nnoremap [<Space> <Cmd>put! =repeat(nr2char(10), v:count1)<CR><CR>:']+1<CR>
 nnoremap ]<Space> <Cmd>put =repeat(nr2char(10), v:count1)<CR><CR>:'[-1<CR>
 " }}}
@@ -160,10 +160,6 @@ nnoremap cdi <Cmd>tcd %:h<CR>
 " }}}
 " `C-w` {{{
 nnoremap <C-w>z <cmd>call yo#WinZoomToggle()<cr>
-" }}}
-" `C-z` {{{
-nnoremap <C-z> <Nop>
-nnoremap <C-z><C-z> <cmd>stop<cr>
 " }}}
 
 """"""""""""""""""""""""""""""""

@@ -32,6 +32,12 @@ return {
       end,
       'Show mode',
     },
+    z = {
+      function()
+        vim.cmd 'stop'
+      end,
+      'Stop(C-z)',
+    },
   },
   [']'] = {
     -- [' '] = {},

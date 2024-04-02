@@ -156,7 +156,7 @@ M.once = function()
           end,
           'QuickList',
         },
-        ['<C-l>'] = {
+        ['<C-z>'] = {
           function()
             vim.cmd 'Telescope loclist'
           end,
@@ -558,19 +558,21 @@ M.done = function()
           ['<A-n>'] = actions.cycle_history_next,
           ['<A-p>'] = actions.cycle_history_prev,
 
-          -- ['<A-j>'] = actions.results_scrolling_down,
-          -- ['<A-k>'] = actions.results_scrolling_up,
-          -- ['<A-h>'] = actions.results_scrolling_left,
-          -- ['<A-l>'] = actions.results_scrolling_right,
+          ['<A-j>'] = actions.results_scrolling_down,
+          ['<A-k>'] = actions.results_scrolling_up,
+          ['<A-h>'] = actions.results_scrolling_left,
+          ['<A-l>'] = actions.results_scrolling_right,
+
+          ['<A-S-j>'] = actions.preview_scrolling_down,
+          ['<A-S-k>'] = actions.preview_scrolling_up,
+          ['<A-S-h>'] = actions.preview_scrolling_left,
+          ['<A-S-l>'] = actions.preview_scrolling_right,
+
           ['<S-down>'] = actions.results_scrolling_down,
           ['<S-up>'] = actions.results_scrolling_up,
           ['<S-left>'] = actions.results_scrolling_left,
           ['<S-right>'] = actions.results_scrolling_right,
 
-          -- ['<A-S-j>'] = actions.preview_scrolling_down,
-          -- ['<A-S-k>'] = actions.preview_scrolling_up,
-          -- ['<A-S-h>'] = actions.preview_scrolling_left,
-          -- ['<A-S-l>'] = actions.preview_scrolling_right,
           ['<A-down>'] = actions.preview_scrolling_down,
           ['<A-up>'] = actions.preview_scrolling_up,
           ['<A-left>'] = actions.preview_scrolling_left,
@@ -580,10 +582,10 @@ M.done = function()
           ['<A-u>'] = actions.drop_all,
 
           ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-          ['<C-l>'] = actions.smart_send_to_loclist + actions.open_loclist,
+          ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,
 
           ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-          ['<A-l>'] = actions.smart_add_to_loclist + actions.open_loclist,
+          ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
           --  NOTE: disabled key
           -- ['<C-n>'] = false,

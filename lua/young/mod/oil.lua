@@ -82,9 +82,9 @@ require('oil').setup {
     -- ['g\\'] = 'actions.toggle_trash',
 
     ['g<C-q>'] = 'actions.send_to_qflist',
-    ['g<C-l>'] = 'actions.send_to_loclist',
+    ['g<C-z>'] = 'actions.send_to_loclist',
     ['g<A-q>'] = 'actions.add_to_qflist',
-    ['g<A-l>'] = 'actions.add_to_loclist',
+    ['g<A-z>'] = 'actions.add_to_loclist',
     ['gt'] = 'actions.open_terminal',
     ['gl'] = 'actions.open_cmdline',
     ['gL'] = 'actions.open_cmdline_dir',
