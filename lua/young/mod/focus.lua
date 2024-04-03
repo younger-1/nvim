@@ -1,25 +1,25 @@
 local M = {}
 
 M.once = function()
-  xy.map2.n('<C-w>h', function()
+  xy.map2.n('<C-w><left>', function()
     require('focus').split_command 'h'
   end, { desc = 'Focus left' })
-  xy.map2.n('<C-w>j', function()
+  xy.map2.n('<C-w><down>', function()
     require('focus').split_command 'j'
   end, { desc = 'Focus down' })
-  xy.map2.n('<C-w>k', function()
+  xy.map2.n('<C-w><up>', function()
     require('focus').split_command 'k'
   end, { desc = 'Focus up' })
-  xy.map2.n('<C-w>l', function()
+  xy.map2.n('<C-w><right>', function()
     require('focus').split_command 'l'
   end, { desc = 'Focus right' })
 
   xy.map2.n('<C-w>f', function()
     vim.cmd 'FocusToggle'
   end, { desc = 'Focus Toggle' })
-  xy.map2.n('<C-w>=', function()
-    vim.cmd 'FocusMaxOrEqual'
-  end, { desc = 'Focus max/equal' })
+  -- xy.map2.n('<C-w>=', function()
+  --   vim.cmd 'FocusMaxOrEqual'
+  -- end, { desc = 'Focus max/equal' })
 end
 
 M.done = function()
