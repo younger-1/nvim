@@ -1,6 +1,3 @@
-" Enable indent-heuristic to make vimdiff more closely match git diff
-set diffopt+=indent-heuristic
-
 " <https://github.com/gpanders/dotfiles/blob/670345f735839c96ce689c8c052dd02135b34803/.config/nvim/init.vim#L38-L49>
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case

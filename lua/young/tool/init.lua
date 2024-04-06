@@ -332,7 +332,7 @@ tool.set_cursor_floating_win = function()
   local winids = vim.api.nvim_tabpage_list_wins(0)
   winids = vim.tbl_filter(function(winid)
     local wincfg = vim.api.nvim_win_get_config(winid)
-    return wincfg.relative ~= ''
+    return wincfg.focusable and wincfg.relative ~= ''
   end, winids)
 
   if #winids == 0 then

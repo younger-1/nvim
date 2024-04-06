@@ -125,7 +125,7 @@ for k, v in pairs(default_options) do
   vim.opt[k] = v
 end
 
-if xy.has '0.9' then
+if xy.has 'nvim-0.9' then
   vim.o.splitkeep = 'screen'
 end
 
@@ -134,8 +134,12 @@ vim.opt.shortmess:append 'c'
 -- disable saving current directory with views
 vim.opt.viewoptions:remove 'curdir'
 
-vim.opt.diffopt:append 'vertical'
-if xy.has '0.9' then
+vim.opt.diffopt:append {
+  'vertical',
+  'indent-heuristic', -- Enable indent-heuristic to make vimdiff more closely match git diff
+  'algorithm:patience',
+}
+if xy.has 'nvim-0.9' then
   vim.opt.diffopt:append 'linematch:60'
 end
 

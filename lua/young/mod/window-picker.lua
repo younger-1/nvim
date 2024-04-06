@@ -48,13 +48,34 @@ local cfg = {
   -- if you want to manually filter out the windows, pass in a function that
   -- takes two parameters. You should return window ids that should be
   -- included in the selection
-  -- EX:-
-  -- function(window_ids, filters)
-  --    -- folder the window_ids
-  --    -- return only the ones you want to include
-  --    return {1000, 1001}
-  -- end
-  filter_func = nil,
+  filter_func = function(window_ids, filter_rules)
+    -- exclude non-focusable windows(nvim-treesitter-context) and floating windows
+    window_ids = vim.tbl_filter(function(win_id)
+      local win_cfg = vim.api.nvim_win_get_config(win_id)
+      return win_cfg.focusable and win_cfg.relative == ''
+    end, window_ids)
+
+    -- exclude current window
+    if not filter_rules.include_current_win then
+      window_ids = vim.tbl_filter(function(win_id)
+        return win_id ~= vim.api.nvim_get_current_win()
+      end, window_ids)
+    end
+
+    -- exclude buffer filetype/buftype
+    window_ids = vim.tbl_filter(function(win_id)
+      local buf_id = vim.api.nvim_win_get_buf(win_id)
+      for opt_key, opt_values in pairs(filter_rules.bo) do
+        local actual_opt = vim.api.nvim_buf_get_option(buf_id, opt_key)
+        if vim.tbl_contains(opt_values, actual_opt) then
+          return false
+        end
+      end
+      return true
+    end, window_ids)
+
+    return window_ids
+  end,
 
   -- following filters are only applied when you are using the default filter
   -- defined by this plugin. If you pass in a function to "filter_func"
@@ -121,6 +142,13 @@ local cfg = {
 
 return {
   once = function()
+    xy.map2.n('<C-w>p', function()
+      local wid = require('window-picker').pick_window()
+      if wid then
+        vim.api.nvim_set_current_win(wid)
+        return wid
+      end
+    end, { desc = 'Pick window' })
     xy.map2.n('<CR>', function()
       local wid = require('window-picker').pick_window()
       if wid then

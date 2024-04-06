@@ -101,6 +101,12 @@ do
         buffer = args.data.buf_id,
         desc = '[young] open cwd',
       })
+      vim.keymap.set('n', '<CR>', function()
+        require('mini.files').go_in { close_on_file = true }
+      end, {
+        buffer = args.data.buf_id,
+        desc = '[young] open cwd',
+      })
     end,
   })
 end
