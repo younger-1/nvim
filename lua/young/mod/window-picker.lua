@@ -1,3 +1,4 @@
+local float_flag
 local cfg = {
   -- type of hints you want to get
   -- following types are supported
@@ -49,10 +50,13 @@ local cfg = {
   -- takes two parameters. You should return window ids that should be
   -- included in the selection
   filter_func = function(window_ids, filter_rules)
-    -- exclude non-focusable windows(nvim-treesitter-context) and floating windows
     window_ids = vim.tbl_filter(function(win_id)
       local win_cfg = vim.api.nvim_win_get_config(win_id)
-      return win_cfg.focusable and win_cfg.relative == ''
+      return win_cfg.focusable -- exclude non-focusable windows(nvim-treesitter-context)
+        and (
+          (float_flag == true and win_cfg.relative ~= '') -- only floating windows
+          or (float_flag == false and win_cfg.relative == '') -- only non-floating windows
+        )
     end, window_ids)
 
     -- exclude current window
@@ -143,13 +147,15 @@ local cfg = {
 return {
   once = function()
     xy.map2.n('<C-w>p', function()
+      float_flag = true
       local wid = require('window-picker').pick_window()
       if wid then
         vim.api.nvim_set_current_win(wid)
         return wid
       end
-    end, { desc = 'Pick window' })
+    end, { desc = 'Pick window(float)' })
     xy.map2.n('<CR>', function()
+      float_flag = false
       local wid = require('window-picker').pick_window()
       if wid then
         vim.api.nvim_set_current_win(wid)

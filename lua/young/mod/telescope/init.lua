@@ -545,38 +545,43 @@ M.done = function()
           -- ['<CR>'] = actions.select_default + actions.center,
 
           -- ['<C-_>'] = actions.which_key, -- Keys to produce <C-/>
-          -- ['<C-_>'] = require('telescope.actions.generate').which_key {
-          --   only_show_current_mode = true,
-          --   name_width = 20, -- typically leads to smaller floats
-          --   max_height = 0.2, -- increase potential maximum height
-          --   seperator = " ⇐ ", -- change sep between mode, keybind, and name
-          --   close_with_action = false, -- do not close float on action
-          -- },
+          ['<C-_>'] = {
+            require('telescope.actions.generate').which_key {
+              max_height = 0.4, -- increase potential maximum height
+              keybind_width = 10,
+              name_width = 26, -- typically leads to smaller floats
+              separator = '', -- ' ⇒ ', -- change sep between mode, keybind, and name
+              only_show_current_mode = true,
+              close_with_action = true, -- do not close float on action
+            },
+            type = 'action', -- 'action_key', 'command'
+            opts = { desc = 'which_key' }, -- 'which_key', 'nop'
+          },
           ['<C-j>'] = actions.move_selection_next,
           ['<C-k>'] = actions.move_selection_previous,
 
           ['<A-n>'] = actions.cycle_history_next,
           ['<A-p>'] = actions.cycle_history_prev,
 
-          ['<A-j>'] = actions.results_scrolling_down,
-          ['<A-k>'] = actions.results_scrolling_up,
-          ['<A-h>'] = actions.results_scrolling_left,
-          ['<A-l>'] = actions.results_scrolling_right,
+          ['<A-j>'] = { actions.results_scrolling_down, type = 'action', opts = { desc = 'nop' } },
+          ['<A-k>'] = { actions.results_scrolling_up, type = 'action', opts = { desc = 'nop' } },
+          ['<A-h>'] = { actions.results_scrolling_left, type = 'action', opts = { desc = 'nop' } },
+          ['<A-l>'] = { actions.results_scrolling_right, type = 'action', opts = { desc = 'nop' } },
 
-          ['<A-S-j>'] = actions.preview_scrolling_down,
-          ['<A-S-k>'] = actions.preview_scrolling_up,
-          ['<A-S-h>'] = actions.preview_scrolling_left,
-          ['<A-S-l>'] = actions.preview_scrolling_right,
+          ['<A-S-j>'] = { actions.preview_scrolling_down, type = 'action', opts = { desc = 'nop' } },
+          ['<A-S-k>'] = { actions.preview_scrolling_up, type = 'action', opts = { desc = 'nop' } },
+          ['<A-S-h>'] = { actions.preview_scrolling_left, type = 'action', opts = { desc = 'nop' } },
+          ['<A-S-l>'] = { actions.preview_scrolling_right, type = 'action', opts = { desc = 'nop' } },
 
-          ['<S-down>'] = actions.results_scrolling_down,
-          ['<S-up>'] = actions.results_scrolling_up,
-          ['<S-left>'] = actions.results_scrolling_left,
-          ['<S-right>'] = actions.results_scrolling_right,
+          ['<S-down>'] = { actions.results_scrolling_down, type = 'action', opts = { desc = 'nop' } },
+          ['<S-up>'] = { actions.results_scrolling_up, type = 'action', opts = { desc = 'nop' } },
+          ['<S-left>'] = { actions.results_scrolling_left, type = 'action', opts = { desc = 'nop' } },
+          ['<S-right>'] = { actions.results_scrolling_right, type = 'action', opts = { desc = 'nop' } },
 
-          ['<A-down>'] = actions.preview_scrolling_down,
-          ['<A-up>'] = actions.preview_scrolling_up,
-          ['<A-left>'] = actions.preview_scrolling_left,
-          ['<A-right>'] = actions.preview_scrolling_right,
+          ['<A-down>'] = { actions.preview_scrolling_down, type = 'action', opts = { desc = 'nop' } },
+          ['<A-up>'] = { actions.preview_scrolling_up, type = 'action', opts = { desc = 'nop' } },
+          ['<A-left>'] = { actions.preview_scrolling_left, type = 'action', opts = { desc = 'nop' } },
+          ['<A-right>'] = { actions.preview_scrolling_right, type = 'action', opts = { desc = 'nop' } },
 
           ['<A-t>'] = actions.toggle_all,
           ['<A-u>'] = actions.drop_all,
@@ -622,7 +627,7 @@ M.done = function()
 
           ['<C-o>'] = require('young.mod.telescope.actions').xy_resume,
           ['<A-o>'] = require('young.mod.telescope.actions').xy_open_and_resume,
-          ['<CR>'] = require('young.mod.telescope.actions').xy_open_multi_files,
+          -- ['<CR>'] = require('young.mod.telescope.actions').xy_open_multi_files,
         },
         n = {
           ['<A-n>'] = actions.cycle_history_next,
