@@ -1,6 +1,9 @@
 require('wf').setup {
   -- theme = 'space',
   -- theme = 'chad',
+  builtin_keymaps = { -- https://github.com/Cassin01/wf.nvim/issues/113
+    toggle = '<CR>',
+  },
 }
 
 -- Register
