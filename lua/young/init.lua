@@ -506,7 +506,12 @@ setmetatable(xy.map2, {
   __call = function(t, lhs, rhs, opts)
     local mode = opts['mode'] or { 'n', 'x', 'o' }
     opts['mode'] = nil
-    vim.keymap.set(mode, lhs, rhs, opts)
+    if type(lhs) == 'string' then
+      lhs = { lhs }
+    end
+    for _, lh in ipairs(lhs) do
+      vim.keymap.set(mode, lh, rhs, opts)
+    end
   end,
   __index = function(t, key)
     -- local silent

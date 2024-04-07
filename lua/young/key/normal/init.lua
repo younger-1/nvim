@@ -88,12 +88,12 @@ return {
     'Man',
   },
   ['<C-w>'] = {
-    w = {
-      function()
-        require('young.tool').set_cursor_floating_win()
-      end,
-      'Goto float',
-    },
+    -- w = {
+    --   function()
+    --     require('young.tool').set_cursor_floating_win()
+    --   end,
+    --   'Goto float',
+    -- },
     -- ['<C-m>']
     -- ['<C-x>']
     -- ['<CR>']

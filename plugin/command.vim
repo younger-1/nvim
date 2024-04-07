@@ -86,4 +86,4 @@ command! DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_
 command! BufDelete silent! exe "bp|bd #"
 command! BufDeleteOther silent! exe "%bd|e#|bd#"
 
-command! QuitWindow lclose | try | close | catch /E444/ | bd | endtry
+command! QuitWindowOrBuffer cclose | lclose | try | close | catch /E444/ | bd | endtry

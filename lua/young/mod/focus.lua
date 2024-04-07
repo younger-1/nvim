@@ -17,9 +17,9 @@ M.once = function()
   xy.map2.n('<C-w>f', function()
     vim.cmd 'FocusToggle'
   end, { desc = 'Focus Toggle' })
-  -- xy.map2.n('<C-w>=', function()
-  --   vim.cmd 'FocusMaxOrEqual'
-  -- end, { desc = 'Focus max/equal' })
+  xy.map2.n('<C-w>e', function()
+    vim.cmd 'FocusMaxOrEqual'
+  end, { desc = 'Focus max/equal' })
 end
 
 M.done = function()

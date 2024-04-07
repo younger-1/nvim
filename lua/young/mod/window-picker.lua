@@ -71,7 +71,7 @@ local cfg = {
       local buf_id = vim.api.nvim_win_get_buf(win_id)
       for opt_key, opt_values in pairs(filter_rules.bo) do
         local actual_opt = vim.api.nvim_buf_get_option(buf_id, opt_key)
-        if vim.tbl_contains(opt_values, actual_opt) then
+        if not float_flag and vim.tbl_contains(opt_values, actual_opt) then
           return false
         end
       end
@@ -146,15 +146,7 @@ local cfg = {
 
 return {
   once = function()
-    xy.map2.n('<C-w>p', function()
-      float_flag = true
-      local wid = require('window-picker').pick_window()
-      if wid then
-        vim.api.nvim_set_current_win(wid)
-        return wid
-      end
-    end, { desc = 'Pick window(float)' })
-    xy.map2.n('<CR>', function()
+    xy.map2.n({ '<S-CR>', '<C-w><cr>' }, function()
       float_flag = false
       local wid = require('window-picker').pick_window()
       if wid then
@@ -162,6 +154,15 @@ return {
         return wid
       end
     end, { desc = 'Pick window' })
+    xy.map2.n({ '<C-w>w', '<C-w><tab>' }, function()
+      float_flag = true
+      local wid = require('window-picker').pick_window()
+      if wid then
+        vim.api.nvim_set_current_win(wid)
+        xy.map.n { 'q', '<cmd>close<cr>', buffer = true }
+        return wid
+      end
+    end, { desc = 'Pick window(float)' })
   end,
   done = function()
     require('window-picker').setup(cfg)
