@@ -100,7 +100,7 @@ local M = action_mt.transform_mod {
 
     for _, j in pairs(multi) do
       if j.path ~= nil then -- is it a file -> open it as well:
-        vim.cmd(string.format('%s %s', 'edit', j.path))
+        xy.tool.open_file(j.path)
       end
     end
   end,

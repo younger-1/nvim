@@ -40,6 +40,66 @@ return {
   -- },
   ['?'] = {
     name = '+help',
+    e = {
+      function()
+        vim.cmd 'exu'
+      end,
+      'Ex-cmd index',
+    },
+    E = {
+      function()
+        vim.cmd 'h ex-edit-index'
+      end,
+      'Ex-edit index',
+    },
+    I = {
+      function()
+        vim.cmd 'h insert-index'
+      end,
+      'Insert index',
+    },
+    g = {
+      function()
+        vim.cmd 'h g'
+      end,
+      'g-index',
+    },
+    i = {
+      function()
+        vim.cmd 'h index'
+      end,
+      'Index',
+    },
+    n = {
+      function()
+        vim.cmd 'viu'
+      end,
+      'Normal index',
+    },
+    w = {
+      function()
+        vim.cmd 'h ctrl-w'
+      end,
+      'Windows index',
+    },
+    x = {
+      function()
+        vim.cmd 'h visual-index'
+      end,
+      'Visual index',
+    },
+    ['['] = {
+      function()
+        vim.cmd 'h ['
+      end,
+      '[ ] index',
+    },
+    z = {
+      function()
+        vim.cmd 'h z'
+      end,
+      'z-index',
+    },
     ['?'] = {
       function()
         vim.cmd 'h reference_toc'
@@ -70,12 +130,6 @@ return {
       end,
       'Vim colors',
     },
-    E = {
-      function()
-        vim.cmd 'h ex-edit-index'
-      end,
-      'Ex-edit index',
-    },
     F = {
       function()
         vim.cmd 'h function-list'
@@ -87,12 +141,6 @@ return {
         vim.cmd 'h help-summary'
       end,
       'Help',
-    },
-    I = {
-      function()
-        vim.cmd 'h insert-index'
-      end,
-      'Insert index',
     },
     L = {
       function()
@@ -142,35 +190,17 @@ return {
       end,
       'Defaults',
     },
-    e = {
-      function()
-        vim.cmd 'exu'
-      end,
-      'Ex-cmd index',
-    },
     f = {
       function()
         vim.cmd 'h vim-function'
       end,
       'Functions',
     },
-    g = {
-      function()
-        vim.cmd 'h g'
-      end,
-      'g-index',
-    },
     h = {
       function()
         vim.cmd 'h help-tags'
       end,
       'Help tags',
-    },
-    i = {
-      function()
-        vim.cmd 'h index'
-      end,
-      'Index',
     },
     k = {
       function()
@@ -189,12 +219,6 @@ return {
         vim.cmd 'h vim-modes'
       end,
       'Modes',
-    },
-    n = {
-      function()
-        vim.cmd 'viu'
-      end,
-      'Normal index',
     },
     o = {
       function()
@@ -237,30 +261,6 @@ return {
         vim.cmd 'h vim-variable'
       end,
       'Vim variable',
-    },
-    w = {
-      function()
-        vim.cmd 'h ctrl-w'
-      end,
-      'Windows index',
-    },
-    x = {
-      function()
-        vim.cmd 'h visual-index'
-      end,
-      'Visual index',
-    },
-    y = {
-      function()
-        vim.cmd 'h ['
-      end,
-      '[ ] index',
-    },
-    z = {
-      function()
-        vim.cmd 'h z'
-      end,
-      'z-index',
     },
   },
   a = {
@@ -1230,6 +1230,20 @@ return {
   },
   y = {
     name = '+young',
+    ['1'] = {
+      function()
+        pp('[young] relative path', vim.fn.expand '%')
+        vim.fn.setreg('+', vim.fn.expand '%')
+      end,
+      'Copy path',
+    },
+    ['2'] = {
+      function()
+        pp('[young] full path', vim.fn.expand '%:p')
+        vim.fn.setreg('+', vim.fn.expand '%:p')
+      end,
+      'Copy full path',
+    },
     b = {
       function()
         require('telescope.builtin').git_commits {

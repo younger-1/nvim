@@ -33,10 +33,24 @@
 - [ ] autopair: remove single quote (\' and \`) rules for lisp file
 - [ ] call-tree, no-refenrence-list
 - [ ] decouple which-key from core, by using local.lua
-- [ ] a more powerful <C-g>
-  - pwd, filepath
-  - statusline info
-  - a quick-pannel to lookup git/file information (e.g. branch, ff, fenc, sw) which is not very common like changes and diagnostics
+- [ ] a more powerful `<C-g>` organized by sections: (`<tab>` for switch/fold section, `<cr>` for enter section or active function)
+  - stuffs which is not very common like changes and diagnostics
+  - current file: file information (e.g. ff, fenc, sw) and uncommon statusline info
+  - project/workspace:
+    - pwd
+    - recent files
+    - marks
+    - multiple session
+    - project-settings (bridge `neoconf`, sessions)
+  - buffers:
+    - show name/path
+    - delete buffers, copy name/path
+    - bridge `harpoon`, `arrow`, `BufPin`
+  - git: git information (e.g. branch)
+  - lsp: bridge `LspInfo`, `Mason`, `null-ls`, `cmp`
+  - tree-sitter: bridge `TSConfigInfo`
+  - diagnostics: bridge `Trouble`
+  - plugin: bridget `lazy`
 - [ ] split diagnostics and lsp, lazy load lsp setup to filetype(not good for lvim) or event, lazy load lsp_line after diagnostics
 - [x] toggle transparence of colorscheme
 - [ ] with prefix(XY), autocmd/manually generate vim-commands for all functions of rr('young.tool') and mod's function
@@ -47,7 +61,7 @@
 - [ ] setlocal winbar: can't disable window-local winbar, but can enable window-local winbar
 - [ ] Telescope git_branches: can not show worktree correctly
 - [ ] Telescope keymaps or other plugin: open files of lua function used in rhs
-- [ ] Telescope keymaps: only show <Plug> mappings
+- [ ] Telescope keymaps: only show `<Plug>` mappings
 - [ ] Telescope commands: only show buf local commands
 - [ ] Telescope: break dot-repeat
 - [ ] Telescope live_grep: use glob_pattern, type_filter, search_dirs

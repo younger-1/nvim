@@ -628,6 +628,31 @@ M.done = function()
           ['<C-o>'] = require('young.mod.telescope.actions').xy_resume,
           ['<A-o>'] = require('young.mod.telescope.actions').xy_open_and_resume,
           -- ['<CR>'] = require('young.mod.telescope.actions').xy_open_multi_files,
+
+          ['<A-c>'] = {
+            function()
+              local action_state = require 'telescope.actions.state'
+              local entry = action_state.get_selected_entry()
+              local path = entry[1] or entry.path or entry.filename
+              path = vim.fn.fnamemodify(path, ':.')
+              pp('[young] path: ' .. path)
+              vim.fn.setreg('+', path)
+            end,
+            type = 'action',
+            opts = { desc = 'xy_copy_path' },
+          },
+          ['<A-S-c>'] = {
+            function()
+              local action_state = require 'telescope.actions.state'
+              local entry = action_state.get_selected_entry()
+              local path = entry[1] or entry.path or entry.filename
+              path = vim.fn.fnamemodify(path, ':p')
+              pp('[young] full path: ' .. path)
+              vim.fn.setreg('+', path)
+            end,
+            type = 'action',
+            opts = { desc = 'xy_copy_full_path' },
+          },
         },
         n = {
           ['<A-n>'] = actions.cycle_history_next,
