@@ -161,6 +161,52 @@ nnoremap cdi <Cmd>tcd %:h<CR>
 nnoremap <C-w>z <cmd>call yo#WinZoomToggle()<cr>
 " }}}
 
+" help {{{
+nnoremap <leader>?? :h reference_toc<cr>
+nnoremap <leader>?<space> :h api<cr>
+nnoremap <leader>?<tab> :h news<cr>
+nnoremap <leader>?A :h vim-additions<cr>
+nnoremap <leader>?C :h cterm-colors<cr>
+nnoremap <leader>?F :h function-list<cr>
+nnoremap <leader>?H :h help-summary<cr>
+nnoremap <leader>?L :h lsp<cr>
+nnoremap <leader>?M :h map-modes<cr>
+nnoremap <leader>?N :h notation<cr>
+nnoremap <leader>?O :h option-list<cr>
+nnoremap <leader>?T :h tips<cr>
+
+nnoremap <leader>?a :h vim-arguments<cr>
+nnoremap <leader>?c :h gui-colors<cr>
+nnoremap <leader>?d :h nvim-defaults<cr>
+nnoremap <leader>?f :h builtin-functions<cr>
+nnoremap <leader>?h :h help-tags<cr>
+nnoremap <leader>?k :h key-codes<cr>
+nnoremap <leader>?m :h vim-modes<cr>
+nnoremap <leader>?o :h options<cr>
+nnoremap <leader>?p :h local-additions<cr>
+nnoremap <leader>?q :h quickref<cr>
+nnoremap <leader>?s :h startup<cr>
+nnoremap <leader>?u :h user-manual<cr>
+nnoremap <leader>?v :h vim-variable<cr>
+
+nnoremap <leader>?ll :h lua-vim<cr>
+nnoremap <leader>?ls :h lua-stdlib<cr>
+nnoremap <leader>?lr :h lua-ref<cr>
+nnoremap <leader>?lg :h lua-guide<cr>
+
+nnoremap <leader>?ii :h insert-index<cr>
+nnoremap <leader>?in :h normal-index<cr>
+nnoremap <leader>?io :h objects<cr>
+nnoremap <leader>?iw :h CTRL-W<cr>
+nnoremap <leader>?i[ :h [<cr>
+nnoremap <leader>?ig :h g<cr>
+nnoremap <leader>?iz :h z<cr>
+nnoremap <leader>?iv :h visual-index<cr>
+nnoremap <leader>?ic :h ex-edit-index<cr>
+nnoremap <leader>?it :h terminal-mode-index<cr>
+nnoremap <leader>?ie :h ex-cmd-index<cr>
+" }}}
+
 """"""""""""""""""""""""""""""""
 "        3. visual mode
 """"""""""""""""""""""""""""""""

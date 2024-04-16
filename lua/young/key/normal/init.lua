@@ -94,6 +94,12 @@ return {
     --   end,
     --   'Goto float',
     -- },
+    O = {
+      function()
+        require('young.tool').close_all_floating_win()
+      end,
+      'Close all float',
+    },
     -- ['<C-m>']
     -- ['<C-x>']
     -- ['<CR>']

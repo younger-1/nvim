@@ -354,6 +354,16 @@ tool.set_cursor_floating_win = function()
   end
 end
 
+tool.close_all_floating_win = function()
+  local winids = vim.api.nvim_tabpage_list_wins(0)
+  for _, winid in ipairs(winids) do
+    local wincfg = vim.api.nvim_win_get_config(winid)
+    if wincfg.relative ~= '' then
+      vim.api.nvim_win_close(winid, false)
+    end
+  end
+end
+
 tool.startup_time = function()
   xy.util.defer(function()
     for i, times in ipairs(xy.startup_time or {}) do

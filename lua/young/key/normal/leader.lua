@@ -40,228 +40,6 @@ return {
   -- },
   ['?'] = {
     name = '+help',
-    e = {
-      function()
-        vim.cmd 'exu'
-      end,
-      'Ex-cmd index',
-    },
-    E = {
-      function()
-        vim.cmd 'h ex-edit-index'
-      end,
-      'Ex-edit index',
-    },
-    I = {
-      function()
-        vim.cmd 'h insert-index'
-      end,
-      'Insert index',
-    },
-    g = {
-      function()
-        vim.cmd 'h g'
-      end,
-      'g-index',
-    },
-    i = {
-      function()
-        vim.cmd 'h index'
-      end,
-      'Index',
-    },
-    n = {
-      function()
-        vim.cmd 'viu'
-      end,
-      'Normal index',
-    },
-    w = {
-      function()
-        vim.cmd 'h ctrl-w'
-      end,
-      'Windows index',
-    },
-    x = {
-      function()
-        vim.cmd 'h visual-index'
-      end,
-      'Visual index',
-    },
-    ['['] = {
-      function()
-        vim.cmd 'h ['
-      end,
-      '[ ] index',
-    },
-    z = {
-      function()
-        vim.cmd 'h z'
-      end,
-      'z-index',
-    },
-    ['?'] = {
-      function()
-        vim.cmd 'h reference_toc'
-      end,
-      '❓',
-    },
-    [' '] = {
-      function()
-        vim.cmd 'h api'
-      end,
-      'Api',
-    },
-    ['<tab>'] = {
-      function()
-        vim.cmd 'h news'
-      end,
-      'News',
-    },
-    A = {
-      function()
-        vim.cmd 'h vim-additions'
-      end,
-      'Vim additions',
-    },
-    C = {
-      function()
-        vim.cmd 'h cterm-colors'
-      end,
-      'Vim colors',
-    },
-    F = {
-      function()
-        vim.cmd 'h function-list'
-      end,
-      'Function list',
-    },
-    H = {
-      function()
-        vim.cmd 'h help-summary'
-      end,
-      'Help',
-    },
-    L = {
-      function()
-        vim.cmd 'h lsp'
-      end,
-      'LSP',
-    },
-    M = {
-      function()
-        vim.cmd 'h map-modes'
-      end,
-      'Map modes',
-    },
-    N = {
-      function()
-        vim.cmd 'h notation'
-      end,
-      'Notation',
-    },
-    O = {
-      function()
-        vim.cmd 'h option-list'
-      end,
-      'Option list',
-    },
-    T = {
-      function()
-        vim.cmd 'h tips'
-      end,
-      'Tips',
-    },
-    a = {
-      function()
-        vim.cmd 'h vim-arguments'
-      end,
-      'Vim arguments',
-    },
-    c = {
-      function()
-        vim.cmd 'h gui-colors'
-      end,
-      'Vim colors',
-    },
-    d = {
-      function()
-        vim.cmd 'h nvim-defaults'
-      end,
-      'Defaults',
-    },
-    f = {
-      function()
-        vim.cmd 'h vim-function'
-      end,
-      'Functions',
-    },
-    h = {
-      function()
-        vim.cmd 'h help-tags'
-      end,
-      'Help tags',
-    },
-    k = {
-      function()
-        vim.cmd 'h key-codes'
-      end,
-      'Key codes',
-    },
-    l = {
-      function()
-        vim.cmd 'h lua'
-      end,
-      'Lua',
-    },
-    m = {
-      function()
-        vim.cmd 'h vim-modes'
-      end,
-      'Modes',
-    },
-    o = {
-      function()
-        vim.cmd 'options'
-      end,
-      'Options',
-    },
-    p = {
-      function()
-        vim.cmd 'h local-additions'
-      end,
-      'Plugin',
-    },
-    q = {
-      function()
-        vim.cmd 'h quickref'
-      end,
-      'Quick reference',
-    },
-    s = {
-      function()
-        vim.cmd 'h startup'
-      end,
-      'Startup',
-    },
-    t = {
-      function()
-        vim.cmd 'h objects'
-      end,
-      'Text objects',
-    },
-    u = {
-      function()
-        vim.cmd 'h user-manual'
-      end,
-      'User manual',
-    },
-    v = {
-      function()
-        vim.cmd 'h vim-variable'
-      end,
-      'Vim variable',
-    },
   },
   a = {
     name = '+apps',
@@ -1091,8 +869,18 @@ return {
     -- m = { require('young.packer').snapshot_hook, 'Snapshot sort' },
     -- v = { require('young.packer').loaded, 'Loaded' },
   },
-  q = { '<cmd>QuitWindowOrBuffer<cr>', 'which_key_ignore' },
-  Q = { '<cmd>q<cr>', 'which_key_ignore' },
+  q = {
+    function()
+      vim.cmd.QuitWindowOrBuffer()
+    end,
+    'which_key_ignore',
+  },
+  Q = {
+    function()
+      vim.cmd.q()
+    end,
+    'which_key_ignore',
+  },
   -- Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
   r = {
     name = '+replace',
@@ -1222,6 +1010,12 @@ return {
   w = {
     function()
       vim.cmd 'update'
+    end,
+    'which_key_ignore',
+  },
+  W = {
+    function()
+      vim.cmd 'wa'
     end,
     'which_key_ignore',
   },
