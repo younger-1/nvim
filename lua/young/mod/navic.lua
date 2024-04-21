@@ -1,5 +1,6 @@
-vim.opt.winbar:append "%{%v:lua.require'nvim-navic'.get_location()%}"
+-- vim.opt.winbar:append "%{%v:lua.require'nvim-navic'.get_location()%}"
 -- vim.cmd [[set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}]]
+xy.winbar[1] = require('nvim-navic').get_location
 
 local navic = require 'nvim-navic'
 
