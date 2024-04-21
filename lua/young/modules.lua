@@ -1722,9 +1722,16 @@ modules.UI = {
     { -- breadcrumbs
       'SmiteshP/nvim-navic',
       event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
-      config = function()
-        require 'young.mod.navic'
-      end,
+      auto = 'config',
+    },
+    {
+      'utilyre/barbecue.nvim',
+      event = { 'BufReadPost', 'BufNewFile' },
+      dependencies = {
+        'SmiteshP/nvim-navic',
+        'nvim-tree/nvim-web-devicons', -- optional dependency
+      },
+      auto = 'config',
     },
     -- {
     --   'Bekaboo/dropbar.nvim',
