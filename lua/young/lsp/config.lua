@@ -11,11 +11,11 @@ return {
   -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
     signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = '✘',
-        [vim.diagnostic.severity.WARN] = '',
-        [vim.diagnostic.severity.INFO] = '',
-        [vim.diagnostic.severity.HINT] = '󰌶',
+      text = { -- neovim/neovim#26193 (0.10.0)
+        [vim.diagnostic.severity.ERROR] = require('young.util.icon').diagnostics.error_bold,
+        [vim.diagnostic.severity.WARN] = require('young.util.icon').diagnostics.warn_bold,
+        [vim.diagnostic.severity.INFO] = require('young.util.icon').diagnostics.info_bold,
+        [vim.diagnostic.severity.HINT] = require('young.util.icon').diagnostics.hint_var,
       },
     },
     virtual_text = {

@@ -28,11 +28,28 @@ local lsp_cfg = require 'young.lsp.config'
 --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 -- end
 
--- TODO: https://github.com/wookayin/dotfiles/commit/a5336885b515b4849f843c87832628271aad264b
-vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError' })
-vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn' })
-vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo' })
-vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
+local icons = lsp_cfg.diagnostics.signs.text
+-- @see: https://github.com/wookayin/dotfiles/commit/a5336885b515b4849f843c87832628271aad264b
+-- Redefine signs (:help diagnostic-signs) and highlights (:help diagnostic-highlights)
+-- see vim.diagnostic.config, but we still keep legacy signs because other plugins (neotree, etc.) still use them
+do -- if vim.fn.has('nvim-0.10') == 0 then
+  vim.fn.sign_define(
+    'DiagnosticSignError',
+    { text = icons[vim.diagnostic.severity.ERROR], texthl = 'DiagnosticSignError' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignWarn',
+    { text = icons[vim.diagnostic.severity.WARN], texthl = 'DiagnosticSignWarn' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignInfo',
+    { text = icons[vim.diagnostic.severity.INFO], texthl = 'DiagnosticSignInfo' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignHint',
+    { text = icons[vim.diagnostic.severity.HINT], texthl = 'DiagnosticSignHint' }
+  )
+end
 
 vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
   -- virtual_text = false,
