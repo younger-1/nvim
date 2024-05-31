@@ -49,7 +49,8 @@ do
   -- Toggle explorer
   xy.map2.n('<leader>em', function()
     if not require('mini.files').close() then
-      require('mini.files').open(vim.fn.expand '%:p:h')
+      require('mini.files').open(vim.fn.expand '%:p')
+      require('mini.files').reveal_cwd()
     end
   end, { desc = 'Mini files' })
   xy.map2.n('<leader>eM', function()
