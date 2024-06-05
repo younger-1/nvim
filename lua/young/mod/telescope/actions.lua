@@ -43,10 +43,40 @@ end
 
 local M = action_mt.transform_mod {
   xy_print_entry = function(prompt_bufnr)
-    local title = action_state.get_current_picker(prompt_bufnr).prompt_title
+    local _picker = action_state.get_current_picker(prompt_bufnr)
+    local picker = {}
+    for k, v in pairs(_picker) do
+      if
+        vim.tbl_contains({
+          'multi_icon',
+          'initial_mode',
+          'selection_caret',
+          'selection_strategy',
+          'prompt_win',
+          'prompt_bufnr',
+          'prompt_title',
+          -- 'prompt_border',
+          'prompt_prefix',
+          'results_win',
+          'results_bufnr',
+          'results_title',
+          -- 'results_border',
+          'preview_win',
+          'preview_bufnr',
+          'preview_title',
+          -- 'preview_border',
+          'original_cword',
+          'original_cline',
+          'original_cfile',
+          'original_win_id',
+        }, k)
+      then
+        picker[k] = v
+      end
+    end
     local entry = action_state.get_selected_entry()
-    local locs = get_locs(title, entry)
-    print('Picker: ' .. vim.inspect(title))
+    local locs = get_locs(picker, entry)
+    print('Picker: ' .. vim.inspect(picker))
     print('Entry: ' .. vim.inspect(entry))
     print('Def: ' .. vim.inspect(locs))
   end,

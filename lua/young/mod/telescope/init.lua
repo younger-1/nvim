@@ -511,8 +511,36 @@ M.done = function()
       -- cycle_layout_list = { 'horizontal', 'vertical', 'center', 'cursor', 'bottom_pane', 'current_buffer', 'flex' },
       winblend = 15,
       dynamic_preview_title = true,
-      -- path_display = { shorten = 5 },
-      path_display = { truncate = 5 },
+      path_display = {
+        -- 'truncate',
+        -- shorten = { len = 3, exclude = { 1, -1, -2 } },
+        filename_first = {
+          reverse_directories = false,
+        },
+      },
+      -- path_display = function(opts, path)
+      --   local status = require('telescope.state').get_status(vim.api.nvim_get_current_buf())
+      --   local len = vim.api.nvim_win_get_width(status.layout.results.winid) - status.picker.selection_caret:len() - 2
+      --   if #path > len then
+      --     -- local shorten = { len = 5, exclude = { 1, -1, -2 } }
+      --     -- path = require('plenary.path'):new(path):shorten(shorten.len, shorten.exclude)
+      --     path = path:sub(#path - len + 1)
+      --   end
+      --
+      --   -- Format path as "file.txt path/to/parent"
+      --   local tail = require('telescope.utils').path_tail(path)
+      --   path = string.format('%s %s', tail, path:sub(1, #path - #tail - 1))
+      --   local highlights = {
+      --     {
+      --       {
+      --         #tail, -- highlight start position
+      --         #path, -- highlight end position
+      --       },
+      --       'Comment', -- highlight group name
+      --     },
+      --   }
+      --   return path, highlights
+      -- end,
       -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       -- borderchars = {
       --   prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
