@@ -122,11 +122,11 @@ local M = action_mt.transform_mod {
   end,
 
   -- https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-1407046929
-  xy_open_multi_files = function(pb)
-    local picker = action_state.get_current_picker(pb)
+  xy_open_multi_files = function(prompt_bufnr)
+    local picker = action_state.get_current_picker(prompt_bufnr)
     local multi = picker:get_multi_selection()
 
-    actions.select_default(pb) -- the normal enter behaviour
+    actions.select_default(prompt_bufnr) -- the normal enter behaviour
 
     for _, j in pairs(multi) do
       if j.path ~= nil then -- is it a file -> open it as well:

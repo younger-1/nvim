@@ -451,6 +451,7 @@ M.done = function()
   -- local sorters = require 'telescope.sorters'
   local actions = require 'telescope.actions'
   local action_layout = require 'telescope.actions.layout'
+  local action_state = require 'telescope.actions.state'
   -- local builtin = require 'telescope.builtin'
   -- local themes = require 'telescope.themes'
 
@@ -659,7 +660,6 @@ M.done = function()
 
           ['<A-c>'] = {
             function()
-              local action_state = require 'telescope.actions.state'
               local entry = action_state.get_selected_entry()
               local path = entry[1] or entry.path or entry.filename
               path = vim.fn.fnamemodify(path, ':.')
@@ -671,7 +671,6 @@ M.done = function()
           },
           ['<A-S-c>'] = {
             function()
-              local action_state = require 'telescope.actions.state'
               local entry = action_state.get_selected_entry()
               local path = entry[1] or entry.path or entry.filename
               path = vim.fn.fnamemodify(path, ':p')
@@ -680,6 +679,26 @@ M.done = function()
             end,
             type = 'action',
             opts = { desc = 'xy_copy_full_path' },
+          },
+          ['<C-r><C-g>'] = {
+            function(prompt_bufnr)
+              local picker = action_state.get_current_picker(prompt_bufnr)
+              local original_path = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(picker.original_win_id))
+              local relative_path = xy.util.relative_current(original_path)
+              picker:set_prompt(relative_path, false)
+            end,
+            type = 'action',
+            opts = { desc = 'xy_insert_filename' },
+          },
+          ['<C-r><C-f>'] = {
+            function(prompt_bufnr)
+              local picker = action_state.get_current_picker(prompt_bufnr)
+              local original_path = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(picker.original_win_id))
+              local file_name = vim.fn.fnamemodify(original_path, ':t')
+              picker:set_prompt(file_name, false)
+            end,
+            type = 'action',
+            opts = { desc = 'xy_insert_filename' },
           },
         },
         n = {
