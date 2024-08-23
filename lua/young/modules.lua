@@ -629,6 +629,9 @@ modules.neovim = {
       require('numb').setup()
     end,
   },
+  {
+    'lewis6991/fileline.nvim',
+  },
   -- {
   --   'winston0410/range-highlight.nvim',
   --   event = 'CmdlineEnter',
@@ -1647,6 +1650,11 @@ modules.UI = {
     cmd = { 'Trouble', 'TroubleToggle' },
     auto = true,
   },
+  -- {
+  --   'lewis6991/hover.nvim',
+  --   lazy = true,
+  --   auto = true,
+  -- },
   {
     'stevearc/dressing.nvim',
     event = 'VimEnter', -- not VeryLazy
@@ -2756,6 +2764,19 @@ modules.tool = {
       }
     end,
   },
+  -- {
+  --   'ThePrimeagen/vim-apm',
+  --   keys = {
+  --     {
+  --       '<leader>apm',
+  --       function()
+  --         local apm = require 'vim-apm'
+  --         apm:setup {}
+  --         apm:toggle_monitor()
+  --       end,
+  --     },
+  --   },
+  -- },
 }
 
 local to_plugs = function(t, submods)
