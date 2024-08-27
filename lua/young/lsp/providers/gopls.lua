@@ -2,7 +2,8 @@
 -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md
 
 return {
-  cmd = { 'gopls', 'serve' },
+  -- cmd = { 'gopls' },
+  -- cmd = { 'gopls', 'serve' },
   -- cmd = { 'gopls', '--remote=auto' },
   -- init_options = {},
   settings = {
@@ -31,7 +32,7 @@ return {
         unusedwrite = true,
         useany = true,
       },
-      staticcheck = true,
+      -- staticcheck = true,
       -- hints = {
       --   assignVariableTypes = true,
       --   compositeLiteralFields = true,

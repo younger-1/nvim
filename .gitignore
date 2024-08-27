@@ -9,6 +9,7 @@ packer_compiled.lua
 __pycache__/
 
 *.packer
+*.lazy
 
 .nlsp-settings/
 

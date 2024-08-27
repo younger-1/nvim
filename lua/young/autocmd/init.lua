@@ -204,10 +204,46 @@ function M.done()
       { 'InsertEnter', '*', require('young.tool').no_rnu },
       { 'InsertLeave', '*', require('young.tool').rnu },
     },
-    -- _cursorline = {
-    --   { 'InsertEnter,WinLeave,FocusLost', '*', require('young.tool').no_cursorline },
-    --   { 'InsertLeave,WinEnter,FocusGained', '*', require('young.tool').cursorline },
-    -- },
+    _cursorline = {
+      -- { 'InsertEnter,WinLeave,FocusLost', '*', require('young.tool').no_cursorline },
+      -- { 'InsertLeave,WinEnter,FocusGained', '*', require('young.tool').cursorline },
+      --
+      -- Hide cursorline in insert mode and when the current window doesn't have focus
+      -- autocmd InsertEnter * setlocal nocursorline
+      -- autocmd InsertLeave * setlocal cursorline
+      -- autocmd WinLeave,FocusLost * if !&diff | setlocal nocursorline | endif
+      -- autocmd InsertLeave,WinEnter,FocusGained * let &l:cursorline = mode() !=# 'i'
+      -- {
+      --   'InsertEnter',
+      --   '*',
+      --   'setlocal nocursorline',
+      -- },
+      -- {
+      --   'WinLeave,FocusLost',
+      --   '*',
+      --   'if !&diff | setlocal nocursorline | endif',
+      -- },
+      -- {
+      --   'InsertLeave,WinEnter,FocusGained',
+      --   '*',
+      --   'set cursorline',
+      -- },
+      --
+      -- Highlight cursor line briefly when neovim regains focus.
+      -- This helps to reorient the user and tell them where they are in the buffer.
+      -- Stolen from https://developer.ibm.com/tutorials/l-vim-script-5
+      -- {
+      --   'FocusGained',
+      --   '*',
+      --   function()
+      --     vim.opt.cursorline = true
+      --     vim.cmd 'redraw'
+      --     vim.defer_fn(function()
+      --       vim.opt.cursorline = false
+      --     end, 600)
+      --   end,
+      -- },
+    },
     _cursor = {
       {
         'VimEnter,VimResume',
@@ -419,31 +455,6 @@ function M.done()
       },
     },
   }
-
-  M.build_augroups({
-    -- Hide cursorline in insert mode and when the current window doesn't have focus
-    -- autocmd InsertEnter * setlocal nocursorline
-    -- autocmd InsertLeave * setlocal cursorline
-    -- autocmd WinLeave,FocusLost * if !&diff | setlocal nocursorline | endif
-    -- autocmd InsertLeave,WinEnter,FocusGained * let &l:cursorline = mode() !=# 'i'
-    -- auto_cursorline = {
-    --   {
-    --     'InsertEnter',
-    --     '*',
-    --     'setlocal nocursorline',
-    --   },
-    --   {
-    --     'WinLeave,FocusLost',
-    --     '*',
-    --     'if !&diff | setlocal nocursorline | endif',
-    --   },
-    --   {
-    --     'InsertLeave,WinEnter,FocusGained',
-    --     '*',
-    --     'set cursorline',
-    --   },
-    -- },
-  }, true)
 
   -- require 'young.autocmd.core'
 end
