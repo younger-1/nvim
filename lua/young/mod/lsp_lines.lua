@@ -12,7 +12,7 @@ M.toggle = function(cur)
   if state == 0 then
     vim.diagnostic.config { virtual_text = false, virtual_lines = false }
   elseif state == 1 then
-    vim.diagnostic.config { virtual_text = true, virtual_lines = false }
+    vim.diagnostic.config { virtual_text = require('young.lsp.config').diagnostics.virtual_text, virtual_lines = false }
   elseif state == 2 then
     vim.diagnostic.config { virtual_text = false, virtual_lines = true }
   end
@@ -22,6 +22,6 @@ M.toggle = function(cur)
 end
 
 M.toggle()
-xy.map.n { '<leader>lt', M.toggle, 'Toggle virtual text' }
+xy.map2.n('<leader>lt', M.toggle, { desc = 'Toggle virtual text' })
 
 return M

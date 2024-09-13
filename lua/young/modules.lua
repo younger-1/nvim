@@ -2252,7 +2252,8 @@ modules.LSP = {
       tag = 'legacy',
     },
     {
-      'Maan2003/lsp_lines.nvim',
+      'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+      -- 'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
       event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
       config = function()

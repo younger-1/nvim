@@ -51,15 +51,7 @@ do -- if vim.fn.has('nvim-0.10') == 0 then
   )
 end
 
-vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {
-  -- virtual_text = false,
-  virtual_text = {
-    prefix = '',
-  },
-  float = {
-    border = 'single',
-  },
-}))
+vim.diagnostic.config(vim.tbl_deep_extend('force', lsp_cfg.diagnostics, {}))
 
 -- This strips out &nbsp; and some ending escaped backslashes out of hover
 -- strings because the pyright LSP is... odd with how it creates hover strings.

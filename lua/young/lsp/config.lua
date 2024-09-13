@@ -18,12 +18,14 @@ return {
         [vim.diagnostic.severity.HINT] = require('young.util.icon').diagnostics.hint_var,
       },
     },
+    -- virtual_text = false,
     virtual_text = {
       spacing = 4,
-      prefix = '●',
-      severity = {
-        min = vim.diagnostic.severity.WARN,
-      },
+      -- prefix = '●',
+      prefix = '',
+      -- severity = {
+      --   min = vim.diagnostic.severity.WARN,
+      -- },
     },
     underline = {
       severity = {
@@ -35,7 +37,8 @@ return {
     float = {
       focusable = true,
       style = 'minimal',
-      border = 'rounded',
+      -- border = 'rounded',
+      border = 'single',
       -- border = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
       -- border = { "/", "-", "\\", "|" },
       severity_sort = true,
