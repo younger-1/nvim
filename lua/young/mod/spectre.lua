@@ -3,6 +3,7 @@ local M = {}
 M.once = function()
   xy.map.register {
     ['<leader>r'] = {
+      group = '+replace',
       r = {
         function()
           require('spectre').toggle()

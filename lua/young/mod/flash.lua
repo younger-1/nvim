@@ -40,14 +40,14 @@ M.once = function()
       mode = { 'n', 'x', 'o' },
       desc = 'Flash Treesitter',
     },
-    {
-      'r',
-      function()
-        require('flash').remote()
-      end,
-      mode = 'o',
-      desc = 'Remote Flash',
-    },
+    -- {
+    --   'r',
+    --   function()
+    --     require('flash').remote()
+    --   end,
+    --   mode = 'o',
+    --   desc = 'Remote Flash',
+    -- },
     {
       'R',
       function()

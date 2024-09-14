@@ -28,6 +28,7 @@ return {
   once = function()
     xy.map.register {
       ['<leader>ps'] = {
+        group = '+session',
         c = {
           function()
             require('persistence').load()

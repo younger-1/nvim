@@ -4,6 +4,7 @@ function M.once()
   xy.map.register {
     g = {
       j = {
+        group = '+lspsaga',
         j = {
           function()
             vim.cmd 'Lspsaga finder'

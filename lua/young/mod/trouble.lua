@@ -9,6 +9,7 @@ M.once = function()
   t.defaults.mappings.n['t'] = xy_send_to_trouble
   xy.map.register {
     ['<leader>x'] = {
+      group = '+trouble',
       x = {
         function()
           vim.cmd 'TroubleToggle'

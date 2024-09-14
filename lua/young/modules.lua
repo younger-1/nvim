@@ -416,9 +416,8 @@ modules.change = {
   -- },
   {
     'gregorias/coerce.nvim',
-    tag = 'v1.0',
     event = { 'BufReadPost', 'BufNewFile' },
-    config = true,
+    auto = 'config',
   },
   pair = {
     {
@@ -1359,7 +1358,7 @@ modules.telescope = {
       'LukasPietzschmann/telescope-tabs',
       keys = {
         {
-          '<leader>s<tab>',
+          '<leader>s`',
           function()
             vim.cmd 'Telescope telescope-tabs list_tabs'
           end,
@@ -1397,9 +1396,7 @@ modules.git = {
     'lewis6991/gitsigns.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
     -- event = 'VeryLazy',
-    config = function()
-      require('young.mod.gitsigns').done()
-    end,
+    auto = true,
   },
   {
     'sindrets/diffview.nvim',
@@ -2017,9 +2014,7 @@ modules.code = {
     {
       'mfussenegger/nvim-dap',
       lazy = true,
-      config = function()
-        require 'young.mod.dap'
-      end,
+      auto = true,
       dependencies = {
         {
           'rcarriga/cmp-dap',
@@ -2037,8 +2032,9 @@ modules.code = {
       'rcarriga/nvim-dap-ui',
       lazy = true,
       config = function()
-        require 'young.mod.dapui'
+        require 'young.mod.dap-ui'
       end,
+      dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
     },
     {
       'theHamsta/nvim-dap-virtual-text',
@@ -2139,6 +2135,7 @@ modules.LSP = {
     init = function()
       xy.map.register {
         ['<leader>l'] = {
+          group = '+lsp',
           i = {
             function()
               vim.cmd 'LspInfo'
@@ -2562,6 +2559,11 @@ modules.write = {
       'iamcco/markdown-preview.nvim',
       build = 'cd app && yarn install',
       ft = 'markdown',
+      init = function()
+        vim.keymap.set('n', '<leader>am', function()
+          vim.cmd 'MarkdownPreviewToggle'
+        end, { desc = 'Markdown preview' })
+      end,
       config = function()
         vim.g.mkdp_auto_start = 0
         vim.g.mkdp_auto_close = 0
@@ -2640,7 +2642,7 @@ modules.write = {
     },
   },
   { 'jbyuki/venn.nvim', cmd = 'VBox' },
-  { 'jbyuki/nabla.nvim', lazy = true },
+  { 'jbyuki/nabla.nvim', lazy = true, auto = true },
   -- {
   --   '3rd/image.nvim',
   --   event = 'VeryLazy',
@@ -2659,10 +2661,7 @@ modules.tool = {
     {
       'itchyny/vim-external', -- TODO:gx in WSL
       event = { 'BufReadPost', 'BufNewFile' },
-      keys = { '<Plug>(external-editor)', '<Plug>(external-explorer)', '<Plug>(external-browser)' },
-      config = function()
-        require 'young.mod.external'
-      end,
+      auto = 'config',
     },
     {
       'axieax/urlview.nvim',
@@ -2852,7 +2851,7 @@ local function require_helper_semi(plug)
   local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
   local mod_path = 'young.mod.' .. plug_name
 
-  if plug.auto == 'init' or plug.auto == true then
+  if plug.auto == 'init' or plug.auto == 'once' or plug.auto == true then
     plug.init = function()
       -- xy.autogroup('_lazy_init_' .. plug_name, {
       --   {
@@ -2869,7 +2868,7 @@ local function require_helper_semi(plug)
     end
   end
 
-  if plug.auto == 'config' or plug.auto == true then
+  if plug.auto == 'config' or plug.auto == 'done' or plug.auto == true then
     plug.config = function()
       local m = require(mod_path)
       if type(m) == 'table' and m.done and type(m.done) == 'function' then

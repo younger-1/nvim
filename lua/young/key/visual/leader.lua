@@ -1,7 +1,6 @@
 return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(fn.visualmode())<cr>', 'Comment' },
   g = {
-    name = '+git',
     h = {
       function()
         vim.cmd [[exe "normal! \<ESC>"]]
@@ -13,14 +12,7 @@ return {
       'Commits(current range)',
     },
   },
-  l = {
-    name = '+lsp',
-  },
-  f = {
-    name = '+fzf',
-  },
   s = {
-    name = '+search',
     f = {
       function()
         local text = xy.util.get_visual_selection_by_reg()
@@ -69,7 +61,6 @@ return {
     },
   },
   y = {
-    name = '+young',
     g = {
       function()
         local text = xy.util.get_visual_selection_by_reg()

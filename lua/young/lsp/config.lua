@@ -266,7 +266,7 @@ return {
           'Vista',
         },
         w = {
-          name = '+workspace',
+          group = '+workspace',
           w = {
             function()
               pp(vim.lsp.buf.list_workspace_folders())
@@ -288,6 +288,7 @@ return {
         },
       },
       ['<leader>c'] = {
+        group = '+code',
         -- [' '] = {},
         -- lsp goto
         d = {
@@ -357,7 +358,7 @@ return {
           'Diagnostics(All)',
         },
         -- p = {
-        --   name = '+peek',
+        --   group = '+peek',
         --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },
         --   i = { "<cmd>lua require('young.lsp.misc').Peek('implementation')<cr>", 'Implementation' },
         --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type definition' },

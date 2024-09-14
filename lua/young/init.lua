@@ -414,55 +414,64 @@ xy.map = {
 
   _nest = function(mappings, prefix, mode, buffer)
     for k, v in pairs(mappings) do
-      if k == 'name' or type(v) == 'string' then
-        -- NOTE: #v == 1 which-key will take it as description
-        goto continue
-      end
-      if #v == 0 then
+      if k == 'group' or type(v) == 'string' then
+        -- NOTE: #v == 1 which-key will take it as description, but we want actual map
+        require('young.mod.which_key').add { prefix, group = v }
+      elseif #v == 0 then
         xy.map._nest(v, prefix .. k, mode, buffer)
+      elseif v[1] == nil then
+        xy.util.echomsg { fmt('[xy.map.register]: [%s%s] is mapped to nil, with v = ', prefix, k), vim.inspect(v) }
+      elseif #v == vim.tbl_count(v) then
+        xy.map[mode] { prefix .. k, v[1], v[2], buffer = buffer }
       else
-        local desc = v[2] ~= 'which_key_ignore' and v[2] or nil
-        if v[1] == nil then
-          xy.util.echomsg { fmt('[young]: [%s%s] is mapped to nil, with v = ', prefix, k), vim.inspect(v) }
-        elseif #v == vim.tbl_count(v) then
-          xy.map[mode] { prefix .. k, v[1], desc, buffer = buffer }
-        else
-          local keymap = { prefix .. k, v[1], desc, buffer = buffer }
-          -- allow |mappings|'s buffer override |opts|'s buffer
-          for kk, vv in pairs(v) do
-            if tonumber(kk) == nil then
-              keymap[kk] = vv
-            end
+        local keymap = { prefix .. k, v[1], v[2], buffer = buffer }
+        -- allow |mappings|'s (mode,buffer) override |opts|'s (mode,buffer)
+        for kk, vv in pairs(v) do
+          if tonumber(kk) == nil then
+            keymap[kk] = vv
           end
-          xy.map[mode](keymap)
         end
+        xy.map[mode](keymap)
       end
-      ::continue::
     end
   end,
 }
 
----@param tbl table: { lhs, rhs, desc, ... }
-local function mapper(tbl)
-  local opts = { nowait = true }
-
-  local mode = tbl['mode'] or { 'n', 'x', 'o' }
-  tbl['mode'] = nil
-
-  for k, v in pairs(tbl) do
-    if tonumber(k) == nil then
-      opts[k] = v
-    end
-  end
-  opts.desc = tbl[3] or opts.desc
-
-  vim.keymap.set(mode, tbl[1], tbl[2], opts)
-end
-
 setmetatable(xy.map, {
   -- default to 'map', not 'nmap'
+  ---@param tbl table: { lhs, rhs, desc, ... }
   __call = function(t, tbl)
-    mapper(tbl)
+    local mode = tbl['mode'] or { 'n', 'x', 'o' }
+    tbl['mode'] = nil
+
+    local opts = { nowait = true }
+    for k, v in pairs(tbl) do
+      if tonumber(k) == nil then
+        opts[k] = v
+      end
+    end
+    opts.desc = tbl[3] or opts.desc
+
+    local e = vim.fn.maparg(tbl[1], type(mode) == 'string' and mode or table.concat(mode), false, true)
+    ---@cast e -string
+    if next(e) then
+      xy.util.echomsg {
+        fmt(
+          '[xy.map.check](%s): %s old map is [%s](%s), new map is [%s](%s)',
+          mode,
+          tbl[1],
+          -- old
+          e.rhs or table.concat({ xy.util.get_func_loc(e.callback) }, ' '),
+          e.desc,
+          -- new
+          type(tbl[2]) == 'string' and tbl[2] or table.concat({ xy.util.get_func_loc(tbl[2]) }, ' '),
+          opts.desc
+        ),
+      }
+      -- return
+    end
+
+    vim.keymap.set(mode, tbl[1], tbl[2], opts)
   end,
   __index = function(t, key)
     -- local silent
@@ -477,28 +486,11 @@ setmetatable(xy.map, {
 
       -- let mode has higher priority
       tbl['mode'] = tbl['mode'] or key
-      mapper(tbl)
+      xy.map(tbl)
     end
     return t[key]
   end,
 })
-
----@param tbl table: { lhs, rhs, desc, ... }
-local function mapper2(tbl)
-  local opts = { nowait = true }
-
-  local mode = tbl['mode'] or { 'n', 'x', 'o' }
-  tbl['mode'] = nil
-
-  for k, v in pairs(tbl) do
-    if tonumber(k) == nil then
-      opts[k] = v
-    end
-  end
-  opts.desc = tbl[3] or opts.desc
-
-  vim.keymap.set(mode, tbl[1], tbl[2], opts)
-end
 
 xy.map2 = {}
 setmetatable(xy.map2, {
@@ -506,24 +498,29 @@ setmetatable(xy.map2, {
   __call = function(t, lhs, rhs, opts)
     local mode = opts['mode'] or { 'n', 'x', 'o' }
     opts['mode'] = nil
-    if type(lhs) == 'string' then
-      lhs = { lhs }
+    local e = vim.fn.maparg(lhs, type(mode) == 'string' and mode or table.concat(mode), false, true)
+    ---@cast e -string
+    if next(e) then
+      xy.util.echomsg {
+        fmt(
+          '[xy.map2.check](%s): %s old map is [%s](%s), new map is [%s](%s)',
+          mode,
+          lhs,
+          -- old
+          e.rhs or table.concat({ xy.util.get_func_loc(e.callback) }, ' '),
+          e.desc,
+          -- new
+          type(rhs) == 'string' and rhs or table.concat({ xy.util.get_func_loc(rhs) }, ' '),
+          opts.desc
+        ),
+      }
+      -- return
     end
-    for _, lh in ipairs(lhs) do
-      vim.keymap.set(mode, lh, rhs, opts)
-    end
+
+    vim.keymap.set(mode, lhs, rhs, opts)
   end,
   __index = function(t, key)
-    -- local silent
-    -- if key ~= '!' and key ~= 'c' then
-    --   silent = true
-    -- end
-
     t[key] = function(lhs, rhs, opts)
-      -- if nil == tbl['silent'] then
-      --   tbl['silent'] = silent
-      -- end
-
       -- let mode has higher priority
       opts['mode'] = opts['mode'] or key
       xy.map2(lhs, rhs, opts)

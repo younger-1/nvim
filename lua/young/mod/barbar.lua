@@ -145,6 +145,7 @@ xy.map.register {
     'Buffer Goto',
   },
   ['<leader>b'] = {
+    groub = '+buffer',
     ['1'] = {
       function()
         vim.cmd 'BufferGoto 1'
@@ -290,6 +291,7 @@ xy.map.register {
     },
     --
     s = {
+      group = '+sort',
       b = {
         function()
           vim.cmd 'BufferOrderByBufferNumber'

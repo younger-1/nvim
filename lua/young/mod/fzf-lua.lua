@@ -3,7 +3,7 @@ return {
     xy.map.register {
       ['<leader>'] = {
         f = {
-          name = '+fzf',
+          group = '+fzf',
           [' '] = {
             function()
               require('fzf-lua').live_grep_resume()

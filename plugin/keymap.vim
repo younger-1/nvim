@@ -142,6 +142,7 @@ nnoremap yor <Cmd>set rnu! \|set rnu?<CR>
 nnoremap yol <Cmd>set list! \|set list?<CR>
 nnoremap yos <Cmd>set spell! \|set spell?<CR>
 nnoremap yow <Cmd>set wrap! \|set wrap?<CR>
+nnoremap yoo :set scrolloff=<C-r>=999-&scrolloff<cr><cr>
 nnoremap yob :set bg=<C-R>=&bg == "dark" ? "light" : "dark"<cr> \|set bg?<cr>
 nnoremap yom :set mouse=<C-R>=&mouse == "" ? "nvi" : ""<cr> \|set mouse?<cr>
 nnoremap yoc :set cc=<C-R>=&cc == "" ? "81,121" : ""<cr> \|set cc?<cr>

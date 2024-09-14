@@ -38,6 +38,7 @@ M.once = function()
   xy.map.register {
     ['<leader>'] = {
       s = {
+        group = '+search',
         -- ['`'] = { 'TODO', 'Terminal' },
         -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
         -- ['0'] = { function() vim.cmd 'Telescope pickers' end, 'Resume pickers' },
@@ -191,7 +192,7 @@ M.once = function()
           'Commands',
         },
         d = {
-          name = '+dir',
+          group = '+dir',
           f = {
             function()
               vim.cmd 'Telescope find_files cwd=%:p:h'
@@ -321,7 +322,7 @@ M.once = function()
           'Man pages',
         },
         s = {
-          name = '+symbol',
+          group = '+symbol',
           e = {
             function()
               require('telescope.builtin').symbols { sources = { 'emoji' } }
@@ -385,7 +386,7 @@ M.once = function()
         },
         -- u = { function() vim.cmd 'Telescope repo list' end, 'Repository' },
         v = {
-          name = '+vim',
+          group = '+vim',
           f = {
             function()
               vim.cmd 'Telescope filetypes'

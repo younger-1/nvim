@@ -242,25 +242,21 @@ function util.unlimited_depth_table()
   return setmetatable({}, mt)
 end
 
-function util.get_loc()
-  local me = debug.getinfo(1, 'S')
-  local level = 2
-  local info = debug.getinfo(level, 'S')
-  while info and info.source == me.source do
-    level = level + 1
-    info = debug.getinfo(level, 'S')
-  end
-  info = info or me
-  local source = info.source:sub(2)
-  source = vim.loop.fs_realpath(source) or source
-  return source .. ':' .. info.linedefined
+function util.get_func_loc(func)
+  local func_name = debug.getinfo(func or 2, 'n').name
+  local info = debug.getinfo(func or 2, 'S')
+  local file_name = info.source:sub(2)
+  file_name = vim.loop.fs_realpath(file_name) or file_name
+  file_name = vim.fn.fnamemodify(file_name, ':~:.')
+  local line_defined = info.linedefined
+  return file_name .. ':' .. line_defined, func_name
 end
 
 ---@param value any
 ---@param opts? {loc:string}
 function util.dump(value, opts)
   opts = opts or {}
-  opts.loc = opts.loc or util.get_loc()
+  opts.loc = opts.loc or util.get_func_loc(3)
   if vim.in_fast_event() then
     return vim.schedule(function()
       util.dump(value, opts)

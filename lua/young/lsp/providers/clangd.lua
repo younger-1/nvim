@@ -194,6 +194,7 @@ return {
 
     xy.map.register({
       ['<leader>cc'] = {
+        group = '+clangd',
         s = {
           function()
             vim.cmd 'ClangdSwitchSourceHeader'

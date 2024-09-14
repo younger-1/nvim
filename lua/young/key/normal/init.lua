@@ -114,7 +114,7 @@ return {
   },
   [','] = {
     s = {
-      name = '+seek',
+      group = '+seek',
       c = {
         function()
           vim.cmd 'Telescope cheat fd'
@@ -131,7 +131,7 @@ return {
   },
   c = {
     d = {
-      name = '+cmd',
+      group = '+cmd',
       o = {
         function()
           xy.tool.buf_git_root 'tcd'
@@ -153,6 +153,7 @@ return {
       'Edit or select [R/r]egister',
     },
     p = {
+      -- https://vim.fandom.com/wiki/Selecting_your_pasted_text
       -- "p" makes sense, gv selects the last Visual selection, so this one selects the last pasted text.
       function()
         vim.api.nvim_feedkeys('`[' .. vim.fn.strpart(vim.fn.getregtype(), 0, 1) .. '`]', 'n', false)
@@ -162,7 +163,7 @@ return {
   },
   y = {
     c = {
-      name = '+colorscheme',
+      group = '+colorscheme',
       c = {
         function()
           require('young.theme').toggle_style()
@@ -177,7 +178,7 @@ return {
       },
     },
     o = {
-      name = '+options',
+      group = '+options',
       ['-'] = 'line',
       ['|'] = 'column',
       n = 'number',

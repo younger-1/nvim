@@ -146,7 +146,8 @@ local cfg = {
 
 return {
   once = function()
-    xy.map2.n({ '<S-CR>', '<C-w><cr>' }, function()
+    -- '<S-CR>'
+    xy.map2.n('<C-w><cr>', function()
       float_flag = false
       local wid = require('window-picker').pick_window()
       if wid then
@@ -154,7 +155,8 @@ return {
         return wid
       end
     end, { desc = 'Pick window' })
-    xy.map2.n({ '<C-w>w', '<C-w><tab>' }, function()
+    -- '<C-w>w'
+    xy.map2.n('<C-w><tab>', function()
       float_flag = true
       local wid = require('window-picker').pick_window()
       if wid then

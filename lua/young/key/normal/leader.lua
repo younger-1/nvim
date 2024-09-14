@@ -39,83 +39,10 @@ return {
   --   'Buffer string',
   -- },
   ['?'] = {
-    name = '+help',
+    group = '+help',
   },
   a = {
-    name = '+apps',
-    [' '] = {
-      function()
-        vim.cmd 'Telescope command_palette'
-      end,
-      'Command palette',
-    },
-    e = { '+external' },
-    g = {
-      name = '+github',
-      g = {
-        function()
-          vim.cmd 'Telescope gh gist'
-        end,
-        'Gist',
-      },
-      i = {
-        function()
-          vim.cmd 'Telescope gh issues'
-        end,
-        'Issues',
-      },
-      p = {
-        function()
-          vim.cmd 'Telescope gh pull_request'
-        end,
-        'Pull_request',
-      },
-      r = {
-        function()
-          vim.cmd 'Telescope gh run'
-        end,
-        'Run',
-      },
-    },
-    m = {
-      function()
-        vim.cmd 'MarkdownPreviewToggle'
-      end,
-      'Markdown',
-    },
-    n = {
-      name = '+nabla',
-      n = {
-        function()
-          require('nabla').popup { border = 'rounded' }
-        end,
-        'ASCII LaTeX equations',
-      },
-      r = {
-        function()
-          require('nabla').replace_current()
-        end,
-        'Replace current LaTeX equations',
-      },
-      a = {
-        function()
-          require('nabla').replace_all()
-        end,
-        'Replace current LaTeX equations',
-      },
-      d = {
-        function()
-          require('nabla').draw_overlay()
-        end,
-        'Draw overlay',
-      },
-      t = {
-        function()
-          require('nabla').toggle_virt()
-        end,
-        'Toggle ASCII LaTeX',
-      },
-    },
+    group = '+apps',
     u = {
       function()
         xy.tool.open_github_url()
@@ -129,642 +56,31 @@ return {
       'Open in vscode',
     },
   },
-  b = {
-    name = '+buffer',
-    s = {
-      name = '+sort',
-    },
-    -- A = { function() vim.cmd 'TablineToggleShowAllBuffers' end, 'Tabline toggle all' },
-    -- U = { function() vim.cmd 'TablineBuffersClearBind' end, 'Tabline unbound' },
-    -- B = { ':TablineBuffersBind ', 'Tabline bound' },
-    -- R = { ':TablineTabRename ', 'Tabline rename' },
-    -- N = { ':TablineTabNew ', 'Tabline new' },
-    -- T = { ':TablineCustom ', 'Tabline++' },
+  -- b = {
+  --   A = { function() vim.cmd 'TablineToggleShowAllBuffers' end, 'Tabline toggle all' },
+  --   U = { function() vim.cmd 'TablineBuffersClearBind' end, 'Tabline unbound' },
+  --   B = { ':TablineBuffersBind ', 'Tabline bound' },
+  --   R = { ':TablineTabRename ', 'Tabline rename' },
+  --   N = { ':TablineTabNew ', 'Tabline new' },
+  --   T = { ':TablineCustom ', 'Tabline++' },
+  -- },
+  e = {
+    group = '+explorer',
   },
-  c = {
-    name = '+code',
-    c = {
-      name = '+lsp-extension',
-    },
-    n = {
-      name = '+neogen',
-    },
-  },
-  d = {
-    name = '+debug',
-    s = {
-      name = '+telescope',
-      [' '] = {
-        function()
-          vim.cmd 'Telescope dap configurations'
-        end,
-        'Dap configurations',
-      },
-      c = {
-        function()
-          vim.cmd 'Telescope dap commands'
-        end,
-        'Dap commands',
-      },
-      l = {
-        function()
-          vim.cmd 'Telescope dap list_breakpoints'
-        end,
-        'Dap list_breakpoints',
-      },
-      v = {
-        function()
-          vim.cmd 'Telescope dap variables'
-        end,
-        'Dap variables',
-      },
-      f = {
-        function()
-          vim.cmd 'Telescope dap frames'
-        end,
-        'Dap frames',
-      },
-    },
-    [' '] = {
-      function()
-        require('dapui').toggle()
-      end,
-      ' UI',
-    },
-    ['<tab>'] = '+lang',
-    f = {
-      s = {
-        function()
-          vim.cmd 'DapScopesFloat'
-        end,
-        'Scopes float',
-      },
-      f = {
-        function()
-          vim.cmd 'DapFramesFloat'
-        end,
-        'Frames Float',
-      },
-      e = {
-        function()
-          vim.cmd 'DapExpressionFloat'
-        end,
-        'Expression float',
-      },
-      t = {
-        function()
-          vim.cmd 'DapThreadsFloat'
-        end,
-        'Threads float',
-      },
-    },
-    -- h = { function() require'dap.ui.widgets'.hover() end, 'Hover' },
-    h = {
-      function()
-        require('dapui').eval(nil, { enter = true })
-      end,
-      'Hover',
-    },
-    t = {
-      function()
-        vim.cmd 'DapVirtualTextToggle'
-      end,
-      'Virtual text',
-    },
-    ['['] = {
-      function()
-        require('persistent-breakpoints.api').load_breakpoints()
-      end,
-      'Load breakpoints',
-    },
-    [']'] = {
-      function()
-        require('persistent-breakpoints.api').store_breakpoints()
-      end,
-      'Store breakpoints',
-    },
-
-    L = {
-      function()
-        vim.cmd 'DapShowLog'
-      end,
-      'Show log',
-    },
-
-    -- s = { function() require'dap'.continue() end, ' Start' },
-    c = {
-      function()
-        require('dap').continue()
-      end,
-      ' Continue',
-    },
-    a = {
-      function()
-        require('dap').run_to_cursor()
-      end,
-      '省 Run to cursor',
-    },
-    x = {
-      function()
-        require('dap').run_last()
-      end,
-      ' Run last',
-    },
-    v = {
-      function()
-        require('dap').goto_()
-      end,
-      'Jump/Skip to line',
-    },
-    z = {
-      function()
-        require('dap').pause()
-      end,
-      '懶 Pause',
-    },
-
-    d = {
-      function()
-        require('dap').toggle_breakpoint()
-      end,
-      'ﴫ Toggle breakpoint',
-    },
-    E = {
-      function()
-        require('dap').set_breakpoint(vim.fn.input 'Condition: ')
-      end,
-      ' Condition breakpoint',
-    },
-    F = {
-      function()
-        require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ')
-      end,
-      ' Log breakpoint',
-    },
-    H = {
-      function()
-        require('dap').set_breakpoint(nil, vim.fn.input 'Hit times: ')
-      end,
-      ' Hit breakpoint',
-    },
-
-    g = {
-      function()
-        require('dap').set_exception_breakpoints()
-      end,
-      'Ask exception breakpoints',
-    },
-    G = {
-      function()
-        require('dap').set_exception_breakpoints 'default'
-      end,
-      'Default exception breakpoints',
-    },
-    l = {
-      function()
-        require('dap').list_breakpoints(true)
-      end,
-      'List breakpoints',
-    },
-    C = {
-      function()
-        require('dap').clear_breakpoints()
-      end,
-      'Clear breakpoints',
-    },
-
-    r = {
-      function()
-        require('dap').repl.toggle()
-      end,
-      ' Toggle repl',
-    },
-    R = {
-      function()
-        require('dap').toggle()
-      end,
-      'Toggle Repl',
-    },
-
-    o = {
-      function()
-        require('dap').step_over()
-      end,
-      ' Step over',
-    },
-    i = {
-      function()
-        require('dap').step_into()
-      end,
-      ' Step into',
-    },
-    I = {
-      function()
-        require('dap').step_into { askForTargets = true }
-      end,
-      ' Step into',
-    },
-    u = {
-      function()
-        require('dap').step_out()
-      end,
-      ' Step out',
-    },
-    b = {
-      function()
-        require('dap').step_back()
-      end,
-      'Step back',
-    },
-    B = {
-      function()
-        require('dap').reverse_continue()
-      end,
-      'Reverse Continue',
-    },
-    j = {
-      function()
-        require('dap').down()
-      end,
-      'Stacktrace down',
-    },
-    k = {
-      function()
-        require('dap').up()
-      end,
-      'Stacktrace up',
-    },
-
-    q = {
-      function()
-        require('dap').terminate()
-      end,
-      'Terminate',
-    },
-    Q = {
-      function()
-        require('dap').disconnect()
-      end,
-      'Disconnect',
-    },
-    -- q = { function() require'dap'.close() end, 'Quit' },
-
-    m = {
-      function()
-        pp(require('dap').status(), require('dap').session())
-      end,
-      'Print session',
-    },
-    J = {
-      function()
-        require('dap.ext.vscode').load_launchjs()
-      end,
-      'Load launch JSON',
-    },
-  },
-  e = { name = '+explorer' },
-  f = { name = '+file' },
-  g = {
-    name = '+git',
-    [' '] = {
-      function()
-        vim.cmd 'tab Git'
-      end,
-      'Git',
-    },
-    m = {
-      function()
-        vim.cmd 'Flog'
-      end,
-      'Flog',
-    },
-    ['"'] = {
-      function()
-        vim.cmd 'Gitsigns toggle_current_line_blame'
-      end,
-      'Blames',
-    },
-    ["'"] = {
-      function()
-        vim.cmd 'Gitsigns toggle_linehl'
-      end,
-      'Line highlight',
-    },
-    ['`'] = {
-      function()
-        vim.cmd 'Gitsigns toggle_numhl'
-      end,
-      'Number highlight',
-    },
-    [';'] = {
-      function()
-        vim.cmd 'Gitsigns toggle_deleted'
-      end,
-      'Deleted lines',
-    },
-    [','] = {
-      function()
-        vim.cmd 'Gitsigns toggle_signs'
-      end,
-      'Sign highlight',
-    },
-    ['<C-q>'] = {
-      name = '+quickfix',
-      a = {
-        function()
-          require('gitsigns').setqflist 'all'
-        end,
-        'All git',
-      },
-      b = {
-        function()
-          require('gitsigns').setqflist 'attached'
-        end,
-        'Buffers',
-      },
-      c = {
-        function()
-          vim.cmd 'Gitsigns setqflist'
-        end,
-        'Current',
-      },
-    },
-    ['<C-z>'] = {
-      name = '+loclist',
-      a = {
-        function()
-          require('gitsigns').setloclist(0, 'all')
-        end,
-        'All git',
-      },
-      b = {
-        function()
-          require('gitsigns').setloclist(0, 'attached')
-        end,
-        'Buffers',
-      },
-      c = {
-        function()
-          vim.cmd 'Gitsigns setloclist'
-        end,
-        'Current',
-      },
-    },
-    b = {
-      function()
-        vim.cmd 'Telescope git_branches'
-      end,
-      'Branches',
-    },
-    c = {
-      function()
-        vim.cmd 'Telescope git_commits'
-      end,
-      'Commits',
-    },
-    C = {
-      function()
-        vim.cmd 'Telescope git_bcommits'
-      end,
-      'Commits(current file)',
-    },
-    e = {
-      function()
-        vim.cmd 'Telescope git_stash'
-      end,
-      'Stash',
-    },
-    f = {
-      function()
-        vim.cmd 'Telescope git_files'
-      end,
-      'Files',
-    },
-    o = {
-      function()
-        vim.cmd 'Telescope git_status'
-      end,
-      'Open changed file',
-    },
-    h = {
-      function()
-        vim.cmd 'Telescope git_bcommits_range'
-      end,
-      'Commits(current line)',
-    },
-    -- d = { function() vim.cmd 'Gitsigns diffthis ~1' end, 'Diff this' },
-    d = {
-      name = '+diff',
-      [' '] = { ':DiffviewOpen ', 'Diffview open' },
-      ['<tab>'] = { ':DiffviewFileHistory ', 'Diffview commits' },
-      -- s = { function() vim.cmd 'DiffviewOpen --staged' end, 'Open staged' },
-      -- c = { function() vim.cmd 'DiffviewClose' end, 'Close diff' },
-      -- t = { function() vim.cmd 'DiffviewToggleFiles' end, 'Toggle files' },
-      d = {
-        function()
-          vim.cmd 'DiffviewOpen'
-        end,
-        'Open diff',
-      },
-      h = {
-        function()
-          vim.cmd 'DiffviewFileHistory'
-        end,
-        'All commits',
-      },
-      f = {
-        function()
-          vim.cmd 'DiffviewFileHistory %'
-        end,
-        'File commits',
-      },
-      p = {
-        function()
-          vim.cmd 'DiffviewLog'
-        end,
-        'Log',
-      },
-      --
-      a = { ':DiffviewFileHistory --author=', 'All commits (author)' },
-      m = { ':DiffviewFileHistory --grep=', 'All commits (log message)' },
-      l = {
-        function()
-          vim.cmd 'DiffviewFileHistory --base=LOCAL'
-        end,
-        'All commits (compare to local)',
-      },
-      y = {
-        function()
-          vim.cmd 'DiffviewFileHistory --merges'
-        end,
-        'All commits (merge)',
-      },
-      Y = {
-        function()
-          vim.cmd 'DiffviewFileHistory --no-merges'
-        end,
-        'All commits (no merge)',
-      },
-      --
-      A = { ':DiffviewFileHistory % --author=', 'File commits (author)' },
-      M = { ':DiffviewFileHistory % --grep=', 'File commits (log message)' },
-      L = {
-        function()
-          vim.cmd 'DiffviewFileHistory % --base=LOCAL'
-        end,
-        'File commits (compare to local)',
-      },
-      R = { ':DiffviewFileHistory -L,:<Left><Left>', 'File commits (range)' },
-      F = { ':DiffviewFileHistory -L::<Left>', 'File commits (func)' },
-    },
-    i = {
-      name = '+gist',
-      a = {
-        function()
-          vim.cmd 'Gist -b -a'
-        end,
-        'Create anon',
-      },
-      d = {
-        function()
-          vim.cmd 'Gist -d'
-        end,
-        'Delete',
-      },
-      f = {
-        function()
-          vim.cmd 'Gist -f'
-        end,
-        'Fork',
-      },
-      g = {
-        function()
-          vim.cmd 'Gist -b'
-        end,
-        'Create',
-      },
-      l = {
-        function()
-          vim.cmd 'Gist -l'
-        end,
-        'List',
-      },
-      p = {
-        function()
-          vim.cmd 'Gist -b -p'
-        end,
-        'Create private',
-      },
-    },
-    j = {
-      function()
-        vim.cmd 'Gitsigns next_hunk'
-      end,
-      'Next hunk',
-    },
-    k = {
-      function()
-        vim.cmd 'Gitsigns prev_hunk'
-      end,
-      'Prev hunk',
-    },
-    l = {
-      function()
-        vim.cmd 'Gitsigns blame_line'
-      end,
-      'Blame',
-    },
-    L = {
-      function()
-        require('gitsigns').blame_line { full = true }
-      end,
-      'Blame',
-    },
-    n = {
-      name = '+neogit',
-      c = {
-        function()
-          require('neogit').open { 'commit' }
-        end,
-        'Commit',
-      },
-      n = {
-        function()
-          vim.cmd 'Neogit'
-        end,
-        '♐',
-      },
-      s = {
-        function()
-          require('neogit').open { kind = 'split' }
-        end,
-        'Commit',
-      },
-      v = {
-        function()
-          require('neogit').open { kind = 'vsplit' }
-        end,
-        'Commit',
-      },
-    },
-    p = {
-      function()
-        vim.cmd 'Gitsigns preview_hunk_inline'
-      end,
-      'Preview hunk inline',
-    },
-    P = {
-      function()
-        vim.cmd 'Gitsigns preview_hunk'
-      end,
-      'Preview hunk',
-    },
-    r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk', mode = { 'n', 'x' } },
-    R = {
-      function()
-        vim.cmd 'Gitsigns reset_buffer'
-      end,
-      'Reset buffer',
-    },
-    s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk', mode = { 'n', 'x' } },
-    S = {
-      function()
-        vim.cmd 'Gitsigns stage_buffer'
-      end,
-      'Stage buffer',
-    },
-    u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk', mode = { 'n', 'x' } },
-    U = {
-      function()
-        vim.cmd 'Gitsigns reset_buffer_index'
-      end,
-      'Reset buffer index',
-    },
-    w = {
-      function()
-        vim.cmd 'Gitsigns toggle_word_diff'
-      end,
-      'Word diff',
-    },
-  },
-  h = { '<cmd>nohlsearch<cr>', 'which_key_ignore' },
   j = {
-    name = '+jump',
+    group = '+jump',
   },
   k = {
-    name = '+kit',
-  },
-  l = {
-    name = '+lsp',
+    group = '+kit',
   },
   L = {
-    name = '+lua',
+    group = '+lua',
     -- impatient.nvim
     -- c = { '<cmd>LuaCacheClear<cr>', 'LuaCache clear' },
     -- l = { '<cmd>LuaCacheLog<cr>', 'LuaCache log' },
     -- p = { '<cmd>LuaCacheProfile<cr>', 'LuaCache profile' },
     L = {
-      name = '+logs',
+      group = '+logs',
       d = {
         function()
           require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())
@@ -806,22 +122,19 @@ return {
     },
   },
   m = {
-    name = '+mark',
+    group = '+mark',
   },
   n = {
-    name = '+noice',
+    group = '+noice',
   },
   N = { '<cmd>tabnew | set nobuflisted<cr>', 'which_key_ignore' },
   o = {
-    name = '+open',
+    group = '+open',
   },
   p = {
-    name = '+project',
-    s = {
-      name = '+sessions',
-    },
+    group = '+project',
     S = {
-      name = '+session-man',
+      group = '+session-man',
       l = {
         function()
           vim.cmd 'SessionManager load_current_dir_session'
@@ -882,17 +195,11 @@ return {
     'which_key_ignore',
   },
   -- Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
-  r = {
-    name = '+replace',
-  },
-  s = {
-    name = '+search',
-  },
   t = {
-    name = '+toggle',
+    group = '+toggle',
     [':'] = { ':call wilder#toggle()<cr>', 'Wilder' },
     a = {
-      name = '+autocmd',
+      group = '+autocmd',
       f = {
         function()
           require('young.autocmd').toggle_format_on_save()
@@ -929,7 +236,7 @@ return {
     },
   },
   T = {
-    name = '+treesitter',
+    group = '+treesitter',
     t = {
       function()
         vim.cmd 'Telescope treesitter'
@@ -989,10 +296,10 @@ return {
     },
   },
   u = {
-    name = '+ui',
+    group = '+ui',
   },
   v = {
-    name = '+vim',
+    group = '+vim',
     v = {
       function()
         vim.cmd 'Inspect'
@@ -1019,11 +326,8 @@ return {
     end,
     'which_key_ignore',
   },
-  x = {
-    name = '+trouble',
-  },
   y = {
-    name = '+young',
+    group = '+young',
     ['1'] = {
       function()
         pp('[young] relative path', vim.fn.expand '%')

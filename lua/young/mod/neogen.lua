@@ -2,6 +2,7 @@ return {
   once = function()
     xy.map.register {
       ['<leader>cn'] = {
+        group = '+neogen',
         n = {
           function()
             -- generate annotation for the function, class or other relevant type you're currently in
