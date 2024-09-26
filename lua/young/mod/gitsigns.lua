@@ -72,6 +72,23 @@ M.cfg = {
   --     show_count = show_count,
   --   },
   -- },
+  signs = {
+    add = { text = '┃' },
+    change = { text = '┃' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked = { text = '┆' },
+  },
+  signs_staged = {
+    add = { text = '┃' },
+    change = { text = '┃' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked = { text = '┆' },
+  },
+  signs_staged_enable = true,
   count_chars = {
     [1] = '₁',
     [2] = '₂',
@@ -96,6 +113,7 @@ M.cfg = {
   watch_gitdir = {
     follow_files = true,
   },
+  auto_attach = true,
   attach_to_untracked = true,
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
@@ -103,6 +121,8 @@ M.cfg = {
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
     delay = vim.o.updatetime,
     ignore_whitespace = false,
+    virt_text_priority = 100,
+    use_focus = true,
   },
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> (<author_time:%R>) - <summary>',
   sign_priority = 6,
@@ -127,7 +147,7 @@ M.cfg = {
   --   ['x ih'] = '<cmd>lua require"gitsigns.actions".select_hunk()<cr>',
   -- },
   on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
+    local gitsigns = require 'gitsigns'
 
     local function map(mode, l, r, opts)
       opts = opts or {}
@@ -138,301 +158,230 @@ M.cfg = {
     -- Navigation
     map('n', ']c', function()
       if vim.wo.diff then
-        return ']c'
+        vim.cmd.normal { ']c', bang = true }
+      else
+        gitsigns.nav_hunk 'next'
       end
-      vim.schedule(function()
-        gs.next_hunk()
-      end)
-      return '<Ignore>'
-    end, { expr = true })
+    end)
 
     map('n', '[c', function()
       if vim.wo.diff then
-        return '[c'
+        vim.cmd.normal { '[c', bang = true }
+      else
+        gitsigns.nav_hunk 'prev'
       end
-      vim.schedule(function()
-        gs.prev_hunk()
-      end)
-      return '<Ignore>'
-    end, { expr = true })
+    end)
 
     map('n', ']d', function()
-      vim.schedule(function()
-        gs.next_hunk { preview = 1 }
-      end)
+      gitsigns.nav_hunk('next', { greedy = false, preview = true })
     end)
 
     map('n', '[d', function()
-      vim.schedule(function()
-        gs.prev_hunk { preview = 1 }
-      end)
+      gitsigns.nav_hunk('prev', { greedy = false, preview = true })
+    end)
+
+    map('n', ']s', function()
+      gitsigns.nav_hunk('next', { target = 'staged', greedy = false, preview = true })
+    end)
+
+    map('n', '[s', function()
+      gitsigns.nav_hunk('prev', { target = 'staged', greedy = false, preview = true })
+    end)
+
+    map('n', ']C', function()
+      gitsigns.nav_hunk 'first'
+    end)
+
+    map('n', '[C', function()
+      gitsigns.nav_hunk 'last'
     end)
 
     -- Text object
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+
+    xy.map.register({
+      ['<leader>h'] = {
+        ['"'] = {
+          function()
+            vim.cmd 'Gitsigns toggle_current_line_blame'
+          end,
+          'Blames',
+        },
+        ["'"] = {
+          function()
+            vim.cmd 'Gitsigns toggle_linehl'
+          end,
+          'Line highlight',
+        },
+        ['`'] = {
+          function()
+            vim.cmd 'Gitsigns toggle_numhl'
+          end,
+          'Number highlight',
+        },
+        [';'] = {
+          function()
+            vim.cmd 'Gitsigns toggle_deleted'
+          end,
+          'Deleted lines',
+        },
+        [','] = {
+          function()
+            vim.cmd 'Gitsigns toggle_signs'
+          end,
+          'Sign highlight',
+        },
+        ['<C-q>'] = {
+          group = '+quickfix',
+          a = {
+            function()
+              vim.cmd 'Gitsigns setqflist all'
+            end,
+            'All git',
+          },
+          b = {
+            function()
+              vim.cmd 'Gitsigns setqflist attached'
+            end,
+            'Buffers',
+          },
+          c = {
+            function()
+              vim.cmd 'Gitsigns setqflist'
+            end,
+            'Current',
+          },
+        },
+        ['<C-z>'] = {
+          group = '+loclist',
+          a = {
+            function()
+              vim.cmd 'Gitsigns setloclist all'
+            end,
+            'All git',
+          },
+          b = {
+            function()
+              vim.cmd 'Gitsigns setloclist attached'
+            end,
+            'Buffers',
+          },
+          c = {
+            function()
+              vim.cmd 'Gitsigns setloclist'
+            end,
+            'Current',
+          },
+        },
+        b = {
+          function()
+            vim.cmd 'Gitsigns blame'
+          end,
+          'Blame',
+        },
+        c = {
+          function()
+            if vim.v.count == 0 then
+              vim.cmd 'Gitsigns change_base'
+            else
+              vim.cmd('Gitsigns change_base ~' .. vim.v.count)
+            end
+          end,
+          'Change base',
+        },
+        C = {
+          function()
+            vim.cmd 'Gitsigns reset_base'
+          end,
+          'Reset base',
+        },
+        d = {
+          function()
+            if vim.v.count == 0 then
+              vim.cmd 'Gitsigns diffthis'
+            else
+              vim.cmd('Gitsigns diffthis ~' .. vim.v.count)
+            end
+          end,
+          'Diff index',
+        },
+        D = {
+          function()
+            vim.cmd 'Gitsigns diffthis'
+          end,
+          'Diff this',
+        },
+        j = {
+          function()
+            vim.cmd 'Gitsigns next_hunk'
+          end,
+          'Next hunk',
+        },
+        k = {
+          function()
+            vim.cmd 'Gitsigns prev_hunk'
+          end,
+          'Prev hunk',
+        },
+        l = {
+          function()
+            vim.cmd 'Gitsigns blame_line'
+          end,
+          'Blame',
+        },
+        L = {
+          function()
+            vim.cmd 'Gitsigns blame_line full=1'
+          end,
+          'Blame',
+        },
+        p = {
+          function()
+            vim.cmd 'Gitsigns preview_hunk_inline'
+          end,
+          'Preview hunk inline',
+        },
+        P = {
+          function()
+            vim.cmd 'Gitsigns preview_hunk'
+          end,
+          'Preview hunk',
+        },
+        r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk', mode = { 'n', 'x' } },
+        R = {
+          function()
+            vim.cmd 'Gitsigns reset_buffer'
+          end,
+          'Reset buffer',
+        },
+        s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk', mode = { 'n', 'x' } },
+        S = {
+          function()
+            vim.cmd 'Gitsigns stage_buffer'
+          end,
+          'Stage buffer',
+        },
+        u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk', mode = { 'n', 'x' } },
+        U = {
+          function()
+            vim.cmd 'Gitsigns reset_buffer_index'
+          end,
+          'Reset buffer index',
+        },
+        w = {
+          function()
+            vim.cmd 'Gitsigns toggle_word_diff'
+          end,
+          'Word diff',
+        },
+      },
+    }, { buffer = bufnr })
   end,
 }
 
 M.once = function()
   xy.map.register {
     ['<leader>g'] = {
-      group = '+git',
-      [' '] = {
-        function()
-          vim.cmd 'tab Git'
-        end,
-        'Git',
-      },
-      m = {
-        function()
-          vim.cmd 'Flog'
-        end,
-        'Flog',
-      },
-      --
-      ['"'] = {
-        function()
-          vim.cmd 'Gitsigns toggle_current_line_blame'
-        end,
-        'Blames',
-      },
-      ["'"] = {
-        function()
-          vim.cmd 'Gitsigns toggle_linehl'
-        end,
-        'Line highlight',
-      },
-      ['`'] = {
-        function()
-          vim.cmd 'Gitsigns toggle_numhl'
-        end,
-        'Number highlight',
-      },
-      [';'] = {
-        function()
-          vim.cmd 'Gitsigns toggle_deleted'
-        end,
-        'Deleted lines',
-      },
-      [','] = {
-        function()
-          vim.cmd 'Gitsigns toggle_signs'
-        end,
-        'Sign highlight',
-      },
-      ['<C-q>'] = {
-        group = '+quickfix',
-        a = {
-          function()
-            require('gitsigns').setqflist 'all'
-          end,
-          'All git',
-        },
-        b = {
-          function()
-            require('gitsigns').setqflist 'attached'
-          end,
-          'Buffers',
-        },
-        c = {
-          function()
-            vim.cmd 'Gitsigns setqflist'
-          end,
-          'Current',
-        },
-      },
-      ['<C-z>'] = {
-        group = '+loclist',
-        a = {
-          function()
-            require('gitsigns').setloclist(0, 'all')
-          end,
-          'All git',
-        },
-        b = {
-          function()
-            require('gitsigns').setloclist(0, 'attached')
-          end,
-          'Buffers',
-        },
-        c = {
-          function()
-            vim.cmd 'Gitsigns setloclist'
-          end,
-          'Current',
-        },
-      },
-      j = {
-        function()
-          vim.cmd 'Gitsigns next_hunk'
-        end,
-        'Next hunk',
-      },
-      k = {
-        function()
-          vim.cmd 'Gitsigns prev_hunk'
-        end,
-        'Prev hunk',
-      },
-      l = {
-        function()
-          vim.cmd 'Gitsigns blame_line'
-        end,
-        'Blame',
-      },
-      L = {
-        function()
-          require('gitsigns').blame_line { full = true }
-        end,
-        'Blame',
-      },
-      p = {
-        function()
-          vim.cmd 'Gitsigns preview_hunk_inline'
-        end,
-        'Preview hunk inline',
-      },
-      P = {
-        function()
-          vim.cmd 'Gitsigns preview_hunk'
-        end,
-        'Preview hunk',
-      },
-      r = { ':Gitsigns reset_hunk<CR>', 'Reset Hunk', mode = { 'n', 'x' } },
-      R = {
-        function()
-          vim.cmd 'Gitsigns reset_buffer'
-        end,
-        'Reset buffer',
-      },
-      s = { ':Gitsigns stage_hunk<CR>', 'Stage Hunk', mode = { 'n', 'x' } },
-      S = {
-        function()
-          vim.cmd 'Gitsigns stage_buffer'
-        end,
-        'Stage buffer',
-      },
-      u = { ':Gitsigns undo_stage_hunk<CR>', 'Undo stage Hunk', mode = { 'n', 'x' } },
-      U = {
-        function()
-          vim.cmd 'Gitsigns reset_buffer_index'
-        end,
-        'Reset buffer index',
-      },
-      w = {
-        function()
-          vim.cmd 'Gitsigns toggle_word_diff'
-        end,
-        'Word diff',
-      },
-      --
-      b = {
-        function()
-          vim.cmd 'Telescope git_branches'
-        end,
-        'Branches',
-      },
-      c = {
-        function()
-          vim.cmd 'Telescope git_commits'
-        end,
-        'Commits',
-      },
-      C = {
-        function()
-          vim.cmd 'Telescope git_bcommits'
-        end,
-        'Commits(current file)',
-      },
-      e = {
-        function()
-          vim.cmd 'Telescope git_stash'
-        end,
-        'Stash',
-      },
-      f = {
-        function()
-          vim.cmd 'Telescope git_files'
-        end,
-        'Files',
-      },
-      o = {
-        function()
-          vim.cmd 'Telescope git_status'
-        end,
-        'Open changed file',
-      },
-      h = {
-        function()
-          vim.cmd 'Telescope git_bcommits_range'
-        end,
-        'Commits(current line)',
-      },
-      -- d = { function() vim.cmd 'Gitsigns diffthis ~1' end, 'Diff this' },
-      d = {
-        group = '+diff',
-        [' '] = { ':DiffviewOpen ', 'Diffview open' },
-        ['<tab>'] = { ':DiffviewFileHistory ', 'Diffview commits' },
-        -- s = { function() vim.cmd 'DiffviewOpen --staged' end, 'Open staged' },
-        -- c = { function() vim.cmd 'DiffviewClose' end, 'Close diff' },
-        -- t = { function() vim.cmd 'DiffviewToggleFiles' end, 'Toggle files' },
-        d = {
-          function()
-            vim.cmd 'DiffviewOpen'
-          end,
-          'Open diff',
-        },
-        h = {
-          function()
-            vim.cmd 'DiffviewFileHistory'
-          end,
-          'All commits',
-        },
-        f = {
-          function()
-            vim.cmd 'DiffviewFileHistory %'
-          end,
-          'File commits',
-        },
-        p = {
-          function()
-            vim.cmd 'DiffviewLog'
-          end,
-          'Log',
-        },
-        --
-        a = { ':DiffviewFileHistory --author=', 'All commits (author)' },
-        m = { ':DiffviewFileHistory --grep=', 'All commits (log message)' },
-        l = {
-          function()
-            vim.cmd 'DiffviewFileHistory --base=LOCAL'
-          end,
-          'All commits (compare to local)',
-        },
-        y = {
-          function()
-            vim.cmd 'DiffviewFileHistory --merges'
-          end,
-          'All commits (merge)',
-        },
-        Y = {
-          function()
-            vim.cmd 'DiffviewFileHistory --no-merges'
-          end,
-          'All commits (no merge)',
-        },
-        --
-        A = { ':DiffviewFileHistory % --author=', 'File commits (author)' },
-        M = { ':DiffviewFileHistory % --grep=', 'File commits (log message)' },
-        L = {
-          function()
-            vim.cmd 'DiffviewFileHistory % --base=LOCAL'
-          end,
-          'File commits (compare to local)',
-        },
-        R = { ':DiffviewFileHistory -L,:<Left><Left>', 'File commits (range)' },
-        F = { ':DiffviewFileHistory -L::<Left>', 'File commits (func)' },
-      },
       i = {
         group = '+gist',
         a = {
@@ -470,33 +419,6 @@ M.once = function()
             vim.cmd 'Gist -b -p'
           end,
           'Create private',
-        },
-      },
-      n = {
-        group = '+neogit',
-        c = {
-          function()
-            require('neogit').open { 'commit' }
-          end,
-          'Commit',
-        },
-        n = {
-          function()
-            vim.cmd 'Neogit'
-          end,
-          '♐',
-        },
-        s = {
-          function()
-            require('neogit').open { kind = 'split' }
-          end,
-          'Commit',
-        },
-        v = {
-          function()
-            require('neogit').open { kind = 'vsplit' }
-          end,
-          'Commit',
         },
       },
     },

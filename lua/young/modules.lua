@@ -1386,11 +1386,29 @@ modules.git = {
   {
     'tpope/vim-fugitive',
     cmd = { 'Git', 'G', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gdiff' },
+    init = function()
+      xy.map.n {
+        '<leader>g ',
+        function()
+          vim.cmd 'tab Git'
+        end,
+        'Git',
+      }
+    end,
   },
   {
     'rbong/vim-flog',
     dependencies = { 'tpope/vim-fugitive' },
     cmd = { 'Flog', 'Flogsplit' },
+    init = function()
+      xy.map.n {
+        '<leader>gm',
+        function()
+          vim.cmd 'Flog'
+        end,
+        'Flog',
+      }
+    end,
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -1402,16 +1420,12 @@ modules.git = {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
-    config = function()
-      require 'young.mod.diffview'
-    end,
+    auto = true,
   },
   {
     'TimUntersberger/neogit',
     cmd = 'Neogit',
-    config = function()
-      require('neogit').setup {}
-    end,
+    auto = true,
   },
   -- {
   --   'tanvirtin/vgit.nvim',
@@ -2073,32 +2087,32 @@ modules.code = {
     },
   },
   task = {
-    {
-      'tpope/vim-dispatch',
-      -- :h dispatch-maps
-      -- These can be disabled with: let g:dispatch_no_maps = 1
-      keys = {
-        { 'm<CR>', desc = 'Make' },
-        { 'm<Space>', desc = 'Make...' },
-        { 'm!', desc = 'Make!' },
-        { 'm?', desc = 'Show makeprg' },
-        --
-        { '`<CR>', desc = 'Dispatch' },
-        { '`<Space>', desc = 'Dispatch...' },
-        { '`!', desc = 'Dispatch!' },
-        { '`?', desc = 'Show Dispatch' },
-        --
-        { "'<CR>", desc = 'Start' },
-        { "'<Space>", desc = 'Start...' },
-        { "'!", desc = 'Start!' },
-        { "'?", desc = 'Show b:start' },
-        --
-        { "g'<CR>", desc = 'Spawn' },
-        { "g'<Space>", desc = 'Spawn...' },
-        { "g'!", desc = 'Spawn!' },
-        { "g'?", desc = 'Show shell' },
-      },
-    },
+    -- {
+    --   'tpope/vim-dispatch',
+    --   -- :h dispatch-maps
+    --   -- These can be disabled with: let g:dispatch_no_maps = 1
+    --   keys = {
+    --     { 'm<CR>', desc = 'Make' },
+    --     { 'm<Space>', desc = 'Make...' },
+    --     { 'm!', desc = 'Make!' },
+    --     { 'm?', desc = 'Show makeprg' },
+    --     --
+    --     { '`<CR>', desc = 'Dispatch' },
+    --     { '`<Space>', desc = 'Dispatch...' },
+    --     { '`!', desc = 'Dispatch!' },
+    --     { '`?', desc = 'Show Dispatch' },
+    --     --
+    --     { "'<CR>", desc = 'Start' },
+    --     { "'<Space>", desc = 'Start...' },
+    --     { "'!", desc = 'Start!' },
+    --     { "'?", desc = 'Show b:start' },
+    --     --
+    --     { "g'<CR>", desc = 'Spawn' },
+    --     { "g'<Space>", desc = 'Spawn...' },
+    --     { "g'!", desc = 'Spawn!' },
+    --     { "g'?", desc = 'Show shell' },
+    --   },
+    -- },
     -- { 'pianocomposer321/yabs.nvim', config = require 'young.mod.yabs' },
     -- {
     --   'skywind3000/asynctasks.vim',
@@ -2135,7 +2149,6 @@ modules.LSP = {
     init = function()
       xy.map.register {
         ['<leader>l'] = {
-          group = '+lsp',
           i = {
             function()
               vim.cmd 'LspInfo'

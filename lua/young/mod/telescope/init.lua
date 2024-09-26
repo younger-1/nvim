@@ -38,7 +38,6 @@ M.once = function()
   xy.map.register {
     ['<leader>'] = {
       s = {
-        group = '+search',
         -- ['`'] = { 'TODO', 'Terminal' },
         -- ['~'] = { '<cmd>Alpha<cr>', 'Alpha' },
         -- ['0'] = { function() vim.cmd 'Telescope pickers' end, 'Resume pickers' },
@@ -442,6 +441,126 @@ M.once = function()
           end,
           'Lazy plugin spec',
         },
+      },
+      g = {
+        b = {
+          function()
+            vim.cmd 'Telescope git_branches'
+          end,
+          'Branches',
+        },
+        c = {
+          function()
+            vim.cmd 'Telescope git_commits'
+          end,
+          'Commits',
+        },
+        C = {
+          function()
+            vim.cmd 'Telescope git_bcommits'
+          end,
+          'Commits(current file)',
+        },
+        e = {
+          function()
+            vim.cmd 'Telescope git_stash'
+          end,
+          'Stash',
+        },
+        f = {
+          function()
+            vim.cmd 'Telescope git_files'
+          end,
+          'Files',
+        },
+        o = {
+          function()
+            vim.cmd 'Telescope git_status'
+          end,
+          'Open changed file',
+        },
+        h = {
+          function()
+            vim.cmd 'Telescope git_bcommits_range'
+          end,
+          'Commits(current line)',
+        },
+      },
+      c = {
+        -- [' '] = {},
+        -- lsp goto
+        d = {
+          function()
+            vim.cmd 'Telescope lsp_definitions'
+          end,
+          'Def',
+        },
+        r = {
+          function()
+            vim.cmd 'Telescope lsp_references'
+          end,
+          'Ref',
+        },
+        y = {
+          function()
+            vim.cmd 'Telescope lsp_type_definitions'
+          end,
+          'Type',
+        },
+        i = {
+          function()
+            vim.cmd 'Telescope lsp_implementations'
+          end,
+          'Impl',
+        },
+        s = {
+          function()
+            vim.cmd 'Telescope lsp_document_symbols'
+          end,
+          'Document symbols',
+        },
+        w = {
+          function()
+            vim.cmd 'Telescope lsp_workspace_symbols'
+          end,
+          'Workspace symbols',
+        },
+        S = {
+          function()
+            vim.cmd 'Telescope lsp_dynamic_workspace_symbols'
+          end,
+          'Dynamic Workspace symbols',
+        },
+        ['['] = {
+          function()
+            vim.cmd 'Telescope lsp_incoming_calls'
+          end,
+          'Incoming calls',
+        },
+        [']'] = {
+          function()
+            vim.cmd 'Telescope lsp_outgoing_calls'
+          end,
+          'Outgoing calls',
+        },
+        e = {
+          function()
+            vim.cmd 'Telescope diagnostics bufnr=0'
+          end,
+          'Diagnostics',
+        },
+        E = {
+          function()
+            vim.cmd 'Telescope diagnostics'
+          end,
+          'Diagnostics(All)',
+        },
+        -- p = {
+        --   group = '+peek',
+        --   d = { "<cmd>lua require('young.lsp.misc').Peek('definition')<cr>", 'Definition' },
+        --   i = { "<cmd>lua require('young.lsp.misc').Peek('implementation')<cr>", 'Implementation' },
+        --   t = { "<cmd>lua require('young.lsp.misc').Peek('typeDefinition')<cr>", 'Type definition' },
+        -- },
       },
     },
   }

@@ -415,8 +415,7 @@ xy.map = {
   _nest = function(mappings, prefix, mode, buffer)
     for k, v in pairs(mappings) do
       if k == 'group' or type(v) == 'string' then
-        -- NOTE: #v == 1 which-key will take it as description, but we want actual map
-        require('young.mod.which_key').add { prefix, group = v }
+        require('young.mod.which_key').add { prefix, group = v, mode = { 'n', 'x', 'o' } }
       elseif #v == 0 then
         xy.map._nest(v, prefix .. k, mode, buffer)
       elseif v[1] == nil then
@@ -435,6 +434,28 @@ xy.map = {
       end
     end
   end,
+
+  check = function(caller, lhs, rhs, mode, desc)
+    local e = vim.fn.maparg(lhs, type(mode) == 'string' and mode or table.concat(mode), false, true)
+    ---@cast e -string
+    if next(e) then
+      xy.util.echomsg {
+        fmt(
+          '[%s check](%s): %s old map is [%s](%s), new map is [%s](%s)',
+          caller,
+          mode,
+          lhs,
+          -- old
+          e.rhs or table.concat({ xy.util.get_func_loc(e.callback) }, ' '),
+          e.desc,
+          -- new
+          type(rhs) == 'string' and rhs or table.concat({ xy.util.get_func_loc(rhs) }, ' '),
+          desc
+        ),
+      }
+      -- return
+    end
+  end
 }
 
 setmetatable(xy.map, {
@@ -452,24 +473,7 @@ setmetatable(xy.map, {
     end
     opts.desc = tbl[3] or opts.desc
 
-    local e = vim.fn.maparg(tbl[1], type(mode) == 'string' and mode or table.concat(mode), false, true)
-    ---@cast e -string
-    if next(e) then
-      xy.util.echomsg {
-        fmt(
-          '[xy.map.check](%s): %s old map is [%s](%s), new map is [%s](%s)',
-          mode,
-          tbl[1],
-          -- old
-          e.rhs or table.concat({ xy.util.get_func_loc(e.callback) }, ' '),
-          e.desc,
-          -- new
-          type(tbl[2]) == 'string' and tbl[2] or table.concat({ xy.util.get_func_loc(tbl[2]) }, ' '),
-          opts.desc
-        ),
-      }
-      -- return
-    end
+    xy.map.check('xy.map', tbl[1], tbl[2], mode, opts.desc)
 
     vim.keymap.set(mode, tbl[1], tbl[2], opts)
   end,
@@ -498,24 +502,8 @@ setmetatable(xy.map2, {
   __call = function(t, lhs, rhs, opts)
     local mode = opts['mode'] or { 'n', 'x', 'o' }
     opts['mode'] = nil
-    local e = vim.fn.maparg(lhs, type(mode) == 'string' and mode or table.concat(mode), false, true)
-    ---@cast e -string
-    if next(e) then
-      xy.util.echomsg {
-        fmt(
-          '[xy.map2.check](%s): %s old map is [%s](%s), new map is [%s](%s)',
-          mode,
-          lhs,
-          -- old
-          e.rhs or table.concat({ xy.util.get_func_loc(e.callback) }, ' '),
-          e.desc,
-          -- new
-          type(rhs) == 'string' and rhs or table.concat({ xy.util.get_func_loc(rhs) }, ' '),
-          opts.desc
-        ),
-      }
-      -- return
-    end
+
+    xy.map.check('xy.map2', lhs, rhs, mode, opts.desc)
 
     vim.keymap.set(mode, lhs, rhs, opts)
   end,

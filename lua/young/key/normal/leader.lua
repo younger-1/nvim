@@ -64,14 +64,26 @@ return {
   --   N = { ':TablineTabNew ', 'Tabline new' },
   --   T = { ':TablineCustom ', 'Tabline++' },
   -- },
+  c = {
+    group = '+code',
+  },
   e = {
     group = '+explorer',
+  },
+  h = {
+    group = '+hunk',
+  },
+  g = {
+    group = '+git',
   },
   j = {
     group = '+jump',
   },
   k = {
     group = '+kit',
+  },
+  l = {
+    group = '+lsp',
   },
   L = {
     group = '+lua',
@@ -193,6 +205,9 @@ return {
       vim.cmd.q()
     end,
     'which_key_ignore',
+  },
+  s = {
+    group = '+search',
   },
   -- Q = { '<cmd>tabclose<cr>', 'which_key_ignore' },
   t = {
