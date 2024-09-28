@@ -247,7 +247,7 @@ function util.get_func_loc(func)
   local info = debug.getinfo(func or 2, 'S')
   local file_name = info.source:sub(2)
   file_name = vim.loop.fs_realpath(file_name) or file_name
-  file_name = vim.fn.fnamemodify(file_name, ':~:.')
+  file_name = vim.fn.fnamemodify(file_name, (':s?%s?%s?:~:.'):format(vim.fn.stdpath 'data' .. '/', '@'))
   local line_defined = info.linedefined
   return file_name .. ':' .. line_defined, func_name
 end

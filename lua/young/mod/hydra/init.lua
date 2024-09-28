@@ -29,46 +29,6 @@ require 'young.mod.hydra.window'
 require 'young.mod.hydra.diagram'
 -- end)
 
--- for [ and ]
-local amend = function(lhs, rhs, opts)
-  require 'keymap-amend'('n', lhs, rhs, opts)
-end
--- Make <Esc> disable highlighting of recently searched text in addition to its original functionality
--- amend('<Esc>', function(original)
---   if vim.v.hlsearch and vim.v.hlsearch == 1 then
---     vim.cmd 'nohlsearch'
---   end
---   original()
--- end, { desc = 'disable search highlight' })
-
--- amend(']b', function(original)
---   original()
---   require 'young.mod.hydra.buffer'()
--- end)
--- amend('[b', function(original)
---   original()
---   require 'young.mod.hydra.buffer'()
--- end)
-
--- local diagnostic_hydra = require 'hydra' {
---   mode = 'n',
---   config = {
---     hint = false,
---   },
---   heads = {
---     { '[', vim.diagnostic.goto_prev },
---     { ']', vim.diagnostic.goto_next },
---   },
--- }
--- amend(']e', function(original)
---   original()
---   diagnostic_hydra:activate()
--- end)
--- amend('[e', function(original)
---   original()
---   diagnostic_hydra:activate()
--- end)
-
 local M = {}
 local Hydra = require 'hydra'
 
@@ -179,16 +139,57 @@ M.ab_init_hydra = Hydra {
   heads = ab_init_heads,
 }
 
-do
-  for head, mark in pairs(key2mark) do
-    for _, ab in ipairs { '[', ']' } do
-      local query = ab .. head
-      amend(query, function(original)
-        original()
-        ab_hydra_land[mark]:activate()
-      end)
-    end
-  end
-end
+-- for [ and ]
+-- local amend = function(lhs, rhs, opts)
+--   require 'keymap-amend'('n', lhs, rhs, opts)
+-- end
+
+-- Make <Esc> disable highlighting of recently searched text in addition to its original functionality
+-- amend('<Esc>', function(original)
+--   if vim.v.hlsearch and vim.v.hlsearch == 1 then
+--     vim.cmd 'nohlsearch'
+--   end
+--   original()
+-- end, { desc = 'disable search highlight' })
+
+-- amend(']b', function(original)
+--   original()
+--   require 'young.mod.hydra.buffer'()
+-- end)
+-- amend('[b', function(original)
+--   original()
+--   require 'young.mod.hydra.buffer'()
+-- end)
+
+-- local diagnostic_hydra = require 'hydra' {
+--   mode = 'n',
+--   config = {
+--     hint = false,
+--   },
+--   heads = {
+--     { '[', vim.diagnostic.goto_prev },
+--     { ']', vim.diagnostic.goto_next },
+--   },
+-- }
+-- amend(']e', function(original)
+--   original()
+--   diagnostic_hydra:activate()
+-- end)
+-- amend('[e', function(original)
+--   original()
+--   diagnostic_hydra:activate()
+-- end)
+
+-- do
+--   for head, mark in pairs(key2mark) do
+--     for _, ab in ipairs { '[', ']' } do
+--       local query = ab .. head
+--       amend(query, function(original)
+--         original()
+--         ab_hydra_land[mark]:activate()
+--       end)
+--     end
+--   end
+-- end
 
 return M

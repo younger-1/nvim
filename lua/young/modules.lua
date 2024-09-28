@@ -1520,8 +1520,6 @@ modules.git = {
 }
 
 modules.keymap = {
-  { 'anuvyklack/keymap-amend.nvim', lazy = true },
-
   menu = {
     {
       'folke/which-key.nvim',
@@ -1544,6 +1542,9 @@ modules.keymap = {
       config = function()
         require 'young.mod.hydra'
       end,
+      -- dependencies = {
+      --   { 'anuvyklack/keymap-amend.nvim', lazy = true },
+      -- },
     },
     -- {
     --   'linty-org/key-menu.nvim',

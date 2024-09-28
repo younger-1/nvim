@@ -400,6 +400,11 @@ end
 ----------------------------------------------------------------------------------------------------
 -- mappings
 ----------------------------------------------------------------------------------------------------
+-- local org_keymap = vim.keymap.set
+-- function vim.keymap.set(mode, lhs, rhs, opts)
+--   xy.map.check('xy.map', lhs, rhs, mode, opts)
+--   org_keymap(mode, lhs, rhs, opts)
+-- end
 
 xy.map = {
   register = function(mappings, opts)
@@ -435,27 +440,34 @@ xy.map = {
     end
   end,
 
-  check = function(caller, lhs, rhs, mode, desc)
-    local e = vim.fn.maparg(lhs, type(mode) == 'string' and mode or table.concat(mode), false, true)
+  check = function(caller, lhs, rhs, mode, opts)
+    local mode_name = type(mode) == 'string' and mode or table.concat(mode)
+    local e = vim.fn.maparg(lhs, mode_name, false, true)
+    if (opts and opts.buffer) or (vim.startswith(lhs, '<Plug>')) then
+      return
+    end
     ---@cast e -string
     if next(e) then
       xy.util.echomsg {
         fmt(
-          '[%s check](%s): %s old map is [%s](%s), new map is [%s](%s)',
+          '[%s check](%s): %s %s%s(%s) => %s%s(%s)',
           caller,
-          mode,
+          mode_name,
           lhs,
           -- old
+          e.buffer == 1 and '[@]' or '',
           e.rhs or table.concat({ xy.util.get_func_loc(e.callback) }, ' '),
           e.desc,
           -- new
+          opts
+            and opts.buffer and '[@]' or '',
           type(rhs) == 'string' and rhs or table.concat({ xy.util.get_func_loc(rhs) }, ' '),
-          desc
+          opts and opts.desc
         ),
       }
       -- return
     end
-  end
+  end,
 }
 
 setmetatable(xy.map, {
@@ -472,8 +484,6 @@ setmetatable(xy.map, {
       end
     end
     opts.desc = tbl[3] or opts.desc
-
-    xy.map.check('xy.map', tbl[1], tbl[2], mode, opts.desc)
 
     vim.keymap.set(mode, tbl[1], tbl[2], opts)
   end,
@@ -502,8 +512,6 @@ setmetatable(xy.map2, {
   __call = function(t, lhs, rhs, opts)
     local mode = opts['mode'] or { 'n', 'x', 'o' }
     opts['mode'] = nil
-
-    xy.map.check('xy.map2', lhs, rhs, mode, opts.desc)
 
     vim.keymap.set(mode, lhs, rhs, opts)
   end,
