@@ -130,7 +130,7 @@ return {
     warn = '',
     warn_bold = '',
     info = '',
-    boldinfo = '',
+    info_bold = '',
     hint = '󰌶',
     hint_bold = '󰌵',
     hint_var = '',

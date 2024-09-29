@@ -764,13 +764,24 @@ modules.BWT = {
   },
   -- tab = {},
   quickfix = {
-    { 'weilbith/vim-qfloc-edit', ft = 'qf' },
     {
-      'https://gitlab.com/yorickpeterse/nvim-pqf',
-      -- ft = 'qf', -- not working for first time open qf
-      event = { 'BufReadPost', 'BufNewFile' },
-      config = true,
+      'kevinhwang91/nvim-bqf',
+      -- event = "BufReadPost",
+      ft = 'qf',
+      auto = 'config',
     },
+    {
+      'stevearc/quicker.nvim',
+      event = 'FileType qf',
+      auto = true,
+    },
+    -- { 'weilbith/vim-qfloc-edit', ft = 'qf' },
+    -- {
+    --   'https://gitlab.com/yorickpeterse/nvim-pqf',
+    --   -- ft = 'qf', -- not working for first time open qf
+    --   event = { 'BufReadPost', 'BufNewFile' },
+    --   config = true,
+    -- },
     -- {
     --   'ten3roberts/qf.nvim',
     --   ft = 'qf',
@@ -778,12 +789,6 @@ modules.BWT = {
     --     require('qf').setup {}
     --   end,
     -- },
-    {
-      'kevinhwang91/nvim-bqf',
-      -- event = "BufReadPost",
-      ft = 'qf',
-      auto = 'config',
-    },
     -- {
     --   'arsham/listish.nvim',
     --   dependencies = {

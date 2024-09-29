@@ -136,7 +136,7 @@ M.cfg = {
     row = 0,
     col = 1,
   },
-  trouble = true, -- if possible, use trouble.nvim instead of quickfix
+  trouble = false, -- if possible, use trouble.nvim instead of quickfix
   -- keymaps = {
   --   noremap = true,
   --   ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },

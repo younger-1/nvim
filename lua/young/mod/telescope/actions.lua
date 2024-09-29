@@ -16,12 +16,12 @@ local function get_locs(title, entry)
     },
     ['autocommands'] = {
       type = 'autocmd',
-      name = entry.value.event,
-      group = (entry.value.group_name or ''):match '^[^<]+' or '',
+      name = entry.value and entry.value.event,
+      group = (entry.value and entry.value.group_name or ''):match '^[^<]+' or '',
     },
     ['options'] = {
       type = 'set',
-      name = entry.value.name,
+      name = entry.value and entry.value.name,
     },
     ['Highlights'] = {
       type = 'highlight',
