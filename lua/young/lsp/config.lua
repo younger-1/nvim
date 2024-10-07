@@ -43,7 +43,7 @@ return {
       -- border = { "/", "-", "\\", "|" },
       severity_sort = true,
       source = false,
-      -- source = 'always',
+      -- source = 'if_many',
       header = '',
       prefix = '',
       suffix = '',
@@ -159,7 +159,7 @@ return {
       --
       ['gl'] = {
         function()
-          local _, fwin = vim.diagnostic.open_float { scope = 'line', source = 'always' }
+          local _, fwin = vim.diagnostic.open_float { scope = 'line', source = true }
           if fwin then
             vim.wo[fwin].signcolumn = 'no'
           end
@@ -174,7 +174,7 @@ return {
       },
       [']E'] = {
         function()
-          vim.diagnostic.goto_next { severity = 'Error' }
+          vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR }
         end,
         'Next error',
       },
@@ -186,7 +186,7 @@ return {
       },
       ['[E'] = {
         function()
-          vim.diagnostic.goto_prev { severity = 'Error' }
+          vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR }
         end,
         'Prev error',
       },

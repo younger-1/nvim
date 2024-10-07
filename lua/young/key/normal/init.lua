@@ -227,12 +227,6 @@ return {
   --   },
   -- },
   z = {
-    ['<CR>'] = {
-      function()
-        vim.cmd 'TSContextToggle'
-      end,
-      'Toggle context',
-    },
     [' '] = {
       function()
         require('young.tool').blink_cursor()

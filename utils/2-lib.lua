@@ -11,7 +11,7 @@ vim.list_extend(t, { 'c', 'd' })
 
 t = vim.tbl_extend('force', t, { 'x', 'y', 1, 2 })
 print(vim.inspect(t)) -- { "x", "y", 1, 2, "d" }
--- print(vim.tbl_islist(t)) -- true
+-- print(vim.islist(t)) -- true
 
 -- m = vim.tbl_extend("force", m, { b = "GG" })
 -- pp(m)

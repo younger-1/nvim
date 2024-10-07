@@ -656,7 +656,14 @@ end
 -- end
 
 function M.setup_context()
-  -- TSContextToggle
+  xy.map.n {
+    'z<CR>',
+    function()
+      vim.cmd 'TSContextToggle'
+    end,
+    'Toggle ts sticky context',
+  }
+
   require('treesitter-context').setup {
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.

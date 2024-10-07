@@ -732,8 +732,8 @@ M.done = function()
           ['<A-left>'] = { actions.preview_scrolling_left, type = 'action', opts = { desc = 'nop' } },
           ['<A-right>'] = { actions.preview_scrolling_right, type = 'action', opts = { desc = 'nop' } },
 
-          ['<A-t>'] = actions.toggle_all,
-          ['<A-u>'] = actions.drop_all,
+          ['<A-a>'] = actions.toggle_all,
+          ['<A-d>'] = actions.drop_all,
 
           ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
           ['<C-z>'] = actions.smart_send_to_loclist + actions.open_loclist,

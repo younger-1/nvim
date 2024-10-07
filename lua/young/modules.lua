@@ -1664,7 +1664,7 @@ modules.UI = {
   {
     'folke/trouble.nvim',
     -- event = 'BufReadPost',
-    cmd = { 'Trouble', 'TroubleToggle' },
+    cmd = 'Trouble',
     auto = true,
   },
   -- {

@@ -101,7 +101,7 @@ vim.lsp.handlers['textDocument/definition'] = function(_, result, ctx, config)
   end
   local client = vim.lsp.get_client_by_id(ctx.client_id)
   config = config or {}
-  if vim.tbl_islist(result) then
+  if vim.islist(result) then
     local results = vim.lsp.util.locations_to_items(result, client.offset_encoding)
     local lnum, filename = results[1].lnum, results[1].filename
     for i, val in pairs(results) do
