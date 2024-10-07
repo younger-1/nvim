@@ -80,8 +80,8 @@ end
 local function get_server_fts(server_name)
   -- local server_fts = server:get_supported_filetypes()
   -- local server_fts = require('nvim-lsp-installer._generated.metadata')[server_name].filetypes
-  -- local server_fts = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
-  local status_ok, config = pcall(require, ('lspconfig.server_configurations.%s'):format(server_name))
+  -- local server_fts = require('lspconfig.configs.' .. server_name).default_config.filetypes
+  local status_ok, config = pcall(require, ('lspconfig.configs.%s'):format(server_name))
   if not status_ok then
     return {}
   end
@@ -101,7 +101,7 @@ end
 
 local function setup_server(server_name)
   local opts = get_opts(server_name)
-  -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md>
+  -- <https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md>
   require('lspconfig')[server_name].setup(opts)
   -- TODO:use pcall or not?
   -- pcall(function()
