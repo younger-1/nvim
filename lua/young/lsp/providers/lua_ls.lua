@@ -26,28 +26,28 @@ return {
   -- root_dir = function()
   --   return vim.fn.getcwd()
   -- end,
-  on_new_config = function(new_config, new_root_dir)
-    -- if fn.finddir('lua', '**') == '' then
-    -- if not next(vim.fs.find('lua', { type = 'directory', path = new_root_dir })) then
-    if vim.fn.isdirectory(new_root_dir .. '/lua') == 0 then
-      return
-    end
-    new_config.settings.Lua.runtime.path = {
-      'lua/?.lua',
-      'lua/?/init.lua',
-    }
-    new_config.settings.Lua.workspace.library = {
-      -- Neovim:
-      [vim.fn.expand '$VIMRUNTIME'] = true,
-      [require('neodev.config').types()] = true,
-      -- [packer_plugins['neodev.nvim'].path .. '/types/' .. (vim.version().prerelease and 'nightly' or 'stable')] = true,
-      -- [packer_plugins['emmylua-nvim'].path] = true,
-      -- Plugins:
-      -- [packer_plugins['plenary.nvim'].path] = true,
-      -- [packer_plugins['telescope.nvim'].path] = true,
-      -- [packer_plugins['nvim-lspconfig'].path] = true,
-    }
-  end,
+  -- on_new_config = function(new_config, new_root_dir)
+  --   -- if fn.finddir('lua', '**') == '' then
+  --   -- if not next(vim.fs.find('lua', { type = 'directory', path = new_root_dir })) then
+  --   if vim.fn.isdirectory(new_root_dir .. '/lua') == 0 then
+  --     return
+  --   end
+  --   new_config.settings.Lua.runtime.path = {
+  --     'lua/?.lua',
+  --     'lua/?/init.lua',
+  --   }
+  --   new_config.settings.Lua.workspace.library = {
+  --     -- Neovim:
+  --     [vim.fn.expand '$VIMRUNTIME'] = true,
+  --     [require('neodev.config').types()] = true,
+  --     -- [packer_plugins['neodev.nvim'].path .. '/types/' .. (vim.version().prerelease and 'nightly' or 'stable')] = true,
+  --     -- [packer_plugins['emmylua-nvim'].path] = true,
+  --     -- Plugins:
+  --     -- [packer_plugins['plenary.nvim'].path] = true,
+  --     -- [packer_plugins['telescope.nvim'].path] = true,
+  --     -- [packer_plugins['nvim-lspconfig'].path] = true,
+  --   }
+  -- end,
   on_attach = function(client, bufnr)
     require('young.lsp.common').on_attach(client, bufnr)
     -- Use stylua instead

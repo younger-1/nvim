@@ -105,6 +105,7 @@
 - [ ] lsp: <C-w>d/r/i, t/b, a/y/u/;/,/.
 - [ ] winbar: show `winner`. highlight current window
 - [ ] zf-native: in `Telescope diagnostics`, <C-l> tag not work
+- [ ] lazydev: support vim.cmd
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")

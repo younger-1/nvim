@@ -14,9 +14,7 @@ return {
 
     local state = 0
 
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
-    local opts = {
+    require('quicker').setup {
       -- Local options to set for quickfix
       opts = {
         buflisted = false,
@@ -110,6 +108,5 @@ return {
         return vim.o.columns - start_col
       end,
     }
-    require('quicker').setup(opts)
   end,
 }

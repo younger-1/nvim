@@ -140,18 +140,7 @@ M.once = function()
 end
 
 M.done = function()
-  ---@module "trouble"
-  ---@class trouble.Mode: trouble.Config,trouble.Section.spec
-  ---@field desc? string
-  ---@field sections? string[]
-
-  ---@class trouble.Config
-  ---@field mode? string
-  ---@field config? fun(opts:trouble.Config)
-  ---@field formatters? table<string,trouble.Formatter> custom formatters
-  ---@field filters? table<string, trouble.FilterFn> custom filters
-  ---@field sorters? table<string, trouble.SorterFn> custom sorters
-  local opts = {
+  require('trouble').setup {
     auto_close = false, -- auto close when there are no items
     auto_open = false, -- auto open when there are items
     auto_preview = true, -- automatically open preview when on an item
@@ -344,7 +333,6 @@ M.done = function()
       },
     },
   }
-  require('trouble').setup(opts)
 
   local cfg = {
     position = 'bottom', -- position of the list can be: bottom, top, left, right

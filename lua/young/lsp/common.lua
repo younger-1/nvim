@@ -168,25 +168,12 @@ M.on_exit = function(_, _)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
+
 M.capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
-local completionItem = M.capabilities.textDocument.completion.completionItem
-completionItem.snippetSupport = true
-completionItem.preselectSupport = true
-completionItem.insertReplaceSupport = true
-completionItem.labelDetailsSupport = true
-completionItem.deprecatedSupport = true
-completionItem.commitCharactersSupport = true
-completionItem.tagSupport = { valueSet = { 1 } }
-completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
-}
--- M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
+
+M.capabilities = vim.tbl_deep_extend('force', M.capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 return M

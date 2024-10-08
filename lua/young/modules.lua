@@ -1958,6 +1958,12 @@ modules.code = {
       'hrsh7th/nvim-cmp',
       enabled = not xy.coc,
       event = { 'InsertEnter', 'CmdlineEnter' },
+      cmd = 'CmpStatus',
+      init = function()
+        vim.keymap.set('n', '<leader>lc', function()
+          vim.cmd 'CmpStatus'
+        end, { desc = 'Cmp status' })
+      end,
       config = function()
         require('young.mod.cmp').done()
       end,
@@ -2179,12 +2185,6 @@ modules.LSP = {
             end,
             'Null-ls info',
           },
-          c = {
-            function()
-              vim.cmd 'CmpStatus'
-            end,
-            'Cmp status',
-          },
           C = {
             function()
               vim.cmd 'Copilot status'
@@ -2371,7 +2371,22 @@ modules.lang = {
     },
   },
   lua = {
-    { 'folke/neodev.nvim', lazy = true },
+    {
+      'folke/lazydev.nvim',
+      enabled = xy.has 'nvim-0.10',
+      ft = 'lua', -- only load on lua files
+      cmd = 'LazyDev',
+      init = function()
+        vim.keymap.set('n', '<leader>ld', function()
+          vim.cmd 'LazyDev'
+        end, { desc = 'LazyDev' })
+      end,
+      auto = 'config',
+      dependencies = {
+        { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
+      },
+    },
+    -- { 'folke/neodev.nvim', lazy = true },
     -- { 'ii14/emmylua-nvim', lazy = true },
     {
       'nanotee/luv-vimdocs',

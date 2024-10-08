@@ -1,14 +1,12 @@
 -- floating window highlights for the cmp menu
 -- @see: https://github.com/zbirenbaum/NvCustom/blob/c92400505e7aa0f6308e434b9311199d578db3da/plugins/completion_plugins/cmp_configs/cmp.lua
 
-local cmp = require 'cmp'
-local cmapping = cmp.mapping
-
 local M = {}
 
 local pum_half = (vim.o.pumheight == 0 and 5) or vim.o.pumheight / 2
 
 -- @see <https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua>
+---@type cmp.ConfigSchema
 M.cfg = {
   -- enabled = function()
   --   -- disable completion if the cursor is `Comment` syntax group.
@@ -95,9 +93,7 @@ M.cfg = {
       -- require('snippy').expand_snippet(args.body)
 
       -- For `luasnip` users.
-      if rr 'luasnip' then
-        require('luasnip').lsp_expand(args.body)
-      end
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   window = {
@@ -114,24 +110,6 @@ M.cfg = {
   -- },
   experimental = {
     ghost_text = true,
-  },
-  -- preselect = cmp.PreselectMode.Item,
-  preselect = cmp.PreselectMode.None,
-  -- completion = {
-  --   autocomplete = false,
-  -- },
-  sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.recently_used,
-      cmp.config.compare.score,
-      cmp.config.compare.locality,
-      cmp.config.compare.kind,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
   },
   formatting = {
     -- fields = { 'abbr', 'kind', 'menu' },
@@ -169,108 +147,139 @@ M.cfg = {
       },
     },
   },
-  -- mapping = cmapping.preset.insert {
-  mapping = {
-    ['<C-j>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
-    ['<C-k>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
-    ['<C-n>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
-    ['<C-p>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
-    ['<Down>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
-    ['<Up>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
-    --
-    ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
-    ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
-    ['<C-f>'] = cmapping(
-      cmapping.confirm {
-        select = false, -- select = false is nice in cmdline
-        behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
-      },
-      { 'i', 'c' }
-    ),
-    ['<C-e>'] = {
-      i = cmapping.abort(),
-      c = cmapping.close(),
-    },
-    ['<CR>'] = cmapping(
-      cmapping.confirm {
-        select = false,
-        behavior = cmp.ConfirmBehavior.Insert,
-      },
-      { 'i', 'c' }
-    ),
-    ['<C-Space>'] = cmapping(function(--[[ fallback ]])
-      if cmp.visible() then
-        cmp.close()
-        -- fallback()
-      else
-        cmp.complete()
-      end
-    end, { 'i', 'c' }),
-    ['<Tab>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif rr 'neogen' and require('neogen').jumpable() then
-        require('neogen').jump_next()
-      elseif rr 'luasnip' and require('luasnip').expand_or_locally_jumpable() then
-        require('luasnip').expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif rr 'neogen' and require('neogen').jumpable(true) then
-        require('neogen').jump_prev()
-      elseif rr 'luasnip' and require('luasnip').jumpable(-1) then
-        require('luasnip').jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<PageUp>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        for _ = 1, pum_half do
-          cmp.select_prev_item()
-        end
-      else
-        fallback()
-      end
-    end, { 'i', 'c' }),
-    ['<PageDown>'] = cmapping(function(fallback)
-      if cmp.visible() then
-        for _ = 1, pum_half do
-          cmp.select_next_item()
-        end
-      else
-        fallback()
-      end
-    end, { 'i', 'c' }),
-    ['<C-x><C-h>'] = cmapping.complete {
-      config = {
-        sources = {
-          { name = 'luasnip' },
-        },
-      },
-    },
-    -- ['<C-x><C-g>'] = cmapping.complete({}),
-    -- ['<C-x><C-m>'] = cmapping.complete({}),
-    -- ['<C-x><C-b>'] = cmapping.complete({}),
-    -- ['<C-x>h'] = cmapping.complete({}),
-    -- ['<C-x>j'] = cmapping.complete({}),
-    -- ['<C-x>k'] = cmapping.complete({}),
-    -- ['<C-x>l'] = cmapping.complete({}),
-    ['<C-l>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        return cmp.complete_common_string()
-      end
-      fallback()
-    end, { 'i', 'c' }),
-    -- ['<C-s>'] = cmapping.complete({}),
-  },
 }
 
 M.done = function()
+  local cmp = require 'cmp'
+  local cmapping = cmp.mapping
+
+  M.cfg = vim.tbl_deep_extend('keep', M.cfg, {
+    -- preselect = cmp.PreselectMode.Item,
+    preselect = cmp.PreselectMode.None, -- disable the `preselect` feature
+    -- completion = {
+    --   autocomplete = false,
+    -- },
+    sorting = {
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.score,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
+    -- mapping = cmapping.preset.insert {
+    mapping = {
+      ['<C-j>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+      ['<C-k>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { 'i', 'c' }),
+      ['<C-n>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+      ['<C-p>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+      ['<Down>'] = cmapping(cmapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+      ['<Up>'] = cmapping(cmapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { 'i' }),
+      --
+      ['<C-u>'] = cmapping(cmapping.scroll_docs(-4)),
+      ['<C-d>'] = cmapping(cmapping.scroll_docs(4)),
+      ['<C-f>'] = cmapping(
+        cmapping.confirm {
+          select = false, -- select = false is nice in cmdline
+          behavior = cmp.ConfirmBehavior.Replace, -- useful for change a symbol's name
+        },
+        { 'i', 'c' }
+      ),
+      ['<C-e>'] = {
+        i = cmapping.abort(),
+        c = cmapping.close(),
+      },
+      ['<CR>'] = cmapping(
+        cmapping.confirm {
+          select = false,
+          behavior = cmp.ConfirmBehavior.Insert,
+        },
+        { 'i', 'c' }
+      ),
+      ['<C-Space>'] = cmapping(function(--[[ fallback ]])
+        if cmp.visible() then
+          cmp.close()
+        -- fallback()
+        else
+          cmp.complete()
+        end
+      end, { 'i', 'c' }),
+      ['<Tab>'] = cmapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif rr 'neogen' and require('neogen').jumpable() then
+          require('neogen').jump_next()
+        elseif rr 'luasnip' and require('luasnip').expand_or_locally_jumpable() then
+          require('luasnip').expand_or_jump()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<S-Tab>'] = cmapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif rr 'neogen' and require('neogen').jumpable(true) then
+          require('neogen').jump_prev()
+        elseif rr 'luasnip' and require('luasnip').jumpable(-1) then
+          require('luasnip').jump(-1)
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<PageUp>'] = cmapping(function(fallback)
+        if cmp.visible() then
+          for _ = 1, pum_half do
+            cmp.select_prev_item()
+          end
+        else
+          fallback()
+        end
+      end, { 'i', 'c' }),
+      ['<PageDown>'] = cmapping(function(fallback)
+        if cmp.visible() then
+          for _ = 1, pum_half do
+            cmp.select_next_item()
+          end
+        else
+          fallback()
+        end
+      end, { 'i', 'c' }),
+      ['<C-l><C-l>'] = cmapping.complete {
+        config = {
+          sources = {
+            { name = 'luasnip' },
+          },
+        },
+      },
+      ['<C-l><C-h>'] = function()
+        if cmp.visible_docs() then
+          cmp.close_docs()
+        else
+          cmp.open_docs()
+        end
+      end,
+      ['<C-l><C-m>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          return cmp.complete_common_string()
+        end
+        fallback()
+      end, { 'i', 'c' }),
+      --
+      -- ['<C-s>'] = cmapping.complete({}),
+      --
+      -- ['<C-x><C-m>'] = cmapping.complete({}),
+      -- ['<C-x><C-b>'] = cmapping.complete({}),
+      -- ['<C-x>h'] = cmapping.complete({}),
+      -- ['<C-x>j'] = cmapping.complete({}),
+      -- ['<C-x>k'] = cmapping.complete({}),
+      -- ['<C-x>l'] = cmapping.complete({}),
+    },
+  })
   cmp.setup(M.cfg)
 
   -- Set configuration for specific filetype.
@@ -322,14 +331,7 @@ M.done = function()
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    mapping = cmdline_map,
-    -- mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' },
-    },
-  })
-  cmp.setup.cmdline('?', {
+  cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmdline_map,
     -- mapping = cmp.mapping.preset.cmdline(),
     sources = {
