@@ -360,6 +360,8 @@ __      ___                 _    _____ _             _ _          _____         
 }
 
 M.done = function()
+  -- require('alpha').setup(require('young.mod.alpha.screen').opts)
+
   math.randomseed(os.time()) -- For random header.
   local header = headers[math.random(#headers)]
 

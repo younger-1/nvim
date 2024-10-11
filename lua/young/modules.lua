@@ -110,15 +110,7 @@ modules.theme = {
     {
       'folke/styler.nvim',
       event = { 'BufReadPost', 'BufNewFile' },
-      config = function()
-        require('styler').setup {
-          themes = {
-            markdown = { colorscheme = 'nightfox' },
-            help = { colorscheme = 'carbonfox' },
-            -- noice = { colorscheme = "gruvbox", background = "dark" },
-          },
-        }
-      end,
+      auto = 'config',
     },
     -- { 'rktjmp/lush.nvim' },
     -- {
@@ -232,11 +224,7 @@ modules.appearance = {
     {
       'lukas-reineke/virt-column.nvim',
       event = { 'BufReadPost', 'BufNewFile' },
-      config = function()
-        require('virt-column').setup {
-          char = '║',
-        }
-      end,
+      auto = 'config',
     },
     {
       'Bekaboo/deadcolumn.nvim',
@@ -624,9 +612,7 @@ modules.neovim = {
   {
     'nacro90/numb.nvim',
     event = 'CmdlineEnter',
-    config = function()
-      require('numb').setup()
-    end,
+    config = true,
   },
   {
     'lewis6991/fileline.nvim',
@@ -649,9 +635,7 @@ modules.neovim = {
   {
     'nmac427/guess-indent.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
-    config = function()
-      require('guess-indent').setup {}
-    end,
+    config = true,
   },
   -- {
   --   'Darazaki/indent-o-matic',
@@ -663,22 +647,7 @@ modules.neovim = {
   {
     'lunarvim/bigfile.nvim',
     event = { 'FileReadPre', 'BufReadPre', 'User FileOpened' },
-    config = function()
-      require('bigfile').setup {
-        filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
-        pattern = { '*' }, -- autocmd pattern or function see <### Overriding the detection of big files>
-        features = { -- features to disable
-          'indent_blankline',
-          'illuminate',
-          'lsp',
-          'treesitter',
-          'syntax',
-          'matchparen',
-          'vimopts',
-          'filetype',
-        },
-      }
-    end,
+    auto = 'config',
   },
   -- { -- BUG: key
   --   'ecthelionvi/NeoComposer.nvim',
@@ -718,9 +687,7 @@ modules.BWT = {
     {
       'luukvbaal/stabilize.nvim',
       enabled = not xy.has 'nvim-0.9', -- use 'splitkeep' instead
-      config = function()
-        require('stabilize').setup {}
-      end,
+      config = true,
     },
     {
       'stevearc/stickybuf.nvim',
@@ -821,18 +788,7 @@ modules.file = {
   ranger = {
     {
       'kelly-lin/ranger.nvim',
-      keys = {
-        {
-          '<leader>er',
-          function()
-            require('ranger-nvim').open(true)
-          end,
-          desc = 'Ranger',
-        },
-      },
-      config = function()
-        require('ranger-nvim').setup { replace_netrw = true }
-      end,
+      auto = true,
     },
     {
       'simonmclean/triptych.nvim',
@@ -901,59 +857,13 @@ modules.file = {
       -- event = 'BufWinEnter',
       -- event = { 'BufReadPost', 'BufNewFile' },
       dependencies = { 'nvim-tree/nvim-web-devicons' },
-      init = function()
-        xy.map.n {
-          '<leader>-',
-          function()
-            vim.cmd 'Oil'
-          end,
-          'Oil',
-        }
-        xy.map.n {
-          '<leader>ef',
-          function()
-            require('oil').toggle_float()
-          end,
-          'Oil float',
-        }
-      end,
-      auto = 'config',
+      auto = true,
     },
   },
   project = {
     {
       'nvim-telescope/telescope-project.nvim',
-      keys = {
-        {
-          '<leader>sp',
-          function()
-            vim.cmd 'Telescope project display_type=full layout_config={width=0.7}'
-          end,
-          desc = 'Projects',
-        },
-      },
-      config = function()
-        require('young.mod.telescope').cfg.extensions.project = {
-          theme = 'dropdown',
-          base_dirs = { -- check .git dir for project
-            -- { vim.fn.stdpath 'data' .. '/lazy' }, -- Too slow
-            -- { '~/work' },
-            -- { '~/source' },
-            -- { '~/projects' },
-            { '~', max_depth = 3 },
-          },
-          hidden_files = true, -- default: false
-          -- order_by = 'recent',
-          search_by = { 'title', 'path' }, -- default: 'title'
-          -- on_project_selected = function(prompt_bufnr)
-          --   -- Do anything you want in here. For example:
-          --   local project_actions = require 'telescope._extensions.project.actions'
-          --   project_actions.change_working_directory(prompt_bufnr, false)
-          --   require('harpoon.ui').nav_file(1)
-          -- end,
-        }
-        require('telescope').load_extension 'project'
-      end,
+      auto = true,
     },
     -- {
     --   'ahmedkhalf/project.nvim',
@@ -1067,26 +977,7 @@ modules.find = {
     },
     {
       'gabrielpoca/replacer.nvim',
-      opts = {
-        save_on_write = false,
-        rename_files = false,
-      },
-      keys = {
-        {
-          '<leader>rn',
-          function()
-            require('replacer').run()
-          end,
-          desc = 'Replacer run',
-        },
-        {
-          '<leader>rN',
-          function()
-            require('replacer').save()
-          end,
-          desc = 'Replacer save',
-        },
-      },
+      auto = true,
     },
   },
   fzf = {
@@ -1250,46 +1141,7 @@ modules.telescope = {
   -- },
   {
     'nvim-telescope/telescope-live-grep-args.nvim',
-    keys = {
-      {
-        "<leader>'",
-        function()
-          vim.cmd 'Telescope live_grep_args'
-        end,
-        desc = 'Grep',
-      },
-      {
-        "<leader>'",
-        function()
-          require('telescope-live-grep-args.shortcuts').grep_visual_selection()
-        end,
-        mode = 'x',
-        desc = 'Grep',
-      },
-      {
-        '<leader>"',
-        function()
-          require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()
-        end,
-        desc = 'Grep cursor word',
-      },
-    },
-    config = function()
-      require('young.mod.telescope').cfg.extensions.live_grep_args = {
-        auto_quoting = true, -- enable/disable auto-quoting
-        mappings = {
-          i = {
-            ['<C-l>'] = function(prompt_bufnr)
-              require('telescope-live-grep-args.actions').quote_prompt()(prompt_bufnr)
-            end,
-            ['<A-l>'] = function(prompt_bufnr)
-              require('telescope-live-grep-args.actions').quote_prompt { postfix = ' --iglob ' }(prompt_bufnr)
-            end,
-          },
-        },
-      }
-      require('telescope').load_extension 'live_grep_args'
-    end,
+    auto = true,
   },
   other = {
     { 'nvim-telescope/telescope-symbols.nvim' },
@@ -1361,28 +1213,7 @@ modules.telescope = {
     },
     {
       'LukasPietzschmann/telescope-tabs',
-      keys = {
-        {
-          '<leader>s`',
-          function()
-            vim.cmd 'Telescope telescope-tabs list_tabs'
-          end,
-          desc = 'Tabs',
-        },
-        {
-          'g<BS>',
-          function()
-            vim.cmd 'lua require("telescope-tabs").go_to_previous()'
-          end,
-          desc = 'Tab prev',
-        },
-      },
-      config = function()
-        require('telescope-tabs').setup {
-          close_tab_shortcut_i = '<C-d>', -- if you're in insert mode
-          close_tab_shortcut_n = 'D', -- if you're in normal mode
-        }
-      end,
+      auto = true,
     },
   },
 }
@@ -1477,49 +1308,12 @@ modules.git = {
     {
       'kevinhwang91/nvim-fundo',
       lazy = true,
-      build = function()
-        require('fundo').install()
-      end,
       dependencies = { 'kevinhwang91/promise-async' },
-      config = function()
-        require('fundo').setup()
-      end,
+      opts = {},
     },
     {
       'debugloop/telescope-undo.nvim',
-      keys = {
-        {
-          '<leader>sU',
-          function()
-            vim.cmd 'Telescope undo'
-          end,
-          desc = 'Undo',
-        },
-      },
-      config = function()
-        require('young.mod.telescope').cfg.extensions.undo = {
-          layout_strategy = 'vertical',
-          -- theme = 'ivy',
-          use_delta = true,
-          use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
-          side_by_side = true,
-          diff_context_lines = vim.o.scrolloff,
-          entry_format = 'state #$ID, $STAT, $TIME',
-          time_format = '',
-          saved_only = false,
-          mappings = {
-            i = {
-              -- ['<cr>'] = require('telescope-undo.actions').yank_additions,
-              -- ['<S-cr>'] = require('telescope-undo.actions').yank_deletions,
-              -- ['<C-cr>'] = require('telescope-undo.actions').restore,
-              -- alternative defaults, for users whose terminals do questionable things with modified <cr>
-              -- ['<C-y>'] = function() require('telescope-undo.actions').yank_deletions end,
-              -- ['<C-r>'] = function() require('telescope-undo.actions').restore end,
-            },
-          },
-        }
-        require('telescope').load_extension 'undo'
-      end,
+      auto = true,
     },
   },
 }
@@ -1629,9 +1423,7 @@ modules.keymap = {
     { -- Escape from insert, terminal & command mode without delay
       'TheBlob42/houdini.nvim',
       event = 'VeryLazy',
-      config = function()
-        require('houdini').setup()
-      end,
+      opts = {},
     },
   },
 }
@@ -1854,7 +1646,6 @@ modules.UI = {
       cmd = 'Alpha',
       -- event = 'VimEnter',
       config = function()
-        -- require('alpha').setup(require('young.mod.alpha.screen').opts)
         require('young.mod.alpha').done()
         -- vim.cmd[[doautocmd BufReadPost]]
       end,
@@ -1992,9 +1783,7 @@ modules.code = {
           'petertriho/cmp-git',
           ft = 'gitcommit',
           dependencies = 'nvim-lua/plenary.nvim',
-          config = function()
-            require('cmp_git').setup()
-          end,
+          opts = {},
         },
       },
     },
@@ -2079,9 +1868,7 @@ modules.code = {
     {
       'Weissle/persistent-breakpoints.nvim',
       lazy = true,
-      config = function()
-        require('persistent-breakpoints').setup {}
-      end,
+      opts = {},
     },
     {
       'mfussenegger/nvim-dap-python',
@@ -2317,11 +2104,9 @@ modules.LSP = {
     {
       'm-demare/hlargs.nvim',
       event = { 'BufReadPost', 'BufNewFile' },
-      config = function()
-        require('hlargs').setup {
-          -- color = '#ef9062',
-        }
-      end,
+      opts = {
+        -- color = '#ef9062',
+      },
     },
   },
 }
@@ -2616,17 +2401,15 @@ modules.write = {
           desc = 'Glow',
         },
       },
-      config = function()
-        require('glow').setup {
-          glow_path = 'glow', -- will be filled automatically with your glow bin in $PATH, if any
-          border = 'shadow', -- floating window border config
-          pager = false,
-          -- width = 80,
-          -- height = 100,
-          width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
-          height_ratio = 0.7,
-        }
-      end,
+      opts = {
+        glow_path = 'glow', -- will be filled automatically with your glow bin in $PATH, if any
+        border = 'shadow', -- floating window border config
+        pager = false,
+        -- width = 80,
+        -- height = 100,
+        width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+        height_ratio = 0.7,
+      },
     },
     {
       'crispgm/telescope-heading.nvim',
@@ -2721,16 +2504,14 @@ modules.tool = {
         }
         xy.map.n { '<leader>aB', ':BrowserBookmarks ' }
       end,
-      config = function()
-        require('browser_bookmarks').setup {
-          selected_browser = 'chrome', -- Available: 'brave', 'google_chrome', 'safari', 'firefox',
-          url_open_command = xy.open_cmd, -- url_open_plugin = 'external_browser',
-          -- Show the full path to the bookmark instead of just the bookmark name
-          full_path = true,
-          -- Provide a custom profile name for Firefox
-          firefox_profile_name = nil,
-        }
-      end,
+      opts = {
+        selected_browser = 'chrome', -- Available: 'brave', 'google_chrome', 'safari', 'firefox',
+        url_open_command = xy.open_cmd, -- url_open_plugin = 'external_browser',
+        -- Show the full path to the bookmark instead of just the bookmark name
+        full_path = true,
+        -- Provide a custom profile name for Firefox
+        firefox_profile_name = nil,
+      },
     },
   },
   website = {
@@ -2885,7 +2666,14 @@ local function require_helper_semi(plug)
   local plug_name = short_name:match('^[^.]+'):gsub('^n?vim%-', '')
   local mod_path = 'young.mod.' .. plug_name
 
-  if plug.auto == 'init' or plug.auto == 'once' or plug.auto == true then
+  if plug.auto == true then
+    plug.keys = function()
+      local m = require(mod_path)
+      return m.keys
+    end
+  end
+
+  if plug.auto == 'init' or plug.auto == true then
     plug.init = function()
       -- xy.autogroup('_lazy_init_' .. plug_name, {
       --   {
@@ -2896,17 +2684,27 @@ local function require_helper_semi(plug)
       --   },
       -- })
       local m = require(mod_path)
-      if type(m) == 'table' and m.once and type(m.once) == 'function' then
-        m.once()
+      if type(m) == 'table' then
+        if m.once and type(m.once) == 'function' then
+          m.once()
+        end
+        if m.init and type(m.init) == 'function' then
+          m.init()
+        end
       end
     end
   end
 
-  if plug.auto == 'config' or plug.auto == 'done' or plug.auto == true then
+  if plug.auto == 'config' or plug.auto == true then
     plug.config = function()
       local m = require(mod_path)
-      if type(m) == 'table' and m.done and type(m.done) == 'function' then
-        m.done()
+      if type(m) == 'table' then
+        if m.done and type(m.done) == 'function' then
+          m.done()
+        end
+        if m.config and type(m.config) == 'function' then
+          m.config()
+        end
       end
     end
   end
