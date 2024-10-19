@@ -71,6 +71,7 @@ require('lazy').setup {
     },
   },
   rocks = {
+    enabled = false,
     root = vim.fn.stdpath 'data' .. '/lazy-rocks',
     server = 'https://nvim-neorocks.github.io/rocks-binaries/',
   },

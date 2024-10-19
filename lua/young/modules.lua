@@ -374,7 +374,7 @@ modules.edit = {
   },
   {
     'AndrewRadev/splitjoin.vim',
-    submodules = false,
+    -- submodules = false,
     -- event = 'BufWinEnter',
     cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
     keys = {
@@ -714,7 +714,7 @@ modules.BWT = {
     },
     {
       'nvim-focus/focus.nvim',
-      submodules = false,
+      -- submodules = false,
       -- event = "BufReadPost",
       cmd = { 'FocusToggle', 'FocusMaxOrEqual' },
       auto = true,
@@ -792,7 +792,7 @@ modules.file = {
     },
     {
       'simonmclean/triptych.nvim',
-      submodules = false,
+      -- submodules = false,
       dependencies = {
         'nvim-lua/plenary.nvim', -- required
         'nvim-tree/nvim-web-devicons', -- optional
@@ -1026,7 +1026,7 @@ modules.telescope = {
       -- },
       {
         'natecraddock/telescope-zf-native.nvim',
-        submodules = false,
+        -- submodules = false,
         init = function()
           require('young.mod.telescope').cfg.extensions['zf-native'] = {
             -- options for sorting file-like items
