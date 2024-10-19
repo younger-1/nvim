@@ -5,15 +5,15 @@ local in_headless = #api.nvim_list_uis() == 0
 local util = require 'young.util'
 -- local Log = require "lvim.core.log"
 
-local package_root = join_paths(fn.stdpath 'data', 'site', 'pack')
-local install_path = join_paths(package_root, 'packer', 'start', 'packer.nvim')
+local package_root = vim.fs.joinpath(vim.fn.stdpath 'data', 'site', 'pack')
+local install_path = vim.fs.joinpath(package_root, 'packer', 'start', 'packer.nvim')
 local standard = false
-local standard_path = join_paths(fn.stdpath 'config', 'plugin', 'packer_compiled.lua')
+local standard_path = vim.fs.joinpath(vim.fn.stdpath 'config', 'plugin', 'packer_compiled.lua')
 local compile_path = standard and standard_path
-  or join_paths(fn.stdpath 'config', 'lua', 'young', 'packer_compiled.lua')
+  or vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', 'young', 'packer_compiled.lua')
 local snapshot_name = 'packer-lock.json'
-local snapshot_path = join_paths(fn.stdpath 'config', 'utils', 'snapshot')
--- local default_snapshot = join_paths(snapshot_path, snapshot_name)
+local snapshot_path = vim.fs.joinpath(vim.fn.stdpath 'config', 'utils', 'snapshot')
+-- local default_snapshot = vim.fs.joinpath(snapshot_path, snapshot_name)
 
 local _, packer = pcall(require, 'packer')
 local first_time = nil
@@ -165,7 +165,7 @@ M.source_compiled = function()
   -- Use impatient
   if false == standard then
     if util.is_file(standard_path) then
-      fn.delete(standard_path)
+      vim.fn.delete(standard_path)
     end
     require 'young.packer_compiled'
     -- dofile(compile_path)
@@ -220,7 +220,7 @@ end
 M.snapshot_hook = function()
   -- TODO:not doautocmd for packer.snapshot yet
   local tmpfile = vim.fn.tempname()
-  local snapfile = join_paths(snapshot_path, snapshot_name)
+  local snapfile = vim.fs.joinpath(snapshot_path, snapshot_name)
   local jsoner
   for _, item in ipairs { 'jq' } do
     if vim.fn.executable(item) == 1 then
@@ -245,7 +245,7 @@ M.loaded = function()
   local loaded_start, loaded_opt, no_loaded = {}, {}, {}
   for name, spec in pairs(_G.packer_plugins) do
     if spec.loaded then
-      if (spec.path):match(join_paths(package_root, 'packer', 'start')) then
+      if (spec.path):match(vim.fs.joinpath(package_root, 'packer', 'start')) then
         table.insert(loaded_start, name)
       else
         table.insert(loaded_opt, name)

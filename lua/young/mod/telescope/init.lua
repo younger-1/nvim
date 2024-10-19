@@ -31,6 +31,7 @@ M.cfg = {
       n = {},
     },
   },
+  pickers = {},
   extensions = {},
 }
 

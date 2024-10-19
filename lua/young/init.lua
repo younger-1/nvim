@@ -635,7 +635,6 @@ xy.globals = function()
     'is_unix',
     'is_windows',
     'is_wsl',
-    'join_paths',
     'nvim',
     'pn',
     'pp',

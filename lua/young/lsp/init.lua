@@ -128,7 +128,7 @@ M.once = function()
 
   require 'young.lsp.handler'
 
-  -- bootstrap_nlsp { config_home = util.join_paths(get_config_dir(), "lsp-settings") }
+  -- bootstrap_nlsp { config_home = vim.fs.joinpath(get_config_dir(), "lsp-settings") }
 
   -- autocmds.configure_format_on_save()
 end

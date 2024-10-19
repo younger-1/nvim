@@ -375,7 +375,7 @@ function M.setup_dictionary()
       -- },
       -- spelllang = {
       --   -- en = "./spell/10k.txt"
-      --   -- en = join_paths(vim.fn.stdpath 'config', 'spell', '10k.txt'),
+      --   -- en = vim.fs.joinpath(vim.fn.stdpath 'config', 'spell', '10k.txt'),
       -- },
     },
     -- The following are default values.

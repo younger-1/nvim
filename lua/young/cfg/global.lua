@@ -122,7 +122,7 @@ local scoop = os.getenv 'scoop'
 
 if is_windows then
   if scoop then
-    vim.g.sqlite_clib_path = join_paths(scoop, 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
+    vim.g.sqlite_clib_path = vim.fs.joinpath(scoop, 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
   else
     vim.notify('[young]: scoop not installed', vim.log.levels.INFO)
   end

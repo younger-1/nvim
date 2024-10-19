@@ -61,15 +61,15 @@ function M.reload()
   -- vim.cmd.doautocmd 'VimEnter'
 end
 
-M.reload_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
+M.reload_path = vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', 'young', 'plugins.lua')
 
-M.lazy_path = join_paths(vim.fn.stdpath 'config', 'lua', 'young', 'modules.lua')
+M.lazy_path = vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', 'young', 'modules.lua')
 
-M.local_config_path = join_paths(vim.fn.stdpath 'config', 'local', 'init.lua')
+M.local_config_path = vim.fs.joinpath(vim.fn.stdpath 'config', 'local', 'init.lua')
 
 function M.create_local_config()
   if not xy.util.is_file(M.local_config_path) then
-    local template = join_paths(vim.fn.stdpath 'config', 'utils', 'local.template.lua')
+    local template = vim.fs.joinpath(vim.fn.stdpath 'config', 'utils', 'local.template.lua')
     fn.mkdir(fn.fnamemodify(M.local_config_path, ':p:h'), 'p')
     uv.fs_copyfile(template, M.local_config_path)
   end

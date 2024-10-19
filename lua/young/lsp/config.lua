@@ -8,7 +8,6 @@
 -- end
 
 return {
-  -- templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   diagnostics = {
     signs = {
       text = { -- neovim/neovim#26193 (0.10.0)

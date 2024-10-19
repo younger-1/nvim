@@ -367,7 +367,7 @@ return {
     },
     c = {
       function()
-        local file = join_paths(vim.fn.stdpath 'config', 'init.lua')
+        local file = vim.fs.joinpath(vim.fn.stdpath 'config', 'init.lua')
         xy.tool.open_file(file)
       end,
       'Open init.lua',

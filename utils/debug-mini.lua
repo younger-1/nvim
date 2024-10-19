@@ -26,7 +26,7 @@
 --   -- termguicolors = true,
 --   timeoutlen = 300,
 --   title = true,
---   -- undodir = join_paths(vim.fn.stdpath "cache", "undo"),
+--   -- undodir = vim.fs.joinpath(vim.fn.stdpath "cache", "undo"),
 --   undofile = true,
 --   updatetime = 300,
 --   writebackup = false,

@@ -1059,7 +1059,7 @@ modules.telescope = {
         dependencies = { 'kkharji/sqlite.lua' },
         init = function()
           require('young.mod.telescope').cfg.defaults.history = {
-            path = join_paths(fn.stdpath 'data', 'telescope_history.sqlite3'),
+            path = vim.fs.joinpath(vim.fn.stdpath 'data', 'telescope_history.sqlite3'),
           }
           -- To enable extension's setting
           lazy_on_load('telescope.nvim', function()
