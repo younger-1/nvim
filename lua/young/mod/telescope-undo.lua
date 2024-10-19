@@ -8,7 +8,7 @@ return {
       desc = 'Undo',
     },
   },
-  config = function()
+  init = function()
     require('young.mod.telescope').cfg.extensions.undo = {
       layout_strategy = 'vertical',
       -- theme = 'ivy',
@@ -30,6 +30,8 @@ return {
         },
       },
     }
+  end,
+  config = function()
     require('telescope').load_extension 'undo'
   end,
 }

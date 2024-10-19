@@ -8,7 +8,7 @@ return {
       desc = 'Projects',
     },
   },
-  config = function()
+  init = function()
     require('young.mod.telescope').cfg.extensions.project = {
       theme = 'dropdown',
       base_dirs = { -- check .git dir for project
@@ -28,6 +28,8 @@ return {
       --   require('harpoon.ui').nav_file(1)
       -- end,
     }
+  end,
+  config = function()
     require('telescope').load_extension 'project'
   end,
 }

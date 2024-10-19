@@ -105,7 +105,7 @@
 - [ ] lsp: <C-w>d/r/i, t/b, a/y/u/;/,/.
 - [ ] winbar: show `winner`. highlight current window
 - [ ] zf-native: in `Telescope diagnostics`, <C-l> tag not work
-- [ ] lazydev: support vim.cmd
+- [ ] lazydev: support vim.cmd, vim.opt
 
 ```
 map("n", term_maps.new_horizontal, ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
@@ -242,3 +242,60 @@ let g:loaded_zip               = 1 "$VIMRUNTIME/autoload/zip.vim
 let g:loaded_zipPlugin         = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
 let g:vimsyn_embed             = 1 "$VIMRUNTIME/syntax/vim.vim
 ```
+
+| Gregory Anders docs: update LSP quickstart (#28954)
+|
+| The LSP quickstart can act as our true "entrypoint" for answering the
+| question "How do I use LSP in Neovim?" As such, it can be a little more
+| beginniner-friendly than other sections of our help docs by including
+| explanatory comments and a more fleshed out example (including a
+| `FileType` autocommand).
+|
+| This also includes some other minor wording updates and points users
+| toward `:checkhealth lsp`.
+
+| Gregory Anders feat(defaults): add LSP default mappings (again) (#28650)
+
+| dundargoc refactor: replace deprecated vim.loop with vim.uv
+
+| dundargoc feat: allow gx to function for markdown links
+|
+| In other words, `gx` works regardless of where it was used in
+| `[...](https://...)`. This only works on markdown buffers.
+|
+| Co-authored-by: ribru17 <ribru17@gmail.com>
+
+| Ilia Choly refactor(lsp): use supports_method where applicable
+
+| Tobias Schmitz feat(signs)!: place higher-priority signs from the left #27781
+|
+| Problem:
+| Higher-priority signs may be hidden by lower-priority signs.
+|
+| Solution:
+| Place higher-priority signs from the left.
+|
+| Example:
+|
+|     nvim_buf_set_extmark(0, ns, 0, -1, {sign_text='H', priority=1})
+|     nvim_buf_set_extmark(0, ns, 0, -1, {sign_text='W', priority=2})
+|     nvim_buf_set_extmark(0, ns, 0, -1, {sign_text='E', priority=3})
+|
+| Before:
+|
+|             |     |
+|           H | W E |
+|           ^ |     |
+| Not visible
+|
+| After:
+|
+|   |     |
+|   | E W | H
+|   |     | ^
+|           Not visible
+|
+| Fixes #16632
+
+| Ilia Choly fix(lsp): add textDocument/documentLink to capability map (#28838)
+

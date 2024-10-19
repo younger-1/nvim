@@ -5,7 +5,7 @@ M.once = function()
   local function xy_send_to_trouble(prompt_bufnr)
     require('trouble.sources.telescope').open(prompt_bufnr)
   end
-  t.defaults.mappings.i['<c-t>'] = xy_send_to_trouble
+  t.defaults.mappings.i['<C-t>'] = xy_send_to_trouble
   local function xy_add_to_trouble(prompt_bufnr)
     require('trouble.sources.telescope').add(prompt_bufnr) -- Use this to add more results without clearing the trouble list
   end

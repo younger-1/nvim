@@ -681,7 +681,6 @@ M.done = function()
       -- file_sorter = sorters.get_fuzzy_file,
       -- generic_sorter = sorters.get_generic_fuzzy_sorter,
       history = {
-        path = join_paths(fn.stdpath 'data', 'telescope_history.sqlite3'),
         limit = 500,
       },
       cache_picker = {

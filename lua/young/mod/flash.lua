@@ -20,7 +20,7 @@ M.once = function()
     }
   end
   local t = require('young.mod.telescope').cfg
-  t.defaults.mappings.i['<c-s>'] = xy_flash
+  t.defaults.mappings.i['<C-s>'] = xy_flash
   t.defaults.mappings.n['s'] = xy_flash
 
   local keys = {

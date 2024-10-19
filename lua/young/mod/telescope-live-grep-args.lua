@@ -23,7 +23,7 @@ return {
       desc = 'Grep cursor word',
     },
   },
-  config = function()
+  init = function()
     require('young.mod.telescope').cfg.extensions.live_grep_args = {
       auto_quoting = true, -- enable/disable auto-quoting
       mappings = {
@@ -37,6 +37,8 @@ return {
         },
       },
     }
+  end,
+  config = function()
     require('telescope').load_extension 'live_grep_args'
   end,
 }

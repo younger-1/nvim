@@ -241,7 +241,7 @@ endfunction
 """"""""""""""""""""""""""""""""
 "        4. terminal mode
 """"""""""""""""""""""""""""""""
-" tnoremap <ESC><ESC> <C-\><C-N>
+tnoremap <ESC><ESC> <C-\><C-N>
 tnoremap JK <C-\><C-N>
 " Better window navigation
 " tnoremap <C-h> <C-\><C-N><C-w>h
