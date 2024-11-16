@@ -3,13 +3,19 @@ return {
 
   ['\\'] = {
     s = { ':so<cr>', ':source' },
-    -- I = { 'y:lua pp(<C-r>")', 'Inspect' },
-    I = {
+    p = {
       function()
         local text = xy.util.get_visual_selection_by_reg()
-        fn.feedkeys(':lua=' .. text)
+        vim.fn.feedkeys(vim.keycode '<Esc>' .. ':=' .. text, 'n')
       end,
-      'Inspect',
+      'Inspect (=)',
+    },
+    l = {
+      function()
+        local text = xy.util.get_visual_selection_by_reg()
+        vim.fn.feedkeys(vim.keycode '<Esc>' .. ':lua ' .. text, 'n')
+      end,
+      'Inspect (lua)',
     },
   },
   g = {

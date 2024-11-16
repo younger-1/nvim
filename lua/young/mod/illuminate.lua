@@ -48,8 +48,10 @@ hi! def link IlluminatedWordWrite LspReferenceWrite
 -- vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
 -- vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 
-vim.keymap.set('n', ']w', require('illuminate').goto_next_reference, { desc = 'Move to next reference' })
-vim.keymap.set('n', '[w', require('illuminate').goto_prev_reference, { desc = 'Move to previous reference' })
+vim.keymap.set('n', ']w', require('illuminate').goto_next_reference, { desc = 'Next reference' })
+vim.keymap.set('n', '[w', require('illuminate').goto_prev_reference, { desc = 'Previous reference' })
+vim.keymap.set('n', ']]', require('illuminate').goto_next_reference, { desc = 'Next reference' })
+vim.keymap.set('n', '[[', require('illuminate').goto_prev_reference, { desc = 'Previous reference' })
 -- vim.keymap.set('o', '<a-i>', require('illuminate').textobj_select)
 -- vim.keymap.set('x', '<a-i>', require('illuminate').textobj_select)
 --

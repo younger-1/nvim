@@ -162,7 +162,7 @@ M.cfg = {
       else
         gitsigns.nav_hunk 'next'
       end
-    end)
+    end, { desc = 'Next change' })
 
     map('n', '[c', function()
       if vim.wo.diff then
@@ -170,31 +170,31 @@ M.cfg = {
       else
         gitsigns.nav_hunk 'prev'
       end
-    end)
-
-    map('n', ']d', function()
-      gitsigns.nav_hunk('next', { greedy = false, preview = true })
-    end)
-
-    map('n', '[d', function()
-      gitsigns.nav_hunk('prev', { greedy = false, preview = true })
-    end)
-
-    map('n', ']s', function()
-      gitsigns.nav_hunk('next', { target = 'staged', greedy = false, preview = true })
-    end)
-
-    map('n', '[s', function()
-      gitsigns.nav_hunk('prev', { target = 'staged', greedy = false, preview = true })
-    end)
+    end, { desc = 'Prev change' })
 
     map('n', ']C', function()
       gitsigns.nav_hunk 'first'
-    end)
+    end, { desc = 'Last change' })
 
     map('n', '[C', function()
       gitsigns.nav_hunk 'last'
-    end)
+    end, { desc = 'First change' })
+
+    map('n', ']d', function()
+      gitsigns.nav_hunk('next', { greedy = false, preview = true })
+    end, { desc = 'Next diff' })
+
+    map('n', '[d', function()
+      gitsigns.nav_hunk('prev', { greedy = false, preview = true })
+    end, { desc = 'Prev diff' })
+
+    map('n', ']s', function()
+      gitsigns.nav_hunk('next', { target = 'staged', greedy = false, preview = true })
+    end, { desc = 'Next staged' })
+
+    map('n', '[s', function()
+      gitsigns.nav_hunk('prev', { target = 'staged', greedy = false, preview = true })
+    end, { desc = 'Prev staged' })
 
     -- Text object
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -205,19 +205,13 @@ M.cfg = {
           function()
             vim.cmd 'Gitsigns toggle_current_line_blame'
           end,
-          'Blames',
+          'Line blame',
         },
         ["'"] = {
           function()
             vim.cmd 'Gitsigns toggle_linehl'
           end,
           'Line highlight',
-        },
-        ['`'] = {
-          function()
-            vim.cmd 'Gitsigns toggle_numhl'
-          end,
-          'Number highlight',
         },
         [';'] = {
           function()
@@ -227,9 +221,21 @@ M.cfg = {
         },
         [','] = {
           function()
+            vim.cmd 'Gitsigns toggle_numhl'
+          end,
+          'Number highlight',
+        },
+        ['.'] = {
+          function()
             vim.cmd 'Gitsigns toggle_signs'
           end,
           'Sign highlight',
+        },
+        ['/'] = {
+          function()
+            vim.cmd 'Gitsigns toggle_word_diff'
+          end,
+          'Word diff',
         },
         ['<C-q>'] = {
           group = '+quickfix',
@@ -327,13 +333,13 @@ M.cfg = {
           function()
             vim.cmd 'Gitsigns blame_line'
           end,
-          'Blame',
+          'Blame line',
         },
         L = {
           function()
             vim.cmd 'Gitsigns blame_line full=1'
           end,
-          'Blame',
+          'Blame line(full)',
         },
         p = {
           function()
@@ -367,12 +373,6 @@ M.cfg = {
             vim.cmd 'Gitsigns reset_buffer_index'
           end,
           'Reset buffer index',
-        },
-        w = {
-          function()
-            vim.cmd 'Gitsigns toggle_word_diff'
-          end,
-          'Word diff',
         },
       },
     }, { buffer = bufnr })

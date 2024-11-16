@@ -22,7 +22,7 @@ M.once = function()
             action_callback = vim.v.count ~= 0 and require('gitlinker.actions').open_in_browser or nil,
           }
         end,
-        'Link(Repo)',
+        'Link(repo)',
       },
     },
   }

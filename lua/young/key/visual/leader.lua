@@ -1,7 +1,7 @@
 return {
   -- ['/'] = { '<ESC><CMD>lua ___comment_gc(fn.visualmode())<cr>', 'Comment' },
   g = {
-    h = {
+    l = {
       function()
         vim.cmd [[exe "normal! \<ESC>"]]
         require('telescope.builtin').git_bcommits_range {
@@ -9,7 +9,7 @@ return {
           to = vim.fn.line "'>",
         }
       end,
-      'Commits(current range)',
+      'Commits(lines)',
     },
   },
   s = {

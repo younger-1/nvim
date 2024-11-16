@@ -191,57 +191,6 @@ M.once = function()
           end,
           'Commands',
         },
-        d = {
-          group = '+dir',
-          f = {
-            function()
-              vim.cmd 'Telescope find_files cwd=%:p:h'
-            end,
-            'Find files',
-          },
-          g = {
-            function()
-              vim.cmd 'Telescope live_grep cwd=%:p:h'
-            end,
-            'Grep',
-          },
-          w = {
-            function()
-              vim.cmd 'Telescope grep_string cwd=%:p:h'
-            end,
-            'Word under cursor',
-          },
-        },
-        b = {
-          function()
-            vim.cmd 'Telescope buffers'
-          end,
-          'Buffers',
-        },
-        f = {
-          function()
-            vim.cmd 'Telescope find_files'
-          end,
-          'Find files',
-        },
-        F = {
-          function()
-            vim.cmd 'Telescope find_files no_ignore=true'
-          end,
-          'Find files (with ignored)',
-        },
-        r = {
-          function()
-            vim.cmd 'Telescope oldfiles only_cwd=true'
-          end,
-          'Open recent file (cwd)',
-        },
-        R = {
-          function()
-            vim.cmd 'Telescope oldfiles'
-          end,
-          'Open recent file',
-        },
         g = {
           function()
             require('telescope.builtin').live_grep {
@@ -443,6 +392,59 @@ M.once = function()
           'Lazy plugin spec',
         },
       },
+      f = {
+        d = {
+          group = '+dir',
+          f = {
+            function()
+              vim.cmd 'Telescope find_files cwd=%:p:h'
+            end,
+            'Find files',
+          },
+          g = {
+            function()
+              vim.cmd 'Telescope live_grep cwd=%:p:h'
+            end,
+            'Grep',
+          },
+          w = {
+            function()
+              vim.cmd 'Telescope grep_string cwd=%:p:h'
+            end,
+            'Word under cursor',
+          },
+        },
+        b = {
+          function()
+            vim.cmd 'Telescope buffers'
+          end,
+          'Buffers',
+        },
+        f = {
+          function()
+            vim.cmd 'Telescope find_files'
+          end,
+          'Find files',
+        },
+        F = {
+          function()
+            vim.cmd 'Telescope find_files no_ignore=true'
+          end,
+          'Find files (with ignored)',
+        },
+        r = {
+          function()
+            vim.cmd 'Telescope oldfiles only_cwd=true'
+          end,
+          'Recent (cwd)',
+        },
+        R = {
+          function()
+            vim.cmd 'Telescope oldfiles'
+          end,
+          'Recent',
+        },
+      },
       g = {
         b = {
           function()
@@ -460,9 +462,9 @@ M.once = function()
           function()
             vim.cmd 'Telescope git_bcommits'
           end,
-          'Commits(current file)',
+          'Commits(buffer)',
         },
-        e = {
+        S = {
           function()
             vim.cmd 'Telescope git_stash'
           end,
@@ -480,11 +482,11 @@ M.once = function()
           end,
           'Open changed file',
         },
-        h = {
+        l = {
           function()
             vim.cmd 'Telescope git_bcommits_range'
           end,
-          'Commits(current line)',
+          'Commits(line)',
         },
       },
       c = {
@@ -685,8 +687,7 @@ M.done = function()
         limit = 500,
       },
       cache_picker = {
-        num_pickers = 10,
-        limit_entries = 300,
+        num_pickers = 20,
       },
       -- exec 'e ' .. stdpath('data') .. '/site/pack/packer/start/telescope.nvim/lua/telescope/mappings.lua'
       mappings = {

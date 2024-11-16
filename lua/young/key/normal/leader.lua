@@ -315,13 +315,13 @@ return {
   },
   v = {
     group = '+vim',
-    v = {
+    i = {
       function()
         vim.cmd 'Inspect'
       end,
       'Inspect',
     },
-    t = {
+    I = {
       function()
         vim.cmd 'InspectTree'
       end,

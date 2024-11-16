@@ -1,7 +1,7 @@
 return {
   once = function()
     xy.map.register {
-      ['<leader>'] = {
+      ['<leader>a'] = {
         f = {
           group = '+fzf',
           [' '] = {
