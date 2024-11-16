@@ -14,6 +14,7 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 _G.night = {}
 

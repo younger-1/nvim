@@ -69,6 +69,7 @@
 
 -- -- Mappings
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 local function nmap(key, cmd, opts)
   opts = vim.tbl_extend('force', { noremap = true, nowait = true }, opts or {})
   vim.api.nvim_set_keymap('n', key, cmd, opts)

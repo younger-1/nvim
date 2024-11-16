@@ -192,7 +192,7 @@ command! -bang -range ToggleSlash <line1>,<line2>call ToggleSlash(<bang>1)
 
 " Mappings {{{
 let g:mapleader = ' '
-let g:maplocalleader = '\'
+let g:maplocalleader = ','
 
 " [Keys be remaped]
 " Normal: ~, +, -, _, j, k, gj, gk, gs, <Tab>, <BS>, <S-CR>, <S-Up...>, <C-N>, <C-P>, <C-M>, <C-j>, <C-k>
