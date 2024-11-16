@@ -265,6 +265,7 @@ noremap! <C-d> <Del>
 "        6. insert mode
 """"""""""""""""""""""""""""""""
 inoremap <C-v> <C-G>u<C-R><C-O>+
+inoremap <A-v> <C-G>u<C-R><C-O>+
 " Move current line / block, like in vscode
 inoremap <A-k> <C-o>:move .-2<CR>
 inoremap <A-j> <C-o>:move .+1<CR>
@@ -289,6 +290,7 @@ inoremap : :<C-g>u
 "        7. command mode
 """"""""""""""""""""""""""""""""
 cnoremap <C-v> <C-R>+
+cnoremap <A-v> <C-R>+
 
 " cnoremap <expr> <C-j> pumvisible() ? "<C-n>" : "<C-j>"
 " cnoremap <expr> <C-k> pumvisible() ? "<C-p>" : "<C-k>"

@@ -702,16 +702,28 @@ M.done = function()
               name_width = 26, -- typically leads to smaller floats
               separator = '', -- ' ⇒ ', -- change sep between mode, keybind, and name
               only_show_current_mode = true,
-              close_with_action = true, -- do not close float on action
+              close_with_action = false, -- do not close float on action
             },
             type = 'action', -- 'action_key', 'command'
-            opts = { desc = 'which_key' }, -- 'which_key', 'nop'
+            opts = { desc = 'nop' },
           },
-          ['<C-j>'] = actions.move_selection_next,
-          ['<C-k>'] = actions.move_selection_previous,
 
-          ['<A-n>'] = actions.cycle_history_next,
-          ['<A-p>'] = actions.cycle_history_prev,
+          --  NOTE: disabled key
+          -- ['<C-n>'] = false,
+          -- ['<C-p>'] = false,
+          ['<C-f>'] = false,
+          ['<C-b>'] = false,
+          ['<A-f>'] = false,
+          ['<A-b>'] = false,
+
+          ['<C-v>'] = { actions.select_vertical, type = 'action', opts = { desc = 'nop' } },
+          ['<C-s>'] = { actions.select_horizontal, type = 'action', opts = { desc = 'nop' } },
+
+          ['<A-n>'] = { actions.cycle_history_next, type = 'action', opts = { desc = 'nop' } },
+          ['<A-p>'] = { actions.cycle_history_prev, type = 'action', opts = { desc = 'nop' } },
+
+          ['<C-j>'] = { actions.move_selection_next, type = 'action', opts = { desc = 'nop' } },
+          ['<C-k>'] = { actions.move_selection_previous, type = 'action', opts = { desc = 'nop' } },
 
           ['<A-j>'] = { actions.results_scrolling_down, type = 'action', opts = { desc = 'nop' } },
           ['<A-k>'] = { actions.results_scrolling_up, type = 'action', opts = { desc = 'nop' } },
@@ -742,20 +754,11 @@ M.done = function()
           ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
           ['<A-z>'] = actions.smart_add_to_loclist + actions.open_loclist,
 
-          --  NOTE: disabled key
-          -- ['<C-n>'] = false,
-          -- ['<C-p>'] = false,
-          ['<C-f>'] = false,
-          ['<A-f>'] = false,
-          ['<C-v>'] = false,
-          ['<C-h>'] = actions.select_vertical,
-          ['<C-x>'] = actions.select_horizontal,
           --  NOTE: free key
           -- ['<C-i>']
           -- ['<C-o>']
           -- ['<C-y>']
           -- ['<C-g>']
-          -- ['<C-s>']
           -- ['<C-t>']
           -- ['<C-l>']
           -- ['<C-c>']
