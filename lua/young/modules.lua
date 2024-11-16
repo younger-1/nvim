@@ -108,6 +108,12 @@ modules.theme = {
   },
   helper = {
     {
+      'jlanzarotta/colorSchemeExplorer',
+      keys = {
+        { '<leader>tc', '<cmd>ColorSchemeExplorer<cr>' },
+      },
+    },
+    {
       'folke/styler.nvim',
       event = { 'BufReadPost', 'BufNewFile' },
       auto = 'config',

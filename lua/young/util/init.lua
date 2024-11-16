@@ -129,7 +129,10 @@ end
 ---@param str string
 ---@return string
 function util.t(str)
-  return api.nvim_replace_termcodes(str, true, true, true)
+  if xy.has 'nvim-0.10' then
+    return vim.keycode(str)
+  end
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 ---Shortcut for nvim_replace_termcodes
@@ -200,9 +203,9 @@ end
 -- 1. gv works as usual.
 -- 2. deal with any unicode.
 function util.get_visual_selection_by_reg(reg)
-  -- if xy.has 'nvim-0.10' then
-  --   return vim.fn.getregion(vim.fn.getpos '.', vim.fn.getpos 'v', { mode = vim.fn.mode() })
-  -- end
+  if xy.has 'nvim-0.10' then
+    return table.concat(vim.fn.getregion(vim.fn.getpos '.', vim.fn.getpos 'v', { type = vim.fn.mode() }))
+  end
 
   reg = reg or vim.v.register
   local old_text, type = fn.getreg(reg), fn.getregtype(reg)

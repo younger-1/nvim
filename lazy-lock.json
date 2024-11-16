@@ -27,6 +27,7 @@
   "cmp-rg": { "branch": "master", "commit": "677a7874ee8f1afc648c2e7d63a97bc21a7663c5" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "coerce.nvim": { "branch": "main", "commit": "4ea7e31b95209105899ee6360c2a3a30e09d361d" },
+  "colorSchemeExplorer": { "branch": "master", "commit": "5e8e763264af1142f2310894206ccfb2456e99c3" },
   "deadcolumn.nvim": { "branch": "master", "commit": "af13928aa281f36273e8f220b19e78d497c7fb87" },
   "dial.nvim": { "branch": "master", "commit": "3b70b2a6ce7d44826420f3653feef23501767577" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
