@@ -688,6 +688,10 @@ modules.BWT = {
       event = { 'BufReadPost', 'BufNewFile' },
       auto = true,
     },
+    {
+      'jlanzarotta/bufexplorer',
+      keys = { '<leader>be', '<leader>bv' }
+    }
   },
   window = {
     {
