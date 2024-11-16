@@ -3,11 +3,18 @@
 --   return
 -- end
 
-local ok, jdtls_server = require('nvim-lsp-installer.servers').get_server 'jdtls'
-if not ok or not jdtls_server:is_installed() then
+-- local ok, jdtls_server = require('nvim-lsp-installer.servers').get_server 'jdtls'
+-- if not ok or not jdtls_server:is_installed() then
+--   vim.notify '[Young]: not install jdtls'
+--   return
+-- end
+
+if not require('mason-registry').is_installed 'jdtls' then
   vim.notify '[Young]: not install jdtls'
   return
 end
+
+local jdtls_server = require('mason-registry').get_package 'jdtls'
 
 local common_opts = require 'young.lsp.common'
 
@@ -20,30 +27,32 @@ local actions = require 'telescope.actions'
 local pickers = require 'telescope.pickers'
 require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
   local opts = {}
-  pickers.new(opts, {
-    prompt_title = prompt,
-    finder = finders.new_table {
-      results = items,
-      entry_maker = function(entry)
-        return {
-          value = entry,
-          display = label_fn(entry),
-          ordinal = label_fn(entry),
-        }
+  pickers
+    .new(opts, {
+      prompt_title = prompt,
+      finder = finders.new_table {
+        results = items,
+        entry_maker = function(entry)
+          return {
+            value = entry,
+            display = label_fn(entry),
+            ordinal = label_fn(entry),
+          }
+        end,
+      },
+      sorter = sorters.get_generic_fuzzy_sorter(),
+      attach_mappings = function(prompt_bufnr)
+        actions.goto_file_selection_edit:replace(function()
+          local selection = actions.get_selected_entry(prompt_bufnr)
+          actions.close(prompt_bufnr)
+
+          cb(selection.value)
+        end)
+
+        return true
       end,
-    },
-    sorter = sorters.get_generic_fuzzy_sorter(),
-    attach_mappings = function(prompt_bufnr)
-      actions.goto_file_selection_edit:replace(function()
-        local selection = actions.get_selected_entry(prompt_bufnr)
-        actions.close(prompt_bufnr)
-
-        cb(selection.value)
-      end)
-
-      return true
-    end,
-  }):find()
+    })
+    :find()
 end
 
 local on_attach_jdtls = function(client, bufnr)
@@ -52,7 +61,7 @@ local on_attach_jdtls = function(client, bufnr)
   -- JdtBytecode command to show bytecode of current file
   -- JdtJol command to show memory usage of current file (jol_path must be set)
   -- JdtJshell command to open up jshell with classpath from project set
-  require('jdtls.setup').add_commands()
+  -- require('jdtls.setup').add_commands()
 
   -- require('jdtls').setup_dap()
   -- require('lsp-status').register_progress()
@@ -98,6 +107,11 @@ M.setup = function()
   local root_dir = require('jdtls.setup').find_root(root_markers)
   local home = os.getenv 'HOME'
   -- local workspace_folder = home .. '/.workspace' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
+  -- TODO:
+  -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/setup-with-nvim-jdtls.md
+  -- https://stackoverflow.com/questions/74844019/neovim-setting-up-jdtls-with-lsp-zero-mason
+  local project_name = vim.fn.fnamemodify(root_dir, ':p:h:t')
+  local workspace_dir = home .. '/.cache/jdtls/workspace/' .. project_name
 
   local extendedClientCapabilities = require('jdtls').extendedClientCapabilities
   extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -110,7 +124,15 @@ M.setup = function()
 
   local config = vim.tbl_deep_extend('force', common_opts, require 'young.lsp.providers.jdtls')
   config = vim.tbl_deep_extend('force', config, {
-    cmd = jdtls_server._default_options.cmd,
+    -- cmd = jdtls_server._default_options.cmd,
+    -- cmd = require('lspconfig.configs.jdtls').default_config.cmd,
+    cmd = {
+      'jdtls',
+      '-configuration',
+      '/Users/bytedance/.cache/jdtls/config',
+      '-data',
+      '/Users/bytedance/.cache/jdtls/workspace',
+    },
     root_dir = root_dir,
     on_attach = on_attach_jdtls,
     flags = {
