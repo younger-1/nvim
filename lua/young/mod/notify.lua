@@ -32,7 +32,16 @@ M.cfg = {
   top_down = true,
 
   -- Function called when a new window is opened, use for changing win settings/config
-  on_open = nil,
+  on_open = function(win)
+    local bufnr = vim.api.nvim_win_get_buf(win)
+    -- highlights & copies the line number in error stack traces:
+    vim.api.nvim_buf_call(bufnr, function()
+      vim.fn.matchadd('WarningMsg', [[\w\+\.lua:\d\+\ze:]])
+      local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n')
+      local lineNum = bufText:match '%w+%.lua:(%d+):'
+      vim.fn.setreg('"', lineNum)
+    end)
+  end,
 
   -- Function called when a window is closed
   on_close = nil,

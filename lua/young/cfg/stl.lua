@@ -52,11 +52,12 @@ end
 function M.file_or_lsp_status()
   -- Neovim keeps the messages sent from the language server in a buffer and
   -- get_progress_messages polls the messages
-  local messages = vim.lsp.util.get_progress_messages()
+  -- local messages = vim.lsp.util.get_progress_messages()
+  local messages = vim.lsp.status()
   local mode = api.nvim_get_mode().mode
 
   -- If neovim isn't in normal mode, or if there are no messages from the language server display the file name
-  if mode ~= 'n' or vim.tbl_isempty(messages) then
+  if true or mode ~= 'n' or vim.tbl_isempty(messages) then
     return M.format_uri(vim.uri_from_bufnr(api.nvim_get_current_buf()))
   end
 

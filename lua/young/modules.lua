@@ -380,7 +380,7 @@ modules.edit = {
   },
   {
     'AndrewRadev/splitjoin.vim',
-    -- submodules = false,
+    submodules = false,
     -- event = 'BufWinEnter',
     cmd = { 'SplitjoinSplit', 'SplitjoinJoin' },
     keys = {
@@ -690,8 +690,8 @@ modules.BWT = {
     },
     {
       'jlanzarotta/bufexplorer',
-      keys = { '<leader>be', '<leader>bv' }
-    }
+      keys = { '<leader>be', '<leader>bv' },
+    },
   },
   window = {
     {
@@ -724,7 +724,7 @@ modules.BWT = {
     },
     {
       'nvim-focus/focus.nvim',
-      -- submodules = false,
+      submodules = false,
       -- event = "BufReadPost",
       cmd = { 'FocusToggle', 'FocusMaxOrEqual' },
       auto = true,
@@ -802,7 +802,7 @@ modules.file = {
     },
     {
       'simonmclean/triptych.nvim',
-      -- submodules = false,
+      submodules = false,
       dependencies = {
         'nvim-lua/plenary.nvim', -- required
         'nvim-tree/nvim-web-devicons', -- optional
@@ -1036,7 +1036,7 @@ modules.telescope = {
       -- },
       {
         'natecraddock/telescope-zf-native.nvim',
-        -- submodules = false,
+        submodules = false,
         init = function()
           require('young.mod.telescope').cfg.extensions['zf-native'] = {
             -- options for sorting file-like items
@@ -1526,20 +1526,18 @@ modules.UI = {
     --     require 'young.mod.lualine'
     --   end,
     -- },
-    {
-      'freddiehaddad/feline.nvim',
-      event = { 'BufReadPost', 'BufNewFile' },
-      opts = {},
-      config = function(_, opts)
-        require 'young.mod.feline'
-      end,
-    },
+    -- {
+    --   'freddiehaddad/feline.nvim',
+    --   event = { 'BufReadPost', 'BufNewFile' },
+    --   opts = {},
+    --   config = function(_, opts)
+    --     require 'young.mod.feline'
+    --   end,
+    -- },
     -- {
     --   'rebelot/heirline.nvim',
     --   event = { 'BufReadPost', 'BufNewFile' },
-    --   config = function()
-    --     require('heirline').setup {}
-    --   end,
+    --   opts = {},
     -- },
   },
   statuscolumn = {
@@ -2537,7 +2535,7 @@ modules.tool = {
     cmd = 'Calendar',
     init = function()
       xy.map.n {
-        '<leader>tc',
+        '<leader>ac',
         function()
           vim.cmd 'Calendar'
         end,
@@ -2591,7 +2589,7 @@ end
 --     { 'young', 'mod', plug_name },
 --     { 'young', 'mod', mod_name, plug_name },
 --   } do
---     local prefix = join_paths(fn.stdpath 'config', 'lua', unpack(paths))
+--     local prefix = vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', unpack(paths))
 --     if xy.util.is_file(prefix .. '.lua') or xy.util.is_file(prefix .. '/init.lua') then
 --       mod_path = table.concat(paths, '.')
 --       gg(mod_path)
