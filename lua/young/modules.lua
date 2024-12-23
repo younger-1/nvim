@@ -182,26 +182,6 @@ modules.appearance = {
     --     }
     --   end,
     -- },
-    -- {
-    --   'shellRaining/hlchunk.nvim',
-    --   event = { 'UIEnter' },
-    --   config = function()
-    --     require('hlchunk').setup {
-    --       chunk = {
-    --         chars = {
-    --           horizontal_line = '━',
-    --           vertical_line = '┃',
-    --           left_top = '┏',
-    --           left_bottom = '┗',
-    --           right_arrow = '━',
-    --         },
-    --       },
-    --       blank = {
-    --         enable = false,
-    --       },
-    --     }
-    --   end,
-    -- },
   },
   line = {
     -- { -- Show where your cursor moves when jumping large distances
@@ -1216,7 +1196,6 @@ modules.git = {
   },
   {
     'sindrets/diffview.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
     auto = true,
   },
