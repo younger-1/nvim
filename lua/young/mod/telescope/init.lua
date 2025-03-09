@@ -46,7 +46,7 @@ M.once = function()
           function()
             vim.cmd 'Telescope pickers'
           end,
-          'Resume pickers',
+          '󰚾',
         },
         [' '] = {
           function()
@@ -114,7 +114,7 @@ M.once = function()
             require('telescope.builtin').command_history {
               prompt_prefix = '$ ',
               filter_fn = function(item)
-                local ignored_pattern = vim.regex 'edit\\|write\\|lua\\s='
+                local ignored_pattern = vim.regex [[\s$]]
                 if #item < 3 then
                   return false
                 else
@@ -133,13 +133,12 @@ M.once = function()
         ['/'] = {
           function()
             require('telescope.builtin').search_history {
-              prompt_prefix = '$ ',
+              prompt_prefix = '/ ',
               filter_fn = function(item)
-                local ignored_pattern = vim.regex 'edit\\|write\\|lua\\s='
                 if #item < 3 then
                   return false
                 else
-                  return not ignored_pattern:match_str(item)
+                  return true
                 end
               end,
               attach_mappings = function(_, map)

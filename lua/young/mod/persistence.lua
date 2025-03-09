@@ -57,23 +57,26 @@ return {
     }
   end,
   done = function()
-    local cwd = vim.fn.getcwd() .. '/'
-
     require('persistence').setup {
-      dir = vim.fn.expand(vim.fn.stdpath 'data' .. '/persistence/'), -- directory where session files are saved
-      options = { 'buffers', 'curdir', 'tabpages', 'winsize' }, -- sessionoptions used for saving
-      pre_save = function() -- called before saving the session
-        -- @see https://github.com/folke/persistence.nvim/issues/43
-        -- remove buffers whose files are located outside of cwd
-        vim.cmd.tcd(cwd)
-        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          local bufpath = vim.api.nvim_buf_get_name(buf) .. '/'
-          if not bufpath:match('^' .. vim.pesc(cwd)) then
-            vim.api.nvim_buf_delete(buf, {})
-          end
-        end
-      end,
-      save_empty = false, -- don't save if there are no open file buffers
+      dir = vim.fn.expand(vim.fn.stdpath 'state' .. '/persistence/'), -- directory where session files are saved
     }
+    -- @see https://github.com/folke/persistence.nvim/issues/43
+    -- remove buffers whose files are located outside of cwd
+    local cwd = vim.uv.cwd()
+    xy.autogroup('_persistence', {
+      {
+        'User',
+        'PersistenceSavePre',
+        function()
+          vim.cmd.tcd(cwd)
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            local bufpath = vim.api.nvim_buf_get_name(buf)
+            if not bufpath:match('^' .. vim.pesc(cwd)) then
+              vim.api.nvim_buf_delete(buf, {})
+            end
+          end
+        end,
+      },
+    })
   end,
 }

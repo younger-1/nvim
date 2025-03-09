@@ -4,33 +4,33 @@ function M.once()
   xy.map.n {
     '<leader>ee',
     function()
-      vim.cmd 'Neotree toggle reveal'
+      vim.cmd 'Neotree toggle reveal_force_cwd'
     end,
     'Explorer',
   }
   xy.map.n {
     '<leader>eb',
     function()
-      vim.cmd 'Neotree toggle reveal float buffers'
+      vim.cmd 'Neotree toggle reveal_force_cwd float buffers'
     end,
     'Buffers',
   }
   xy.map.n {
     '<leader>eg',
     function()
-      vim.cmd 'Neotree toggle reveal float git_status'
+      vim.cmd 'Neotree toggle reveal_force_cwd float git_status'
     end,
     'Git status',
   }
 
   vim.cmd [[
-  nnoremap <silent> <Leader>ek <cmd>Neotree toggle reveal top<cr>
-  nnoremap <silent> <Leader>ej <cmd>Neotree toggle reveal bottom<cr>
-  nnoremap <silent> <Leader>eh <cmd>Neotree toggle reveal left<cr>
-  nnoremap <silent> <Leader>el <cmd>Neotree toggle reveal right<cr>
-  nnoremap <silent> <C-e> <cmd>Neotree toggle reveal left<cr>
-  nnoremap <silent> <C-n> <cmd>Neotree toggle reveal right<cr>
-  nnoremap <silent> <C-p> <cmd>Neotree toggle reveal top<cr>
+  nnoremap <silent> <Leader>ek <cmd>Neotree toggle reveal_force_cwd top<cr>
+  nnoremap <silent> <Leader>ej <cmd>Neotree toggle reveal_force_cwd bottom<cr>
+  nnoremap <silent> <Leader>eh <cmd>Neotree toggle reveal_force_cwd left<cr>
+  nnoremap <silent> <Leader>el <cmd>Neotree toggle reveal_force_cwd right<cr>
+  nnoremap <silent> <C-e> <cmd>Neotree toggle reveal_force_cwd left<cr>
+  nnoremap <silent> <C-n> <cmd>Neotree toggle reveal_force_cwd right<cr>
+  nnoremap <silent> <C-p> <cmd>Neotree toggle reveal_force_cwd top<cr>
   ]]
 end
 
@@ -103,7 +103,7 @@ local cfg = {
         -- ['<cr>'] = 'open',
         -- ['P'] = { 'toggle_preview', config = { use_float = true } },
         ['s'] = 'fuzzy_finder',
-        ['<leader>sf'] = 'telescope_find',
+        ['<leader>ff'] = 'telescope_find',
         ['<leader>sg'] = 'telescope_grep',
       },
     },

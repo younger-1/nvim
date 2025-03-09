@@ -1061,7 +1061,6 @@ modules.telescope = {
   },
   {
     'nvim-telescope/telescope-frecency.nvim',
-    dependencies = { 'kkharji/sqlite.lua' },
     auto = true,
   },
   {
@@ -1997,7 +1996,7 @@ modules.LSP = {
       'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
       -- 'Maan2003/lsp_lines.nvim',
       -- 'ErichDonGubler/lsp_lines.nvim',
-      event = xy.has 'nvim-0.8' and 'LspAttach' or 'BufReadPost',
+      event = 'BufReadPost',
       config = function()
         require('young.mod.lsp_lines').done()
       end,

@@ -3,71 +3,96 @@
 -- <https://github.com/rafamadriz/dotfiles/blob/c285f6e592850565d579350486271173e2795f80/private_dot_config/nvim/lua/settings.lua>
 
 local default_options = {
-  backup = false,
-  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   clipboard = '',
+
+  mouse = 'nvi',
+
+  confirm = true, -- show confirm dialog instead of error msg
+
+  timeoutlen = 500, -- time to wait for a mapped sequence to complete (in milliseconds)
+  updatetime = 200, -- faster completion
+
+  autoindent = true,
+  smartindent = true,
+
+  expandtab = true,
+  tabstop = 8, -- insert 8 spaces for a tab
+  softtabstop = 0,
+  shiftwidth = 0,
+  smarttab = true,
+
+  wrap = false,
+  linebreak = true,
+
+  breakindent = true,
+  -- breakindentopt = { 'sbr' },
+  showbreak = '↪ ',
+
+  conceallevel = 2, -- Hide * markup for bold and italic, but not markers with substitutions
+
+  swapfile = false, -- creates a swapfile
+
+  undofile = true, -- enable persistent undo
+
+  showtabline = 2, -- always show tabs
   laststatus = 3, -- global statusline
+
   cmdheight = 1,
-  completeopt = { 'menuone', 'noselect' },
-  conceallevel = 0, -- so that `` is visible in markdown files
+  showcmd = true, -- show (partial) normal-mode command or visaul-mode selected chars
+  showmode = false, -- dont show mode since we have a statusline
+  ruler = false, -- disable the default ruler
+
   hlsearch = true,
   incsearch = true,
   inccommand = 'split',
+
   ignorecase = true,
   smartcase = true,
+
   fileformats = { 'unix', 'dos', 'mac' },
   fileencoding = 'utf-8', -- the encoding written to a file
   fileencodings = { 'ucs-bom', 'utf-8', 'default', 'latin1', 'utf-16', 'gbk', 'big5', 'gb18030' },
+
   foldcolumn = 'auto',
   foldmethod = 'expr', -- folding, set to "expr" for treesitter based folding
   -- foldexpr = 'v:lua.vim.treesitter.foldexpr()', -- TODO: treesitter/_fold.lua:get_folds_levels: table overflow
   foldtext = 'v:lua.vim.treesitter.foldtext()',
   -- foldtext = 'yo#fold#Text()',
+
   -- guifont = is_windows and 'SauceCodePro NF' or 'SauceCodePro Nerd Font',
   guifontwide = { 'Sarasa Term SC' },
-  -- mouse = 'nvi', -- allow the mouse to be used in neovim
+
+  completeopt = { 'menuone', 'noselect' },
   pumwidth = 25, -- pop up menu width
   pumheight = 20, -- pop up menu height
   pumblend = 30, -- transparency for the |popup-menu|
-  showmode = false, -- we don't need to see things like -- INSERT -- anymore
-  showtabline = 2, -- always show tabs
-  smartindent = true, -- make indenting smarter again
+
   splitbelow = true, -- force all horizontal splits to go below current window
   splitright = true, -- force all vertical splits to go to the right of current window
-  swapfile = false, -- creates a swapfile
-  termguicolors = true, -- set term gui colors (most terminals support this)
-  timeoutlen = 600, -- time to wait for a mapped sequence to complete (in milliseconds)
-  title = true, -- set the title of window to the value of the titlestring
-  -- titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) - LunarVim',
-  -- undodir = vim.fs.joinpath(vim.fn.stdpath "cache", "undo"), -- set an undo directory
-  undofile = true, -- enable persistent undo
-  updatetime = 200, -- faster completion
-  tabstop = 8, -- insert 8 spaces for a tab
-  expandtab = true, -- convert tabs to spaces
-  softtabstop = -1,
-  shiftwidth = 2, -- the number of spaces inserted for each indentation
-  smarttab = true,
-  cursorline = true, -- highlight the current line
-  colorcolumn = { 80 },
+
   number = true, -- set numbered lines
   relativenumber = true, -- set relative numbered lines
-  numberwidth = 4, -- set number column width to 2 {default 4}
   signcolumn = 'yes:2', -- always show the sign column, otherwise it would shift the text each time
-  wrap = false,
-  linebreak = true,
+
   spell = false,
   spelllang = { 'en', 'cjk' },
+
+  termguicolors = true, -- set term gui colors (most terminals support this)
+
+  title = true, -- set the title of window to the value of the titlestring
+  -- titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) - LunarVim',
+
+  cursorline = true, -- highlight the current line
+  colorcolumn = { 80 },
+
   scrolloff = 10, -- is one of my fav
   sidescrolloff = 8,
-  confirm = true,
-  -- breakindent = true,
-  breakindentopt = { 'sbr', 'shift:2' },
-  showbreak = '↪ ',
+
+  path = '.,,',
+
   qftf = '{info -> v:lua.require("young.cfg.quickfix").quickfixtextfunc(info)}',
   synmaxcol = 400,
   list = true,
-  lazyredraw = false,
-  path = '.,,',
   virtualedit = 'onemore',
   wildignore = {
     '**/node_modules/**',

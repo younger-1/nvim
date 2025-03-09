@@ -1,7 +1,8 @@
 return {
   root_dir = function(fname)
     local util = require 'lspconfig.util'
-    return util.root_pattern '.sqllsrc.json'(fname) or util.find_git_ancestor(fname)
+    return util.root_pattern '.sqllsrc.json'(fname)
+      or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
   end,
   settings = {
     sqlLanguageServer = {
